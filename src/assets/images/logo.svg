@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="40px" viewBox="0 0 80 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>Logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Shared" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Header" transform="translate(-11.000000, -10.000000)">
+            <g id="Logo" transform="translate(11.000000, 10.000000)">
+                <g id="Line-logo">
+                    <circle id="Oval-" fill="#34AE4A" cx="5" cy="25" r="5"></circle>
+                    <circle id="Oval-" fill="#34AE4A" cx="26" cy="8" r="5"></circle>
+                    <circle id="Oval-3" fill="#34AE4A" cx="34" cy="28" r="5"></circle>
+                    <circle id="Oval-5" fill="#34AE4A" cx="49" cy="35" r="5"></circle>
+                    <circle id="Oval-6" fill="#34AE4A" cx="57" cy="17" r="5"></circle>
+                    <circle id="Oval-6-Copy" fill="#34AE4A" cx="75" cy="21" r="5"></circle>
+                    <circle id="Oval-4" fill="#34AE4A" cx="44" cy="5" r="5"></circle>
+                    <path d="M5.5,25.5 L25.5,9.5" id="Line" stroke="#34AE4A" stroke-linecap="square"></path>
+                    <path d="M33.5,27.5 L27.5,8.5" id="Line-Copy" stroke="#34AE4A" stroke-linecap="square"></path>
+                    <path d="M34.5,28.5 L44.5,4.5" id="Line-Copy-2" stroke="#34AE4A" stroke-linecap="square"></path>
+                    <path d="M49.5,36.5 L44.5,5.5" id="Line-Copy-3" stroke="#34AE4A" stroke-linecap="square"></path>
+                    <path d="M49.5,34.5 L56.5,18.5" id="Line-Copy-4" stroke="#34AE4A" stroke-linecap="round"></path>
+                    <path d="M57.5,17.5 L74.5,20.5" id="Line-Copy-5" stroke="#34AE4A" stroke-linecap="round"></path>
+                    <text id="ion-ios-search---Ionicons" font-family="Ionicons" font-size="8" font-weight="400" fill="#FFFFFF">
+                        <tspan x="2" y="28"></tspan>
+                    </text>
+                    <text id="" font-family="material" font-size="6" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="23" y="10"></tspan>
+                    </text>
+                    <text id="phone_iphone---material" font-family="material" font-size="6" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="31" y="30"></tspan>
+                    </text>
+                    <text id="lightbulb_outline---material" font-family="material" font-size="6" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="54.1" y="19"></tspan>
+                    </text>
+                    <text id="people---material" font-family="material" font-size="6" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="46" y="37"></tspan>
+                    </text>
+                    <text id="format_list_numbered---material" font-family="material" font-size="6" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="41" y="7"></tspan>
+                    </text>
+                    <text id="check_box---material" font-family="material" font-size="6" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="72.1" y="23"></tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

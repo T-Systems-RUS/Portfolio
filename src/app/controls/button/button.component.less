@@ -1,0 +1,21 @@
+@import './../../../assets/style/colors.less';
+@import './../../../assets/style/mixins.less';
+
+.button{
+    background-color: @green_main;
+    color: @text_white;
+    display: inline-block;
+    font-family: ProximaRegularLight;
+    font-size: 18px;
+    line-height: 54px;
+    height: 54px;
+    padding: 0 20px;
+    text-decoration: none;
+    vertical-align: 54px;
+    .boxSizing();
+    .transition(all .3s);
+
+    &:hover{
+        background-color: @green_main_hover;
+    }
+}

@@ -1,0 +1,57 @@
+@import './../../../assets/style/colors.less';
+@import './../../../assets/style/mixins.less';
+
+
+.input{
+    display: inline-block;
+    
+
+    .boxSizing();
+
+    &__label{
+        display: block;
+        font-family: ProximaRegular;
+        font-size: 1em;
+        margin-bottom: 5px;
+    }
+
+    &__button{
+        position: absolute;
+        top:0;
+        right: 0;
+        z-index: 101;
+    }
+
+    &__box{
+        display: block;
+        border: 1px solid #dddddd;
+        outline: none;
+        height: 54px;
+        font-family: ProximaRegular;
+        font-size: 18px;
+        padding: 0  20px;
+        width: 100%;
+        .boxSizing();
+
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:@text_input;
+          }
+        &::-moz-placeholder { /* Firefox 19+ */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:@text_input;
+          }
+        &:-ms-input-placeholder { /* IE 10+ */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:@text_input;
+          }
+        &:-moz-placeholder { /* Firefox 18- */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:@text_input;
+          }
+    }
+}

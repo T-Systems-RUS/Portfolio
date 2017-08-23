@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="49px" height="49px" viewBox="0 0 49 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>person</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Project-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-Alternate" transform="translate(-530.000000, -551.000000)">
+            <g id="Content" transform="translate(121.000000, 352.000000)">
+                <g id="Team" transform="translate(409.000000, 156.000000)">
+                    <g id="List-item-group" transform="translate(0.000000, 43.000000)">
+                        <g id="List-item">
+                            <g id="person">
+                                <circle id="Oval" fill="#CDE9E1" cx="24.5" cy="24.5" r="24.5"></circle>
+                                <text id="person---material" font-family="material" font-size="24" font-weight="normal" fill="#FFFFFF">
+                                    <tspan x="13" y="31"></tspan>
+                                </text>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>JS Logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Employee-page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-545.000000, -758.000000)" id="Team">
+            <g transform="translate(530.000000, 665.000000)">
+                <g id="List-item-2" transform="translate(15.000000, 93.000000)">
+                    <g id="JS-Logo">
+                        <rect id="Rectangle-2" fill="#F1DA1D" x="0" y="0" width="24" height="24"></rect>
+                        <text id="ion-social-javascript---Ionicons" font-family="Ionicons" font-size="16" font-weight="400" fill="#000000">
+                            <tspan x="5" y="18"></tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

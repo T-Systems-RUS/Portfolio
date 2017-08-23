@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="287px" height="250px" viewBox="0 0 287 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>Badge</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <ellipse id="path-1" cx="38.3828125" cy="60.9168307" rx="38.3828125" ry="39.5362943"></ellipse>
+        <filter x="-4.6%" y="-3.2%" width="109.1%" height="108.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <ellipse id="path-3" cx="38.3828125" cy="60.9168307" rx="30.1041667" ry="31.0088583"></ellipse>
+        <filter x="-5.8%" y="-4.0%" width="111.6%" height="111.3%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-5" x="66" y="35" width="60" height="11" rx="5.5"></rect>
+        <filter x="-5.8%" y="-40.9%" width="111.7%" height="163.6%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="-1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <filter x="-22.9%" y="-2.6%" width="144.3%" height="118.3%" filterUnits="objectBoundingBox" id="filter-7">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <circle id="path-8" cx="34.6074219" cy="79.6074219" r="34.6074219"></circle>
+        <filter x="-24.6%" y="-23.1%" width="149.1%" height="149.1%" filterUnits="objectBoundingBox" id="filter-9">
+            <feMorphology radius="4" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feMorphology radius="4" operator="erode" in="SourceAlpha" result="shadowInner"></feMorphology>
+            <feOffset dx="0" dy="1" in="shadowInner" result="shadowInner"></feOffset>
+            <feComposite in="shadowOffsetOuter1" in2="shadowInner" operator="out" result="shadowOffsetOuter1"></feComposite>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Shared" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Employees-background" transform="translate(-21.000000, -5.000000)">
+            <g id="Badge" transform="translate(21.000000, 7.000000)">
+                <rect id="Rectangle-3" fill="#FFFFFF" x="0" y="26" width="191.847656" height="217.183594" rx="8"></rect>
+                <g id="Logo" transform="translate(10.000000, 208.000000)">
+                    <g id="Line-logo">
+                        <circle id="Oval-" fill="#34AE4A" cx="3.87573242" cy="19.3786621" r="3.87573242"></circle>
+                        <circle id="Oval-" fill="#34AE4A" cx="20.1538086" cy="6.20117188" r="3.87573242"></circle>
+                        <circle id="Oval-3" fill="#34AE4A" cx="26.3549805" cy="21.7041016" r="3.87573242"></circle>
+                        <circle id="Oval-5" fill="#34AE4A" cx="37.9821777" cy="27.130127" r="3.87573242"></circle>
+                        <circle id="Oval-6" fill="#34AE4A" cx="44.1833496" cy="13.1774902" r="3.87573242"></circle>
+                        <circle id="Oval-6-Copy" fill="#34AE4A" cx="58.1359863" cy="16.2780762" r="3.87573242"></circle>
+                        <circle id="Oval-4" fill="#34AE4A" cx="34.1064453" cy="3.87573242" r="3.87573242"></circle>
+                        <path d="M4.26330566,19.7662354 L19.7662354,7.3638916" id="Line" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M25.9674072,21.3165283 L21.3165283,6.58874512" id="Line-Copy" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M26.7425537,22.0916748 L34.4940186,3.48815918" id="Line-Copy-2" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M38.369751,28.2928467 L34.4940186,4.26330566" id="Line-Copy-3" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M38.369751,26.7425537 L43.7957764,14.34021" id="Line-Copy-4" stroke="#34AE4A" stroke-linecap="round"></path>
+                        <path d="M44.5709229,13.5650635 L57.7484131,15.8905029" id="Line-Copy-5" stroke="#34AE4A" stroke-linecap="round"></path>
+                        <text id="" font-family="Ionicons" font-size="5" font-weight="400" fill="#FFFFFF">
+                            <tspan x="2.55029297" y="21.3786621"></tspan>
+                        </text>
+                        <text id="" font-family="material" font-size="5" font-weight="normal" fill="#FFFFFF">
+                            <tspan x="17.8283691" y="8.20117188"></tspan>
+                        </text>
+                        <text id="phone_iphone---material" font-family="material" font-size="5" font-weight="normal" fill="#FFFFFF">
+                            <tspan x="24.029541" y="23.7041016"></tspan>
+                        </text>
+                        <text id="lightbulb_outline---material" font-family="material" font-size="5" font-weight="normal" fill="#FFFFFF">
+                            <tspan x="41.9354248" y="15.1774902"></tspan>
+                        </text>
+                        <text id="people---material" font-family="material" font-size="5" font-weight="normal" fill="#FFFFFF">
+                            <tspan x="35.6567383" y="29.130127"></tspan>
+                        </text>
+                        <text id="format_list_numbered---material" font-family="material" font-size="5" font-weight="normal" fill="#FFFFFF">
+                            <tspan x="31.7810059" y="5.87573242"></tspan>
+                        </text>
+                        <text id="check_box---material" font-family="material" font-size="5" font-weight="normal" fill="#FFFFFF">
+                            <tspan x="55.8880615" y="18.2780762"></tspan>
+                        </text>
+                    </g>
+                </g>
+                <path d="M94.3812101,10.6217268 C161.735408,-33.3871193 189.121564,73.5862048 206.785843,111.344678 C212.784947,124.168129 220.15701,136.303293 226.842594,148.7826" id="Path-3" stroke="#FFFFFF" stroke-width="3"></path>
+                <path d="M103.099561,17.027973 C158.180844,4.85033019 174.240248,61.6430263 192.145879,99.6529004 C205.71543,128.45819 207.53257,128.881792 224.999978,153.598643" id="Path-4" stroke="#FFFFFF" stroke-width="3"></path>
+                <g id="Bange-holder" transform="translate(208.000000, 144.000000)">
+                    <g id="Oval-2">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g id="Oval-7">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                        <use fill="#D80074" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    </g>
+                    <g id="T-Logo-Copy" transform="translate(31.609375, 46.997355)" fill="#FFFFFF">
+                        <text id="T" font-family="BodoniSvtyTwoITCTT-Book, Bodoni 72" font-size="24" font-weight="normal">
+                            <tspan x="4.26325641e-14" y="22">T</tspan>
+                        </text>
+                        <rect id="block-left" x="10" y="13" width="4" height="4"></rect>
+                        <rect id="Block-right" x="4.26325641e-14" y="13" width="4" height="4"></rect>
+                    </g>
+                    <g id="Badge-holder-Copy" transform="translate(23.093532, 17.633988) rotate(153.000000) translate(-23.093532, -17.633988) translate(15.593532, 2.633988)">
+                        <rect id="Rectangle-4" fill="#D80074" x="5.68434189e-14" y="0.485026042" width="14.359375" height="29.1666667" rx="7.1796875"></rect>
+                        <circle id="Oval-Copy" fill="#FAE1EE" cx="7.20596847" cy="7.1166904" r="4.5"></circle>
+                    </g>
+                </g>
+                <path d="M8,26 L183.511719,26 L183.511719,26 C187.929997,26 191.511719,29.581722 191.511719,34 L191.511719,151 L0,151 L0,34 L0,34 C-5.41083001e-16,29.581722 3.581722,26 8,26 Z" id="Rectangle" fill="#D80074"></path>
+                <g id="Rectangle-2">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+                    <use fill="#C2E6C8" fill-rule="evenodd" xlink:href="#path-5"></use>
+                </g>
+                <g id="stars-all" transform="translate(61.000000, 19.000000)">
+                    <g id="Stars">
+                        <g id="Star" filter="url(#filter-7)">
+                            <g id="Outside-ring">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-9)" xlink:href="#path-8"></use>
+                                <use stroke="#FFFFFF" stroke-width="3" xlink:href="#path-8"></use>
+                            </g>
+                            <circle id="Inside-oval" fill="#FFFFFF" opacity="0.8" cx="34.6074219" cy="79.6074219" r="27.6859375"></circle>
+                            <g id="T-Logo" transform="translate(27.799570, 66.991719)" fill="#D80074">
+                                <text id="T" font-family="BodoniSvtyTwoITCTT-Book, Bodoni 72" font-size="24" font-weight="normal">
+                                    <tspan x="0" y="22">T</tspan>
+                                </text>
+                                <rect id="block-left" x="10" y="13" width="4" height="4"></rect>
+                                <rect id="Block-right" x="0" y="13" width="4" height="4"></rect>
+                            </g>
+                            <path d="" id="Path-2" stroke="#979797"></path>
+                        </g>
+                    </g>
+                </g>
+                <g id="Badge-holder" transform="translate(89.000000, 8.000000)">
+                    <rect id="Rectangle-4" fill="#D80074" x="0" y="0.58203125" width="14.359375" height="35" rx="7.1796875"></rect>
+                    <circle id="Oval" fill="#FAE1EE" cx="7.5" cy="8.5" r="4.5"></circle>
+                </g>
+                <text id="T-Systems-Employee" font-family="ProximaNova-Regular, Proxima Nova" font-size="14" font-weight="normal" fill="#000000">
+                    <tspan x="10" y="171">T-Systems Employee</tspan>
+                </text>
+                <text id="Senior-developer" font-family="ProximaNova-Regular, Proxima Nova" font-size="11" font-weight="normal" fill="#757575">
+                    <tspan x="10" y="186">Senior developer</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

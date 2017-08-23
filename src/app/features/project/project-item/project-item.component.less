@@ -1,0 +1,93 @@
+@import './../../../../assets/style/colors.less';
+@import './../../../../assets/style/mixins.less';
+
+.project-item{
+    display: inline-block;
+    width: 230px;
+    height: 280px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    
+    .boxSizing();
+    .borderRadius(2px);
+    .boxShadow(0 2px 4px 0 rgba(0,0,0,0.50));
+
+    &__header{
+        a{
+            display: inline-block;
+            width: 100%;
+        }
+        img{
+            width: 100%;
+        }
+    }
+
+    &__content{
+        display: block;
+        padding: 15px 17px 0 17px;
+
+        .boxSizing();
+    }
+
+    &__name{
+        margin: 0;
+        font-family:ProximaRegularBold;
+        font-size:16px;
+        color:@text_h;
+        text-align: left;
+    }
+
+    &__domain{
+        margin:3px 0 0 0;
+        font-family:ProximaRegularThin;
+        font-size:12px;
+        color:@text_second;
+        text-align: left;
+    }
+
+    &__description{
+        font-family:ProximaRegularLight;
+        font-size:14px;
+        color:@text_body;
+        line-height: 125%;
+        margin:10px 0 0 0;
+        text-align: left;
+        overflow: hidden;
+        max-height: 70px;
+    }
+
+
+
+    &__footer{
+        display: inline-block;
+        background-color: @text_white;
+        width: 100%;
+        padding: 0 17px 5px 17px;
+        z-index: 20;
+        .boxSizing();
+    }
+
+    &__team{
+        margin: 0;
+        font-family:ProximaRegular;
+        font-size:19px;
+        color:@text_h;
+        position: absolute;
+        bottom: 25px;
+
+        img{
+            margin-right: 2px;
+        }
+    }
+
+    &__modified{
+        position: absolute;
+        margin: 0;
+        bottom: 5px;
+        font-family:ProximaRegularLight;
+        font-size:12px;
+        color:@text_second;
+        text-align:left;
+    }
+}
