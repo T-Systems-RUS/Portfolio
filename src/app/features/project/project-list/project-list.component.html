@@ -5,5 +5,11 @@
 
 
 <div @appear3 class="project-list">
+    <filter-panel>
+        <filter-item (onFilterAction)="onFilterAction($event)" name="view"></filter-item>
+        <filter-item (onFilterAction)="onFilterAction($event)" name="export"></filter-item>
+        <filter-item (onFilterAction)="onFilterAction($event)" name="sort"></filter-item> 
+        <filter-item (onFilterAction)="onFilterAction($event)" name="filter"></filter-item>  
+    </filter-panel>
     <project-item *ngFor="let project of projects" [model]="project"></project-item>
 </div>

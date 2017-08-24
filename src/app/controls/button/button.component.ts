@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './button.component.html',
   styleUrls:  [
       './button.component.less',
-      './../../core/backpanel/backpanel.component.less',
+      './../../shared/backpanel/backpanel.component.less',
       './../input/input.component.less']
 })
 export class ButtonComponent {

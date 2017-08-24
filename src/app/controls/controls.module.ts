@@ -5,6 +5,9 @@ import { SharedModule }       from '../shared/shared.module';
 import { ButtonComponent } from './button/button.component'
 import { InputComponent } from './input/input.component'
 
+import { FilterItemComponent } from './filters/filter-item/filter-item.component'
+import { FilterPanelComponent } from './filters/filter-panel/filter-panel.component'
+
 
 @NgModule({
   imports:      [ 
@@ -12,11 +15,15 @@ import { InputComponent } from './input/input.component'
   ],
   declarations: [
     ButtonComponent,
-    InputComponent
+    InputComponent,
+    FilterItemComponent,
+    FilterPanelComponent
   ],
   exports:      [ 
     ButtonComponent,
-    InputComponent
+    InputComponent,
+    FilterItemComponent,
+    FilterPanelComponent
   ],
   providers:    [ 
     

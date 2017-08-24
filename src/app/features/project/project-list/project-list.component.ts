@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Project } from '../../../shared/models/project';
+import { ProjectService } from '../project.service';
 import { LIST_ANIMATION } from './project-list.animation';
 
 
@@ -10,30 +11,36 @@ import { LIST_ANIMATION } from './project-list.animation';
       './project-list.component.less'],
   animations:LIST_ANIMATION
 })
+
 export class ProjectListComponent {
 
     @Input() projects:Array<Project>=new Array<Project>();
-    lines=["automotive", "horizontal", "vertical","sap"];
-    domains=["Transportation", "Health", "Telecom","Automotive"];
+    @Input() sortOrder:boolean=true;
+
     
-    constructor() {
-        this.projects=this.generateProjects();
+    constructor(private dataService:ProjectService) {
+        this.projects=this.dataService.generateProjects();
     }
 
-    generateProjects():Array<Project>{
-        let projects=new Array<Project>();
-
-        for(let i=0;i<20;i++){
-            let project=new Project({
-                name:"Sopre AOM",
-                line: i<4 ? this.lines[i] : this.lines[1],
-                domain: i<4 ? this.domains[i] : this.domains[2],
-                description: "Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online",
-                teamcount:i.toString()
-            });
-            projects.push(project);   
+    onFilterAction(event){
+        switch(event){
+            case 'sort':
+            let sorted$ = this.projects.sort(this.sortByName);
+            break;
         }
 
-        return projects;
+        console.log(event)
+        
     }
+
+    sortByName(a,b) {
+       
+        if (a.name < b.name)
+          return -1;
+        if (a.name > b.name)
+          return 1;
+        return 0;
+
+        
+      }
 }
