@@ -45,6 +45,7 @@ export class ProjectService {
 
         for(let i=0;i<20;i++){
             let project=new Project({
+                id:(i+1).toString(),
                 name:this.names[this.getRandomizer(0,6)],
                 line: this.lines[this.getRandomizer(0,3)],
                 domain: this.domains[this.getRandomizer(0,3)],

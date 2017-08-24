@@ -1,6 +1,7 @@
 
 
 export class Project{
+    id:string='';
     name:string='';
     line:string='';
     domain:string='';

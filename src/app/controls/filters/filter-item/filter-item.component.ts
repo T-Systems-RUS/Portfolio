@@ -11,6 +11,7 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 export class FilterItemComponent {
 
     @Input() name:string='';
+    @Input() withTooltip:boolean=false;
 
     @Output() onFilterAction=new EventEmitter<string>(); 
 

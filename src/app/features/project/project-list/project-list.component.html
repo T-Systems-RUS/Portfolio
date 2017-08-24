@@ -8,7 +8,7 @@
     <filter-panel>
         <filter-item (onFilterAction)="onFilterAction($event)" name="view"></filter-item>
         <filter-item (onFilterAction)="onFilterAction($event)" name="export"></filter-item>
-        <filter-item (onFilterAction)="onFilterAction($event)" name="sort"></filter-item> 
+        <filter-item [withTooltip]="true" (onFilterAction)="onFilterAction($event)" name="sort"></filter-item> 
         <filter-item (onFilterAction)="onFilterAction($event)" name="filter"></filter-item>  
     </filter-panel>
     <project-item *ngFor="let project of projects" [model]="project"></project-item>
