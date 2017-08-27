@@ -1,14 +1,14 @@
 <div [@appear]='in' class="backpanel {{color}}">
 
     <img [@appear2]='in' class="backpanel__img backpanel__img--left"  
-         src="./../../assets/images/stars.svg" 
+         src="./../../assets/images/stars.png" 
          alt="stars"
          [ngClass]="{'hidden': image==='right'}">
     <div [@appear3]='in' class="backpanel__content">
         <ng-content></ng-content>
     </div>
     <img [@appear2]='in' class="backpanel__img backpanel__img--right" 
-         src="./../../assets/images/stars_all_reverse.svg"  
+         src="./../../assets/images/stars_all.png"  
          alt="stars"
          [ngClass]="{'hidden': image==='left'}">
     

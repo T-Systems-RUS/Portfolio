@@ -1,7 +1,7 @@
 <div class="project-item">
     <div class="project-item__header">
-        <a href="#">
-            <img src="./../../assets/images/{{model.line}}.svg" alt="{{model.line}}">
+        <a [routerLink]="['/project', model.id]">
+            <img src="./../../assets/images/{{model.line}}.png" alt="{{model.line}}">
         </a>
     </div>
     <div class="project-item__content">

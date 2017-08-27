@@ -17,20 +17,31 @@ export class ProjectListComponent {
     @Input() projects:Array<Project>=new Array<Project>();
     @Input() sortOrder:boolean=true;
 
-    
+    tooltipVisible:boolean=false;
+
     constructor(private dataService:ProjectService) {
         this.projects=this.dataService.generateProjects();
     }
 
     onFilterAction(event){
-        switch(event){
-            case 'sort':
-            let sorted$ = this.projects.sort(this.sortByName);
-            break;
-        }
+        // switch(event){
+        //     case 'sort':
+        //     let sorted$ = this.projects.sort(this.sortByName);
+        //     break;
+        // }
+        // for(let pr of this.projects){
+        //     console.log(Object.keys(pr));
+        // }
+        this.projects.sort(this.propComparator(event));
+        this.tooltipVisible=false;
+        console.log(this.tooltipVisible)
+    }
 
-        console.log(event)
-        
+    propComparator(prop) {
+        return function(a, b) {
+            //console.log(a[prop],b[prop],prop,a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1)
+            return a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
+        }
     }
 
     sortByName(a,b) {
@@ -42,5 +53,9 @@ export class ProjectListComponent {
         return 0;
 
         
+      }
+
+      hello(){
+          console.log('hello')
       }
 }

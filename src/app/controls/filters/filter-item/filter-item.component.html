@@ -1,12 +1,11 @@
-<a  class="filter-item" (click)="filterClick(name)">
+<a  class="filter-item" (click)="tooltipVisible=!tooltipVisible">
     <img src="./../../assets/images/{{name}}.svg" alt="{{name}}">
 </a>
 
-<div class="tooltip__wrapper">
-    <div *ngIf="withTooltip" class="filter-item__tooltip">
-        <p class="filter-item__tooltip-i">Sort by name</p>
-        <p class="filter-item__tooltip-i">Sort by production line</p>
-        <p class="filter-item__tooltip-i">Sort by team size</p>
-        <p class="filter-item__tooltip-i">Sort by date modified</p>
+<div class="tooltip__wrapper" *ngIf="withTooltip" [ngClass]="{'tooltip__wrapper--visible': tooltipVisible}">
+    <div class="filter-item__tooltip">
+        <ng-content>
+
+        </ng-content>
     </div>
 </div>

@@ -1,0 +1,45 @@
+@import './../../../../assets/style/colors.less';
+@import './../../../../assets/style/mixins.less';
+
+.project{
+    display: inline-block;
+    position: absolute;
+    background-color: @text_white;
+    top:120px;
+    width: 100%;
+    max-width: 80%;
+    left: 50%;
+    padding: 0 20px;
+    margin-left: -40%;
+
+    .boxSizing();
+
+    &__header{
+        display: inline-block;
+        width: 100%;
+        margin-top: 37px;
+        .boxSizing();
+    }
+
+    &__subheading{
+        display: inline-block;
+        width: 100%;
+        margin: 0;
+        font-family:ProximaRegularThin;
+        font-size:18px;
+        color:@text_second;
+        text-align:left;
+
+        .boxSizing();
+    }
+
+    &__heading{
+        display: inline-block;
+        width: 100%;
+        margin: 10px 0 0 0;
+
+        font-family:ProximaRegularBold;
+        font-size:40px;
+        color:@text_h;
+    }
+}

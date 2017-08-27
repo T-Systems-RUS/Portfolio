@@ -15,13 +15,23 @@
         padding: 20px 0;
         position: absolute;
         cursor: pointer;
-        z-index: 200;
+        z-index: 199;
         min-width: 230px;
+        
+
+        .transition(all .4s);
         .boxSizing();
         .boxShadow(0 2px 4px 0 rgba(0,0,0,0.50));
 
-        &-i{
+        
+
+        :host ::ng-deep &-i{
             position: relative;
+            display: flex;
+            /* align-content: center; */
+            vertical-align: middle;
+            line-height: 25px;
+        
             margin: 0;
             font-family: ProximaRegular;
             font-size: 14px;
@@ -30,13 +40,17 @@
             text-align: left;
             margin-bottom: 10px;
             .transition(all .4s);
+
+            img{
+                margin-right: 10px;
+            }
         }
 
-        &-i:hover{
+        :host ::ng-deep &-i:hover{
             background-color: #d6d8da;
         }
 
-        &-i:last-child{
+        :host ::ng-deep &-i:last-child{
             margin-bottom: 0;
         }
     }
@@ -58,4 +72,14 @@
 
 .tooltip__wrapper{
     position: relative;
+    visibility: none;
+    opacity: 0;
+    z-index: 199;
+    .transition(all .2s);
+
+    &--visible{
+        opacity: 1;
+        visibility: visible;
+        
+    }
 }

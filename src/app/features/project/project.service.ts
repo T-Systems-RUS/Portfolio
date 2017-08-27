@@ -23,7 +23,7 @@ export class ProjectService {
     }
 
 
-    public applySearchByParamString(): Observable<Array<Project>> {
+    public getProjects(): Observable<Array<Project>> {
         //let params = new URLSearchParams('');
 
         let projects = this.generateProjects();
@@ -56,6 +56,19 @@ export class ProjectService {
         }
 
         return projects;
+    }
+
+    generateProject():Project{
+        let project=new Project({
+            id:"1",
+            name:this.names[this.getRandomizer(0,6)],
+            line: this.lines[this.getRandomizer(0,3)],
+            domain: this.domains[this.getRandomizer(0,3)],
+            description: "Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online",
+            teamcount: "10"
+        });
+
+        return project;
     }
 
      getRandomizer(bottom, top) {

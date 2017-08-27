@@ -7,8 +7,23 @@
 <div @appear3 class="project-list">
     <filter-panel>
         <filter-item (onFilterAction)="onFilterAction($event)" name="view"></filter-item>
-        <filter-item (onFilterAction)="onFilterAction($event)" name="export"></filter-item>
-        <filter-item [withTooltip]="true" (onFilterAction)="onFilterAction($event)" name="sort"></filter-item> 
+        <filter-item [withTooltip]="true" (onFilterAction)="onFilterAction($event)" name="export">
+                <p class="filter-item__tooltip-i" (click)="hello()">
+                    <img src="./../../assets/images/powerpoint.png" alt="">
+                    Powerpoint
+                </p>
+                <p class="filter-item__tooltip-i" (click)="hello()">
+                    <img src="./../../assets/images/exel.png" alt="">
+                    Excel
+                </p>
+        </filter-item>
+        <filter-item [withTooltip]="true" [tooltipVisible]="tooltipVisible" (onFilterAction)="onFilterAction($event)" name="sort">
+            <p class="filter-item__tooltip-i" (click)="onFilterAction('name')">Sort by name {{tooltipVisible}}</p>
+            <p class="filter-item__tooltip-i" (click)="onFilterAction('line')">Sort by production line</p>
+            <p class="filter-item__tooltip-i" (click)="onFilterAction('teamcount')" >Sort by team size</p>
+            <p class="filter-item__tooltip-i" (click)="onFilterAction('dateModified')">Sort by date modified</p>     
+            
+        </filter-item> 
         <filter-item (onFilterAction)="onFilterAction($event)" name="filter"></filter-item>  
     </filter-panel>
     <project-item *ngFor="let project of projects" [model]="project"></project-item>
