@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="16px" height="19px" viewBox="0 0 16 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
-    <title>file_download - material</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Start-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-size="26" font-family="material" font-weight="normal">
-        <g id="Desktop" transform="translate(-65.000000, -358.000000)" fill="#777777">
-            <g id="Filter-panel" transform="translate(17.000000, 353.000000)">
-                <text id="file_download---material">
-                    <tspan x="43" y="24"></tspan>
-                </text>
-            </g>
-        </g>
-    </g>
+
+
+<svg fill="#777777" height="20" viewBox="0 0 19 20" width="19" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
 </svg>
