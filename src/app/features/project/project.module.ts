@@ -8,9 +8,11 @@ import { ProjectComponent }     from './project/project.component';
 import { ProjectService }       from './project.service';
 import { ProjectRoutingModule } from './project-routing.module';
 
+import { EmployeeItemComponent } from './employee/employee-item/employee-item.component';
+
 @NgModule({
   imports:      [ SharedModule, ProjectRoutingModule, ControlsModule ],
-  declarations: [ ProjectItemComponent, ProjectListComponent, ProjectComponent ],
+  declarations: [ ProjectItemComponent, ProjectListComponent, ProjectComponent, EmployeeItemComponent ],
   providers:    [ ProjectService ]
 })
 export class ProjectModule { }

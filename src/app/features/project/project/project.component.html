@@ -52,13 +52,20 @@
                 <p *ngIf="model.customer" class="project__t project__t--small">Customer:
                     <span class="project__bold">{{model.customer}}</span>
                 </p>
+
+                <p *ngIf="backend.length>0" class="project__t project__t--small project__mt30 project__mb10">Back-end</p>
+                <chip *ngFor="let tech of backend" [value]="tech.name" style="horizontal"></chip>
+
+                <p *ngIf="frontend.length>0" class="project__t project__t--small project__mt30 project__mb10">Front-end</p>
+                <chip *ngFor="let tech of frontend" [value]="tech.name" style="grey"></chip>
+
+                <p *ngIf="information.length>0" class="project__t project__t--small project__mt30 project__mb10">Information</p>
+                <chip *ngFor="let info of information" [value]="info" style="sap"></chip>
             </div>
+
             <div class="project__block-item">
-                <p class="project__h">TOPICS</p>
-                <p class="project__sh">
-                    Online Sales,  BMW,  Scrum,  Angular,  Typescript,  Oracle,
-                    Automotive, Agile
-                </p>
+                <p class="project__h">TEAM</p>
+                <employee-item  *ngFor="let employee of model.employees"></employee-item>
             </div>
         </div>
 </div>

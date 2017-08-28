@@ -1,4 +1,5 @@
-
+import {Technology} from './technology'
+import {Employee} from './employee'
 
 export class Project{
     id:string='';
@@ -9,6 +10,9 @@ export class Project{
     description:string='';
     teamcount:string='0';
     dateModified:string=new Date().toDateString();
+
+    technologies:Array<Technology>=new Array<Technology>();
+    employees:Array<Employee>=new Array<Employee>();
 
 
     start:string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();

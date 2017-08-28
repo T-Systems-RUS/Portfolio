@@ -2,11 +2,12 @@ import { NgModule, Optional, SkipSelf }           from '@angular/core';
 import { SharedModule }       from '../shared/shared.module';
 
 /*Control Components */
-import { ButtonComponent } from './button/button.component'
-import { InputComponent } from './input/input.component'
+import { ButtonComponent } from './button/button.component';
+import { InputComponent }  from './input/input.component';
+import { ChipComponent }   from './chip/chip.component';
 
-import { FilterItemComponent } from './filters/filter-item/filter-item.component'
-import { FilterPanelComponent } from './filters/filter-panel/filter-panel.component'
+import { FilterItemComponent } from './filters/filter-item/filter-item.component';
+import { FilterPanelComponent } from './filters/filter-panel/filter-panel.component';
 
 
 @NgModule({
@@ -15,12 +16,14 @@ import { FilterPanelComponent } from './filters/filter-panel/filter-panel.compon
   ],
   declarations: [
     ButtonComponent,
+    ChipComponent,
     InputComponent,
     FilterItemComponent,
     FilterPanelComponent
   ],
   exports:      [ 
     ButtonComponent,
+    ChipComponent,
     InputComponent,
     FilterItemComponent,
     FilterPanelComponent
