@@ -64,8 +64,18 @@ export class ProjectService {
             name:this.names[this.getRandomizer(0,6)],
             line: this.lines[this.getRandomizer(0,3)],
             domain: this.domains[this.getRandomizer(0,3)],
-            description: "Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online",
-            teamcount: "10"
+            description: "Online Sales Management system for dealers and  customers."+ 
+                         "Used for selling vehicles of BMW AG online"+
+                         "Used for selling vehicles of BMW AG online"+
+                         "Used for selling vehicles of BMW AG online"+
+                         "Used for selling vehicles of BMW AG online"+
+                         "Used for selling vehicles of BMW AG online"+
+                         "Used for selling vehicles of BMW AG online"+
+                         "Used for selling vehicles of BMW AG online"+
+                         "Used for selling vehicles of BMW AG online"+
+                         "Used for selling vehicles of BMW AG online",
+            teamcount: "10",
+            customer:"BMW AG"
         });
 
         return project;

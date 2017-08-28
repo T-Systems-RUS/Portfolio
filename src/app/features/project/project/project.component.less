@@ -11,6 +11,7 @@
     left: 50%;
     padding: 0 20px;
     margin-left: -40%;
+    z-index: 100;
 
     .boxSizing();
 
@@ -41,5 +42,64 @@
         font-family:ProximaRegularBold;
         font-size:40px;
         color:@text_h;
+
+        &--small{
+            font-size: 22px;
+        }
+    }
+
+    &__block{
+        width:100%;
+        margin-bottom: 15px;
+        margin-top: 20px;
+
+        .flex-display();
+
+        &-item{
+            .flex(1)
+        }
+    }
+
+    &__h{
+        font-family:ProximaRegular;
+        font-size: 14px;
+        color: @text_h;
+        margin: 0;
+    }
+
+    &__sh{
+        font-family:ProximaRegular;
+        font-size: 14px;
+        color: @text_second2;
+        margin: 2px 0 10px 0;
+        
+    }
+
+    &__t{
+        font-family:ProximaRegularLight;
+        font-size: 18px;
+        color: @text_body;
+        line-height: 125%;
+        margin: 0;
+
+        span{
+            margin-left: 5px;
+        }
+
+        &--small{
+            color: #32241A;
+            font-size: 16px;
+            font-family: ProximaRegular;
+        }
+    }
+
+    &__bold{
+        color: @green_main;
+        font-size: 16px;
+        font-family: ProximaRegularBold;
+    }
+
+    &__mb10{
+        margin-bottom: 10px;
     }
 }

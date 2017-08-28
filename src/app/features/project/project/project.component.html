@@ -9,4 +9,56 @@
             {{model.name}}
         </h1>
     </div>
+    <div class="project__block">
+        <div class="project__block-item">
+            <p class="project__h">Alexander Rusov</p>
+            <p class="project__sh">Head of online sales and after-sales cluster</p>
+            <p class="project__h">Dietmar Bernreuther</p>
+            <p class="project__sh">Project manager</p>
+        </div>
+        <div class="project__block-item">
+            <p class="project__h">TOPICS</p>
+            <p class="project__sh">
+                Online Sales,  BMW,  Scrum,  Angular,  Typescript,  Oracle,
+                Automotive, Agile
+            </p>
+        </div>
+    </div>
+    <div class="project__block project__block--flex">
+        <p class="project__t">
+            {{model.description}}
+        </p>
+    </div>
+
+    <h1 class="project__heading  project__heading--small">
+        Details
+    </h1>
+
+    <div class="project__block">
+            <div class="project__block-item">
+                <p class="project__t project__t--small project__mb10">Project duration:
+                    <span class="project__bold">{{model.start}}</span>
+                    <span class="project__bold" *ngIf="model.end"> - {{model.end}}</span>
+                </p>
+                <p *ngIf="model.domain" class="project__t project__t--small project__mb10">Domain:
+                    <span class="project__bold">{{model.domain}}</span>
+                </p>
+                <p class="project__t project__t--small project__mb10">Project language:
+                    <span class="project__bold">English, German</span>
+                </p>
+                <p class="project__t project__t--small project__mb10">Methology:
+                    <span class="project__bold">Scrum</span>
+                </p>
+                <p *ngIf="model.customer" class="project__t project__t--small">Customer:
+                    <span class="project__bold">{{model.customer}}</span>
+                </p>
+            </div>
+            <div class="project__block-item">
+                <p class="project__h">TOPICS</p>
+                <p class="project__sh">
+                    Online Sales,  BMW,  Scrum,  Angular,  Typescript,  Oracle,
+                    Automotive, Agile
+                </p>
+            </div>
+        </div>
 </div>
