@@ -6,6 +6,10 @@ export class Employee{
     lastname:string='';
     roles:Array<Role>=new Array<Role>();
 
+    get fullname() {
+        return this.firstname + " " + this.lastname;
+    }
+
     public constructor(init?:Partial<Employee>) {
         Object.assign(this, init);
     }

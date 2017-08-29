@@ -1,3 +1,10 @@
 <div class="employee-item">
-    <img src="./../../assets/images/person.png" alt="person">
+    <img class="employee-item__img" src="./../../assets/images/person.png" alt="person">
+
+    <div class="employee-item__block">
+        <p class="employee-item__primary">{{model.fullname}}</p>
+        <p class="employee-item__secondary">{{model.roles[0].name}}</p>
+    </div>
+
+    <p class="employee-item__info">{{model.roles[0].participation}}</p>
 </div>

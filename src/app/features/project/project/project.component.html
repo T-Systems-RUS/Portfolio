@@ -64,8 +64,8 @@
             </div>
 
             <div class="project__block-item">
-                <p class="project__h">TEAM</p>
-                <employee-item  *ngFor="let employee of model.employees"></employee-item>
+                <p class="project__h project__mb30">TEAM</p>
+                <employee-item  *ngFor="let employee of model.employees" [model]="employee"></employee-item>
             </div>
         </div>
 </div>

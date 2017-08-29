@@ -20,7 +20,7 @@
       "prefix": "app",
       "styles": [
         "assets/style/styles.less",
-        "../node_modules/normalize/normalize.css"
+        "../node_modules/normalize.css/normalize.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
