@@ -20,7 +20,7 @@ export class InputComponent {
     @Input() boxStyle='';
     @Input() placeholder:string=''
     @Input() withButton:boolean=true;
-    
+    @Input() complete:Array<any>=new Array<any>();
 
     constructor() {
         

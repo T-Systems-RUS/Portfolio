@@ -33,6 +33,20 @@ export class FooterComponent {
       //   }
 
       // })
+      var lastScrollTop = 0;
+      let footer=document.querySelector('div#footer');
+
+      window.addEventListener("scroll", function(){ 
+        var st = window.pageYOffset || document.documentElement.scrollTop; 
+        if (st > lastScrollTop){
+            footer.classList.add('footer--visible');
+            console.log('down')
+        } else {
+             footer.classList.remove('footer--visible');
+            console.log('up')
+        }
+        lastScrollTop = st;
+      }, false);
     }
 
 

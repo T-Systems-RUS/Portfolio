@@ -1,6 +1,9 @@
 <div id={{id}} class="input {{wrapperStyle}}">
     <label *ngIf="label!==''" for="{{name}}" class="input__label {{labelStyle}}">{{label}}</label>
     <input id={{name}} placeholder="{{placeholder}}" type="text" class="input__box {{boxStyle}}">
+    <ul *ngIf="complete.length>0" class="autocomplete">
+        <li *ngFor="let item of complete" class="autocomplete__item">{{item}}</li>
+    </ul>
     <app-button value="SEARCH" 
                 style="input__button"
                 [visible]="withButton">

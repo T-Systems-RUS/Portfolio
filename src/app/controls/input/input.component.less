@@ -55,3 +55,35 @@
           }
     }
 }
+
+
+.autocomplete{
+    display: inline-block;
+    background-color: @text_white;
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    width: 100%;
+    
+    .boxSizing();
+    .boxShadow(0 3px 3px 0 rgba(0,0,0,0.50));
+    .transition(visibility 0.3s, opacity 0.5s;);
+
+
+    &__item{
+        display: inline-block;
+        width: 100%;
+        padding: 10px 20px;
+        cursor: pointer;
+        color:@text_h;
+        font-size: 14px;
+        font-family: ProximaRegular;
+
+        .boxSizing();
+        .transition(all .4s);
+
+        &:hover{
+            background-color: @hor_bg;
+        }
+    }
+}

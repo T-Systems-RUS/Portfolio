@@ -9,6 +9,8 @@ import { ChipComponent }   from './chip/chip.component';
 import { FilterItemComponent } from './filters/filter-item/filter-item.component';
 import { FilterPanelComponent } from './filters/filter-panel/filter-panel.component';
 
+import { ListItemComponent } from './list/list-item/list-item.component';
+
 
 @NgModule({
   imports:      [ 
@@ -19,14 +21,16 @@ import { FilterPanelComponent } from './filters/filter-panel/filter-panel.compon
     ChipComponent,
     InputComponent,
     FilterItemComponent,
-    FilterPanelComponent
+    FilterPanelComponent,
+    ListItemComponent
   ],
   exports:      [ 
     ButtonComponent,
     ChipComponent,
     InputComponent,
     FilterItemComponent,
-    FilterPanelComponent
+    FilterPanelComponent,
+    ListItemComponent
   ],
   providers:    [ 
     

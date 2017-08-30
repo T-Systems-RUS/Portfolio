@@ -1,6 +1,6 @@
 <backpanel  [color]="model.line" image="both"></backpanel>
 
-<div class="project">
+<div @appear3 class="project">
     <div class="project__header">
         <h3 class="project__subheading">
             {{model.dateModified}} - {{model.domain}}
@@ -65,7 +65,7 @@
 
             <div class="project__block-item">
                 <p class="project__h project__mb30">TEAM</p>
-                <employee-item  *ngFor="let employee of model.employees" [model]="employee"></employee-item>
+                <list-item  *ngFor="let employee of model.employees" [model]="employee"></list-item>
             </div>
         </div>
 </div>

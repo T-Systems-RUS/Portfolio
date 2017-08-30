@@ -66,7 +66,8 @@ export class ProjectService {
                 line: this.lines[this.getRandomizer(0,3)],
                 domain: this.domains[this.getRandomizer(0,3)],
                 description: "Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online",
-                teamcount:i.toString()
+                teamcount:i.toString(),
+                technologies:this.technologies
             });
             projects.push(project);   
         }

@@ -2,12 +2,14 @@ import { Component, Input } from '@angular/core';
 import { Project } from '../../../shared/models/project';
 import { Technology } from '../../../shared/models/technology';
 import { ProjectService } from '../project.service';
+import { PROJECT_ANIMATION } from './project.animation';
 
 @Component({
   selector: 'project',
   templateUrl: './project.component.html',
   styleUrls:  [
-      './project.component.less']
+      './project.component.less'],
+  animations: [PROJECT_ANIMATION]
 })
 export class ProjectComponent {
 
@@ -28,8 +30,6 @@ export class ProjectComponent {
         this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
         this.information.push("PSS 4.71");
         this.information.push("TOP 50");
-
-        console.log(this.backend)
     }
     
     ngAfterViewInit(){

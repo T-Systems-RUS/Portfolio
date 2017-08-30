@@ -8,10 +8,12 @@
     line-height: 60px;
     vertical-align: middle;
     position: fixed;
-    bottom: 0;
+    
     text-align: center;
     z-index: 300;
+    bottom:-100px;
     .boxSizing();
+    .transition(all .4s);
 
     &__button{
         display: inline-block;
@@ -37,5 +39,9 @@
             margin-left: -10px;
             margin-top: -12px;
         }
+    }
+
+    &--visible{
+        bottom: 0;
     }
 }
