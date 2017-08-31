@@ -102,6 +102,7 @@ export class ProjectService {
                 new Employee({
                     firstname:'Ivan' + i,
                     lastname:"Ivanov"+i,
+                    technologies:this.technologies,
                     roles:[new Role({
                         name:"Lead Architect",
                         participation:"100%"

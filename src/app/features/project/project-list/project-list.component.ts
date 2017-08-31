@@ -18,9 +18,11 @@ export class ProjectListComponent {
     @Input() sortOrder:boolean=true;
 
     tooltipVisible:boolean=false;
+    complete:Array<string>=new Array<string>();
 
     constructor(private dataService:ProjectService) {
         this.projects=this.dataService.generateProjects();
+        this.complete=Array.from(new Set(this.projects.map(item=>item.name)));
     }
 
     onFilterAction(event){

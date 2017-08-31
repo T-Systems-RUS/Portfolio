@@ -3,6 +3,8 @@ export class Technology{
     name:string='';
     domain:string='';
 
+    
+
     public constructor(init?:Partial<Technology>) {
         Object.assign(this, init);
     }
