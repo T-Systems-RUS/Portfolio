@@ -22,6 +22,18 @@
         z-index: 101;
     }
 
+    &__clear{
+        display: inline-block;
+        cursor: pointer;
+        font-family: ProximaRegularThin;
+        font-size: 20px;
+        position: absolute;
+        color:@text_input;
+        top:17px;
+        right: 120px;
+
+    }
+
     &__box{
         display: block;
         border: 1px solid #dddddd;
@@ -56,6 +68,10 @@
     }
 }
 
+.paddingR140{
+    padding-right: 140px;
+}
+
 
 .autocomplete{
     display: inline-block;
@@ -66,6 +82,8 @@
     overflow-y: auto;
     max-height: 400px;
     width: 100%;
+    opacity: 0;
+    visibility: hidden;
     
     .boxSizing();
     .boxShadow(0 3px 3px 0 rgba(0,0,0,0.50));
@@ -87,5 +105,14 @@
         &:hover{
             background-color: @hor_bg;
         }
+
+        &--active{
+            background-color: @hor_bg;
+        }
+    }
+
+    &__visible{
+        opacity: 1;
+        visibility: visible;
     }
 }

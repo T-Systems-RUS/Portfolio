@@ -1,5 +1,9 @@
 <backpanel  color="grey-bg" image="left">
-    <app-input id="search" [complete]="complete" placeholder="Search projects" wrapperStyle="backpanel__search"></app-input>
+    <app-input id="search" [complete]="complete" 
+                           placeholder="Search projects" 
+                           wrapperStyle="backpanel__search"
+                           boxStyle="paddingR140"
+                           (onModelChanged)="filterProjects($event)"></app-input>
 </backpanel>
 
 

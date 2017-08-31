@@ -17,12 +17,20 @@ export class ProjectListComponent {
     @Input() projects:Array<Project>=new Array<Project>();
     @Input() sortOrder:boolean=true;
 
+    filteredProjects:Array<Project>=new Array<Project>();
+
     tooltipVisible:boolean=false;
     complete:Array<string>=new Array<string>();
 
     constructor(private dataService:ProjectService) {
         this.projects=this.dataService.generateProjects();
         this.complete=Array.from(new Set(this.projects.map(item=>item.name)));
+    }
+
+    ngAfterViewInit(){
+        setTimeout(()=> {
+            this.filteredProjects=this.projects;
+        }, 0); 
     }
 
     onFilterAction(event){
@@ -57,7 +65,18 @@ export class ProjectListComponent {
         
       }
 
-      hello(){
-          console.log('hello')
+      filterProjects(event){
+          let filters=event.split(',');
+          
+
+        //   this.projects=[];
+
+        //   for(let item of filters){
+        //     let filtered=this.filteredProjects.filter(pr=>pr.name===item);
+        //     this.projects.concat(filtered);
+        //     console.log(this.filteredProjects)
+        //     console.log(filtered)
+        //   }
+          console.log(this.projects);
       }
 }

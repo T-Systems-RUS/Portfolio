@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -13,9 +13,16 @@ export class ButtonComponent {
     @Input() value:string='SEARCH';
     @Input() style:string='';
     @Input() visible:boolean=true;
+
+    @Output() click=new EventEmitter();
     
     constructor() {
         
+    }
+
+    clicked(event){
+        event.stopPropagation();
+        this.click.emit();
     }
 
 

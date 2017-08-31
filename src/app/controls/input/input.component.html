@@ -4,12 +4,22 @@
            placeholder="{{placeholder}}" 
            type="text"
            class="input__box {{boxStyle}}"
-           [ngModel]="model"
-           (ngModelChange)="modelChanged($event)">
-    <ul *ngIf="complete.length>0" class="autocomplete">
-        <li *ngFor="let item of complete" (click)="completeClick(item)" class="autocomplete__item">{{item}}</li>
+           [(ngModel)]="model"
+           (ngModelChange)="modelChanged($event)"
+           (focus)="showAutocomplete=true"
+           (blur)="showAutocomplete=false">
+    <span *ngIf="model.length>0" (click)="clearModel()" class="input__clear {{clearStyle}}">X</span>
+
+    <ul *ngIf="complete.length>0" class="autocomplete" [ngClass]="{'autocomplete__visible':showAutocomplete}">
+        <li *ngFor="let item of complete;let i = index" 
+            (click)="completeClick(item)" 
+            class="autocomplete__item"
+            [ngClass]="{'autocomplete__item--active':i===activeItem}">
+                {{item}}
+        </li>
     </ul>
     <app-button value="SEARCH" 
+                (click)="filter()"
                 style="input__button"
                 [visible]="withButton">
     </app-button>
