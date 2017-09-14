@@ -1,4 +1,4 @@
-import { Component, Input,Output, EventEmitter } from '@angular/core';
+import { Component, Input,Output, EventEmitter,ViewChild } from '@angular/core';
 import * as Rx from 'rxjs/Rx';
 
 @Component({
@@ -21,10 +21,11 @@ export class InputComponent {
     @Input() boxStyle='';
     @Input() clearStyle:string='';
     @Input() placeholder:string='';
-    @Input() withButton:boolean=true;
     @Input() complete:Array<any>=new Array<any>();
 
     @Output() onModelChanged=new EventEmitter<string>();
+
+    @ViewChild('searchBox') searchBox;
 
     completeInitial:Array<any>=new Array<any>();
     searchString:string='';
@@ -48,37 +49,63 @@ export class InputComponent {
 
 
     modelChanged(event){
-        this.searchString= this.model==='' ? '' : this.searchString;
+        this.showAutocomplete=true;
         this.complete=this.completeInitial;
-        this.complete=this.complete.filter(item=>item.toLowerCase().indexOf(event.toLowerCase())!=-1);
+
+        let filtered=this.complete.filter(item=>item.toLowerCase().indexOf(event.toLowerCase())!=-1);
+        this.complete=filtered.length>0 ? filtered : ["No results found"];
+        this.onModelChanged.emit(this.model);
+    }
+
+    blurInput(){
+        setTimeout(function() {
+            this.showAutocomplete = false;
+            console.log(this.showAutocomplete);
+        }.bind(this), 200);
     }
 
     completeClick(data){
-        this.searchString=(this.searchString+=', ' + data).replace(/(^[,\s]+)|([,\s]+$)/g, '');
-        this.model=this.searchString;
+        console.log(data);
+        //this.searchString=(this.searchString+=', ' + data).replace(/(^[,\s]+)|([,\s]+$)/g, '');
+        this.model=data;//this.searchString;
+        this.modelChanged(data);
+        this.showAutocomplete=false;
     }
 
     clearModel(){
         this.model='';
-        this.searchString='';
+        this.activeItem=-1;
+        this.modelChanged(this.model);
+        this.searchBox.nativeElement.focus();
         this.onModelChanged.emit(this.model);
     }
+
+
 
     walkThroughComplete(evt,showAutocomplete){
      
         if(showAutocomplete){
             switch(evt){
                 case "ArrowDown":
-                this.activeItem===this.completeInitial.length-1 ? this.activeItem=0 : this.activeItem++;                  
+                    this.activeItem===this.complete.length-1 ? this.activeItem=0 : this.activeItem++;              
                     break;
                 case "ArrowUp":
-                this.activeItem===0 ? this.activeItem=this.completeInitial.length-1 : this.activeItem--; 
+                    this.activeItem===0 ? this.activeItem=this.complete.length-1 : this.activeItem--;                     
                     break;
                 case "Enter":
-                    this.completeClick(this.completeInitial[this.activeItem]);
+                    let selected=this.activeItem<0 ? this.model : this.complete[this.activeItem];
+                    
+                    this.model=selected; 
+                    this.modelChanged(selected);
+                    this.onModelChanged.emit(selected);
+
+                    this.activeItem=-1;
+                    this.showAutocomplete=false;
             }
         }
     }
+
+   
 
     filter(){
         this.showAutocomplete=false;

@@ -1,13 +1,14 @@
 <div id={{id}} class="input {{wrapperStyle}}">
     <label *ngIf="label!==''" for="{{name}}" class="input__label {{labelStyle}}">{{label}}</label>
     <input id={{name}} 
+           #searchBox
            placeholder="{{placeholder}}" 
            type="text"
            class="input__box {{boxStyle}}"
            [(ngModel)]="model"
            (ngModelChange)="modelChanged($event)"
            (focus)="showAutocomplete=true"
-           (blur)="showAutocomplete=false">
+           (blur)="blurInput()">
     <span *ngIf="model.length>0" (click)="clearModel()" class="input__clear {{clearStyle}}">X</span>
 
     <ul *ngIf="complete.length>0" class="autocomplete" [ngClass]="{'autocomplete__visible':showAutocomplete}">
@@ -18,9 +19,6 @@
                 {{item}}
         </li>
     </ul>
-    <app-button value="SEARCH" 
-                (click)="filter()"
-                style="input__button"
-                [visible]="withButton">
-    </app-button>
+    <ng-content></ng-content>
+    
 </div>

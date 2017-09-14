@@ -22,8 +22,12 @@ export class ProjectListComponent {
     tooltipVisible:boolean=false;
     complete:Array<string>=new Array<string>();
 
+    //initial project list
+    initialProjects:Array<Project>=new Array<Project>();
+
     constructor(private dataService:ProjectService) {
         this.projects=this.dataService.generateProjects();
+        this.initialProjects=this.projects;
         this.complete=Array.from(new Set(this.projects.map(item=>item.name)));
     }
 
@@ -66,17 +70,8 @@ export class ProjectListComponent {
       }
 
       filterProjects(event){
-          let filters=event.split(',');
-          
-
-        //   this.projects=[];
-
-        //   for(let item of filters){
-        //     let filtered=this.filteredProjects.filter(pr=>pr.name===item);
-        //     this.projects.concat(filtered);
-        //     console.log(this.filteredProjects)
-        //     console.log(filtered)
-        //   }
-          console.log(this.projects);
+          console.log(event)
+        this.projects=this.initialProjects;
+        this.projects=this.projects.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
       }
 }
