@@ -34,7 +34,14 @@ export const LIST_ANIMATION = [trigger('appear', [
       }),
       animate('0.4s 1500ms ease-out')
     ])
-  ])
+  ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: '0' }),
+        animate('.5s ease-out', style({ opacity: '1' })),
+      ]),
+    ])
+  
 
 
 ]

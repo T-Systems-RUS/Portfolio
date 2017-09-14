@@ -1,13 +1,14 @@
 import { Component, Input,Output, EventEmitter,ViewChild } from '@angular/core';
 import * as Rx from 'rxjs/Rx';
 
+
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls:  [
       './input.component.less',
       './../../shared/backpanel/backpanel.component.less'
-    ]
+    ]    
 })
 
 export class InputComponent {

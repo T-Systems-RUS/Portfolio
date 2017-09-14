@@ -31,5 +31,5 @@
             <div>Hello</div>    
         </filter-item>  
     </filter-panel>
-    <project-item *ngFor="let project of projects" [model]="project"></project-item>
+    <project-item [@fadeIn]="''" *ngFor="let project of projects" [model]="project"></project-item>
 </div>
