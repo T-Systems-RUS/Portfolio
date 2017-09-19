@@ -34,13 +34,18 @@ export class InputComponent {
     showAutocomplete:boolean=false;
     activeItem=-1;
 
+    hasComplete:boolean=false;
+
     constructor() {
         
     }
+    
 
     ngAfterViewInit(){
         this.showAutocomplete=false;
-        this.completeInitial=this.complete;
+        this.completeInitial=this.complete;      
+        this.hasComplete=this.complete.length>0;
+
 
         Rx.Observable.fromEvent(document, 'keydown')
                      .pluck('key')
@@ -50,12 +55,14 @@ export class InputComponent {
 
 
     modelChanged(event){
-        this.showAutocomplete=true;
-        this.complete=this.completeInitial;
-
-        let filtered=this.complete.filter(item=>item.toLowerCase().indexOf(event.toLowerCase())!=-1);
-        this.complete=filtered.length>0 ? filtered : ["No results found"];
-        this.onModelChanged.emit(this.model);
+        if(this.hasComplete){
+            this.showAutocomplete=true;
+            this.complete=this.completeInitial;
+    
+            let filtered=this.complete.filter(item=>item.toLowerCase().indexOf(event.toLowerCase())!=-1);
+            this.complete=filtered.length>0 ? filtered : ["No results found"];
+            this.onModelChanged.emit(this.model);
+        }
     }
 
     blurInput(){

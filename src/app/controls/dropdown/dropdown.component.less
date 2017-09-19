@@ -1,0 +1,38 @@
+@import './../../../assets/style/colors.less';
+@import './../../../assets/style/mixins.less';
+
+
+.dropdown{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+
+    .boxSizing();
+
+    &__label{
+        display: block;
+        font-family: ProximaRegular;
+        font-size: 14px;
+        color:@text_h;
+        margin-bottom: 5px;
+    }
+
+
+
+    &__box{
+        display: block;
+        border: 1px solid #dddddd;
+        background-color: @text_white;
+        outline: none;
+        height: 40px;
+        font-family: ProximaRegularLight;
+        font-size: 18px;
+        padding: 0  20px;
+        width: 100%;
+
+        //-webkit-appearance: none;
+        .boxSizing();
+        .borderRadius(0px);
+
+    }
+}

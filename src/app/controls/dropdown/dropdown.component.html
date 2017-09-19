@@ -1,0 +1,6 @@
+<div id={{id}} class="dropdown {{wrapperStyle}}">
+    <label *ngIf="label!==''" for="{{name}}" class="dropdown__label {{labelStyle}}">{{label}}</label>
+    <select class="dropdown__box" name="{{name}}" id="{{name}}">
+        <option *ngFor="let option of options" value="option">{{option}}</option>
+    </select>
+</div>

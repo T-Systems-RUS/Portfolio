@@ -1,3 +1,32 @@
+<modal>
+    <div class="modal__header {{model.line}}" header>
+        <img class="modal__image--line" *ngIf="model.line!==''" src="./../../assets/images/{{model.line}}.png" alt="modal.line">
+        <img class="modal__image"  src="./../../assets/images/Create Image.png" alt="create">     
+    </div>
+    <div class="modal__content" content>
+        <div class="modal__content-block">
+                <app-input id="name" 
+                    placeholder="Project name" 
+                    boxStyle="input--small"
+                    label="Project name"
+                    clearStyle="input__clear--right20 input__clear--top30"
+                    wrapperStyle="input--width100"></app-input>
+
+                <dropdown id="line" 
+                          label="Production line"
+                          [options]="options"></dropdown>
+        </div>
+        <div class="modal__content-block">
+                <app-input id="start" 
+                    placeholder="Project start" 
+                    boxStyle="input--small"
+                    label="Project start"
+                    clearStyle="input__clear--right20 input__clear--top30"
+                    wrapperStyle="input--width100"></app-input>
+        </div>
+    </div>
+</modal>
+
 <backpanel  color="grey-bg" image="left">
     <app-input id="search" [complete]="complete" 
                            placeholder="Search projects" 
@@ -5,7 +34,6 @@
                            wrapperStyle="backpanel__search"
                            (onModelChanged)="filterProjects($event)"></app-input>
 </backpanel>
-
 
 
 <div @appear3 class="project-list">
@@ -32,4 +60,6 @@
         </filter-item>  
     </filter-panel>
     <project-item [@fadeIn]="''" *ngFor="let project of projects" [model]="project"></project-item>
+
+    <app-button value="+" style="button--action"></app-button>
 </div>

@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Project } from '../../../shared/models/project';
 import { ProjectService } from '../project.service';
 import { LIST_ANIMATION } from './project-list.animation';
+
+import { ModalComponent } from '../../../shared/modal/modal.component';
 
 
 @Component({
@@ -25,6 +27,13 @@ export class ProjectListComponent {
     //initial project list
     initialProjects:Array<Project>=new Array<Project>();
 
+    @ViewChild(ModalComponent)
+    private readonly modal:ModalComponent;
+
+    //Options for new Project form
+    private model:Project=new Project();
+    private options:Array<string>=["Automotive","Horizontal","SAP","Vertical"]
+
     constructor(private dataService:ProjectService) {
         this.projects=this.dataService.generateProjects();
         this.initialProjects=this.projects;
@@ -34,7 +43,10 @@ export class ProjectListComponent {
     ngAfterViewInit(){
         setTimeout(()=> {
             this.filteredProjects=this.projects;
+            this.model.line='horizontal';   
         }, 0); 
+
+        
     }
 
     onFilterAction(event){
@@ -74,4 +86,6 @@ export class ProjectListComponent {
         this.projects=this.initialProjects;
         this.projects=this.projects.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
       }
+
+      
 }

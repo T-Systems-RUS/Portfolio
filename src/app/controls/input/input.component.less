@@ -4,14 +4,15 @@
 
 .input{
     display: inline-block;
-    
+    position: relative;
 
     .boxSizing();
 
     &__label{
         display: block;
         font-family: ProximaRegular;
-        font-size: 1em;
+        font-size: 14px;
+        color:@text_h;
         margin-bottom: 5px;
     }
 
@@ -34,6 +35,10 @@
 
         &--right20{
             right: 20px;
+        }
+
+        &--top30{
+            top:30px;
         }
 
     }
@@ -69,6 +74,15 @@
             font-size: 18px;
             color:@text_input;
           }
+    }
+
+     &--small{
+        width: 100%;
+        height: 40px;
+    }
+
+    &--width100{
+        width:100%;
     }
 }
 
@@ -121,4 +135,6 @@
         visibility: visible;
         height: auto;
     }
+
+    
 }
