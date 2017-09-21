@@ -94,6 +94,7 @@ export class ProjectService {
             teamcount: "10",
             customer:"BMW AG"
         });
+        
 
 
         for(let i=0;i<10;i++){
@@ -114,6 +115,25 @@ export class ProjectService {
         
 
         return project;
+    }
+
+    generateEmployees(){
+        let employees=new Array<Employee>();
+        
+        for(let i=0;i<20;i++){
+            let employee=new Employee({
+                firstname:'Ivan' + i,
+                lastname:"Ivanov"+i,
+                technologies:this.technologies,
+                roles:[new Role({
+                    name:"Lead Architect",
+                    participation:"100%"
+                })]
+            })
+            employees.push(employee);   
+        }
+
+        return employees;
     }
 
      getRandomizer(bottom, top) {

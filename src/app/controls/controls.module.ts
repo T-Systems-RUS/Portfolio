@@ -3,6 +3,7 @@ import { SharedModule }       from '../shared/shared.module';
 
 /*Control Components */
 import { ButtonComponent } from './button/button.component';
+import { CheckBoxComponent } from './checkbox/checkbox.component';
 import { InputComponent }  from './input/input.component';
 import { DropDownComponent }  from './dropdown/dropdown.component';
 import { ChipComponent }   from './chip/chip.component';
@@ -19,6 +20,7 @@ import { ListItemComponent } from './list/list-item/list-item.component';
   ],
   declarations: [
     ButtonComponent,
+    CheckBoxComponent,
     ChipComponent,
     InputComponent,
     DropDownComponent,
@@ -28,6 +30,7 @@ import { ListItemComponent } from './list/list-item/list-item.component';
   ],
   exports:      [ 
     ButtonComponent,
+    CheckBoxComponent,
     ChipComponent,
     InputComponent,
     DropDownComponent,

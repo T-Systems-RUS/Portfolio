@@ -1,6 +1,15 @@
 <div id={{id}} class="dropdown {{wrapperStyle}}">
-    <label *ngIf="label!==''" for="{{name}}" class="dropdown__label {{labelStyle}}">{{label}}</label>
-    <select class="dropdown__box" name="{{name}}" id="{{name}}">
-        <option *ngFor="let option of options" value="option">{{option}}</option>
+    <label *ngIf="label!==''" for="{{name}}" class="dropdown__label {{labelStyle}}">
+        {{label}}
+        <span class="dropdown__error">{{errorMessage}}</span>
+    </label>
+    <select  
+             class="dropdown__box" 
+             name="{{name}}" 
+             id="{{name}}"
+             [(ngModel)]="model"
+             [ngClass]="{'dropdown__box--error': errorMessage!=''}"
+             (ngModelChange)="modelChanged($event)">
+        <option *ngFor="let option of options" value="{{option}}">{{option}}</option>
     </select>
 </div>

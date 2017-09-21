@@ -24,6 +24,9 @@ export class InputComponent {
     @Input() placeholder:string='';
     @Input() complete:Array<any>=new Array<any>();
 
+    @Input() errorMessage:string=""; //Field is required
+    @Input() controlType:string="input";
+
     @Output() onModelChanged=new EventEmitter<string>();
 
     @ViewChild('searchBox') searchBox;

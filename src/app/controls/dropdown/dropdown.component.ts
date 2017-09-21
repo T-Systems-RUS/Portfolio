@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'dropdown',
@@ -18,10 +18,21 @@ export class DropDownComponent {
     @Input() labelStyle='';
 
     @Input() options:Array<string>=new Array<string>();
+    @Input() errorMessage:string=""; //Field is required
+
+    @Output() private changed:EventEmitter<string>=new EventEmitter<string>();
     
 
     constructor() {
         
+    }
+
+    ngOnInit(){
+        console.log(this.model)
+    }
+
+    modelChanged(event){
+        this.changed.emit(event);
     }
 
 

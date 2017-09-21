@@ -11,7 +11,7 @@ import { Employee } from '../../../shared/models/employee';
 export class ListItemComponent {
 
     @Input() model:Employee=new Employee();
-    
+    @Input() itemStyle:string='';
     
     constructor() {
         

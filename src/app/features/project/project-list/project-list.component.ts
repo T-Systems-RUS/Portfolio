@@ -32,7 +32,8 @@ export class ProjectListComponent {
 
     //Options for new Project form
     private model:Project=new Project();
-    private options:Array<string>=["Automotive","Horizontal","SAP","Vertical"]
+    private options:Array<string>=["automotive","horizontal","sap","vertical"]
+    private options2:Array<string>=["telekom","automotive","transportation","health"]
 
     constructor(private dataService:ProjectService) {
         this.projects=this.dataService.generateProjects();
@@ -40,10 +41,15 @@ export class ProjectListComponent {
         this.complete=Array.from(new Set(this.projects.map(item=>item.name)));
     }
 
+    ngOnInit(){
+        this.model.line='grey'; 
+        this.model.employees=this.dataService.generateEmployees();
+    }
+
     ngAfterViewInit(){
         setTimeout(()=> {
             this.filteredProjects=this.projects;
-            this.model.line='horizontal';   
+              
         }, 0); 
 
         
@@ -85,6 +91,11 @@ export class ProjectListComponent {
           console.log(event)
         this.projects=this.initialProjects;
         this.projects=this.projects.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
+      }
+
+
+      changeLine(event){
+          this.model.line=event;
       }
 
       

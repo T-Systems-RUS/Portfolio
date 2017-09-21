@@ -23,6 +23,11 @@
         z-index: 101;
     }
 
+    &__error{
+        color:@error;
+        float: right;
+    }
+
     &__clear{
         display: inline-block;
         cursor: pointer;
@@ -43,7 +48,7 @@
 
     }
 
-    &__box{
+    &__box, &__textbox{
         display: block;
         border: 1px solid #dddddd;
         outline: none;
@@ -74,6 +79,16 @@
             font-size: 18px;
             color:@text_input;
           }
+
+        &--error{
+            border-color: @error;
+        }
+    }
+
+    &__textbox{
+        padding-top: 10px;
+        height: 120px;
+        resize: vertical;
     }
 
      &--small{
@@ -83,6 +98,10 @@
 
     &--width100{
         width:100%;
+    }
+
+    &--marginB20{
+        margin-bottom: 20px;
     }
 }
 

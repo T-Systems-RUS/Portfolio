@@ -40,7 +40,7 @@
         color: @text_second2;
     }
 
-    &__info{
+    :host ::ng-deep &__info{
         margin: 0;
         font-family: ProximaRegularLight;
         position: absolute;
@@ -50,5 +50,16 @@
         margin-top: -8px;
         font-size: 14px;
         color: @text_body;
+    }
+
+    :host ::ng-deep &--picker{
+        border-bottom: 1px solid #dddddd;
+        margin: 0;
+        padding: 10px;
+        height: auto;
+        
+        // &:last-child{
+        //     border-bottom: none;
+        // }
     }
 }

@@ -1,0 +1,10 @@
+<div class="checkbox">
+    <label  for="{{name}}" class="checkbox__label {{labelStyle}}">
+        {{label}}
+    </label>
+    <input id={{name}} 
+        type="checkbox"
+        class="checkbox__check {{boxStyle}}"
+        [(ngModel)]="model"
+        (ngModelChange)="check($event)">
+</div>

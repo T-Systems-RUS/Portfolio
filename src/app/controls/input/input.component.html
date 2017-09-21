@@ -1,24 +1,43 @@
-<div id={{id}} class="input {{wrapperStyle}}">
-    <label *ngIf="label!==''" for="{{name}}" class="input__label {{labelStyle}}">{{label}}</label>
-    <input id={{name}} 
-           #searchBox
-           placeholder="{{placeholder}}" 
-           type="text"
-           class="input__box {{boxStyle}}"
-           [(ngModel)]="model"
-           (ngModelChange)="modelChanged($event)"
-           (focus)="showAutocomplete=true"
-           (blur)="blurInput()">
-    <span *ngIf="model.length>0" (click)="clearModel()" class="input__clear {{clearStyle}}">X</span>
+<div [ngSwitch]="controlType">
+    <div *ngSwitchCase="'input'" id={{id}} class="input {{wrapperStyle}}">
+            <label *ngIf="label!==''" for="{{name}}" class="input__label {{labelStyle}}">
+                {{label}}
+                <span class="input__error">{{errorMessage}}</span>
+            </label>
+            <input id={{name}} 
+                    #searchBox
+                    placeholder="{{placeholder}}" 
+                    type="text"
+                    class="input__box {{boxStyle}}"
+                    [(ngModel)]="model"
+                    (ngModelChange)="modelChanged($event)"
+                    (focus)="showAutocomplete=true"
+                    (blur)="blurInput()"
+                    [ngClass]="{'input__box--error': errorMessage!=''}">
+            <span *ngIf="model.length>0" (click)="clearModel()" class="input__clear {{clearStyle}}">X</span>
+        
+            <ul *ngIf="complete.length>0" class="autocomplete" [ngClass]="{'autocomplete__visible':showAutocomplete}">
+                <li *ngFor="let item of complete;let i = index" 
+                    (click)="completeClick(item)" 
+                    class="autocomplete__item"
+                    [ngClass]="{'autocomplete__item--active':i===activeItem}">
+                        {{item}}
+                </li>
+            </ul>
+            <ng-content></ng-content>
+            
+    </div>
 
-    <ul *ngIf="complete.length>0" class="autocomplete" [ngClass]="{'autocomplete__visible':showAutocomplete}">
-        <li *ngFor="let item of complete;let i = index" 
-            (click)="completeClick(item)" 
-            class="autocomplete__item"
-            [ngClass]="{'autocomplete__item--active':i===activeItem}">
-                {{item}}
-        </li>
-    </ul>
-    <ng-content></ng-content>
-    
+    <div *ngSwitchCase="'textbox'" id={{id}} class="input {{wrapperStyle}}">
+            <label *ngIf="label!==''" for="{{name}}" class="input__label {{labelStyle}}">
+                {{label}}
+                <span class="input__error">{{errorMessage}}</span>
+            </label>
+            <textarea name="{{name}}" id="{{id}}" cols="30" rows="10"
+                        placeholder="{{placeholder}}" 
+                        type="text"
+                        class="input__textbox {{boxStyle}}"
+                        [(ngModel)]="model"
+                        [ngClass]="{'input__box--error': errorMessage!=''}"></textarea>
+    </div>
 </div>

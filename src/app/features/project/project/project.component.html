@@ -65,7 +65,9 @@
 
             <div class="project__block-item">
                 <p class="project__h project__mb30">TEAM</p>
-                <list-item  *ngFor="let employee of model.employees" [model]="employee"></list-item>
+                <list-item  *ngFor="let employee of model.employees" [model]="employee">
+                    <p class="list-item__info">{{employee.roles[0].participation}}</p>
+                </list-item>
             </div>
         </div>
 </div>

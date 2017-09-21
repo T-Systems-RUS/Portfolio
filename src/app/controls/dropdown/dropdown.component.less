@@ -32,7 +32,19 @@
 
         //-webkit-appearance: none;
         .boxSizing();
-        .borderRadius(0px);
+        .borderRadius(0px);   
 
+        &--error{
+            border-color: @error;
+        }
+    }
+
+    &__error{
+        color:@error;
+        float: right;
+    }
+
+    &--marginB20{
+        margin-bottom: 20px;
     }
 }
