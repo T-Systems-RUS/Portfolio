@@ -56,27 +56,40 @@
                 wrapperStyle="input--width100"></app-input>
         </div> 
         <div class="modal__content-block">
-            <p class="modal__h">
+            <p class="modal__h modal--mb20">
                 TEAM    
             </p>   
             <app-input id="Search" 
                 placeholder="Search employee" 
                 boxStyle="input--small"
                 clearStyle="input__clear--right20 input__clear--top30"
-                wrapperStyle="input--width100"></app-input>
+                wrapperStyle="input--width100"
+                (onModelChanged)="filterEmployees($event)"></app-input>
 
             <div class="modal__wrapper">
                 <list-item  *ngFor="let employee of model.employees" itemStyle="list-item--picker" [model]="employee">
-                    <checkbox [model]="true"></checkbox>
+                    <checkbox [model]="false"></checkbox>
                 </list-item>
             </div>
         </div>   
         <div class="modal__content-block">
-            <p class="modal__h">
+            <p class="modal__h modal--mb20">
                 TECHNOLOGIES    
             </p> 
-            <div>
-                
+            <app-input id="Search" 
+                placeholder="Search technology" 
+                boxStyle="input--small"
+                clearStyle="input__clear--right20 input__clear--top30"
+                wrapperStyle="input--width100"
+                (onModelChanged)="filterTechnologies($event)"></app-input>
+
+            <div class="modal__wrapper modal--pad10">
+                <chip *ngFor="let tech of model.technologies" 
+                      [value]="tech.name"
+                      [clickable]="true" 
+                      style="grey"
+                      [active] ="tech.active"
+                      (clicked)="selectTechnology($event)"></chip>
             </div>
         </div>
     </div>       

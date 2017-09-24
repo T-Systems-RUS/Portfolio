@@ -83,8 +83,9 @@
 
     :host ::ng-deep &__wrapper{
         border: 1px solid #dddddd;
-        max-height: 291px;
+        height: 291px;
         overflow-y: scroll;
+        .boxSizing();
     }
 
     :host ::ng-deep &__content{
@@ -121,11 +122,20 @@
             }
         }
 
+
         
     }
 
     :host ::ng-deep &__footer{
         
+    }
+
+    :host ::ng-deep  &--pad10{
+        padding: 10px;
+    }
+
+    :host ::ng-deep  &--mb20{
+        margin-bottom: 20px;
     }
 }
 
