@@ -5,6 +5,8 @@ export class Employee{
     id:string='';
     firstname:string='';
     lastname:string='';
+    active:boolean=false;
+    participation:string="0%";
     roles:Array<Role>=new Array<Role>();
     technologies:Array<Technology>=new Array<Technology>();
 

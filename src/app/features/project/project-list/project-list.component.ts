@@ -4,8 +4,8 @@ import { Employee } from '../../../shared/models/employee';
 import { Technology } from '../../../shared/models/technology';
 import { ProjectService } from '../project.service';
 import { LIST_ANIMATION } from './project-list.animation';
+import { Router } from '@angular/router';
 
-import { ModalComponent } from '../../../shared/modal/modal.component';
 
 
 @Component({
@@ -28,40 +28,27 @@ export class ProjectListComponent {
 
     //initial project list
     initialProjects:Array<Project>=new Array<Project>();
-    //initial employee list
-    initialEmployees:Array<Employee>=new Array<Employee>();
-    //initial tech list
-    initialTechnologies:Array<Technology>=new Array<Technology>();
 
-    @ViewChild(ModalComponent)
-    private readonly modal:ModalComponent;
 
-    //Options for new Project form
-    private model:Project=new Project();
-    private options:Array<string>=["automotive","horizontal","sap","vertical"]
-    private options2:Array<string>=["telekom","automotive","transportation","health"]
 
-    constructor(private dataService:ProjectService) {
+
+
+
+
+    constructor(private dataService:ProjectService,public router: Router) {
         this.projects=this.dataService.generateProjects();
         this.initialProjects=this.projects;
         this.complete=Array.from(new Set(this.projects.map(item=>item.name)));
     }
 
     ngOnInit(){
-        this.model.line='grey'; 
-        this.model.employees=this.dataService.generateEmployees();
-        this.initialEmployees=this.model.employees;
-        this.model.technologies=this.dataService.technologies;
-        this.initialTechnologies=this.model.technologies;
+
     }
 
     ngAfterViewInit(){
         setTimeout(()=> {
-            this.filteredProjects=this.projects;
-              
-        }, 0); 
-
-        
+            this.filteredProjects=this.projects;             
+        }, 0);     
     }
 
     onFilterAction(event){
@@ -101,25 +88,8 @@ export class ProjectListComponent {
         this.projects=this.projects.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
       }
 
-      filterEmployees(event){
-        this.model.employees=this.initialEmployees;
-        this.model.employees=this.model.employees.filter(item=>item.fullname.toLowerCase().indexOf(event.toLowerCase())!=-1);
-      }
-
-      filterTechnologies(event){
-          
-        this.model.technologies=this.initialTechnologies;
-        this.model.technologies=this.model.technologies.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
-      }
-
-      selectTechnology(event){
-          let tech=this.initialTechnologies.filter(item=>item.name===event)[0];
-          tech.active=!tech.active;
-      }
-
-
-      changeLine(event){
-          this.model.line=event;
+      newProject(){
+          this.router.navigate(["/project/new"]);
       }
 
       

@@ -1,4 +1,4 @@
-<div class="list-item {{itemStyle}}">
+<div class="list-item {{itemStyle}}" (click)="performCLick(model)" [ngClass]="{'list-item--active':model.active}">
     <img class="list-item__img" src="./../../assets/images/person.png" alt="person">
 
     <div class="list-item__block">

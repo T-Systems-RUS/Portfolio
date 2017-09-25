@@ -1,0 +1,100 @@
+<div class="new-project">
+    <div class="new-project__header {{model.line}}">
+        <img class="new-project__image--line" *ngIf="model.line!=='grey'" src="./../../assets/images/{{model.line}}.png" alt="new-project.line">
+        <img class="new-project__image"  src="./../../assets/images/Create Image.png" alt="create">     
+    </div>
+    <div class="new-project__content">
+        <div class="new-project__content-block">
+                <app-input id="name" 
+                    placeholder="Project name" 
+                    boxStyle="input--small"
+                    label="Project name"
+                    clearStyle="input__clear--right20 input__clear--top30"
+                    wrapperStyle="input--width100 input--marginB20"></app-input>
+
+                <dropdown id="line" 
+                          label="Production line"
+                          [options]="options"
+                          wrapperStyle="dropdown--marginB20"
+                          [model]="model.line"
+                          (changed)="changeLine($event)"></dropdown>
+
+                <dropdown id="domain" 
+                          label="Domain"
+                          [options]="options2"
+                          [model]="model.domain"></dropdown>
+        </div>
+        <div class="new-project__content-block">
+                <app-input id="start" 
+                    placeholder="Project start" 
+                    boxStyle="input--small"
+                    label="Project start"
+                    clearStyle="input__clear--right20 input__clear--top30"
+                    wrapperStyle="input--width100 input--marginB20"></app-input>
+
+                <app-input id="end" 
+                    placeholder="Project end" 
+                    boxStyle="input--small"
+                    label="Project end"
+                    clearStyle="input__clear--right20 input__clear--top30"
+                    wrapperStyle="input--width100 input--marginB20"></app-input>
+
+                <app-input id="Customer" 
+                    placeholder="Customer" 
+                    boxStyle="input--small"
+                    label="Customer"
+                    clearStyle="input__clear--right20 input__clear--top30"
+                    wrapperStyle="input--width100"></app-input>                   
+        </div>
+        <div class="new-project__content-block new-project__content-block--fullwidth  new-project__content-block--maxH163">
+            <app-input id="Description" 
+                placeholder="Description" 
+                
+                label="Description"
+                controlType="textbox"
+                clearStyle="input__clear--right20 input__clear--top30"
+                wrapperStyle="input--width100"></app-input>
+        </div> 
+        <div class="new-project__content-block">
+            <app-input id="Search" 
+                placeholder="Search employee" 
+                label="TEAM"
+                boxStyle="input--small"
+                clearStyle="input__clear--right20 input__clear--top30"
+                wrapperStyle="input--width100"
+                (onModelChanged)="filterEmployees($event)"></app-input>
+
+            <div class="new-project__wrapper">
+                <list-item  *ngFor="let employee of model.employees" 
+                            [clickable]="true" 
+                             itemStyle="list-item--picker" 
+                            [model]="employee"
+                            (clicked)="selectEmployee($event)">
+                    <input (click)="stopAction($event)" [(ngModel)]="employee.participation" class="list-item__input">
+                </list-item>
+            </div>
+        </div>   
+        <div class="new-project__content-block">
+            <app-input id="Search" 
+                placeholder="Search technology" 
+                label="TECHNOLOGIES"
+                boxStyle="input--small"
+                clearStyle="input__clear--right20 input__clear--top30"
+                wrapperStyle="input--width100"
+                (onModelChanged)="filterTechnologies($event)"></app-input>
+
+            <div class="new-project__wrapper new-project--pad10">
+                <chip *ngFor="let tech of model.technologies" 
+                      [value]="tech.name"
+                      [clickable]="true" 
+                      style="grey"
+                      [active] ="tech.active"
+                      (clicked)="selectTechnology($event)"></chip>
+            </div>
+        </div>
+    </div> 
+    <div class="new-project__footer">
+        <app-button (click)="back()" value="CANCEL" style="button--white" ></app-button>
+        <app-button (click)="newProject()" value="SUBMIT" style="" ></app-button>
+    </div>
+</div>

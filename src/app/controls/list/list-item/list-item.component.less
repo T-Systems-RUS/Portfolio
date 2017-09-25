@@ -52,14 +52,45 @@
         color: @text_body;
     }
 
+    :host ::ng-deep &__input{
+        position: absolute;
+        right: 20px;
+        height: 20px;
+        top:50%;
+        margin-top: -10px;
+        width: 40px;
+        font-family: ProximaRegularLight;
+        font-size: 18px;
+        outline: none;
+        border: none;
+        text-align: center;
+        .borderRadius(2px);
+        .transition(all .4s);
+        z-index: 200;
+        
+        &:focus{
+            border-bottom: 2px solid @text_h;
+        }
+
+    }
+
     :host ::ng-deep &--picker{
         border-bottom: 1px solid #dddddd;
         margin: 0;
+        float: left;
         padding: 10px;
         height: auto;
-        
-        // &:last-child{
-        //     border-bottom: none;
-        // }
+        cursor: pointer;
+
+        .transition(all .4s);
+
+        &:hover{
+            //background-color: @sap_bg;
+        }
+
+    }
+
+    &--active{
+        background-color: @sap_bg;
     }
 }

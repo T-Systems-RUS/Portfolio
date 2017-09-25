@@ -5,6 +5,7 @@
     <input id={{name}} 
         type="checkbox"
         class="checkbox__check {{boxStyle}}"
-       
+        [(ngModel)]="model"
+        value="{{model}}"
         (ngModelChange)="check($event)">
 </div>
