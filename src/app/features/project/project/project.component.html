@@ -72,4 +72,14 @@
         </div>
 </div>
 
-<app-footer [color]="model.line"></app-footer>
+<app-footer [color]="model.line">
+        <a [routerLink]="['/project/update', model.id]" class="footer__button">
+            <img src="./../../assets/images/edit.png" alt="edit">
+        </a>
+        <a class="footer__button">
+            <img src="./../../assets/images/powerpoint.png" alt="powerpoint">
+        </a>
+        <a class="footer__button">
+            <img src="./../../assets/images/exel.png" alt="exel">
+        </a>
+</app-footer>
