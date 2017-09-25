@@ -12,7 +12,7 @@ export class FilterPanelComponent {
 
     @Input() id:string='';
 
-    
+    sortProperty:string='name';
 
     constructor() {
         
