@@ -4,6 +4,8 @@ import { Technology } from '../../../shared/models/technology';
 import {Employee } from '../../../shared/models/employee';
 import { ProjectService } from '../project.service';
 
+import {Message} from 'primeng/components/common/api';
+
 
 @Component({
   selector: 'new-project',
@@ -20,6 +22,9 @@ export class NewProjectComponent {
     initialEmployees:Array<Employee>=new Array<Employee>();
     //initial tech list
     initialTechnologies:Array<Technology>=new Array<Technology>();
+
+    msgs: Message[] = [];
+    dateValue:Date;
 
     private options:Array<string>=["automotive","horizontal","sap","vertical"]
     private options2:Array<string>=["telekom","automotive","transportation","health"]
@@ -59,6 +64,11 @@ export class NewProjectComponent {
       selectEmployee(event){
         let employee=this.initialEmployees.filter(item=>item.fullname===event.fullname)[0];
         employee.active=event.active;
+      }
+
+
+      newProject(){
+        this.msgs.push({severity:'warn', summary:'Info Message', detail:'PrimeNG rocks'});
       }
 
 

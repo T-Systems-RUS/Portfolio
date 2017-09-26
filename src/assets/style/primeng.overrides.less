@@ -1,0 +1,59 @@
+@import "colors.less";
+@import "mixins.less";
+
+.ui-growl{
+    z-index: 4000 !important;
+}
+
+
+.ui-calendar{
+    width: 100% ;
+}
+
+.ui-inputtext{
+    display: block ;
+    border: 1px solid #dddddd ;
+    outline: none ;
+    height: 40px ;
+    font-family: ProximaRegular ;
+    font-size: 18px ;
+    padding: 0  20px ;
+    width: 100% ;
+    .boxSizing();
+    border-radius: 0 ;
+
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        font-family: ProximaRegularThin;
+        font-size: 18px;
+        color:@text_input;
+      }
+    &::-moz-placeholder { /* Firefox 19+ */
+        font-family: ProximaRegularThin;
+        font-size: 18px;
+        color:@text_input;
+      }
+    &:-ms-input-placeholder { /* IE 10+ */
+        font-family: ProximaRegularThin;
+        font-size: 18px;
+        color:@text_input;
+      }
+    &:-moz-placeholder { /* Firefox 18- */
+        font-family: ProximaRegularThin;
+        font-size: 18px;
+        color:@text_input;
+      }
+
+    &:focus{
+        outline: none ;
+        border: 1px solid #dddddd ;
+        .boxShadow(none);
+    }
+}
+
+.ui-calender-label{
+    display: block;
+    font-family: ProximaRegular;
+    font-size: 14px;
+    color:@text_h;
+    margin-bottom: 5px;
+}
