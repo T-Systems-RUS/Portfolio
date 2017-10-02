@@ -1,26 +1,23 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "1Ass-4ole2",
-    "database": "portfolio-dev",
-    "host": "localhost",
-    "port":5432,
-    "dialect": "postgres"
+    "username": "root",
+    "password": null,
+    "database": "database_development",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
-    "port":5432,
-    "dialect": "postgres"
+    "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
-    "port":5432,
-    "dialect": "postgres"
+    "dialect": "mysql"
   }
 }
