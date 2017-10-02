@@ -4,10 +4,23 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 
+
 // Get our API routes
 const api = require('./server/routes/api');
 
 const app = express();
+var models = require("./server/models");
+
+//Sync Database
+models.sequelize.sync().then(function() {
+
+   console.log('Nice! Database looks fine')
+
+}).catch(function(err) {
+
+   console.log(err, "Something went wrong with the Database Update!")
+
+});
 
 // Parsers for POST data
 app.use(bodyParser.json());
