@@ -1,8 +1,9 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Technology = sequelize.define('Technology', {
+  var Role = sequelize.define('Role', {
     name: DataTypes.STRING,
     domain: DataTypes.STRING,
+    leadrole:DataTypes.BOOLEAN,
     active: DataTypes.BOOLEAN,
     createdAt: {
       allowNull: false,
@@ -15,9 +16,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: function(models) {
-        Technology.belongsToMany(models.Employee,{through: 'employee_technology'});
+        Role.hasMany(models.Schedule,{
+            foreignKey: 'role_id',
+            constraints: false,
+            scope: {
+                commentable: 'schedule'
+            }});
       }
     }
   });
-  return Technology;
+  return Role;
 };
