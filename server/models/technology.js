@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     classMethods: {
       associate: function(models) {
         Technology.belongsToMany(models.Employee,{through: 'employee_technology'});
+        //Technology.belongsToMany(models.Project,{through: 'project_technology'});
       }
     }
   });

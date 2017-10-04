@@ -5,38 +5,17 @@ module.exports = (sequelize, DataTypes) => {
     line: DataTypes.STRING,
     domain: DataTypes.STRING,
     description: DataTypes.STRING,
-    teamcount:{
-        type: Sequelize.STRING,
-        defaultValue:"0",
-        get() {
-            return "0";
-        }
-    },
+    teamcount: DataTypes.STRING,
     active: DataTypes.BOOLEAN,
-    createdAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    },
-    updatedAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    }
+    startdate: DataTypes.DATE,
+    enddate: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {
-        Project.hasMany(models.Schedule,{
-            foreignKey: 'project_id',
-            constraints: false,
-            scope: {
-                commentable: 'schedule'
-            }});
+        Project.hasMany(models.Schedule);
+        Project.belongsToMany(models.Technology,{through: 'project_technology'});
       }
     }
   });
   return Project;
 };
-
-
-
-
-

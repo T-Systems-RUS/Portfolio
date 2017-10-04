@@ -16,12 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     classMethods: {
       associate: function(models) {
         Employee.belongsToMany(models.Technology,{through: 'employee_technology'});
-        // Employee.hasMany(models.Schedule,{
-        //   foreignKey: 'employee_id',
-        //   constraints: false,
-        //   scope: {
-        //       commentable: 'schedule'
-        //   }});
+        //Employee.hasMany(models.Schedule);
       }
     }
   });

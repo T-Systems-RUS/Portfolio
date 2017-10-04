@@ -2,22 +2,14 @@
 module.exports = (sequelize, DataTypes) => {
   var Schedule = sequelize.define('Schedule', {
     participation: DataTypes.DECIMAL,
-    startdate: DataTypes.DATE                        ,
-    enddate: DataTypes.DATE                        ,
-    createdAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    },
-    updatedAt: {
-      allowNull: false,
-      type: Sequelize.DATE
-    }
+    startdate: DataTypes.DATE,
+    enddate: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {
-        Schedule.belongsTo(models.Role,{ foreignKey: 'role_id',as: 'schedule'});
-        Schedule.belongsTo(models.Employee,{ foreignKey: 'employee_id',as: 'schedule'});
-        Schedule.belongsTo(models.Project,{ foreignKey: 'project_id',as: 'schedule'});
+        Schedule.belongsTo(models.Project);
+        Schedule.belongsTo(models.Employee)
+        Schedule.belongsTo(models.Role)
       }
     }
   });
