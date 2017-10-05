@@ -9,9 +9,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: function(models) {
-        Role.hasMany(models.Schedule);
+       
       }
     }
   });
+
+  role.associate=function(models){
+     Role.hasMany(models.Schedule);
+  }
+
   return Role;
 };

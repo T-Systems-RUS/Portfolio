@@ -15,10 +15,15 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: function(models) {
-        Technology.belongsToMany(models.Employee,{through: 'employee_technology'});
-        //Technology.belongsToMany(models.Project,{through: 'project_technology'});
+        
       }
     }
   });
+
+  Technology.associate=function(models){
+      Technology.belongsToMany(models.Employee,{through: 'employee_technology',as: 'employee'});
+      Technology.belongsToMany(models.Project,{through: 'project_technology'});
+  }
+
   return Technology;
 };

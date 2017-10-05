@@ -7,11 +7,16 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: function(models) {
-        Schedule.belongsTo(models.Project);
-        Schedule.belongsTo(models.Employee)
-        Schedule.belongsTo(models.Role)
+       
       }
     }
   });
+
+  Schedule.associate=function(models){
+      Schedule.belongsTo(models.Project);
+      Schedule.belongsTo(models.Employee);
+      Schedule.belongsTo(models.Role);
+  }
+
   return Schedule;
 };
