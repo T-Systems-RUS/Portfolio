@@ -9,18 +9,27 @@ const bodyParser = require('body-parser');
 const api = require('./server/routes/api');
 
 const app = express();
-var models = require("./server/models");
 
-//Sync Database
-models.sequelize.sync().then(function() {
+var Sequelize = require('sequelize');
+var env       = process.env.NODE_ENV || 'development';
+var config    = require('./server/config/config.json')[env];
+var db        = {};
 
-   console.log('Nice! Database looks fine')
+if (config.use_env_variable) {
+  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+} else {
+  var sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 
-}).catch(function(err) {
-
-   console.log(err, "Something went wrong with the Database Update!")
-
+sequelize
+.authenticate()
+.then(() => {
+  console.log('Connection has been established successfully.');
+})
+.catch(err => {
+  console.error('Unable to connect to the database:', err);
 });
+
 
 // Parsers for POST data
 app.use(bodyParser.json());

@@ -9,6 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       participation: {
+        defaultValue: 0.0,
         type: Sequelize.DECIMAL
       },
       startdate: {

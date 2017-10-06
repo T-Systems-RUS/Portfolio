@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Technology.associate=function(models){
-      Technology.belongsToMany(models.Employee,{through: 'employee_technology',as: 'employee'});
-      Technology.belongsToMany(models.Project,{through: 'project_technology'});
+      Technology.belongsToMany(models.Employee,{through: 'employee_technology',as: 'employees'});
+      Technology.belongsToMany(models.Project,{through: 'project_technology', as:'projects'});
   }
 
   return Technology;

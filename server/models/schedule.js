@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Schedule.associate=function(models){
-      Schedule.belongsTo(models.Project);
-      Schedule.belongsTo(models.Employee);
-      Schedule.belongsTo(models.Role);
+      Schedule.belongsTo(models.Project, { as: 'project'});
+      Schedule.belongsTo(models.Employee, { as: 'employee'});
+      Schedule.belongsTo(models.Role, { as: 'role'});
   }
 
   return Schedule;

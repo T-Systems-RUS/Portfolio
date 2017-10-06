@@ -9,6 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       line: {
@@ -21,9 +22,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       teamcount: {
+        defaultValue:"0",
         type: Sequelize.STRING
       },
       active: {
+        defaultValue:false,
         type: Sequelize.BOOLEAN
       },
       startdate: {

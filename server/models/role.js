@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   role.associate=function(models){
-     Role.hasMany(models.Schedule);
+     Role.hasMany(models.Schedule, { as: 'schedules'});
   }
 
   return Role;

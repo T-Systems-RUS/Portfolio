@@ -9,6 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       domain: {
@@ -18,6 +19,7 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       active: {
+        defaultValue:false,
         type: Sequelize.BOOLEAN
       },
       createdAt: {

@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Project.associate=function(models){
-    Project.hasMany(models.Schedule);
-    Project.belongsToMany(models.Technology,{through: 'project_technology'});
+    Project.hasMany(models.Schedule, { as: 'schedules'});
+    Project.belongsToMany(models.Technology,{through: 'project_technology', as: 'technologies'});
   }
 
   return Project;

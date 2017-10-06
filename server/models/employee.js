@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Employee.associate=function(models){
-     Employee.belongsToMany(models.Technology,{through: 'employee_technology', as: 'technology'});
-     Employee.hasMany(models.Schedule);
+     Employee.belongsToMany(models.Technology,{through: 'employee_technology', as: 'technologies'});
+     Employee.hasMany(models.Schedule, { as: 'schedules'});
   }
 
   return Employee;
