@@ -8,11 +8,13 @@ var env       = process.env.NODE_ENV || 'development';
 var config    = require('../config/config.json')[env];
 var db        = {};
 
-if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
-} else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+
+  if (config.use_env_variable) {
+    var sequelize = new Sequelize(process.env[config.use_env_variable]);
+  } else {
+    var sequelize = new Sequelize(config.database, config.username, config.password, config);
+  }
+
 
 try{
     fs
@@ -31,7 +33,7 @@ try{
       }
     });
 } catch(e){
-  console.log('fuck',e)
+  console.log('fuck',e);
 }
 
 db.sequelize = sequelize;

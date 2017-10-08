@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     active: DataTypes.BOOLEAN,
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     }
   }, {
     classMethods: {
