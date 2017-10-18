@@ -5,14 +5,14 @@ module.exports = {
       return queryInterface.bulkInsert('Technologies', [{
         name: 'Angular 2.x',
         domain: 'frontend',
-        active:true,
+        active:false,
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
         name: 'Java 1.8',
         domain: 'backend',
-        active:true,
+        active:false,
         createdAt:new Date(),
         updatedAt:new Date()
       }], {});
@@ -21,7 +21,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
       return queryInterface.bulkDelete('Technologies', [{
-        name :'Angular 2.x'
+        //name :'Angular 2.x'
       }], {});
     
   }
