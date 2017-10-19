@@ -21,56 +21,92 @@ module.exports = {
       //   createdAt:new Date(),
       //   updatedAt:new Date()
       // },
+      // {
+      //   name: 'OSM',
+      //   line:'automotive',
+      //   domain: 'Automotive',
+      //   description:'123',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
+      // {
+      //   name: 'T-Vision',
+      //   line:'vertical',
+      //   domain: 'Health',
+      //   description:'123',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
+      // {
+      //   name: 'T-Mobile Austria',
+      //   line:'sap',
+      //   domain: 'Telekom',
+      //   description:'123',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
+      // {
+      //   name: 'AS1313',
+      //   line:'horizontal',
+      //   domain: 'Public',
+      //   description:'123',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
+      // {
+      //   name: 'SBB',
+      //   line:'vertical',
+      //   domain: 'Transportation',
+      //   description:'123',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
+      // {
+      //   name: 'Sopre AOM',
+      //   line:'vertical',
+      //   domain: 'Transportation',
+      //   description:'123',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
       {
-        name: 'OSM',
+        name: 'PPA',
         line:'automotive',
         domain: 'Automotive',
-        description:'123',
+        description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'T-Vision',
+        name: 'Aeroports',
         line:'vertical',
-        domain: 'Health',
-        description:'123',
+        domain: 'Transportation',
+        description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'T-Mobile Austria',
-        line:'sap',
-        domain: 'Telekom',
-        description:'123',
-        active:false,
-        createdAt:new Date(),
-        updatedAt:new Date()
-      },
-      {
-        name: 'AS1313',
+        name: 'DFMG',
         line:'horizontal',
-        domain: 'Public',
-        description:'123',
+        domain: 'Health',
+        description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'SBB',
-        line:'vertical',
-        domain: 'Transportation',
-        description:'123',
-        active:false,
-        createdAt:new Date(),
-        updatedAt:new Date()
-      },
-      {
-        name: 'Sopre AOM',
-        line:'vertical',
-        domain: 'Transportation',
-        description:'123',
+        name: 'Strabag',
+        line:'sap',
+        domain: 'public',
+        description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()

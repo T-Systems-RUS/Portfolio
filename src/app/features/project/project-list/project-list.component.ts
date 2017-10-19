@@ -36,14 +36,18 @@ export class ProjectListComponent {
 
 
     constructor(private dataService:ProjectService,public router: Router) {
-        this.projects=this.dataService.generateProjects();
-        this.initialProjects=this.projects;
-        this.complete=Array.from(new Set(this.projects.map(item=>item.name)));
+        // this.projects=this.dataService.generateProjects();
+        // this.initialProjects=this.projects;
+        // this.complete=Array.from(new Set(this.projects.map(item=>item.name)));
     }
 
     ngOnInit(){
         this.dataService.getProjects().subscribe(data=>{
-            console.log(data);
+            this.projects=data;
+            console.log(this.projects);
+            this.initialProjects=this.projects;
+            this.complete=Array.from(new Set(this.projects.map(item=>item.name)));
+
         },err=>{
             console.log(err);
         })

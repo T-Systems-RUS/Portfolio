@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     domain: DataTypes.STRING,
     leadrole: DataTypes.BOOLEAN,
+    seniority:DataTypes.STRING,
     active: DataTypes.BOOLEAN,
 
   }, {

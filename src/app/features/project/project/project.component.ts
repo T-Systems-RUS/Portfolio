@@ -3,6 +3,7 @@ import { Project } from '../../../shared/models/project';
 import { Technology } from '../../../shared/models/technology';
 import { ProjectService } from '../project.service';
 import { PROJECT_ANIMATION } from './project.animation';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'project',
@@ -15,17 +16,24 @@ export class ProjectComponent {
 
     @Input() model:Project=new Project();
     
+    id:number;
     backend:Array<Technology>=new Array<Technology>();
     frontend:Array<Technology>=new Array<Technology>();
     information:Array<string>=new Array<string>();
     
-    constructor(private dataService:ProjectService) {
+    constructor(private dataService:ProjectService,private route: ActivatedRoute) {
         
     }
 
     ngOnInit(){
-        this.model=this.dataService.generateProject();
+        this.route.params.subscribe(params=>{
+            this.id=+params['id'];
+            console.log(this.id);
+        })
 
+
+        this.model=this.dataService.generateProject();
+        
         this.backend=this.model.technologies.filter(tech=>tech.domain==='backend');
         this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
         this.information.push("PSS 4.71");

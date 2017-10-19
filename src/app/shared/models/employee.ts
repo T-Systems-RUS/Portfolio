@@ -1,5 +1,5 @@
-import {Role} from './role'
-import {Technology} from './technology'
+import {Role} from './role';
+import {Technology} from './technology';
 
 export class Employee{
     id:string='';
