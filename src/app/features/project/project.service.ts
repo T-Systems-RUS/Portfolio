@@ -1,6 +1,6 @@
 import {Output, EventEmitter, Injectable} from "@angular/core";
 import {Response, URLSearchParams} from "@angular/http";
-import {Http as HttpClient}  from '@angular/http';
+import { HttpService }  from "../../core/http.service";
 import {Observable} from "rxjs/Observable";
 
 import { Project } from "../../shared/models/project";
@@ -45,27 +45,38 @@ export class ProjectService {
     ];
 
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpService) {
 
     }
 
 
-    public getProjects(): Observable<Array<Project>> {
-        //let params = new URLSearchParams('');
+    // public getProjects(): Observable<Array<Project>> {
+    //     //let params = new URLSearchParams('');
 
-        let projects = this.generateProjects();
-        let delayedResponse = Observable.of(projects).delay(1000);
+    //     let projects = this.generateProjects();
+    //     let delayedResponse = Observable.of(projects).delay(1000);
 
-        return Observable.create((observer) => {
-            delayedResponse.subscribe(
-                response => {
-                    observer.next(response);
-                },
-                error => {
-                    observer.error(error);
-                })
-            }).take(1);
-    }
+    //     return Observable.create((observer) => {
+    //         delayedResponse.subscribe(
+    //             response => {
+    //                 observer.next(response);
+    //             },
+    //             error => {
+    //                 observer.error(error);
+    //             })
+    //         }).take(1);
+    // }
+
+    getProjects() : Observable<Project[]> {
+        
+                 // ...using get request
+                 return this.http.get('/api/projects')
+                                // ...and calling .json() on the response to return data
+                                 .map((res:Response) => res.json())
+                                 //...errors if any
+                                 .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+        
+             }
 
     generateProjects():Array<Project>{
         let projects=new Array<Project>();

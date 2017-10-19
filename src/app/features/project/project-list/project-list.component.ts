@@ -42,7 +42,11 @@ export class ProjectListComponent {
     }
 
     ngOnInit(){
-
+        this.dataService.getProjects().subscribe(data=>{
+            console.log(data);
+        },err=>{
+            console.log(err);
+        })
     }
 
     ngAfterViewInit(){

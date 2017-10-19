@@ -13,6 +13,8 @@ import {
   import { HeaderComponent }   from './header/header.component';
   import { LoaderComponent }   from './loader/loader.component';
 
+  import { HttpService }       from './http.service';
+
   
   @NgModule({
     imports:      [ 
@@ -27,7 +29,8 @@ import {
       LoaderComponent
     ],
     providers:    [ 
-      UserService
+      UserService,
+      HttpService
     ]
   })
   export class CoreModule {

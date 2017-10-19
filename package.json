@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "webpack-dev-server --port=4200",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "start:dev": "nodemon server.js",
     "build": "webpack",
     "build:dev": "ng build && node server.js",
