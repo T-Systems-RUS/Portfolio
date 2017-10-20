@@ -45,23 +45,31 @@ export class InputComponent {
     
 
     ngAfterViewInit(){
-        this.showAutocomplete=false;
-        this.completeInitial=this.complete;      
-        this.hasComplete=this.complete.length>0;
 
+        setTimeout(function() {
+            this.showAutocomplete=false;
+            this.completeInitial=this.complete;      
+            this.hasComplete=this.complete.length>0;
+         
+    
+            Rx.Observable.fromEvent(document, 'keydown')
+                         .pluck('key')
+                         .filter(char => char==="ArrowDown" || char==="ArrowUp" || char==="Enter")
+                         .subscribe(item=>this.walkThroughComplete(item,this.showAutocomplete));
+        }.bind(this), 200);
+        
+    }
 
-        Rx.Observable.fromEvent(document, 'keydown')
-                     .pluck('key')
-                     .filter(char => char==="ArrowDown" || char==="ArrowUp" || char==="Enter")
-                     .subscribe(item=>this.walkThroughComplete(item,this.showAutocomplete));
+    ngAfterContentInit(){
+        
     }
 
 
     modelChanged(event){
+        
         if(this.hasComplete){
             this.showAutocomplete=true;
             this.complete=this.completeInitial;
-    
             let filtered=this.complete.filter(item=>item.toLowerCase().indexOf(event.toLowerCase())!=-1);
             this.complete=filtered.length>0 ? filtered : ["No results found"];           
         }
@@ -71,7 +79,6 @@ export class InputComponent {
     blurInput(){
         setTimeout(function() {
             this.showAutocomplete = false;
-            console.log(this.showAutocomplete);
         }.bind(this), 200);
     }
 

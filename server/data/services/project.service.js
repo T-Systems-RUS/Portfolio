@@ -11,19 +11,36 @@ var  projectService={};
 //GET list of projects with teamcount
 projectService.getProjects= function(){
     return  models.Project.findAll({
+            group:'name',
             include: [{
                 as: 'schedules',
-                model: models.Schedule,
-                // include: [{
-                //     as: 'employee',
-                //     model: models.Employee
-                //   }
-                // ]
+                model: models.Schedule
               } 
             ]
         }
     )
 }
+
+//GET list of projects with teamcount
+// projectService.getProjects= function(){
+//     return models.sequelize.query("SELECT * "+
+//     "FROM ( "+
+//           "SELECT name, MAX(id) as maxid "+
+//           "FROM `portfolio-dev`.projects "+
+//           "GROUP BY name "+
+//     ") as Project "+
+//     "INNER JOIN `portfolio-dev`.projects t "+
+//     "ON t.name = Project.name AND t.id = Project.maxid "+
+//     "left outer join `portfolio-dev`.schedules as schedules "+
+//     "on t.id=schedules.projectid",{
+        
+//         type: models.sequelize.QueryTypes.SELECT
+//       })  
+    
+// }
+
+
+
 
 //GET single project by id
 projectService.getProject = function(id){

@@ -46,7 +46,7 @@ export class ProjectListComponent {
             this.projects=data;
             console.log(this.projects);
             this.initialProjects=this.projects;
-            this.complete=Array.from(new Set(this.projects.map(item=>item.name)));
+            this.complete= Array.from(new Set(this.projects.map(item=>item.name)));//
 
         },err=>{
             console.log(err);
@@ -94,6 +94,8 @@ export class ProjectListComponent {
       filterProjects(event){
         this.projects=this.initialProjects;
         this.projects=this.projects.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
+        console.log(this.projects);
+        this.complete=this.projects.map(item=>item.name);
       }
 
       newProject(){
