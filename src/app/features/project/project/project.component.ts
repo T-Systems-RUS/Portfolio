@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProjectComponent {
 
-    @Input() model:Project=new Project();
+    model:Project=new Project();
     
     id:number;
     backend:Array<Technology>=new Array<Technology>();
@@ -28,16 +28,23 @@ export class ProjectComponent {
     ngOnInit(){
         this.route.params.subscribe(params=>{
             this.id=+params['id'];
+
+            this.dataService.getProject(this.id).subscribe(data=>{
+                this.model=data;
+                console.log(this.model);    
+            },err=>{
+                console.log(err);
+            })
             console.log(this.id);
         })
 
 
-        this.model=this.dataService.generateProject();
+        // this.model=this.dataService.generateProject();
         
-        this.backend=this.model.technologies.filter(tech=>tech.domain==='backend');
-        this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
-        this.information.push("PSS 4.71");
-        this.information.push("TOP 50");
+        // this.backend=this.model.technologies.filter(tech=>tech.domain==='backend');
+        // this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
+        // this.information.push("PSS 4.71");
+        // this.information.push("TOP 50");
     }
     
     ngAfterViewInit(){

@@ -9,6 +9,7 @@ module.exports = {
         domain: 'Automotive',
         description:'123',
         active:false,
+        //ishistor
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -25,7 +26,7 @@ module.exports = {
         name: 'OSM',
         line:'automotive',
         domain: 'Automotive',
-        description:'123',
+        description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -34,7 +35,7 @@ module.exports = {
         name: 'T-Vision',
         line:'vertical',
         domain: 'Health',
-        description:'123',
+        description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -43,7 +44,7 @@ module.exports = {
         name: 'T-Mobile Austria',
         line:'sap',
         domain: 'Telekom',
-        description:'123',
+        description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -52,7 +53,7 @@ module.exports = {
         name: 'AS1313',
         line:'horizontal',
         domain: 'Public',
-        description:'123',
+        description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -61,7 +62,7 @@ module.exports = {
         name: 'SBB',
         line:'vertical',
         domain: 'Transportation',
-        description:'123',
+        description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -70,7 +71,7 @@ module.exports = {
         name: 'Sopre AOM',
         line:'vertical',
         domain: 'Transportation',
-        description:'123',
+        description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()

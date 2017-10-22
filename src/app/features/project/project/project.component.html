@@ -3,7 +3,7 @@
 <div @appear3 class="project">
     <div class="project__header">
         <h3 class="project__subheading">
-            {{model.dateModified}} - {{model.domain}}
+            {{model.updatedAt | date: 'dd.MM.yyyy' }} - {{model.domain}}
         </h3>
         <h1 class="project__heading">
             {{model.name}}

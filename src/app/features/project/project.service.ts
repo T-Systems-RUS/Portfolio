@@ -76,7 +76,18 @@ export class ProjectService {
                                  //...errors if any
                                  .catch((error:any) => Observable.throw(error.toString() || 'Server error'));
         
-             }
+    }
+
+    getProject(id) : Observable<Project> {
+        
+                 // ...using get request
+                 return this.http.get('/api/projects/' + id)
+                                // ...and calling .json() on the response to return data
+                                 .map((res:Response) => res.json())
+                                 //...errors if any
+                                 .catch((error:any) => Observable.throw(error.toString() || 'Server error'));
+        
+    }
 
     generateProjects():Array<Project>{
         let projects=new Array<Project>();

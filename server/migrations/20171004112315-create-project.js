@@ -29,6 +29,10 @@ module.exports = {
         defaultValue:false,
         type: Sequelize.BOOLEAN
       },
+      ishistory: {
+        defaultValue:false,
+        type: Sequelize.BOOLEAN
+      },
       startdate: {
         type: Sequelize.DATE
       },

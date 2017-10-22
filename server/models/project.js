@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     teamcount: DataTypes.STRING,
     active: DataTypes.BOOLEAN,
+    ishistory:DataTypes.BOOLEAN,
     startdate: DataTypes.DATE,
     enddate: DataTypes.DATE
   }, {

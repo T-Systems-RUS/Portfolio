@@ -94,7 +94,6 @@ export class ProjectListComponent {
       filterProjects(event){
         this.projects=this.initialProjects;
         this.projects=this.projects.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
-        console.log(this.projects);
         this.complete=this.projects.map(item=>item.name);
       }
 

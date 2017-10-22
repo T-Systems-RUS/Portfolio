@@ -22,6 +22,9 @@ module.exports = {
         defaultValue:false,
         type: Sequelize.BOOLEAN
       },
+      seniority: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

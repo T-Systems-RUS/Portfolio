@@ -10,15 +10,19 @@ var  projectService={};
 
 //GET list of projects with teamcount
 projectService.getProjects= function(){
-    return  models.Project.findAll({
-            group:'name',
-            include: [{
-                as: 'schedules',
-                model: models.Schedule
-              } 
-            ]
-        }
-    )
+    try{
+        return  models.Project.findAll({
+                        where: { ishistory: 0 },
+                        include: [{
+                                as: 'schedules',
+                                model: models.Schedule
+                            },
+                        ]
+                    }
+                )
+    }catch(e){
+        console.log('fuck ',e)
+    }
 }
 
 //GET list of projects with teamcount
@@ -44,7 +48,7 @@ projectService.getProjects= function(){
 
 //GET single project by id
 projectService.getProject = function(id){
-    return models.Project.findAll({
+    return models.Project.findOne({
         where: {
             id: id
           },
