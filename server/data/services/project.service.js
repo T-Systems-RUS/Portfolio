@@ -25,29 +25,11 @@ projectService.getProjects= function(){
     }
 }
 
-//GET list of projects with teamcount
-// projectService.getProjects= function(){
-//     return models.sequelize.query("SELECT * "+
-//     "FROM ( "+
-//           "SELECT name, MAX(id) as maxid "+
-//           "FROM `portfolio-dev`.projects "+
-//           "GROUP BY name "+
-//     ") as Project "+
-//     "INNER JOIN `portfolio-dev`.projects t "+
-//     "ON t.name = Project.name AND t.id = Project.maxid "+
-//     "left outer join `portfolio-dev`.schedules as schedules "+
-//     "on t.id=schedules.projectid",{
-        
-//         type: models.sequelize.QueryTypes.SELECT
-//       })  
-    
-// }
-
-
 
 
 //GET single project by id
 projectService.getProject = function(id){
+    
     return models.Project.findOne({
         where: {
             id: id
@@ -68,6 +50,54 @@ projectService.getProject = function(id){
         }]        
     })
 }
+
+
+//GET check if project exists
+projectService.doesProjectExist= function(name){
+    
+    return models.Project.count({where: { name: name }}).then(count=>{
+        if(count!=0){
+            return true;
+        } else{
+            return false;
+        }
+    }).catch(error=>{
+        console.log(error);
+    }); 
+}
+
+
+//POST Section
+
+//POST create new project
+projectService.createProject=function(Project){
+    return models.sequelize.transaction().then(function (t) {
+        return models.Project.create({
+          name: Project.name,
+          line: Project.line,
+          domain: Project.domain,
+          description:Project.description,
+          active:false,
+          startdate:Project.startdate,
+          enddate:Project.enddate,
+          ishistory:false,              // default for new project
+          version:1,                    // default for new project
+          technologies: Project.technologies
+        },{
+            include:[{
+                model:models.Technology,
+                as :'technologies'
+            }]
+        }, {transaction: t}).then(function () {
+          return t.commit();
+        }).catch(function (err) {
+          return t.rollback();
+        });
+      });
+}
+
+
+
 
 module.exports = projectService;
 

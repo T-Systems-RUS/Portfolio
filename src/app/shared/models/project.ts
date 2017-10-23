@@ -15,12 +15,14 @@ export class Project{
     employees:Array<Employee>=new Array<Employee>();
 
     schedules:Array<Schedule>=new Array<Schedule>();
+    version:number=1;
 
     startdate:string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
     enddate:string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
 
-    teamcount:string=this.schedules.length.toString();
-
+    get teamcount(){
+        return this.schedules.length.toString();
+    }
 
 
     public constructor(init?:Partial<Project>) {

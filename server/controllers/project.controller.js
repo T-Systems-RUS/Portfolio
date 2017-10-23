@@ -4,7 +4,7 @@ const router = express.Router();
 var projectService=require('../data/services/project.service');
 
 
-
+// GET requests
 router.get('/projects', (req, res) => {
     
     projectService.getProjects().then(data=>{
@@ -19,7 +19,6 @@ router.get('/projects', (req, res) => {
 });
 
 router.get('/projects/:id', (req, res) => {
-    console.log(req.params.id)
     projectService.getProject(req.params.id).then(data=>{
         if(!data) res.status(404).send("No projects found");
         
@@ -30,6 +29,24 @@ router.get('/projects/:id', (req, res) => {
       
       
 });
+
+
+//POST Requests
+router.post('/projects/create',(req, res) => {
+   return projectService.doesProjectExist().then(doesExist=>{
+       if(doesExist){
+           res.status(409).send('Project already exists');
+       }else{
+           this,projectService.createProject(req.body).then(project=>{
+               res.status(200).send(project);
+           }).catch(error=>{
+               res.status(500).send(error);
+           })
+       }
+   })
+      
+      
+})
 
 
 module.exports = router;
