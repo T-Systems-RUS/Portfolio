@@ -49,5 +49,9 @@ export class HttpService {
     opt.headers = this.getCommonHeaders();
     return this.http.delete(url, opt);
   }
+
+  getConstants(){
+     return this.http.request('./../assets/constants.json');
+  }
 }
 

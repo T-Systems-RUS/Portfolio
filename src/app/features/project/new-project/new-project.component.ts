@@ -7,6 +7,7 @@ import { ProjectService } from '../project.service';
 import {Message} from 'primeng/components/common/api';
 
 
+
 @Component({
   selector: 'new-project',
   templateUrl: './new-project.component.html',
@@ -26,19 +27,32 @@ export class NewProjectComponent {
     msgs: Message[] = [];
     dateValue:Date;
 
-    private options:Array<string>=["automotive","horizontal","sap","vertical"]
-    private options2:Array<string>=["telekom","automotive","transportation","health"]
+    private lines:Array<string>;
+    private domains:Array<string>;
     
     constructor(private dataService:ProjectService) {
         
     }
 
     ngOnInit(){
-        this.model.line='grey'; 
-        this.model.employees=this.dataService.generateEmployees();
-        this.initialEmployees=this.model.employees;
-        this.model.technologies=this.dataService.technologies;
-        this.initialTechnologies=this.model.technologies;
+
+        this.dataService.getConstants().subscribe(res=>{
+            this.lines=res.lines;
+            this.domains=res.domains;
+
+            this.model.line='grey'; 
+            this.model.employees=this.dataService.generateEmployees();
+            this.initialEmployees=this.model.employees;
+            this.model.technologies=this.dataService.technologies;
+            this.initialTechnologies=this.model.technologies;
+        },error=>{
+            console.log(error);
+        })
+
+       // this.model.line='grey'; 
+       
+
+        
     }
     
     filterEmployees(event){
@@ -67,8 +81,13 @@ export class NewProjectComponent {
       }
 
 
-      newProject(){
-        this.msgs.push({severity:'warn', summary:'Info Message', detail:'PrimeNG rocks'});
+      createProject(){
+        this.dataService.createProject(this.model);
+      }
+
+      setValue(value,prop){
+          this.model[prop]=value;
+          console.log(this.model)
       }
 
 

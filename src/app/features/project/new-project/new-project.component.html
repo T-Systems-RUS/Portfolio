@@ -12,27 +12,30 @@
                     placeholder="Project name" 
                     boxStyle="input--small"
                     label="Project name"
+                    [model]="model.name"
+                    (onModelChanged)="setValue($event,'name')"
                     clearStyle="input__clear--right20 input__clear--top30"
                     wrapperStyle="input--width100 input--marginB20"></app-input>
 
                 <dropdown id="line" 
                           label="Production line"
-                          [options]="options"
+                          [options]="lines"
                           wrapperStyle="dropdown--marginB20"
                           [model]="model.line"
-                          (changed)="changeLine($event)"></dropdown>
+                          (changed)="changeLine($event);setValue($event,'line')"></dropdown>
 
                 <dropdown id="domain" 
                           label="Domain"
-                          [options]="options2"
-                          [model]="model.domain"></dropdown>
+                          [options]="domains"
+                          [model]="model.domain"
+                          (changed)="setValue($event,'domain')"></dropdown>
         </div>
         <div class="new-project__content-block">
 
                 <label class="ui-calender-label">Project start</label>
                 <p-calendar placeholder="Project start" 
                             [style]="{'margin-bottom':'20px'}"  
-                            [(ngModel)]="dateValue" 
+                            [(ngModel)]="model.startdate" 
                             dateFormat="dd.mm.yy"
                             [monthNavigator]="true" 
                             [yearNavigator]="true" 
@@ -105,6 +108,6 @@
     </div> 
     <div class="new-project__footer">
         <app-button (click)="back()" value="CANCEL" style="button--white" ></app-button>
-        <app-button (click)="newProject()" value="SUBMIT" style="" ></app-button>
+        <app-button (click)="createProject()" value="SUBMIT" style="" ></app-button>
     </div>
 </div>

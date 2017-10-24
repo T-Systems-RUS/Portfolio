@@ -17,7 +17,7 @@ export class Project{
     schedules:Array<Schedule>=new Array<Schedule>();
     version:number=1;
 
-    startdate:string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
+    startdate:Date; //string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
     enddate:string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
 
     get teamcount(){

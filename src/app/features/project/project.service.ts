@@ -1,12 +1,15 @@
 import {Output, EventEmitter, Injectable} from "@angular/core";
 import {Response, URLSearchParams} from "@angular/http";
 import { HttpService }  from "../../core/http.service";
+import { ExtractService }  from "../../core/extract.service";
 import {Observable} from "rxjs/Observable";
 
 import { Project } from "../../shared/models/project";
 import { Technology } from "../../shared/models/technology";
 import { Employee } from "../../shared/models/employee";
 import { Role } from "../../shared/models/role";
+
+import { PortfolioQueryEncoder } from "../../shared//helpers/queryEncoder";
 
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
@@ -45,7 +48,7 @@ export class ProjectService {
     ];
 
 
-    constructor(private http: HttpService) {
+    constructor(private http: HttpService, private extract:ExtractService) {
 
     }
 
@@ -67,14 +70,15 @@ export class ProjectService {
     //         }).take(1);
     // }
 
+    //GET requests
     getProjects() : Observable<Project[]> {
         
                  // ...using get request
                  return this.http.get('/api/projects')
                                 // ...and calling .json() on the response to return data
-                                 .map((res:Response) => res.json())
+                                 .map(this.extract.extractData)
                                  //...errors if any
-                                 .catch((error:any) => Observable.throw(error.toString() || 'Server error'));
+                                 .catch(this.extract.handleError);
         
     }
 
@@ -83,10 +87,31 @@ export class ProjectService {
                  // ...using get request
                  return this.http.get('/api/projects/' + id)
                                 // ...and calling .json() on the response to return data
-                                 .map((res:Response) => res.json())
+                                 .map(this.extract.extractData)
                                  //...errors if any
                                  .catch((error:any) => Observable.throw(error.toString() || 'Server error'));
         
+    }
+
+    //POST requests
+    createProject(project:Project) {
+
+        let data = new URLSearchParams('', new PortfolioQueryEncoder());
+
+        for(let key of Object.keys(project)){
+            data.append(key,project[key]);
+        }
+        
+        console.log(data);
+
+        //return this.
+    }
+
+
+    getConstants() : Observable<any> {
+        return this.http.getConstants()
+                        .map(this.extract.extractData)
+                        .catch(this.extract.handleError);
     }
 
     generateProjects():Array<Project>{
