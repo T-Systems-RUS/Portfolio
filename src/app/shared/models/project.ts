@@ -20,6 +20,8 @@ export class Project{
     startdate:Date; //string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
     enddate:string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
 
+    errorMessage:string="";
+
     get teamcount(){
         return this.schedules.length.toString();
     }

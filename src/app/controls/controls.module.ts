@@ -13,6 +13,10 @@ import { FilterPanelComponent } from './filters/filter-panel/filter-panel.compon
 
 import { ListItemComponent } from './list/list-item/list-item.component';
 
+import { FormComponent } from './form/form.component'; 
+import { DynamicFormQuestionComponent } from './form/dynamic-question/dynamic-question.component';
+import { QuestionControlService } from './form/question-control.service'; 
+
 
 @NgModule({
   imports:      [ 
@@ -26,6 +30,8 @@ import { ListItemComponent } from './list/list-item/list-item.component';
     DropDownComponent,
     FilterItemComponent,
     FilterPanelComponent,
+    FormComponent,
+    DynamicFormQuestionComponent,
     ListItemComponent
   ],
   exports:      [ 
@@ -36,10 +42,12 @@ import { ListItemComponent } from './list/list-item/list-item.component';
     DropDownComponent,
     FilterItemComponent,
     FilterPanelComponent,
+    FormComponent,
+    DynamicFormQuestionComponent,
     ListItemComponent
   ],
   providers:    [ 
-    
+    QuestionControlService
   ]
 })
 export class ControlsModule {

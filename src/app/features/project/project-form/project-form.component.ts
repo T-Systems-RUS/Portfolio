@@ -4,20 +4,28 @@ import { Technology } from '../../../shared/models/technology';
 import {Employee } from '../../../shared/models/employee';
 import { ProjectService } from '../project.service';
 
+import { FormGroup }                 from '@angular/forms';
+import { QuestionBase }              from '../../../controls/form/question-base';
+import { QuestionControlService }    from '../../../controls/form/question-control.service';
+
+
+
 import {Message} from 'primeng/components/common/api';
 
 
 
 @Component({
-  selector: 'new-project',
-  templateUrl: './new-project.component.html',
+  selector: 'project-form',
+  templateUrl: './project-form.component.html',
   styleUrls:  [
-      './new-project.component.less'],
+      './project-form.component.less'],
   animations: []
 })
-export class NewProjectComponent {
+export class ProjectFormComponent {
 
     @Input() model:Project=new Project();
+    @Input() questions: QuestionBase<any>[] = [];
+    form: FormGroup;
     
     //initial employee list
     initialEmployees:Array<Employee>=new Array<Employee>();
@@ -30,7 +38,7 @@ export class NewProjectComponent {
     private lines:Array<string>;
     private domains:Array<string>;
     
-    constructor(private dataService:ProjectService) {
+    constructor(private dataService:ProjectService, private qcs: QuestionControlService) {
         
     }
 
@@ -45,12 +53,8 @@ export class NewProjectComponent {
             console.log(error);
         })
 
-        this.model.line='grey'; 
-        this.model.employees=this.dataService.generateEmployees();
-        this.initialEmployees=this.model.employees;
-        this.model.technologies=this.dataService.technologies;
-        this.initialTechnologies=this.model.technologies;
        
+        this.form = this.qcs.toFormGroup(this.questions);
 
         
     }

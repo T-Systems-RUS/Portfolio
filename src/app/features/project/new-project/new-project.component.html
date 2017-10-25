@@ -12,6 +12,7 @@
                     placeholder="Project name" 
                     boxStyle="input--small"
                     label="Project name"
+                    [errorMessage]="model.errorMessage"
                     [model]="model.name"
                     (onModelChanged)="setValue($event,'name')"
                     clearStyle="input__clear--right20 input__clear--top30"

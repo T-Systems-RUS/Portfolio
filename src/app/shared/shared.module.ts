@@ -14,6 +14,6 @@ import { TrimTextDirective }  from './trimtext.directive';
 @NgModule({
   imports:      [ CommonModule, ReactiveFormsModule,GrowlModule, CalendarModule ],
   declarations: [ BackPanelComponent, FooterComponent, ModalComponent, TrimTextDirective ],
-  exports:      [ CommonModule,GrowlModule, CalendarModule, FormsModule, BackPanelComponent,FooterComponent, ModalComponent, TrimTextDirective ]
+  exports:      [ CommonModule,GrowlModule, CalendarModule, FormsModule,ReactiveFormsModule, BackPanelComponent,FooterComponent, ModalComponent, TrimTextDirective ]
 })
 export class SharedModule { }
