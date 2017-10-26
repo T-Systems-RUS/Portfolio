@@ -21,5 +21,9 @@ export class DynamicFormQuestionComponent {
     @Input() placeholder:string='';
     @Input() labelStyle='';
 
+    ngOnInit(){
+      console.log(this.form,this.form.controls[this.question.key])
+    }
+
     get isValid() { return this.form.controls[this.question.key].valid; }
   }

@@ -45,7 +45,7 @@
                 <label class="ui-calender-label">Project end</label>
                 <p-calendar placeholder="Project end" 
                             [style]="{'margin-bottom':'20px'}"  
-                            [(ngModel)]="dateValue" 
+                            [(ngModel)]="model.enddate" 
                             dateFormat="dd.mm.yy"
                             [monthNavigator]="true" 
                             [yearNavigator]="true" 
@@ -79,7 +79,7 @@
                 (onModelChanged)="filterEmployees($event)"></app-input>
 
             <div class="new-project__wrapper">
-                <list-item  *ngFor="let employee of model.employees" 
+                <list-item  *ngFor="let employee of employees" 
                             [clickable]="true" 
                              itemStyle="list-item--picker" 
                             [model]="employee"
@@ -98,7 +98,7 @@
                 (onModelChanged)="filterTechnologies($event)"></app-input>
 
             <div class="new-project__wrapper new-project--pad10">
-                <chip *ngFor="let tech of model.technologies" 
+                <chip *ngFor="let tech of technologies" 
                       [value]="tech.name"
                       [clickable]="true" 
                       style="grey"

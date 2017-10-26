@@ -6,6 +6,7 @@ import { ProjectService } from '../project.service';
 
 import { FormGroup }                 from '@angular/forms';
 import { QuestionBase }              from '../../../controls/form/question-base';
+import { TextboxQuestion }              from '../../../controls/form/dynamic-question/question-textbox';
 import { QuestionControlService }    from '../../../controls/form/question-control.service';
 
 
@@ -53,10 +54,22 @@ export class ProjectFormComponent {
             console.log(error);
         })
 
-       
+        this.questions=[new TextboxQuestion({
+            key: 'firstName',
+            label: 'First name',
+            value: 'Bombasto',
+            required: true,
+            order: 1
+          })]
         this.form = this.qcs.toFormGroup(this.questions);
 
+        console.log(this.form.valid)
         
+        
+    }
+
+    onSubmit(){
+        console.log(this.form.value);
     }
     
     filterEmployees(event){

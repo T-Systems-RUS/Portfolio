@@ -20,8 +20,10 @@ export class NewProjectComponent {
     @Input() model:Project=new Project();
     
     //initial employee list
+    employees;
     initialEmployees:Array<Employee>=new Array<Employee>();
     //initial tech list
+    technologies;
     initialTechnologies:Array<Technology>=new Array<Technology>();
 
     msgs: Message[] = [];
@@ -46,19 +48,19 @@ export class NewProjectComponent {
         })
 
         this.model.line='grey'; 
-        this.model.employees=this.dataService.generateEmployees();
-        this.initialEmployees=this.model.employees;
-        this.model.technologies=this.dataService.technologies;
-        this.initialTechnologies=this.model.technologies;
+        this.employees=this.dataService.generateEmployees();
+        this.initialEmployees=this.employees;
+        this.technologies=this.dataService.technologies;
+        this.initialTechnologies=this.technologies;
        
 
         
     }
     
     filterEmployees(event){
-        this.model.employees=this.initialEmployees;
-        console.log(this.model.employees,this.initialEmployees)
-        this.model.employees=this.model.employees.filter(item=>
+        this.employees=this.initialEmployees;
+        console.log(this.employees,this.initialEmployees)
+        this.employees=this.employees.filter(item=>
             item.fullname.toLowerCase().indexOf(event.toLowerCase())!=-1 || 
             item.roles[0].name.toLowerCase().indexOf(event.toLowerCase())!=-1
         );
@@ -66,8 +68,8 @@ export class NewProjectComponent {
 
       filterTechnologies(event){
           
-        this.model.technologies=this.initialTechnologies;
-        this.model.technologies=this.model.technologies.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
+        this.technologies=this.initialTechnologies;
+        this.technologies=this.technologies.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
       }
 
       selectTechnology(event){

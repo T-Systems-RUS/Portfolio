@@ -18,7 +18,7 @@ export class Project{
     version:number=1;
 
     startdate:Date; //string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
-    enddate:string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
+    enddate:Date;//=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
 
     errorMessage:string="";
 

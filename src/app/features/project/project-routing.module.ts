@@ -10,7 +10,7 @@ import { ProjectFormComponent }     from './project-form/project-form.component'
   imports: [RouterModule.forChild([
     { path: 'projects', component: ProjectListComponent },
     { path: 'project/new', component: NewProjectComponent },
-    { path: 'project/form', component: ProjectFormComponent },
+   // { path: 'project/form', component: ProjectFormComponent },
     { path: 'project/update/:id', component: NewProjectComponent },
     { path: 'project/:id', component: ProjectComponent }
   ])],
