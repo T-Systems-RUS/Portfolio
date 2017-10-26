@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 /*Feature Modules */
 import { CoreModule } from './core/core.module';
 import { ProjectModule } from './features/project/project.module';
+import { EmployeeModule } from './features/employee/employee.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ProjectModule } from './features/project/project.module';
     BrowserAnimationsModule,
     HttpModule,
     CoreModule.forRoot({userName: 'Miss Marple'}),
+    EmployeeModule,
     ProjectModule,
     AppRoutingModule
   ],

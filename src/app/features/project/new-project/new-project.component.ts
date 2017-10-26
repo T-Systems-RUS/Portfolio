@@ -3,6 +3,7 @@ import { Project } from '../../../shared/models/project';
 import { Technology } from '../../../shared/models/technology';
 import {Employee } from '../../../shared/models/employee';
 import { ProjectService } from '../project.service';
+import { EmployeeService } from '../../employee/employee.service';
 
 import {Message} from 'primeng/components/common/api';
 
@@ -32,7 +33,7 @@ export class NewProjectComponent {
     private lines:Array<string>;
     private domains:Array<string>;
     
-    constructor(private dataService:ProjectService) {
+    constructor(private dataService:ProjectService,private employeeService:EmployeeService) {
         
     }
 
@@ -45,6 +46,10 @@ export class NewProjectComponent {
             
         },error=>{
             console.log(error);
+        })
+
+        this.employeeService.getEmployees().subscribe(res=>{
+            console.log((res[0]).firstname + ' ' + res[0].lastname);
         })
 
         this.model.line='grey'; 

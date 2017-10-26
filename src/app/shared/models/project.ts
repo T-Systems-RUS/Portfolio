@@ -26,6 +26,10 @@ export class Project{
         return this.schedules.length.toString();
     }
 
+    get required(){
+        return ["name","line","domain","startdate"]
+    }
+
 
     public constructor(init?:Partial<Project>) {
         Object.assign(this, init);

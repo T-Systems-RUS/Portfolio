@@ -7,7 +7,11 @@ const bodyParser = require('body-parser');
 
 // Get our API routes
 const api = require('./server/routes/api');
+
 const projectController = require('./server/controllers/project.controller');
+const technologyController = require('./server/controllers/technology.controller');
+const employeeController = require('./server/controllers/employee.controller');
+
 
 const app = express();
 
@@ -21,6 +25,8 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set our api routes
 app.use('/api', projectController);
+app.use('/api', technologyController);
+app.use('/api', employeeController);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
