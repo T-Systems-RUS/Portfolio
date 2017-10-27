@@ -2,7 +2,9 @@
  * Created by apotikho on 29.04.2017.
  */
 import {Injectable} from "@angular/core";
-import {Http, Headers, RequestOptionsArgs, RequestOptions} from "@angular/http";
+import {Http, Headers, RequestOptionsArgs, RequestOptions, URLSearchParams} from "@angular/http";
+
+import { PortfolioQueryEncoder } from "../shared//helpers/queryEncoder";
 //import {AuthenticationService} from "../security/auth.service";
 
 @Injectable()
@@ -48,6 +50,25 @@ export class HttpService {
     let opt = options ? options : new RequestOptions();
     opt.headers = this.getCommonHeaders();
     return this.http.delete(url, opt);
+  }
+
+  createParams(model:any) : URLSearchParams{
+    let data = new URLSearchParams('', new PortfolioQueryEncoder());
+    
+    for(let key of Object.keys(model)){
+        if(!Array.isArray(model[key])){
+          data.append(key,model[key]);
+        } else {
+            for(let item of model[key]){
+                data.append(key,item);
+            }
+        }
+        
+    }
+            
+    console.log(data);
+
+    return data;
   }
 
   getConstants(){

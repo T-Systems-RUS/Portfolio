@@ -1,0 +1,17 @@
+<app-input id="Search" 
+            placeholder="Search employee" 
+            label="TEAM"
+            boxStyle="input--small"
+            clearStyle="input__clear--right20 input__clear--top30"
+            wrapperStyle="input--width100"
+            (onModelChanged)="filterEmployees($event)"></app-input>
+
+<div class="employee-picker__wrapper">
+    <list-item  *ngFor="let employee of employees" 
+                [clickable]="true" 
+                itemStyle="list-item--picker" 
+                [model]="employee"
+                (clicked)="selectEmployee($event)">
+        <input (click)="stopAction($event)" [(ngModel)]="employee.participation" class="list-item__input">
+    </list-item>
+</div>

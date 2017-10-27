@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { ProjectModule } from './features/project/project.module';
 import { EmployeeModule } from './features/employee/employee.module';
+import { TechnologyModule } from './features/technology/technology.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { EmployeeModule } from './features/employee/employee.module';
     CoreModule.forRoot({userName: 'Miss Marple'}),
     EmployeeModule,
     ProjectModule,
+    TechnologyModule,
     AppRoutingModule
   ],
   providers: [],

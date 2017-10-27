@@ -9,7 +9,7 @@ import { Technology } from "../../shared/models/technology";
 import { Employee } from "../../shared/models/employee";
 import { Role } from "../../shared/models/role";
 
-import { PortfolioQueryEncoder } from "../../shared//helpers/queryEncoder";
+import { Routes } from './../../shared/helpers/routes';
 
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
@@ -18,7 +18,7 @@ import "rxjs/add/operator/toPromise";
 
 @Injectable()
 export class ProjectService {
-
+    routes:Routes;
     lines=["automotive", "horizontal", "vertical","sap"];
     domains=["Transportation", "Health", "Telecom","Automotive"];
     names=["SBB","Sopre AOM","OSM", "T-Vision", "VPS", "Contie UBR","T-Mobile"];
@@ -49,7 +49,7 @@ export class ProjectService {
 
 
     constructor(private http: HttpService, private extract:ExtractService) {
-
+        this.routes=new Routes();
     }
 
 
@@ -74,7 +74,7 @@ export class ProjectService {
     getProjects() : Observable<Project[]> {
         
                  // ...using get request
-                 return this.http.get('/api/projects')
+                 return this.http.get(this.routes.getProjects)
                                 // ...and calling .json() on the response to return data
                                  .map(this.extract.extractData)
                                  //...errors if any
@@ -85,7 +85,7 @@ export class ProjectService {
     getProject(id) : Observable<Project> {
         
                  // ...using get request
-                 return this.http.get('/api/projects/' + id)
+                 return this.http.get(this.routes.getProjects + id)
                                 // ...and calling .json() on the response to return data
                                  .map(this.extract.extractData)
                                  //...errors if any
@@ -96,15 +96,14 @@ export class ProjectService {
     //POST requests
     createProject(project:Project) {
 
-        let data = new URLSearchParams('', new PortfolioQueryEncoder());
+        let data = this.http.createParams(project);
 
-        for(let key of Object.keys(project)){
-            data.append(key,project[key]);
-        }
-        
-        console.log(data);
+        return this.http.post(this.routes.createProject,data).subscribe(data=>{
+            console.log(data);
+        },error=>{
+            console.log(error);
+        });
 
-        //return this.
     }
 
 

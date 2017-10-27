@@ -14,6 +14,7 @@ import {
   import { LoaderComponent }   from './loader/loader.component';
 
   import { HttpService }       from './http.service';
+  import { DataService }       from './data.service';
   import { ExtractService }       from './extract.service';
   
   @NgModule({
@@ -30,6 +31,7 @@ import {
     ],
     providers:    [ 
       UserService,
+      DataService,
       HttpService,
       ExtractService
     ]

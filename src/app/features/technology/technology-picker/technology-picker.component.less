@@ -1,0 +1,17 @@
+@import './../../../../assets/style/colors.less';
+@import './../../../../assets/style/mixins.less';
+
+.technology-picker{
+    
+        &__wrapper{
+            border: 1px solid #dddddd;
+            height: 291px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            .boxSizing();
+        }
+
+        :host ::ng-deep  &--pad10{
+            padding: 10px;
+        }
+    }

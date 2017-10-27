@@ -70,41 +70,10 @@
         </div> 
         
         <div class="new-project__content-block">
-            <app-input id="Search" 
-                placeholder="Search employee" 
-                label="TEAM"
-                boxStyle="input--small"
-                clearStyle="input__clear--right20 input__clear--top30"
-                wrapperStyle="input--width100"
-                (onModelChanged)="filterEmployees($event)"></app-input>
-
-            <div class="new-project__wrapper">
-                <list-item  *ngFor="let employee of employees" 
-                            [clickable]="true" 
-                             itemStyle="list-item--picker" 
-                            [model]="employee"
-                            (clicked)="selectEmployee($event)">
-                    <input (click)="stopAction($event)" [(ngModel)]="employee.participation" class="list-item__input">
-                </list-item>
-            </div>
+            <employee-picker (onSelect)="setValue($event,'employees')"></employee-picker>
         </div>   
         <div class="new-project__content-block">
-            <app-input id="Search" 
-                placeholder="Search technology" 
-                label="TECHNOLOGIES"
-                boxStyle="input--small"
-                clearStyle="input__clear--right20 input__clear--top30"
-                wrapperStyle="input--width100"
-                (onModelChanged)="filterTechnologies($event)"></app-input>
-
-            <div class="new-project__wrapper new-project--pad10">
-                <chip *ngFor="let tech of technologies" 
-                      [value]="tech.name"
-                      [clickable]="true" 
-                      style="grey"
-                      [active] ="tech.active"
-                      (clicked)="selectTechnology($event)"></chip>
-            </div>
+            <technology-picker (onSelect)="setValue($event,'technologies')"></technology-picker>
         </div>
     </div> 
     <div class="new-project__footer">

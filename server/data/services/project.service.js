@@ -83,12 +83,12 @@ projectService.createProject=function(Project){
           ishistory:false,              // default for new project
           version:1,                    // default for new project
           technologies: Project.technologies
-        },{
+        }/*,{
             include:[{
                 model:models.Technology,
                 as :'technologies'
             }]
-        }, {transaction: t}).then(function () {
+        }*/, {transaction: t}).then(function () {
           return t.commit();
         }).catch(function (err) {
           return t.rollback();

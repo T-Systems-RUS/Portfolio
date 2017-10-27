@@ -2,8 +2,8 @@
     <img class="list-item__img" src="./../../assets/images/person.png" alt="person">
 
     <div class="list-item__block">
-        <p class="list-item__primary">{{model.fullname}}</p>
-        <p class="list-item__secondary">{{model.roles[0].name}}</p>
+        <p class="list-item__primary">{{model.firstname + ' ' + model.lastname}}</p>
+        <p class="list-item__secondary">Lead Developer</p>
     </div>
 
     <ng-content></ng-content>

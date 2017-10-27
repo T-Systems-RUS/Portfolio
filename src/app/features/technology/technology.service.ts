@@ -5,7 +5,7 @@ import { ExtractService }  from "../../core/extract.service";
 import {Observable} from "rxjs/Observable";
 
 
-import { Employee } from "../../shared/models/employee";
+import { Technology } from "../../shared/models/technology";
 
 
 import { PortfolioQueryEncoder } from "../../shared//helpers/queryEncoder";
@@ -17,7 +17,7 @@ import "rxjs/add/operator/toPromise";
 
 
 @Injectable()
-export class EmployeeService {
+export class TechnologyService {
 
     routes:Routes;
 
@@ -29,10 +29,10 @@ export class EmployeeService {
 
 
     //GET requests
-    getEmployees() : Observable<Employee[]> {
+    getTechnologies() : Observable<Technology[]> {
         
                  // ...using get request
-                 return this.http.get(this.routes.getEmployees)
+                 return this.http.get(this.routes.getTechnologies)
                                 // ...and calling .json() on the response to return data
                                  .map(this.extract.extractData)
                                  //...errors if any

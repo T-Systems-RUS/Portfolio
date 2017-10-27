@@ -1,0 +1,16 @@
+<app-input id="Search" 
+            placeholder="Search technology" 
+            label="TECHNOLOGIES"
+            boxStyle="input--small"
+            clearStyle="input__clear--right20 input__clear--top30"
+            wrapperStyle="input--width100"
+            (onModelChanged)="filterTechnologies($event)"></app-input>
+
+<div class="technology-picker__wrapper technology-picker--pad10">
+      <chip *ngFor="let tech of technologies" 
+            [value]="tech.name"
+            [clickable]="true" 
+            style="grey"
+            [active] ="tech.active"
+            (clicked)="selectTechnology($event)"></chip>
+</div>
