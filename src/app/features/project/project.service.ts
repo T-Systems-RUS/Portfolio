@@ -98,11 +98,7 @@ export class ProjectService {
 
         let data = this.http.createParams(project);
 
-        return this.http.post(this.routes.createProject,data).subscribe(data=>{
-            console.log(data);
-        },error=>{
-            console.log(error);
-        });
+        return this.http.post(this.routes.createProject,data);
 
     }
 

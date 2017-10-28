@@ -38,6 +38,7 @@
                         type="text"
                         class="input__textbox {{boxStyle}}"
                         [(ngModel)]="model"
+                        (ngModelChange)="modelChanged($event)"
                         [ngClass]="{'input__box--error': errorMessage!=''}"></textarea>
     </div>
 </div>

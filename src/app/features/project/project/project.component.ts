@@ -31,6 +31,8 @@ export class ProjectComponent {
 
             this.dataService.getProject(this.id).subscribe(data=>{
                 this.model=data;
+                this.backend=this.model.technologies.filter(tech=>tech.domain==='backend');
+                this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
                 console.log(this.model);    
             },err=>{
                 console.log(err);

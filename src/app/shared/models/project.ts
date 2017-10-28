@@ -12,6 +12,8 @@ export class Project{
     updatedAt:Date=new Date();
 
     technologies:Array<Technology>=new Array<Technology>();
+    technolodgyIds:Array<string>=new Array<string>();
+
     employees:Array<Employee>=new Array<Employee>();
 
     schedules:Array<Schedule>=new Array<Schedule>();
@@ -27,7 +29,7 @@ export class Project{
     }
 
     get required(){
-        return ["name","line","domain","startdate"]
+        return ["name","line","domain","startdate","description"];
     }
 
 

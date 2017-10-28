@@ -2,8 +2,8 @@
 
 <div class="new-project">
         <p-growl [(value)]="msgs" [life]="3000"></p-growl>
-    <div class="new-project__header {{model.line}}">
-        <img class="new-project__image--line" *ngIf="model.line!=='grey'" src="./../../assets/images/{{model.line}}.png" alt="new-project.line">
+    <div class="new-project__header {{model.line || 'grey'}}">
+        <img class="new-project__image--line" *ngIf="model.line!==''" src="./../../assets/images/{{model.line}}.png" alt="new-project.line">
         <img class="new-project__image"  src="./../../assets/images/Create Image.png" alt="create">     
     </div>
     <div class="new-project__content">
@@ -62,9 +62,10 @@
         <div class="new-project__content-block new-project__content-block--fullwidth  new-project__content-block--maxH163">
             <app-input id="Description" 
                 placeholder="Description" 
-                
                 label="Description"
                 controlType="textbox"
+                [model]="model.description"
+                (onModelChanged)="setValue($event,'description')"
                 clearStyle="input__clear--right20 input__clear--top30"
                 wrapperStyle="input--width100"></app-input>
         </div> 

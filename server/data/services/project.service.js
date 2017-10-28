@@ -72,27 +72,36 @@ projectService.doesProjectExist= function(name){
 //POST create new project
 projectService.createProject=function(Project){
     return models.sequelize.transaction().then(function (t) {
+        
         return models.Project.create({
-          name: Project.name,
-          line: Project.line,
-          domain: Project.domain,
-          description:Project.description,
-          active:false,
-          startdate:Project.startdate,
-          enddate:Project.enddate,
-          ishistory:false,              // default for new project
-          version:1,                    // default for new project
-          technologies: Project.technologies
-        }/*,{
-            include:[{
-                model:models.Technology,
-                as :'technologies'
-            }]
-        }*/, {transaction: t}).then(function () {
-          return t.commit();
-        }).catch(function (err) {
-          return t.rollback();
-        });
+            name: Project.name,
+            line: Project.line,
+            domain: Project.domain,
+            description:Project.description,
+            active:false,
+            startdate:Project.startdate,
+            enddate:Project.enddate,
+            ishistory:false,              // default for new project
+            version:1                     // default for new project
+          }, {transaction: t}).then(function (project) {
+            if(Project.technolodgyIds){
+                models.Technology.findAll({
+                    where:{
+                        id:Project.technolodgyIds
+                    }
+                }).then(function(technologies){
+                    if(technologies.length>0){
+                        project.setTechnologies(technologies);
+                    }  
+        
+                })
+            }
+                 
+            return t.commit();
+          }).catch(function (err) {
+                console.log(err);
+                return t.rollback();
+          });
       });
 }
 

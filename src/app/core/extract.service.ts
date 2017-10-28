@@ -1,5 +1,6 @@
 import {Output, EventEmitter, Injectable} from "@angular/core";
 import {Response} from "@angular/http";
+import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 
@@ -32,6 +33,6 @@ export class ExtractService {
       errMsg = error.message ? error.message : error.toString();
     }
 
-    return Promise.reject(errMsg);
+    return Observable.throw(errMsg);
   }
 }

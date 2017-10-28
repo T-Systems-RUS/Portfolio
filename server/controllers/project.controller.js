@@ -34,15 +34,14 @@ router.get('/projects/:id', (req, res) => {
 //POST Requests
 router.post('/projects/create',(req, res) => {
    return projectService.doesProjectExist(req.body.name).then(doesExist=>{
-       console.log(doesExist)
        if(doesExist){
            res.status(409).send('Project already exists');
        }else{
            this,projectService.createProject(req.body).then(project=>{
                res.status(200).send(project);
-           }).catch(error=>{
-               res.status(500).send(error);
-           })
+           },error=>{
+                res.status(500).send(error);
+           })   
        }
    })
       

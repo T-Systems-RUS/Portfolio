@@ -46,13 +46,9 @@ export class NewProjectComponent {
             
         },error=>{
             console.log(error);
-        })
+        });
 
-        this.service.getEmployees().subscribe(res=>{
-            console.log((res[0]));
-        })
-
-        this.model.line='grey'; 
+        //this.model.line='grey'; 
         this.technologies=this.dataService.technologies;
         this.initialTechnologies=this.technologies;
        
@@ -75,12 +71,24 @@ export class NewProjectComponent {
 
 
       createProject(){
-        this.dataService.createProject(this.model);
+            this.model.technolodgyIds=this.model.technologies.map(tech=>tech.id);
+            // this.dataService.createProject(this.model).subscribe(
+            //     data=>{console.log(data)},
+            //     error=>{console.log(error)}
+            // );
+            console.log(this.model.required);
+            console.log(this.unvalidFields())
       }
 
       setValue(value,prop){
           this.model[prop]=value;
           console.log(this.model)
+      }
+
+      unvalidFields(){
+          return this.model.required.map(key=>{
+              return this.model[key]==="" || this.model[key]===undefined ? key : '';
+          }).filter(item=>item!='');
       }
 
 
