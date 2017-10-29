@@ -22,7 +22,7 @@ export class Project{
     startdate:Date; //string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
     enddate:Date;//=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
 
-    errorMessage:string="";
+    errors:Object={};
 
     get teamcount(){
         return this.schedules.length.toString();

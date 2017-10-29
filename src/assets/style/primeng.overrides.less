@@ -22,6 +22,10 @@
     .boxSizing();
     border-radius: 0 ;
 
+    &--error{
+        border-color: @error;
+    }
+
     &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
         font-family: ProximaRegularThin;
         font-size: 18px;
@@ -56,4 +60,9 @@
     font-size: 14px;
     color:@text_h;
     margin-bottom: 5px;
+
+    &__error{
+        color:@error;
+        float: right;
+    }
 }

@@ -32,6 +32,8 @@ export class NewProjectComponent {
 
     private lines:Array<string>;
     private domains:Array<string>;
+
+    private errors:Object={};
     
     constructor(private dataService:ProjectService,private service:DataService) {
         
@@ -71,13 +73,18 @@ export class NewProjectComponent {
 
 
       createProject(){
+            this.model.errors={};
+            let unvalidFields=this.unvalidFields();
+            unvalidFields.map(field=>{
+                this.model.errors[field]=`${field} is required`;
+            })
+            console.log(this.model.errors);
+            
             this.model.technolodgyIds=this.model.technologies.map(tech=>tech.id);
             // this.dataService.createProject(this.model).subscribe(
             //     data=>{console.log(data)},
             //     error=>{console.log(error)}
-            // );
-            console.log(this.model.required);
-            console.log(this.unvalidFields())
+            // );ß
       }
 
       setValue(value,prop){

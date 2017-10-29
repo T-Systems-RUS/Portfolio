@@ -12,7 +12,8 @@
                     placeholder="Project name" 
                     boxStyle="input--small"
                     label="Project name"
-                    [errorMessage]="model.errorMessage"
+                    [name]="name"
+                    [errorMessage]="model.errors['name']"
                     [model]="model.name"
                     (onModelChanged)="setValue($event,'name')"
                     clearStyle="input__clear--right20 input__clear--top30"
@@ -23,17 +24,22 @@
                           [options]="lines"
                           wrapperStyle="dropdown--marginB20"
                           [model]="model.line"
+                          [errorMessage]="model.errors['line']"
                           (changed)="changeLine($event);setValue($event,'line')"></dropdown>
 
                 <dropdown id="domain" 
                           label="Domain"
                           [options]="domains"
                           [model]="model.domain"
+                          [errorMessage]="model.errors['domain']"
                           (changed)="setValue($event,'domain')"></dropdown>
         </div>
         <div class="new-project__content-block">
 
-                <label class="ui-calender-label">Project start</label>
+                <label class="ui-calender-label">
+                    Project start
+                    <span class="ui-calender-label__error">{{model.errors['startdate']}}</span>
+                </label>
                 <p-calendar placeholder="Project start" 
                             [style]="{'margin-bottom':'20px'}"  
                             [(ngModel)]="model.startdate" 
@@ -65,6 +71,7 @@
                 label="Description"
                 controlType="textbox"
                 [model]="model.description"
+                [errorMessage]="model.errors['description']"
                 (onModelChanged)="setValue($event,'description')"
                 clearStyle="input__clear--right20 input__clear--top30"
                 wrapperStyle="input--width100"></app-input>

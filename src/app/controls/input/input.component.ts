@@ -27,7 +27,8 @@ export class InputComponent {
     @Input() errorMessage:string=""; //Field is required
     @Input() controlType:string="input";
 
-    @Output() onModelChanged=new EventEmitter<string>();
+    @Output() onModelChanged=new EventEmitter<Object>();
+    
 
     @ViewChild('searchBox') searchBox;
 
@@ -44,6 +45,8 @@ export class InputComponent {
     }
     
 
+ 
+
     ngAfterViewInit(){
 
         setTimeout(function() {
@@ -57,7 +60,6 @@ export class InputComponent {
                          .filter(char => char==="ArrowDown" || char==="ArrowUp" || char==="Enter")
                          .subscribe(item=>this.walkThroughComplete(item,this.showAutocomplete));
         }.bind(this), 200);
-        
     }
 
     ngAfterContentInit(){
@@ -73,6 +75,8 @@ export class InputComponent {
             let filtered=this.complete.filter(item=>item.toLowerCase().indexOf(event.toLowerCase())!=-1);
             this.complete=filtered.length>0 ? filtered : ["No results found"];           
         }
+        
+        this.errorMessage='';
         this.onModelChanged.emit(this.model);
     }
 

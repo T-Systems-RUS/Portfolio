@@ -32,6 +32,7 @@ export class DropDownComponent {
     }
 
     modelChanged(event){
+        this.errorMessage='';
         this.changed.emit(event);
     }
 

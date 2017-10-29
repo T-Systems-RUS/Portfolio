@@ -13,7 +13,7 @@
                     (ngModelChange)="modelChanged($event)"
                     (focus)="showAutocomplete=true"
                     (blur)="blurInput()"
-                    [ngClass]="{'input__box--error': errorMessage!=''}">
+                    [ngClass]="{'input__box--error': errorMessage!==undefined && errorMessage!==''}">
             <span *ngIf="model.length>0" (click)="clearModel()" class="input__clear {{clearStyle}}">X</span>
         
             <ul *ngIf="complete.length>0" class="autocomplete" [ngClass]="{'autocomplete__visible':showAutocomplete}">
@@ -39,6 +39,6 @@
                         class="input__textbox {{boxStyle}}"
                         [(ngModel)]="model"
                         (ngModelChange)="modelChanged($event)"
-                        [ngClass]="{'input__box--error': errorMessage!=''}"></textarea>
+                        [ngClass]="{'input__box--error': errorMessage!==undefined && errorMessage!==''}"></textarea>
     </div>
 </div>
