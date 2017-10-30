@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const { check, validationResult } = require('express-validator/check');
+const { matchedData, sanitize } = require('express-validator/filter');
+
 var projectService=require('../data/services/project.service');
 
 
@@ -32,7 +35,19 @@ router.get('/projects/:id', (req, res) => {
 
 
 //POST Requests
-router.post('/projects/create',(req, res) => {
+router.post('/projects/create',[
+    check('name','Field name is required').exists().isLength({ min: 1,max:100 }),
+    check('line','Field line is required').exists().isLength({ min: 1,max:100 }),
+    check('domain','Field domain is required').exists().isLength({ min: 1,max:100 }),
+    check('startdate','Field startdate is required').exists().isLength({ min: 1,max:100 })
+],(req, res) => {
+
+   const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+        console.log(errors)
+        return res.status(422).json({ errors: errors.mapped() });
+   }
+
    return projectService.doesProjectExist(req.body.name).then(doesExist=>{
        if(doesExist){
            res.status(409).send('Project already exists');

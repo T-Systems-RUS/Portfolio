@@ -28,7 +28,6 @@ export class DropDownComponent {
     }
 
     ngOnInit(){
-        console.log(this.model)
     }
 
     modelChanged(event){

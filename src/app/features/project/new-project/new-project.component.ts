@@ -3,9 +3,11 @@ import { Project } from '../../../shared/models/project';
 import { Technology } from '../../../shared/models/technology';
 import {Employee } from '../../../shared/models/employee';
 import { ProjectService } from '../project.service';
-import { DataService } from '../../../core/data.service';
+import { ExtractService }  from "../../../core/extract.service";
 
 import {Message} from 'primeng/components/common/api';
+
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -29,14 +31,16 @@ export class NewProjectComponent {
 
     msgs: Message[] = [];
     dateValue:Date;
+    styleClass:string="";
+    editMode:boolean=false;
 
     private lines:Array<string>;
     private domains:Array<string>;
 
     private errors:Object={};
     
-    constructor(private dataService:ProjectService,private service:DataService) {
-        
+    constructor(private dataService:ProjectService,private extract:ExtractService,
+        private route: ActivatedRoute) {
     }
 
     ngOnInit(){
@@ -44,19 +48,29 @@ export class NewProjectComponent {
         this.dataService.getConstants().subscribe(res=>{
             this.lines=res.lines;
             this.domains=res.domains;
-
-            
         },error=>{
             console.log(error);
         });
 
-        //this.model.line='grey'; 
-        this.technologies=this.dataService.technologies;
-        this.initialTechnologies=this.technologies;
-       
-
-        
+        this.route.params.subscribe(params=>{
+            if(params['id']){
+                this.dataService.getProject(params['id']).subscribe(data=>{
+                    this.model=new Project(data);
+                    console.log(this.model);
+                    //this.model.errors={};
+                },err=>{
+                    console.log(err);
+                })
+            } else{
+                this.model=new Project();
+            }
+            
+        },error=>{
+            console.log('fuck',error)
+        })        
     }
+
+    
     
 
 
@@ -73,18 +87,25 @@ export class NewProjectComponent {
 
 
       createProject(){
-            this.model.errors={};
-            let unvalidFields=this.unvalidFields();
-            unvalidFields.map(field=>{
-                this.model.errors[field]=`${field} is required`;
-            })
-            console.log(this.model.errors);
-            
+        this.model.errors={};
+        let unvalidFields=this.unvalidFields();
+
+        if(unvalidFields.length>0){
+            this.model.generateErrors(unvalidFields);
+
+            //error style for prime ng calender
+            this.styleClass=unvalidFields.filter(field=>field==="startdate").length>0 
+            ? "ui-inputtext--error"
+            : "";
+
+            this.msgs.push({severity:'error', summary:'Error Message', detail:'Please fill required fields'})
+        }else{
             this.model.technolodgyIds=this.model.technologies.map(tech=>tech.id);
-            // this.dataService.createProject(this.model).subscribe(
-            //     data=>{console.log(data)},
-            //     error=>{console.log(error)}
-            // );ß
+            this.dataService.createProject(this.model).subscribe(
+                data=>{console.log(data)},
+                error=>{console.log(this.extract.handlePostError(error))}
+            );
+        } 
       }
 
       setValue(value,prop){
@@ -94,7 +115,7 @@ export class NewProjectComponent {
 
       unvalidFields(){
           return this.model.required.map(key=>{
-              return this.model[key]==="" || this.model[key]===undefined ? key : '';
+              return !this.model[key] ? key : '';
           }).filter(item=>item!='');
       }
 

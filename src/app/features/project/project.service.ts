@@ -109,66 +109,66 @@ export class ProjectService {
                         .catch(this.extract.handleError);
     }
 
-    generateProjects():Array<Project>{
-        let projects=new Array<Project>();
+    // generateProjects():Array<Project>{
+    //     let projects=new Array<Project>();
 
-        for(let i=0;i<20;i++){
-            let project=new Project({
-                id:(i+1).toString(),
-                name:this.names[this.getRandomizer(0,6)],
-                line: this.lines[this.getRandomizer(0,3)],
-                domain: this.domains[this.getRandomizer(0,3)],
-                description: "Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online",
-                teamcount:i.toString(),
-                technologies:this.technologies
-            });
-            projects.push(project);   
-        }
+    //     for(let i=0;i<20;i++){
+    //         let project=new Project({
+    //             id:(i+1).toString(),
+    //             name:this.names[this.getRandomizer(0,6)],
+    //             line: this.lines[this.getRandomizer(0,3)],
+    //             domain: this.domains[this.getRandomizer(0,3)],
+    //             description: "Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online",
+    //             teamcount:i.toString(),
+    //             technologies:this.technologies
+    //         });
+    //         projects.push(project);   
+    //     }
 
-        return projects;
-    }
+    //     return projects;
+    // }
 
-    generateProject():Project{
-        let project=new Project({
-            id:"1",
-            name:this.names[this.getRandomizer(0,6)],
-            line: this.lines[this.getRandomizer(0,3)],
-            domain: this.domains[this.getRandomizer(0,3)],
-            description: "Online Sales Management system for dealers and  customers."+ 
-                         "Used for selling vehicles of BMW AG online"+
-                         "Used for selling vehicles of BMW AG online"+
-                         "Used for selling vehicles of BMW AG online"+
-                         "Used for selling vehicles of BMW AG online"+
-                         "Used for selling vehicles of BMW AG online"+
-                         "Used for selling vehicles of BMW AG online"+
-                         "Used for selling vehicles of BMW AG online"+
-                         "Used for selling vehicles of BMW AG online"+
-                         "Used for selling vehicles of BMW AG online",
-            teamcount: "10",
-            customer:"BMW AG"
-        });
+    // generateProject():Project{
+    //     let project=new Project({
+    //         id:"1",
+    //         name:this.names[this.getRandomizer(0,6)],
+    //         line: this.lines[this.getRandomizer(0,3)],
+    //         domain: this.domains[this.getRandomizer(0,3)],
+    //         description: "Online Sales Management system for dealers and  customers."+ 
+    //                      "Used for selling vehicles of BMW AG online"+
+    //                      "Used for selling vehicles of BMW AG online"+
+    //                      "Used for selling vehicles of BMW AG online"+
+    //                      "Used for selling vehicles of BMW AG online"+
+    //                      "Used for selling vehicles of BMW AG online"+
+    //                      "Used for selling vehicles of BMW AG online"+
+    //                      "Used for selling vehicles of BMW AG online"+
+    //                      "Used for selling vehicles of BMW AG online"+
+    //                      "Used for selling vehicles of BMW AG online",
+    //         teamcount: "10",
+    //         customer:"BMW AG"
+    //     });
         
 
 
-        for(let i=0;i<10;i++){
-            project.technologies.push(this.technologies[this.getRandomizer(0,9)]);
-            project.employees.push(
-                new Employee({
-                    firstname:'Ivan' + i,
-                    lastname:"Ivanov"+i,
-                    technologies:this.technologies,
-                    roles:[new Role({
-                        name:"Lead Architect",
-                        participation:"100%"
-                    })]
-                })
-            );
-        }
+    //     for(let i=0;i<10;i++){
+    //         project.technologies.push(this.technologies[this.getRandomizer(0,9)]);
+    //         project.employees.push(
+    //             new Employee({
+    //                 firstname:'Ivan' + i,
+    //                 lastname:"Ivanov"+i,
+    //                 technologies:this.technologies,
+    //                 roles:[new Role({
+    //                     name:"Lead Architect",
+    //                     participation:"100%"
+    //                 })]
+    //             })
+    //         );
+    //     }
 
         
 
-        return project;
-    }
+    //     return project;
+    // }
 
     generateEmployees(){
         let employees=new Array<Employee>();

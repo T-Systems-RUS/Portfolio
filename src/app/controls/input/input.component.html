@@ -14,7 +14,7 @@
                     (focus)="showAutocomplete=true"
                     (blur)="blurInput()"
                     [ngClass]="{'input__box--error': errorMessage!==undefined && errorMessage!==''}">
-            <span *ngIf="model.length>0" (click)="clearModel()" class="input__clear {{clearStyle}}">X</span>
+            <span *ngIf="model?.length>0" (click)="clearModel()" class="input__clear {{clearStyle}}">X</span>
         
             <ul *ngIf="complete.length>0" class="autocomplete" [ngClass]="{'autocomplete__visible':showAutocomplete}">
                 <li *ngFor="let item of complete;let i = index" 

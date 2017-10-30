@@ -19,21 +19,25 @@ export class Project{
     schedules:Array<Schedule>=new Array<Schedule>();
     version:number=1;
 
-    startdate:Date; //string=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
-    enddate:Date;//=new Date().getMonth().toString() + "." + new Date().getFullYear().toString();
+    startdate:Date;
+    enddate:Date;
 
     errors:Object={};
 
-    get teamcount(){
-        return this.schedules.length.toString();
-    }
 
-    get required(){
-        return ["name","line","domain","startdate","description"];
+    required:Array<string>;
+
+    generateErrors(unvalidFields:Array<string>){
+        this.errors={};
+        unvalidFields.map(field=>{
+            this.errors[field]=`${field} is required`;
+        });
     }
 
 
     public constructor(init?:Partial<Project>) {
         Object.assign(this, init);
+        this.errors={};
+        this.required=["name","line","domain","startdate","description"];
     }
 } 

@@ -35,4 +35,20 @@ export class ExtractService {
 
     return Observable.throw(errMsg);
   }
+
+  public handlePostError(error: Response | any) {
+    
+        let errors:Array<string>=new Array<string>();
+
+        if (error instanceof Response) {
+          let resp=error.json()["errors"];
+          for(let key of Object.keys(resp)){
+              errors.push(resp[key].msg);
+          }
+        } else {
+          errors.toString();
+        }
+    
+        return errors;
+    }
 }

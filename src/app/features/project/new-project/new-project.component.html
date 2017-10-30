@@ -1,9 +1,9 @@
 
 
 <div class="new-project">
-        <p-growl [(value)]="msgs" [life]="3000"></p-growl>
+        <p-growl [(value)]="msgs" [life]="4000"></p-growl>
     <div class="new-project__header {{model.line || 'grey'}}">
-        <img class="new-project__image--line" *ngIf="model.line!==''" src="./../../assets/images/{{model.line}}.png" alt="new-project.line">
+        <img class="new-project__image--line" *ngIf="model.line" src="./../../assets/images/{{model.line}}.png" alt="new-project.line">
         <img class="new-project__image"  src="./../../assets/images/Create Image.png" alt="create">     
     </div>
     <div class="new-project__content">
@@ -41,7 +41,8 @@
                     <span class="ui-calender-label__error">{{model.errors['startdate']}}</span>
                 </label>
                 <p-calendar placeholder="Project start" 
-                            [style]="{'margin-bottom':'20px'}"  
+                            [style]="{'margin-bottom':'20px'}" 
+                            inputStyleClass="{{styleClass}}"
                             [(ngModel)]="model.startdate" 
                             dateFormat="dd.mm.yy"
                             [monthNavigator]="true" 
@@ -62,6 +63,8 @@
                     placeholder="Customer" 
                     boxStyle="input--small"
                     label="Customer"
+                    [model]="model.customer"
+                    (onModelChanged)="setValue($event,'customer')"
                     clearStyle="input__clear--right20 input__clear--top30"
                     wrapperStyle="input--width100"></app-input>                   
         </div>

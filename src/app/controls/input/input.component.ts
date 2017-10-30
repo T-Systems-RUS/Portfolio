@@ -68,7 +68,7 @@ export class InputComponent {
 
 
     modelChanged(event){
-        
+        console.log(event)
         if(this.hasComplete){
             this.showAutocomplete=true;
             this.complete=this.completeInitial;
