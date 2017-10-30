@@ -106,6 +106,13 @@ projectService.createProject=function(Project){
 }
 
 
+//POST request update Project
+projectService.updateProject=function(Project){
+    
+        
+        
+}
+
 
 
 module.exports = projectService;

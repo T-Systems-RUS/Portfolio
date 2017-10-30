@@ -9,6 +9,7 @@ export class Routes {
   //Project
   getProjects;
   createProject;
+  updateProject;
 
 
   //Employees
@@ -26,7 +27,8 @@ export class Routes {
   constructor() {
 
     this.getProjects="/api/projects/";
-    this.createProject="/api/projects/create/"
+    this.createProject="/api/projects/create/";
+    this.updateProject="/api/projects/update/";
 
     this.getEmployees="/api/employees";
 

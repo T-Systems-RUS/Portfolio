@@ -57,12 +57,12 @@ export class NewProjectComponent {
                 this.dataService.getProject(params['id']).subscribe(data=>{
                     this.model=new Project(data);
                     console.log(this.model);
-                    //this.model.errors={};
+                    this.editMode=true;
                 },err=>{
                     console.log(err);
                 })
             } else{
-                this.model=new Project();
+                this.editMode=false;
             }
             
         },error=>{
@@ -86,7 +86,7 @@ export class NewProjectComponent {
       }
 
 
-      createProject(){
+      changeProject(){
         this.model.errors={};
         let unvalidFields=this.unvalidFields();
 
@@ -101,10 +101,18 @@ export class NewProjectComponent {
             this.msgs.push({severity:'error', summary:'Error Message', detail:'Please fill required fields'})
         }else{
             this.model.technolodgyIds=this.model.technologies.map(tech=>tech.id);
-            this.dataService.createProject(this.model).subscribe(
-                data=>{console.log(data)},
-                error=>{console.log(this.extract.handlePostError(error))}
-            );
+            
+            if(this.editMode){
+                this.dataService.updateProject(this.model).subscribe(
+                    data=>{console.log(data)},
+                    error=>{console.log(this.extract.handlePostError(error))}
+                );
+            } else{
+                this.dataService.createProject(this.model).subscribe(
+                    data=>{console.log(data)},
+                    error=>{console.log(this.extract.handlePostError(error))}
+                );
+            }
         } 
       }
 

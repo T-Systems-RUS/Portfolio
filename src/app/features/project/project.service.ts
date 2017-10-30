@@ -95,11 +95,13 @@ export class ProjectService {
 
     //POST requests
     createProject(project:Project) {
-
         let data = this.http.createParams(project);
-
         return this.http.post(this.routes.createProject,data);
+    }
 
+    updateProject(project:Project) {
+        let data = this.http.createParams(project);
+        return this.http.post(this.routes.updateProject,data);
     }
 
 
