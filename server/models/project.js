@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     line: DataTypes.STRING,
     domain: DataTypes.STRING,
     description: DataTypes.STRING,
+    customer:DataTypes.STRING,
     teamcount: DataTypes.STRING,
     active: DataTypes.BOOLEAN,
     ishistory:DataTypes.BOOLEAN,

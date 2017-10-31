@@ -3,11 +3,11 @@ import { Project } from '../../../shared/models/project';
 import { Technology } from '../../../shared/models/technology';
 import {Employee } from '../../../shared/models/employee';
 import { ProjectService } from '../project.service';
-import { ExtractService }  from "../../../core/extract.service";
 
 import {Message} from 'primeng/components/common/api';
 
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 
@@ -39,8 +39,9 @@ export class NewProjectComponent {
 
     private errors:Object={};
     
-    constructor(private dataService:ProjectService,private extract:ExtractService,
-        private route: ActivatedRoute) {
+    constructor(private dataService:ProjectService,
+                private route: ActivatedRoute,
+                private router:Router) {
     }
 
     ngOnInit(){
@@ -58,6 +59,7 @@ export class NewProjectComponent {
                     this.model=new Project(data);
                     this.model.startdate=new Date(this.model.startdate);
                     this.editMode=true;
+                    console.log(this.editMode)
                 },err=>{
                     console.log(err);
                 })
@@ -68,6 +70,8 @@ export class NewProjectComponent {
         },error=>{
             console.log('fuck',error)
         })        
+
+        
     }
 
     
@@ -104,13 +108,16 @@ export class NewProjectComponent {
             
             if(this.editMode){
                 this.dataService.updateProject(this.model).subscribe(
-                    data=>{console.log(data)},
-                    error=>{console.log(this.extract.handlePostError(error))}
+                    data=>{
+                        //this.router.navigate(["/project/",data.id]);
+                        console.log(data)
+                    },
+                    error=>{console.log('error',error)}
                 );
             } else{
                 this.dataService.createProject(this.model).subscribe(
-                    data=>{console.log(data)},
-                    error=>{console.log(this.extract.handlePostError(error))}
+                    data=>{/*this.router.navigate(["/projects/");*/},
+                    error=>{console.log('error',error)}
                 );
             }
         } 

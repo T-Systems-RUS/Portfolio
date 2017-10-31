@@ -84,7 +84,7 @@
             <employee-picker (onSelect)="setValue($event,'employees')"></employee-picker>
         </div>   
         <div class="new-project__content-block">
-            <technology-picker (onSelect)="setValue($event,'technologies')"></technology-picker>
+            <technology-picker [selectedTechnologies]="model.technologies" (onSelect)="setValue($event,'technologies')"></technology-picker>
         </div>
     </div> 
     <div class="new-project__footer">

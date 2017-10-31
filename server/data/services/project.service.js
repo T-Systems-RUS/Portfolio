@@ -13,6 +13,7 @@ projectService.getProjects= function(){
     try{
         return  models.Project.findAll({
                         where: { ishistory: 0 },
+                        distinct:'name',
                         include: [{
                                 as: 'schedules',
                                 model: models.Schedule
@@ -67,51 +68,75 @@ projectService.doesProjectExist= function(name){
 }
 
 
+//GET Get latest project
+projectService.isProjectLatest=function(id){
+    return models.Project.findOne({
+        where:{
+            id:id
+        }
+    }).then(project=>{
+        return project.ishistory ? false : true;
+    }).catch(error=>{
+        console.log(error);
+    });
+} 
+
+
 //POST Section
 
 //POST create new project
 projectService.createProject=function(Project){
-    return models.sequelize.transaction().then(function (t) {
-        
-        return models.Project.create({
-            name: Project.name,
-            line: Project.line,
-            domain: Project.domain,
-            description:Project.description,
-            active:false,
-            startdate:Project.startdate,
-            enddate:Project.enddate,
-            ishistory:false,              // default for new project
-            version:1                     // default for new project
-          }, {transaction: t}).then(function (project) {
-            if(Project.technolodgyIds){
-                models.Technology.findAll({
-                    where:{
-                        id:Project.technolodgyIds
-                    }
-                }).then(function(technologies){
-                    if(technologies.length>0){
-                        project.setTechnologies(technologies);
-                    }  
-        
-                })
-            }
-                 
-            return t.commit();
-          }).catch(function (err) {
-                console.log(err);
-                return t.rollback();
-          });
-      });
+    return models.Project.create({
+        name: Project.name,
+        line: Project.line,
+        customer:Project.customer,
+        domain: Project.domain,
+        description:Project.description,
+        active:false,
+        startdate:Project.startdate,
+        enddate:Project.enddate,
+        ishistory:false,              // default for new project
+        version:Project.version                    // default for new project
+      }).then(function (project) {
+        if(Project.technolodgyIds){
+            models.Technology.findAll({
+                where:{
+                    id:Project.technolodgyIds
+                }
+            }).then(function(technologies){
+                if(technologies.length>0){
+                    project.setTechnologies(technologies);
+                }  
+    
+            })
+        }           
+
+         return project;
+      })
 }
 
 
 //POST request update Project
 projectService.updateProject=function(Project){
-    
-        
-        
+    let transaction=models.sequelize.transaction();
+    return transaction.then(function(t){
+        return models.Project.update(
+            { ishistory: true },
+            { where: { id: Project.id } },
+            { transaction: t }
+          ).then(project=>{
+                t.commit();
+                return projectService.createProject(Project);   
+          },error=>{
+            console.log(error);
+            return t.rollback();
+        })  
+    }) 
+     
 }
+
+
+
 
 
 

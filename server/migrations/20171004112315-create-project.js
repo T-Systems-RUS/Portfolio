@@ -15,6 +15,9 @@ module.exports = {
       line: {
         type: Sequelize.STRING
       },
+      customer: {
+        type: Sequelize.STRING
+      },
       domain: {
         type: Sequelize.STRING
       },

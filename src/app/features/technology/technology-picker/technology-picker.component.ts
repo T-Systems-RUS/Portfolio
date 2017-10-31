@@ -10,24 +10,33 @@ import {TechnologyService} from './../technology.service';
 })
 export class TechnologyPickerComponent {
 
-    @Input() technologies:Array<Technology>=new Array<Technology>();
+    @Input() selectedTechnologies:Array<Technology>=new Array<Technology>();
     @Output() onSelect=new EventEmitter<Array<Technology>>();
 
     initialTechnologies:Array<Technology>=new Array<Technology>();
+    technologies:Array<Technology>=new Array<Technology>();
 
     constructor(private dataService:TechnologyService) {
         
     }
 
     ngOnInit(){
-        if(this.technologies.length<=0){
-            this.dataService.getTechnologies().subscribe(data=>{
-                this.technologies=data;
-                this.initialTechnologies=this.technologies;
-            }, error=>{
-                console.log(error);
-            })
-        }
+        this.dataService.getTechnologies().subscribe(data=>{
+            this.technologies=data;
+            
+            this.technologies.filter((item)=>
+            this.selectedTechnologies.map(i=>i.id)
+                                     .includes(item.id)).forEach(element => {
+                                        element.active=true;  
+                                     });
+
+            let selected=this.technologies.filter(item=>item.active);
+            this.onSelect.emit(selected);
+
+            this.initialTechnologies=this.technologies;
+        }, error=>{
+            console.log(error);
+        })
     }
 
     filterTechnologies(event){

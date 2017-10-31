@@ -96,12 +96,18 @@ export class ProjectService {
     //POST requests
     createProject(project:Project) {
         let data = this.http.createParams(project);
-        return this.http.post(this.routes.createProject,data);
+        return this.http.post(this.routes.createProject,data)
+                        .map(this.extract.extractData)
+                        .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));
     }
 
     updateProject(project:Project) {
+        project.version=project.version+1;
         let data = this.http.createParams(project);
-        return this.http.post(this.routes.updateProject,data);
+        return this.http.post(this.routes.updateProject,data)
+                        .map(this.extract.extractData)
+                        .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));
+;
     }
 
 
