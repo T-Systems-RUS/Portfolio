@@ -13,6 +13,8 @@ import { FilterPanelComponent } from './filters/filter-panel/filter-panel.compon
 
 import { ListItemComponent } from './list/list-item/list-item.component';
 
+import { PanelComponent } from './panel/panel.component';
+
 import { FormComponent } from './form/form.component'; 
 import { DynamicFormQuestionComponent } from './form/dynamic-question/dynamic-question.component';
 import { QuestionControlService } from './form/question-control.service'; 
@@ -32,7 +34,8 @@ import { QuestionControlService } from './form/question-control.service';
     FilterPanelComponent,
     FormComponent,
     DynamicFormQuestionComponent,
-    ListItemComponent
+    ListItemComponent,
+    PanelComponent
   ],
   exports:      [ 
     ButtonComponent,
@@ -44,7 +47,8 @@ import { QuestionControlService } from './form/question-control.service';
     FilterPanelComponent,
     FormComponent,
     DynamicFormQuestionComponent,
-    ListItemComponent
+    ListItemComponent,
+    PanelComponent
   ],
   providers:    [ 
     QuestionControlService

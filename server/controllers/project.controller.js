@@ -34,6 +34,18 @@ router.get('/projects/:id', (req, res) => {
       
 });
 
+router.get('/projects/history/:name', (req, res) => {
+    projectService.getProjectsByName(req.params.name).then(data=>{
+        if(!data) res.status(404).send("No projects found");
+        
+        res.status(200).send(data);
+    }).catch(err=>{
+        res.status(500).send(err);
+    })
+      
+      
+});
+
 
 //POST Requests
 router.post('/projects/create', projectValidator.createValidators(),(req, res) => {

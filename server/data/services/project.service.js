@@ -53,6 +53,34 @@ projectService.getProject = function(id){
 }
 
 
+//Get All Projects with same name
+projectService.getProjectsByName = function(name){
+    
+    return models.Project.findAll({
+        where: {
+            name: name
+          },
+        include: [{
+            as: 'schedules',
+            model: models.Schedule,
+            include: [{
+                as: 'employee',
+                model: models.Employee
+              },{
+                as: 'role',
+                model:models.Role
+              }]
+        },{
+            as:'technologies',
+            model: models.Technology
+        }],
+        order:[
+            ['version','DESC']
+        ]        
+    })
+}
+
+
 //GET check if project exists
 projectService.doesProjectExist= function(name){
     

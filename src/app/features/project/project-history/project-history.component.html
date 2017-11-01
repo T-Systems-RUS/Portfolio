@@ -1,0 +1,20 @@
+<backpanel  [color]="model.line" image="both"></backpanel>
+
+<div @appear3 class="project">
+    <div class="project__header">
+        <h3 class="project__subheading">
+            {{model.updatedAt | date: 'dd.MM.yyyy' }} - {{model.domain}}
+        </h3>
+        <h1 class="project__heading">
+            {{model.name}}
+        </h1>
+    </div>
+
+    <div>
+            <panel *ngFor="let project of projects">
+                <div class="panel__wrapper" header>
+                    <span class="panel__name">{{project.name}}</span>
+                </div>
+            </panel>
+    </div>
+</div>

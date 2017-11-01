@@ -78,16 +78,16 @@ export class NewProjectComponent {
     
 
 
-      filterTechnologies(event){
+    //   filterTechnologies(event){
           
-        this.technologies=this.initialTechnologies;
-        this.technologies=this.technologies.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
-      }
+    //     this.technologies=this.initialTechnologies;
+    //     this.technologies=this.technologies.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
+    //   }
 
-      selectTechnology(event){
-          let tech=this.initialTechnologies.filter(item=>item.name===event)[0];
-          tech.active=!tech.active;
-      }
+    //   selectTechnology(event){
+    //       let tech=this.initialTechnologies.filter(item=>item.name===event)[0];
+    //       tech.active=!tech.active;
+    //   }
 
 
       changeProject(){
@@ -107,6 +107,7 @@ export class NewProjectComponent {
             this.model.technolodgyIds=this.model.technologies.map(tech=>tech.id);
             
             if(this.editMode){
+                this.model.version=this.model.version+1;
                 this.dataService.updateProject(this.model).subscribe(
                     data=>{
                         //this.router.navigate(["/project/",data.id]);
@@ -125,7 +126,6 @@ export class NewProjectComponent {
 
       setValue(value,prop){
           this.model[prop]=value;
-          console.log(this.model)
       }
 
       unvalidFields(){

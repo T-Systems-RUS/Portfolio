@@ -82,6 +82,17 @@ export class ProjectService {
         
     }
 
+    getProjectsByName(name) : Observable<Project[]> {
+        
+                 // ...using get request
+                 return this.http.get(this.routes.history + name)
+                                // ...and calling .json() on the response to return data
+                                 .map(this.extract.extractData)
+                                 //...errors if any
+                                 .catch(this.extract.handleError);
+        
+    }
+
     getProject(id) : Observable<Project> {
         
                  // ...using get request
@@ -102,7 +113,7 @@ export class ProjectService {
     }
 
     updateProject(project:Project) {
-        project.version=project.version+1;
+        
         let data = this.http.createParams(project);
         return this.http.post(this.routes.updateProject,data)
                         .map(this.extract.extractData)
