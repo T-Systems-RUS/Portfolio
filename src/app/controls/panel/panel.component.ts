@@ -12,8 +12,9 @@ export class PanelComponent {
 
 
     @Input() itemStyle:string='';
+    @Input() panelVisible:boolean=true;
+    @Input() panelOpened:boolean=true;
 
-    
     constructor() {
         
     }

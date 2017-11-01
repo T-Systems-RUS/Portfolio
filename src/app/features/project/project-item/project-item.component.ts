@@ -25,8 +25,8 @@ export class ProjectItemComponent {
     }
 
     trimText(string, limit)
-    {
-        return string.length > limit ? string.substring(0,limit) + "..." : string;
-    }
+        {
+            return string.length > limit ? string.substring(0,limit) + "..." : string;
+        }
 
 }

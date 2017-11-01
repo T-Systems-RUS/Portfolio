@@ -8,6 +8,7 @@ import { ProjectItemComponent }     from './project-item/project-item.component'
 import { ProjectListComponent }     from './project-list/project-list.component';
 import { ProjectComponent }         from './project/project.component';
 import { ProjectHistoryComponent }         from './project-history/project-history.component';
+import { ProjectModalComponent }         from './project-modal/project-modal.component';
 import { ProjectService }           from './project.service';
 import { ProjectRoutingModule }     from './project-routing.module';
 import { NewProjectComponent }      from './new-project/new-project.component';
@@ -17,7 +18,7 @@ import { NewProjectComponent }      from './new-project/new-project.component';
 
 @NgModule({
   imports:      [ SharedModule, ProjectRoutingModule, ControlsModule,EmployeeModule,TechnologyModule ],
-  declarations: [ ProjectItemComponent, ProjectListComponent, ProjectComponent,NewProjectComponent, ProjectHistoryComponent ],
+  declarations: [ ProjectItemComponent, ProjectListComponent, ProjectComponent,NewProjectComponent, ProjectHistoryComponent,ProjectModalComponent ],
   providers:    [ ProjectService ]
 })
 export class ProjectModule { }

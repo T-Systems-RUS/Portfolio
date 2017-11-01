@@ -7,9 +7,6 @@ import { ProjectService } from '../project.service';
 
 
 
-
-
-
 @Component({
   selector: 'project-history',
   templateUrl: './project-history.component.html',

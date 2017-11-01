@@ -3,18 +3,25 @@
 <div @appear3 class="project">
     <div class="project__header">
         <h3 class="project__subheading">
-            {{model.updatedAt | date: 'dd.MM.yyyy' }} - {{model.domain}}
+            {{model.updatedAt | date: 'dd.MM.yyyy' }} - {{model.name}}
         </h3>
-        <h1 class="project__heading">
-            {{model.name}}
-        </h1>
     </div>
 
-    <div>
-            <panel *ngFor="let project of projects">
-                <div class="panel__wrapper" header>
-                    <span class="panel__name">{{project.name}}</span>
+    <div class="project-history__container">
+            <panel *ngFor="let project of projects; let i = index;" [panelVisible]="i!==projects.length-1">
+                <span header class="panel__name">{{project.name}}</span>
+                <p header class="panel__info panel__info--ib">
+                    version:
+                    <span>{{project.version}}</span>
+                </p>
+                <div content class="panel__legend">sdsd</div>
+                <div content class="panel__col">
+                    <project-modal [project]="project"></project-modal>
+                </div>
+                <div content class="panel__col panel__col--noborderL">
+                    <project-modal [project]="projects[i===projects.length-1 ? i : i+1]"></project-modal>
                 </div>
             </panel>
     </div>
 </div>
+
