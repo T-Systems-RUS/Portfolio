@@ -14,7 +14,20 @@
                     version:
                     <span>{{project.version}}</span>
                 </p>
-                <div content class="panel__legend">sdsd</div>
+                <div content class="panel__legend">
+                    <div class="panel__legend-item">
+                        <div class="panel__legend-color"></div>
+                        <span class="panel__legend-text">Removed</span>
+                    </div>
+                    <div class="panel__legend-item">
+                        <div class="panel__legend-color panel__legend-color--added"></div>
+                        <span class="panel__legend-text">Added</span>
+                    </div>
+                    <div class="panel__legend-item">
+                        <div class="panel__legend-color panel__legend-color--edited"></div>
+                        <span class="panel__legend-text">Edited</span>
+                    </div>
+                </div>
                 <div content class="panel__col">
                     <project-modal [project]="project"></project-modal>
                 </div>
