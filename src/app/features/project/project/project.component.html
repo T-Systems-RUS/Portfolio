@@ -1,6 +1,7 @@
 <backpanel  [color]="model.line" image="both"></backpanel>
 
 <div @appear3 class="project">
+    <ribbon *ngIf="model.enddate" text="FINISHED" style="ribbon__text--red"></ribbon>
     <div class="project__header">
         <h3 class="project__subheading">
             {{model.updatedAt | date: 'dd.MM.yyyy' }} - {{model.domain}}
