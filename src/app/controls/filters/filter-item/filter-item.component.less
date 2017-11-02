@@ -4,11 +4,23 @@
 .filter-item{
     display: inline-block;
     text-decoration: none;
-    line-height: 26px;
     margin-right: 20px;
     vertical-align: top;
     position: relative;
     cursor: pointer;
+
+    :host ::ng-deep &--right{
+        margin: 0;
+        position: absolute;
+        right: 12px;
+        height: 24px;
+        top: 50%;
+        margin-top: -12px;
+    }
+
+    :host ::ng-deep &__dropdown{
+        
+    }
 
     &__tooltip{
         background-color: #EEF1F3;
@@ -22,6 +34,15 @@
         .transition(all .4s);
         .boxSizing();
         .boxShadow(0 2px 4px 0 rgba(0,0,0,0.50));
+
+        :host ::ng-deep &--right{
+            top:20px;
+            right: 0;
+    
+            &:before{
+                left: 212px !important;
+            }
+        }
 
         
 
@@ -77,9 +98,19 @@
     z-index: 199;
     .transition(all .2s);
 
+    :host ::ng-deep &--right{
+        margin: 0;
+        position: absolute;
+        right: 12px;
+    }
+
     &--visible{
         opacity: 1;
         visibility: visible;
         
     }
+
+    
+
+    
 }

@@ -12,6 +12,9 @@ var  technologyService={};
 technologyService.getTechnologies= function(){
     try{
         return  models.Technology.findAll({
+                        order: [
+                            ['name', 'ASC'],
+                        ]
                         // include: [{
                         //         as: 'schedules',
                         //         model: models.Schedule

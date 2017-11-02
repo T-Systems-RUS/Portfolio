@@ -1,9 +1,9 @@
-<a  class="filter-item" (click)="tooltipVisible=!tooltipVisible">
+<a  class="filter-item {{filterStyle}}" (click)="tooltipVisible=!tooltipVisible">
     <img src="./../../assets/images/{{name}}.svg" alt="{{name}}">
 </a>
 
-<div class="tooltip__wrapper" *ngIf="withTooltip" [ngClass]="{'tooltip__wrapper--visible': tooltipVisible}">
-    <div class="filter-item__tooltip">
+<div class="tooltip__wrapper {{wrapperStyle}}" *ngIf="withTooltip" [ngClass]="{'tooltip__wrapper--visible': tooltipVisible}">
+    <div class="filter-item__tooltip {{tooltipStyle}}"> 
         <ng-content>
 
         </ng-content>

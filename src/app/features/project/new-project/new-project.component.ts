@@ -59,7 +59,7 @@ export class NewProjectComponent {
                     this.model=new Project(data);
                     this.model.startdate=new Date(this.model.startdate);
                     this.editMode=true;
-                    console.log(this.editMode)
+                    console.log(this.model)
                 },err=>{
                     console.log(err);
                 })

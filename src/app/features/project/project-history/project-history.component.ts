@@ -1,9 +1,11 @@
-import { Component, Input, Output,EventEmitter } from '@angular/core';
+import { Component, Input, Output,EventEmitter,ViewChildren,QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Project } from '../../../shared/models/project';
 import { PROJECT_ANIMATION } from '../project/project.animation';
 import { ProjectService } from '../project.service';
+
+import { ProjectModalComponent } from '../project-modal/project-modal.component';
 
 
 
@@ -21,6 +23,9 @@ export class ProjectHistoryComponent {
     @Input() projects:Array<Project>=new Array<Project>();
     @Input() itemStyle:string='';
 
+    versions:Array<number>=new Array<number>();
+
+    @ViewChildren(ProjectModalComponent) divs: QueryList<ProjectModalComponent>
     
     constructor(private dataService:ProjectService,
                 private route: ActivatedRoute) {        
@@ -34,7 +39,9 @@ export class ProjectHistoryComponent {
                 this.model.domain="Sales and aftersales";
                 this.dataService.getProjectsByName(params['name']).subscribe(data=>{
                     this.projects=data;
+                    this.versions=this.projects.map(p=>p.version);
                     console.log(this.projects);
+                    console.log(this.divs);
                 })
             } else{
                 
@@ -46,6 +53,14 @@ export class ProjectHistoryComponent {
 
     }
     
+    onChange(event,project){
+        console.log(event,project)
+
+        console.log(this.divs.map(i=>{
+            console.log(i)
+            return i;
+        }))
+    }
 
 
 

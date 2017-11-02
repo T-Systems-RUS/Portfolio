@@ -8,7 +8,8 @@
     </div>
 
     <div class="project-history__container">
-            <panel *ngFor="let project of projects; let i = index;" [panelVisible]="i!==projects.length-1">
+            <panel *ngFor="let project of projects; let i = index;" 
+                    [panelVisible]="i!==projects.length-1">
                 <span header class="panel__name">{{project.name}}</span>
                 <p header class="panel__info panel__info--ib">
                     version:
@@ -27,12 +28,29 @@
                         <div class="panel__legend-color panel__legend-color--edited"></div>
                         <span class="panel__legend-text">Edited</span>
                     </div>
+                    <filter-item [withTooltip]="true" 
+                                 filterStyle="filter-item--right"
+                                 wrapperStyle="tooltip__wrapper--right"
+                                 tooltipStyle="filter-item__tooltip--right"
+                                 (onFilterAction)="onFilterAction($event)" 
+                                 name="dots">
+                        <p class="filter-item__tooltip-i">
+                            <img src="./../../assets/images/powerpoint.png" alt="">
+                            Compare with version:                            
+                        </p>
+                        <select name="version" id="version" [(ngModel)]="v" (ngModelChange)="onChange($event,project)">
+                            <option *ngFor="let v of versions" value="{{v}}">{{v}}</option>
+                        </select>
+                    </filter-item>
                 </div>
                 <div content class="panel__col">
-                    <project-modal [project]="project"></project-modal>
+                    <project-modal [project]="project"
+                                   [compareProject]="projects[i===projects.length-1 ? i : i+1]"></project-modal>
                 </div>
                 <div content class="panel__col panel__col--noborderL">
-                    <project-modal [project]="projects[i===projects.length-1 ? i : i+1]"></project-modal>
+                    <project-modal [project]="projects[i===projects.length-1 ? i : i+1]"
+                                   [compareProject]="project"
+                    ></project-modal>
                 </div>
             </panel>
     </div>

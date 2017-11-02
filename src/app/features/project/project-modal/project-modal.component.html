@@ -1,44 +1,48 @@
 <div class="project-modal">
-    <span  class="project-modal__name">Version {{project.version}}</span>
+    <span  class="project-modal__name">
+        Version {{project.version}}
+        <span>{{project.updatedAt | date: 'dd.MM.yyyy' }}</span>
+    </span>
+
     <p  class="project-modal__info">
         Project name:
-        <span>{{project.name}}</span>
+        <span class="{{this.validator['name']}}">{{project.name}}</span>
     </p>
     <p class="project-modal__info">
         Production line:
-        <span>{{project.line}}</span>
+        <span class="{{this.validator['line']}}">{{project.line}}</span>
     </p>
     <p class="project-modal__info">
         Domain:
-        <span class="project-modal--edited">{{project.domain}}</span>
+        <span class="{{this.validator['domain']}}">{{project.domain}}</span>
     </p>
     <p class="project-modal__info">
         Customer:
-        <span>{{project.customer}}</span>
+        <span class="{{this.validator['customer']}}">{{project.customer}}</span>
     </p>
     <p class="project-modal__info">
         Start date:
-        <span>{{project.startdate | date: 'dd.MM.yyyy'}}</span>
+        <span class="{{this.validator['startdate']}}">{{project.startdate | date: 'dd.MM.yyyy'}}</span>
     </p>
     <p class="project-modal__info">
         End date:
-        <span>{{project.enddate | date: 'dd.MM.yyyy'}}</span>
+        <span class="{{this.validator['enddate']}}">{{project.enddate | date: 'dd.MM.yyyy'}}</span>
     </p>
     <p class="project-modal__info">
         Description:
-        <span>{{project.description}}</span>
+        <span class="{{this.validator['description']}} project-modal--description">{{project.description}}</span>
     </p>
-    <p class="project-modal__info" *ngIf="project.technologies.length>0">
-        Technologies:
+    <p class="project-modal__info project-modal--margin1020" *ngIf="project.technologies.length>0">
+        <span class="{{this.validator['technologies']}}">Technologies:</span>
         <chip *ngFor="let tech of project.technologies" [value]="tech.name" style="grey"></chip>
     </p>
-    <p class="project-modal__info" *ngIf="project.schedules.length>0">
-        Team:
+    <p class="project-modal__info project-modal--margin1020" *ngIf="project.schedules.length>0">
+        <span class="{{this.validator['schedules']}}">Team:</span>
         <list-item  *ngFor="let schedule of project.schedules" 
             [clickable]="false" 
             itemStyle="list-item--picker" 
             [model]="schedule.employee">
-            <input (click)="stopAction($event)" [(ngModel)]="employee.participation" class="list-item__input">
+            <input (click)="stopAction($event)" [(ngModel)]="schedule.participation" class="list-item__input">
         </list-item>
     </p>
 </div>

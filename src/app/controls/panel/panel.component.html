@@ -1,10 +1,10 @@
 <div class="panel" *ngIf="panelVisible">
-    <div class="panel__header">
+    <div class="panel__header" (click)="panelOpened=!panelOpened">
         <ng-content select="[header]"></ng-content>
-        <span class="panel__arrow" *ngIf="panelOpened" (click)="panelOpened=false">
+        <span class="panel__arrow" *ngIf="panelOpened">
             <i class="fa fa-chevron-up" aria-hidden="true"></i>
         </span>
-        <span class="panel__arrow" *ngIf="!panelOpened" (click)="panelOpened=true">
+        <span class="panel__arrow" *ngIf="!panelOpened">
             <i class="fa fa-chevron-down" aria-hidden="true"></i>
         </span>
     </div>

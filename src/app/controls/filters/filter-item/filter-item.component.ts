@@ -13,6 +13,9 @@ export class FilterItemComponent {
     @Input() name:string='';
     @Input() withTooltip:boolean=false;
     @Input() tooltipVisible:boolean=false;
+    @Input() filterStyle:string="";
+    @Input() tooltipStyle:string="";
+    @Input() wrapperStyle:string="";
 
     @Output() onFilterAction=new EventEmitter<string>(); 
 
