@@ -1,4 +1,5 @@
 <div class="project-item">
+    <div class="ribbon" *ngIf="model.enddate"><span class="ribbon__text ribbon__text--red">FINISHED</span></div>
     <div class="project-item__header">
         <a [routerLink]="['/project', model.id]">
             <img src="./../../assets/images/{{model.line}}.png" alt="{{model.line}}">

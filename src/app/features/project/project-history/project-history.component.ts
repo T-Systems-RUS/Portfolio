@@ -24,6 +24,7 @@ export class ProjectHistoryComponent {
     @Input() itemStyle:string='';
 
     versions:Array<number>=new Array<number>();
+    counter:number=0;
 
     @ViewChildren(ProjectModalComponent) divs: QueryList<ProjectModalComponent>
     
@@ -53,13 +54,20 @@ export class ProjectHistoryComponent {
 
     }
     
-    onChange(event,project){
-        console.log(event,project)
-
-        console.log(this.divs.map(i=>{
-            console.log(i)
-            return i;
-        }))
+    onChange(event,project,project2){
+            let modal=this.divs.filter(i=>{
+                return i.id==project.id;
+            })[0];
+            let modal2=this.divs.filter(i=>{
+                return i.id==project2.id;
+            })[0];
+             console.log(modal.project.id,modal.id,modal2.project.id,modal2.id)
+            let aimproject=this.projects.filter(pr=>pr.version==event)[0];
+            //let aimproject2=this.projects.filter(pr=>pr.version==event)[0];
+            modal.project=aimproject;
+            modal.compareProjects(modal.project,modal2.project);
+            modal2.compareProjects(modal2.project,modal.project);
+        
     }
 
 

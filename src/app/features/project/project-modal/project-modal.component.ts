@@ -14,6 +14,7 @@ export class ProjectModalComponent {
     @Input() compareProject:Project;
 
     validator={};
+    id:string;
     
     constructor() {
         
@@ -23,6 +24,8 @@ export class ProjectModalComponent {
         if(this.compareProject){
             this.compareProjects(this.project,this.compareProject);
         }
+
+        this.id=this.project.id;
     }
 
     compareProjects(project1,project2){
