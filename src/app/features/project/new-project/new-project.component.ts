@@ -1,13 +1,20 @@
-import { Component, Input } from '@angular/core';
-import { Project } from '../../../shared/models/project';
-import { Technology } from '../../../shared/models/technology';
-import {Employee } from '../../../shared/models/employee';
-import { ProjectService } from '../project.service';
-
-import {Message} from 'primeng/components/common/api';
-
+//angular
+import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+
+//models
+import { Project } from '../../../shared/models/project';
+import { Technology } from '../../../shared/models/technology';
+import { Employee } from '../../../shared/models/employee';
+
+//Services
+import { ProjectService } from '../project.service';
+import { DynamicService } from '../../../core/dynamic.service';
+
+//primeng and third libraries
+import {Message} from 'primeng/components/common/api';
+
 
 
 
@@ -21,16 +28,9 @@ import { Router } from '@angular/router';
 export class NewProjectComponent {
 
     @Input() model:Project=new Project();
-    
-    //initial employee list
-    employees;
-    initialEmployees:Array<Employee>=new Array<Employee>();
-    //initial tech list
-    technologies;
-    initialTechnologies:Array<Technology>=new Array<Technology>();
+    @ViewChild('entry', { read: ViewContainerRef} ) entry:ViewContainerRef; 
 
     msgs: Message[] = [];
-    dateValue:Date;
     styleClass:string="";
     editMode:boolean=false;
 
@@ -41,8 +41,8 @@ export class NewProjectComponent {
     
     constructor(private dataService:ProjectService,
                 private route: ActivatedRoute,
-                private router:Router) {
-    }
+                private router:Router,
+                private dynamic:DynamicService ) {}
 
     ngOnInit(){
 
@@ -58,8 +58,10 @@ export class NewProjectComponent {
                 this.dataService.getProject(params['id']).subscribe(data=>{
                     this.model=new Project(data);
                     this.model.startdate=new Date(this.model.startdate);
+                    this.model.enddate= this.model.enddate ? new Date(this.model.enddate) : undefined;
                     this.editMode=true;
-                    console.log(this.model)
+                    console.log(this.model);
+                    
                 },err=>{
                     console.log(err);
                 })
@@ -70,24 +72,11 @@ export class NewProjectComponent {
         },error=>{
             console.log('fuck',error)
         })        
-
         
     }
 
     
     
-
-
-    //   filterTechnologies(event){
-          
-    //     this.technologies=this.initialTechnologies;
-    //     this.technologies=this.technologies.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
-    //   }
-
-    //   selectTechnology(event){
-    //       let tech=this.initialTechnologies.filter(item=>item.name===event)[0];
-    //       tech.active=!tech.active;
-    //   }
 
 
       changeProject(){
@@ -110,22 +99,37 @@ export class NewProjectComponent {
                 this.model.version=this.model.version+1;
                 this.dataService.updateProject(this.model).subscribe(
                     data=>{
-                        //this.router.navigate(["/project/",data.id]);
+                        this.router.navigate(["/project/",data.id]);
                         console.log(data)
                     },
-                    error=>{console.log('error',error)}
+                    error=>{
+                        this.dynamic.setRootViewContainerRef(this.entry);
+                        let modal=this.dynamic.addErrorComponent();
+                        modal.error=error;
+                    }
                 );
             } else{
                 this.dataService.createProject(this.model).subscribe(
-                    data=>{/*this.router.navigate(["/projects/");*/},
-                    error=>{console.log('error',error)}
-                );
+                    data=>{this.router.navigate(["/projects/"])},
+                    error=>{
+                        this.dynamic.setRootViewContainerRef(this.entry);
+                        let modal=this.dynamic.addErrorComponent();
+                        modal.error=error;
+                    }
+                );                
             }
         } 
       }
 
+      showPreview(){
+        this.dynamic.setRootViewContainerRef(this.entry);
+        let modal=this.dynamic.addProjectConfirmationComponent();
+        modal.project=this.model;
+      }
+
       setValue(value,prop){
           this.model[prop]=value;
+          console.log(this.model)
       }
 
       unvalidFields(){

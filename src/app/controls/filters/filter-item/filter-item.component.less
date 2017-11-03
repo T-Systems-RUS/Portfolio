@@ -19,7 +19,10 @@
     }
 
     :host ::ng-deep &__dropdown{
-        
+        display: inline-block;
+        outline: none;
+        font-family: ProximaRegular;
+        .borderRadius(4px);
     }
 
     &__tooltip{
@@ -29,7 +32,7 @@
         cursor: pointer;
         z-index: 199;
         min-width: 230px;
-        
+        text-align: center;
 
         .transition(all .4s);
         .boxSizing();

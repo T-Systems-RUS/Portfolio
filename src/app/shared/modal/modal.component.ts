@@ -10,7 +10,8 @@ export class ModalComponent {
 
     @Input() color:string='';
     @Input() headerColor:string='grey';
-    @Input() visible=false;
+    @Input() visible=true;
+    @Input() windowStyle:string="";
 
     @Input() fullscreen:boolean=false;
 

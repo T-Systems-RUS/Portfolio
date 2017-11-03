@@ -69,7 +69,7 @@ router.post('/projects/create', projectValidator.createValidators(),(req, res) =
    })
 })
 
-router.post('/projects/update', projectValidator.createValidators(),(req, res) => {
+router.post('/projects/update', projectValidator.createValidators(),(req, res, next) => {
     
        const errors = validationResult(req);
        if (!errors.isEmpty()) {
@@ -77,17 +77,22 @@ router.post('/projects/update', projectValidator.createValidators(),(req, res) =
             return res.status(422).json({ errors: errors.mapped() });
        }
     
-       return projectService.isProjectLatest(req.body.id).then(isLatest=>{
-           if(!isLatest){
-               res.status(409).json({ errors: { latest:{msg:'Somebody has already updated the project in background'} }});
-           }else{
-               this,projectService.updateProject(req.body).then(project=>{
-                   res.status(200).send(project);
-               },error=>{
-                    res.status(500).json({ errors: { er:{msg:error} }});
-               })   
-           }
-       })
+       try{
+            return projectService.isProjectLatest(req.body.id).then(isLatest=>{
+                if(!isLatest){
+                
+                    res.status(409).json({ errors: { latest:{msg:'Somebody has already updated the project in background'} }});
+                }else{
+                    this,projectService.updateProject(req.body).then(project=>{
+                        res.status(200).send(project);
+                    },error=>{
+                        res.status(500).json({ errors: { er:{msg:error} }});
+                    })   
+                }
+            })
+       } catch(e){
+            res.status(500).json({ errors: { er:{msg:e} }});
+       }
 })
 
 

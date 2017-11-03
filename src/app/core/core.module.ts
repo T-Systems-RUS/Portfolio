@@ -14,7 +14,7 @@ import {
   import { LoaderComponent }   from './loader/loader.component';
 
   import { HttpService }       from './http.service';
-  import { DataService }       from './data.service';
+  import { DynamicService }    from './dynamic.service';
   import { ExtractService }       from './extract.service';
   
   @NgModule({
@@ -30,8 +30,8 @@ import {
       LoaderComponent
     ],
     providers:    [ 
+      DynamicService,
       UserService,
-      DataService,
       HttpService,
       ExtractService
     ]

@@ -26,7 +26,7 @@ export class ProjectHistoryComponent {
     versions:Array<number>=new Array<number>();
     counter:number=0;
 
-    @ViewChildren(ProjectModalComponent) divs: QueryList<ProjectModalComponent>
+    @ViewChildren(ProjectModalComponent) modals: QueryList<ProjectModalComponent>
     
     constructor(private dataService:ProjectService,
                 private route: ActivatedRoute) {        
@@ -42,7 +42,6 @@ export class ProjectHistoryComponent {
                     this.projects=data;
                     this.versions=this.projects.map(p=>p.version);
                     console.log(this.projects);
-                    console.log(this.divs);
                 })
             } else{
                 
@@ -55,10 +54,10 @@ export class ProjectHistoryComponent {
     }
     
     onChange(event,project,project2){
-            let modal=this.divs.filter(i=>{
+            let modal=this.modals.filter(i=>{
                 return i.id==project.id;
             })[0];
-            let modal2=this.divs.filter(i=>{
+            let modal2=this.modals.filter(i=>{
                 return i.id==project2.id;
             })[0];
              console.log(modal.project.id,modal.id,modal2.project.id,modal2.id)

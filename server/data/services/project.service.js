@@ -18,7 +18,10 @@ projectService.getProjects= function(){
                                 as: 'schedules',
                                 model: models.Schedule
                             },
-                        ]
+                        ],
+                        order:[
+                            ['updatedAt','DESC']
+                        ] 
                     }
                 )
     }catch(e){

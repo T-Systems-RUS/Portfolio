@@ -4,6 +4,9 @@ import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 
+import { Error } from '../shared/models/error';
+
+
 
 @Injectable()
 export class ExtractService {
@@ -38,17 +41,21 @@ export class ExtractService {
 
   public handlePostError(error: Response | any) {
     
-        let errors:Array<string>=new Array<string>();
+        let errors:Error=new Error();
 
         if (error instanceof Response) {
+          errors.status=error.status;
+          errors.statusText=error.statusText;
+
           let resp=error.json()["errors"];
           for(let key of Object.keys(resp)){
-              errors.push(resp[key].msg);
+              errors.errors.push(resp[key].msg);
           }
         } else {
-          errors.toString();
+            errors.errors.push(error.toString());
         }
     
         return errors;
     }
-}
+
+  }  

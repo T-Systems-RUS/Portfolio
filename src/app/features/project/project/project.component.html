@@ -39,7 +39,7 @@
             <div class="project__block-item">
                 <p class="project__t project__t--small project__mb10">Project duration:
                     <span class="project__bold">{{model.startdate | date: 'dd.MM.yyyy'}}</span>
-                    <span class="project__bold" *ngIf="model.end"> - {{model.enddate | date: 'dd.MM.yyyy'}}</span>
+                    <span class="project__bold" *ngIf="model.enddate"> - {{model.enddate | date: 'dd.MM.yyyy'}}</span>
                 </p>
                 <p *ngIf="model.domain" class="project__t project__t--small project__mb10">Domain:
                     <span class="project__bold">{{model.domain}}</span>
@@ -77,7 +77,7 @@
         <a [routerLink]="['/project/update', model.id]" class="footer__button">
             <img src="./../../assets/images/edit.png" alt="edit">
         </a>
-        <a class="footer__button">
+        <a [routerLink]="['/project/history', model.name]" class="footer__button">
             <img src="./../../assets/images/powerpoint.png" alt="powerpoint">
         </a>
         <a class="footer__button">
