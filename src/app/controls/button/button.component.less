@@ -48,4 +48,14 @@
         .borderRadius(50%);
         .boxShadow(0 2px 4px 0 rgba(0,0,0,0.50));
     }
+
+    :host ::ng-deep &--grey{
+        background-color: @grey_bg;
+        border-color: @grey_bg;
+        color: @text_body;
+
+        &:hover{
+            background-color: @grey;
+        }
+    }
 }

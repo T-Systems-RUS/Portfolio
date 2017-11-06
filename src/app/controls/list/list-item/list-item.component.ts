@@ -30,7 +30,7 @@ export class ListItemComponent {
         if(this.clickable){
             
             value.active=!value.active;
-            value.participation=value.active ? "100%" :"0%"; 
+            value.participation=value.active ? 100.00 :0.0; 
             this.clicked.emit(value);
         }
     }

@@ -36,11 +36,11 @@ export class ProjectHistoryComponent {
         this.route.params.subscribe(params=>{
             if(params['name']){
                 this.model.name=params['name'];
-                this.model.line="automotive";
-                this.model.domain="Sales and aftersales";
                 this.dataService.getProjectsByName(params['name']).subscribe(data=>{
                     this.projects=data;
                     this.versions=this.projects.map(p=>p.version);
+                    this.model.line=this.projects.length>0 ? this.projects[0].line : 'grey';
+                    //Sthis.model.domain=this.projects.length>0 ? this.projects[0].domain : '';
                     console.log(this.projects);
                 })
             } else{
