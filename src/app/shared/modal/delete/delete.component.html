@@ -1,0 +1,15 @@
+<modal windowStyle="modal--small">
+    <div header class="delete__header">
+        <h3 class="delete__status">Delete item?</h3>
+    </div>
+    <div content class="delete__content">
+        <p class="delete__line">
+            Would you really like to delete {{type}} <b>{{name}}</b>?
+        </p>
+    </div>
+
+    <div footer class="delete__footer">
+        <button (click)="cancel()" value="No" class="delete__button delete__button--white" >No</button>
+        <button (click)="confirm()" value="Yes" class="delete__button" >Yes</button>
+    </div>
+</modal>

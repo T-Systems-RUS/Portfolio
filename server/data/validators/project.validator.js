@@ -14,6 +14,13 @@ projectValidator.createValidators=function(){
     ]
 }
 
+projectValidator.archieveValidators=function(){
+    return [
+        check('id','Id is required').exists().isLength({ min: 1,max:100000 }),
+        check('id','Id has to be number').isNumeric()
+    ]
+}
+
 
 
 module.exports = projectValidator;

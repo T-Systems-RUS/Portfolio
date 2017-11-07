@@ -36,7 +36,8 @@ projectService.getProject = function(id){
     
     return models.Project.findOne({
         where: {
-            id: id
+            id: id,
+            ishistory:false
           },
         include: [{
             as: 'schedules',
@@ -87,7 +88,7 @@ projectService.getProjectsByName = function(name){
 //GET check if project exists
 projectService.doesProjectExist= function(name){
     
-    return models.Project.count({where: { name: name }}).then(count=>{
+    return models.Project.count({where: { name: name}}).then(count=>{
         if(count!=0){
             return true;
         } else{
@@ -113,7 +114,6 @@ projectService.isProjectLatest=function(id){
 } 
 
 
-//POST Section
 
 //POST create new project
 projectService.createProject=function(Project){
@@ -164,6 +164,22 @@ projectService.updateProject=function(Project){
         })  
     }) 
      
+}
+
+
+//PUT request archieve project
+projectService.archieveProject=  async(id)=> {
+    try{
+        let project=await  models.Project.update(
+                    { ishistory: true,
+                      updatedAt:new Date()  },
+                    { where: { id:id } }
+                 );
+        
+        return project;
+    } catch(e){
+        console.log(e);
+    }
 }
 
 

@@ -57,7 +57,7 @@ export class NewProjectComponent {
             if(params['id']){
                 this.dataService.getProject(params['id']).subscribe(data=>{
                     this.model=new Project(data);
-                    this.model.startdate=new Date(this.model.startdate);
+                    this.model.startdate=this.model.startdate ? new Date(this.model.startdate) : undefined;
                     this.model.enddate= this.model.enddate ? new Date(this.model.enddate) : undefined;
                     this.editMode=true;
                     console.log(this.model);

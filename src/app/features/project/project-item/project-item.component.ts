@@ -12,7 +12,7 @@ export class ProjectItemComponent {
 
     @Input() model:Project=new Project();
     
-    
+    ribbonVisible=false;
     constructor() {
         
     }
@@ -20,6 +20,9 @@ export class ProjectItemComponent {
     ngAfterViewInit(){
         setTimeout(()=> {
             this.model.description=this.trimText(this.model.description,101);
+            if(this.model.enddate){
+                this.ribbonVisible=new Date(this.model.enddate)<=new Date();
+            }
         }, 0);
         //
     }

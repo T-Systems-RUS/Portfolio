@@ -1,9 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input,ViewChild,ViewContainerRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 import { Project } from '../../../shared/models/project';
 import { Technology } from '../../../shared/models/technology';
+
+import { DynamicService } from '../../../core/dynamic.service';
 import { ProjectService } from '../project.service';
+
 import { PROJECT_ANIMATION } from './project.animation';
-import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'project',
@@ -15,13 +21,19 @@ import { ActivatedRoute } from '@angular/router';
 export class ProjectComponent {
 
     model:Project=new Project();
+    @ViewChild('entry', { read: ViewContainerRef} ) entry:ViewContainerRef;
     
     id:number;
     backend:Array<Technology>=new Array<Technology>();
     frontend:Array<Technology>=new Array<Technology>();
     information:Array<string>=new Array<string>();
+
+    ribbonVisible:boolean=false;
     
-    constructor(private dataService:ProjectService,private route: ActivatedRoute) {
+    constructor(private dataService:ProjectService,
+                private route: ActivatedRoute,
+                private router:Router,
+                private dynamic:DynamicService) {
         
     }
 
@@ -33,27 +45,41 @@ export class ProjectComponent {
                 this.model=data;
                 this.backend=this.model.technologies.filter(tech=>tech.domain==='backend');
                 this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
+
+                if(this.model.enddate){
+                    this.ribbonVisible=new Date(this.model.enddate)<=new Date();
+                }
+
                 console.log(this.model);    
             },err=>{
                 console.log(err);
             })
             console.log(this.id);
         })
+    }
 
 
-        // this.model=this.dataService.generateProject();
-        
-        // this.backend=this.model.technologies.filter(tech=>tech.domain==='backend');
-        // this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
-        // this.information.push("PSS 4.71");
-        // this.information.push("TOP 50");
+    archieveProject(){
+        this.dynamic.setRootViewContainerRef(this.entry);
+        let modal=this.dynamic.addDeleteComponent();
+        modal.type="Project";
+        modal.name=this.model.name;
+
+        modal.confirmed.subscribe(action=>{
+            modal.visible=false;
+            this.dataService.archieveProject(this.model).subscribe(
+                data=>{
+                    this.router.navigate(["/projects"]);
+                    console.log(data)
+                },
+                error=>{
+                    this.dynamic.setRootViewContainerRef(this.entry);
+                    let modal=this.dynamic.addErrorComponent();
+                    modal.error=error;
+                }
+            )
+        })
     }
-    
-    ngAfterViewInit(){
-        setTimeout(()=> {
-            //this.model.description=this.trimText(this.model.description,101);
-        }, 0);
-        //
-    }
+
 
 }

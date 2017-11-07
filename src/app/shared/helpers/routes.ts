@@ -11,6 +11,7 @@ export class Routes {
   createProject;
   updateProject;
   history;
+  archieve;
 
 
   //Employees
@@ -30,6 +31,7 @@ export class Routes {
     this.getProjects="/api/projects/";
     this.createProject="/api/projects/create/";
     this.updateProject="/api/projects/update/";
+    this.archieve="/api/projects/archieve/";
     this.history="/api/projects/history/";
 
     this.getEmployees="/api/employees";

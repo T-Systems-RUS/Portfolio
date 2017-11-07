@@ -1,0 +1,90 @@
+@import './../../../../assets/style/colors.less';
+@import './../../../../assets/style/mixins.less';
+
+.delete{
+
+
+    &__header{
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        width:100%;
+        height: 40px;
+        background-color: @error;
+        color:@text_white;
+        font-family: ProximaRegularLight;
+        .boxSizing();
+    }
+
+    &__text,&__status{
+        margin: 0;
+        font-size: 22px;
+        display: inline-block;
+    }
+
+    &__content{
+        width: 100%;
+        display: inline-block;
+        padding:20px;
+        position: relative;
+        text-align: center;
+
+        .boxSizing();
+    }
+
+    &__line{
+        display: block;
+        margin: 0;
+        font-size: 16px;
+        font-family: ProximaRegularLight;
+        color: @text_body;
+        margin-bottom: 10px;
+    }
+
+    &__footer{
+        display: flex;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        padding: 10px 0;
+        justify-content: center;
+        .boxSizing();
+    }
+
+    &__button{
+        background-color: @error;
+        color: @text_white;
+        cursor: pointer;
+        display: inline-block;
+        font-family: ProximaRegularLight;
+        font-size: 14px;
+        border: 2px solid @error;
+        line-height: 28px;
+        height: 30px;
+        padding: 0 10px;
+        text-decoration: none;
+        text-align: center;
+        vertical-align: 54px;
+        .boxSizing();
+        .transition(all .3s);
+        .borderRadius(2px);
+    
+        &:hover{
+            background-color: @error2;
+        }
+
+        &--white{
+            background-color: @text_white;
+            color:@error;
+
+            margin-right: 10px;
+
+            &:hover{
+                background-color: @text_white;
+                color:@error2;
+                border-color: @error2;
+            }
+        }
+
+    }
+}

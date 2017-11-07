@@ -22,7 +22,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        validate: { len: [0,100000] }
       },
       teamcount: {
         defaultValue:"0",

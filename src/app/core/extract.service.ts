@@ -42,7 +42,7 @@ export class ExtractService {
   public handlePostError(error: Response | any) {
     
         let errors:Error=new Error();
-
+        console.log(error)
         if (error instanceof Response) {
           errors.status=error.status;
           errors.statusText=error.statusText;

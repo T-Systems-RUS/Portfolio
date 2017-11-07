@@ -1,7 +1,8 @@
-<backpanel  [color]="model.line" image="both"></backpanel>
+<div #entry></div>
+<backpanel   [color]="model.line" image="both"></backpanel>
 
 <div @appear3 class="project">
-    <ribbon *ngIf="model.enddate" text="FINISHED" style="ribbon__text--red"></ribbon>
+    <ribbon  [visible]="ribbonVisible"  text="FINISHED" style="ribbon__text--red"></ribbon>
     <div class="project__header">
         <h3 class="project__subheading">
             {{model.updatedAt | date: 'dd.MM.yyyy' }} - {{model.domain}}
@@ -80,7 +81,7 @@
         <a [routerLink]="['/project/history', model.name]" class="footer__button">
             <img src="./../../assets/images/powerpoint.png" alt="powerpoint">
         </a>
-        <a class="footer__button">
+        <a (click)="archieveProject()" class="footer__button">
             <img src="./../../assets/images/exel.png" alt="exel">
         </a>
 </app-footer>

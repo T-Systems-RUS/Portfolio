@@ -118,7 +118,16 @@ export class ProjectService {
         return this.http.post(this.routes.updateProject,data)
                         .map(this.extract.extractData)
                         .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));
-;
+
+    }
+
+    archieveProject(project:Project) {
+        
+        let data = this.http.createParams(project);
+        return this.http.put(this.routes.archieve,data)
+                        .map(this.extract.extractData)
+                        .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));
+
     }
 
 

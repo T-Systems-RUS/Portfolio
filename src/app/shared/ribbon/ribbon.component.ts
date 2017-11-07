@@ -11,11 +11,10 @@ export class RibbonComponent {
 
     @Input() style:string='';
     @Input() text:string='';
+    @Input() date:Date;
 
+    @Input() visible =false;
     constructor() {
         
     }
-
-
-
 }
