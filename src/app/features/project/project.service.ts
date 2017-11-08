@@ -78,7 +78,7 @@ export class ProjectService {
                                 // ...and calling .json() on the response to return data
                                  .map(this.extract.extractData)
                                  //...errors if any
-                                 .catch(this.extract.handleError);
+                                 .catch((error:any) => Observable.throw(this.extract.handleError(error)));
         
     }
 
@@ -89,7 +89,7 @@ export class ProjectService {
                                 // ...and calling .json() on the response to return data
                                  .map(this.extract.extractData)
                                  //...errors if any
-                                 .catch(this.extract.handleError);
+                                 .catch((error:any) => Observable.throw(this.extract.handleError(error)));
         
     }
 
@@ -100,7 +100,7 @@ export class ProjectService {
                                 // ...and calling .json() on the response to return data
                                  .map(this.extract.extractData)
                                  //...errors if any
-                                 .catch((error:any) => Observable.throw(error.toString() || 'Server error'));
+                                 .catch((error:any) => Observable.throw(this.extract.handleError(error)));
         
     }
 
@@ -134,7 +134,7 @@ export class ProjectService {
     getConstants() : Observable<any> {
         return this.http.getConstants()
                         .map(this.extract.extractData)
-                        .catch(this.extract.handleError);
+                        .catch((error:any) => Observable.throw(this.extract.handleError(error)));
     }
 
     // generateProjects():Array<Project>{

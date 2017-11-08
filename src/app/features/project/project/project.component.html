@@ -1,7 +1,7 @@
 <div #entry></div>
 <backpanel   [color]="model.line" image="both"></backpanel>
 
-<div @appear3 class="project">
+<div @appear3 class="project" *ngIf="model.id!==''">
     <ribbon  [visible]="ribbonVisible"  text="FINISHED" style="ribbon__text--red"></ribbon>
     <div class="project__header">
         <h3 class="project__subheading">
@@ -74,7 +74,7 @@
         </div>
 </div>
 
-<app-footer [color]="model.line">
+<app-footer @appear3 [color]="model.line">
         <a [routerLink]="['/project/update', model.id]" class="footer__button">
             <img src="./../../assets/images/edit.png" alt="edit">
         </a>

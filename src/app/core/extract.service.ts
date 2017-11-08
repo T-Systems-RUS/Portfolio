@@ -27,22 +27,23 @@ export class ExtractService {
 
   public handleError(error: Response | any) {
 
-    let errMsg: string;
+    let errors: Error=new Error();
     if (error instanceof Response) {
-      // const body = error.json() || '';
-      // const err = body.error || JSON.stringify(body);
-      errMsg = error.toString();//`${error.status} - ${error.statusText || ''}`; //${err};
+      errors.status=error.status;
+      errors.statusText=error.statusText;
+
+      errors.errors.push(error.text());
     } else {
-      errMsg = error.message ? error.message : error.toString();
+      errors.errors.push(error.message ? error.message : error.toString());
     }
 
-    return Observable.throw(errMsg);
+    return errors;
   }
 
   public handlePostError(error: Response | any) {
     
         let errors:Error=new Error();
-        console.log(error)
+        
         if (error instanceof Response) {
           errors.status=error.status;
           errors.statusText=error.statusText;

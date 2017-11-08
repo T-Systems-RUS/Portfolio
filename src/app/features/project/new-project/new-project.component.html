@@ -44,6 +44,7 @@
                             [style]="{'margin-bottom':'20px'}" 
                             inputStyleClass="{{styleClass}}"
                             [(ngModel)]="model.startdate" 
+                            (onSelect)="setValue($event,'startdate')"
                             dateFormat="dd.mm.yy"
                             [monthNavigator]="true" 
                             [yearNavigator]="true" 
@@ -53,6 +54,7 @@
                 <p-calendar placeholder="Project end" 
                             [style]="{'margin-bottom':'20px'}"  
                             [(ngModel)]="model.enddate" 
+                            (onSelect)="setValue($event,'enddate')"
                             dateFormat="dd.mm.yy"
                             [monthNavigator]="true" 
                             [yearNavigator]="true" 
@@ -90,6 +92,6 @@
     <div class="new-project__footer">
         <app-button (click)="back()" value="CANCEL" style="button--white" ></app-button>
         <app-button (click)="showPreview()" value="SHOW PREVIEW" style="button--grey" ></app-button>
-        <app-button (click)="changeProject()" value="SUBMIT" style="" ></app-button>
+        <app-button (click)="changeProject()" [disabled]="!allowSubmit" value="SUBMIT" style="" ></app-button>
     </div>
 </div>

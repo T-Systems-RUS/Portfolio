@@ -10,23 +10,19 @@ var  projectService={};
 
 //GET list of projects with teamcount
 projectService.getProjects= function(){
-    try{
-        return  models.Project.findAll({
-                        where: { ishistory: 0 },
-                        distinct:'name',
-                        include: [{
-                                as: 'schedules',
-                                model: models.Schedule
-                            },
-                        ],
-                        order:[
-                            ['updatedAt','DESC']
-                        ] 
-                    }
-                )
-    }catch(e){
-        console.log('fuck ',e)
-    }
+    return  models.Project.findAll({
+                where: { ishistory: 0 },
+                distinct:'name',
+                include: [{
+                        as: 'schedules',
+                        model: models.Schedule
+                    },
+                ],
+                order:[
+                    ['updatedAt','DESC']
+                ] 
+            }
+    )
 }
 
 
@@ -143,6 +139,8 @@ projectService.createProject=function(Project){
         }           
 
          return project;
+      }).catch(error=>{
+          console.log(error);
       })
 }
 
@@ -158,10 +156,10 @@ projectService.updateProject=function(Project){
           ).then(project=>{
                 t.commit();
                 return projectService.createProject(Project);   
-          },error=>{
-            console.log(error);
-            return t.rollback();
-        })  
+          })  
+    }).catch(error=>{
+        console.log(error);
+        return t.rollback();
     }) 
      
 }

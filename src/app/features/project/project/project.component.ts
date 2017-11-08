@@ -42,7 +42,7 @@ export class ProjectComponent {
             this.id=+params['id'];
 
             this.dataService.getProject(this.id).subscribe(data=>{
-                this.model=data;
+                this.model=new Project(data);
                 this.backend=this.model.technologies.filter(tech=>tech.domain==='backend');
                 this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
 
@@ -51,10 +51,13 @@ export class ProjectComponent {
                 }
 
                 console.log(this.model);    
-            },err=>{
-                console.log(err);
+            },error=>{
+                this.dynamic.setRootViewContainerRef(this.entry);
+                let modal=this.dynamic.addErrorComponent();
+                modal.error=error;
+                this.model.line="grey";
             })
-            console.log(this.id);
+            console.log(this.model);
         })
     }
 

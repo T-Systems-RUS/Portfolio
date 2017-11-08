@@ -30,6 +30,7 @@
     "express": "^4.16.0",
     "express-validator": "^4.3.0",
     "font-awesome": "^4.7.0",
+    "lodash": "^4.17.4",
     "mysql": "^2.14.1",
     "normalize.css": "^7.0.0",
     "pg": "^4.4.3",

@@ -40,7 +40,7 @@ router.get('/projects/history/:name', (req, res) => {
         
         res.status(200).send(data);
     }).catch(err=>{
-        res.status(500).send(err);
+        res.status(500).send({ errors: { er:{msg:error.message} }});
     })
       
       
@@ -52,7 +52,6 @@ router.post('/projects/create', projectValidator.createValidators(),(req, res) =
 
    const errors = validationResult(req);
    if (!errors.isEmpty()) {
-        console.log(errors)
         return res.status(422).json({ errors: errors.mapped() });
    }
 
@@ -75,7 +74,6 @@ router.post('/projects/update', projectValidator.createValidators(),(req, res, n
     
        const errors = validationResult(req);
        if (!errors.isEmpty()) {
-            console.log(errors)
             return res.status(422).json({ errors: errors.mapped() });
        }
     
@@ -101,7 +99,6 @@ router.put('/projects/archieve', projectValidator.archieveValidators(), async (r
     
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors)
         return res.status(422).json({ errors: errors.mapped() });
     }
     

@@ -14,7 +14,7 @@ import { DynamicService } from '../../../core/dynamic.service';
 
 //primeng and third libraries
 import {Message} from 'primeng/components/common/api';
-
+//import * as Rx from 'rxjs/Rx'; 
 
 
 
@@ -25,7 +25,7 @@ import {Message} from 'primeng/components/common/api';
       './new-project.component.less'],
   animations: []
 })
-export class NewProjectComponent {
+export class NewProjectComponent  {
 
     @Input() model:Project=new Project();
     @ViewChild('entry', { read: ViewContainerRef} ) entry:ViewContainerRef; 
@@ -37,7 +37,9 @@ export class NewProjectComponent {
     private lines:Array<string>;
     private domains:Array<string>;
 
+    private allowSubmit:boolean=true;
     private errors:Object={};
+    private initialState:Project=new Project();
     
     constructor(private dataService:ProjectService,
                 private route: ActivatedRoute,
@@ -59,11 +61,12 @@ export class NewProjectComponent {
                     this.model=new Project(data);
                     this.model.startdate=this.model.startdate ? new Date(this.model.startdate) : undefined;
                     this.model.enddate= this.model.enddate ? new Date(this.model.enddate) : undefined;
-                    this.editMode=true;
-                    console.log(this.model);
-                    
-                },err=>{
-                    console.log(err);
+                    this.editMode=true; 
+
+                },error=>{
+                    this.dynamic.setRootViewContainerRef(this.entry);
+                    let modal=this.dynamic.addErrorComponent();
+                    modal.error=error;
                 })
             } else{
                 this.editMode=false;
@@ -72,6 +75,10 @@ export class NewProjectComponent {
         },error=>{
             console.log('fuck',error)
         })        
+        
+    }
+   
+    ngDoCheck() {
         
     }
 
@@ -129,7 +136,6 @@ export class NewProjectComponent {
 
       setValue(value,prop){
           this.model[prop]=value;
-          console.log(this.model)
       }
 
       unvalidFields(){
@@ -146,6 +152,8 @@ export class NewProjectComponent {
       back(){
           window.history.back();
       }
+
+      
 
 
 }

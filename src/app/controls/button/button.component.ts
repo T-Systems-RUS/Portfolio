@@ -13,6 +13,7 @@ export class ButtonComponent {
     @Input() value:string='SEARCH';
     @Input() style:string='';
     @Input() visible:boolean=true;
+    @Input() disabled:boolean=false;
 
     @Output() click=new EventEmitter();
     
@@ -26,4 +27,4 @@ export class ButtonComponent {
     }
 
 
-}
+} 
