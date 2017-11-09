@@ -33,12 +33,25 @@
 
     }
 
-    &__secondary{
+    &__secondary,&__select{
         margin: 0;
         font-family: ProximaRegularLight;
         font-size: 14px;
         color: @text_second2;
     }
+
+    &__select{
+        display: block;
+        border: none;
+        outline: none;
+        .borderRadius(2px);
+
+        &--active{
+            background-color: @sap_bg;
+        }
+    }
+
+
 
     :host ::ng-deep &__info{
         margin: 0;

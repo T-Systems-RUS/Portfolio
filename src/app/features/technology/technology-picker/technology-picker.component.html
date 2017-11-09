@@ -10,7 +10,6 @@
       <chip *ngFor="let tech of technologies" 
             [value]="tech.name"
             [clickable]="true" 
-            style="grey"
             [active] ="tech.active"
             (clicked)="selectTechnology($event)"></chip>
 </div>

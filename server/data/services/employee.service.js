@@ -24,6 +24,18 @@ employeeService.getEmployees= function(){
     }
 }
 
+employeeService.getRoles= async ()=>{
+    try{
+        return await  models.Role.findAll({
+            order:[
+                ['name','ASC']
+            ] 
+        })
+    }catch(e){
+        console.log('fuck ',e)
+    }
+}
+
 
 
 

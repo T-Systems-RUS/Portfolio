@@ -3,7 +3,12 @@
 
     <div class="list-item__block">
         <p class="list-item__primary">{{model.firstname + ' ' + model.lastname}}</p>
-        <p class="list-item__secondary">Lead Developer</p>
+        <p *ngIf="roles.length===0" class="list-item__secondary">Lead Developer</p>
+        <select [ngClass]="{'list-item__select--active': model.active}" (change)="selectRole($event)" (click)="stopAction($event)" *ngIf="roles.length>0" class="list-item__select" name="roles" id="roles">
+            <option *ngFor="let role of roles" value="{{role.id}}">
+                {{role.name}} ({{role.seniority}})
+            </option>
+        </select>
     </div>
 
     <ng-content></ng-content>

@@ -33,8 +33,8 @@
         <span class="{{this.validator['description']}} project-modal--description">{{project.description}}</span>
     </p>
     <p class="project-modal__info project-modal--margin1020" *ngIf="project.technologies.length>0">
-        <span class="{{this.validator['technologies']}}">Technologies:</span>
-        <chip *ngFor="let tech of project.technologies" [value]="tech.name" [style]="tech.style"></chip>
+        <span>Technologies:</span>
+        <chip *ngFor="let tech of project.technologies" [value]="tech.name" [style]="this.validator['technologies'+tech.id]"></chip>
     </p>
     <p class="project-modal__info project-modal--margin1020" *ngIf="project.schedules.length>0">
         <span class="{{this.validator['schedules']}}">Team:</span>

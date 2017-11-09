@@ -1,7 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import  { Employee }  from './../../../shared/models/employee';
+import  { Role }  from './../../../shared/models/role';
 
 import {EmployeeService} from './../employee.service';
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'employee-picker',
@@ -11,6 +13,8 @@ import {EmployeeService} from './../employee.service';
 export class EmployeePickerComponent {
 
     @Input() employees:Array<Employee>=new Array<Employee>();
+    @Input() roles:Array<Role>=new Array<Role>();
+
     @Output() onSelect=new EventEmitter<Array<Employee>>();
 
     initialEmployees:Array<Employee>=new Array<Employee>();
@@ -20,9 +24,13 @@ export class EmployeePickerComponent {
     }
 
     ngOnInit(){
-        if(this.employees.length<=0){
-            this.dataService.getEmployees().subscribe(data=>{
-                this.employees=data;
+        if(this.employees.length<=0){ 
+            Observable.forkJoin(
+                this.dataService.getEmployees(),
+                this.dataService.getRoles()
+            ).subscribe(data=>{
+                this.employees=data[0];
+                this.roles=data[1];
                 this.initialEmployees=this.employees;
             }, error=>{
                 console.log(error);

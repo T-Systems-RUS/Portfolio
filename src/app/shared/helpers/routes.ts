@@ -35,6 +35,7 @@ export class Routes {
     this.history="/api/projects/history/";
 
     this.getEmployees="/api/employees";
+    this.getRoles="/api/roles";
 
     this.getTechnologies="/api/technologies";
 

@@ -7,6 +7,7 @@ module.exports = {
         domain: 'Testing',
         leadrole:false,
         active:false,
+        seniority:'Junior',
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -15,6 +16,34 @@ module.exports = {
         domain: 'Development',
         leadrole:false,
         active:false,
+        seniority:'Middle',
+        createdAt:new Date(),
+        updatedAt:new Date()
+      },
+      {
+        name: 'Project Manager',
+        domain: 'Management',
+        leadrole:false,
+        active:false,
+        seniority:'PM',
+        createdAt:new Date(),
+        updatedAt:new Date()
+      },
+      {
+        name: 'Configuration Manager',
+        domain: 'Development',
+        leadrole:false,
+        active:false,
+        seniority:'senior',
+        createdAt:new Date(),
+        updatedAt:new Date()
+      },
+      {
+        name: 'Scrum Master',
+        domain: 'Management',
+        leadrole:false,
+        active:false,
+        seniority:'PM',
         createdAt:new Date(),
         updatedAt:new Date()
       }], {});

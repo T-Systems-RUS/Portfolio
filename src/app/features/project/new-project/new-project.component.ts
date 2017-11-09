@@ -136,6 +136,7 @@ export class NewProjectComponent  {
 
       setValue(value,prop){
           this.model[prop]=value;
+          console.log(this.model);
       }
 
       unvalidFields(){

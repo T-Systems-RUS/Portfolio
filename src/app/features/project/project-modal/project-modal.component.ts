@@ -32,27 +32,27 @@ export class ProjectModalComponent {
     compareProjects(project1,project2){
         if(Object.keys(project1).length===Object.keys(project2).length){
             for(let key of Object.keys(project1)){
-                // if(Array.isArray(project1[key]) && (key==='technologies' || key==='schedules')){
-                //     //added
-                //     let diff1=_.differenceBy(project1[key],project2[key],'name');
-                //     //removed
-                //     let diff2=_.differenceBy(project2[key],project1[key],'name');
+                if(Array.isArray(project1[key]) && (key==='technologies' || key==='schedules')){
+                    //added
+                    let diff1=_.differenceBy(project1[key],project2[key],'name');
+                    //removed
+                    let diff2=_.differenceBy(project2[key],project1[key],'name');
 
-                //     if(diff1.length>0){
-                //         diff1.forEach(element => {
-                //             element.style='chip--removed'
-                //         });               
-                //     } else if(diff2.length>0){
-                //         diff2.forEach(element => {
-                //             element.style='chip--added'
-                //         });
-                //     } else{
+                    if(diff1.length>0){
+                        diff1.forEach(element => {
+                            this.validator[key+element.id]='chip--edited';
+                        });               
+                    } else if(diff2.length>0){
+                        diff2.forEach(element => {
+                            this.validator[key+element.id]='chip--edited';
+                        });
+                    } else{
 
-                //     }
+                    }
 
-                //     console.log(project1.version,project2.version,diff1,diff2);
-                //     console.log(key)
-                //}
+                    console.log(project1.version,project2.version,diff1,diff2);
+                    console.log(key)
+                }
                 if(project1.version>project2.version){
                     if(project1[key] && !project2[key]){
                         this.validator[key]='project-modal--added'
