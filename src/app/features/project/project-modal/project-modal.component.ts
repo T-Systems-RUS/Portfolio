@@ -25,8 +25,12 @@ export class ProjectModalComponent {
         if(this.compareProject){
             this.compareProjects(this.project,this.compareProject);
         }
-
+        
         this.id=this.project.id;
+    }
+
+    ngAfterViewInit(){
+        console.log(this.project)
     }
 
     compareProjects(project1,project2){

@@ -198,24 +198,24 @@ export class ProjectService {
     //     return project;
     // }
 
-    generateEmployees(){
-        let employees=new Array<Employee>();
+    // generateEmployees(){
+    //     let employees=new Array<Employee>();
         
-        for(let i=0;i<20;i++){
-            let employee=new Employee({
-                firstname:'Ivan' + i,
-                lastname:"Ivanov"+i,
-                technologies:this.technologies,
-                roles:[new Role({
-                    name:"Lead Architect",
-                    participation:"100%"
-                })]
-            })
-            employees.push(employee);   
-        }
+    //     for(let i=0;i<20;i++){
+    //         let employee=new Employee({
+    //             firstname:'Ivan' + i,
+    //             lastname:"Ivanov"+i,
+    //             technologies:this.technologies,
+    //             roles:[new Role({
+    //                 name:"Lead Architect",
+    //                 participation:"100%"
+    //             })]
+    //         })
+    //         employees.push(employee);   
+    //     }
 
-        return employees;
-    }
+    //     return employees;
+    // }
 
      getRandomizer(bottom, top) {
         return Math.floor( Math.random() * ( 1 + top - bottom ) ) + bottom;

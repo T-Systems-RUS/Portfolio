@@ -1,5 +1,6 @@
 import {Role} from './role';
 import {Technology} from './technology';
+import {Schedule} from './schedule';
 
 export class Employee{
     id:string='';
@@ -7,7 +8,7 @@ export class Employee{
     lastname:string='';
     active:boolean=false;
     participation:number=0.0;
-    roles:Array<Role>=new Array<Role>();
+    schedules:Array<Schedule>=new Array<Schedule>();
     technologies:Array<Technology>=new Array<Technology>();
 
     get fullname() {

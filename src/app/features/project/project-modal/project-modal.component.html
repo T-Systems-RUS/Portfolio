@@ -41,8 +41,9 @@
         <list-item  *ngFor="let schedule of project.schedules" 
             [clickable]="false" 
             itemStyle="list-item--picker" 
+            [roles]="[schedule.role]"
+            [output]="schedule.participation"
             [model]="schedule.employee">
-            <input (click)="stopAction($event)" [(ngModel)]="schedule.participation" class="list-item__input">
         </list-item>
     </p>
 </div>

@@ -3,13 +3,13 @@
 
     <div class="list-item__block">
         <p class="list-item__primary">{{model.firstname + ' ' + model.lastname}}</p>
-        <p *ngIf="roles.length===0" class="list-item__secondary">Lead Developer</p>
+        <p *ngIf="roles.length===1" class="list-item__secondary">{{roles[0].name}} ({{roles[0].seniority}})</p>
         <select [ngClass]="{'list-item__select--active': model.active}" (change)="selectRole($event)" (click)="stopAction($event)" *ngIf="roles.length>0" class="list-item__select" name="roles" id="roles">
             <option *ngFor="let role of roles" value="{{role.id}}">
                 {{role.name}} ({{role.seniority}})
             </option>
         </select>
     </div>
-
+    <input (click)="stopAction($event)" [(ngModel)]="output.participation" class="list-item__input">
     <ng-content></ng-content>
 </div>

@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import  { Employee }  from './../../../shared/models/employee';
 import  { Role }  from './../../../shared/models/role';
+import  { Schedule }  from './../../../shared/models/schedule';
 
 import {EmployeeService} from './../employee.service';
 import {Observable} from "rxjs/Observable";
@@ -15,9 +16,10 @@ export class EmployeePickerComponent {
     @Input() employees:Array<Employee>=new Array<Employee>();
     @Input() roles:Array<Role>=new Array<Role>();
 
-    @Output() onSelect=new EventEmitter<Array<Employee>>();
+    @Output() onSelect=new EventEmitter<Array<Schedule>>();
 
     initialEmployees:Array<Employee>=new Array<Employee>();
+    schedules:Array<Schedule>=new Array<Schedule>();
 
     constructor(private dataService:EmployeeService) {
         
@@ -48,11 +50,12 @@ export class EmployeePickerComponent {
     }
 
     selectEmployee(event){
-        let employee=this.initialEmployees.filter(item=>item.id===event.id)[0];
-        employee.active=event.active;
-
-        let selected=this.employees.filter(item=>item.active);
-        this.onSelect.emit(selected);
+        console.log(event)
+         //let employee=this.initialEmployees.filter(item=>item.id===event.employee.id)[0];
+         //employee.active=event.active;
+         this.schedules.push(event);
+         let selected=this.schedules.filter(item=>item.active);
+         this.onSelect.emit(selected);
     }
 
     stopAction($event){

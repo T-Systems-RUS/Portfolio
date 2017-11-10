@@ -17,28 +17,32 @@ export class ListItemComponent {
     @Input() itemStyle:string='';
 
     @Input() clickable:boolean=false;
-    @Output() clicked=new EventEmitter<Employee>();
+    @Output() clicked=new EventEmitter<Schedule>();
 
     active=false;
-    output:Schedule;
+    @Input() output:Schedule=new Schedule();
     
     constructor() {
         
     }
     
     ngAfterViewInit(){
-        this.output=new Schedule({
-            roleid:this.roles.length>0 ? this.roles[0].id : new Role().id
-        });
+        setTimeout(()=>{
+            this.output=new Schedule({
+                role:this.roles.length>0 ? this.roles[0] : new Role()
+            });
+        },0);
     }
 
     performCLick(value:Employee){
-        console.log(this.output)
-        if(this.clickable){
-            
+        
+        if(this.clickable){          
             value.active=!value.active;
-            value.participation=value.active ? 100.00 :0.0; 
-            this.clicked.emit(value);
+            this.output.active=!this.output.active;
+            this.output.participation = value.active ? 100.00 :0.0; 
+            this.output.employee=value;
+            console.log(this.output)
+            this.clicked.emit(this.output);
         }
     }
 
@@ -47,6 +51,6 @@ export class ListItemComponent {
     }
 
     selectRole($event){
-        this.output.roleid=($event.target.value);
+        this.output.role=this.roles.filter(item=>item.id==$event.target.value)[0];
     }
 }
