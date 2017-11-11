@@ -20,16 +20,7 @@ export class ProjectConfirmationComponent extends ModalComponent {
     }
 
     ngOnInit(){
-        this.project.schedules=[];
-        this.project.schedules=this.project.employees.map(employee=>{
-            let emp=new Employee(employee);
-            emp.active=false;
-            return new Schedule({
-                employee:emp,
-                project:this.project,
-                participation:emp.participation
-            })
-        })
+        
     }
 
 

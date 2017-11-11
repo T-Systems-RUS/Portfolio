@@ -50,10 +50,8 @@ export class EmployeePickerComponent {
     }
 
     selectEmployee(event){
-        console.log(event)
-         //let employee=this.initialEmployees.filter(item=>item.id===event.employee.id)[0];
-         //employee.active=event.active;
          this.schedules.push(event);
+         this.schedules=Array.from(new Set(this.schedules));
          let selected=this.schedules.filter(item=>item.active);
          this.onSelect.emit(selected);
     }

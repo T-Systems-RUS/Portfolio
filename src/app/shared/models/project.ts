@@ -17,6 +17,7 @@ export class Project{
     employees:Array<Employee>=new Array<Employee>();
 
     schedules:Array<Schedule>=new Array<Schedule>();
+    schedulesIds:Array<Array<string>>=new Array<Array<string>>();
     version:number=1;
 
     startdate:Date;

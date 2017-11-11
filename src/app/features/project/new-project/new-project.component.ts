@@ -101,6 +101,7 @@ export class NewProjectComponent  {
             this.msgs.push({severity:'error', summary:'Error Message', detail:'Please fill required fields'})
         }else{
             this.model.technolodgyIds=this.model.technologies.map(tech=>tech.id);
+            this.model.schedulesIds=this.model.schedules.map(item=>new Array<string>(item.employee.id,item.role.id,item.participation.toString()))
             
             if(this.editMode){
                 this.model.version=this.model.version+1;
@@ -131,7 +132,7 @@ export class NewProjectComponent  {
       showPreview(){
         this.dynamic.setRootViewContainerRef(this.entry);
         let modal=this.dynamic.addProjectConfirmationComponent();
-        modal.project=this.model;
+        modal.project=new Project(this.model);
       }
 
       setValue(value,prop){

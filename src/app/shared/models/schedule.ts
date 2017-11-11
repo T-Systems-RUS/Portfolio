@@ -14,6 +14,9 @@ export class Schedule {
     employee:Employee=new Employee();
     role:Role=new Role();
 
+    roleid:string;
+    employeeid:string;
+
     public constructor(init?:Partial<Schedule>) {
         Object.assign(this, init);
     }

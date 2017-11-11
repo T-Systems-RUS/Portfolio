@@ -28,6 +28,7 @@ export class ListItemComponent {
     
     ngAfterViewInit(){
         setTimeout(()=>{
+            console.log(this.output)
             this.output=new Schedule({
                 role:this.roles.length>0 ? this.roles[0] : new Role()
             });

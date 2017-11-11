@@ -3,7 +3,11 @@ module.exports = (sequelize, DataTypes) => {
   var Schedule = sequelize.define('Schedule', {
     participation: DataTypes.DECIMAL,
     startdate: DataTypes.DATE,
-    enddate: DataTypes.DATE
+    enddate: DataTypes.DATE,
+    projectid:DataTypes.INTEGER,
+    employeeid:DataTypes.INTEGER,
+    roleid:DataTypes.INTEGER
+
   }, {
     classMethods: {
       associate: function(models) {

@@ -30,7 +30,7 @@ export class ProjectModalComponent {
     }
 
     ngAfterViewInit(){
-        console.log(this.project)
+       
     }
 
     compareProjects(project1,project2){
