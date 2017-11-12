@@ -141,19 +141,13 @@ projectService.createProject=function(Project){
         if(Project.schedulesIds){
             for(let schedule of Project.schedulesIds){
                 let s=schedule.split(',');
-                console.log(s[0])
-                console.log(s[1])
-                console.log(s[2])
-                console.log(project.id)
                 const sch=models.Schedule.create({
                     projectid:project.id,
                     employeeid:s[0],
                     roleid:s[1],
                     participation:s[2],
                 });
-  
-            }
-            
+            }        
         }
 
          return project;

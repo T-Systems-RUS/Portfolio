@@ -25,13 +25,12 @@ export class ListItemComponent {
     constructor() {
         
     }
+
+
     
     ngAfterViewInit(){
         setTimeout(()=>{
-            console.log(this.output)
-            this.output=new Schedule({
-                role:this.roles.length>0 ? this.roles[0] : new Role()
-            });
+            this.output.role=this.roles.length>0 ? this.roles[0] : new Role()
         },0);
     }
 
@@ -40,7 +39,7 @@ export class ListItemComponent {
         if(this.clickable){          
             value.active=!value.active;
             this.output.active=!this.output.active;
-            this.output.participation = value.active ? 100.00 :0.0; 
+            this.output.participation = this.output.active ? 100.00 :0.0; 
             this.output.employee=value;
             console.log(this.output)
             this.clicked.emit(this.output);

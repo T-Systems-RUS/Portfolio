@@ -27,6 +27,7 @@ export class ProjectModalComponent {
         }
         
         this.id=this.project.id;
+        console.log(this.project);
     }
 
     ngAfterViewInit(){
