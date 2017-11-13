@@ -54,7 +54,7 @@ router.post('/projects/create', projectValidator.createValidators(),(req, res) =
    if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.mapped() });
    }
-
+  
    return projectService.doesProjectExist(req.body.name).then(doesExist=>{
        if(doesExist){
            res.status(409).json({ errors: { latest:{msg:'Project already exists'} }});
@@ -76,7 +76,7 @@ router.post('/projects/update', projectValidator.createValidators(),(req, res, n
        if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.mapped() });
        }
-    
+       
        return projectService.isProjectLatest(req.body.id).then(isLatest=>{
             if(!isLatest){
             

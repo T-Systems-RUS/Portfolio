@@ -60,6 +60,8 @@ export class HttpService {
           data.append(key,model[key]);
         } else {
             for(let item of model[key]){
+                if(item instanceof Object) item=JSON.stringify(item);
+                console.log(item);
                 data.append(key,item);
             }
         }

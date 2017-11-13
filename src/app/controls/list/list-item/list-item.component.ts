@@ -52,5 +52,6 @@ export class ListItemComponent {
 
     selectRole($event){
         this.output.role=this.roles.filter(item=>item.id==$event.target.value)[0];
+        console.log(this.output.role)
     }
 }

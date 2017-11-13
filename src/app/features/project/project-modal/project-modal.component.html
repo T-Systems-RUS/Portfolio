@@ -37,7 +37,7 @@
         <chip *ngFor="let tech of project.technologies" [value]="tech.name" [style]="this.validator['technologies'+tech.id]"></chip>
     </p>
     <p class="project-modal__info project-modal--margin1020" *ngIf="project.schedules.length>0">
-        <span class="{{this.validator['schedules']}}">Team:</span>
+        <span>Team:</span>
         <list-item  *ngFor="let schedule of project.schedules" 
             [clickable]="false" 
             itemStyle="list-item--picker" 

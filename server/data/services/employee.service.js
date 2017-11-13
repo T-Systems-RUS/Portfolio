@@ -12,11 +12,11 @@ var  employeeService={};
 employeeService.getEmployees= function(){
     try{
         return  models.Employee.findAll({
-                        // include: [{
-                        //         as: 'schedules',
-                        //         model: models.Schedule
-                        //     },
-                        // ]
+                        include: [{
+                                as: 'schedules',
+                                model: models.Schedule
+                            },
+                        ]
                     }
                 )
     }catch(e){

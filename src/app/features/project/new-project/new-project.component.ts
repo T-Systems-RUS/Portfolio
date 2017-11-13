@@ -78,9 +78,7 @@ export class NewProjectComponent  {
         
     }
    
-    ngDoCheck() {
-        
-    }
+    
 
     
     
@@ -101,13 +99,13 @@ export class NewProjectComponent  {
             this.msgs.push({severity:'error', summary:'Error Message', detail:'Please fill required fields'})
         }else{
             this.model.technolodgyIds=this.model.technologies.map(tech=>tech.id);
-            this.model.schedulesIds=this.model.schedules.map(item=>new Array<string>(item.employee.id,item.role.id,item.participation.toString()))
+
             
             if(this.editMode){
                 this.model.version=this.model.version+1;
                 this.dataService.updateProject(this.model).subscribe(
                     data=>{
-                        this.router.navigate(["/project/",data.id]);
+                       // this.router.navigate(["/project/",data.id]);
                         console.log(data)
                     },
                     error=>{

@@ -137,18 +137,34 @@ projectService.createProject=function(Project){
     
             })
         }
-
-        if(Project.schedulesIds){
-            for(let schedule of Project.schedulesIds){
-                let s=schedule.split(',');
-                const sch=models.Schedule.create({
-                    projectid:project.id,
-                    employeeid:s[0],
-                    roleid:s[1],
-                    participation:s[2],
-                });
-            }        
+        
+        if(Array.isArray(Project.schedules)){
+            for(let schedule of Project.schedules){
+                //console.log(schedule)
+                    let s=JSON.parse(schedule);
+                
+                    models.Schedule.create({
+                        projectid:project.id,
+                        employeeid:s.employee.id,
+                        roleid:s.role.id,
+                        participation:s.participation,
+                    });
+            }
+        } else{
+            if(Project.schedules){
+                let s=JSON.parse(Project.schedules);
+                
+                    models.Schedule.create({
+                        projectid:project.id,
+                        employeeid:s.employee.id,
+                        roleid:s.role.id,
+                        participation:s.participation,
+                    });
+            }
         }
+        
+        
+
 
          return project;
       }).catch(error=>{

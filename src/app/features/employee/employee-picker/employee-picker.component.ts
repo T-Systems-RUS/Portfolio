@@ -15,11 +15,12 @@ export class EmployeePickerComponent {
 
     @Input() employees:Array<Employee>=new Array<Employee>();
     @Input() roles:Array<Role>=new Array<Role>();
+    @Input() schedules:Array<Schedule>=new Array<Schedule>();
 
     @Output() onSelect=new EventEmitter<Array<Schedule>>();
 
     initialEmployees:Array<Employee>=new Array<Employee>();
-    schedules:Array<Schedule>=new Array<Schedule>();
+    
 
     constructor(private dataService:EmployeeService) {
         
@@ -34,6 +35,12 @@ export class EmployeePickerComponent {
                 this.employees=data[0];
                 this.roles=data[1];
                 this.initialEmployees=this.employees;
+
+                
+                
+                
+               console.log(this.schedules);
+               console.log(this.employees)
             }, error=>{
                 console.log(error);
             })
