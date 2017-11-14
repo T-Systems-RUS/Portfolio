@@ -1,4 +1,6 @@
 {
     "lines":["automotive","vertical","sap","horizontal"],
-    "domains": ["Health","Transportation","Public","Telematics","Logistic","Automotive"]
+    "domains": ["Health","Transportation","Public","Telematics","Logistic","Automotive"],
+    "programs":["Sales and Aftersales","Logistics and Manufactoring"],
+    "types":["Project","Service","Test"]
 }

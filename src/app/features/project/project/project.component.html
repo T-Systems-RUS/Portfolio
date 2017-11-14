@@ -45,11 +45,15 @@
                 <p *ngIf="model.domain" class="project__t project__t--small project__mb10">Domain:
                     <span class="project__bold">{{model.domain}}</span>
                 </p>
-                <p class="project__t project__t--small project__mb10">Project language:
-                    <span class="project__bold">English, German</span>
+                <p *ngIf="language.length>0" class="project__t project__t--small project__mb10">Project language:
+                    <a class="project__bold" *ngFor="let l of language">
+                        {{l.name}}
+                    </a>
                 </p>
-                <p class="project__t project__t--small project__mb10">Methology:
-                    <span class="project__bold">Scrum</span>
+                <p *ngIf="methodology.length>0" class="project__t project__t--small project__mb10">Methology:
+                    <a class="project__bold" *ngFor="let m of methodology">
+                        {{m.name}}
+                    </a>
                 </p>
                 <p *ngIf="model.customer" class="project__t project__t--small">Customer:
                     <span class="project__bold">{{model.customer}}</span>
@@ -70,8 +74,7 @@
                 <list-item  *ngFor="let schedule of model.schedules" 
                             [clickable]="false" 
                             [roles]="[schedule.role]"
-                            [output]="schedule"
-                            [model]="schedule.employee">
+                            [model]="schedule">
                 </list-item>
             </div>
         </div>

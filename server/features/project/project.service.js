@@ -84,7 +84,7 @@ projectService.getProjectsByName = function(name){
 //GET check if project exists
 projectService.doesProjectExist= function(name){
     
-    return models.Project.count({where: { name: name}}).then(count=>{
+    return models.Project.count({where: { name: name, ishistory:false}}).then(count=>{
         if(count!=0){
             return true;
         } else{
@@ -122,6 +122,10 @@ projectService.createProject=function(Project){
         active:false,
         startdate:Project.startdate,
         enddate:Project.enddate,
+        pss:Project.pss,
+        program:Project.program,
+        feedback:Project.feedback,
+        type:Project.type,
         ishistory:false,              // default for new project
         version:Project.version                    // default for new project
       }).then(function (project) {

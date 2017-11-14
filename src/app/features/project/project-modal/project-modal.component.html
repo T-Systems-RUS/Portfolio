@@ -17,6 +17,18 @@
         <span class="{{this.validator['domain']}}">{{project.domain}}</span>
     </p>
     <p class="project-modal__info">
+        Program:
+        <span class="{{this.validator['program']}}">{{project.program}}</span>
+    </p>
+    <p class="project-modal__info">
+        Project type:
+        <span class="{{this.validator['type']}}">{{project.type}}</span>
+    </p>
+    <p class="project-modal__info">
+        PSS:
+        <span class="{{this.validator['pss']}}">{{project.pss}}</span>
+    </p>
+    <p class="project-modal__info">
         Customer:
         <span class="{{this.validator['customer']}}">{{project.customer}}</span>
     </p>
@@ -32,18 +44,17 @@
         Description:
         <span class="{{this.validator['description']}} project-modal--description">{{project.description}}</span>
     </p>
-    <p class="project-modal__info project-modal--margin1020" *ngIf="project.technologies.length>0">
+    <p class="project-modal__info project-modal--margin1020">
         <span>Technologies:</span>
         <chip *ngFor="let tech of project.technologies" [value]="tech.name" [style]="this.validator['technologies'+tech.id]"></chip>
     </p>
     <p class="project-modal__info project-modal--margin1020" *ngIf="project.schedules.length>0">
-        <span>Team:</span>
+        <span class="project-modal__h">Team:</span>
         <list-item  *ngFor="let schedule of project.schedules" 
             [clickable]="false" 
-            itemStyle="list-item--picker" 
+            
             [roles]="[schedule.role]"
-            [output]="schedule"
-            [model]="schedule.employee">
+            [model]="schedule">
         </list-item>
     </p>
 </div>

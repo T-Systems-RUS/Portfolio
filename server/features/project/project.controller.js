@@ -4,8 +4,8 @@ const router = express.Router();
 const { validationResult } = require('express-validator/check');
 
 
-var projectService=require('../data/services/project.service');
-var projectValidator=require('../data/validators/project.validator');
+var projectService=require('./project.service');
+var projectValidator=require('./project.validator');
 
 
 // GET requests

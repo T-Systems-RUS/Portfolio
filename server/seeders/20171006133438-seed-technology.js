@@ -17,39 +17,68 @@ module.exports = {
       //   createdAt:new Date(),
       //   updatedAt:new Date()
       // },
+      // {
+      //   name: 'JSF',
+      //   domain: 'backend',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
+      // {
+      //   name: 'Jenkins',
+      //   domain: 'backend',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
+      // {
+      //   name: 'React',
+      //   domain: 'frontend',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },{
+      //   name: 'VueJs',
+      //   domain: 'frontend',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },{
+      //   name: '.NET 4.5',
+      //   domain: 'backend',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
       {
-        name: 'JSF',
-        domain: 'backend',
+        name: 'Scrum',
+        domain: 'methodology',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'Jenkins',
-        domain: 'backend',
+        name: 'Agile',
+        domain: 'methodology',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'React',
-        domain: 'frontend',
+        name: 'English',
+        domain: 'language',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
-      },{
-        name: 'VueJs',
-        domain: 'frontend',
+      },
+      {
+        name: 'German',
+        domain: 'language',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
-      },{
-        name: '.NET 4.5',
-        domain: 'backend',
-        active:false,
-        createdAt:new Date(),
-        updatedAt:new Date()
-      }], {});
+      }
+    ], {});
     
   },
 

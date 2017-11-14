@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-var technologyService=require('../data/services/technology.service');
+var technologyService=require('./technology.service');
 
 
 // GET requests

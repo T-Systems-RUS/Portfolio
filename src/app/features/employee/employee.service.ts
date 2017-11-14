@@ -14,6 +14,7 @@ import { Routes } from './../../shared/helpers/routes';
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/toPromise";
+import { retry } from "rxjs/operator/retry";
 
 
 @Injectable()
@@ -49,6 +50,13 @@ export class EmployeeService {
                                  //...errors if any
                                  .catch((error:any) => Observable.throw(this.extract.handleError(error)));
         
+    }
+
+    getRolesAndEmploees() : Observable<[Employee[],Role[]]>{
+        return Observable.forkJoin(
+            this.getEmployees(),
+            this.getRoles()
+        )
     }
 
 }

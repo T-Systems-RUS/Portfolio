@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-var employeeService=require('../data/services/employee.service');
+var employeeService=require('./employee.service');
 
 
 // GET requests

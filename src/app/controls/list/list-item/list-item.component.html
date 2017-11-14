@@ -1,16 +1,17 @@
-<div class="list-item {{itemStyle}}" (click)="performCLick(model)" [ngClass]="{'list-item--active':output.active}">
+<div class="list-item {{itemStyle}}" (click)="performCLick(model)" [ngClass]="{'list-item--active':model.active}">
     <img class="list-item__img" src="./../../assets/images/person.png" alt="person">
 
     <div class="list-item__block">
-        <p class="list-item__primary">{{model.firstname + ' ' + model.lastname}}</p>
+        <p class="list-item__primary">{{model.employee.firstname + ' ' + model.employee.lastname}}</p>
         <p *ngIf="roles.length===1" class="list-item__secondary">{{roles[0].name}} ({{roles[0].seniority}})</p>
         <select [ngClass]="{'list-item__select--active': model.active}" (change)="selectRole($event)" (click)="stopAction($event)" *ngIf="roles.length>1" class="list-item__select" name="roles" id="roles">
-            <option *ngFor="let role of roles" value="{{role.id}}">
+            <option *ngFor="let role of roles" value="{{role.id}}"
+                    [selected]="role.name===model.role.name">
                 {{role.name}} ({{role.seniority}})
             </option>
         </select>
     </div>
-    <input *ngIf="clickable" (click)="stopAction($event)" [(ngModel)]="output.participation" class="list-item__input">
-    <p *ngIf="!clickable" class="list-item__info">{{output.participation}}%</p>
+    <input *ngIf="clickable" (click)="stopAction($event)" [(ngModel)]="model.participation" class="list-item__input">
+    <p *ngIf="!clickable" class="list-item__info">{{model.participation}}%</p>
     <ng-content></ng-content>
 </div>

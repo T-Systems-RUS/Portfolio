@@ -11,6 +11,12 @@ export class Project{
     description:string='';
     updatedAt:Date=new Date();
 
+    //new props
+    pss:number=0.0;
+    feedback:string="";
+    program:string="";
+    type:string="";
+
     technologies:Array<Technology>=new Array<Technology>();
     technolodgyIds:Array<string>=new Array<string>();
 
@@ -40,6 +46,6 @@ export class Project{
     public constructor(init?:Partial<Project>) {
         Object.assign(this, init);
         this.errors={};
-        this.required=["name","line","domain","startdate","description"];
+        this.required=["name","line","domain","startdate","description","type","program"];
     }
 } 

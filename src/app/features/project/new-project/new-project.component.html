@@ -31,8 +31,24 @@
                           label="Domain"
                           [options]="domains"
                           [model]="model.domain"
+                          wrapperStyle="dropdown--marginB20"
                           [errorMessage]="model.errors['domain']"
                           (changed)="setValue($event,'domain')"></dropdown>
+
+                <dropdown id="program" 
+                          label="Program"
+                          [options]="programs"
+                          [model]="model.program"
+                          wrapperStyle="dropdown--marginB20"
+                          [errorMessage]="model.errors['program']"
+                          (changed)="setValue($event,'program')"></dropdown>        
+                          
+                <dropdown id="type" 
+                          label="Project type"
+                          [options]="types"
+                          [model]="model.type"
+                          [errorMessage]="model.errors['type']"
+                          (changed)="setValue($event,'type')"></dropdown> 
         </div>
         <div class="new-project__content-block">
 
@@ -68,7 +84,16 @@
                     [model]="model.customer"
                     (onModelChanged)="setValue($event,'customer')"
                     clearStyle="input__clear--right20 input__clear--top30"
-                    wrapperStyle="input--width100"></app-input>                   
+                    wrapperStyle="input--width100 input--marginB20"></app-input>  
+                    
+                <app-input id="PSS" 
+                    placeholder="PSS" 
+                    boxStyle="input--small"
+                    label="PSS"
+                    [model]="model.pss"
+                    (onModelChanged)="setValue($event,'pss')"
+                    clearStyle="input__clear--right20 input__clear--top30"
+                    wrapperStyle="input--width100"></app-input> 
         </div>
         <div class="new-project__content-block new-project__content-block--fullwidth  new-project__content-block--maxH163">
             <app-input id="Description" 
@@ -83,11 +108,22 @@
         </div> 
         
         <div class="new-project__content-block">
-            <employee-picker (onSelect)="setValue($event,'schedules')" [schedules]="model.schedules"></employee-picker>
+            <employee-picker (onSelect)="setValue($event,'schedules')" [selectedSchedules]="model.schedules"></employee-picker>
         </div>   
         <div class="new-project__content-block">
             <technology-picker [selectedTechnologies]="model.technologies" (onSelect)="setValue($event,'technologies')"></technology-picker>
         </div>
+        <!-- <div class="new-project__content-block new-project__content-block--fullwidth  new-project__content-block--maxH163">
+            <app-input id="feedback" 
+                placeholder="Customer Feedback" 
+                label="Customer Feedback"
+                controlType="textbox"
+                [model]="model.feedback"
+                [errorMessage]="model.errors['feedback']"
+                (onModelChanged)="setValue($event,'feedback')"
+                clearStyle="input__clear--right20 input__clear--top30"
+                wrapperStyle="input--width100"></app-input>
+        </div>  -->
     </div> 
     <div class="new-project__footer">
         <app-button (click)="back()" value="CANCEL" style="button--white" ></app-button>
@@ -95,3 +131,4 @@
         <app-button (click)="changeProject()" [disabled]="!allowSubmit" value="SUBMIT" style="" ></app-button>
     </div>
 </div>
+

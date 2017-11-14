@@ -36,6 +36,8 @@ export class NewProjectComponent  {
 
     private lines:Array<string>;
     private domains:Array<string>;
+    private types:Array<string>;
+    private programs:Array<string>;
 
     private allowSubmit:boolean=true;
     private errors:Object={};
@@ -51,6 +53,8 @@ export class NewProjectComponent  {
         this.dataService.getConstants().subscribe(res=>{
             this.lines=res.lines;
             this.domains=res.domains;
+            this.types=res.types;
+            this.programs=res.programs;
         },error=>{
             console.log(error);
         });
@@ -105,7 +109,7 @@ export class NewProjectComponent  {
                 this.model.version=this.model.version+1;
                 this.dataService.updateProject(this.model).subscribe(
                     data=>{
-                       // this.router.navigate(["/project/",data.id]);
+                        this.router.navigate(["/project/",data.id]);
                         console.log(data)
                     },
                     error=>{

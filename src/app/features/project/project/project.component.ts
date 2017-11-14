@@ -26,6 +26,8 @@ export class ProjectComponent {
     id:number;
     backend:Array<Technology>=new Array<Technology>();
     frontend:Array<Technology>=new Array<Technology>();
+    methodology:Array<Technology>=new Array<Technology>();
+    language:Array<Technology>=new Array<Technology>();
     information:Array<string>=new Array<string>();
 
     ribbonVisible:boolean=false;
@@ -45,6 +47,8 @@ export class ProjectComponent {
                 this.model=new Project(data);
                 this.backend=this.model.technologies.filter(tech=>tech.domain==='backend');
                 this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
+                this.language=this.model.technologies.filter(tech=>tech.domain==='language');
+                this.methodology=this.model.technologies.filter(tech=>tech.domain==='methodology');
 
                 if(this.model.enddate){
                     this.ribbonVisible=new Date(this.model.enddate)<=new Date();

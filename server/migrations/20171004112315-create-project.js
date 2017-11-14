@@ -21,8 +21,21 @@ module.exports = {
       domain: {
         type: Sequelize.STRING
       },
+      type: {
+        type: Sequelize.STRING
+      },
+      program: {
+        type: Sequelize.STRING
+      },
+      pss: {
+        type: Sequelize.DECIMAL
+      },
+      feedback: {
+        type: Sequelize.TEXT,
+        validate: { len: [0,100000] }
+      },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         validate: { len: [0,100000] }
       },
       teamcount: {

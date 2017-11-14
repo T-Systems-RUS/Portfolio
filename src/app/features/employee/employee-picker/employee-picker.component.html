@@ -7,12 +7,11 @@
             (onModelChanged)="filterEmployees($event)"></app-input>
 
 <div class="employee-picker__wrapper">
-    <list-item  *ngFor="let employee of employees" 
+    <list-item  *ngFor="let schedule of schedules" 
                 [clickable]="true" 
                 itemStyle="list-item--picker" 
-                [model]="employee"
-                [roles]="roles"
-                
+                [model]="schedule"
+                [roles]="roles"               
                 (clicked)="selectEmployee($event)">
     </list-item>
 </div>

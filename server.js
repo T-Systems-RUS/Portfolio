@@ -9,9 +9,9 @@ const validator = require('express-validator');
 // Get our API routes
 const api = require('./server/routes/api');
 
-const projectController = require('./server/controllers/project.controller');
-const technologyController = require('./server/controllers/technology.controller');
-const employeeController = require('./server/controllers/employee.controller');
+const projectController = require('./server/features/project/project.controller');
+const technologyController = require('./server/features/technology/technology.controller');
+const employeeController = require('./server/features/employee/employee.controller');
 
 
 const app = express();
