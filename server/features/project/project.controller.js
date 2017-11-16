@@ -57,7 +57,7 @@ router.post('/projects/create', projectValidator.createValidators(),(req, res) =
   
    return projectService.doesProjectExist(req.body.name).then(doesExist=>{
        if(doesExist){
-           res.status(409).json({ errors: { latest:{msg:'Project already exists'} }});
+           res.status(409).json({ errors: { latest:{msg:'Project already exists or was archieved'} }});
        }else{
            projectService.createProject(req.body).then(project=>{
                res.status(200).send(project);

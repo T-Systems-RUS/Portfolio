@@ -81,13 +81,19 @@
 </div>
 
 <app-footer @appear3 [color]="model.line">
-        <a [routerLink]="['/project/update', model.id]" class="footer__button">
+        <a title="Edit project" [routerLink]="['/project/update', model.id]" class="footer__button">
             <img src="./../../assets/images/edit.png" alt="edit">
         </a>
-        <a [routerLink]="['/project/history', model.name]" class="footer__button">
+        <a title="Project history" [routerLink]="['/project/history', model.name]" class="footer__button">
+            <img src="./../../assets/images/history.png" alt="powerpoint">
+        </a>      
+        <a title="" [routerLink]="['/project/update', model.id]" class="footer__button">
             <img src="./../../assets/images/powerpoint.png" alt="powerpoint">
         </a>
-        <a (click)="archieveProject()" class="footer__button">
+        <!-- <a [routerLink]="['/project/history', model.name]" class="footer__button">
             <img src="./../../assets/images/exel.png" alt="exel">
+        </a> -->
+        <a title="Archieve history" (click)="archieveProject()" class="footer__button">
+            <img src="./../../assets/images/delete.png" alt="delete">
         </a>
 </app-footer>

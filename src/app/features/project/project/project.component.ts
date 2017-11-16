@@ -49,6 +49,9 @@ export class ProjectComponent {
                 this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
                 this.language=this.model.technologies.filter(tech=>tech.domain==='language');
                 this.methodology=this.model.technologies.filter(tech=>tech.domain==='methodology');
+                this.information=this.model.technologies.filter(tech=>tech.domain==='information').map(item=>item.name);
+                this.information.push("PSS " + this.model.pss);
+
 
                 if(this.model.enddate){
                     this.ribbonVisible=new Date(this.model.enddate)<=new Date();

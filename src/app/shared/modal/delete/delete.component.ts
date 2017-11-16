@@ -27,8 +27,7 @@ export class DeleteComponent extends ModalComponent {
     }
 
     cancel(){
-        console.log('erre')
-        this.hide();
+        this.visible=false;
     }
 
 

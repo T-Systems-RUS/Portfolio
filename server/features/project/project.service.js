@@ -84,7 +84,7 @@ projectService.getProjectsByName = function(name){
 //GET check if project exists
 projectService.doesProjectExist= function(name){
     
-    return models.Project.count({where: { name: name, ishistory:false}}).then(count=>{
+    return models.Project.count({where: { name: name}}).then(count=>{
         if(count!=0){
             return true;
         } else{

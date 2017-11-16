@@ -44,7 +44,9 @@ export class ProjectListComponent {
     ngOnInit(){
         this.dataService.getProjects().subscribe(data=>{
             this.projects=data;
+            this.projects.forEach(item=>item.teamcount=item.schedules.length);
             console.log(this.projects);
+            
             this.initialProjects=this.projects;
             this.complete= Array.from(new Set(this.projects.map(item=>item.name)));//
 

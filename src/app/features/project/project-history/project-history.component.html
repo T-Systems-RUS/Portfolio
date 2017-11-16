@@ -9,7 +9,8 @@
 
     <div class="project-history__container">
             <panel *ngFor="let project of projects; let i = index;" 
-                    [panelVisible]="i!==projects.length-1">
+                    [panelVisible]="i!==projects.length-1"
+                    [panelOpened]="i===0">
                 <span header class="panel__name">{{project.name}}</span>
                 <p header class="panel__info panel__info--ib">
                     version:

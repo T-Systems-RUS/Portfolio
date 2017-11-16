@@ -24,7 +24,7 @@ export class Project{
 
     schedules:Array<Schedule>=new Array<Schedule>();
     version:number=1;
-
+    teamcount:number=0;
     startdate:Date;
     enddate:Date;
 
