@@ -103,7 +103,7 @@ export class NewProjectComponent  {
             this.msgs.push({severity:'error', summary:'Error Message', detail:'Please fill required fields'})
         }else{
             this.model.technolodgyIds=this.model.technologies.map(tech=>tech.id);
-
+            this.model.pss=this.model.pss || 0;
             
             if(this.editMode){
                 this.model.version=this.model.version+1;
