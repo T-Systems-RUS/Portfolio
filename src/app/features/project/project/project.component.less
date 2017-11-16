@@ -59,6 +59,14 @@
         &-item{
             .flex(1)
         }
+
+        &--center{
+            justify-content: center;
+        }
+
+        &--mt75{
+            margin-top: 75px;
+        }
     }
 
     &__h{
@@ -97,7 +105,20 @@
     &__bold{
         color: @green_main;
         font-size: 16px;
+        text-decoration: none;
         font-family: ProximaRegularBold;
+        .transition(all .3s);
+
+        &:hover{
+            color:@green_bg;
+
+        }
+
+        &--nohover{
+            &:hover{
+                color: @green_main;
+            }
+        }
     }
 
     &__mb10{

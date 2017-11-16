@@ -1,0 +1,20 @@
+<modal windowStyle="modal--small" [visible]="visible">
+    <!-- <div header class="file__header">
+        <h3 class="file__status">Upload image</h3>
+    </div> -->
+    <div content class="file__content">
+        <p-fileUpload name="demo[]" 
+                      url="./upload.php" 
+                      (onSelect)="onUpload($event)" 
+                      multiple="multiple" accept="image/*" 
+                      maxFileSize="1000000">
+            <ng-template pTemplate type="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">
+                        <img [src]="file.objectURL" width="300" height="200" alt="">
+                        {{file.name}} - {{file.size}} bytes</li>
+                </ul>
+            </ng-template>        
+        </p-fileUpload>
+    </div>
+</modal>

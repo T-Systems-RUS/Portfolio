@@ -66,6 +66,9 @@ export class ProjectComponent {
             })
             console.log(this.model);
         })
+
+        this.dynamic.setRootViewContainerRef(this.entry);
+        let modal=this.dynamic.addFileComponent();
     }
 
 
@@ -90,6 +93,8 @@ export class ProjectComponent {
             )
         })
     }
+
+
 
 
 }

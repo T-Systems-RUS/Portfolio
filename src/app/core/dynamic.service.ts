@@ -1,6 +1,7 @@
 import { Component,ComponentFactoryResolver, Injectable, Inject, ReflectiveInjector,ViewContainerRef} from '@angular/core'
 import { DeleteComponent } from '../shared/modal/delete/delete.component';
 import { ErrorComponent } from '../shared/modal/error/error.component';
+import { FileComponent } from '../shared/modal/file/file.component';
 import { ProjectConfirmationComponent } from '../features/project/project-modal/project-confirmation/project-confirmation.component';
 
 
@@ -23,6 +24,12 @@ import { ProjectConfirmationComponent } from '../features/project/project-modal/
 
     addDeleteComponent():DeleteComponent {
         const factory = this.factoryResolver.resolveComponentFactory(DeleteComponent)
+        const component = this.rootViewContainer.createComponent(factory);
+        return component.instance;
+    }
+
+    addFileComponent():FileComponent {
+        const factory = this.factoryResolver.resolveComponentFactory(FileComponent)
         const component = this.rootViewContainer.createComponent(factory);
         return component.instance;
     }

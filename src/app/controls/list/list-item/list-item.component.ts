@@ -27,10 +27,6 @@ export class ListItemComponent {
         
     }
 
-    ngOnInit(){
-        console.log(this.model)
-    }
-    
     ngAfterViewInit(){
         setTimeout(()=>{
             //this.output.role=this.roles.length>0 ? this.roles[0] : new Role()
@@ -41,10 +37,7 @@ export class ListItemComponent {
         
         if(this.clickable){          
             value.active=!value.active;
-            //this.output.active=!this.output.active;
             value.participation = value.active ? 100.00 :0.0; 
-            //this.output.employee=value;
-            console.log(value)
             this.clicked.emit(this.model);
         }
     }

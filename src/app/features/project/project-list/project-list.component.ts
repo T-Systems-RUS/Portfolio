@@ -62,14 +62,6 @@ export class ProjectListComponent {
     }
 
     onFilterAction(event){
-        // switch(event){
-        //     case 'sort':
-        //     let sorted$ = this.projects.sort(this.sortByName);
-        //     break;
-        // }
-        // for(let pr of this.projects){
-        //     console.log(Object.keys(pr));
-        // }
         this.projects.sort(this.propComparator(event));
         this.tooltipVisible=false;
         console.log(this.tooltipVisible)
