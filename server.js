@@ -1,3 +1,5 @@
+
+
 // Get dependencies
 const express = require('express');
 const path = require('path');
@@ -12,7 +14,7 @@ const api = require('./server/routes/api');
 const projectController = require('./server/features/project/project.controller');
 const technologyController = require('./server/features/technology/technology.controller');
 const employeeController = require('./server/features/employee/employee.controller');
-
+const fileController=require('./server/shared/file.controller');
 
 const app = express();
 
@@ -29,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/api', projectController);
 app.use('/api', technologyController);
 app.use('/api', employeeController);
+app.use('/api', fileController);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

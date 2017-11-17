@@ -34,14 +34,14 @@ export class NewProjectComponent  {
     styleClass:string="";
     editMode:boolean=false;
 
-    private lines:Array<string>;
-    private domains:Array<string>;
-    private types:Array<string>;
-    private programs:Array<string>;
+    lines:Array<string>;
+    domains:Array<string>;
+    types:Array<string>;
+    programs:Array<string>;
 
-    private allowSubmit:boolean=true;
-    private errors:Object={};
-    private initialState:Project=new Project();
+    allowSubmit:boolean=true;
+    errors:Object={};
+    initialState:Project=new Project();
     
     constructor(private dataService:ProjectService,
                 private route: ActivatedRoute,

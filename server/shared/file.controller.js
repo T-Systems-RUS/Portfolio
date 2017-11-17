@@ -7,8 +7,9 @@ const router = express.Router();
 
 
 // GET requests
-router.get('/employees', (req, res) => {
-    
+router.post('/images/add', (req, res) => {
+    console.log(req.body);
+    res.send(req.body);
 
       
       

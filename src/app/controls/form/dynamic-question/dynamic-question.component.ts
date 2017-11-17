@@ -15,6 +15,7 @@ import { QuestionBase }              from './../question-base';
 export class DynamicFormQuestionComponent {
     @Input() question: QuestionBase<any>;
     @Input() form: FormGroup;
+    @Input() id:string="";
 
     @Input() label:string='';
     @Input() wrapperStyle='';

@@ -4,10 +4,13 @@
     </div> -->
     <div content class="file__content">
         <p-fileUpload name="demo[]" 
-                      url="./upload.php" 
-                      (onSelect)="onUpload($event)" 
-                      multiple="multiple" accept="image/*" 
-                      maxFileSize="1000000">
+                      url="/api/images/add/" 
+                      (onSelect)="onSelect($event)" 
+                      (onUpload)="onUpload(event)"
+                      [multiple]="false" 
+                      accept="image/*" 
+                      maxFileSize="1000000"
+                      (onError)="onError($event)">
             <ng-template pTemplate type="content">
                 <ul *ngIf="uploadedFiles.length">
                     <li *ngFor="let file of uploadedFiles">

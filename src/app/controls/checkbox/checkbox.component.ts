@@ -13,6 +13,8 @@ export class CheckBoxComponent {
     @Input() name:string='';
     @Input() style:string='';
     @Input() visible:boolean=true;
+    @Input() labelStyle:string='';
+    @Input() boxStyle:string='';
 
     @Output() checked=new EventEmitter();
     

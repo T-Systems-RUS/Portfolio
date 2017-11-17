@@ -22,14 +22,22 @@ export class FileComponent extends ModalComponent {
     
     uploadedFiles: any[] = [];
 
-    onUpload(event) {
+    onSelect(event) {
         for(let file of event.files) {
             this.uploadedFiles.push(file);
         }
+        console.log(event.files)
         console.log(this.uploadedFiles)
         this.msgs = [];
         this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
     }
 
+    onUpload(event){
+        console.log(event);
+    }
+
+    onError(event){
+        console.log(event);
+    }
 
 }

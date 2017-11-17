@@ -12,7 +12,7 @@
                     placeholder="Project name" 
                     boxStyle="input--small"
                     label="Project name"
-                    [name]="name"
+                    [name]="model.name"
                     [errorMessage]="model.errors['name']"
                     [model]="model.name"
                     (onModelChanged)="setValue($event,'name')"
