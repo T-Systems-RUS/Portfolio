@@ -3,10 +3,10 @@
         <h3 class="file__status">Upload image</h3>
     </div> -->
     <div content class="file__content">
-        <p-fileUpload name="demo[]" 
+        <p-fileUpload name="image" 
                       url="/api/images/add/" 
                       (onSelect)="onSelect($event)" 
-                      (onUpload)="onUpload(event)"
+                      (onUpload)="onUpload($event)"
                       [multiple]="false" 
                       accept="image/*" 
                       maxFileSize="1000000"

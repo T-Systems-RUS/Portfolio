@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ModalComponent } from '../modal.component';
-import { Error } from '../../../shared/models/error';
+import { Project } from '../../../shared/models/project';
 import {Message} from 'primeng/components/common/api';
 
 @Component({
@@ -10,7 +10,7 @@ import {Message} from 'primeng/components/common/api';
 })
 export class FileComponent extends ModalComponent {
 
-    @Input() error:Error=new Error();
+    @Input() project:Project=new Project();
 
 
 
@@ -24,6 +24,7 @@ export class FileComponent extends ModalComponent {
 
     onSelect(event) {
         for(let file of event.files) {
+            //file.name=file.name+=' ' + this.project.id + ' ' + this.project.name;
             this.uploadedFiles.push(file);
         }
         console.log(event.files)
@@ -33,6 +34,7 @@ export class FileComponent extends ModalComponent {
     }
 
     onUpload(event){
+        //event.stopPropagation();
         console.log(event);
     }
 

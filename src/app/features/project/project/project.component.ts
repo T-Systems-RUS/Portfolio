@@ -56,7 +56,10 @@ export class ProjectComponent {
                 if(this.model.enddate){
                     this.ribbonVisible=new Date(this.model.enddate)<=new Date();
                 }
-
+                
+                this.dynamic.setRootViewContainerRef(this.entry);
+                let modal=this.dynamic.addFileComponent();
+                modal.project=this.model;
                 console.log(this.model);    
             },error=>{
                 this.dynamic.setRootViewContainerRef(this.entry);
@@ -67,8 +70,7 @@ export class ProjectComponent {
             console.log(this.model);
         })
 
-        this.dynamic.setRootViewContainerRef(this.entry);
-        let modal=this.dynamic.addFileComponent();
+        
     }
 
 
