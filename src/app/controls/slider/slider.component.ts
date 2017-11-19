@@ -13,5 +13,10 @@ export class SliderComponent {
   constructor() {
 
   }
+
+  ngOnInit(){
+    this.image=this.image ? "/server/images/"+this.image : "";
+    console.log(this.image);
+  }
 }
 

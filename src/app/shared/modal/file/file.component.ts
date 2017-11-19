@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ModalComponent } from '../modal.component';
 import { Project } from '../../../shared/models/project';
-import {Message} from 'primeng/components/common/api';
+
 
 @Component({
   selector: 'file',
@@ -18,28 +18,34 @@ export class FileComponent extends ModalComponent {
         super();
     }
 
-    msgs: Message[];
+
     
     uploadedFiles: any[] = [];
 
     onSelect(event) {
+        
         for(let file of event.files) {
             //file.name=file.name+=' ' + this.project.id + ' ' + this.project.name;
             this.uploadedFiles.push(file);
         }
         console.log(event.files)
-        console.log(this.uploadedFiles)
-        this.msgs = [];
-        this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
+        console.log(this.uploadedFiles);
     }
 
     onUpload(event){
         //event.stopPropagation();
-        console.log(event);
+        this.uploadedFiles=[];
+        console.log(event.xhr.response);
     }
 
     onError(event){
+        this.uploadedFiles=[];
         console.log(event);
+    }
+
+    onBeforeUpload(event){
+        event.formData.append('name',this.project.name);
+        event.formData.append('id',this.project.id);
     }
 
 }

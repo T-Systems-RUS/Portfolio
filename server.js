@@ -26,6 +26,7 @@ app.use(validator());
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use('/server/images', express.static('server/images'));
 
 // Set our api routes
 app.use('/api', projectController);
@@ -37,6 +38,7 @@ app.use('/api', fileController);
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
+
 
 /**
  * Get port from environment and store in Express.

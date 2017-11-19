@@ -1,27 +1,38 @@
 'use strict';
-
+var path = require('path');
 const express = require('express');
 const router = express.Router();
-
 var multer = require('multer');
-var DIR = 'images/';
-var upload = multer({dest: DIR}).single('image');
+var projectService=require('../features/project/project.service');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'server/images/')
+  },
+  filename: function (req, file, cb) {
+    console.log(file)
+    cb(null, file.fieldname + '-' + req.body.name+path.extname(file.originalname));
+  }
+})
+
+var upload = multer({ storage: storage }).single('image');
 
 
-
-// GET requests
+// POST requests
 router.post('/images/add', function (req, res, next) {
-    var path = '';
     upload(req, res, function (err) {
        if (err) {
-         // An error occurred when uploading
-         console.log(err);
-         return res.status(422).send("an Error occured")
+         console.log(err)
+         return res.status(422).send(err)
        }  
-      // No error occured.
-      console.log(req.file)
-       path = req.file.path;
-       return res.send("Upload Completed for "+path); 
+
+       
+       console.log(req.file);
+       projectService.updateImage(req.body.id,req.file.filename).then(project=>{
+          res.status(200).send(project);
+       }).catch(error=>{
+          res.status(500).json({ errors: { er:{msg:error} }});
+       })
  });  
 //console.log(req.file)   
 })

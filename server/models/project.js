@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     customer:DataTypes.STRING,
     type:DataTypes.STRING,
     program:DataTypes.STRING,
+    image:DataTypes.STRING,
     feedback:DataTypes.TEXT,
     pss:DataTypes.DECIMAL,
     teamcount: DataTypes.STRING,

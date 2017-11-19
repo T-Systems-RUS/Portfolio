@@ -1,9 +1,9 @@
-<div class="slider">
+<div class="slider" *ngIf="image">
     <div class="slider__block  slider--left">
         <img class="slider__decoration" src="./../../assets/images/image-left.png" alt="left">
     </div>
     <div class="slider__block">
-        <img class="slider__main" [src]="image" alt="team">
+        <img class="slider__main" src="{{image}}" alt="team">
     </div>
     <div class="slider__block  slider--right">
         <img class="slider__decoration" src="./../../assets/images/image-right.png" alt="left">

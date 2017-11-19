@@ -7,6 +7,7 @@
                       url="/api/images/add/" 
                       (onSelect)="onSelect($event)" 
                       (onUpload)="onUpload($event)"
+                      (onBeforeUpload)="onBeforeUpload($event)"
                       [multiple]="false" 
                       accept="image/*" 
                       maxFileSize="1000000"

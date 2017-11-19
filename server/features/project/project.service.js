@@ -213,6 +213,18 @@ projectService.archieveProject=  async(id)=> {
 }
 
 
+//PUT Save image
+projectService.updateImage=  (id,image)=> {
+    return models.Project.update(
+        { 
+            image: image,
+            updatedAt:new Date() 
+        },
+        { where: { id:id } }
+     );
+}
+
+
 
 
 

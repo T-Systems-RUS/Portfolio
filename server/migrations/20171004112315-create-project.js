@@ -42,6 +42,9 @@ module.exports = {
         defaultValue:"0",
         type: Sequelize.STRING
       },
+      image: {
+        type: Sequelize.STRING
+      },
       version: {
         defaultValue:1,
         type: Sequelize.INTEGER
