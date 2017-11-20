@@ -229,6 +229,19 @@ projectService.updateImage=  (id,image)=> {
      });
 }
 
+projectService.removeImage=  (project)=> {
+    return models.Project.update(
+        { 
+            image: project.image
+        },
+        { 
+            where: { name:project.name }
+        }     
+     ).then(()=>{
+        return projectService.getProject(project.id);
+     });
+}
+
 
 
 

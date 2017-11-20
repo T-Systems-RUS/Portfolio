@@ -9,13 +9,16 @@ import { Component, Input } from '@angular/core';
 })
 export class SliderComponent {
 
-@Input() image:string=""
-  constructor() {
+    @Input() image:string="";
+    fullpath;
+    
 
-  }
+    constructor() {
+
+    }
 
   ngOnInit(){
-    this.image=this.image ? "/server/images/"+this.image : "";
+    this.fullpath=this.image ? "/server/images/"+this.image : "";
     console.log(this.image);
   }
 }

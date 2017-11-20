@@ -26,6 +26,10 @@ export class Routes {
   //Roles
   getRoles;
 
+
+  //file
+  removeImage;
+
   constructor() {
 
     this.getProjects="/api/projects/";
@@ -40,6 +44,8 @@ export class Routes {
     this.getTechnologies="/api/technologies";
 
     this.getRoles="/api/roles";
+
+    this.removeImage="/api/images/remove";
   }
 
 

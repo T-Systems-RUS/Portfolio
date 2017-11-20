@@ -103,6 +103,12 @@ export class ProjectComponent {
             this.model.image="/server/images/"+image;
             modal.visible=false;
         })
+
+        modal.onErrors.subscribe(error=>{
+            this.dynamic.setRootViewContainerRef(this.entry);
+            let modal=this.dynamic.addErrorComponent();
+            modal.error=error;
+        })
     }
 
 

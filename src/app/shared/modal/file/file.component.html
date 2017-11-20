@@ -12,13 +12,15 @@
                       accept="image/*" 
                       maxFileSize="1000000"
                       (onError)="onError($event)">
-            <ng-template pTemplate type="content">
-                <ul *ngIf="uploadedFiles.length">
+            <ng-template pTemplate type="content">               
+                <ul *ngIf="uploadedFiles.length">                       
                     <li *ngFor="let file of uploadedFiles">
                         <img [src]="file.objectURL" width="300" height="200" alt="">
                         {{file.name}} - {{file.size}} bytes</li>
+                        
                 </ul>
             </ng-template>        
         </p-fileUpload>
+        <a (click)="removeImage()">Remove Image</a>
     </div>
 </modal>

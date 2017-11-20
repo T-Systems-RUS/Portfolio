@@ -1,6 +1,7 @@
 import { Component, Input, Output,EventEmitter } from '@angular/core';
 import { ModalComponent } from '../modal.component';
 import { Project } from '../../../shared/models/project';
+import { FileService } from './file.service';
 
 
 @Component({
@@ -12,16 +13,20 @@ export class FileComponent extends ModalComponent {
 
     @Input() project:Project=new Project();
     @Output() onUploaded=new EventEmitter<string>();
+    @Output() onErrors=new EventEmitter<any>();
+
     visible=true;
+    uploadedFiles: any[] = [];
 
-
-    constructor() {
+    constructor(private dataService:FileService) {
         super();
     }
 
 
+    ngOnInit(){
+        console.log(this.project.image)
+    }
     
-    uploadedFiles: any[] = [];
 
     onSelect(event) {
         
@@ -47,6 +52,15 @@ export class FileComponent extends ModalComponent {
     onBeforeUpload(event){
         event.formData.append('name',this.project.name);
         event.formData.append('id',this.project.id);
+    }
+
+    removeImage(){
+        this.dataService.removeImage(this.project).subscribe(project=>{
+            console.log(project);
+        },error=>{
+            this.visible=false;
+            this.onErrors.emit(error);
+        })
     }
 
 }

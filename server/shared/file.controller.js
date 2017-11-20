@@ -1,5 +1,7 @@
 'use strict';
 var path = require('path');
+var fs = require('fs');
+const DIST="server/images/";
 const express = require('express');
 const router = express.Router();
 var multer = require('multer');
@@ -7,7 +9,7 @@ var projectService=require('../features/project/project.service');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'server/images/')
+    cb(null, DIST)
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + req.body.name+path.extname(file.originalname));
@@ -32,8 +34,27 @@ router.post('/images/add', function (req, res, next) {
        }).catch(error=>{
           res.status(500).json({ errors: { er:{msg:error} }});
        })
- });  
-//console.log(req.file)   
+ });   
+})
+
+
+router.put('/images/remove', function (req, res, next) {
+  let image=DIST+req.body.image;
+  fs.exists(image, function(exists) {
+    if(exists) {
+      console.log(exists)
+      fs.unlink(image);
+      req.body.image='';
+      projectService.removeImage(req.body).then(project=>{
+          res.status(200).send(project);
+      }).catch(error=>{
+          res.status(500).json({ errors: { er:{msg:error} }});
+      })
+    } else {
+      console.log(exists)
+      res.status(404).send('File not found.');
+    }
+  });
 })
 
 
