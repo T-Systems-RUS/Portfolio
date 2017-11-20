@@ -10,7 +10,6 @@ var storage = multer.diskStorage({
     cb(null, 'server/images/')
   },
   filename: function (req, file, cb) {
-    console.log(file)
     cb(null, file.fieldname + '-' + req.body.name+path.extname(file.originalname));
   }
 })
@@ -27,9 +26,9 @@ router.post('/images/add', function (req, res, next) {
        }  
 
        
-       console.log(req.file);
+
        projectService.updateImage(req.body.id,req.file.filename).then(project=>{
-          res.status(200).send(project);
+          res.status(200).send(project.image);
        }).catch(error=>{
           res.status(500).json({ errors: { er:{msg:error} }});
        })

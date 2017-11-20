@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output,EventEmitter } from '@angular/core';
 import { ModalComponent } from '../modal.component';
 import { Project } from '../../../shared/models/project';
 
@@ -11,7 +11,8 @@ import { Project } from '../../../shared/models/project';
 export class FileComponent extends ModalComponent {
 
     @Input() project:Project=new Project();
-
+    @Output() onUploaded=new EventEmitter<string>();
+    visible=true;
 
 
     constructor() {
@@ -35,7 +36,7 @@ export class FileComponent extends ModalComponent {
     onUpload(event){
         //event.stopPropagation();
         this.uploadedFiles=[];
-        console.log(event.xhr.response);
+        this.onUploaded.emit(event.xhr.response);
     }
 
     onError(event){

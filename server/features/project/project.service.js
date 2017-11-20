@@ -125,6 +125,7 @@ projectService.createProject=function(Project){
         pss:Project.pss,
         program:Project.program,
         feedback:Project.feedback,
+        image:Project.image,
         type:Project.type,
         ishistory:false,              // default for new project
         version:Project.version                    // default for new project
@@ -220,8 +221,12 @@ projectService.updateImage=  (id,image)=> {
             image: image,
             updatedAt:new Date() 
         },
-        { where: { id:id } }
-     );
+        { 
+            where: { id:id }
+        }     
+     ).then(()=>{
+        return projectService.getProject(id);
+     });
 }
 
 

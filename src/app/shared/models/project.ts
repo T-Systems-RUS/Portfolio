@@ -16,6 +16,7 @@ export class Project{
     feedback:string="";
     program:string="";
     type:string="";
+    image:string="";
 
     technologies:Array<Technology>=new Array<Technology>();
     technolodgyIds:Array<string>=new Array<string>();

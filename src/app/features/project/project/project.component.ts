@@ -50,16 +50,14 @@ export class ProjectComponent {
                 this.language=this.model.technologies.filter(tech=>tech.domain==='language');
                 this.methodology=this.model.technologies.filter(tech=>tech.domain==='methodology');
                 this.information=this.model.technologies.filter(tech=>tech.domain==='information').map(item=>item.name);
-                this.information.push("PSS " + this.model.pss);
+                this.information.push("PSS " + (this.model.pss || 0));
 
 
                 if(this.model.enddate){
                     this.ribbonVisible=new Date(this.model.enddate)<=new Date();
                 }
                 
-                this.dynamic.setRootViewContainerRef(this.entry);
-                let modal=this.dynamic.addFileComponent();
-                modal.project=this.model;
+                
                 console.log(this.model);    
             },error=>{
                 this.dynamic.setRootViewContainerRef(this.entry);
@@ -96,7 +94,16 @@ export class ProjectComponent {
         })
     }
 
+    showUpload(){
+        this.dynamic.setRootViewContainerRef(this.entry);
+        let modal=this.dynamic.addFileComponent();
+        modal.project=this.model;
 
+        modal.onUploaded.subscribe(image=>{
+            this.model.image="/server/images/"+image;
+            modal.visible=false;
+        })
+    }
 
 
 }

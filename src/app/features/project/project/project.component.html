@@ -97,9 +97,9 @@
         <a title="" [routerLink]="['/project/update', model.id]" class="footer__button">
             <img src="./../../assets/images/powerpoint.png" alt="powerpoint">
         </a>
-        <!-- <a [routerLink]="['/project/history', model.name]" class="footer__button">
+        <a title="Upload image" (click)="showUpload()" class="footer__button">
             <img src="./../../assets/images/exel.png" alt="exel">
-        </a> -->
+        </a>
         <a title="Archieve history" (click)="archieveProject()" class="footer__button">
             <img src="./../../assets/images/delete.png" alt="delete">
         </a>
