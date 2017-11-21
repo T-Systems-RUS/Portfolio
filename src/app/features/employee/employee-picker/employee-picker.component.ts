@@ -4,7 +4,7 @@ import  { Role }  from './../../../shared/models/role';
 import  { Schedule }  from './../../../shared/models/schedule';
 
 import {EmployeeService} from './../employee.service';
-import {Observable} from "rxjs/Observable";
+
 
 @Component({
   selector: 'employee-picker',
@@ -19,7 +19,7 @@ export class EmployeePickerComponent {
 
     @Output() onSelect=new EventEmitter<Array<Schedule>>();
 
-    initialEmployees:Array<Employee>=new Array<Employee>();
+    initialSchedules:Array<Schedule>=new Array<Schedule>();
     selectedEmployees:Array<Employee>=new Array<Employee>();
     schedules:Array<Schedule>=new Array<Schedule>();
 
@@ -42,7 +42,7 @@ export class EmployeePickerComponent {
                 });
                 console.log(this.schedules)
                 this.roles=data[1];
-                this.initialEmployees=this.employees;
+                this.initialSchedules=this.schedules;
                 
 
                 // this.schedules.filter((item)=>
@@ -60,9 +60,9 @@ export class EmployeePickerComponent {
     }
 
     filterEmployees(event){
-        this.employees=this.initialEmployees;
-        this.employees=this.employees.filter(item=>
-            (item.firstname + ' ' + item.lastname).toLowerCase().indexOf(event.toLowerCase())!=-1 //|| 
+        this.schedules=this.initialSchedules;
+        this.schedules=this.schedules.filter(item=>
+            (item.employee.firstname + ' ' + item.employee.lastname).toLowerCase().indexOf(event.toLowerCase())!=-1 //|| 
             //tem.roles[0].name.toLowerCase().indexOf(event.toLowerCase())!=-1
         );
     }

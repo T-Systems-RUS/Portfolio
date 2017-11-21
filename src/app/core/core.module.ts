@@ -16,6 +16,7 @@ import {
   import { HttpService }       from './http.service';
   import { DynamicService }    from './dynamic.service';
   import { ExtractService }       from './extract.service';
+  import { FileService }       from './file.service';
   
   @NgModule({
     imports:      [ 
@@ -33,7 +34,8 @@ import {
       DynamicService,
       UserService,
       HttpService,
-      ExtractService
+      ExtractService,
+      FileService
     ]
   })
   export class CoreModule {

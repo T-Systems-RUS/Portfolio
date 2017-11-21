@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="project__block project__block--flex project__block--center project__block--mt75">
-            <slider [image]="model.image"></slider>
+            <slider [(image)]="model.image"></slider>
         </div>
 
 </div>
@@ -94,7 +94,7 @@
         <a title="Project history" [routerLink]="['/project/history', model.name]" class="footer__button">
             <img src="./../../assets/images/history.png" alt="powerpoint">
         </a>      
-        <a title="" [routerLink]="['/project/update', model.id]" class="footer__button">
+        <a title="" (click)="createPresentation()" class="footer__button">
             <img src="./../../assets/images/powerpoint.png" alt="powerpoint">
         </a>
         <a title="Upload image" (click)="showUpload()" class="footer__button">

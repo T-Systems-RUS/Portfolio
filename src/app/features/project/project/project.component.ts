@@ -6,7 +6,9 @@ import { Project } from '../../../shared/models/project';
 import { Technology } from '../../../shared/models/technology';
 
 import { DynamicService } from '../../../core/dynamic.service';
+import { FileService } from '../../../core/file.service';
 import { ProjectService } from '../project.service';
+
 
 import { PROJECT_ANIMATION } from './project.animation';
 
@@ -35,7 +37,8 @@ export class ProjectComponent {
     constructor(private dataService:ProjectService,
                 private route: ActivatedRoute,
                 private router:Router,
-                private dynamic:DynamicService) {
+                private dynamic:DynamicService,
+                private file:FileService) {
         
     }
 
@@ -100,7 +103,8 @@ export class ProjectComponent {
         modal.project=this.model;
 
         modal.onUploaded.subscribe(image=>{
-            this.model.image="/server/images/"+image;
+            this.model.image=image;
+            console.log(this.model.image);
             modal.visible=false;
         })
 
@@ -111,5 +115,8 @@ export class ProjectComponent {
         })
     }
 
+    createPresentation(){
+        this.file.createPresentation(this.model);
+    }
 
 }

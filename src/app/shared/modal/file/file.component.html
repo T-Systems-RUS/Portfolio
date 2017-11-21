@@ -8,19 +8,34 @@
                       (onSelect)="onSelect($event)" 
                       (onUpload)="onUpload($event)"
                       (onBeforeUpload)="onBeforeUpload($event)"
+                      (onClear)="onClear($event)"
                       [multiple]="false" 
                       accept="image/*" 
                       maxFileSize="1000000"
                       (onError)="onError($event)">
-            <ng-template pTemplate type="content">               
+            <ng-template pTemplate="toolbar">
+                <a *ngIf="project.image" (click)="removeImage()">Remove Image</a>
+            </ng-template>
+            <ng-template  type="content"> 
+                 
+            </ng-template>
+            <ng-template pTemplate type="content"> 
+                              
                 <ul *ngIf="uploadedFiles.length">                       
                     <li *ngFor="let file of uploadedFiles">
                         <img [src]="file.objectURL" width="300" height="200" alt="">
                         {{file.name}} - {{file.size}} bytes</li>
                         
                 </ul>
-            </ng-template>        
+            </ng-template> 
+          
         </p-fileUpload>
-        <a (click)="removeImage()">Remove Image</a>
+
+        <img width="300" 
+             height="200" 
+             alt="" 
+             *ngIf="project.image  && !uploadedFiles.length" 
+             src="./server/images/{{project.image}}"
+             alt="">       
     </div>
 </modal>

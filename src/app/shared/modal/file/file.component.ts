@@ -1,7 +1,7 @@
 import { Component, Input, Output,EventEmitter } from '@angular/core';
 import { ModalComponent } from '../modal.component';
 import { Project } from '../../../shared/models/project';
-import { FileService } from './file.service';
+import { FileService } from '../../../core/file.service';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class FileComponent extends ModalComponent {
 
 
     ngOnInit(){
-        console.log(this.project.image)
+
     }
     
 
@@ -44,6 +44,10 @@ export class FileComponent extends ModalComponent {
         this.onUploaded.emit(event.xhr.response);
     }
 
+    onClear(event){
+        this.uploadedFiles=[];
+    }
+
     onError(event){
         this.uploadedFiles=[];
         console.log(event);
@@ -54,8 +58,10 @@ export class FileComponent extends ModalComponent {
         event.formData.append('id',this.project.id);
     }
 
-    removeImage(){
+    removeImage(){   
         this.dataService.removeImage(this.project).subscribe(project=>{
+            this.project.image=null;
+            this.visible=false;
             console.log(project);
         },error=>{
             this.visible=false;

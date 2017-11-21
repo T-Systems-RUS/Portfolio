@@ -1,5 +1,5 @@
 // Exact copy of app/title.component.ts except import UserService from shared
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 
 
 @Component({
@@ -18,8 +18,18 @@ export class SliderComponent {
     }
 
   ngOnInit(){
-    this.fullpath=this.image ? "/server/images/"+this.image : "";
+    this.changePath(this.image)
     console.log(this.image);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    let change=changes.image.currentValue;
+    this.changePath(change);
+
+  }
+
+  changePath(path){
+    this.fullpath=path ? "/server/images/" + path : "";
   }
 }
 

@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 var multer = require('multer');
 var projectService=require('../features/project/project.service');
-
+var pptx = require('pptxgenjs');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, DIST)
@@ -44,7 +44,7 @@ router.put('/images/remove', function (req, res, next) {
     if(exists) {
       console.log(exists)
       fs.unlink(image);
-      req.body.image='';
+      req.body.image=null;
       projectService.removeImage(req.body).then(project=>{
           res.status(200).send(project);
       }).catch(error=>{
@@ -56,8 +56,6 @@ router.put('/images/remove', function (req, res, next) {
     }
   });
 })
-
-
 
 
 

@@ -13,7 +13,6 @@ import { ModalComponent} from './modal/modal.component';
 import { ErrorComponent} from './modal/error/error.component';
 import { DeleteComponent} from './modal/delete/delete.component';
 import { FileComponent} from './modal/file/file.component';
-import { FileService }  from './modal/file/file.service';
 import { RibbonComponent} from './ribbon/ribbon.component';
 import { TrimTextDirective }  from './trimtext.directive';
 
@@ -21,7 +20,6 @@ import { TrimTextDirective }  from './trimtext.directive';
   imports:      [ CommonModule, ReactiveFormsModule,GrowlModule, CalendarModule,FileUploadModule ],
   declarations: [ BackPanelComponent,ErrorComponent,DeleteComponent,FileComponent, FooterComponent, ModalComponent, RibbonComponent, TrimTextDirective ],
   exports:      [ CommonModule,ErrorComponent,DeleteComponent,FileComponent,FileUploadModule,GrowlModule, CalendarModule, FormsModule,ReactiveFormsModule, BackPanelComponent,FooterComponent,RibbonComponent, ModalComponent, TrimTextDirective ],
-  entryComponents:[ErrorComponent, DeleteComponent,FileComponent],
-  providers: [FileService]
+  entryComponents:[ErrorComponent, DeleteComponent,FileComponent]
 })
 export class SharedModule { }
