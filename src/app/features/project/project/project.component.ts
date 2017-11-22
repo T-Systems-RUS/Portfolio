@@ -6,7 +6,7 @@ import { Project } from '../../../shared/models/project';
 import { Technology } from '../../../shared/models/technology';
 
 import { DynamicService } from '../../../core/dynamic.service';
-import { FileService } from '../../../core/file.service';
+import { PowerPointService } from '../../../core/powerpoint.service';
 import { ProjectService } from '../project.service';
 
 
@@ -38,7 +38,7 @@ export class ProjectComponent {
                 private route: ActivatedRoute,
                 private router:Router,
                 private dynamic:DynamicService,
-                private file:FileService) {
+                private powerpoint:PowerPointService) {
         
     }
 
@@ -116,7 +116,7 @@ export class ProjectComponent {
     }
 
     createPresentation(){
-        this.file.createPresentation(this.model);
+        this.powerpoint.createPresentation(this.model);
     }
 
 }

@@ -17,6 +17,7 @@ import {
   import { DynamicService }    from './dynamic.service';
   import { ExtractService }       from './extract.service';
   import { FileService }       from './file.service';
+  import { PowerPointService }       from './powerpoint.service';
   
   @NgModule({
     imports:      [ 
@@ -35,7 +36,8 @@ import {
       UserService,
       HttpService,
       ExtractService,
-      FileService
+      FileService,
+      PowerPointService
     ]
   })
   export class CoreModule {
