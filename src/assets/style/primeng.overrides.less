@@ -85,14 +85,20 @@
 //checkbox
 
 .ui-chkbox{
-   
+
 }	//Container element
 .ui-chkbox-box{
+    background-color: #EEF1F3;
+    border: 2px solid #5F5F5F;
 
+    &:hover{
+        background-color: #EEF1F3;
+        border: 2px solid #5F5F5F;
+    }
 }	//Container of icon.
 
 .ui-chkbox-icon{
-
+    
 }	//Icon element.
 
 .ui-chkbox-label{
@@ -103,8 +109,36 @@
     margin: 0;
 }	//Label element.
 
-.ui-label-active{
+.ui-state-active{
+    background: #EEF1F3 !important;;
+    border: 2px solid #5F5F5F;
 
+    &:focus{
+        background: #EEF1F3;
+    }
+}
+
+.ui-state-focus{
+    background: #EEF1F3 !important;;
+    border: 2px solid #5F5F5F;
+}
+
+.ui-chkbox-box.ui-state-active, .ui-radiobutton-box.ui-state-active {
+    background: #EEF1F3 !important;;
+    border: 2px solid #5F5F5F;
+    color:@text_h;
+    .boxShadow(none);
+    &:focus{
+        background: #EEF1F3 !important;;
+    }
+}
+
+.ui-state-highlight{
+    background: #EEF1F3 !important;
+}
+
+.ui-label-active{
+    
 }	//Label element of a checked state.
 
 .ui-label-focus{

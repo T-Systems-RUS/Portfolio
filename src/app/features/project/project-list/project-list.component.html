@@ -29,7 +29,7 @@
         </filter-item>  -->
         <filter-item [withTooltip]="true" 
                      [tooltipVisible]="tooltipVisible" 
-                      wrapperStyle="filter-item--minwidth630"
+                     tooltipStyle="filter-item--minwidth630"
                      (onFilterAction)="onFilterAction($event)" name="filter">
             <h1 class="filter__header">Filters</h1>
             <div class="filter__wrapper">
@@ -47,7 +47,49 @@
                                     [(ngModel)]="selectedLines" 
                                     inputId="line"></p-checkbox>
                         </div>                     
-                    </div>    
+                    </div>  
+                    <div class="filter__checkboxes">
+                        <h3 class="filter__subheader">
+                            Project type    
+                        </h3>
+                        <div *ngFor="let type of constants.types" class="filter__checkbox">
+                                <p-checkbox   
+                                    name="type" 
+                                    value="{{type}}" 
+                                    label="{{type}}" 
+                                    (onChange)="check($event)"
+                                    [(ngModel)]="selectedTypes" 
+                                    inputId="type"></p-checkbox>
+                        </div>                     
+                    </div>   
+                    <div class="filter__checkboxes">
+                        <h3 class="filter__subheader">
+                            Program   
+                        </h3>
+                        <div *ngFor="let program of constants.programs" class="filter__checkbox">
+                                <p-checkbox   
+                                    name="program" 
+                                    value="{{program}}" 
+                                    label="{{program}}" 
+                                    (onChange)="check($event)"
+                                    [(ngModel)]="selectedPrograms" 
+                                    inputId="program"></p-checkbox>
+                        </div>                     
+                    </div> 
+                        <div class="filter__checkboxes">
+                            <h3 class="filter__subheader">
+                                Project domain    
+                            </h3>
+                            <div *ngFor="let domain of constants.domains" class="filter__checkbox">
+                                    <p-checkbox   
+                                        name="domain" 
+                                        value="{{domain}}" 
+                                        label="{{domain}}" 
+                                        (onChange)="check($event)"
+                                        [(ngModel)]="selectedDomains" 
+                                        inputId="domain"></p-checkbox>
+                            </div>                     
+                        </div> 
                 </div> 
                 <div class="filter__block">
                     <technology-picker (onSelect)="check($event)"></technology-picker>    

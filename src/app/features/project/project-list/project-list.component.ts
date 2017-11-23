@@ -34,8 +34,9 @@ export class ProjectListComponent {
     constants=new Constants();
     //filter checkboxes
     selectedLines=new Array<string>();
-
-
+    selectedTypes=new Array<string>();
+    selectedPrograms=new Array<string>();
+    selectedDomains=new Array<string>();
 
     constructor(private dataService:ProjectService,public router: Router) {
         // this.projects=this.dataService.generateProjects();

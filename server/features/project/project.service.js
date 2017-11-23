@@ -16,7 +16,10 @@ projectService.getProjects= function(){
                 include: [{
                         as: 'schedules',
                         model: models.Schedule
-                    },
+                    },{
+                        as:'technologies',
+                        model: models.Technology
+                    }
                 ],
                 order:[
                     ['updatedAt','DESC']
