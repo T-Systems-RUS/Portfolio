@@ -92,6 +92,10 @@
         top:-6px; 
         left: 7px;
     }
+
+    :host ::ng-deep &--minwidth630{
+        min-width: 630px;
+    }
 }
 
 .tooltip__wrapper{
@@ -114,6 +118,49 @@
     }
 
     
-
     
+    
+}
+
+
+:host ::ng-deep .filter{
+
+    &__header{
+        font-size: 16px;
+        margin: 0;
+        font-family: ProximaRegularBold;
+        color:@text_h;
+        width: 100%;
+        text-align: left;
+        .boxSizing();
+    }
+
+    &__subheader{
+        display: block;
+        font-family: ProximaRegular;
+        font-size: 14px;
+        color:@text_h;
+        margin: 0;
+        text-align: left;
+    }
+
+    &__wrapper{
+        display: flex;
+        width: 100%;
+        .boxSizing();
+    }
+
+    &__block{
+        .flex(1);
+        width: 50%;
+        .boxSizing();
+    }
+
+    &__checkboxes{
+
+    }
+
+    &__checkbox{
+        text-align: left;
+    }
 }

@@ -26,10 +26,15 @@
             </p>
         </div>
     </div>
-    <div class="project__block project__block--flex">
-        <p class="project__t">
-            {{model.description}}
-        </p>
+    <div class="project__block" [ngClass]="{'project__block--flex':!model.image}">
+        <div class="project__block-item">
+            <p class="project__t">
+                {{model.description}}
+            </p>
+        </div>
+        <div *ngIf="model.image" class="project__block-item">
+            <slider [(image)]="model.image"></slider>
+        </div>      
     </div>
 
     <h1 class="project__heading  project__heading--small">
@@ -81,10 +86,6 @@
                 </list-item>
             </div>
         </div>
-        <div class="project__block project__block--flex project__block--center project__block--mt75">
-            <slider [(image)]="model.image"></slider>
-        </div>
-
 </div>
 
 <app-footer @appear3 [color]="model.line">

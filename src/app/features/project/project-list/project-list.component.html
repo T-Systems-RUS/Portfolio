@@ -10,8 +10,8 @@
 
 <div @appear3 class="project-list">
     <filter-panel>
-        <filter-item (onFilterAction)="onFilterAction($event)" name="view"></filter-item>
-        <filter-item [withTooltip]="true" (onFilterAction)="onFilterAction($event)" name="export">
+        <!-- <filter-item (onFilterAction)="onFilterAction($event)" name="view"></filter-item> -->
+        <!-- <filter-item [withTooltip]="true" (onFilterAction)="onFilterAction($event)" name="export">
                 <p class="filter-item__tooltip-i">
                     <img src="./../../assets/images/powerpoint.png" alt="">
                     Powerpoint
@@ -26,9 +26,33 @@
             <p class="filter-item__tooltip-i" (click)="onFilterAction('line')">Sort by production line</p>
             <p class="filter-item__tooltip-i" (click)="onFilterAction('teamcount')" >Sort by team size</p>
             <p class="filter-item__tooltip-i" (click)="onFilterAction('dateModified')">Sort by date modified</p>       
-        </filter-item> 
-        <filter-item [withTooltip]="true" [tooltipVisible]="tooltipVisible" (onFilterAction)="onFilterAction($event)" name="filter">
-            <div>Hello</div>    
+        </filter-item>  -->
+        <filter-item [withTooltip]="true" 
+                     [tooltipVisible]="tooltipVisible" 
+                      wrapperStyle="filter-item--minwidth630"
+                     (onFilterAction)="onFilterAction($event)" name="filter">
+            <h1 class="filter__header">Filters</h1>
+            <div class="filter__wrapper">
+                <div class="filter__block">
+                    <div class="filter__checkboxes">
+                        <h3 class="filter__subheader">
+                            Production line    
+                        </h3>
+                        <div *ngFor="let line of constants.lines" class="filter__checkbox">
+                                <p-checkbox   
+                                    name="lines" 
+                                    value="{{line}}" 
+                                    label="{{line}}" 
+                                    (onChange)="check($event)"
+                                    [(ngModel)]="selectedLines" 
+                                    inputId="line"></p-checkbox>
+                        </div>                     
+                    </div>    
+                </div> 
+                <div class="filter__block">
+                    <technology-picker (onSelect)="check($event)"></technology-picker>    
+                </div>   
+            </div>   
         </filter-item>  
     </filter-panel>
     <project-item [@fadeIn]="''" *ngFor="let project of projects" [model]="project"></project-item>

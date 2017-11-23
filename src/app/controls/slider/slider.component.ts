@@ -10,6 +10,7 @@ import { Component, Input, SimpleChanges } from '@angular/core';
 export class SliderComponent {
 
     @Input() image:string="";
+    @Input() withSugar:boolean=false;
     fullpath;
     
 

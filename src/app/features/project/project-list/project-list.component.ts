@@ -2,6 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { Project } from '../../../shared/models/project';
 import { Employee } from '../../../shared/models/employee';
 import { Technology } from '../../../shared/models/technology';
+import { Constants } from '../../../shared/models/constants';
 import { ProjectService } from '../project.service';
 import { LIST_ANIMATION } from './project-list.animation';
 import { Router } from '@angular/router';
@@ -23,15 +24,16 @@ export class ProjectListComponent {
 
     filteredProjects:Array<Project>=new Array<Project>();
 
-    tooltipVisible:boolean=false;
+    tooltipVisible:boolean=true;
     complete:Array<string>=new Array<string>();
 
     //initial project list
     initialProjects:Array<Project>=new Array<Project>();
 
-
-
-
+    //constants
+    constants=new Constants();
+    //filter checkboxes
+    selectedLines=new Array<string>();
 
 
 
@@ -42,6 +44,15 @@ export class ProjectListComponent {
     }
 
     ngOnInit(){
+        this.dataService.getConstants().subscribe(res=>{
+            this.constants.lines=res.lines;
+            this.constants.domains=res.domains;
+            this.constants.types=res.types;
+            this.constants.programs=res.programs;
+        },error=>{
+            console.log(error);
+        });
+
         this.dataService.getProjects().subscribe(data=>{
             this.projects=data;
             this.projects.forEach(item=>item.teamcount=item.schedules.length);
@@ -74,17 +85,6 @@ export class ProjectListComponent {
         }
     }
 
-    sortByName(a,b) {
-       
-        if (a.name < b.name)
-          return -1;
-        if (a.name > b.name)
-          return 1;
-        return 0;
-
-        
-      }
-
       filterProjects(event){
         this.projects=this.initialProjects;
         this.projects=this.projects.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
@@ -95,5 +95,8 @@ export class ProjectListComponent {
           this.router.navigate(["/project/new"]);
       }
 
-      
+      check($event){
+          console.log($event);
+          console.log(this.selectedLines)
+      }
 }
