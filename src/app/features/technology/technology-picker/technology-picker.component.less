@@ -6,12 +6,21 @@
         &__wrapper{
             border: 1px solid #dddddd;
             height: 291px;
-            overflow-y: scroll;
+            overflow-y: auto;
             overflow-x: hidden;
+            text-align: left;
             .boxSizing();
         }
 
         :host ::ng-deep  &--pad10{
             padding: 10px;
+        }
+
+        :host ::ng-deep &--no-border{
+            border: none;
+        }
+
+        :host ::ng-deep &--no-padding{
+            padding: 10px 0;
         }
     }

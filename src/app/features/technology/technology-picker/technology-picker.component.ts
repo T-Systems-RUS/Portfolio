@@ -11,6 +11,10 @@ import {TechnologyService} from './../technology.service';
 export class TechnologyPickerComponent {
 
     @Input() selectedTechnologies:Array<Technology>=new Array<Technology>();
+    @Input() pickerStyle:string="";
+    @Input() searchStyle:string="";
+    @Input() clearStyle:string="";
+
     @Output() onSelect=new EventEmitter<Array<Technology>>();
 
     initialTechnologies:Array<Technology>=new Array<Technology>();

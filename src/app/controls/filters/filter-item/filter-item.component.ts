@@ -30,7 +30,7 @@ export class FilterItemComponent {
     }
 
     filterClick(type:string){
-        this.onFilterAction.emit(type);
+        this.onFilterAction.emit(this.name);
     }
 
 }

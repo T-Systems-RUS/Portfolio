@@ -1,12 +1,12 @@
 <app-input id="Search" 
             placeholder="Search technology" 
             label="TECHNOLOGIES"
-            boxStyle="input--small"
-            clearStyle="input__clear--right20 input__clear--top30"
+            boxStyle="input--small {{searchStyle}}"
+            clearStyle="input__clear--right20 input__clear--top30 {{clearStyle}}"
             wrapperStyle="input--width100"
             (onModelChanged)="filterTechnologies($event)"></app-input>
 
-<div class="technology-picker__wrapper technology-picker--pad10">
+<div class="technology-picker__wrapper technology-picker--pad10 {{pickerStyle}}">
       <chip *ngFor="let tech of technologies" 
             [value]="tech.name"
             [clickable]="true" 

@@ -20,17 +20,17 @@
                     <img src="./../../assets/images/exel.png" alt="">
                     Excel
                 </p>
-        </filter-item>
-        <filter-item [withTooltip]="true" [tooltipVisible]="tooltipVisible" (onFilterAction)="onFilterAction($event)" name="sort">
+        </filter-item> -->
+        <filter-item [withTooltip]="true" [tooltipVisible]="false" (onFilterAction)="onFilterAction($event)" name="sort">
             <p class="filter-item__tooltip-i" (click)="onFilterAction('name')">Sort by name</p>
             <p class="filter-item__tooltip-i" (click)="onFilterAction('line')">Sort by production line</p>
             <p class="filter-item__tooltip-i" (click)="onFilterAction('teamcount')" >Sort by team size</p>
             <p class="filter-item__tooltip-i" (click)="onFilterAction('dateModified')">Sort by date modified</p>       
-        </filter-item>  -->
+        </filter-item>  
         <filter-item [withTooltip]="true" 
                      [tooltipVisible]="tooltipVisible" 
                      tooltipStyle="filter-item--minwidth630"
-                     (onFilterAction)="onFilterAction($event)" name="filter">
+                     (onFilterAction)="complexFilter()" name="filter">
             <h1 class="filter__header">Filters</h1>
             <div class="filter__wrapper">
                 <div class="filter__block">
@@ -38,61 +38,65 @@
                         <h3 class="filter__subheader">
                             Production line    
                         </h3>
-                        <div *ngFor="let line of constants.lines" class="filter__checkbox">
+                        <div *ngFor="let l of constants.lines" class="filter__checkbox">
                                 <p-checkbox   
                                     name="lines" 
-                                    value="{{line}}" 
-                                    label="{{line}}" 
-                                    (onChange)="check($event)"
-                                    [(ngModel)]="selectedLines" 
-                                    inputId="line"></p-checkbox>
+                                    value="{{l}}" 
+                                    label="{{l}}" 
+                                    (onChange)="check($event,'line')"
+                                    [(ngModel)]="line" 
+                                    inputId="l"></p-checkbox>
                         </div>                     
                     </div>  
                     <div class="filter__checkboxes">
                         <h3 class="filter__subheader">
                             Project type    
                         </h3>
-                        <div *ngFor="let type of constants.types" class="filter__checkbox">
+                        <div *ngFor="let t of constants.types" class="filter__checkbox">
                                 <p-checkbox   
                                     name="type" 
-                                    value="{{type}}" 
-                                    label="{{type}}" 
-                                    (onChange)="check($event)"
-                                    [(ngModel)]="selectedTypes" 
-                                    inputId="type"></p-checkbox>
+                                    value="{{t}}" 
+                                    label="{{t}}" 
+                                    (onChange)="check($event,'type')"
+                                    [(ngModel)]="type" 
+                                    inputId="t"></p-checkbox>
                         </div>                     
                     </div>   
                     <div class="filter__checkboxes">
                         <h3 class="filter__subheader">
                             Program   
                         </h3>
-                        <div *ngFor="let program of constants.programs" class="filter__checkbox">
+                        <div *ngFor="let pr of constants.programs" class="filter__checkbox">
                                 <p-checkbox   
                                     name="program" 
-                                    value="{{program}}" 
-                                    label="{{program}}" 
-                                    (onChange)="check($event)"
-                                    [(ngModel)]="selectedPrograms" 
-                                    inputId="program"></p-checkbox>
+                                    value="{{pr}}" 
+                                    label="{{pr}}" 
+                                    (onChange)="check($event,'program')"
+                                    [(ngModel)]="program" 
+                                    inputId="pr"></p-checkbox>
                         </div>                     
                     </div> 
                         <div class="filter__checkboxes">
                             <h3 class="filter__subheader">
                                 Project domain    
                             </h3>
-                            <div *ngFor="let domain of constants.domains" class="filter__checkbox">
+                            <div *ngFor="let dom of constants.domains" class="filter__checkbox">
                                     <p-checkbox   
                                         name="domain" 
-                                        value="{{domain}}" 
-                                        label="{{domain}}" 
-                                        (onChange)="check($event)"
-                                        [(ngModel)]="selectedDomains" 
-                                        inputId="domain"></p-checkbox>
+                                        value="{{dom}}" 
+                                        label="{{dom}}" 
+                                        (onChange)="check($event,'domain')"
+                                        [(ngModel)]="domain" 
+                                        inputId="dom"></p-checkbox>
                             </div>                     
                         </div> 
                 </div> 
                 <div class="filter__block">
-                    <technology-picker (onSelect)="check($event)"></technology-picker>    
+                    <technology-picker pickerStyle="technology-picker--no-border technology-picker--no-padding"
+                                       clearStyle="input__clear--filter"
+                                       searchStyle="input--filter" 
+                                      (onSelect)="check($event,'technologies')">
+                    </technology-picker>    
                 </div>   
             </div>   
         </filter-item>  

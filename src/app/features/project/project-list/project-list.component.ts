@@ -6,6 +6,7 @@ import { Constants } from '../../../shared/models/constants';
 import { ProjectService } from '../project.service';
 import { LIST_ANIMATION } from './project-list.animation';
 import { Router } from '@angular/router';
+import { retry } from 'rxjs/operator/retry';
 
 
 
@@ -33,10 +34,12 @@ export class ProjectListComponent {
     //constants
     constants=new Constants();
     //filter checkboxes
-    selectedLines=new Array<string>();
-    selectedTypes=new Array<string>();
-    selectedPrograms=new Array<string>();
-    selectedDomains=new Array<string>();
+    line=new Array<string>();
+    type=new Array<string>();
+    program=new Array<string>();
+    domain=new Array<string>();
+
+    filter:any=new Object();
 
     constructor(private dataService:ProjectService,public router: Router) {
         // this.projects=this.dataService.generateProjects();
@@ -96,8 +99,25 @@ export class ProjectListComponent {
           this.router.navigate(["/project/new"]);
       }
 
-      check($event){
+      check($event,name){
           console.log($event);
-          console.log(this.selectedLines)
+          console.log(this[name])
+          //this.projects=this.initialProjects;
+          console.log(this.projects)
+          console.log(this.initialProjects)
+          if(this[name]){
+            this.filter[name]=this[name];
+            this.complexFilter();
+          }
+      }
+
+      complexFilter(){
+         this.projects=this.initialProjects;
+          for(let key of Object.keys(this.filter)){
+            this.projects=this.projects.filter(item=>{
+                if(this.filter[key].indexOf(item[key])>-1) return item;
+                else if(!this.filter[key].length) return item;
+            })
+          }
       }
 }
