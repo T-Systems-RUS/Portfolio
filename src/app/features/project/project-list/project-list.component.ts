@@ -38,6 +38,7 @@ export class ProjectListComponent {
     type=new Array<string>();
     program=new Array<string>();
     domain=new Array<string>();
+    technologies=new Array<Technology>();
 
     filter:any=new Object();
 
@@ -100,11 +101,6 @@ export class ProjectListComponent {
       }
 
       check($event,name){
-          console.log($event);
-          console.log(this[name])
-          //this.projects=this.initialProjects;
-          console.log(this.projects)
-          console.log(this.initialProjects)
           if(this[name]){
             this.filter[name]=this[name];
             this.complexFilter();
@@ -112,12 +108,29 @@ export class ProjectListComponent {
       }
 
       complexFilter(){
-         this.projects=this.initialProjects;
+          this.projects=this.initialProjects;
+          
           for(let key of Object.keys(this.filter)){
             this.projects=this.projects.filter(item=>{
-                if(this.filter[key].indexOf(item[key])>-1) return item;
-                else if(!this.filter[key].length) return item;
+                return this.filter[key].length 
+                    ? this.filter[key].indexOf(item[key])>-1
+                    : item;
+                //if(this.filter[key].indexOf(item[key])>-1) return item;
+                //else if(!this.filter[key].length) return item;
             })
           }
+          
+      }
+
+      filterByTechnology(technologies){
+            let ids=technologies.map(item=>item.id);
+            this.projects=this.initialProjects;
+            this.projects=this.projects.filter(item=>{
+                return item.technologies.map(item=>item.id).filter(function (elem) {
+                    return ids.indexOf(elem) > -1;
+                }).length == ids.length
+            })
+
+            console.log(this.projects) 
       }
 }

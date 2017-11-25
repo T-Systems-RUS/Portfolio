@@ -30,7 +30,7 @@
         <filter-item [withTooltip]="true" 
                      [tooltipVisible]="tooltipVisible" 
                      tooltipStyle="filter-item--minwidth630"
-                     (onFilterAction)="complexFilter()" name="filter">
+                      name="filter">
             <h1 class="filter__header">Filters</h1>
             <div class="filter__wrapper">
                 <div class="filter__block">
@@ -95,7 +95,7 @@
                     <technology-picker pickerStyle="technology-picker--no-border technology-picker--no-padding"
                                        clearStyle="input__clear--filter"
                                        searchStyle="input--filter" 
-                                      (onSelect)="check($event,'technologies')">
+                                      (onSelect)="filterByTechnology($event)">
                     </technology-picker>    
                 </div>   
             </div>   
