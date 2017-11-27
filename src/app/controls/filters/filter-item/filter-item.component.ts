@@ -1,4 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
+import * as Rx from 'rxjs/Rx';
 
 @Component({
   selector: 'filter-item',
@@ -26,7 +27,7 @@ export class FilterItemComponent {
     }
 
     ngAfterViewInit(){
-        
+
     }
 
     filterClick(type:string){

@@ -102,6 +102,7 @@ export class ProjectListComponent {
 
       check($event,name){
           if(this[name]){
+            if(name==='technologies') this[name]=$event;
             this.filter[name]=this[name];
             this.complexFilter();
           }
@@ -112,25 +113,20 @@ export class ProjectListComponent {
           
           for(let key of Object.keys(this.filter)){
             this.projects=this.projects.filter(item=>{
-                return this.filter[key].length 
-                    ? this.filter[key].indexOf(item[key])>-1
-                    : item;
-                //if(this.filter[key].indexOf(item[key])>-1) return item;
-                //else if(!this.filter[key].length) return item;
+                if(this.filter[key].length){
+                    if(Array.isArray(item[key])){
+                        let ids=this.filter[key].map(item=>item.id);
+                        return item[key].map(item=>item.id).filter(elem=>{                          
+                            return ids.indexOf(elem)>-1
+                        }).length==ids.length;
+                    } else{
+                        return this.filter[key].indexOf(item[key])>-1
+                    }
+                } else{
+                    return item;
+                }
             })
           }
           
-      }
-
-      filterByTechnology(technologies){
-            let ids=technologies.map(item=>item.id);
-            this.projects=this.initialProjects;
-            this.projects=this.projects.filter(item=>{
-                return item.technologies.map(item=>item.id).filter(function (elem) {
-                    return ids.indexOf(elem) > -1;
-                }).length == ids.length
-            })
-
-            console.log(this.projects) 
       }
 }
