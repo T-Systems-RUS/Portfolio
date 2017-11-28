@@ -1,4 +1,5 @@
 import { Component, Input, ViewChild } from '@angular/core';
+import { TechnologyPickerComponent } from '../../technology/technology-picker/technology-picker.component';
 import { Project } from '../../../shared/models/project';
 import { Employee } from '../../../shared/models/employee';
 import { Technology } from '../../../shared/models/technology';
@@ -22,6 +23,7 @@ export class ProjectListComponent {
 
     @Input() projects:Array<Project>=new Array<Project>();
     @Input() sortOrder:boolean=true;
+    @ViewChild(TechnologyPickerComponent) technologyPicker:TechnologyPickerComponent;
 
     filteredProjects:Array<Project>=new Array<Project>();
 
@@ -30,6 +32,7 @@ export class ProjectListComponent {
 
     //initial project list
     initialProjects:Array<Project>=new Array<Project>();
+    sortProperty:string='';
 
     //constants
     constants=new Constants();
@@ -43,9 +46,7 @@ export class ProjectListComponent {
     filter:any=new Object();
 
     constructor(private dataService:ProjectService,public router: Router) {
-        // this.projects=this.dataService.generateProjects();
-        // this.initialProjects=this.projects;
-        // this.complete=Array.from(new Set(this.projects.map(item=>item.name)));
+
     }
 
     ngOnInit(){
@@ -79,8 +80,7 @@ export class ProjectListComponent {
 
     onFilterAction(event){
         this.projects.sort(this.propComparator(event));
-        this.tooltipVisible=false;
-        console.log(this.tooltipVisible)
+        this.sortProperty=event;
     }
 
     propComparator(prop) {
@@ -128,5 +128,16 @@ export class ProjectListComponent {
             })
           }
           
+      }
+
+      clearFilters(){
+        this.line=[]
+        this.type=[]
+        this.program=[];
+        this.domain=[];
+        this.technologies=[];
+        this.filter=new Object();
+        this.projects=this.initialProjects;
+        this.technologyPicker.clearSelect();
       }
 }

@@ -1,3 +1,7 @@
+@import './../../../../assets/style/colors.less';
+@import './../../../../assets/style/mixins.less';
+
+
 .project-list{
     display: block;
     width: 100%;
@@ -5,4 +9,10 @@
     margin: 0 auto;
     text-align: center;
     margin-top: 20px;
+
+    &__empty{
+        color:@text_h;
+        font-family: ProximaRegular;
+        font-size: 30px;
+    }
 }

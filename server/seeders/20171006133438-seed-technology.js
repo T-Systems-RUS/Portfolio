@@ -50,34 +50,34 @@ module.exports = {
       //   createdAt:new Date(),
       //   updatedAt:new Date()
       // },
-      {
-        name: 'Scrum',
-        domain: 'methodology',
-        active:false,
-        createdAt:new Date(),
-        updatedAt:new Date()
-      },
-      {
-        name: 'Agile',
-        domain: 'methodology',
-        active:false,
-        createdAt:new Date(),
-        updatedAt:new Date()
-      },
-      {
-        name: 'English',
-        domain: 'language',
-        active:false,
-        createdAt:new Date(),
-        updatedAt:new Date()
-      },
-      {
-        name: 'German',
-        domain: 'language',
-        active:false,
-        createdAt:new Date(),
-        updatedAt:new Date()
-      },
+      // {
+      //   name: 'Scrum',
+      //   domain: 'methodology',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
+      // {
+      //   name: 'Agile',
+      //   domain: 'methodology',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
+      // {
+      //   name: 'English',
+      //   domain: 'language',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
+      // {
+      //   name: 'German',
+      //   domain: 'language',
+      //   active:false,
+      //   createdAt:new Date(),
+      //   updatedAt:new Date()
+      // },
       {
         name: 'Angular 4',
         domain: 'frontend',

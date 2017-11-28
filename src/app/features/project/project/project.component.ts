@@ -53,7 +53,7 @@ export class ProjectComponent {
                 this.language=this.model.technologies.filter(tech=>tech.domain==='language');
                 this.methodology=this.model.technologies.filter(tech=>tech.domain==='methodology');
                 this.information=this.model.technologies.filter(tech=>tech.domain==='information').map(item=>item.name);
-                this.information.push("PSS " + (this.model.pss || 0));
+                if(this.model.pss) this.information.push("PSS " + (this.model.pss));
 
 
                 if(this.model.enddate){

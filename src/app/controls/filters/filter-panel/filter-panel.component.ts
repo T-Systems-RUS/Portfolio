@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { FilterItemComponent } from '../filter-item/filter-item.component';
+
+import * as Rx from 'rxjs/Rx';
 
 @Component({
   selector: 'filter-panel',
@@ -6,13 +9,15 @@ import { Component, Input } from '@angular/core';
   styleUrls:  [
       './filter-panel.component.less'
     ]
+
 })
 
-export class FilterPanelComponent {
+export class FilterPanelComponent  {
 
     @Input() id:string='';
+    @Input() sortProperty:string='name';
 
-    sortProperty:string='name';
+
 
     constructor() {
         

@@ -57,5 +57,9 @@ export class TechnologyPickerComponent {
         this.onSelect.emit(selected);
     }
 
+    clearSelect(){
+        this.technologies.forEach(tech=>tech.active=false);
+    }
+
 }
 
