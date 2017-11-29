@@ -29,6 +29,8 @@ export class Routes {
 
   //file
   removeImage;
+  //presentation
+  presentationImages;
 
   constructor() {
 
@@ -46,6 +48,7 @@ export class Routes {
     this.getRoles="/api/roles";
 
     this.removeImage="/api/images/remove";
+    this.presentationImages='/api/presentation/images';
   }
 
 

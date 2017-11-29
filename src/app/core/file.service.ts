@@ -36,16 +36,4 @@ export class FileService {
                         .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));        
     }
 
-
-    createPresentation(project:Project) /*:Observable<Project>*/{
-       // var pptx = new pptx();
-       pptx.setBrowser(true);
-        var slide = pptx.addNewSlide();
-        slide.addText(
-          project.name,
-          { x:0.0, y:0.25, w:'100%', h:1.5, align:'c', font_size:24, color:'0088CC', fill:'F1F1F1' }
-        );
-
-        pptx.save('Demo');  
-    }
 }

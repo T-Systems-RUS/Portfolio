@@ -115,8 +115,9 @@ export class ProjectComponent {
         })
     }
 
+
     createPresentation(){
-        this.powerpoint.createPresentation(this.model);
+        this.powerpoint.createPresentation(this.model)
     }
 
 }

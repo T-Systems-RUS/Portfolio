@@ -17,7 +17,7 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({ storage: storage }).single('image');
-
+var pptx = require("pptxgenjs");
 
 // POST requests
 router.post('/images/add', function (req, res, next) {
@@ -56,6 +56,20 @@ router.put('/images/remove', function (req, res, next) {
     }
   });
 })
+
+
+router.get('/presentation/images', (req, res) => {
+
+    let background=fs.readFileSync(path.join(__dirname, '../images/presentation', 't-background.png'));
+    let logo=fs.readFileSync(path.join(__dirname, '../images/presentation', 'logo.png'));
+
+    let images={
+      background:new Buffer(background,'binary').toString('base64'),
+      logo:new Buffer(logo,'binary').toString('base64')
+    };
+
+    res.status(200).send(images)  
+});
 
 
 
