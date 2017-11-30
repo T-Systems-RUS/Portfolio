@@ -48,7 +48,7 @@ export class Routes {
     this.getRoles="/api/roles";
 
     this.removeImage="/api/images/remove";
-    this.presentationImages='/api/presentation/images';
+    this.presentationImages='/api/presentation/images/';
   }
 
 

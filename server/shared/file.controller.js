@@ -1,3 +1,4 @@
+
 'use strict';
 var path = require('path');
 var fs = require('fs');
@@ -58,17 +59,21 @@ router.put('/images/remove', function (req, res, next) {
 })
 
 
-router.get('/presentation/images', (req, res) => {
+router.get('/presentation/images/:image?', (req, res) => {
 
     let background=fs.readFileSync(path.join(__dirname, '../images/presentation', 't-background.png'));
     let logo=fs.readFileSync(path.join(__dirname, '../images/presentation', 'logo.png'));
+    let image=req.params.image!=="null" ?  fs.readFileSync(path.join(__dirname, '../images', req.params.image))
+                                        : null;
 
+                              
     let images={
       background:new Buffer(background,'binary').toString('base64'),
-      logo:new Buffer(logo,'binary').toString('base64')
+      logo:new Buffer(logo,'binary').toString('base64'),
+      image:image ? new Buffer(image,'binary').toString('base64') : ''
     };
 
-    res.status(200).send(images)  
+    res.status(200).send(images)
 });
 
 
