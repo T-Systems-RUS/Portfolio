@@ -71,6 +71,10 @@ export class NewProjectComponent  {
                     this.dynamic.setRootViewContainerRef(this.entry);
                     let modal=this.dynamic.addErrorComponent();
                     modal.error=error;
+                    modal.action=true;
+                    modal.actionPerfomed.subscribe(action=>{
+                        this.router.navigate(["/projects/"]);
+                    });
                 })
             } else{
                 this.editMode=false;
@@ -102,7 +106,6 @@ export class NewProjectComponent  {
 
             this.msgs.push({severity:'error', summary:'Error Message', detail:'Please fill required fields'})
         }else{
-            this.model.technolodgyIds=this.model.technologies.map(tech=>tech.id);
             this.model.pss=this.model.pss || 0;
             
             if(this.editMode){
@@ -116,6 +119,10 @@ export class NewProjectComponent  {
                         this.dynamic.setRootViewContainerRef(this.entry);
                         let modal=this.dynamic.addErrorComponent();
                         modal.error=error;
+                        modal.action=true;
+                        modal.actionPerfomed.subscribe(action=>{
+                            this.router.navigate(["/projects/"]);
+                        })
                     }
                 );
             } else{

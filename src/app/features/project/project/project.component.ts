@@ -66,6 +66,11 @@ export class ProjectComponent {
                 this.dynamic.setRootViewContainerRef(this.entry);
                 let modal=this.dynamic.addErrorComponent();
                 modal.error=error;
+                modal.action=true;
+                modal.actionPerfomed.subscribe(action=>{
+                    this.router.navigate(["/projects/"]);
+                })
+                
                 this.model.line="grey";
             })
             console.log(this.model);

@@ -19,8 +19,6 @@ export class Project{
     image:string="";
 
     technologies:Array<Technology>=new Array<Technology>();
-    technolodgyIds:Array<string>=new Array<string>();
-
     employees:Array<Employee>=new Array<Employee>();
 
     schedules:Array<Schedule>=new Array<Schedule>();

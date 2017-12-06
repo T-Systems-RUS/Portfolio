@@ -1,7 +1,7 @@
 'use strict';
 
 var models = require('../../models');
-
+var parse=require('../../shared/parse.service');
 
 var  projectService={};
 
@@ -133,50 +133,30 @@ projectService.createProject=function(Project){
         ishistory:false,              // default for new project
         version:Project.version                    // default for new project
       }).then(function (project) {
-        if(Project.technolodgyIds){
-            models.Technology.findAll({
-                where:{
-                    id:Project.technolodgyIds
-                }
-            }).then(function(technologies){
-                if(technologies.length>0){
-                    project.setTechnologies(technologies);
-                }  
+        // if(Project.technolodgyIds){
+        //     models.Technology.findAll({
+        //         where:{
+        //             id:Project.technolodgyIds
+        //         }
+        //     }).then(function(technologies){
+        //         if(technologies.length>0){
+        //             project.setTechnologies(technologies);
+        //         }  
     
-            })
-        }
-        
-        if(Array.isArray(Project.schedules)){
-            for(let schedule of Project.schedules){
-                //console.log(schedule)
-                    let s=JSON.parse(schedule);
-                
-                    models.Schedule.create({
-                        projectid:project.id,
-                        employeeid:s.employee.id,
-                        roleid:s.role.id,
-                        participation:s.participation,
-                    });
-            }
-        } else{
-            if(Project.schedules){
-                let s=JSON.parse(Project.schedules);
-                
-                    models.Schedule.create({
-                        projectid:project.id,
-                        employeeid:s.employee.id,
-                        roleid:s.role.id,
-                        participation:s.participation,
-                    });
-            }
-        }
-        
+        //     })
+        // }
+        let technologies=parse.parseTechnology(Project.technologies);
+        let instances=technologies.map(tech=> { return models.Technology.build(tech) });
+        project.setTechnologies(instances);
+
+        let schedules=parse.parseShedules(project, Project.schedules);
+        models.Schedule.bulkCreate(schedules);
         
 
 
          return project;
       }).catch(error=>{
-          console.log(error);
+          throw new Error(error);
       })
 }
 
@@ -190,8 +170,8 @@ projectService.updateProject=function(Project){
             { where: { id: Project.id } },
             { transaction: t }
           ).then(project=>{
+                return projectService.createProject(Project);
                 t.commit();
-                return projectService.createProject(Project);   
           })  
     }).catch(error=>{
         console.log(error);

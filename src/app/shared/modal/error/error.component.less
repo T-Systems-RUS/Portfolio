@@ -42,8 +42,23 @@
         padding:20px;
         position: relative;
         text-align: center;
-
         .boxSizing();
+    }
+
+    &__link{
+        font-family: ProximaRegularThin;
+        color: @text_white;
+        position: absolute;
+        cursor: pointer;
+        bottom:10px;
+        left:0;
+        text-align: center;
+        width: 100%;
+        .boxSizing();
+
+        &:hover{
+            text-decoration: underline;
+        }
     }
 
     &__line{

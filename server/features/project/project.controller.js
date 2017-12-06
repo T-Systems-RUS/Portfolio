@@ -31,10 +31,9 @@ router.get('/projects/:id', (req, res) => {
         res.status(200).send(data);
     }).catch(err=>{
         res.status(500).send(err);
-    })
-      
-      
+    })    
 });
+
 
 router.get('/projects/history/:name', (req, res) => {
     projectService.getProjectsByName(req.params.name).then(data=>{
@@ -43,9 +42,7 @@ router.get('/projects/history/:name', (req, res) => {
         res.status(200).send(data);
     }).catch(err=>{
         res.status(500).send({ errors: { er:{msg:error.message} }});
-    })
-      
-      
+    })  
 });
 
 

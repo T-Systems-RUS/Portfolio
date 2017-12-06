@@ -1,4 +1,4 @@
-import { Component, Input, Output,EventEmitter } from '@angular/core';
+import { Component, Input, Output,EventEmitter, AfterContentInit } from '@angular/core';
 import { Employee } from '../../../shared/models/employee';
 import { Role } from '../../../shared/models/role';
 import { Schedule } from '../../../shared/models/schedule';
@@ -10,7 +10,7 @@ import { validateConfig } from '@angular/router/src/config';
   styleUrls:  [
       './list-item.component.less']
 })
-export class ListItemComponent {
+export class ListItemComponent implements AfterContentInit {
 
     @Input() model:Schedule=new Schedule();
     @Input() roles:Array<Role>=new Array<Role>();
@@ -27,10 +27,8 @@ export class ListItemComponent {
         
     }
 
-    ngAfterViewInit(){
-        setTimeout(()=>{
-            //this.output.role=this.roles.length>0 ? this.roles[0] : new Role()
-        },0);
+    ngAfterContentInit(){
+        this.model.role=this.model.role.id==='' ? this.roles[0] : this.model.role;
     }
 
     performCLick(value:Schedule){

@@ -8,5 +8,7 @@
         <p class="error__line" *ngFor="let er of error.errors">
             {{er}}
         </p>
+
+        <a class="error__link" *ngIf="action" (click)="performAction()">Redirect to newest version</a>
     </div>
 </modal>
