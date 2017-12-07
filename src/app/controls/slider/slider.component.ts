@@ -19,8 +19,7 @@ export class SliderComponent {
     }
 
   ngOnInit(){
-    this.changePath(this.image)
-    console.log(this.image);
+    this.changePath(this.image);
   }
 
   ngOnChanges(changes: SimpleChanges) {

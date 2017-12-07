@@ -48,23 +48,23 @@
                     <span class="project__bold project__bold--nohover" *ngIf="model.enddate"> - {{model.enddate | date: 'dd.MM.yyyy'}}</span>
                 </p>
                 <p *ngIf="model.program" class="project__t project__t--small project__mb10">Program:
-                    <a href="#" class="project__bold">{{model.program}}</a>
+                    <a (click)="searchProjects('program',model.program)" class="project__bold">{{model.program}}</a>
                 </p>
                 <p *ngIf="model.domain" class="project__t project__t--small project__mb10">Domain:
-                    <a href="#" class="project__bold">{{model.domain}}</a>
+                    <a (click)="searchProjects('domain',model.domain)"  class="project__bold">{{model.domain}}</a>
                 </p>
                 <p *ngIf="language.length>0" class="project__t project__t--small project__mb10">Project language:
-                    <a href="#" class="project__bold" *ngFor="let l of language">
+                    <a (click)="searchProjects('technologies',m.name)" class="project__bold" *ngFor="let l of language">
                         {{l.name}}
                     </a>
                 </p>
                 <p *ngIf="methodology.length>0" class="project__t project__t--small project__mb10">Methology:
-                    <a href="#" class="project__bold" *ngFor="let m of methodology">
+                    <a (click)="searchProjects('technologies',m.name)" class="project__bold" *ngFor="let m of methodology">
                         {{m.name}}
                     </a>
                 </p>
                 <p *ngIf="model.customer" class="project__t project__t--small">Customer:
-                    <a href="#" class="project__bold">{{model.customer}}</a>
+                    <a (click)="searchProjects('customer',model.customer)" class="project__bold">{{model.customer}}</a>
                 </p>
 
                 <p *ngIf="backend.length>0" class="project__t project__t--small project__mt30 project__mb10">Back-end</p>

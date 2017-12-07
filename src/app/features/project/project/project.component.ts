@@ -125,4 +125,10 @@ export class ProjectComponent {
         this.powerpoint.createPresentation(this.model)
     }
 
+    searchProjects(name,value) {
+        let param=new Object();
+        param[name]=value;
+        this.router.navigate(['/projects'], { queryParams: param });
+    }
+
 }

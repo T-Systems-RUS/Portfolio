@@ -1,13 +1,17 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild,AfterContentInit } from '@angular/core';
 import { TechnologyPickerComponent } from '../../technology/technology-picker/technology-picker.component';
 import { Project } from '../../../shared/models/project';
 import { Employee } from '../../../shared/models/employee';
 import { Technology } from '../../../shared/models/technology';
+//import { Schedule } from '../../../shared/models/schedule';
 import { Constants } from '../../../shared/models/constants';
 import { ProjectService } from '../project.service';
 import { LIST_ANIMATION } from './project-list.animation';
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { retry } from 'rxjs/operator/retry';
+
+import * as _ from 'lodash';
+//import { Schedule } from 'primeng/primeng';
 
 
 
@@ -19,7 +23,7 @@ import { retry } from 'rxjs/operator/retry';
   animations:LIST_ANIMATION
 })
 
-export class ProjectListComponent {
+export class ProjectListComponent implements AfterContentInit {
 
     @Input() projects:Array<Project>=new Array<Project>();
     @Input() sortOrder:boolean=true;
@@ -41,11 +45,14 @@ export class ProjectListComponent {
     type=new Array<string>();
     program=new Array<string>();
     domain=new Array<string>();
+    customer=new Array<string>();
     technologies=new Array<Technology>();
 
     filter:any=new Object();
 
-    constructor(private dataService:ProjectService,public router: Router) {
+    constructor(private dataService:ProjectService,
+                public router: Router,
+                private route:ActivatedRoute) {
 
     }
 
@@ -66,7 +73,6 @@ export class ProjectListComponent {
             
             this.initialProjects=this.projects;
             this.complete= Array.from(new Set(this.projects.map(item=>item.name)));//
-
         },err=>{
             console.log(err);
         })
@@ -78,15 +84,33 @@ export class ProjectListComponent {
         }, 0);     
     }
 
-    onFilterAction(event){
-        this.projects.sort(this.propComparator(event));
+    ngAfterContentInit(){
+        this.route.queryParams.subscribe(params=>{
+            if(!_.isEmpty(params)){
+                for(let key of Object.keys(params)){
+                    let parameter=params[key];
+                    this[key].push(parameter);
+                    this.check(parameter,key);
+                }                
+            }
+        })
+    }
+
+    isAssending:boolean=false;
+    sortProjects(event){
+        this.isAssending=!this.isAssending;
+        this.projects.sort(this.propComparator(event,this.isAssending));
         this.sortProperty=event;
     }
 
-    propComparator(prop) {
+    propComparator(prop,isAssending) {
         return function(a, b) {
-            //console.log(a[prop],b[prop],prop,a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1)
-            return a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
+            if(isAssending){
+                return a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
+            } else{
+                return b[prop] > a[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
+            }
+            
         }
     }
 
@@ -101,6 +125,7 @@ export class ProjectListComponent {
       }
 
       check($event,name){
+          console.log($event,name)
           if(this[name]){
             if(name==='technologies') this[name]=$event;
             this.filter[name]=this[name];

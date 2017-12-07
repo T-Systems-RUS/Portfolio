@@ -22,10 +22,10 @@
                 </p>
         </filter-item> 
         <filter-item [withTooltip]="true" [tooltipVisible]="false"  name="sort">
-            <p class="filter-item__tooltip-i" (click)="onFilterAction('name')">Sort by name</p>
-            <p class="filter-item__tooltip-i" (click)="onFilterAction('line')">Sort by production line</p>
-            <p class="filter-item__tooltip-i" (click)="onFilterAction('teamcount')" >Sort by team size</p>
-            <p class="filter-item__tooltip-i" (click)="onFilterAction('dateModified')">Sort by date modified</p>       
+            <p class="filter-item__tooltip-i" (click)="sortProjects('name')">Sort by name</p>
+            <p class="filter-item__tooltip-i" (click)="sortProjects('line')">Sort by production line</p>
+            <p class="filter-item__tooltip-i" (click)="sortProjects('teamcount')" >Sort by team size</p>
+            <p class="filter-item__tooltip-i" (click)="sortProjects('dateModified')">Sort by date modified</p>       
         </filter-item>  
         <filter-item [withTooltip]="true"              
                      tooltipStyle="filter-item--minwidth630"
