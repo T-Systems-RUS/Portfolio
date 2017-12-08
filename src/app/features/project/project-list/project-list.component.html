@@ -16,10 +16,10 @@
                     <img src="./../../assets/images/powerpoint.png" alt="">
                     Powerpoint
                 </p>
-                <p class="filter-item__tooltip-i">
+                <!-- <p class="filter-item__tooltip-i">
                     <img src="./../../assets/images/exel.png" alt="">
                     Excel
-                </p>
+                </p> -->
         </filter-item> 
         <filter-item [withTooltip]="true" [tooltipVisible]="false"  name="sort">
             <p class="filter-item__tooltip-i" (click)="sortProjects('name')">Sort by name</p>
@@ -30,7 +30,9 @@
         <filter-item [withTooltip]="true"              
                      tooltipStyle="filter-item--minwidth630"
                       name="filter">
-            <h1 class="filter__header">Filters</h1>
+            <h1 class="filter__header">Filters
+                <a (click)="clearFilters()" class="filter__button filter__button--floatR">CLEAR</a>   
+            </h1>
             <div class="filter__wrapper">
                 <div class="filter__block">
                     <div class="filter__checkboxes">
@@ -75,25 +77,40 @@
                                     inputId="pr"></p-checkbox>
                         </div>                     
                     </div> 
-                        <div class="filter__checkboxes">
-                            <h3 class="filter__subheader">
-                                Project domain    
-                            </h3>
-                            <div *ngFor="let dom of constants.domains" class="filter__checkbox">
-                                    <p-checkbox   
-                                        name="domain" 
-                                        value="{{dom}}" 
-                                        label="{{dom}}" 
-                                        (onChange)="check($event,'domain')"
-                                        [(ngModel)]="domain" 
-                                        inputId="dom"></p-checkbox>
-                            </div>                     
-                        </div>                       
+                    <div class="filter__checkboxes">
+                        <h3 class="filter__subheader">
+                            Project domain    
+                        </h3>
+                        <div *ngFor="let dom of constants.domains" class="filter__checkbox">
+                                <p-checkbox   
+                                    name="domain" 
+                                    value="{{dom}}" 
+                                    label="{{dom}}" 
+                                    (onChange)="check($event,'domain')"
+                                    [(ngModel)]="domain" 
+                                    inputId="dom"></p-checkbox>
+                        </div>                     
+                    </div>
+                    <div class="filter__checkboxes">
+                        <h3 class="filter__subheader">
+                            Customer    
+                        </h3>
+                        <div *ngFor="let cus of constants.customers" class="filter__checkbox">
+                                <p-checkbox   
+                                    name="customer" 
+                                    value="{{cus}}" 
+                                    label="{{cus}}" 
+                                    (onChange)="check($event,'customer')"
+                                    [(ngModel)]="customer" 
+                                    inputId="cus"></p-checkbox>
+                        </div>                     
+                    </div>                     
                 </div> 
                 <div class="filter__block">
                     <technology-picker pickerStyle="technology-picker--no-border technology-picker--no-padding technology-picker--height400"
                                        clearStyle="input__clear--filter"
                                        searchStyle="input--filter" 
+                                       [selected]="selectedTechnology"
                                       (onSelect)="check($event,'technologies')">
                     </technology-picker>    
                 </div>                               

@@ -11,6 +11,7 @@ import {TechnologyService} from './../technology.service';
 export class TechnologyPickerComponent {
 
     @Input() selectedTechnologies:Array<Technology>=new Array<Technology>();
+    @Input() selected:string;
     @Input() pickerStyle:string="";
     @Input() searchStyle:string="";
     @Input() clearStyle:string="";
@@ -27,10 +28,12 @@ export class TechnologyPickerComponent {
     ngOnInit(){
         this.dataService.getTechnologies().subscribe(data=>{
             this.technologies=data;
-            
+            if(this.selected) this.selectedTechnologies.push(new Technology({name:this.selected}));
+          
             this.technologies.filter((item)=>
-            this.selectedTechnologies.map(i=>i.id)
-                                     .includes(item.id)).forEach(element => {
+            this.selectedTechnologies.map(i=>i.name)
+                                     .includes(item.name)).forEach(element => {
+                                         console.log(element)
                                         element.active=true;  
                                      });
 

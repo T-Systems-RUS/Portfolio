@@ -54,7 +54,7 @@
                     <a (click)="searchProjects('domain',model.domain)"  class="project__bold">{{model.domain}}</a>
                 </p>
                 <p *ngIf="language.length>0" class="project__t project__t--small project__mb10">Project language:
-                    <a (click)="searchProjects('technologies',m.name)" class="project__bold" *ngFor="let l of language">
+                    <a (click)="searchProjects('technologies',l.name)" class="project__bold" *ngFor="let l of language">
                         {{l.name}}
                     </a>
                 </p>
@@ -68,13 +68,23 @@
                 </p>
 
                 <p *ngIf="backend.length>0" class="project__t project__t--small project__mt30 project__mb10">Back-end</p>
-                <chip *ngFor="let tech of backend" [value]="tech.name" style="horizontal"></chip>
+                <chip *ngFor="let tech of backend" 
+                      (linkClicked)="searchProjects('technologies',$event)"
+                      [isLink]="true"
+                      [value]="tech.name" 
+                      style="horizontal"></chip>
 
                 <p *ngIf="frontend.length>0" class="project__t project__t--small project__mt30 project__mb10">Front-end</p>
-                <chip *ngFor="let tech of frontend" [value]="tech.name" style="grey"></chip>
+                <chip *ngFor="let tech of frontend" 
+                      (linkClicked)="searchProjects('technologies',$event)"
+                      [isLink]="true"
+                      [value]="tech.name" 
+                      style="grey"></chip>
 
                 <p *ngIf="information.length>0" class="project__t project__t--small project__mt30 project__mb10">Information</p>
-                <chip *ngFor="let info of information" [value]="info" style="sap"></chip>
+                <chip *ngFor="let info of information" 
+                      [value]="info" 
+                      style="sap"></chip>
             </div>
 
             <div class="project__block-item">

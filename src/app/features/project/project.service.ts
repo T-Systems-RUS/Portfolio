@@ -22,30 +22,30 @@ export class ProjectService {
     lines=["automotive", "horizontal", "vertical","sap"];
     domains=["Transportation", "Health", "Telecom","Automotive"];
     names=["SBB","Sopre AOM","OSM", "T-Vision", "VPS", "Contie UBR","T-Mobile"];
-    technologies=[
-        new Technology({id:"1",name:"Java 1.8",domain:"backend"}),
-        new Technology({id:"2",name:"Maven",domain:"backend"}),
-        new Technology({id:"3",name:"Spring",domain:"backend"}),
-        new Technology({id:"4",name:"Hibernate",domain:"backend"}),
-        new Technology({id:"5",name:"Jenkins",domain:"backend"}),
-        new Technology({id:"6",name:"DB2",domain:"backend"}),
-        new Technology({id:"7",name:"HTML5",domain:"frontend"}),
-        new Technology({id:"8",name:"Typescript",domain:"frontend"}),
-        new Technology({id:"9",name:"Angular 2",domain:"frontend"}),
-        new Technology({id:"10",name:"webpack",domain:"frontend"}),
-        new Technology({id:"11",name:"gulp",domain:"frontend"}),
-        new Technology({id:"12",name:"Java 1.6",domain:"backend"}),
-        new Technology({id:"13",name:"Entity Framework",domain:"backend"}),
-        new Technology({id:"14",name:"ASP Net Core",domain:"backend"}),
-        new Technology({id:"15",name:"CQRS",domain:"backend"}),
-        new Technology({id:"16",name:"JSF",domain:"backend"}),
-        new Technology({id:"17",name:"JEE",domain:"backend"}),
-        new Technology({id:"18",name:"Silenium",domain:"frontend"}),
-        new Technology({id:"19",name:"grunt",domain:"frontend"}),
-        new Technology({id:"20",name:"Angular 4",domain:"frontend"}),
-        new Technology({id:"21",name:"React",domain:"frontend"}),
-        new Technology({id:"22",name:"vue",domain:"frontend"})
-    ];
+    // technologies=[
+    //     new Technology({id:"1",name:"Java 1.8",domain:"backend"}),
+    //     new Technology({id:"2",name:"Maven",domain:"backend"}),
+    //     new Technology({id:"3",name:"Spring",domain:"backend"}),
+    //     new Technology({id:"4",name:"Hibernate",domain:"backend"}),
+    //     new Technology({id:"5",name:"Jenkins",domain:"backend"}),
+    //     new Technology({id:"6",name:"DB2",domain:"backend"}),
+    //     new Technology({id:"7",name:"HTML5",domain:"frontend"}),
+    //     new Technology({id:"8",name:"Typescript",domain:"frontend"}),
+    //     new Technology({id:"9",name:"Angular 2",domain:"frontend"}),
+    //     new Technology({id:"10",name:"webpack",domain:"frontend"}),
+    //     new Technology({id:"11",name:"gulp",domain:"frontend"}),
+    //     new Technology({id:"12",name:"Java 1.6",domain:"backend"}),
+    //     new Technology({id:"13",name:"Entity Framework",domain:"backend"}),
+    //     new Technology({id:"14",name:"ASP Net Core",domain:"backend"}),
+    //     new Technology({id:"15",name:"CQRS",domain:"backend"}),
+    //     new Technology({id:"16",name:"JSF",domain:"backend"}),
+    //     new Technology({id:"17",name:"JEE",domain:"backend"}),
+    //     new Technology({id:"18",name:"Silenium",domain:"frontend"}),
+    //     new Technology({id:"19",name:"grunt",domain:"frontend"}),
+    //     new Technology({id:"20",name:"Angular 4",domain:"frontend"}),
+    //     new Technology({id:"21",name:"React",domain:"frontend"}),
+    //     new Technology({id:"22",name:"vue",domain:"frontend"})
+    // ];
 
 
     constructor(private http: HttpService, private extract:ExtractService) {

@@ -1,3 +1,3 @@
-<div (click)="performClick(value)" class="chip {{style}}" [ngClass]="{'chip--clicked': active, 'chip--clickable': clickable}">
+<div (click)="performClick(value)" class="chip {{style}}" [ngClass]="{'chip--clicked': active, 'chip--clickable': clickable || isLink}">
     {{value}}
 </div>

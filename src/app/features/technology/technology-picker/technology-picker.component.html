@@ -7,7 +7,7 @@
             (onModelChanged)="filterTechnologies($event)"></app-input>
 
 <div class="technology-picker__wrapper technology-picker--pad10 {{pickerStyle}}">
-      <chip *ngFor="let tech of technologies" 
+      <chip *ngFor="let tech of technologies"
             [value]="tech.name"
             [clickable]="true" 
             [active] ="tech.active"

@@ -37,6 +37,7 @@ export class ProjectListComponent implements AfterContentInit {
     //initial project list
     initialProjects:Array<Project>=new Array<Project>();
     sortProperty:string='';
+    selectedTechnology:string='';
 
     //constants
     constants=new Constants();
@@ -69,10 +70,14 @@ export class ProjectListComponent implements AfterContentInit {
         this.dataService.getProjects().subscribe(data=>{
             this.projects=data;
             this.projects.forEach(item=>item.teamcount=item.schedules.length);
+            this.constants.customers=new Set(
+                this.projects.map(item=>item.customer).filter(p=>p!=="" && p).sort()
+            );
+
             console.log(this.projects);
             
             this.initialProjects=this.projects;
-            this.complete= Array.from(new Set(this.projects.map(item=>item.name)));//
+            this.complete= this.refreshCompleteList(this.projects);
         },err=>{
             console.log(err);
         })
@@ -89,6 +94,7 @@ export class ProjectListComponent implements AfterContentInit {
             if(!_.isEmpty(params)){
                 for(let key of Object.keys(params)){
                     let parameter=params[key];
+                    if(key==='technologies') this.selectedTechnology=parameter;
                     this[key].push(parameter);
                     this.check(parameter,key);
                 }                
@@ -115,6 +121,7 @@ export class ProjectListComponent implements AfterContentInit {
     }
 
       filterProjects(event){
+        this.clearFilters();
         this.projects=this.initialProjects;
         this.projects=this.projects.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
         this.complete=this.projects.map(item=>item.name);
@@ -125,7 +132,6 @@ export class ProjectListComponent implements AfterContentInit {
       }
 
       check($event,name){
-          console.log($event,name)
           if(this[name]){
             if(name==='technologies') this[name]=$event;
             this.filter[name]=this[name];
@@ -152,7 +158,7 @@ export class ProjectListComponent implements AfterContentInit {
                 }
             })
           }
-          
+          this.complete= this.refreshCompleteList(this.projects);
       }
 
       clearFilters(){
@@ -164,5 +170,9 @@ export class ProjectListComponent implements AfterContentInit {
         this.filter=new Object();
         this.projects=this.initialProjects;
         this.technologyPicker.clearSelect();
+      }
+
+      refreshCompleteList(projects) :Array<any> {
+        return Array.from(new Set(projects.map(item=>item.name)));
       }
 }

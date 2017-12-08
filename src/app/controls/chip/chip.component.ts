@@ -12,8 +12,10 @@ export class ChipComponent {
     @Input() value:string='';
     @Input() style:string='';
     @Input() clickable:boolean=false;
+    @Input() isLink:boolean=false;
 
     @Output() clicked=new EventEmitter<string>();
+    @Output() linkClicked=new EventEmitter<string>();
 
     @Input() active=false;
     
@@ -25,6 +27,10 @@ export class ChipComponent {
         if(this.clickable){
             this.active=!this.active;
             this.clicked.emit(value);
+        } else{
+            if(this.isLink){
+                this.linkClicked.emit(value);
+            }
         }
     }
 

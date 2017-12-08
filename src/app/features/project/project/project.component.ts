@@ -130,5 +130,5 @@ export class ProjectComponent {
         param[name]=value;
         this.router.navigate(['/projects'], { queryParams: param });
     }
-
+    
 }
