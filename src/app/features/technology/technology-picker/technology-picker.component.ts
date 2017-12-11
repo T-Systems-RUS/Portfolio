@@ -33,7 +33,6 @@ export class TechnologyPickerComponent {
             this.technologies.filter((item)=>
             this.selectedTechnologies.map(i=>i.name)
                                      .includes(item.name)).forEach(element => {
-                                         console.log(element)
                                         element.active=true;  
                                      });
 

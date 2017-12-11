@@ -7,7 +7,9 @@ const express = require('express');
 const router = express.Router();
 var multer = require('multer');
 var projectService=require('../features/project/project.service');
-var pptx = require('pptxgenjs');
+
+
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, DIST)
@@ -43,7 +45,6 @@ router.put('/images/remove', function (req, res, next) {
   let image=DIST+req.body.image;
   fs.exists(image, function(exists) {
     if(exists) {
-      console.log(exists)
       fs.unlink(image);
       req.body.image=null;
       projectService.removeImage(req.body).then(project=>{
@@ -59,21 +60,32 @@ router.put('/images/remove', function (req, res, next) {
 })
 
 
-router.get('/presentation/images/:image?', (req, res) => {
+router.get('/presentation/images/:id?', (req, res) => {
 
-    let background=fs.readFileSync(path.join(__dirname, '../images/presentation', 't-background.png'));
-    let logo=fs.readFileSync(path.join(__dirname, '../images/presentation', 'logo.png'));
-    let image=req.params.image!=="null" ?  fs.readFileSync(path.join(__dirname, '../images', req.params.image))
-                                        : null;
+    projectService.getProject(req.params.id).then(project=>{
+        if(!project) res.status(404).send("No projects found");
+        
+        let dist='../images/presentation';
 
-                              
-    let images={
-      background:new Buffer(background,'binary').toString('base64'),
-      logo:new Buffer(logo,'binary').toString('base64'),
-      image:image ? new Buffer(image,'binary').toString('base64') : ''
-    };
-
-    res.status(200).send(images)
+        let header=fs.readFileSync(path.join(__dirname, dist , 'Header.png'));
+        let header2=fs.readFileSync(path.join(__dirname, dist, 'Header2.png'));
+        let domain=fs.existsSync(path.join(__dirname, dist, project.domain +'.png')) ?
+            fs.readFileSync(path.join(__dirname, dist, project.domain +'.png')) :
+            '';
+        let image=project.image!=="null" ?  fs.readFileSync(path.join(__dirname, '../images', project.image))
+                                            : null;
+            
+        let images={
+          header:new Buffer(header,'binary').toString('base64'),
+          header2:new Buffer(header2,'binary').toString('base64'),
+          domain:new Buffer(domain,'binary').toString('base64'),
+          image:image ? new Buffer(image,'binary').toString('base64') : ''
+        };
+    
+        res.status(200).send(images);
+    }).catch(err=>{
+        res.status(500).send(err);
+    })
 });
 
 

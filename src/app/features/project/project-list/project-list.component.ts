@@ -91,6 +91,7 @@ export class ProjectListComponent implements AfterContentInit {
 
     ngAfterContentInit(){
         this.route.queryParams.subscribe(params=>{
+            console.log('conternt init')
             if(!_.isEmpty(params)){
                 for(let key of Object.keys(params)){
                     let parameter=params[key];
