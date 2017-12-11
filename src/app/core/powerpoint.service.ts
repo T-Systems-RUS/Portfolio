@@ -53,7 +53,7 @@ export class PowerPointService {
  
              console.log(res.json())
  
-             pptx.setLayout('LAYOUT_16x9');
+             pptx.setLayout('LAYOUT_4x3');
  
              var slide = pptx.addNewSlide();
              
@@ -85,7 +85,7 @@ export class PowerPointService {
 
             slide.addText(
                 project.description,
-                { x:this.x, y:1.0, w:'50%', h:1.0, align:'l',valign:'top', font_size:12, font_face:'Tele-GroteskNor', color:'000000' }
+                { x:this.x, y:1.0, w:'50%', h:1.0, align:'l',valign:'top', font_size:14, font_face:'Tele-GroteskNor', color:'000000' }
             )
 
             if(image){
@@ -94,26 +94,88 @@ export class PowerPointService {
                 )
             }
 
-            slide.addShape(pptx.shapes.RECTANGLE, { x:0.0, y:3.625, w:'50%', h:2.0, fill:this.magenta });
-            slide.addShape(pptx.shapes.RECTANGLE, { x:'50%', y:3.625, w:'50%', h:2.0, fill:'a4a4a4' });
+            // y = 3.625 for 16_9
+            slide.addShape(pptx.shapes.RECTANGLE, { x:0.0, y:5.5, w:'50%', h:2.0, fill:this.magenta });
+            slide.addShape(pptx.shapes.RECTANGLE, { x:'50%', y:5.5, w:'50%', h:2.0, fill:'a4a4a4' });
 
 
+            //
             slide.addText(
                 'Details',
-                { x:this.x, y:3.625, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'TELEGROTESK HEADLINE ULTRA', color:'ffffff' }
+                { x:this.x, y:5.45, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'TELEGROTESK HEADLINE ULTRA', color:'ffffff' }
             )
 
 
-
+            // y=3.9
+            //duration
+            let start=5.75;
+            let lineheight=0.25;
             slide.addText(
                 'Project duration:',
-                { x:this.x, y:3.9, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
+                { x:this.x, y:start, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
             )
 
             slide.addText(
-                this.getDate(project.startdate) + '-' + this.getDate(project.enddate),
-                { x:1.9, y:3.9, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
+                this.getDate(project.startdate) + 
+                (project.enddate ? '-' : '')
+                + this.getDate(project.enddate),
+                { x:1.9, y:start, w:'50%', h:0.5, align:'l', valign:'middle', underline:true, font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
             )
+
+            //program
+            slide.addText(
+                'Program:',
+                { x:this.x, y:start+(lineheight), w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
+            )
+
+            slide.addText(
+                project.program,
+                { x:1.3, y:start+(lineheight), w:'50%', h:0.5, align:'l', valign:'middle',underline:true, font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
+            )
+
+            //domain
+            slide.addText(
+                'Domain:',
+                { x:this.x, y:start+(lineheight*2), w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
+            )
+
+            slide.addText(
+                project.domain,
+                { x:1.3, y:start+(lineheight*2), w:'50%', h:0.5, align:'l', valign:'middle',underline:true, font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
+            )
+
+            //Language
+            let interval=0;
+            let language=project.technologies.filter(tech=>tech.domain==='language');
+            if(language.length){
+                interval+=0.25;
+                let text =language.map(item=>item.name).join(' ');
+                slide.addText(
+                    'Language:',
+                    { x:this.x, y:start+(lineheight*3), w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
+                )
+    
+                slide.addText(
+                    text,
+                    { x:1.4, y:start+(lineheight*3), w:'50%', h:0.5, align:'l', valign:'middle',underline:true, font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
+                )
+            }
+
+            //Methology
+            let methodology=project.technologies.filter(tech=>tech.domain==='methodology');
+            if(methodology.length){
+                let text =methodology.map(item=>item.name).join(' ');
+                slide.addText(
+                    'Methodology:',
+                    { x:this.x, y:start+(lineheight*3)+interval, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
+                )
+    
+                slide.addText(
+                    text,
+                    { x:1.7, y:start+(lineheight*3)+interval, w:'50%', h:0.5, align:'l', valign:'middle',underline:true, font_size:18, font_face:'Tele-GroteskNor', color:'ffffff' }
+                )
+            }
+
 
             let backend=project.technologies.filter(item=>item.domain==='backend');
             let frontend=project.technologies.filter(item=>item.domain==='frontend');
@@ -121,7 +183,7 @@ export class PowerPointService {
             if(backend.length){
                 slide.addText(
                     'Back-end',
-                    { x:'53%', y:3.625, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'TELEGROTESK HEADLINE ULTRA', color:'ffffff' }
+                    { x:'53%', y:5.45, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'TELEGROTESK HEADLINE ULTRA', color:'ffffff' }
                 )
             }
 

@@ -70,21 +70,36 @@ router.get('/presentation/images/:id?', (req, res) => {
         let header=fs.readFileSync(path.join(__dirname, dist , 'Header.png'));
         let header2=fs.readFileSync(path.join(__dirname, dist, 'Header2.png'));
         let domain=fs.existsSync(path.join(__dirname, dist, project.domain +'.png')) ?
-            fs.readFileSync(path.join(__dirname, dist, project.domain +'.png')) :
-            '';
-        let image=project.image!=="null" ?  fs.readFileSync(path.join(__dirname, '../images', project.image))
-                                            : null;
+            fs.readFileSync(path.join(__dirname, dist, project.domain +'.png')) : '';
             
+      
+        let image=fs.existsSync(path.join(__dirname, '../images', project.image || 'image.png')) ?
+                  fs.readFileSync(path.join(__dirname, '../images', project.image)) : '';
+
+        let technologies=[]
+        for(let technology of project.technologies){
+          if(fs.existsSync(path.join(__dirname, dist, technology.name +'.png'))){
+            let tech=fs.readFileSync(path.join(__dirname, dist, technology.name +'.png'));
+            technologies.push({
+              domain:technology.domain,
+              image:new Buffer(tech,'binary').toString('base64')
+            });
+          }
+        }
+                                            
+                                           
         let images={
           header:new Buffer(header,'binary').toString('base64'),
           header2:new Buffer(header2,'binary').toString('base64'),
           domain:new Buffer(domain,'binary').toString('base64'),
-          image:image ? new Buffer(image,'binary').toString('base64') : ''
+          image: new Buffer(image,'binary').toString('base64'),
+          technologies:technologies
         };
     
         res.status(200).send(images);
     }).catch(err=>{
-        res.status(500).send(err);
+      console.log(err)
+      res.status(500).json({ errors: { er:{msg:err} }});
     })
 });
 
