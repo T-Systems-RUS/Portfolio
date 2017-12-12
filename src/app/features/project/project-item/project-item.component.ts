@@ -11,6 +11,7 @@ import { Project } from '../../../shared/models/project';
 export class ProjectItemComponent {
 
     @Input() model:Project=new Project();
+    description:string='';
     
     ribbonVisible=false;
     constructor() {
@@ -19,7 +20,7 @@ export class ProjectItemComponent {
     
     ngAfterViewInit(){
         setTimeout(()=> {
-            this.model.description=this.trimText(this.model.description,101);
+            this.description=this.trimText(this.model.description,101);
             if(this.model.enddate){
                 this.ribbonVisible=new Date(this.model.enddate)<=new Date();
             }

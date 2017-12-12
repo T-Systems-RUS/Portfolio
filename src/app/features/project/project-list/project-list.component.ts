@@ -6,6 +6,7 @@ import { Technology } from '../../../shared/models/technology';
 //import { Schedule } from '../../../shared/models/schedule';
 import { Constants } from '../../../shared/models/constants';
 import { ProjectService } from '../project.service';
+import { PowerPointService } from '../../../core/powerpoint.service';
 import { LIST_ANIMATION } from './project-list.animation';
 import { ActivatedRoute,Router } from '@angular/router';
 import { retry } from 'rxjs/operator/retry';
@@ -53,7 +54,8 @@ export class ProjectListComponent implements AfterContentInit {
 
     constructor(private dataService:ProjectService,
                 public router: Router,
-                private route:ActivatedRoute) {
+                private route:ActivatedRoute,
+                private powerpoint:PowerPointService) {
 
     }
 
@@ -175,5 +177,13 @@ export class ProjectListComponent implements AfterContentInit {
 
       refreshCompleteList(projects) :Array<any> {
         return Array.from(new Set(projects.map(item=>item.name)));
+      }
+
+
+      createPresentation(){
+        for(let i=0;i<this.projects.length;i++){
+            let saveToClient=i===this.projects.length-1 ? true :false;
+            this.powerpoint.createPresentation(this.projects[i],saveToClient);
+        } 
       }
 }

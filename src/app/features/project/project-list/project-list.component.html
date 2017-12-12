@@ -12,7 +12,7 @@
     <filter-panel [sortProperty]="sortProperty">
          <!-- <filter-item  name="view"></filter-item>  -->
          <filter-item [withTooltip]="true" name="export">
-                <p class="filter-item__tooltip-i">
+                <p (click)="createPresentation()" class="filter-item__tooltip-i">
                     <img src="./../../assets/images/powerpoint.png" alt="">
                     Powerpoint
                 </p>

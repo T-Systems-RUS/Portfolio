@@ -40,8 +40,15 @@ export class PowerPointService {
         return parsed;
     }
 
+    addSlide(project:Project){
+        
+   
 
-    createPresentation(project:Project){
+        
+    }
+
+
+    createPresentation(project:Project, saveToClient=false){
         return this.http.get(this.routes.presentationImages + project.id)
          .subscribe(res=>{
      
@@ -50,8 +57,9 @@ export class PowerPointService {
              let header2=response.header2;
              let domain=response.domain;
              let image=response.image;
+             let technologies=response.technologies;
  
-             console.log(res.json())
+     
  
              pptx.setLayout('LAYOUT_4x3');
  
@@ -90,7 +98,7 @@ export class PowerPointService {
 
             if(image){
                 slide.addImage(
-                    { data:'image/png;base64,'+image, x:'60%', y:1.1,w:3.0,h:1.5 }
+                    { data:'image/png;base64,'+image, x:'60%', y:1.1,w:3.2,h:1.9 }
                 )
             }
 
@@ -177,20 +185,71 @@ export class PowerPointService {
             }
 
 
-            let backend=project.technologies.filter(item=>item.domain==='backend');
-            let frontend=project.technologies.filter(item=>item.domain==='frontend');
+            let backend=technologies.filter(item=>item.domain==='backend');
+            let frontend=technologies.filter(item=>item.domain==='frontend');
+
+            let headerY=5.45;
+            let iconY=5.9;
+            let textY=6.1;
 
             if(backend.length){
                 slide.addText(
                     'Back-end',
-                    { x:'53%', y:5.45, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'TELEGROTESK HEADLINE ULTRA', color:'ffffff' }
+                    { x:5.1, y:headerY, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'TELEGROTESK HEADLINE ULTRA', color:'ffffff' }
                 )
+
+                let bside=5.2;
+                let bsidetext=5.1;
+                for(let item of backend){
+                    slide.addImage(
+                        { data:'image/png;base64,'+item.image, x:bside, y:iconY, w:0.4, h:0.3 }
+                    )
+
+                    slide.addText(
+                        item.name,
+                        { x:bsidetext, y:textY, w:'50%', h:0.5, align:'l', valign:'middle', font_size:14, font_face:'Tele-GroteskNor', color:'ffffff' }
+                    )
+
+                    bside+=0.7;
+                    bsidetext+=0.7;                   
+                }
+
+                headerY+=0.95;
+                iconY+=0.95;
+                textY+=0.95;
+            }
+
+            if(frontend.length){
+                slide.addText(
+                    'Front-end',
+                    { x:5.1, y:headerY, w:'50%', h:0.5, align:'l', valign:'middle', font_size:18, font_face:'TELEGROTESK HEADLINE ULTRA', color:'ffffff' }
+                )
+
+                let bside=5.2;
+                let bsidetext=5.1;
+                for(let item of frontend){
+                    slide.addImage(
+                        { data:'image/png;base64,'+item.image, x:bside, y:iconY, w:0.4, h:0.3 }
+                    )
+
+                    slide.addText(
+                        item.name,
+                        { x:bsidetext, y:textY, w:'50%', h:0.5, align:'l', valign:'middle', font_size:14, font_face:'Tele-GroteskNor', color:'ffffff' }
+                    )
+
+                    bside+=0.7;
+                    bsidetext+=0.7;
+                }
             }
 
 
-             pptx.save('Case Studies '+project.name); 
+            if(saveToClient) pptx.save('Case Studies '+project.name); 
+
          },
-             error => console.log(error)
+             error => {
+                 console.log(error);
+                 Observable.throw(this.extract.handlePostError(error));
+             }
          )      
      }
 

@@ -82,6 +82,7 @@ router.get('/presentation/images/:id?', (req, res) => {
             let tech=fs.readFileSync(path.join(__dirname, dist, technology.name +'.png'));
             technologies.push({
               domain:technology.domain,
+              name:technology.name,
               image:new Buffer(tech,'binary').toString('base64')
             });
           }

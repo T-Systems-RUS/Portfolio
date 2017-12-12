@@ -122,7 +122,13 @@ export class ProjectComponent {
 
 
     createPresentation(){
-        this.powerpoint.createPresentation(this.model)
+       try{
+        this.powerpoint.createPresentation(this.model,true);
+       } catch(error){
+            this.dynamic.setRootViewContainerRef(this.entry);
+            let modal=this.dynamic.addErrorComponent();
+            modal.error=error;
+       }
     }
 
     searchProjects(name,value) {
