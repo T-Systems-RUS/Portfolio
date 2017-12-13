@@ -12,7 +12,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 
 
-import * as pptx from "pptxgenjs";
+import   pptx  from "pptxgenjs";
 import { retry } from "rxjs/operator/retry";
 
 
@@ -21,7 +21,7 @@ export class PowerPointService {
 
     routes:Routes;
 
-    constructor(private http:HttpService, private extract:ExtractService){
+    constructor(private http?:HttpService, private extract?:ExtractService){
         this.routes=new Routes();
         pptx.setBrowser(true);
     }
@@ -36,7 +36,6 @@ export class PowerPointService {
     getDate(date:Date){
         let newDate= date ? new Date(date) : null;
         let parsed=newDate ? newDate.getDate() + '.'+ newDate.getMonth() + '.' + newDate.getFullYear() : '';
-        console.log(parsed);
         return parsed;
     }
 
@@ -59,8 +58,7 @@ export class PowerPointService {
              let image=response.image;
              let technologies=response.technologies;
  
-     
- 
+
              pptx.setLayout('LAYOUT_4x3');
  
              var slide = pptx.addNewSlide();

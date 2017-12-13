@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild,AfterContentInit } from '@angular/core';
+import { Component, Input, ViewChild,OnInit } from '@angular/core';
 import { TechnologyPickerComponent } from '../../technology/technology-picker/technology-picker.component';
 import { Project } from '../../../shared/models/project';
 import { Employee } from '../../../shared/models/employee';
@@ -24,7 +24,7 @@ import * as _ from 'lodash';
   animations:LIST_ANIMATION
 })
 
-export class ProjectListComponent implements AfterContentInit {
+export class ProjectListComponent implements OnInit {
 
     @Input() projects:Array<Project>=new Array<Project>();
     @Input() sortOrder:boolean=true;
@@ -58,7 +58,7 @@ export class ProjectListComponent implements AfterContentInit {
                 private powerpoint:PowerPointService) {
 
     }
-
+    
     ngOnInit(){
         this.dataService.getConstants().subscribe(res=>{
             this.constants.lines=res.lines;
@@ -68,32 +68,25 @@ export class ProjectListComponent implements AfterContentInit {
         },error=>{
             console.log(error);
         });
-
+        
         this.dataService.getProjects().subscribe(data=>{
             this.projects=data;
             this.projects.forEach(item=>item.teamcount=item.schedules.length);
+
+            //cutomer list for filters
             this.constants.customers=new Set(
                 this.projects.map(item=>item.customer).filter(p=>p!=="" && p).sort()
             );
+
+            
 
             console.log(this.projects);
             
             this.initialProjects=this.projects;
             this.complete= this.refreshCompleteList(this.projects);
-        },err=>{
-            console.log(err);
-        })
-    }
 
-    ngAfterViewInit(){
-        setTimeout(()=> {
-            this.filteredProjects=this.projects;             
-        }, 0);     
-    }
-
-    ngAfterContentInit(){
-        this.route.queryParams.subscribe(params=>{
-            console.log('conternt init')
+            //check if filter needs to apply
+            let params=this.route.snapshot.queryParams;
             if(!_.isEmpty(params)){
                 for(let key of Object.keys(params)){
                     let parameter=params[key];
@@ -102,8 +95,13 @@ export class ProjectListComponent implements AfterContentInit {
                     this.check(parameter,key);
                 }                
             }
+            
+        },err=>{
+            console.log(err);
         })
     }
+
+
 
     isAssending:boolean=false;
     sortProjects(event){
@@ -136,7 +134,7 @@ export class ProjectListComponent implements AfterContentInit {
 
       check($event,name){
           if(this[name]){
-            if(name==='technologies') this[name]=$event;
+            if(name==='technologies' && $event.length) this[name]=$event;
             this.filter[name]=this[name];
             this.complexFilter();
           }
@@ -149,7 +147,7 @@ export class ProjectListComponent implements AfterContentInit {
             this.projects=this.projects.filter(item=>{
                 if(this.filter[key].length){
                     if(Array.isArray(item[key])){
-                        let ids=this.filter[key].map(item=>item.id);
+                        let ids=Array.isArray(this.filter[key]) ? this.filter[key].map(item=>item.id) : [];
                         return item[key].map(item=>item.id).filter(elem=>{                          
                             return ids.indexOf(elem)>-1
                         }).length==ids.length;

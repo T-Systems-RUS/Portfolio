@@ -10,6 +10,7 @@
              [(ngModel)]="model"
              [ngClass]="{'dropdown__box--error': errorMessage!==undefined && errorMessage!==''}"
              (ngModelChange)="modelChanged($event)">
+        <option  value="">Select {{label || 'item'}}</option>
         <option *ngFor="let option of options" value="{{option}}">{{option}}</option>
     </select>
 </div>

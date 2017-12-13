@@ -11,6 +11,7 @@ import { ProjectService } from '../project.service';
 
 
 import { PROJECT_ANIMATION } from './project.animation';
+import { ReflectiveDependency } from '@angular/core/src/di/reflective_provider';
 
 
 @Component({
@@ -123,11 +124,11 @@ export class ProjectComponent {
 
     createPresentation(){
        try{
-        this.powerpoint.createPresentation(this.model,true);
+            this.powerpoint.createPresentation(this.model,true);
        } catch(error){
             this.dynamic.setRootViewContainerRef(this.entry);
             let modal=this.dynamic.addErrorComponent();
-            modal.error=error;
+            modal.error.errors=[error];
        }
     }
 
