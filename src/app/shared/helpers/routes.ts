@@ -12,6 +12,7 @@ export class Routes {
   updateProject;
   history;
   archieve;
+  deleteProject;
 
 
   //Employees
@@ -38,6 +39,7 @@ export class Routes {
     this.createProject="/api/projects/create/";
     this.updateProject="/api/projects/update/";
     this.archieve="/api/projects/archieve/";
+    this.deleteProject="/api/projects/delete/";
     this.history="/api/projects/history/";
 
     this.getEmployees="/api/employees";

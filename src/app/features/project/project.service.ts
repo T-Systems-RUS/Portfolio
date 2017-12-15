@@ -13,7 +13,7 @@ import { Routes } from './../../shared/helpers/routes';
 
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import "rxjs/add/operator/toPromise";
+
 
 
 @Injectable()
@@ -82,6 +82,13 @@ export class ProjectService {
         
         let data = this.http.createParams(project);
         return this.http.put(this.routes.archieve,data)
+                        .map(this.extract.extractData)
+                        .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));
+
+    }
+
+    deleteProject(project:Project) {       
+        return this.http.delete(this.routes.deleteProject + project.name)
                         .map(this.extract.extractData)
                         .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));
 

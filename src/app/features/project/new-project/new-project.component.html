@@ -10,13 +10,13 @@
         <div class="new-project__content-block">
                 <app-input id="name" 
                     placeholder="Project name" 
-                    boxStyle="input--small"
+                    boxStyle="input--small {{ this.editMode ? 'input__box--uneditable' : ''}}"
                     label="Project name"
                     [name]="model.name"
                     [errorMessage]="model.errors['name']"
                     [model]="model.name"
                     (onModelChanged)="setValue($event,'name')"
-                    clearStyle="input__clear--right20 input__clear--top30"
+                    clearStyle="input__clear--right20 input__clear--top30 {{ this.editMode ? 'input__clear--hidden' : ''}}"
                     wrapperStyle="input--width100 input--marginB20"></app-input>
 
                 <dropdown id="line" 

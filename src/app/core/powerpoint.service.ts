@@ -20,10 +20,14 @@ import { retry } from "rxjs/operator/retry";
 export class PowerPointService {
 
     routes:Routes;
+    pptx:any;
+    PptxGenJS:any;
 
-    constructor(private http?:HttpService, private extract?:ExtractService){
+    constructor(private http:HttpService, private extract:ExtractService){
         this.routes=new Routes();
-        pptx.setBrowser(true);
+        this.PptxGenJS=Object.getPrototypeOf(pptx).constructor;          
+        this.pptx=new this.PptxGenJS();
+        //pptx.setBrowser(true);
     }
     
     magenta:string="e20074";
@@ -47,7 +51,7 @@ export class PowerPointService {
     }
 
 
-    createPresentation(project:Project, saveToClient=false){
+    createPresentation(project:Project,name='', saveToClient=false){
         return this.http.get(this.routes.presentationImages + project.id)
          .subscribe(res=>{
      
@@ -59,9 +63,14 @@ export class PowerPointService {
              let technologies=response.technologies;
  
 
-             pptx.setLayout('LAYOUT_4x3');
+            //  let PptxGenJS=Object.getPrototypeOf(pptx).constructor;          
+            //  let presentation=new PptxGenJS();
+
+             this.pptx.setBrowser(true);
+
+             this.pptx.setLayout('LAYOUT_4x3');
  
-             var slide = pptx.addNewSlide();
+             var slide = this.pptx.addNewSlide();
              
          
             //header 
@@ -101,8 +110,8 @@ export class PowerPointService {
             }
 
             // y = 3.625 for 16_9
-            slide.addShape(pptx.shapes.RECTANGLE, { x:0.0, y:5.5, w:'50%', h:2.0, fill:this.magenta });
-            slide.addShape(pptx.shapes.RECTANGLE, { x:'50%', y:5.5, w:'50%', h:2.0, fill:'a4a4a4' });
+            slide.addShape(this.pptx.shapes.RECTANGLE, { x:0.0, y:5.5, w:'50%', h:2.0, fill:this.magenta });
+            slide.addShape(this.pptx.shapes.RECTANGLE, { x:'50%', y:5.5, w:'50%', h:2.0, fill:'a4a4a4' });
 
 
             //
@@ -241,7 +250,11 @@ export class PowerPointService {
             }
 
 
-            if(saveToClient) pptx.save('Case Studies '+project.name); 
+            if(saveToClient) {
+                this.pptx.save('POP Russia Portfolio '+ name);
+                this.pptx=new this.PptxGenJS();
+             }
+
 
          },
              error => {

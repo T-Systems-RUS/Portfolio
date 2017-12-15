@@ -25,6 +25,12 @@ projectValidator.archieveValidators=function(){
     ]
 }
 
+projectValidator.deleteValidators=function(){
+    return [
+        check('name','Project name is required').exists().isLength({ min: 1,max:100000 })
+    ]
+}
+
 
 
 module.exports = projectValidator;

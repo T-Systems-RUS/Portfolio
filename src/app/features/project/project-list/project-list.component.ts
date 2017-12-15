@@ -3,8 +3,8 @@ import { TechnologyPickerComponent } from '../../technology/technology-picker/te
 import { Project } from '../../../shared/models/project';
 import { Employee } from '../../../shared/models/employee';
 import { Technology } from '../../../shared/models/technology';
-//import { Schedule } from '../../../shared/models/schedule';
 import { Constants } from '../../../shared/models/constants';
+
 import { ProjectService } from '../project.service';
 import { PowerPointService } from '../../../core/powerpoint.service';
 import { LIST_ANIMATION } from './project-list.animation';
@@ -12,8 +12,6 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { retry } from 'rxjs/operator/retry';
 
 import * as _ from 'lodash';
-//import { Schedule } from 'primeng/primeng';
-
 
 
 @Component({
@@ -179,9 +177,12 @@ export class ProjectListComponent implements OnInit {
 
 
       createPresentation(){
+        
+        let presentationname='';
+
         for(let i=0;i<this.projects.length;i++){
             let saveToClient=i===this.projects.length-1 ? true :false;
-            this.powerpoint.createPresentation(this.projects[i],saveToClient);
+            this.powerpoint.createPresentation(this.projects[i],presentationname,saveToClient);
         } 
       }
 }

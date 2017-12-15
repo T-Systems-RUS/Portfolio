@@ -20,7 +20,7 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({ storage: storage }).single('image');
-var pptx = require("pptxgenjs");
+//var pptx = require("pptxgenjs");
 
 // POST requests
 router.post('/images/add', function (req, res, next) {
@@ -66,6 +66,7 @@ router.get('/presentation/images/:id?', (req, res) => {
         if(!project) res.status(404).send("No projects found");
         
         let dist='../images/presentation';
+
 
         let header=fs.readFileSync(path.join(__dirname, dist , 'Header.png'));
         let header2=fs.readFileSync(path.join(__dirname, dist, 'Header2.png'));

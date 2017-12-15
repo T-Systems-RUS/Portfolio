@@ -89,15 +89,15 @@ export class ProjectComponent {
 
         modal.confirmed.subscribe(action=>{
             modal.visible=false;
-            this.dataService.archieveProject(this.model).subscribe(
+            this.dataService.deleteProject(this.model).subscribe(
                 data=>{
-                    this.router.navigate(["/projects"]);
+                    //this.router.navigate(["/projects"]);
                     console.log(data)
                 },
                 error=>{
                     this.dynamic.setRootViewContainerRef(this.entry);
                     let modal=this.dynamic.addErrorComponent();
-                    modal.error=error;
+                    modal.error.errors=[error];
                 }
             )
         })
@@ -124,7 +124,7 @@ export class ProjectComponent {
 
     createPresentation(){
        try{
-            this.powerpoint.createPresentation(this.model,true);
+            this.powerpoint.createPresentation(this.model, this.model.name,true);
        } catch(error){
             this.dynamic.setRootViewContainerRef(this.entry);
             let modal=this.dynamic.addErrorComponent();

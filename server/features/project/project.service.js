@@ -131,20 +131,10 @@ projectService.createProject=function(Project){
         image:Project.image,
         type:Project.type,
         ishistory:false,              // default for new project
-        version:Project.version                    // default for new project
+        version:Project.version,                    // default for new project,
+        technologies:Project.technologies
       }).then(function (project) {
-        // if(Project.technolodgyIds){
-        //     models.Technology.findAll({
-        //         where:{
-        //             id:Project.technolodgyIds
-        //         }
-        //     }).then(function(technologies){
-        //         if(technologies.length>0){
-        //             project.setTechnologies(technologies);
-        //         }  
-    
-        //     })
-        // }
+
         let technologies=parse.parseTechnology(Project.technologies);
         let instances=technologies.map(tech=> { return models.Technology.build(tech) });
         project.setTechnologies(instances);
@@ -183,7 +173,7 @@ projectService.updateProject=function(Project){
 
 //PUT request archieve project
 projectService.archieveProject=  async(id)=> {
-    try{
+    try{       
         let project=await  models.Project.update(
                     { ishistory: true,
                       updatedAt:new Date()  },
@@ -193,6 +183,16 @@ projectService.archieveProject=  async(id)=> {
         return project;
     } catch(e){
         console.log(e);
+    }
+}
+
+projectService.deleteProject=async  (name)=> {
+    try{
+        let affectedRows=await models.Project.destroy({ where: {name:name},force:true });
+        return affectedRows;
+    } catch(error){
+        console.log(error)
+        throw new Error(error);
     }
 }
 

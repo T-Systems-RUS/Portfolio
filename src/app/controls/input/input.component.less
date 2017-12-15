@@ -46,6 +46,10 @@
         &--top30{
             top:30px;
         }
+
+        &--hidden{
+            display: none;
+        }
         
         :host ::ng-deep &--filter{
             right: 0;
@@ -63,6 +67,12 @@
         padding: 0  20px;
         width: 100%;
         .boxSizing();
+
+        &--uneditable{
+            pointer-events: none;
+            cursor: default;
+            background-color: #dddddd;
+        }
 
         &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
             font-family: ProximaRegularThin;

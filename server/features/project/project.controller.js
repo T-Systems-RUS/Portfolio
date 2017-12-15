@@ -116,6 +116,23 @@ router.put('/projects/archieve', projectValidator.archieveValidators(), async (r
        
 })
 
+router.delete('/projects/delete/:name', projectValidator.deleteValidators(), async (req, res, next) => {
+    
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.mapped() });
+    }
+    
+    try{
+        let response= await projectService.deleteProject(req.params.name);
+        res.status(200).send(response);
+        
+    } catch(error){
+        res.status(500).json({ errors: { er:{msg:error} }});
+    }
+       
+})
+
 
 
 module.exports = router;
