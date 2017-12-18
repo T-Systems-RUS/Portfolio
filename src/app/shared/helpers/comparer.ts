@@ -12,8 +12,8 @@ export default  class Comparer {
             return [];
         } else{
             for(let key of keys1){
-
-                let isObject=obj1[key] instanceof Object;
+                // obj1[key]=obj1[key] || '';
+                // obj2[key]=obj2[key] || '';
 
                 if(Array.isArray(obj1[key])){
                     let ids1=obj1[key].map(i=>i.id);
@@ -28,10 +28,9 @@ export default  class Comparer {
 
                     if(diff.length) difference=[...difference, { [key]: diff }];
                 } else{
-                    if(!isObject){
-                        console.log(obj1[key],obj2[key],key)
+                    if( key!=='errors'){
                         if(obj1[key]!==obj2[key]) difference=[...difference, { [key]: 'changed' }];
-                    } //todo else for objects                 
+                    }               
                 }
             }
         }

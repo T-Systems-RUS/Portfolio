@@ -153,6 +153,7 @@ export class NewProjectComponent  {
         modal.project=new Project(this.model);
       }
 
+
       setValue(value,prop){         
           this.model[prop]=value;
           this.disableSubmit();
@@ -176,9 +177,8 @@ export class NewProjectComponent  {
 
       disableSubmit(){
         let comparer=new Comparer();
-        let x= comparer.deepCompare(this.model,this.modelCopy);
-        console.log(x)
-        this.disabled=x.length===0;
+        let diff= comparer.deepCompare(this.model,this.modelCopy);
+        this.disabled= diff.length===0;
       }
 
 

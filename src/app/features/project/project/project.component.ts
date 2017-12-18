@@ -74,7 +74,6 @@ export class ProjectComponent {
                 
                 this.model.line="grey";
             })
-            console.log(this.model);
         })
 
         
