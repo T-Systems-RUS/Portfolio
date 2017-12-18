@@ -40,7 +40,6 @@ export class EmployeePickerComponent {
                         active:schedule ? true : false
                     })
                 });
-                console.log(this.schedules)
                 this.roles=data[1];
                 this.initialSchedules=this.schedules;
                 

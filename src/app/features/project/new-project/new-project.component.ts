@@ -14,7 +14,8 @@ import { DynamicService } from '../../../core/dynamic.service';
 
 //primeng and third libraries
 import {Message} from 'primeng/components/common/api';
-//import * as Rx from 'rxjs/Rx'; 
+import * as _ from 'lodash'; 
+import Comparer from '../../../shared/helpers/comparer';
 
 
 
@@ -27,7 +28,10 @@ import {Message} from 'primeng/components/common/api';
 })
 export class NewProjectComponent  {
 
-    @Input() model:Project=new Project();
+    @Input() 
+    model:Project=new Project();
+    modelCopy:Project=new Project();
+
     @ViewChild('entry', { read: ViewContainerRef} ) entry:ViewContainerRef; 
 
     msgs: Message[] = [];
@@ -39,7 +43,7 @@ export class NewProjectComponent  {
     types:Array<string>;
     programs:Array<string>;
 
-    allowSubmit:boolean=true;
+    disabled:boolean=true;
     errors:Object={};
     initialState:Project=new Project();
     
@@ -63,8 +67,13 @@ export class NewProjectComponent  {
             if(params['id']){
                 this.dataService.getProject(params['id']).subscribe(data=>{
                     this.model=new Project(data);
+                    //detect changes for submit button disabled
+                    
+
                     this.model.startdate=this.model.startdate ? new Date(this.model.startdate) : undefined;
                     this.model.enddate= this.model.enddate ? new Date(this.model.enddate) : undefined;
+
+                    this.modelCopy=new Project(this.model);
                     this.editMode=true; 
 
                 },error=>{
@@ -144,8 +153,9 @@ export class NewProjectComponent  {
         modal.project=new Project(this.model);
       }
 
-      setValue(value,prop){
+      setValue(value,prop){         
           this.model[prop]=value;
+          this.disableSubmit();
           console.log(this.model);
       }
 
@@ -164,7 +174,12 @@ export class NewProjectComponent  {
           window.history.back();
       }
 
-      
+      disableSubmit(){
+        let comparer=new Comparer();
+        let x= comparer.deepCompare(this.model,this.modelCopy);
+        console.log(x)
+        this.disabled=x.length===0;
+      }
 
 
 }
