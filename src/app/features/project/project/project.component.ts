@@ -60,8 +60,7 @@ export class ProjectComponent {
                 if(this.model.enddate){
                     this.ribbonVisible=new Date(this.model.enddate)<=new Date();
                 }
-                
-                
+
                 console.log(this.model);    
             },error=>{
                 this.dynamic.setRootViewContainerRef(this.entry);

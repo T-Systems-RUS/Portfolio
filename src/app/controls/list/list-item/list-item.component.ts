@@ -16,6 +16,7 @@ export class ListItemComponent implements AfterContentInit {
     @Input() roles:Array<Role>=new Array<Role>();
 
     @Input() itemStyle:string='';
+    @Input() headingStyle:string='';
 
     @Input() clickable:boolean=false;
     @Output() clicked=new EventEmitter<Schedule>();

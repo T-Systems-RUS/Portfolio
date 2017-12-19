@@ -137,6 +137,10 @@
     background: #EEF1F3 !important;
 }
 
+.ui-growl-message-error{
+    background: @error !important;
+}
+
 .ui-label-active{
     
 }	//Label element of a checked state.
@@ -147,4 +151,54 @@
 
 .ui-label-disabled{
 
+}
+
+
+
+.ui-fileupload-files{
+    width:100% !important;
+}
+
+.ui-fileupload-buttonbar{
+    background: @sap_bg;
+}
+
+.ui-button{
+    background: @text_white !important;
+    border: 1px solid @text_h !important;
+
+    &:hover{
+        background: @text_white !important;
+    }
+}
+
+.ui-fileupload-choose,.ui-widget button{
+    color: @text_h !important;
+    cursor: pointer;
+    display: inline-block;
+    font-family: ProximaRegularLight;
+    line-height: 28px;
+    height: 30px;
+    padding: 0 10px;
+    text-decoration: none;
+    text-align: center;
+    vertical-align:middle !important;
+    .boxSizing();
+    .transition(all .3s);
+    .borderRadius(2px);
+}
+
+
+
+//tooltip
+
+.ui-tooltip{
+    
+}	
+.ui-tooltip-arrow{
+   
+}	
+.ui-tooltip-text{
+    background: @hor_bg;
+    font-family: ProximaRegular;
 }

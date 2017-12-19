@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Project } from '../../../shared/models/project';
+import { Comparer } from '../../../shared/helpers/comparer';
 import * as _ from "lodash";
+import { Validators } from '@angular/forms/src/validators';
 
 
 @Component({
@@ -14,11 +16,13 @@ export class ProjectModalComponent {
     @Input() project:Project=new Project();
     @Input() compareProject:Project;
 
+    comparer:Comparer;
+
     validator={};
     id:string;
     
     constructor() {
-        
+        this.comparer=new Comparer();
     }
 
     ngOnInit(){
@@ -35,50 +39,14 @@ export class ProjectModalComponent {
     }
 
     compareProjects(project1,project2){
-        if(Object.keys(project1).length===Object.keys(project2).length){
-            for(let key of Object.keys(project1)){
-                if(Array.isArray(project1[key]) && (key==='technologies' || key==='schedules')){
-                    //added
-                    let diff1=_.differenceBy(project1[key],project2[key],'name');
-                    //removed
-                    let diff2=_.differenceBy(project2[key],project1[key],'name');
+        let difference=this.comparer.deepCompare(project1,project2);
 
-                    if(diff1.length>0){
-                        diff1.forEach(element => {
-                            this.validator[key+element.id]='chip--edited';
-                        });               
-                    } else if(diff2.length>0){
-                        diff2.forEach(element => {
-                            this.validator[key+element.id]='chip--edited';
-                        });
-                    } else{
-
-                    }
-
-                    console.log(project1.version,project2.version,diff1,diff2);
-                    console.log(key)
-                }
-                if(project1.version>project2.version){
-                    if(project1[key] && !project2[key]){
-                        this.validator[key]='project-modal--added'
-                    } else if(!project1[key] && project2[key]){
-                        this.validator[key]=''
-                    } else if(project1[key]!==project2[key]){
-                        this.validator[key]='project-modal--edited'
-                    } else{
-                        this.validator[key]=''
-                    }
-                } else{
-                    if(project1[key] && !project2[key]){
-                        this.validator[key]='project-modal--removed'
-                    } else if(!project1[key] && project2[key]){
-                        this.validator[key]=''
-                    } else if(project1[key]!==project2[key]){
-                        this.validator[key]='project-modal--edited'
-                    } else{
-                        this.validator[key]=''
-                    }
-                }
+        for(let key in difference){
+            
+            if(Array.isArray(difference[key])){
+                difference[key].forEach(id => this.validator[key+id]='item--edited');
+            } else{
+                this.validator[key]='project-modal--edited';
             }
         }
     }

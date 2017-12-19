@@ -153,19 +153,27 @@ projectService.createProject=function(Project){
 
 //POST request update Project
 projectService.updateProject=function(Project){
-    let transaction=models.sequelize.transaction();
-    return transaction.then(function(t){
+    return models.sequelize.transaction().then(function(t){
         return models.Project.update(
             { ishistory: true },
-            { where: { id: Project.id } },
-            { transaction: t }
+            { where: { id: Project.id }, transaction: t },
           ).then(project=>{
-                return projectService.createProject(Project);
-                t.commit();
-          })  
+                return projectService.createProject(Project).then(project=>{
+                    t.commit();
+                    return project;
+                }).catch(error=>{
+                    console.log(error);
+                    throw new Error(error);
+                    return t.rollback();
+                })              
+          }).catch(error=>{
+            console.log(error);
+            throw new Error(error);
+            return t.rollback();
+        })   
     }).catch(error=>{
         console.log(error);
-        return t.rollback();
+        throw new Error(error);
     }) 
      
 }

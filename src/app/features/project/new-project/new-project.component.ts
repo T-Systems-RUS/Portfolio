@@ -15,7 +15,7 @@ import { DynamicService } from '../../../core/dynamic.service';
 //primeng and third libraries
 import {Message} from 'primeng/components/common/api';
 import * as _ from 'lodash'; 
-import Comparer from '../../../shared/helpers/comparer';
+import { Comparer } from '../../../shared/helpers/comparer';
 
 
 
@@ -74,7 +74,9 @@ export class NewProjectComponent  {
                     this.model.enddate= this.model.enddate ? new Date(this.model.enddate) : undefined;
 
                     this.modelCopy=new Project(this.model);
-                    this.editMode=true; 
+
+                    let urlSegment=this.route.snapshot.url[1].path;
+                    this.editMode= urlSegment==='update' ? true : false; 
 
                 },error=>{
                     this.dynamic.setRootViewContainerRef(this.entry);
@@ -135,6 +137,7 @@ export class NewProjectComponent  {
                     }
                 );
             } else{
+                this.model.version=1;
                 this.dataService.createProject(this.model).subscribe(
                     data=>{this.router.navigate(["/projects/"])},
                     error=>{
@@ -178,7 +181,7 @@ export class NewProjectComponent  {
       disableSubmit(){
         let comparer=new Comparer();
         let diff= comparer.deepCompare(this.model,this.modelCopy);
-        this.disabled= diff.length===0;
+        this.disabled= Object.keys(diff).length===0;
       }
 
 

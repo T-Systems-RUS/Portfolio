@@ -12,6 +12,7 @@ import { ProjectHistoryComponent }         from './project-history/project-histo
     { path: 'project/new', component: NewProjectComponent },
     { path: 'project/history/:name', component: ProjectHistoryComponent },
     { path: 'project/update/:id', component: NewProjectComponent },
+    { path: 'project/copy/:id', component: NewProjectComponent },
     { path: 'project/:id', component: ProjectComponent }
   ])],
   exports: [RouterModule]

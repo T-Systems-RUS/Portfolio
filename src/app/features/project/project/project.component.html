@@ -99,19 +99,24 @@
 </div>
 
 <app-footer @appear3 [color]="model.line">
-        <a title="Edit project" [routerLink]="['/project/update', model.id]" class="footer__button">
+        <a [routerLink]="['/project/update', model.id]" 
+           class="footer__button"
+           pTooltip="Edit project" tooltipPosition="top">
             <img src="./../../assets/images/edit.png" alt="edit">
         </a>
-        <a title="Project history" [routerLink]="['/project/history', model.name]" class="footer__button">
+        <a pTooltip="Create copy" tooltipPosition="top" [routerLink]="['/project/copy', model.id]" class="footer__button">
+            <img src="./../../assets/images/edit.png" alt="edit">
+        </a>
+        <a pTooltip="Project history" tooltipPosition="top" [routerLink]="['/project/history', model.name]" class="footer__button">
             <img src="./../../assets/images/history.png" alt="powerpoint">
         </a>      
-        <a title="" (click)="createPresentation()" class="footer__button">
+        <a pTooltip="Generate presentation" tooltipPosition="top" (click)="createPresentation()" class="footer__button">
             <img src="./../../assets/images/powerpoint.png" alt="powerpoint">
         </a>
-        <a title="Upload image" (click)="showUpload()" class="footer__button">
+        <a pTooltip="Upload image" tooltipPosition="top" (click)="showUpload()" class="footer__button">
             <img src="./../../assets/images/image.png" alt="exel">
         </a>
-        <a title="Archieve history" (click)="archieveProject()" class="footer__button">
+        <a pTooltip="Delete Project" tooltipPosition="top" (click)="archieveProject()" class="footer__button">
             <img src="./../../assets/images/delete.png" alt="delete">
         </a>
 </app-footer>

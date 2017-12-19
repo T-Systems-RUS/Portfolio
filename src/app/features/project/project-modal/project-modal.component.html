@@ -52,7 +52,6 @@
         <span class="project-modal__h">Team:</span>
         <list-item  *ngFor="let schedule of project.schedules" 
             [clickable]="false" 
-            
             [roles]="[schedule.role]"
             [model]="schedule">
         </list-item>

@@ -13,29 +13,33 @@
                       accept="image/*" 
                       maxFileSize="1000000"
                       (onError)="onError($event)">
-            <ng-template pTemplate="toolbar">
-                <a *ngIf="project.image" (click)="removeImage()">Remove Image</a>
-            </ng-template>
-            <ng-template  type="content"> 
-                 
-            </ng-template>
             <ng-template pTemplate type="content"> 
                               
-                <ul *ngIf="uploadedFiles.length">                       
-                    <li *ngFor="let file of uploadedFiles">
-                        <img [src]="file.objectURL" width="300" height="200" alt="">
-                        {{file.name}} - {{file.size}} bytes</li>
-                        
+                <ul class="file__list" *ngIf="uploadedFiles.length">                       
+                    <li class="file__item" *ngFor="let file of uploadedFiles">
+                        <img class="file__image" [src]="file.objectURL" alt="">
+                        <span>{{file.name}}</span> 
+                        <span>{{file.size | filesize}}</span>
+                    </li>                        
                 </ul>
             </ng-template> 
           
         </p-fileUpload>
 
-        <img width="300" 
-             height="200" 
-             alt="" 
-             *ngIf="project.image  && !uploadedFiles.length" 
-             src="./server/images/{{project.image}}"
-             alt="">       
+        <div class="file__uploads">
+            <div class="file__uploads-item">
+                <img class="file__image" 
+                alt="" 
+                *ngIf="project.image  && !uploadedFiles.length" 
+                src="./server/images/{{project.image}}"
+                alt="">
+            </div>
+            <div class="file__uploads-item file__uploads--center">
+                <a class="file__button" *ngIf="project.image" (click)="removeImage()">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Remove Image
+                </a> 
+            </div>              
+        </div>       
     </div>
 </modal>

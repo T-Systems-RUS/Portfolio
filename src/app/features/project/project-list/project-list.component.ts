@@ -89,7 +89,7 @@ export class ProjectListComponent implements OnInit {
                 for(let key of Object.keys(params)){
                     let parameter=params[key];
                     if(key==='technologies') this.selectedTechnology=parameter;
-                    this[key].push(parameter);
+                    this[key]=[...this[key],parameter]
                     this.check(parameter,key);
                 }                
             }
@@ -169,6 +169,7 @@ export class ProjectListComponent implements OnInit {
         this.filter=new Object();
         this.projects=this.initialProjects;
         this.technologyPicker.clearSelect();
+        this.complete=this.refreshCompleteList(this.projects);
       }
 
       refreshCompleteList(projects) :Array<any> {
