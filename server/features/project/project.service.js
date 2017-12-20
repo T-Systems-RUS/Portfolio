@@ -196,8 +196,14 @@ projectService.archieveProject=  async(id)=> {
 
 projectService.deleteProject=async  (name)=> {
     try{
-        let affectedRows=await models.Project.destroy({ where: {name:name},force:true });
-        return affectedRows;
+        let projects=await projectService.getProjectsByName(name);
+        projects.forEach(project=>{
+            project.removeTechnologies(project.technologies);
+            models.Schedule.destroy({ where: {projectid:project.id }});
+        });
+        
+         let affectedRows=await models.Project.destroy({ where: {name:name},cascade:true });
+         return affectedRows;
     } catch(error){
         console.log(error)
         throw new Error(error);

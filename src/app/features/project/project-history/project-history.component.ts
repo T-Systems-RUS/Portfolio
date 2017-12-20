@@ -1,9 +1,13 @@
-import { Component, Input, Output,EventEmitter,ViewChildren,QueryList } from '@angular/core';
+import { Component, Input, Output,EventEmitter,
+         ViewChildren,QueryList,ViewChild, 
+         ViewContainerRef } from '@angular/core';
+
 import { ActivatedRoute } from '@angular/router';
 
 import { Project } from '../../../shared/models/project';
 import { PROJECT_ANIMATION } from '../project/project.animation';
 import { ProjectService } from '../project.service';
+import { DynamicService } from '../../../core/dynamic.service';
 
 import { ProjectModalComponent } from '../project-modal/project-modal.component';
 
@@ -26,9 +30,11 @@ export class ProjectHistoryComponent {
     versions:Array<number>=new Array<number>();
     counter:number=0;
 
-    @ViewChildren(ProjectModalComponent) modals: QueryList<ProjectModalComponent>
+    @ViewChildren(ProjectModalComponent) modals: QueryList<ProjectModalComponent>;
+    @ViewChild('entry', { read: ViewContainerRef} ) entry:ViewContainerRef;
     
     constructor(private dataService:ProjectService,
+                private dynamic:DynamicService,
                 private route: ActivatedRoute) {        
     }
 
@@ -40,8 +46,12 @@ export class ProjectHistoryComponent {
                     this.projects=data;
                     this.versions=this.projects.map(p=>p.version);
                     this.model.line=this.projects.length>0 ? this.projects[0].line : 'grey';
-                    //Sthis.model.domain=this.projects.length>0 ? this.projects[0].domain : '';
                     console.log(this.projects);
+                },error=>{
+                    this.model.line='grey';
+                    this.dynamic.setRootViewContainerRef(this.entry);
+                    let modal=this.dynamic.addErrorComponent();
+                    modal.error=error;
                 })
             } else{
                 
@@ -69,6 +79,6 @@ export class ProjectHistoryComponent {
         
     }
 
-
+    
 
 }

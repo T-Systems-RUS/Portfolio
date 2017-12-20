@@ -6,7 +6,9 @@
         </a>
     </div>
     <div class="project-item__content">
-        <h3 class="project-item__name">{{model.name}}</h3>
+        <h3 class="project-item__name">
+            <a [routerLink]="['/project', model.id]">{{model.name}}</a>
+        </h3>
         <p class="project-item__domain">{{model.domain}}</p>
         <p class="project-item__description">{{description}}</p>
     </div>

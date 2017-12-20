@@ -28,7 +28,7 @@ export class TechnologyPickerComponent {
     ngOnInit(){
         this.dataService.getTechnologies().subscribe(data=>{
             this.technologies=data;
-            if(this.selected) this.selectedTechnologies.push(new Technology({name:this.selected}));
+            if(this.selected) this.selectedTechnologies=[...this.selectedTechnologies,new Technology({name:this.selected})]
           
             this.technologies.filter((item)=>
             this.selectedTechnologies.map(i=>i.name)

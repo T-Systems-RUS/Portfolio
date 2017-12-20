@@ -4,6 +4,9 @@ export class Technology{
     domain:string='';
     active:boolean=false;
 
+    image:string='';
+    version:string='';
+
     public constructor(init?:Partial<Technology>) {
         Object.assign(this, init);
     }

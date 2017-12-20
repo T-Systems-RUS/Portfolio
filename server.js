@@ -28,6 +28,7 @@ app.use(validator());
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/server/images', express.static('server/images'));
 
+
 // Set our api routes
 app.use('/api', projectController);
 app.use('/api', technologyController);

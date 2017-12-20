@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter,OnInit } from '@angular/core';
 
 @Component({
   selector: 'chip',
@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       './chip.component.less'
     ]
 })
-export class ChipComponent {
+export class ChipComponent implements OnInit {
 
     @Input() value:string='';
     @Input() style:string='';
@@ -18,9 +18,17 @@ export class ChipComponent {
     @Output() linkClicked=new EventEmitter<string>();
 
     @Input() active=false;
+    @Input() image:string="";
+    @Input() path:string="/server/images/presentation/";
+
+    fullpath;
     
     constructor() {
         
+    }
+
+    ngOnInit(){
+        this.fullpath=this.path + this.image;
     }
 
     performClick(value){

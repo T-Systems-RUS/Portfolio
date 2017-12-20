@@ -15,6 +15,12 @@ module.exports = {
       domain: {
         type: Sequelize.STRING
       },
+      version: {
+        type: Sequelize.STRING
+      },
+      image: {
+        type: Sequelize.STRING
+      },
       active: {
         type: Sequelize.BOOLEAN
       },

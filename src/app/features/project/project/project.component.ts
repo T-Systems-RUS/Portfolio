@@ -85,11 +85,27 @@ export class ProjectComponent {
         modal.type="Project";
         modal.name=this.model.name;
 
-        modal.confirmed.subscribe(action=>{
+        modal.deleted.subscribe(action=>{
             modal.visible=false;
             this.dataService.deleteProject(this.model).subscribe(
                 data=>{
-                    //this.router.navigate(["/projects"]);
+                    this.router.navigate(["/projects"]);
+                    console.log(data)
+                },
+                error=>{
+                    console.log(error)
+                    this.dynamic.setRootViewContainerRef(this.entry);
+                    let modal=this.dynamic.addErrorComponent();
+                    modal.error.errors=[error];
+                }
+            )
+        })
+
+        modal.archieved.subscribe(action=>{
+            modal.visible=false;
+            this.dataService.archieveProject(this.model).subscribe(
+                data=>{
+                    this.router.navigate(["/projects"]);
                     console.log(data)
                 },
                 error=>{

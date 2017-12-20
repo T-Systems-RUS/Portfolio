@@ -12,7 +12,8 @@ export class DeleteComponent extends ModalComponent {
     @Input() type:string='';
     @Input() name:string='';
 
-    @Output() confirmed=new EventEmitter<boolean>();
+    @Output() archieved=new EventEmitter<boolean>();
+    @Output() deleted=new EventEmitter<boolean>();
 
     constructor() {
         super();
@@ -22,8 +23,12 @@ export class DeleteComponent extends ModalComponent {
 
     }
 
-    confirm(){
-        this.confirmed.emit(true);
+    archieve(){
+        this.archieved.emit(true);
+    }
+
+    delete(){
+        this.deleted.emit(true);
     }
 
     cancel(){

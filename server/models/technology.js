@@ -4,6 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     domain: DataTypes.STRING,
     active: DataTypes.BOOLEAN,
+    image: DataTypes.STRING,
+    version: DataTypes.STRING,
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE

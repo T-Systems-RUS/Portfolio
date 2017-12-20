@@ -79,8 +79,8 @@ router.get('/presentation/images/:id?', (req, res) => {
 
         let technologies=[]
         for(let technology of project.technologies){
-          if(fs.existsSync(path.join(__dirname, dist, technology.name +'.png'))){
-            let tech=fs.readFileSync(path.join(__dirname, dist, technology.name +'.png'));
+          if(fs.existsSync(path.join(__dirname, dist, technology.image || 'image.png'))){
+            let tech=fs.readFileSync(path.join(__dirname, dist, technology.image));
             technologies.push({
               domain:technology.domain,
               name:technology.name,

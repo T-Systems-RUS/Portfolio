@@ -71,6 +71,7 @@
                 <chip *ngFor="let tech of backend" 
                       (linkClicked)="searchProjects('technologies',$event)"
                       [isLink]="true"
+                      [image]="tech.image"
                       [value]="tech.name" 
                       style="horizontal"></chip>
 
@@ -78,6 +79,7 @@
                 <chip *ngFor="let tech of frontend" 
                       (linkClicked)="searchProjects('technologies',$event)"
                       [isLink]="true"
+                      [image]="tech.image"
                       [value]="tech.name" 
                       style="grey"></chip>
 
@@ -105,7 +107,7 @@
             <img src="./../../assets/images/edit.png" alt="edit">
         </a>
         <a pTooltip="Create copy" tooltipPosition="top" [routerLink]="['/project/copy', model.id]" class="footer__button">
-            <img src="./../../assets/images/edit.png" alt="edit">
+            <img src="./../../assets/images/copy.svg" alt="edit">
         </a>
         <a pTooltip="Project history" tooltipPosition="top" [routerLink]="['/project/history', model.name]" class="footer__button">
             <img src="./../../assets/images/history.png" alt="powerpoint">

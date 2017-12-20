@@ -14,11 +14,11 @@ var projectValidator=require('./project.validator');
 router.get('/projects', (req, res) => {
     
     projectService.getProjects().then(data=>{
-        if(!data) res.status(404).send("No projects found");
+        if(!data || !data.length) res.status(404).send("No projects found");
         
         res.status(200).send(data);
     }).catch(err=>{
-        res.status(500).send(err);
+        res.status(500).json({ errors: { er:{msg:error.message} }});
     })
       
       
@@ -30,14 +30,14 @@ router.get('/projects/:id', (req, res) => {
         
         res.status(200).send(data);
     }).catch(err=>{
-        res.status(500).send(err);
+        res.status(500).json({ errors: { er:{msg:error.message} }});
     })    
 });
 
 
 router.get('/projects/history/:name', (req, res) => {
     projectService.getProjectsByName(req.params.name).then(data=>{
-        if(!data) res.status(404).send("No projects found");
+        if(!data || !data.length) res.status(404).send("No projects found");
         
         res.status(200).send(data);
     }).catch(err=>{
@@ -125,9 +125,10 @@ router.delete('/projects/delete/:name', projectValidator.deleteValidators(), asy
     
     try{
         let response= await projectService.deleteProject(req.params.name);
-        res.status(200).send(response);
+        res.status(200).json({message:'ok'});
         
     } catch(error){
+        console.log('from catch',response)
         res.status(500).json({ errors: { er:{msg:error} }});
     }
        

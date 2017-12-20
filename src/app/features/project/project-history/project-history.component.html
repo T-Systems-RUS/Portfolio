@@ -1,13 +1,18 @@
+<div #entry></div>
 <backpanel  [color]="model.line" image="both"></backpanel>
 
-<div @appear3 class="project">
+<div @appear3 class="project project-history--height100">
     <div class="project__header">
         <h3 class="project__subheading">
-            {{model.updatedAt | date: 'dd.MM.yyyy' }} - {{model.name}} history of changes
+            {{model.updatedAt | date: 'dd.MM.yyyy' }} - 
+            {{model.name}} history of changes         
         </h3>
     </div>
 
     <div class="project-history__container">
+            <div *ngIf="projects.length===1" class="project-history__message">
+                There is only one version for this project.
+            </div>
             <panel *ngFor="let project of projects; let i = index;" 
                     [panelVisible]="i!==projects.length-1"
                     [panelOpened]="i===0">
