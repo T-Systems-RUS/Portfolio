@@ -132,7 +132,7 @@ export class ProjectListComponent implements OnInit {
 
       check($event,name){
           if(this[name]){
-            if(name==='technologies' && $event.length) this[name]=$event;
+            if(name==='technologies') this[name]=$event;
             this.filter[name]=this[name];
             this.complexFilter();
           }
@@ -140,7 +140,6 @@ export class ProjectListComponent implements OnInit {
 
       complexFilter(){
           this.projects=this.initialProjects;
-          
           for(let key of Object.keys(this.filter)){
             this.projects=this.projects.filter(item=>{
                 if(this.filter[key].length){
@@ -150,7 +149,8 @@ export class ProjectListComponent implements OnInit {
                             return ids.indexOf(elem)>-1
                         }).length==ids.length;
                     } else{
-                        return this.filter[key].indexOf(item[key])>-1
+                        console.log(this.filter,this.filter[key])
+                        return this.filter[key].indexOf(item[key])>-1;
                     }
                 } else{
                     return item;

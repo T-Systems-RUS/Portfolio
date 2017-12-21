@@ -13,6 +13,8 @@ import { ProjectService } from '../project.service';
 import { PROJECT_ANIMATION } from './project.animation';
 import { ReflectiveDependency } from '@angular/core/src/di/reflective_provider';
 
+import { groupBy } from '../../../shared/helpers/extensions';
+
 
 @Component({
   selector: 'project',
@@ -27,11 +29,7 @@ export class ProjectComponent {
     @ViewChild('entry', { read: ViewContainerRef} ) entry:ViewContainerRef;
     
     id:number;
-    backend:Array<Technology>=new Array<Technology>();
-    frontend:Array<Technology>=new Array<Technology>();
-    methodology:Array<Technology>=new Array<Technology>();
-    language:Array<Technology>=new Array<Technology>();
-    information:Array<string>=new Array<string>();
+    technologies:any;
 
     ribbonVisible:boolean=false;
     
@@ -49,13 +47,10 @@ export class ProjectComponent {
 
             this.dataService.getProject(this.id).subscribe(data=>{
                 this.model=new Project(data);
-                this.backend=this.model.technologies.filter(tech=>tech.domain==='backend');
-                this.frontend=this.model.technologies.filter(tech=>tech.domain==='frontend');
-                this.language=this.model.technologies.filter(tech=>tech.domain==='language');
-                this.methodology=this.model.technologies.filter(tech=>tech.domain==='methodology');
-                this.information=this.model.technologies.filter(tech=>tech.domain==='information').map(item=>item.name);
-                if(this.model.pss) this.information.push("PSS " + (this.model.pss));
-
+                this.technologies=groupBy(this.model.technologies,'domain');
+                if(this.model.pss) this.technologies.information=this.technologies.information 
+                    ? [...this.technologies.information,"PSS " + (this.model.pss)] 
+                    : ["PSS " + (this.model.pss)];
 
                 if(this.model.enddate){
                     this.ribbonVisible=new Date(this.model.enddate)<=new Date();
@@ -90,7 +85,6 @@ export class ProjectComponent {
             this.dataService.deleteProject(this.model).subscribe(
                 data=>{
                     this.router.navigate(["/projects"]);
-                    console.log(data)
                 },
                 error=>{
                     console.log(error)
@@ -106,7 +100,6 @@ export class ProjectComponent {
             this.dataService.archieveProject(this.model).subscribe(
                 data=>{
                     this.router.navigate(["/projects"]);
-                    console.log(data)
                 },
                 error=>{
                     this.dynamic.setRootViewContainerRef(this.entry);
@@ -151,5 +144,4 @@ export class ProjectComponent {
         param[name]=value;
         this.router.navigate(['/projects'], { queryParams: param });
     }
-    
 }

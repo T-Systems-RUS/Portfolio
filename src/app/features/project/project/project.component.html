@@ -53,13 +53,13 @@
                 <p *ngIf="model.domain" class="project__t project__t--small project__mb10">Domain:
                     <a (click)="searchProjects('domain',model.domain)"  class="project__bold">{{model.domain}}</a>
                 </p>
-                <p *ngIf="language.length>0" class="project__t project__t--small project__mb10">Project language:
-                    <a (click)="searchProjects('technologies',l.name)" class="project__bold" *ngFor="let l of language">
+                <p *ngIf="technologies['language']" class="project__t project__t--small project__mb10">Project language:
+                    <a (click)="searchProjects('technologies',l.name)" class="project__bold" *ngFor="let l of technologies['language']">
                         {{l.name}}
                     </a>
                 </p>
-                <p *ngIf="methodology.length>0" class="project__t project__t--small project__mb10">Methology:
-                    <a (click)="searchProjects('technologies',m.name)" class="project__bold" *ngFor="let m of methodology">
+                <p *ngIf="technologies['methodology']" class="project__t project__t--small project__mb10">Methology:
+                    <a (click)="searchProjects('technologies',m.name)" class="project__bold" *ngFor="let m of technologies['methodology']">
                         {{m.name}}
                     </a>
                 </p>
@@ -67,24 +67,24 @@
                     <a (click)="searchProjects('customer',model.customer)" class="project__bold">{{model.customer}}</a>
                 </p>
 
-                <p *ngIf="backend.length>0" class="project__t project__t--small project__mt30 project__mb10">Back-end</p>
-                <chip *ngFor="let tech of backend" 
+                <p *ngIf="technologies['backend']" class="project__t project__t--small project__mt30 project__mb10">Back-end</p>
+                <chip *ngFor="let tech of technologies['backend']" 
                       (linkClicked)="searchProjects('technologies',$event)"
                       [isLink]="true"
                       [image]="tech.image"
                       [value]="tech.name" 
                       style="horizontal"></chip>
 
-                <p *ngIf="frontend.length>0" class="project__t project__t--small project__mt30 project__mb10">Front-end</p>
-                <chip *ngFor="let tech of frontend" 
+                <p *ngIf="technologies['frontend']" class="project__t project__t--small project__mt30 project__mb10">Front-end</p>
+                <chip *ngFor="let tech of technologies['frontend']" 
                       (linkClicked)="searchProjects('technologies',$event)"
                       [isLink]="true"
                       [image]="tech.image"
                       [value]="tech.name" 
                       style="grey"></chip>
 
-                <p *ngIf="information.length>0" class="project__t project__t--small project__mt30 project__mb10">Information</p>
-                <chip *ngFor="let info of information" 
+                <p *ngIf="technologies['information']" class="project__t project__t--small project__mt30 project__mb10">Information</p>
+                <chip *ngFor="let info of technologies['information']" 
                       [value]="info" 
                       style="sap"></chip>
             </div>

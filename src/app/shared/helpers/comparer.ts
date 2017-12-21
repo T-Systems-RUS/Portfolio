@@ -19,8 +19,9 @@ export  class Comparer {
                     let ids1=obj1[key].map(i=>i.id);
                     let ids2=obj2[key].map(i=>i.id);
                     let diff=[];
+                    
 
-                    if(ids1.length>ids2.length){
+                    if(ids1.length>=ids2.length){
                         diff=ids1.filter(function(i) {return ids2.indexOf(i) < 0;});
                     } else if(ids1.length < ids2.length){
                         diff=ids2.filter(function(i) {return ids1.indexOf(i) < 0;});
