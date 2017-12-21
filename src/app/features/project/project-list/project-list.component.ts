@@ -149,7 +149,6 @@ export class ProjectListComponent implements OnInit {
                             return ids.indexOf(elem)>-1
                         }).length==ids.length;
                     } else{
-                        console.log(this.filter,this.filter[key])
                         return this.filter[key].indexOf(item[key])>-1;
                     }
                 } else{
