@@ -9,7 +9,7 @@ import { ProjectService } from '../project.service';
 import { PowerPointService } from '../../../core/powerpoint.service';
 import { LIST_ANIMATION } from './project-list.animation';
 import { ActivatedRoute,Router } from '@angular/router';
-import { retry } from 'rxjs/operator/retry';
+
 
 import * as _ from 'lodash';
 
@@ -134,6 +134,7 @@ export class ProjectListComponent implements OnInit {
           if(this[name]){
             if(name==='technologies') this[name]=$event;
             this.filter[name]=this[name];
+            console.log(this.filter,this[name])
             this.complexFilter();
           }
       }

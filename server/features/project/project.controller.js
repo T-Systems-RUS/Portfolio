@@ -18,7 +18,7 @@ router.get('/projects', (req, res) => {
         
         res.status(200).send(data);
     }).catch(err=>{
-        res.status(500).json({ errors: { er:{msg:error.message} }});
+        res.status(500).json({ errors: { er:{msg:err.message} }});
     })
       
       

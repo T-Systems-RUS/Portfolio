@@ -35,7 +35,7 @@
                 alt="">
             </div>
             <div class="file__uploads-item file__uploads--center">
-                <a class="file__button" *ngIf="project.image" (click)="removeImage()">
+                <a class="file__button" *ngIf="project.image && !uploadedFiles.length" (click)="removeImage()">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                     Remove Image
                 </a> 
