@@ -166,6 +166,7 @@ export class ProjectListComponent implements OnInit {
         this.program=[];
         this.domain=[];
         this.technologies=[];
+        this.customer=[];
         this.filter=new Object();
         this.projects=this.initialProjects;
         this.technologyPicker.clearSelect();
