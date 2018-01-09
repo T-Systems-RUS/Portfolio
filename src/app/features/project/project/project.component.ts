@@ -30,6 +30,7 @@ export class ProjectComponent {
     
     id:number;
     technologies:any;
+    leadContacts:any;
 
     ribbonVisible:boolean=false;
     
@@ -51,6 +52,8 @@ export class ProjectComponent {
                 if(this.model.pss) this.technologies.information=this.technologies.information 
                     ? [...this.technologies.information,"PSS " + (this.model.pss)] 
                     : ["PSS " + (this.model.pss)];
+
+                this.leadContacts=this.model.schedules.filter(schedule=>schedule.role.leadrole);
 
                 if(this.model.enddate){
                     this.ribbonVisible=new Date(this.model.enddate)<=new Date();

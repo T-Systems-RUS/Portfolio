@@ -13,18 +13,22 @@
     </div>
     <div class="project__block">
         <div class="project__block-item">
-            <p class="project__h">Alexander Rusov</p>
-            <p class="project__sh">Head of online sales and after-sales cluster</p>
-            <p class="project__h">Dietmar Bernreuther</p>
-            <p class="project__sh">Project manager</p>
+            <div *ngFor="let contact of leadContacts">
+                <p class="project__h">{{contact.employee.firstname}} {{contact.employee.lastname}}</p>
+                <p class="project__sh">{{contact.role.name}}</p>
+            </div>
+            <!-- <div>
+                <p class="project__h">Dietmar Bernreuther</p>
+                <p class="project__sh">Project manager</p>
+            </div> -->
         </div>
-        <div class="project__block-item">
+        <!-- <div class="project__block-item">
             <p class="project__h">TOPICS</p>
             <p class="project__sh">
                 Online Sales,  BMW,  Scrum,  Angular,  Typescript,  Oracle,
                 Automotive, Agile
             </p>
-        </div>
+        </div> -->
     </div>
     <div class="project__block" [ngClass]="{'project__block--flex':!model.image}">
         <div class="project__block-item">
@@ -109,7 +113,7 @@
         <a pTooltip="Create copy" tooltipPosition="top" [routerLink]="['/project/copy', model.id]" class="footer__button">
             <img src="./../../assets/images/copy.svg" alt="edit">
         </a>
-        <a pTooltip="Project history" tooltipPosition="top" [routerLink]="['/project/history', model.name]" class="footer__button">
+        <a *ngIf="model.version>1" pTooltip="Project history" tooltipPosition="top" [routerLink]="['/project/history', model.name]" class="footer__button">
             <img src="./../../assets/images/history.png" alt="powerpoint">
         </a>      
         <a pTooltip="Generate presentation" tooltipPosition="top" (click)="createPresentation()" class="footer__button">

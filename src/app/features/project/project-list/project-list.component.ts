@@ -134,7 +134,6 @@ export class ProjectListComponent implements OnInit {
           if(this[name]){
             if(name==='technologies') this[name]=$event;
             this.filter[name]=this[name];
-            console.log(this.filter,this[name])
             this.complexFilter();
           }
       }
