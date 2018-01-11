@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 /*Feature Modules */
+import { AdminModule } from './admin/admin.module';
 import { CoreModule } from './core/core.module';
 import { ProjectModule } from './features/project/project.module';
 import { EmployeeModule } from './features/employee/employee.module';
@@ -19,6 +20,7 @@ import { TechnologyModule } from './features/technology/technology.module';
     AppComponent
   ],
   imports: [
+    AdminModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
