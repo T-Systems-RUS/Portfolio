@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 
-
-
 @Component({
   selector: 'admin-container',
   templateUrl: './admin-container.component.html',
@@ -11,6 +9,6 @@ import { Component, Input } from '@angular/core';
 export class AdminContainerComponent {
 
   constructor() {
-
+    
   }
 }
