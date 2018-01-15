@@ -1,1 +1,14 @@
-<h1>Technologies</h1>
+<div class="admin-technology">
+
+    <div class="admin-technology__block" *ngFor="let domain of technologies | keys">
+        <h1 class="admin-technology__header">{{domain}}</h1>
+        <chip  *ngFor="let tech of technologies[domain]" 
+                      [value]="tech.name" 
+                      [image]="tech.image"
+                      style="horizontal chip--height30">
+            <delete-button style="delete-button--chip"
+                (clicked)="deleteTech(tech.id)">
+            </delete-button> 
+        </chip>
+    </div>
+</div>

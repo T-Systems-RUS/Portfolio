@@ -7,6 +7,7 @@ import {Observable} from "rxjs/Observable";
 
 import { Employee } from "../shared/models/employee";
 import { Role } from "../shared/models/role";
+import { Technology } from "../shared/models/technology";
 
 import { Routes } from './../shared/helpers/routes';
 
@@ -49,6 +50,17 @@ export class AdminService {
                                  //...errors if any
                                  .catch((error:any) => Observable.throw(this.extract.handleError(error)));
         
+    }
+
+    getTechnologies() : Observable<Technology[]> {
+        
+        // ...using get request
+        return this.http.get(this.routes.getTechnologies)
+                       // ...and calling .json() on the response to return data
+                        .map(this.extract.extractData)
+                        //...errors if any
+                        .catch((error:any) => Observable.throw(this.extract.handleError(error)));
+
     }
 
     getConstants() : Observable<any> {
