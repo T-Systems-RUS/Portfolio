@@ -28,6 +28,7 @@ export class ChipComponent implements OnInit {
     }
 
     ngOnInit(){
+        event.stopPropagation();
         this.fullpath=this.path + this.image;
     }
 

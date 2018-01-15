@@ -1,1 +1,23 @@
-<h1>Roles</h1>
+<div class="admin-role">
+    <form class="role-form" [formGroup]="form" (ngSubmit)="addRole($event)">
+        <input placeholder="Name" type="text" class="role-form__input">
+        <select class="role-form__select">
+            <option *ngFor="let domain of domains" value="domain">{{domain}}</option>
+        </select>
+    </form>
+
+
+    <div class="admin-role__block" *ngFor="let domain of roles | keys">
+        <h1 class="admin-role__header">{{domain}}</h1>
+        <div class="admin-role__item" *ngFor="let role of roles[domain]">
+            <p class="admin-role__name">{{role.name}}</p>
+            <p class="admin-role__seniority">{{role.seniority}}</p>
+            <span *ngIf="role.leadrole" class="admin-role__lead">Lead Role</span>
+
+            <delete-button style="delete-button--floatR delete-button--middleV"
+                        (clicked)="deleteRole(role.id)">
+            </delete-button> 
+            <p class="admin-role__date">{{role.createdAt | date: 'dd.MM.yyyy'}}</p>
+        </div>
+    </div>
+</div>

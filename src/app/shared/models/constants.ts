@@ -6,6 +6,7 @@ export class Constants{
     types:Array<string>;
     programs:Array<string>;
     customers:Set<string>;
+    roles:Array<string>;
 
     public constructor(init?:Partial<Error>) {
         Object.assign(this, init);

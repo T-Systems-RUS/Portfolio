@@ -18,11 +18,12 @@ import { FileComponent} from './modal/file/file.component';
 import { RibbonComponent} from './ribbon/ribbon.component';
 import { TrimTextDirective }  from './trimtext.directive';
 import {FileSizePipe } from './filesize.pipe';
+import { KeysPipe } from './keys.pipe';
 
 @NgModule({
   imports:      [ CommonModule, ReactiveFormsModule,GrowlModule, CalendarModule,FileUploadModule,CheckboxModule,TooltipModule ],
-  declarations: [ BackPanelComponent,ErrorComponent,DeleteComponent,FileComponent,FileSizePipe, FooterComponent, ModalComponent, RibbonComponent, TrimTextDirective ],
-  exports:      [ CommonModule,ErrorComponent,DeleteComponent,FileComponent,FileSizePipe,FileUploadModule,CheckboxModule,GrowlModule, CalendarModule,TooltipModule, FormsModule,ReactiveFormsModule, BackPanelComponent,FooterComponent,RibbonComponent, ModalComponent, TrimTextDirective ],
+  declarations: [ BackPanelComponent,ErrorComponent,DeleteComponent,FileComponent,FileSizePipe, FooterComponent, KeysPipe, ModalComponent, RibbonComponent, TrimTextDirective ],
+  exports:      [ CommonModule,ErrorComponent,DeleteComponent,FileComponent,FileSizePipe,FileUploadModule, KeysPipe,CheckboxModule,GrowlModule, CalendarModule,TooltipModule, FormsModule,ReactiveFormsModule, BackPanelComponent,FooterComponent,RibbonComponent, ModalComponent, TrimTextDirective ],
   entryComponents:[ErrorComponent, DeleteComponent,FileComponent]
 })
 export class SharedModule { }

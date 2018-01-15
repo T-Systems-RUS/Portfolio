@@ -6,6 +6,7 @@ import { ButtonComponent } from './button/button.component';
 import { CheckBoxComponent } from './checkbox/checkbox.component';
 import { InputComponent }  from './input/input.component';
 import { DropDownComponent }  from './dropdown/dropdown.component';
+import { DeleteButtonComponent }  from './delete/delete.component';
 import { ChipComponent }   from './chip/chip.component';
 
 import { FilterItemComponent } from './filters/filter-item/filter-item.component';
@@ -27,6 +28,7 @@ import { QuestionControlService } from './form/question-control.service';
   ],
   declarations: [
     ButtonComponent,
+    DeleteButtonComponent,
     CheckBoxComponent,
     ChipComponent,
     InputComponent,
@@ -41,6 +43,7 @@ import { QuestionControlService } from './form/question-control.service';
   ],
   exports:      [ 
     ButtonComponent,
+    DeleteButtonComponent,
     CheckBoxComponent,
     ChipComponent,
     InputComponent,

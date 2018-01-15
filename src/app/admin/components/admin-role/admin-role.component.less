@@ -1,0 +1,70 @@
+@import './../../../../assets/style/colors.less';
+@import './../../../../assets/style/mixins.less';
+
+
+.admin-role{
+    width: 100%;
+
+    &__block{
+        display: inline-block;
+        width: 100%;
+        
+        margin: 20px 0;
+        .boxSizing();
+        
+    }
+
+    &__item{
+        display: inline-block;
+        background-color: @text_white;
+        width: 100%;
+        height:40px; 
+        line-height: 40px;
+        vertical-align: middle;
+        border-bottom: 1px solid @border;
+        position: relative;
+        .boxSizing();
+        .boxShadow(0 3px 3px 0 rgba(0,0,0,0.50));
+    }
+
+    &__header{
+        font-family: ProximaRegularBold;
+        color:@text_h;
+        font-size: 24px;
+        margin: 0 0 10px 0;
+    }
+
+    &__name, &__seniority, &__date{
+        font-size: 14px;
+        display: inline-block;
+        margin: 0;
+    }
+
+    &__name{
+        font-family: ProximaRegularBold;
+        color:@text_h;
+        width:350px;
+        padding-left: 10px;
+        .boxSizing();
+    }
+
+    &__seniority{
+        font-family: ProximaRegular;
+        width:150px;
+    }
+
+    &__date{
+        font-family: ProximaRegularThin;
+        float: right;
+    }
+
+    &__lead{
+        background-color: @yellow;
+        font-family: ProximaRegularBold;
+        color:@text_h;
+        font-size: 14px;
+        padding: 5px 10px;
+        .boxSizing();
+        .borderRadius(2px);
+    }
+}
