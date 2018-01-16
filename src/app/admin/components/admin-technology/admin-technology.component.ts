@@ -5,7 +5,8 @@ import { Technology } from 'app/shared/models/technology';
 import { groupBy } from '../../../shared/helpers/extensions';
 
 //forms
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder,Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'admin-technology',
@@ -30,6 +31,16 @@ export class AdminTechnologyComponent implements OnInit {
         this.technologies=groupBy(data || [],'domain');
         console.log(this.technologies);
     })
+  }
+
+  form=this.fb.group({
+    name:['', Validators.required],
+    domain:['', Validators.required],
+    version:['']
+  })
+
+  addRole(event){
+    console.log(this.form.value,event);
   }
   
   deleteTech(id){
