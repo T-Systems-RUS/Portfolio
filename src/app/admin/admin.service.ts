@@ -63,6 +63,19 @@ export class AdminService {
 
     }
 
+
+
+    //POST requests
+    createTechnology(technology:Technology) {
+        let data = this.http.createParams(technology);
+        return this.http.post(this.routes.createTechnology , data)
+                        .map(this.extract.extractData)
+                        .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));
+    }
+
+
+
+
     getConstants() : Observable<any> {
         return this.http.getConstants()
                         .map(this.extract.extractData)

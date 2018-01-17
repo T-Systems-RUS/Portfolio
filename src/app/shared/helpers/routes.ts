@@ -22,7 +22,7 @@ export class Routes {
 
   //Technologies
   getTechnologies;
-
+  createTechnology;
   
   //Roles
   getRoles;
@@ -46,6 +46,7 @@ export class Routes {
     this.getRoles="/api/roles";
 
     this.getTechnologies="/api/technologies";
+    this.createTechnology="/api/technology/create";
 
     this.getRoles="/api/roles";
 

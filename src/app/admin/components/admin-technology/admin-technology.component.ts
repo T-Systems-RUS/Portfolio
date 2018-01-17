@@ -6,6 +6,7 @@ import { groupBy } from '../../../shared/helpers/extensions';
 
 //forms
 import { FormBuilder,Validators } from '@angular/forms';
+import { AdminValidators } from './../../admin.validators';
 
 
 @Component({
@@ -27,20 +28,28 @@ export class AdminTechnologyComponent implements OnInit {
 
   ngOnInit(){
     this.service.getConstants().subscribe(data=>this.domains=data.technologies);
+    this.getTechnologies();
+  }
+
+  form=this.fb.group({
+    name:['', Validators.required ],
+    domain:['', Validators.required ],
+    version:['' ]
+  }, { validator: AdminValidators.versionRequired })
+
+  getTechnologies(){
     this.service.getTechnologies().subscribe(data=>{
         this.technologies=groupBy(data || [],'domain');
         console.log(this.technologies);
     })
   }
 
-  form=this.fb.group({
-    name:['', Validators.required],
-    domain:['', Validators.required],
-    version:['']
-  })
-
-  addRole(event){
-    console.log(this.form.value,event);
+  addTechnology(){
+    this.service.createTechnology(this.form.value).subscribe(data=>{
+      this.getTechnologies()
+    },error=>{
+      console.log(error);
+    })
   }
   
   deleteTech(id){

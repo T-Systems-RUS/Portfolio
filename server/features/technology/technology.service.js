@@ -34,9 +34,9 @@ technologyService.getTechnologies= function(){
 
 
 //GET check if project exists
-technologyService.doesTechnologyExist= function(name){
+technologyService.doesTechnologyExist= function(technology){
     
-    return models.Technology.count({where: { name: name }}).then(count=>{
+    return models.Technology.count({where: { name: technology.name, version:technology.version }}).then(count=>{
         if(count!=0){
             return true;
         } else{
@@ -50,9 +50,21 @@ technologyService.doesTechnologyExist= function(name){
 
 //POST Section
 
-//POST create new project
+//POST create new technology
+technologyService.createTechnology=function(Technology){
+    return models.Technology.create({
+        name: Technology.name,
+        domain:Technology.domain,
+        active:0,
+        version:Technology.version || ""
 
+      }).then(function (technology) {
 
+         return technology;
+      }).catch(error=>{
+          throw new Error(error);
+      })
+}
 
 
 

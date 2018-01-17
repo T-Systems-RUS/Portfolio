@@ -1,11 +1,11 @@
 <div class="admin-technology">
-    <form class="role-form" [formGroup]="form" (ngSubmit)="addRole($event)">
+    <form class="role-form" [formGroup]="form" (ngSubmit)="addTechnology()">
         <input placeholder="Name" type="text" formControlName="name" class="role-form__input">
+        <input placeholder="Version" formControlName="version" type="text" class="role-form__input">
         <select class="role-form__select" formControlName="domain">
             <option value="">Select domain</option>
-            <option *ngFor="let domain of domains" value="domain">{{domain}}</option>
+            <option *ngFor="let domain of domains" value="{{domain}}">{{domain}}</option>
         </select>
-        <input placeholder="Version" type="text" class="role-form__input">
 
         <button 
             type="submit"
@@ -18,7 +18,7 @@
     <div class="admin-technology__block" *ngFor="let domain of technologies | keys">
         <h1 class="admin-technology__header">{{domain}}</h1>
         <chip  *ngFor="let tech of technologies[domain]" 
-                      [value]="tech.name" 
+                      [value]="tech.name +' '+ tech.version" 
                       [image]="tech.image"
                       style="horizontal chip--height30">
             <delete-button style="delete-button--chip"
