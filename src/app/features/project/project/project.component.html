@@ -89,7 +89,7 @@
 
                 <p *ngIf="technologies['information']" class="project__t project__t--small project__mt30 project__mb10">Information</p>
                 <chip *ngFor="let info of technologies['information']" 
-                      [value]="info" 
+                      [value]="info.name" 
                       style="sap"></chip>
             </div>
 

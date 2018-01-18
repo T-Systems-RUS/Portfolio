@@ -68,6 +68,20 @@ technologyService.createTechnology=function(Technology){
 
 
 
+technologyService.deleteTechnology=async  (id)=> {
+    try{
+        let technology= await models.Technology.findOne({ where: {id:id},include:[{as:'projects',model:models.Project}]});
+        technology.removeProjects(technology.projects);
+        let affectedRows=await models.Technology.destroy({ where: {id:id},cascade:true });
+
+        return affectedRows;
+    } catch(error){
+        console.log(error)
+        throw new Error(error);
+    }
+}
+
+
 module.exports = technologyService;
 
  

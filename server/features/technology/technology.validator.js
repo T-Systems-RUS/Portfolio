@@ -14,6 +14,12 @@ technologyValidator.createValidators=function(){
     ]
 }
 
+technologyValidator.deleteValidators=function(){
+    return [
+        check('id','Technology id is required').exists().isLength({ min: 1,max:100000 })
+    ]
+}
+
 
 
 

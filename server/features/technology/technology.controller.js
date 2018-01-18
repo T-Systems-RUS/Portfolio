@@ -44,5 +44,24 @@ router.post('/technology/create', technologyValidator.createValidators(),(req, r
  })
 
 
+ router.delete('/technology/delete/:id', technologyValidator.deleteValidators(), async (req, res, next) => {
+    
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.mapped() });
+    }
+    
+    try{
+        let response= await technologyService.deleteTechnology(req.params.id);
+        res.status(200).json({message:'ok'});
+        
+    } catch(error){
+        console.log('from catch',response)
+        res.status(500).json({ errors: { er:{msg:error} }});
+    }
+       
+})
+
+
 
 module.exports = router;

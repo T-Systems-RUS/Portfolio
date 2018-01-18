@@ -13,7 +13,22 @@
             ADD
         </button>
     </form>
-        
+
+    <div>
+        <select class="role-form__select">
+            <option value="">Select technology</option>
+            <option *ngFor="let tech of techNames" value="{{tech}}">{{tech}}</option>
+        </select>
+        <p-fileUpload mode="basic"
+                      name="demo[]" 
+                      url="./upload.php" 
+                      accept="image/*" 
+                      styleClass="{{true ? sap : horizontal}}"
+                      maxFileSize="1000000" 
+                      chooseLabel="Upload Image"
+                      (onSelect)="checkSelectedTechnologies()"
+                      (onUpload)="checkSelectedTechnologies()"></p-fileUpload>
+    </div>
 
     <div class="admin-technology__block" *ngFor="let domain of technologies | keys">
         <h1 class="admin-technology__header">{{domain}}</h1>
@@ -21,6 +36,7 @@
                       [value]="tech.name +' '+ tech.version" 
                       [image]="tech.image"
                       style="horizontal chip--height30">
+            
             <delete-button style="delete-button--chip"
                 (clicked)="deleteTech(tech.id)">
             </delete-button> 

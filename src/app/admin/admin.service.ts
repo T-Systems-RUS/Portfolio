@@ -74,6 +74,13 @@ export class AdminService {
     }
 
 
+    deleteTechnology(id) {       
+        return this.http.delete(this.routes.deleteTechnology + id)
+                        .map(this.extract.extractData)
+                        .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));
+
+    }
+
 
 
     getConstants() : Observable<any> {

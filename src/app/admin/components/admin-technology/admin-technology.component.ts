@@ -18,6 +18,7 @@ import { AdminValidators } from './../../admin.validators';
 export class AdminTechnologyComponent implements OnInit {
 
   technologies:Array<Technology>;
+  techNames:Set<string>;
   domains:Array<string>;
 
   constructor(
@@ -40,19 +41,31 @@ export class AdminTechnologyComponent implements OnInit {
   getTechnologies(){
     this.service.getTechnologies().subscribe(data=>{
         this.technologies=groupBy(data || [],'domain');
+        this.techNames=new Set(data.map(tech=>tech.name))
         console.log(this.technologies);
     })
   }
 
   addTechnology(){
     this.service.createTechnology(this.form.value).subscribe(data=>{
-      this.getTechnologies()
+      this.form.reset();
+      this.getTechnologies();
     },error=>{
       console.log(error);
     })
   }
+
+  checkSelectedTechnologies(){
+    console.log('checked')
+  }
+
+
   
   deleteTech(id){
-    console.log(id);
+    this.service.deleteTechnology(id).subscribe(data=>{
+      this.getTechnologies();
+    },error=>{
+      console.log(error);
+    })
   }
 }

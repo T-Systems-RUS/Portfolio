@@ -50,8 +50,8 @@ export class ProjectComponent {
                 this.model=new Project(data);
                 this.technologies=groupBy(this.model.technologies,'domain');
                 if(this.model.pss) this.technologies.information=this.technologies.information 
-                    ? [...this.technologies.information,"PSS " + (this.model.pss)] 
-                    : ["PSS " + (this.model.pss)];
+                    ? [...this.technologies.information,new Technology({name:"PSS " + (this.model.pss)})] 
+                    : [new Technology({name:"PSS " + (this.model.pss)})];
 
                 this.leadContacts=this.model.schedules.filter(schedule=>schedule.role.leadrole);
 
