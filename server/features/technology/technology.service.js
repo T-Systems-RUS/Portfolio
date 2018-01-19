@@ -56,6 +56,7 @@ technologyService.createTechnology=function(Technology){
         name: Technology.name,
         domain:Technology.domain,
         active:0,
+        image:Technology.image,
         version:Technology.version || ""
 
       }).then(function (technology) {

@@ -35,7 +35,8 @@ export class AdminTechnologyComponent implements OnInit {
   form=this.fb.group({
     name:['', Validators.required ],
     domain:['', Validators.required ],
-    version:['' ]
+    version:['' ],
+    image:['']
   }, { validator: AdminValidators.versionRequired })
 
   getTechnologies(){

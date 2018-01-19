@@ -79,6 +79,7 @@
                       [value]="tech.name" 
                       style="horizontal"></chip>
 
+
                 <p *ngIf="technologies['frontend']" class="project__t project__t--small project__mt30 project__mb10">Front-end</p>
                 <chip *ngFor="let tech of technologies['frontend']" 
                       (linkClicked)="searchProjects('technologies',$event)"
@@ -86,6 +87,14 @@
                       [image]="tech.image"
                       [value]="tech.name" 
                       style="grey"></chip>
+
+                <p *ngIf="technologies['tools']" class="project__t project__t--small project__mt30 project__mb10">Tools</p>
+                <chip *ngFor="let tech of technologies['tools']" 
+                      (linkClicked)="searchProjects('technologies',$event)"
+                      [isLink]="true"
+                      [image]="tech.image"
+                      [value]="tech.name" 
+                      style="horizontal"></chip>
 
                 <p *ngIf="technologies['information']" class="project__t project__t--small project__mt30 project__mb10">Information</p>
                 <chip *ngFor="let info of technologies['information']" 

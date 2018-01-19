@@ -4,5 +4,5 @@
     "programs":["Sales and Aftersales","Logistics and Manufactoring"],
     "types":["Project","Service","Test"],
     "roles":["Configuration","Development","Management","Testing"],
-    "technologies":["backend","frontend","information","language","methodology"]
+    "technologies":["backend","frontend","information","language","methodology","tools"]
 }
