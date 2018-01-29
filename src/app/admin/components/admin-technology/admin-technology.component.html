@@ -1,13 +1,23 @@
 <div class="admin-technology">
     <form class="admin-form" [formGroup]="form" (ngSubmit)="addTechnology()">
-        <input maxlength="30" placeholder="Name" type="text" formControlName="name" class="admin-form__input">
-        <input placeholder="Version" formControlName="version" type="text" class="admin-form__input">
-        <input placeholder="Image"  formControlName="image" type="text" class="admin-form__input">
-        <select class="admin-form__select" formControlName="domain">
-            <option value="">Select domain</option>
-            <option *ngFor="let domain of domains" value="{{domain}}">{{domain}}</option>
-        </select>
-        <p-fileUpload #fubauto mode="basic"
+        <div class="admin-form__control">
+            <input maxlength="30" placeholder="Name" type="text" formControlName="name" class="admin-form__input">
+            <div class="admin-form__error" *ngIf="exists">Technology already exists</div>
+        </div>
+        <div class="admin-form__control">
+             <input placeholder="Image"  formControlName="image" type="text" class="admin-form__input">
+        </div>
+        <div class="admin-form__control">
+            <select class="admin-form__select" formControlName="domain">
+                <option value="">Select domain</option>
+                <option *ngFor="let domain of domains" value="{{domain}}">{{domain}}</option>
+            </select>
+        </div>
+        
+
+        <!-- <input placeholder="Version" formControlName="version" type="text" class="admin-form__input"> -->
+
+        <!-- <p-fileUpload #fubauto mode="basic"
                       name="demo[]" 
                       url="./upload.php" 
                       accept="image/png" 
@@ -15,8 +25,9 @@
                       chooseLabel="Upload Image"
                       auto="true"
                       (onSelect)="checkSelectedTechnologies()"
-                      (onUpload)="checkSelectedTechnologies()"></p-fileUpload>
+                      (onUpload)="checkSelectedTechnologies()"></p-fileUpload> -->
         <button 
+            class="admin-form__button admin-form__button--floatR"
             type="submit"
             [disabled]="form.invalid">
             ADD
@@ -34,8 +45,9 @@
     <div class="admin-technology__block" *ngFor="let domain of technologies | keys">
         <h1 class="admin-technology__header">{{domain}}</h1>
         <chip  *ngFor="let tech of technologies[domain]" 
-                      [value]="tech.name +' '+ tech.version" 
+                      [value]="tech.name" 
                       [image]="tech.image"
+                      
                       style="horizontal chip--height30">
                 <delete-button style="delete-button--chip"
                     (clicked)="deleteTech(tech.id)">
@@ -43,3 +55,7 @@
         </chip>
     </div>
 </div>
+
+
+<!-- [clickable]="true" 
+                      (clicked)="chipClicked()" -->

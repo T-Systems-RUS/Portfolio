@@ -22,6 +22,7 @@ export class Routes {
 
   //Technologies
   getTechnologies;
+  doesTechnologyExist;
   createTechnology;
   deleteTechnology;
   
@@ -47,6 +48,7 @@ export class Routes {
     this.getRoles="/api/roles";
 
     this.getTechnologies="/api/technologies";
+    this.doesTechnologyExist="/api/technologies/exists/";
     this.createTechnology="/api/technology/create";
     this.deleteTechnology="/api/technology/delete/"
 

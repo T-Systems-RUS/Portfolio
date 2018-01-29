@@ -1,0 +1,85 @@
+@import './../../../../assets/style/colors.less';
+@import './../../../../assets/style/mixins.less';
+
+
+.admin-form{
+    display: inline-block;
+    height: 40px;
+    margin: 20px 0 0 0;
+    width: 100%;
+    .boxSizing();
+
+    &__control{
+        display: inline-block;
+        margin-right: 20px;
+        position: relative;
+        height: 100%;
+        width:160px;
+        .boxSizing();
+    }
+
+
+    &__input, &__select{
+        display: inline-block;
+        border: 1px solid #dddddd;
+        outline: none;
+        height: 100%;
+        font-family: ProximaRegular;
+        font-size: 18px;
+        padding: 0  20px;
+        width: 160px;
+        .boxSizing();
+
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:@text_input;
+          }
+        &::-moz-placeholder { /* Firefox 19+ */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:@text_input;
+          }
+        &:-ms-input-placeholder { /* IE 10+ */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:@text_input;
+          }
+        &:-moz-placeholder { /* Firefox 18- */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:@text_input;
+          }
+    }
+
+    &__select{
+        background-color: @text_white;
+        .borderRadius(0);
+
+        -webkit-border-radius: 0px;
+    }
+
+    &__button{
+        background-color: @green_main;
+        color: @text_white;
+        cursor: pointer;
+        display: inline-block;
+        font-family: ProximaRegularLight;
+        font-size: 18px;
+        border: 2px solid @green_main;
+        height: 38px;
+        padding: 0 20px;
+        text-decoration: none;
+        text-align: center;
+        .boxSizing();
+        .transition(all .3s);
+    
+        &:hover{
+            background-color: @green_main_hover;
+        }
+
+        &--floatR{
+            float: right;
+        }
+    }
+}

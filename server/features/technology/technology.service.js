@@ -34,9 +34,9 @@ technologyService.getTechnologies= function(){
 
 
 //GET check if project exists
-technologyService.doesTechnologyExist= function(technology){
+technologyService.doesTechnologyExist= function(name){
     
-    return models.Technology.count({where: { name: technology.name, version:technology.version }}).then(count=>{
+    return models.Technology.count({where: { name: name }}).then(count=>{
         if(count!=0){
             return true;
         } else{

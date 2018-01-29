@@ -19,6 +19,16 @@ router.get('/technologies', (req, res) => {
       
 });
 
+router.get('/technologies/exists/:name', (req, res) => {
+
+    return technologyService.doesTechnologyExist(req.params.name).then(doesExist=>{
+        console.log(doesExist)
+        res.status(200).send(doesExist);
+    }).catch(err=>{
+        res.status(500).send(err);
+    })      
+});
+
 
 //POST Requests
 router.post('/technology/create', technologyValidator.createValidators(),(req, res) => {
@@ -28,9 +38,9 @@ router.post('/technology/create', technologyValidator.createValidators(),(req, r
          return res.status(422).json({ errors: errors.mapped() });
     }
    
-    return technologyService.doesTechnologyExist(req.body).then(doesExist=>{
+    return technologyService.doesTechnologyExist(req.body.name).then(doesExist=>{
         if(doesExist){
-            res.status(409).json({ errors: { latest:{msg:'TEchnology already exists'} }});
+            res.status(409).json({ errors: { latest:{msg:'Technology already exists'} }});
         }else{
             technologyService.createTechnology(req.body).then(technology=>{
                 res.status(200).send(technology);

@@ -5,14 +5,14 @@ import { Technology } from 'app/shared/models/technology';
 import { groupBy } from '../../../shared/helpers/extensions';
 
 //forms
-import { FormBuilder,Validators } from '@angular/forms';
+import { FormBuilder,Validators, AbstractControl } from '@angular/forms';
 import { AdminValidators } from './../../admin.validators';
 
 
 @Component({
   selector: 'admin-technology',
   templateUrl: './admin-technology.component.html',
-  styleUrls:  ['./admin-technology.component.less'],
+  styleUrls:  ['./admin-technology.component.less','./admin-form.component.less'],
   animations: [ ]
 })
 export class AdminTechnologyComponent implements OnInit {
@@ -33,11 +33,11 @@ export class AdminTechnologyComponent implements OnInit {
   }
 
   form=this.fb.group({
-    name:['', Validators.required ],
+    name:['', Validators.required,this.validateTechnology.bind(this) ],
     domain:['', Validators.required ],
     version:['' ],
     image:['']
-  }, { validator: AdminValidators.versionRequired })
+  } /*, { validator: AdminValidators.versionRequired }*/)
 
   getTechnologies(){
     this.service.getTechnologies().subscribe(data=>{
@@ -50,14 +50,28 @@ export class AdminTechnologyComponent implements OnInit {
   addTechnology(){
     this.service.createTechnology(this.form.value).subscribe(data=>{
       this.form.reset();
+      console.log(this.form.value)
       this.getTechnologies();
     },error=>{
       console.log(error);
     })
   }
 
-  checkSelectedTechnologies(){
+  chipClicked(){
     console.log('checked')
+  }
+
+  get exists() {
+    return (
+      this.form.get('name').hasError('alreadyExists') &&
+      this.form.get('name').dirty
+    );
+  }
+
+  validateTechnology(control: AbstractControl) {
+    return this.service
+      .doesTechnologyExist(control.value)
+      .map((response: boolean) => response ? { alreadyExists: true } :  null );
   }
 
 
