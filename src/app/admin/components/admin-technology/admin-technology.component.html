@@ -1,10 +1,11 @@
 <div class="admin-technology">
     <form class="admin-form" [formGroup]="form" (ngSubmit)="addTechnology()">
         <div class="admin-form__control">
-            <input maxlength="30" placeholder="Name" type="text" formControlName="name" class="admin-form__input">
             <div class="admin-form__error" *ngIf="exists">Technology already exists</div>
+            <input maxlength="30" placeholder="Name" type="text" formControlName="name" class="admin-form__input">
         </div>
         <div class="admin-form__control">
+             <div class="admin-form__error" *ngIf="invalid">Invalid image</div>
              <input placeholder="Image"  formControlName="image" type="text" class="admin-form__input">
         </div>
         <div class="admin-form__control">

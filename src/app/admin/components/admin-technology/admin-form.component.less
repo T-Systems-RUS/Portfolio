@@ -4,7 +4,7 @@
 
 .admin-form{
     display: inline-block;
-    height: 40px;
+    height: 60px;
     margin: 20px 0 0 0;
     width: 100%;
     .boxSizing();
@@ -14,7 +14,7 @@
         margin-right: 20px;
         position: relative;
         height: 100%;
-        width:160px;
+        width:200px;
         .boxSizing();
     }
 
@@ -23,12 +23,18 @@
         display: inline-block;
         border: 1px solid #dddddd;
         outline: none;
-        height: 100%;
+        height: 40px;
         font-family: ProximaRegular;
         font-size: 18px;
         padding: 0  20px;
-        width: 160px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
         .boxSizing();
+
+        &__error{
+            border: 1px solid @error;
+        }
 
         &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
             font-family: ProximaRegularThin;
@@ -81,5 +87,20 @@
         &--floatR{
             float: right;
         }
+    }
+
+    &__error{
+        
+        display: inline-block;
+        font-family: ProximaRegular;
+        font-size: 14px;
+        margin-bottom: 5px;
+        color:@error;
+        width: 100%;
+        position: absolute;
+        top:0;
+        left:0;
+
+        .boxSizing();
     }
 }

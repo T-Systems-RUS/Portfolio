@@ -36,8 +36,8 @@ export class AdminTechnologyComponent implements OnInit {
     name:['', Validators.required,this.validateTechnology.bind(this) ],
     domain:['', Validators.required ],
     version:['' ],
-    image:['']
-  } /*, { validator: AdminValidators.versionRequired }*/)
+    image:['',AdminValidators.checkImage]
+  } /*, { validator: AdminValidators.checkImage }*/)
 
   getTechnologies(){
     this.service.getTechnologies().subscribe(data=>{
@@ -65,6 +65,13 @@ export class AdminTechnologyComponent implements OnInit {
     return (
       this.form.get('name').hasError('alreadyExists') &&
       this.form.get('name').dirty
+    );
+  }
+
+  get invalid() {
+    return (
+      this.form.get('image').hasError('invalidImage') &&
+      this.form.get('image').dirty
     );
   }
 
