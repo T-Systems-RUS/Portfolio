@@ -6,6 +6,7 @@
     display: inline-block;
     height: 60px;
     margin: 20px 0 0 0;
+    position: relative;
     width: 100%;
     .boxSizing();
 
@@ -32,8 +33,9 @@
         width: 100%;
         .boxSizing();
 
-        &__error{
+        &--error{
             border: 1px solid @error;
+            .transition(all .3s);
         }
 
         &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -87,6 +89,34 @@
         &--floatR{
             float: right;
         }
+
+        &--absolute{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        &--disabled{
+            cursor: default;
+            pointer-events: none;
+            color: @text_second2;
+        }
+    }
+
+    &__message{
+        background-color: @yellow;
+        font-family: ProximaRegularBold;
+        color:@text_h;
+        font-size: 14px;
+        padding: 5px 10px;
+        position: absolute;
+        bottom: 0;
+        height: 26px;
+        top:50%;
+        margin-top: -2px;
+        cursor: pointer;
+        .boxSizing();
+        .borderRadius(2px);
     }
 
     &__error{

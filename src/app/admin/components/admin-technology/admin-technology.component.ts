@@ -20,6 +20,7 @@ export class AdminTechnologyComponent implements OnInit {
   technologies:Array<Technology>;
   techNames:Set<string>;
   domains:Array<string>;
+  editMode:boolean=false;
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +34,7 @@ export class AdminTechnologyComponent implements OnInit {
   }
 
   form=this.fb.group({
+    id:[''],
     name:['', Validators.required,this.validateTechnology.bind(this) ],
     domain:['', Validators.required ],
     version:['' ],
@@ -57,8 +59,38 @@ export class AdminTechnologyComponent implements OnInit {
     })
   }
 
-  chipClicked(){
-    console.log('checked')
+updateTechnology(){
+    this.service.updateTechnology(this.form.value).subscribe(data=>{
+      this.form.reset();
+      console.log(this.form.value);
+      this.editMode=false;
+      this.getTechnologies();
+    },error=>{
+      console.log(error);
+    })
+  }
+
+  submitForm(){
+    this.editMode ? this.updateTechnology() : this.addTechnology();
+  }
+
+  setForm(value){
+    this.form.patchValue({
+      id:value.id,
+      name:value.name,
+      image:value.image,
+      version:value.version,
+      domain:value.domain
+    });
+
+    this.editMode=true;
+
+    console.log(this.form.value);
+  }
+
+  resetForm(){
+    this.form.reset();
+    this.editMode=false;
   }
 
   get exists() {
@@ -76,14 +108,17 @@ export class AdminTechnologyComponent implements OnInit {
   }
 
   validateTechnology(control: AbstractControl) {
-    return this.service
-      .doesTechnologyExist(control.value)
-      .map((response: boolean) => response ? { alreadyExists: true } :  null );
+      return this.service
+        .doesTechnologyExist(control.value)
+        .map((response: boolean) => 
+                 response && !this.editMode ? { alreadyExists: true } :  null );
   }
 
 
   
-  deleteTech(id){
+  deleteTech(id,$event){
+    $event.stopPropagation();
+    
     this.service.deleteTechnology(id).subscribe(data=>{
       this.getTechnologies();
     },error=>{

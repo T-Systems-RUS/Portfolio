@@ -38,7 +38,7 @@ router.post('/technology/create', technologyValidator.createValidators(),(req, r
          return res.status(422).json({ errors: errors.mapped() });
     }
    
-    return technologyService.doesTechnologyExist(req.body.name).then(doesExist=>{
+    return technologyService.doesTechnologyExist(req.body.name,req.body.id).then(doesExist=>{
         if(doesExist){
             res.status(409).json({ errors: { latest:{msg:'Technology already exists'} }});
         }else{
@@ -47,6 +47,28 @@ router.post('/technology/create', technologyValidator.createValidators(),(req, r
             }).catch(error=>{
                  res.status(500).json({ errors: { er:{msg:error.message} }});
             })   
+        }
+     }).catch(error=>{
+         res.status(500).json({ errors: { er:{msg:error.message} }});
+     }) 
+ })
+
+ router.post('/technology/update', technologyValidator.createValidators(), (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+         return res.status(422).json({ errors: errors.mapped() });
+    }
+   
+    return technologyService.doesTechnologyExist(req.body.name,req.body.id).then(doesExist=>{
+        if(doesExist){
+            res.status(409).json({ errors: { latest:{msg:'Technology already exists'} }});
+        }else{     
+            technologyService.updateTechnology(req.body).then(function(technology){
+                res.status(200).send(technology);
+            }).catch(error=>{
+                 res.status(500).json({ errors: { er:{msg:error.message} }});
+            }) 
         }
      }).catch(error=>{
          res.status(500).json({ errors: { er:{msg:error.message} }});

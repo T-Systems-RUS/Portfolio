@@ -1,7 +1,8 @@
 'use strict';
 
 var models = require('../../models');
-
+const Sequelize = require('sequelize');
+const op = Sequelize.Op;
 
 var  technologyService={};
 
@@ -34,9 +35,9 @@ technologyService.getTechnologies= function(){
 
 
 //GET check if project exists
-technologyService.doesTechnologyExist= function(name){
-    
-    return models.Technology.count({where: { name: name }}).then(count=>{
+technologyService.doesTechnologyExist= function(name,id){
+    id=id || "";
+    return models.Technology.count({where: { name: name, id: { [ op.ne ]: id } }}).then(count=>{
         if(count!=0){
             return true;
         } else{
@@ -65,6 +66,23 @@ technologyService.createTechnology=function(Technology){
       }).catch(error=>{
           throw new Error(error);
       })
+}
+
+
+//PUT Update technology
+technologyService.updateTechnology= function(Technology){
+    return models.Technology.update({ 
+            name: Technology.name,
+            domain:Technology.domain,
+            active:0,
+            image:Technology.image,
+            version:Technology.version || ""
+        }, { where: { id: Technology.id } }
+    ).then(function(technology){
+        return technology;
+    }).catch(error=>{
+        throw new Error(error);
+    });
 }
 
 

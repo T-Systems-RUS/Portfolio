@@ -1,12 +1,21 @@
 <div class="admin-technology">
-    <form class="admin-form" [formGroup]="form" (ngSubmit)="addTechnology()">
+    <form class="admin-form" [formGroup]="form" (ngSubmit)="submitForm()">
         <div class="admin-form__control">
             <div class="admin-form__error" *ngIf="exists">Technology already exists</div>
-            <input maxlength="30" placeholder="Name" type="text" formControlName="name" class="admin-form__input">
+            <input maxlength="30" 
+                   placeholder="Name" 
+                   type="text" 
+                   formControlName="name" 
+                   class="admin-form__input"
+                   [ngClass]="{'admin-form__input--error': exists}">
         </div>
         <div class="admin-form__control">
              <div class="admin-form__error" *ngIf="invalid">Invalid image</div>
-             <input placeholder="Image"  formControlName="image" type="text" class="admin-form__input">
+             <input placeholder="Image"  
+                    formControlName="image" 
+                    type="text" 
+                    class="admin-form__input"
+                    [ngClass]="{'admin-form__input--error': invalid}">
         </div>
         <div class="admin-form__control">
             <select class="admin-form__select" formControlName="domain">
@@ -14,7 +23,9 @@
                 <option *ngFor="let domain of domains" value="{{domain}}">{{domain}}</option>
             </select>
         </div>
-        
+        <div class="admin-form__control" *ngIf="editMode">
+            <div (click)="resetForm()"  class="admin-form__message">Cancel Edit Mode</div>
+        </div>
 
         <!-- <input placeholder="Version" formControlName="version" type="text" class="admin-form__input"> -->
 
@@ -28,10 +39,11 @@
                       (onSelect)="checkSelectedTechnologies()"
                       (onUpload)="checkSelectedTechnologies()"></p-fileUpload> -->
         <button 
-            class="admin-form__button admin-form__button--floatR"
+            class="admin-form__button admin-form__button--floatR admin-form__button--absolute"
             type="submit"
-            [disabled]="form.invalid">
-            ADD
+            [disabled]="form.invalid"
+            [ngClass]="{'admin-form__button--disabled':form.invalid}">
+            SUBMIT
         </button>
     </form>
 
@@ -48,15 +60,14 @@
         <chip  *ngFor="let tech of technologies[domain]" 
                       [value]="tech.name" 
                       [image]="tech.image"
-                      
+                      [clickable]="true" 
+                      (clicked)="setForm(tech)"
                       style="horizontal chip--height30">
                 <delete-button style="delete-button--chip"
-                    (clicked)="deleteTech(tech.id)">
+                    (clicked)="deleteTech(tech.id,$event)">
                 </delete-button> 
         </chip>
     </div>
 </div>
 
 
-<!-- [clickable]="true" 
-                      (clicked)="chipClicked()" -->

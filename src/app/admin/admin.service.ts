@@ -79,6 +79,13 @@ export class AdminService {
                         .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));
     }
 
+    updateTechnology(technology:Technology) {
+        let data = this.http.createParams(technology);
+        return this.http.post(this.routes.updateTechnology , data)
+                        .map(this.extract.extractData)
+                        .catch((error:any) => Observable.throw(this.extract.handlePostError(error)));
+    }
+
 
     deleteTechnology(id) {       
         return this.http.delete(this.routes.deleteTechnology + id)

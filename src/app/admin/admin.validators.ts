@@ -3,8 +3,7 @@ import { AbstractControl } from '@angular/forms';
 export class AdminValidators {
 
   static checkImage(control: AbstractControl) {
-    const valid =control.value.endsWith('.png');
-    console.log(control.value,valid)
+    const valid = control.value ? control.value.endsWith('.png') : true;
     return valid ? null : { invalidImage: true };
   }
 
