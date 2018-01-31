@@ -19,9 +19,9 @@ router.get('/technologies', (req, res) => {
       
 });
 
-router.get('/technologies/exists/:name', (req, res) => {
+router.get('/technologies/exists/:name/:id?', (req, res) => {
 
-    return technologyService.doesTechnologyExist(req.params.name).then(doesExist=>{
+    return technologyService.doesTechnologyExist(req.params.name,req.params.id).then(doesExist=>{
         console.log(doesExist)
         res.status(200).send(doesExist);
     }).catch(err=>{

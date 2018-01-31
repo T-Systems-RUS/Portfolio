@@ -108,10 +108,12 @@ updateTechnology(){
   }
 
   validateTechnology(control: AbstractControl) {
+      let id=this.form.get('id').value;
+
       return this.service
-        .doesTechnologyExist(control.value)
+        .doesTechnologyExist(control.value,id)
         .map((response: boolean) => 
-                 response && !this.editMode ? { alreadyExists: true } :  null );
+                 response  ? { alreadyExists: true } :  null );
   }
 
 

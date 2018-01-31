@@ -29,6 +29,8 @@ export class TechnologyPickerComponent {
         this.dataService.getTechnologies().subscribe(data=>{
             this.technologies=data;
             if(this.selected) this.selectedTechnologies=[...this.selectedTechnologies,new Technology({name:this.selected})]
+            console.log(this.selected)
+            console.log(this.selectedTechnologies)
           
             this.technologies.filter((item)=>
             this.selectedTechnologies.map(i=>i.name)

@@ -63,8 +63,8 @@ export class AdminService {
 
     }
 
-    doesTechnologyExist(name:string){
-        return this.http.get(this.routes.doesTechnologyExist + name)
+    doesTechnologyExist(name:string,id:string){
+        return this.http.get(this.routes.doesTechnologyExist + name + "/" +id)
         // ...and calling .json() on the response to return data
             .map(res=>res.json())
             //...errors if any
