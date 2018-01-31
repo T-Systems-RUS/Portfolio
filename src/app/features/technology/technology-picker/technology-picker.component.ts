@@ -11,10 +11,16 @@ import {TechnologyService} from './../technology.service';
 export class TechnologyPickerComponent {
 
     @Input() selectedTechnologies:Array<Technology>=new Array<Technology>();
-    @Input() selected:string;
     @Input() pickerStyle:string="";
     @Input() searchStyle:string="";
     @Input() clearStyle:string="";
+    
+    //_selected:string;
+    @Input() 
+    public set selected(val: string) {
+        this.selectedTechnologies=[...this.selectedTechnologies,new Technology({name:val})];
+        this.initialFilter();
+    }
 
     @Output() onSelect=new EventEmitter<Array<Technology>>();
 
@@ -27,12 +33,17 @@ export class TechnologyPickerComponent {
 
     ngOnInit(){
         this.dataService.getTechnologies().subscribe(data=>{
-            this.technologies=data;
-            if(this.selected) this.selectedTechnologies=[...this.selectedTechnologies,new Technology({name:this.selected})]
-            console.log(this.selected)
-            console.log(this.selectedTechnologies)
-          
-            this.technologies.filter((item)=>
+            this.technologies=data;          
+            this.initialFilter();
+
+            this.initialTechnologies=this.technologies;
+        }, error=>{
+            console.log(error);
+        })
+    }
+
+    initialFilter(){
+        this.technologies.filter((item)=>
             this.selectedTechnologies.map(i=>i.name)
                                      .includes(item.name)).forEach(element => {
                                         element.active=true;  
@@ -40,11 +51,6 @@ export class TechnologyPickerComponent {
 
             let selected=this.technologies.filter(item=>item.active);
             this.onSelect.emit(selected);
-
-            this.initialTechnologies=this.technologies;
-        }, error=>{
-            console.log(error);
-        })
     }
 
     filterTechnologies(event){

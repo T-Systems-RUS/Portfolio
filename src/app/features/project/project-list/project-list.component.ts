@@ -87,11 +87,9 @@ export class ProjectListComponent implements OnInit {
             //check if filter needs to apply
             let params=this.route.snapshot.queryParams;
             if(!_.isEmpty(params)){
-                console.log('from init')
                 for(let key of Object.keys(params)){
                     let parameter=params[key];
                     if(key==='technologies') this.selectedTechnology=parameter;
-                    console.log(this.selectedTechnology)
                     this[key]=[...this[key],parameter]
                     this.check(parameter,key);
                 }                
@@ -101,22 +99,6 @@ export class ProjectListComponent implements OnInit {
             console.log(err);
         })
     }
-
-    ngAfterContentInit(){
-       // console.log("content")
-       let params=this.route.snapshot.queryParams;
-            if(!_.isEmpty(params)){
-                console.log('from content')
-                for(let key of Object.keys(params)){
-                    let parameter=params[key];
-                    if(key==='technologies') this.selectedTechnology=parameter;
-                    console.log(this.selectedTechnology)
-                    this[key]=[...this[key],parameter]
-                    this.check(parameter,key);
-                }                
-            }
-    }
-
 
 
     isAssending:boolean=false;
@@ -159,15 +141,12 @@ export class ProjectListComponent implements OnInit {
       complexFilter(){
           this.projects=this.initialProjects;
           for(let key of Object.keys(this.filter)){
-            //console.log(key,this.filter[key])
             this.projects=this.projects.filter(item=>{
                 if(this.filter[key].length){
 
                     if(Array.isArray(item[key])){
                         let ids=Array.isArray(this.filter[key]) ? this.filter[key].map(item=>item.id) : [];
-                        return item[key].map(item=>item.id).filter(elem=>{ 
-                            //console.log(item[key],ids.indexOf(elem))   
-                            //console.log(this.filter[key],ids)                       
+                        return item[key].map(item=>item.id).filter(elem=>{                 
                             return ids.indexOf(elem)>-1
                         }).length==ids.length;
                     } else{
@@ -178,7 +157,6 @@ export class ProjectListComponent implements OnInit {
                 }
             })
           }
-          console.log(this.projects)
           this.complete= this.refreshCompleteList(this.projects);
       }
 
