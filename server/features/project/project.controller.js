@@ -88,7 +88,7 @@ router.post('/projects/update', projectValidator.createValidators(),(req, res, n
                 })  
             }
         }).catch(error=>{
-            res.status(500).json({ errors: { er:{msg:error.message} }});
+            res.status(500).json({ errors: { er:{ msg:error} }});
         })
 })
 

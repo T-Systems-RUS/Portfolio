@@ -7,17 +7,18 @@ import { AdminTechnologyComponent } from './components/admin-technology/admin-te
 
 @NgModule({
   imports: [RouterModule.forChild([
-    { path: 'admin', component: AdminContainerComponent,children:[
-      {
-        path: 'technologies',
-        component: AdminTechnologyComponent,
-        outlet: 'content'
-      },
-      {
-        path: 'roles',
-        component: AdminRoleComponent,
-        outlet: 'content'
-      }] 
+    { path: 'admin', component: AdminContainerComponent,  
+        children:[
+        {
+          path: 'technologies',
+          component: AdminTechnologyComponent,
+          outlet: 'content'
+        },
+        {
+          path: 'roles',
+          component: AdminRoleComponent,
+          outlet: 'content'
+        }] 
     }
   ])],
   exports: [RouterModule]

@@ -130,6 +130,7 @@ export class NewProjectComponent  {
                         this.dynamic.setRootViewContainerRef(this.entry);
                         let modal=this.dynamic.addErrorComponent();
                         modal.error=error;
+                        console.log(error);
                         modal.action=true;
                         modal.actionPerfomed.subscribe(action=>{
                             this.router.navigate(["/projects/"]);
@@ -160,7 +161,7 @@ export class NewProjectComponent  {
       setValue(value,prop){         
           this.model[prop]=value;
           this.disableSubmit();
-          console.log(this.model);
+          //console.log(this.model);
       }
 
       unvalidFields(){

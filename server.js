@@ -3,10 +3,10 @@
 // Get dependencies
 const express = require('express');
 const path = require('path');
-const http = require('http');
+const https = require('https');
 const bodyParser = require('body-parser');
 const validator = require('express-validator');
-
+const fs = require('fs');
 
 // Get our API routes
 const api = require('./server/routes/api');
@@ -19,9 +19,17 @@ const fileController=require('./server/shared/file.controller');
 const app = express();
 
 
+var sslOptions = {
+  key: fs.readFileSync('encryption/key.pem'),
+  cert: fs.readFileSync('encryption/cert.pem'),
+  passphrase: '1Ass-4ole2'
+};
+
 // Parsers for POST data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(validator());
 
 // Point static path to dist
@@ -54,7 +62,7 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-const server = http.createServer(app);
+const server = https.createServer(sslOptions,app);
 
 /**
  * Listen on provided port, on all network interfaces.
