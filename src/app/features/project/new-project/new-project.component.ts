@@ -69,7 +69,7 @@ export class NewProjectComponent  {
                     this.model=new Project(data);
                     //detect changes for submit button disabled
                     
-
+                    //if no date must be undefined or date picker breaks
                     this.model.startdate=this.model.startdate ? new Date(this.model.startdate) : undefined;
                     this.model.enddate= this.model.enddate ? new Date(this.model.enddate) : undefined;
 

@@ -9,7 +9,7 @@ import { ProjectService } from '../project.service';
 import { PowerPointService } from '../../../core/powerpoint.service';
 import { LIST_ANIMATION } from './project-list.animation';
 import { ActivatedRoute,Router } from '@angular/router';
-
+import { Comparer } from '../../../shared/helpers/comparer';
 
 import * as _ from 'lodash';
 
@@ -104,19 +104,8 @@ export class ProjectListComponent implements OnInit {
     isAssending:boolean=false;
     sortProjects(event){
         this.isAssending=!this.isAssending;
-        this.projects.sort(this.propComparator(event,this.isAssending));
+        this.projects.sort(Comparer.propCompare(event,this.isAssending));
         this.sortProperty=event;
-    }
-
-    propComparator(prop,isAssending) {
-        return function(a, b) {
-            if(isAssending){
-                return a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
-            } else{
-                return b[prop] > a[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
-            }
-            
-        }
     }
 
       filterProjects(event){

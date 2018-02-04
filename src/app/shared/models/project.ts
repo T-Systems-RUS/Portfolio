@@ -22,6 +22,14 @@ export class Project{
     employees:Array<Employee>=new Array<Employee>();
 
     schedules:Array<Schedule>=new Array<Schedule>();
+    // get schedules(){
+    //     return this._schedules;
+    // }
+    // set schedules(value:Array<Schedule>){
+    //     this._schedules=value;
+    //     this.teamcount=value ? value.length :0;
+    // }
+
     version:number=1;
     teamcount:number=0;
     startdate:Date;

@@ -39,7 +39,15 @@ export  class Comparer {
         return difference;
     }
 
-    
+    static propCompare(prop,isAssending) {
+        return function(a, b) {
+            if(isAssending){
+                return a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
+            } else{
+                return b[prop] > a[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
+            }          
+        }
+    }
 }
 
  
