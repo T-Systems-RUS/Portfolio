@@ -161,7 +161,7 @@ export class NewProjectComponent  {
       setValue(value,prop){         
           this.model[prop]=value;
           this.disableSubmit();
-          //console.log(this.model);
+          console.log(this.model);
       }
 
       unvalidFields(){

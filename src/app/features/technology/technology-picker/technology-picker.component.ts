@@ -14,7 +14,11 @@ export class TechnologyPickerComponent {
     @Input() pickerStyle:string="";
     @Input() searchStyle:string="";
     @Input() clearStyle:string="";
-    
+    @Input() selectStyle:string="";
+
+
+    allSelected:boolean;
+
     //_selected:string;
     @Input() 
     public set selected(val: string) {
@@ -50,6 +54,8 @@ export class TechnologyPickerComponent {
                                      });
 
             let selected=this.technologies.filter(item=>item.active);
+            this.allSelected=selected.length ? true : false;
+            console.log(this.allSelected)
             this.onSelect.emit(selected);
     }
 
@@ -70,6 +76,16 @@ export class TechnologyPickerComponent {
     clearSelect(){
         this.technologies.forEach(tech=>tech.active=false);
     }
+
+    switchAll(allSelected){
+        this.allSelected=!this.allSelected;
+        this.technologies.forEach(tech=>tech.active=this.allSelected);
+
+        this.allSelected ? this.onSelect.emit(this.technologies) 
+                         : this.onSelect.emit([]);
+
+    }
+
 
 }
 

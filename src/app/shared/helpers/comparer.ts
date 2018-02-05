@@ -7,8 +7,8 @@ export  class Comparer {
 
         let keyDifference=_.difference(keys1,keys2);
         let difference={};
-    
-        if(keys1.length!==keys2.length || keyDifference.length){
+
+        if(keys1.length!==keys2.length && !keyDifference.length){
             return [];
         } else{
             for(let key of keys1){
@@ -29,9 +29,10 @@ export  class Comparer {
 
                     if(diff.length) difference[key]=diff;
                 } else{
-                    if( key!=='errors'){
+                    if( key!=='errors'){                      
                         if(obj1[key]!==obj2[key]) difference[key]='changed';;
-                    }               
+                    }  
+
                 }
             }
         }
