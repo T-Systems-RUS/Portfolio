@@ -117,8 +117,8 @@ export class NewProjectComponent  {
 
             this.msgs.push({severity:'error', summary:'Error Message', detail:'Please fill required fields'})
         }else{
-            this.model.pss=this.model.pss || 0;
-            
+            this.model.pss=parseFloat(this.model.pss.toString().replace(',','.')) || 0;
+           
             if(this.editMode){
                 this.model.version=this.model.version+1;
                 this.dataService.updateProject(this.model).subscribe(

@@ -2,7 +2,7 @@
 
 <div class="new-project">
         <p-growl [(value)]="msgs" [life]="4000"></p-growl>
-    <div class="new-project__header {{model.line || 'grey'}}">
+    <div class="new-project__header {{model.line  || 'grey'}}">
         <img class="new-project__image--line" *ngIf="model.line" src="./../../assets/images/{{model.line}}.png" alt="new-project.line">
         <img class="new-project__image"  src="./../../assets/images/Create Image.png" alt="create">     
     </div>
