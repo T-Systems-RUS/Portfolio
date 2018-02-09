@@ -1,54 +1,57 @@
 import * as _ from 'lodash';
 
-export  class Comparer {
-    deepCompare(obj1:any, obj2:any){
-        let keys1=Object.keys(obj1);
-        let keys2=Object.keys(obj2);
+export class Comparer {
 
-        let keyDifference=_.difference(keys1,keys2);
-        let difference={};
+  static propCompare(prop, isAssending) {
+    return (a, b) => {
+      if (isAssending) {
+        return a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
+      } else {
+        return b[prop] > a[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
+      }
+    };
+  }
 
-        if(keys1.length!==keys2.length && !keyDifference.length){
-            return [];
-        } else{
-            for(let key of keys1){
-                // obj1[key]=obj1[key] || '';
-                // obj2[key]=obj2[key] || '';
+  deepCompare(obj1: {}, obj2: {}) {
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
 
-                if(Array.isArray(obj1[key])){
-                    let ids1=obj1[key].map(i=>i.id);
-                    let ids2=obj2[key].map(i=>i.id);
-                    let diff=[];
-                    
+    const keyDifference = _.difference(keys1, keys2);
+    const difference = {};
 
-                    if(ids1.length>=ids2.length){
-                        diff=ids1.filter(function(i) {return ids2.indexOf(i) < 0;});
-                    } else if(ids1.length < ids2.length){
-                        diff=ids2.filter(function(i) {return ids1.indexOf(i) < 0;});
-                    }
+    if (keys1.length !== keys2.length && !keyDifference.length) {
+      return [];
+    } else {
+      for (const key of keys1) {
+        if (Array.isArray(obj1[key])) {
+          const ids1 = obj1[key].map(i => i.id);
+          const ids2 = obj2[key].map(i => i.id);
+          let diff = [];
 
-                    if(diff.length) difference[key]=diff;
-                } else{
-                    if( key!=='errors'){                      
-                        if(obj1[key]!==obj2[key]) difference[key]='changed';;
-                    }  
+          if (ids1.length >= ids2.length) {
+            diff = ids1.filter(i => {
+              return ids2.indexOf(i) < 0;
+            });
+          } else if (ids1.length < ids2.length) {
+            diff = ids2.filter(i => {
+              return ids1.indexOf(i) < 0;
+            });
+          }
 
-                }
+          if (diff.length) {
+            difference[key] = diff;
+          }
+        } else {
+          if (key !== 'errors') {
+            if (obj1[key] !== obj2[key]) {
+              difference[key] = 'changed';
             }
-        }
+          }
 
-        return difference;
+        }
+      }
     }
 
-    static propCompare(prop,isAssending) {
-        return function(a, b) {
-            if(isAssending){
-                return a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
-            } else{
-                return b[prop] > a[prop] ? 1 : a[prop] === b[prop] ? 0 : -1;
-            }          
-        }
-    }
+    return difference;
+  }
 }
-
- 

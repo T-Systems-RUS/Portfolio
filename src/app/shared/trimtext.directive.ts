@@ -1,11 +1,9 @@
-import { Directive, ElementRef } from '@angular/core';
+import {Directive, ElementRef} from '@angular/core';
 
-@Directive({ selector: '[trimtext]' })
+@Directive({selector: '[trimtext]'})
 
 export class TrimTextDirective {
   constructor(el: ElementRef) {
-    
-    console.log(
-      el.nativeElement.innerText);
+    console.log(el.nativeElement.innerText);
   }
 }

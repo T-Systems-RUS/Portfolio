@@ -1,7 +1,6 @@
-import {QueryEncoder} from "@angular/http";
+import {QueryEncoder} from '@angular/http';
 
-
-//requiered for storing '+' in strings for phone numbers
+// requiered for storing '+' in strings for phone numbers
 
 export class PortfolioQueryEncoder extends QueryEncoder {
   encodeKey(k: string): string {

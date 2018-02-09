@@ -1,13 +1,13 @@
-export class Technology{
-    id:string='';
-    name:string='';
-    domain:string='';
-    active:boolean=false;
+export class Technology {
+  id = '';
+  name = '';
+  domain = '';
+  active = false;
 
-    image:string='';
-    version:string='';
+  image = '';
+  version = '';
 
-    public constructor(init?:Partial<Technology>) {
-        Object.assign(this, init);
-    }
-} 
+  public constructor(init?: Partial<Technology>) {
+    Object.assign(this, init);
+  }
+}

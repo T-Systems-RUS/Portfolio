@@ -1,91 +1,86 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import  { Technology }  from './../../../shared/models/technology';
-
-import {TechnologyService} from './../technology.service';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Technology} from '../../../shared/models/technology';
+import {TechnologyService} from '../technology.service';
 
 @Component({
   selector: 'technology-picker',
   templateUrl: './technology-picker.component.html',
-  styleUrls:  ['./technology-picker.component.less'],
+  styleUrls: ['./technology-picker.component.less'],
 })
 export class TechnologyPickerComponent {
 
-    @Input() selectedTechnologies:Array<Technology>=new Array<Technology>();
-    @Input() pickerStyle:string="";
-    @Input() searchStyle:string="";
-    @Input() clearStyle:string="";
-    @Input() selectStyle:string="";
+  @Input() selectedTechnologies: Technology[] = [];
+  @Input() pickerStyle = '';
+  @Input() searchStyle = '';
+  @Input() clearStyle = '';
+  @Input() selectStyle = '';
 
+  allSelected: boolean;
 
-    allSelected:boolean;
+  @Input()
+  public set selected(val: string) {
+    this.selectedTechnologies = [...this.selectedTechnologies, new Technology({name: val})];
+    this.initialFilter();
+  }
 
-    //_selected:string;
-    @Input() 
-    public set selected(val: string) {
-        this.selectedTechnologies=[...this.selectedTechnologies,new Technology({name:val})];
-        this.initialFilter();
-    }
+  @Output() onSelect = new EventEmitter<Technology[]>();
 
-    @Output() onSelect=new EventEmitter<Array<Technology>>();
+  initialTechnologies: Technology[] = [];
+  technologies: Technology[] = [];
 
-    initialTechnologies:Array<Technology>=new Array<Technology>();
-    technologies:Array<Technology>=new Array<Technology>();
+  constructor(private dataService: TechnologyService) {
 
-    constructor(private dataService:TechnologyService) {
-        
-    }
+  }
 
-    ngOnInit(){
-        this.dataService.getTechnologies().subscribe(data=>{
-            this.technologies=data;          
-            this.initialFilter();
+  ngOnInit() {
+    this.dataService.getTechnologies().subscribe(data => {
+      this.technologies = data;
+      this.initialFilter();
 
-            this.initialTechnologies=this.technologies;
-        }, error=>{
-            console.log(error);
-        })
-    }
+      this.initialTechnologies = this.technologies;
+    }, error => {
+      console.log(error);
+    });
+  }
 
-    initialFilter(){
-        this.technologies.filter((item)=>
-            this.selectedTechnologies.map(i=>i.name)
-                                     .includes(item.name)).forEach(element => {
-                                        element.active=true;  
-                                     });
+  initialFilter() {
+    this.technologies.filter(item =>
+      this.selectedTechnologies.map(i => i.name)
+        .includes(item.name)).forEach(element => {
+      element.active = true;
+    });
 
-            let selected=this.technologies.filter(item=>item.active);
-            this.allSelected=selected.length ? true : false;
-            console.log(this.allSelected)
-            this.onSelect.emit(selected);
-    }
+    const selected = this.technologies.filter(item => item.active);
+    this.allSelected = selected.length ? true : false;
+    console.log(this.allSelected);
+    this.onSelect.emit(selected);
+  }
 
-    filterTechnologies(event){
-        
-      this.technologies=this.initialTechnologies;
-      this.technologies=this.technologies.filter(item=>item.name.toLowerCase().indexOf(event.toLowerCase())!=-1);
-    }
+  filterTechnologies(event) {
 
-    selectTechnology(event){
-        let tech=this.initialTechnologies.filter(item=>item.name===event)[0];
-        tech.active=!tech.active;
+    this.technologies = this.initialTechnologies;
+    this.technologies = this.technologies.filter(item => item.name.toLowerCase().indexOf(event.toLowerCase()) != -1);
+  }
 
-        let selected=this.technologies.filter(item=>item.active);
-        this.onSelect.emit(selected);
-    }
+  selectTechnology(event) {
+    const tech = this.initialTechnologies.filter(item => item.name === event)[0];
+    tech.active = !tech.active;
 
-    clearSelect(){
-        this.technologies.forEach(tech=>tech.active=false);
-    }
+    const selected = this.technologies.filter(item => item.active);
+    this.onSelect.emit(selected);
+  }
 
-    switchAll(allSelected){
-        this.allSelected=!this.allSelected;
-        this.technologies.forEach(tech=>tech.active=this.allSelected);
+  clearSelect() {
+    this.technologies.forEach(tech => tech.active = false);
+  }
 
-        this.allSelected ? this.onSelect.emit(this.technologies) 
-                         : this.onSelect.emit([]);
+  switchAll(allSelected) {
+    this.allSelected = !this.allSelected;
+    this.technologies.forEach(tech => tech.active = this.allSelected);
 
-    }
+    this.allSelected ? this.onSelect.emit(this.technologies)
+      : this.onSelect.emit([]);
 
+  }
 
 }
-

@@ -1,39 +1,30 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrls:  [
-      './dropdown.component.less'
-    ]
+  styleUrls: [
+    './dropdown.component.less'
+  ]
 })
 
 export class DropDownComponent {
 
-    @Input() id:string='';
-    @Input() name:string='';
-    @Input() model:string='';
-    @Input() label:string='';
-    @Input() wrapperStyle='';
-    @Input() labelStyle='';
+  @Input() id = '';
+  @Input() name = '';
+  @Input() model = '';
+  @Input() label = '';
+  @Input() wrapperStyle = '';
+  @Input() labelStyle = '';
 
-    @Input() options:Array<string>=new Array<string>();
-    @Input() errorMessage:string=""; //Field is required
+  @Input() options: string[] = [];
+  @Input() errorMessage = ''; //Field is required
 
-    @Output() private changed:EventEmitter<string>=new EventEmitter<string>();
-    
+  @Output() private changed: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor() {
-        
-    }
-
-    ngOnInit(){
-    }
-
-    modelChanged(event){
-        this.errorMessage='';
-        this.changed.emit(event);
-    }
-
+  modelChanged(event) {
+    this.errorMessage = '';
+    this.changed.emit(event);
+  }
 
 }

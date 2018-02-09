@@ -1,25 +1,23 @@
 import {
-    trigger,
-    state,
-    style,
-    animate,
-    transition,
-    keyframes
-  } from '@angular/animations';
-
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 export const PROJECT_ANIMATION = [trigger('appear', [
-    state('in', style({opacity: 1 })),
-    transition('void => *', [
-      style({
-        opacity: 0,
-        transform: 'scale(0,0)'
-      }),
-      animate('0.4s 400ms ease-out')
-    ])
-  ]),
+  state('in', style({opacity: 1})),
+  transition('void => *', [
+    style({
+      opacity: 0,
+      transform: 'scale(0,0)'
+    }),
+    animate('0.4s 400ms ease-out')
+  ])
+]),
   trigger('appear2', [
-    state('in', style({opacity: 1 })),
+    state('in', style({opacity: 1})),
     transition('void => *', [
       style({
         opacity: 0
@@ -28,7 +26,7 @@ export const PROJECT_ANIMATION = [trigger('appear', [
     ])
   ]),
   trigger('appear3', [
-    state('in', style({opacity: 1 })),
+    state('in', style({opacity: 1})),
     transition('void => *', [
       style({
         opacity: 0,
@@ -38,5 +36,4 @@ export const PROJECT_ANIMATION = [trigger('appear', [
     ])
   ])
 
-
-]
+];

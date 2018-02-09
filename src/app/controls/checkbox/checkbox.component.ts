@@ -1,30 +1,25 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrls:  [
-      './checkbox.component.less']
+  styleUrls: [
+    './checkbox.component.less']
 })
 export class CheckBoxComponent {
 
-    @Input() model:boolean=false;
-    @Input() label:string='';
-    @Input() name:string='';
-    @Input() style:string='';
-    @Input() visible:boolean=true;
-    @Input() labelStyle:string='';
-    @Input() boxStyle:string='';
+  @Input() model = false;
+  @Input() label = '';
+  @Input() name = '';
+  @Input() style = '';
+  @Input() visible = true;
+  @Input() labelStyle = '';
+  @Input() boxStyle = '';
 
-    @Output() checked=new EventEmitter();
-    
-    constructor() {
-        
-    }
+  @Output() checked = new EventEmitter();
 
-    check(event){
-        this.checked.emit();
-    }
-
+  check(event) {
+    this.checked.emit();
+  }
 
 }
