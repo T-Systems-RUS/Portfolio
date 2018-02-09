@@ -1,7 +1,7 @@
 import * as express from 'express';
-const router = express.Router();
+import employeeService from './employee.service';
 
-var employeeService = require('./employee.service');
+const router = express.Router();
 
 // GET requests
 router.get('/employees', (req, res) => {

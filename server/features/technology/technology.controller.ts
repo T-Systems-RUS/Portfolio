@@ -1,10 +1,9 @@
 import * as express from 'express';
+import technologyService from './technology.service';
+import technologyValidator from './technology.validator';
+import {validationResult} from 'express-validator/check';
 
 const router = express.Router();
-const {validationResult} = require('express-validator/check');
-
-var technologyService = require('./technology.service');
-var technologyValidator = require('./technology.validator');
 
 // GET requests
 router.get('/technologies', (req, res) => {

@@ -1,10 +1,9 @@
 import * as express from 'express';
+import {validationResult} from 'express-validator/check';
+import projectService from './project.service';
+import projectValidator from './project.validator';
 
 const router = express.Router();
-
-const {validationResult} = require('express-validator/check');
-var projectService = require('./project.service');
-var projectValidator = require('./project.validator');
 
 // GET requests
 router.get('/projects', (req, res) => {
