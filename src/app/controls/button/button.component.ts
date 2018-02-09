@@ -1,30 +1,29 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls:  [
-      './button.component.less',
-      './../../shared/backpanel/backpanel.component.less',
-      './../input/input.component.less']
+  styleUrls: [
+    './button.component.less',
+    './../../shared/backpanel/backpanel.component.less',
+    './../input/input.component.less']
 })
 export class ButtonComponent {
 
-    @Input() value:string='SEARCH';
-    @Input() style:string='';
-    @Input() visible:boolean=true;
-    @Input() disabled:boolean=false;
+  @Input() value = 'SEARCH';
+  @Input() style = '';
+  @Input() visible = true;
+  @Input() disabled = false;
 
-    @Output() click=new EventEmitter();
-    
-    constructor() {
-        
-    }
+  @Output() click = new EventEmitter();
 
-    clicked(event){
-        event.stopPropagation();
-        this.click.emit();
-    }
+  constructor() {
 
+  }
 
-} 
+  clicked(event) {
+    event.stopPropagation();
+    this.click.emit();
+  }
+
+}

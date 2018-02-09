@@ -1,12 +1,6 @@
-import {environment} from '../../../environments/environment';
-
-
 export class Routes {
 
-  IsProduction = environment.production;
-
-
-  //Project
+  // Project
   getProjects;
   createProject;
   updateProject;
@@ -14,52 +8,46 @@ export class Routes {
   archieve;
   deleteProject;
 
-
-  //Employees
+  // Employees
   getEmployees;
-  getEmployee;
 
-
-  //Technologies
+  // Technologies
   getTechnologies;
   doesTechnologyExist;
   createTechnology;
   deleteTechnology;
   updateTechnology;
-  
-  //Roles
+
+  // Roles
   getRoles;
 
-
-  //file
+  // file
   removeImage;
-  //presentation
+  // presentation
   presentationImages;
 
   constructor() {
 
-    this.getProjects="/api/projects/";
-    this.createProject="/api/projects/create/";
-    this.updateProject="/api/projects/update/";
-    this.archieve="/api/projects/archieve/";
-    this.deleteProject="/api/projects/delete/";
-    this.history="/api/projects/history/";
+    this.getProjects = '/api/projects/';
+    this.createProject = '/api/projects/create/';
+    this.updateProject = '/api/projects/update/';
+    this.archieve = '/api/projects/archieve/';
+    this.deleteProject = '/api/projects/delete/';
+    this.history = '/api/projects/history/';
 
-    this.getEmployees="/api/employees";
-    this.getRoles="/api/roles";
+    this.getEmployees = '/api/employees';
+    this.getRoles = '/api/roles';
 
-    this.getTechnologies="/api/technologies";
-    this.doesTechnologyExist="/api/technologies/exists/";
-    this.createTechnology="/api/technology/create";
-    this.deleteTechnology="/api/technology/delete/";
-    this.updateTechnology="/api//technology/update/";
+    this.getTechnologies = '/api/technologies';
+    this.doesTechnologyExist = '/api/technologies/exists/';
+    this.createTechnology = '/api/technology/create';
+    this.deleteTechnology = '/api/technology/delete/';
+    this.updateTechnology = '/api//technology/update/';
 
+    this.getRoles = '/api/roles';
 
-    this.getRoles="/api/roles";
-
-    this.removeImage="/api/images/remove";
-    this.presentationImages='/api/presentation/images/';
+    this.removeImage = '/api/images/remove';
+    this.presentationImages = '/api/presentation/images/';
   }
-
 
 }

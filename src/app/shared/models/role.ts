@@ -1,11 +1,11 @@
-export class Role{
-    id:string='';
-    name:string='';
-    participation:string='';
-    seniority:string='';
-    leadrole:boolean=false;
+export class Role {
+  id = '';
+  name = '';
+  participation = '';
+  seniority = '';
+  leadrole = false;
 
-    public constructor(init?:Partial<Role>) {
-        Object.assign(this, init);
-    }
-} 
+  public constructor(init?: Partial<Role>) {
+    Object.assign(this, init);
+  }
+}

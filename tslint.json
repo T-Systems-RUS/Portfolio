@@ -3,6 +3,7 @@
     "node_modules/codelyzer"
   ],
   "rules": {
+    "arrow-return-shorthand": [true, "multiline"],
     "callable-types": true,
     "class-name": true,
     "comment-format": [
@@ -10,11 +11,13 @@
       "check-space"
     ],
     "curly": true,
+    "deprecation": true,
     "eofline": true,
     "forin": true,
     "import-blacklist": [
       true,
-      "rxjs"
+      "rxjs",
+      "rxjs/Rx"
     ],
     "import-spacing": true,
     "indent": [
@@ -30,8 +33,14 @@
     "member-access": false,
     "member-ordering": [
       true,
-      "static-before-instance",
-      "variables-before-functions"
+      {
+        "order": [
+          "static-field",
+          "instance-field",
+          "static-method",
+          "instance-method"
+        ]
+      }
     ],
     "no-arg": true,
     "no-bitwise": true,
@@ -45,18 +54,22 @@
     ],
     "no-construct": true,
     "no-debugger": true,
-    "no-empty": false,
+    "no-duplicate-super": true,
+    "no-empty": true,
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
       true,
       "ignore-params"
     ],
+    "no-misused-new": true,
+    "no-non-null-assertion": true,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
+    "no-unnecessary-initializer": true,
     "no-unused-expression": true,
     "no-use-before-declare": true,
     "no-var-keyword": true,
@@ -75,6 +88,7 @@
     ],
     "radix": true,
     "semicolon": [
+      true,
       "always"
     ],
     "triple-equals": [
@@ -109,7 +123,7 @@
       "camelCase"
     ],
     "component-selector": [
-      true,
+      false,
       "element",
       "app",
       "kebab-case"
@@ -125,6 +139,20 @@
     "directive-class-suffix": true,
     "no-access-missing-member": true,
     "templates-use-public": true,
-    "invoke-injectable": true
+    "invoke-injectable": true,
+    "no-consecutive-blank-lines": true,
+    "no-unused-variable": true,
+    "no-any": true,
+    "prefer-conditional-expression": true,
+    "no-var-requires": true,
+    "only-arrow-functions": true,
+    "prefer-for-of": true,
+    "cyclomatic-complexity": true,
+    "max-classes-per-file": [true, 1],
+    "no-require-imports": true,
+    "array-type": [true, "array"],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "prefer-method-signature": true,
+    "prefer-template": true
   }
 }

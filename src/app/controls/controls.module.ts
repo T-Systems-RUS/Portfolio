@@ -1,30 +1,29 @@
-import { NgModule, Optional, SkipSelf }           from '@angular/core';
-import { SharedModule }       from '../shared/shared.module';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
+import {SharedModule} from '../shared/shared.module';
 
 /*Control Components */
-import { ButtonComponent } from './button/button.component';
-import { CheckBoxComponent } from './checkbox/checkbox.component';
-import { InputComponent }  from './input/input.component';
-import { DropDownComponent }  from './dropdown/dropdown.component';
-import { DeleteButtonComponent }  from './delete/delete.component';
-import { ChipComponent }   from './chip/chip.component';
+import {ButtonComponent} from './button/button.component';
+import {CheckBoxComponent} from './checkbox/checkbox.component';
+import {InputComponent} from './input/input.component';
+import {DropDownComponent} from './dropdown/dropdown.component';
+import {DeleteButtonComponent} from './delete/delete.component';
+import {ChipComponent} from './chip/chip.component';
 
-import { FilterItemComponent } from './filters/filter-item/filter-item.component';
-import { FilterPanelComponent } from './filters/filter-panel/filter-panel.component';
+import {FilterItemComponent} from './filters/filter-item/filter-item.component';
+import {FilterPanelComponent} from './filters/filter-panel/filter-panel.component';
 
-import { ListItemComponent } from './list/list-item/list-item.component';
+import {ListItemComponent} from './list/list-item/list-item.component';
 
-import { PanelComponent } from './panel/panel.component';
-import { SliderComponent } from './slider/slider.component';
+import {PanelComponent} from './panel/panel.component';
+import {SliderComponent} from './slider/slider.component';
 
-import { FormComponent } from './form/form.component'; 
-import { DynamicFormQuestionComponent } from './form/dynamic-question/dynamic-question.component';
-import { QuestionControlService } from './form/question-control.service'; 
-
+import {FormComponent} from './form/form.component';
+import {DynamicFormQuestionComponent} from './form/dynamic-question/dynamic-question.component';
+import {QuestionControlService} from './form/question-control.service';
 
 @NgModule({
-  imports:      [ 
-     SharedModule
+  imports: [
+    SharedModule
   ],
   declarations: [
     ButtonComponent,
@@ -41,7 +40,7 @@ import { QuestionControlService } from './form/question-control.service';
     PanelComponent,
     SliderComponent
   ],
-  exports:      [ 
+  exports: [
     ButtonComponent,
     DeleteButtonComponent,
     CheckBoxComponent,
@@ -56,12 +55,12 @@ import { QuestionControlService } from './form/question-control.service';
     PanelComponent,
     SliderComponent
   ],
-  providers:    [ 
+  providers: [
     QuestionControlService
   ]
 })
 export class ControlsModule {
-  constructor (@Optional() @SkipSelf() parentModule: ControlsModule) {
+  constructor(@Optional() @SkipSelf() parentModule: ControlsModule) {
     if (parentModule) {
       throw new Error(
         'ControlsModule is already loaded. Import it in the AppModule only');
