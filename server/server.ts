@@ -1,7 +1,6 @@
-
-
 // Get dependencies
-const express = require('express');
+import * as express from 'express';
+
 const path = require('path');
 //const https = require('https');
 const http = require('http');
@@ -10,15 +9,14 @@ const validator = require('express-validator');
 //const fs = require('fs');
 
 // Get our API routes
-const api = require('./server/routes/api');
+const api = require('./routes/api');
 
-const projectController = require('./server/features/project/project.controller');
-const technologyController = require('./server/features/technology/technology.controller');
-const employeeController = require('./server/features/employee/employee.controller');
-const fileController=require('./server/shared/file.controller');
+const projectController = require('./features/project/project.controller');
+const technologyController = require('./features/technology/technology.controller');
+const employeeController = require('./features/employee/employee.controller');
+const fileController = require('./shared/file.controller');
 
 const app = express();
-
 
 // var sslOptions = {
 //   key: fs.readFileSync('encryption/key.pem'),
@@ -56,10 +54,6 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || '3000';
 app.set('port', port);
 
-
-
-
-
 /**
  * Create HTTP server.
  */
@@ -69,5 +63,3 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 server.listen(port, () => console.log(`API running on localhost:${port}`));
-
-
