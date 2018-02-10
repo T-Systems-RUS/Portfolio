@@ -4,7 +4,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
   selector: 'dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: [
-    './dropdown.component.less'
+    './dropdown.component.scss'
   ]
 })
 
@@ -18,7 +18,7 @@ export class DropDownComponent {
   @Input() labelStyle = '';
 
   @Input() options: string[] = [];
-  @Input() errorMessage = ''; //Field is required
+  @Input() errorMessage = ''; // Field is required
 
   @Output() private changed: EventEmitter<string> = new EventEmitter<string>();
 

@@ -4,7 +4,7 @@ import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
   selector: 'chip',
   templateUrl: './chip.component.html',
   styleUrls: [
-    './chip.component.less'
+    './chip.component.scss'
   ]
 })
 export class ChipComponent implements OnInit {

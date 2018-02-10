@@ -5,7 +5,7 @@ import {QuestionBase} from '../question-base';
 @Component({
   selector: 'df-question',
   templateUrl: './dynamic-question.component.html',
-  styleUrls: ['./dynamic-question.component.less']
+  styleUrls: ['./dynamic-question.component.scss']
 })
 
 export class DynamicFormQuestionComponent {
@@ -17,10 +17,6 @@ export class DynamicFormQuestionComponent {
   @Input() wrapperStyle = '';
   @Input() placeholder = '';
   @Input() labelStyle = '';
-
-  ngOnInit() {
-    console.log(this.form, this.form.controls[this.question.key]);
-  }
 
   get isValid() {
     return this.form.controls[this.question.key].valid;

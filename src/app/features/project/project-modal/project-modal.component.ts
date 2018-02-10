@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Project} from '../../../shared/models/project';
 import {Comparer} from '../../../shared/helpers/comparer';
 
@@ -6,9 +6,9 @@ import {Comparer} from '../../../shared/helpers/comparer';
   selector: 'project-modal',
   templateUrl: './project-modal.component.html',
   styleUrls: [
-    './project-modal.component.less']
+    './project-modal.component.scss']
 })
-export class ProjectModalComponent {
+export class ProjectModalComponent implements OnInit {
 
   @Input() project: Project = new Project();
   @Input() compareProject: Project;

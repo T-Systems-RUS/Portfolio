@@ -1,5 +1,5 @@
 // angular
-import {Component, Input, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, Input, ViewChild, ViewContainerRef, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Router} from '@angular/router';
 
@@ -17,10 +17,9 @@ import {Comparer} from '../../../shared/helpers/comparer';
 @Component({
   selector: 'new-project',
   templateUrl: './new-project.component.html',
-  styleUrls: ['./new-project.component.less'],
-  animations: []
+  styleUrls: ['./new-project.component.scss']
 })
-export class NewProjectComponent {
+export class NewProjectComponent implements OnInit {
 
   @Input()
   model: Project = new Project();

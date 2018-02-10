@@ -4,7 +4,7 @@ import {ModalComponent} from '../modal.component';
 @Component({
   selector: 'delete',
   templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.less']
+  styleUrls: ['./delete.component.scss']
 })
 export class DeleteComponent extends ModalComponent {
 

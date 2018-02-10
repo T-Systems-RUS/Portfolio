@@ -1,9 +1,8 @@
-import {Component, Input, ViewChildren, QueryList, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, Input, ViewChildren, QueryList, ViewChild, ViewContainerRef, OnInit} from '@angular/core';
 
 import {ActivatedRoute} from '@angular/router';
 
 import {Project} from '../../../shared/models/project';
-import {PROJECT_ANIMATION} from '../project/project.animation';
 import {ProjectService} from '../project.service';
 import {DynamicService} from '../../../core/dynamic.service';
 
@@ -13,11 +12,10 @@ import {ProjectModalComponent} from '../project-modal/project-modal.component';
   selector: 'project-history',
   templateUrl: './project-history.component.html',
   styleUrls: [
-    './project-history.component.less',
-    '../project/project.component.less'],
-  animations: PROJECT_ANIMATION
+    './project-history.component.scss',
+    '../project/project.component.scss']
 })
-export class ProjectHistoryComponent {
+export class ProjectHistoryComponent implements OnInit {
 
   @Input() model: Project = new Project();
   @Input() projects: Project[] = [];
@@ -48,8 +46,6 @@ export class ProjectHistoryComponent {
           const modal = this.dynamic.addErrorComponent();
           modal.error = error;
         });
-      } else {
-
       }
 
     }, error => {
@@ -60,11 +56,11 @@ export class ProjectHistoryComponent {
 
   onChange(event, project, project2) {
     const modal = this.modals.filter(i =>
-      i.id == project.id)[0];
+      i.id === project.id)[0];
     const modal2 = this.modals.filter(i =>
-      i.id == project2.id)[0];
+      i.id === project2.id)[0];
     console.log(modal.project.id, modal.id, modal2.project.id, modal2.id);
-    const aimproject = this.projects.filter(pr => pr.version == event)[0];
+    const aimproject = this.projects.filter(pr => pr.version === event)[0];
     modal.project = aimproject;
     modal.compareProjects(modal.project, modal2.project);
     modal2.compareProjects(modal2.project, modal.project);

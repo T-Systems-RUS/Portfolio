@@ -1,0 +1,51 @@
+@import './../../../assets/style/colors.scss';
+@import './../../../assets/style/mixins.scss';
+
+
+.dropdown{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+
+    @include boxSizing();
+
+    &__label{
+        display: block;
+        font-family: ProximaRegular;
+        font-size: 14px;
+        color:$text_h;
+        margin-bottom: 5px;
+    }
+
+
+
+    &__box{
+        display: block;
+        border: 1px solid #dddddd;
+        background-color: $text_white;
+        outline: none;
+        height: 40px;
+        font-family: ProximaRegularLight;
+        font-size: 18px;
+        padding: 0  20px;
+        width: 100%;
+
+        //-webkit-appearance: none;
+        @include boxSizing();
+        @include borderRadius(0px);   
+
+        &--error{
+            border-color: $error;
+            @include transition(all .3s);
+        }
+    }
+
+    &__error{
+        color:$error;
+        float: right;
+    }
+
+    &--marginB20{
+        margin-bottom: 20px;
+    }
+}

@@ -6,7 +6,6 @@ import {Constants} from '../../../shared/models/constants';
 
 import {ProjectService} from '../project.service';
 import {PowerPointService} from '../../../core/powerpoint.service';
-import {LIST_ANIMATION} from './project-list.animation';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Comparer} from '../../../shared/helpers/comparer';
 
@@ -15,8 +14,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'project-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.less'],
-  animations: LIST_ANIMATION
+  styleUrls: ['./project-list.component.scss']
 })
 
 export class ProjectListComponent implements OnInit {
@@ -129,7 +127,7 @@ export class ProjectListComponent implements OnInit {
           if (Array.isArray(item[key])) {
             const ids = Array.isArray(this.filter[key]) ? this.filter[key].map(item => item.id) : [];
             return item[key].map(item => item.id).filter(elem =>
-              ids.indexOf(elem) > -1).length == ids.length;
+              ids.indexOf(elem) > -1).length === ids.length;
           } else {
             return this.filter[key].indexOf(item[key]) > -1;
           }

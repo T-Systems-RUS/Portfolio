@@ -1,4 +1,4 @@
-import {Component, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ViewChild, ViewContainerRef, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Router} from '@angular/router';
 
@@ -9,17 +9,14 @@ import {DynamicService} from '../../../core/dynamic.service';
 import {PowerPointService} from '../../../core/powerpoint.service';
 import {ProjectService} from '../project.service';
 
-import {PROJECT_ANIMATION} from './project.animation';
-
 import {groupBy} from '../../../shared/helpers/extensions';
 
 @Component({
   selector: 'project',
   templateUrl: './project.component.html',
-  styleUrls: ['./project.component.less'],
-  animations: [PROJECT_ANIMATION]
+  styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent {
+export class ProjectComponent implements OnInit {
 
   model: Project = new Project();
   @ViewChild('entry', {read: ViewContainerRef}) entry: ViewContainerRef;
@@ -47,8 +44,8 @@ export class ProjectComponent {
         this.technologies = groupBy(this.model.technologies, 'domain');
         if (this.model.pss) {
           this.technologies.information = this.technologies.information
-            ? [...this.technologies.information, new Technology({name: 'PSS ' + (this.model.pss)})]
-            : [new Technology({name: 'PSS ' + (this.model.pss)})];
+            ? [...this.technologies.information, new Technology({name: `'PSS ${this.model.pss}'`})]
+            : [new Technology({name: `'PSS ${this.model.pss}'`})];
         }
 
         this.leadContacts = this.model.schedules.filter(schedule => schedule.role.leadrole);

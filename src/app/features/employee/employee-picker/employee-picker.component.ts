@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {Employee} from '../../../shared/models/employee';
 import {Role} from '../../../shared/models/role';
 import {Schedule} from '../../../shared/models/schedule';
@@ -7,9 +7,9 @@ import {EmployeeService} from '../employee.service';
 @Component({
   selector: 'employee-picker',
   templateUrl: './employee-picker.component.html',
-  styleUrls: ['./employee-picker.component.less'],
+  styleUrls: ['./employee-picker.component.scss'],
 })
-export class EmployeePickerComponent {
+export class EmployeePickerComponent implements OnInit {
 
   @Input() employees: Employee[] = [];
   @Input() roles: Role[] = [];
@@ -55,7 +55,7 @@ export class EmployeePickerComponent {
   filterEmployees(event) {
     this.schedules = this.initialSchedules;
     this.schedules = this.schedules.filter(item =>
-      (item.employee.firstname + ' ' + item.employee.lastname).toLowerCase().indexOf(event.toLowerCase()) !== -1
+      (`'${item.employee.firstname} ${item.employee.lastname}'`).toLowerCase().indexOf(event.toLowerCase()) !== -1
     );
   }
 

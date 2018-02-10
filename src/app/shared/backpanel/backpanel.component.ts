@@ -1,11 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {BACKPANEL_ANIMATION} from './backpanel.animation';
 
 @Component({
   selector: 'backpanel',
   templateUrl: './backpanel.component.html',
-  styleUrls: ['./backpanel.component.less'],
-  animations: BACKPANEL_ANIMATION
+  styleUrls: ['./backpanel.component.scss']
 })
 export class BackPanelComponent {
 

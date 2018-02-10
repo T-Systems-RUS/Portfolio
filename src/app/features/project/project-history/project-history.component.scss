@@ -1,0 +1,40 @@
+@import './../../../../assets/style/colors.scss';
+@import './../../../../assets/style/mixins.scss';
+
+
+.project-history{
+
+    &__container{
+        margin-top: 30px;
+    }
+
+    &__link{
+        display: inline-block;
+        margin: 0;
+        font-family:ProximaRegularThin;
+        font-size:18px;
+        color:$text_h;
+        text-align:left;
+        cursor: pointer;
+        text-decoration: none;
+
+        @include transition(all .4s);
+
+        &:hover{
+            color:$text_second;
+        }
+    }
+
+    &__message{
+        color:$text_h;
+        font-family: ProximaRegular;
+        font-size: 30px;
+        text-align: center;
+        width: 100%;
+        margin-top: 100px;
+    }
+
+    &--height100{
+        height:100%;
+    }
+}

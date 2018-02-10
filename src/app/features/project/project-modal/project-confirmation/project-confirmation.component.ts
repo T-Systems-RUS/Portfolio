@@ -5,7 +5,7 @@ import {Project} from '../../../../shared/models/project';
 @Component({
   selector: 'project-confirmation',
   templateUrl: './project-confirmation.component.html',
-  styleUrls: ['./project-confirmation.component.less']
+  styleUrls: ['./project-confirmation.component.scss']
 })
 export class ProjectConfirmationComponent extends ModalComponent {
 

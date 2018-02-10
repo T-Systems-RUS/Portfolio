@@ -3,7 +3,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 @Component({
   selector: 'delete-button',
   styleUrls: [
-    './delete.component.less'
+    './delete.component.scss'
   ],
   template: `
     <button class="delete-button {{style}}" (click)="buttonClicked($event)">{{value}}</button>

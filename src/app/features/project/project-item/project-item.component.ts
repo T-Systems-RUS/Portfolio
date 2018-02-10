@@ -1,12 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, AfterViewInit} from '@angular/core';
 import {Project} from '../../../shared/models/project';
 
 @Component({
   selector: 'project-item',
   templateUrl: './project-item.component.html',
-  styleUrls: ['./project-item.component.less']
+  styleUrls: ['./project-item.component.scss']
 })
-export class ProjectItemComponent {
+export class ProjectItemComponent implements AfterViewInit {
 
   @Input() model: Project = new Project();
   description = '';
@@ -24,7 +24,7 @@ export class ProjectItemComponent {
   }
 
   trimText(string, limit) {
-    return string.length > limit ? string.substring(0, limit) + '...' : string;
+    return string.length > limit ? `'${string.substring(0, limit)}...'` : string;
   }
 
 }

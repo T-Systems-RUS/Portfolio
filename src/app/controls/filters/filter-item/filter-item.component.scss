@@ -1,0 +1,190 @@
+@import './../../../../assets/style/colors.scss';
+@import './../../../../assets/style/mixins.scss';
+
+.filter-item{
+    display: inline-block;
+    text-decoration: none;
+    margin-right: 20px;
+    vertical-align: top;
+    position: relative;
+    cursor: pointer;
+
+    :host ::ng-deep &--right{
+        margin: 0;
+        position: absolute;
+        right: 12px;
+        height: 24px;
+        top: 50%;
+        margin-top: -12px;
+    }
+
+    :host ::ng-deep &__dropdown{
+        display: inline-block;
+        outline: none;
+        font-family: ProximaRegular;
+        @include borderRadius(4px);
+    }
+
+    &__tooltip{
+        background-color: #EEF1F3;
+        padding: 20px 0;
+        position: absolute;
+        cursor: pointer;
+        z-index: 199;
+        min-width: 230px;
+        text-align: center;
+        max-height: 600px;
+        overflow-y: auto;
+
+        @include transition(all .4s);
+        @include boxSizing();
+        @include boxShadow(0 2px 4px 0 rgba(0,0,0,0.50));
+
+        :host ::ng-deep &--right{
+            top:20px;
+            right: 0;
+    
+            &:before{
+                left: 212px !important;
+            }
+        }
+
+        
+
+        :host ::ng-deep &-i{
+            position: relative;
+            display: flex;
+            /* align-content: center; */
+            vertical-align: middle;
+            line-height: 25px;
+        
+            margin: 0;
+            font-family: ProximaRegular;
+            font-size: 14px;
+            padding: 0 20px;
+            color: $text_h;
+            text-align: left;
+            margin-bottom: 10px;
+            @include transition(all .4s);
+
+            img{
+                margin-right: 10px;
+            }
+        }
+
+        :host ::ng-deep &-i:hover{
+            background-color: #d6d8da;
+        }
+
+        :host ::ng-deep &-i:last-child{
+            margin-bottom: 0;
+        }
+    }
+
+    &__tooltip:before{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0; 
+        height: 0; 
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        
+        border-bottom: 6px solid #EEF1F3;
+        top:-6px; 
+        left: 7px;
+    }
+
+    :host ::ng-deep &--minwidth630{
+        min-width: 630px;
+    }
+}
+
+.tooltip__wrapper{
+    position: relative;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 199;
+    @include transition(all .2s);
+
+    :host ::ng-deep &--right{
+        margin: 0;
+        position: absolute;
+        right: 12px;
+    }
+
+    &--visible{
+        opacity: 1;
+        visibility: visible;
+        
+    }
+
+    
+    
+    
+}
+
+
+:host ::ng-deep .filter{
+
+    &__header{
+        font-size: 16px;
+        margin: 0;
+        font-family: ProximaRegularBold;
+        color:$text_h;
+        width: 100%;
+        text-align: left;
+        padding: 0 10px;
+        margin-bottom: 20px;
+        @include boxSizing();
+    }
+
+    &__subheader{
+        display: block;
+        font-family: ProximaRegular;
+        font-size: 14px;
+        color:$text_h;
+        margin: 0;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    &__footer{
+        text-align: right;
+        padding: 0 20px 0 10px;
+    }
+
+
+    &__button{
+        color: $text_h;
+        font-family: ProximaRegular;
+        text-decoration: none;
+
+        &--floatR{
+            float: right;
+        }
+    }
+
+    &__wrapper{
+        display: flex;
+        width: 100%;
+        @include boxSizing();
+    }
+
+    &__block{
+        @include flex(1);
+        width: 50%;
+        padding: 0 20px 0 10px;
+        @include boxSizing();
+    }
+
+    &__checkboxes{
+        margin-bottom: 15px;
+        @include boxSizing();
+    }
+
+    &__checkbox{
+        text-align: left;
+        margin-bottom: 5px;
+    }
+}

@@ -1,0 +1,42 @@
+@import './../../../assets/style/colors.scss';
+@import './../../../assets/style/mixins.scss';
+
+
+.delete-button{
+    display: inline-block;
+    outline: none;
+    font-family: ProximaRegularThin;
+    font-size: 14px;
+    border: none;
+    width:20px;
+    height: 20px;
+    color:$text_white;
+    z-index: 100;
+    background-color: $text_navigation2;
+    cursor: pointer;
+
+    @include borderRadius(10px);
+    @include transition(all .3s);
+
+    &:hover{
+        background-color: $text_navigation;
+    }
+
+    :host ::ng-deep &--floatR{
+        float: right;
+    }
+
+    :host ::ng-deep &--middleV{
+        margin-top: 9px;
+        margin-right: 10px;
+        margin-left: 30px;
+
+    }
+
+    :host ::ng-deep &--chip{
+        margin-left: 5px;
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: middle;
+    }
+}

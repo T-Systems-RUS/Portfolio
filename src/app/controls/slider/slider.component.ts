@@ -1,12 +1,12 @@
 // Exact copy of app/title.component.ts except import UserService from shared
-import {Component, Input, SimpleChanges} from '@angular/core';
+import {Component, Input, SimpleChanges, OnInit, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'slider',
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.less']
+  styleUrls: ['./slider.component.scss']
 })
-export class SliderComponent {
+export class SliderComponent implements OnInit, OnChanges {
 
   @Input() image = '';
   @Input() withSugar = false;
@@ -22,6 +22,6 @@ export class SliderComponent {
   }
 
   changePath(path) {
-    this.fullpath = path ? '/server/images/' + path : '';
+    this.fullpath = path ? `'/server/images/${path}'` : '';
   }
 }

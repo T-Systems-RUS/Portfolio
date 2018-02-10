@@ -78,7 +78,7 @@ module.exports = {
       "./src/polyfills.ts"
     ],
     "styles": [
-      "./src/assets/style/styles.less"
+      "./src/assets/style/styles.scss"
     ]
   },
   "output": {
@@ -114,7 +114,7 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src/assets/style/styles.less")
+          path.join(process.cwd(), "src/assets/style/styles.scss")
         ],
         "test": /\.css$/,
         "use": [
@@ -137,7 +137,7 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src/assets/style/styles.less")
+          path.join(process.cwd(), "src/assets/style/styles.scss")
         ],
         "test": /\.scss$|\.sass$/,
         "use": [
@@ -168,9 +168,9 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src/assets/style/styles.less")
+          path.join(process.cwd(), "src/assets/style/styles.scss")
         ],
-        "test": /\.less$/,
+        "test": /\.scss$/,
         "use": [
           "exports-loader?module.exports.toString()",
           {
@@ -197,7 +197,7 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src/assets/style/styles.less")
+          path.join(process.cwd(), "src/assets/style/styles.scss")
         ],
         "test": /\.styl$/,
         "use": [
@@ -227,7 +227,7 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/assets/style/styles.less")
+          path.join(process.cwd(), "src/assets/style/styles.scss")
         ],
         "test": /\.css$/,
         "use": [
@@ -250,7 +250,7 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/assets/style/styles.less")
+          path.join(process.cwd(), "src/assets/style/styles.scss")
         ],
         "test": /\.scss$|\.sass$/,
         "use": [
@@ -281,9 +281,9 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/assets/style/styles.less")
+          path.join(process.cwd(), "src/assets/style/styles.scss")
         ],
-        "test": /\.less$/,
+        "test": /\.scss$/,
         "use": [
           "style-loader",
           {
@@ -310,7 +310,7 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/assets/style/styles.less")
+          path.join(process.cwd(), "src/assets/style/styles.scss")
         ],
         "test": /\.styl$/,
         "use": [

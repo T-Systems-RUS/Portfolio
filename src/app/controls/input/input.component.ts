@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ViewChild, AfterViewInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import 'rxjs/add/observable/fromEvent';
@@ -9,12 +9,12 @@ import 'rxjs/add/operator/filter';
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: [
-    './input.component.less',
-    './../../shared/backpanel/backpanel.component.less'
+    './input.component.scss',
+    './../../shared/backpanel/backpanel.component.scss'
   ]
 })
 
-export class InputComponent {
+export class InputComponent implements AfterViewInit {
 
   @Input() id = '';
   @Input() name = '';
@@ -40,11 +40,6 @@ export class InputComponent {
   activeItem = -1;
 
   hasComplete = false;
-
-  constructor() {
-
-  }
-
   ngAfterViewInit() {
 
     setTimeout(function () {
@@ -79,8 +74,8 @@ export class InputComponent {
 
   completeClick(data) {
     console.log(data);
-    //this.searchString=(this.searchString+=', ' + data).replace(/(^[,\s]+)|([,\s]+$)/g, '');
-    this.model = data; //this.searchString;
+    // this.searchString=(this.searchString+=', ' + data).replace(/(^[,\s]+)|([,\s]+$)/g, '');
+    this.model = data; // this.searchString;
     this.modelChanged(data);
     this.showAutocomplete = false;
   }

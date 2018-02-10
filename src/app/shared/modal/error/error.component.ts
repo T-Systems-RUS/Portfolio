@@ -5,7 +5,7 @@ import {Error} from '../../models/error';
 @Component({
   selector: 'error',
   templateUrl: './error.component.html',
-  styleUrls: ['./error.component.less']
+  styleUrls: ['./error.component.scss']
 })
 export class ErrorComponent extends ModalComponent {
 

@@ -1,13 +1,13 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {Technology} from '../../../shared/models/technology';
 import {TechnologyService} from '../technology.service';
 
 @Component({
   selector: 'technology-picker',
   templateUrl: './technology-picker.component.html',
-  styleUrls: ['./technology-picker.component.less'],
+  styleUrls: ['./technology-picker.component.scss'],
 })
-export class TechnologyPickerComponent {
+export class TechnologyPickerComponent implements OnInit {
 
   @Input() selectedTechnologies: Technology[] = [];
   @Input() pickerStyle = '';
@@ -59,7 +59,7 @@ export class TechnologyPickerComponent {
   filterTechnologies(event) {
 
     this.technologies = this.initialTechnologies;
-    this.technologies = this.technologies.filter(item => item.name.toLowerCase().indexOf(event.toLowerCase()) != -1);
+    this.technologies = this.technologies.filter(item => item.name.toLowerCase().indexOf(event.toLowerCase()) !== -1);
   }
 
   selectTechnology(event) {

@@ -4,7 +4,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
   selector: 'checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: [
-    './checkbox.component.less']
+    './checkbox.component.scss']
 })
 export class CheckBoxComponent {
 

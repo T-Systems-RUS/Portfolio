@@ -6,7 +6,7 @@ import {HEADER_ANIMATION} from './header.animation';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.less'],
+  styleUrls: ['./header.component.scss'],
   animations: [HEADER_ANIMATION]
 })
 export class HeaderComponent {

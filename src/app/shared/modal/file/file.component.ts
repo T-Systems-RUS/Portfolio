@@ -6,7 +6,7 @@ import { FileService } from '../../../core/file.service';
 @Component({
   selector: 'file',
   templateUrl: './file.component.html',
-  styleUrls:  ['./file.component.less']
+  styleUrls:  ['./file.component.scss']
 })
 export class FileComponent extends ModalComponent {
 
@@ -21,14 +21,10 @@ export class FileComponent extends ModalComponent {
         super();
     }
 
-    ngOnInit() {
-
-    }
-
     onSelect(event) {
 
         for (const file of event.files) {
-            //file.name=file.name+=' ' + this.project.id + ' ' + this.project.name;
+            // file.name=file.name+=' ' + this.project.id + ' ' + this.project.name;
             this.uploadedFiles.push(file);
         }
         console.log(event.files);
@@ -36,7 +32,7 @@ export class FileComponent extends ModalComponent {
     }
 
     onUpload(event) {
-        //event.stopPropagation();
+        // event.stopPropagation();
         this.uploadedFiles = [];
         this.onUploaded.emit(event.xhr.response);
     }

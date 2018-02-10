@@ -8,7 +8,7 @@ import {AdminService} from '../../admin.service';
 @Component({
   selector: 'admin-technology',
   templateUrl: './admin-technology.component.html',
-  styleUrls: ['./admin-technology.component.less', './../admin-form/admin-form.component.less'],
+  styleUrls: ['./admin-technology.component.scss', './../admin-form/admin-form.component.scss'],
   animations: []
 })
 export class AdminTechnologyComponent implements OnInit {
