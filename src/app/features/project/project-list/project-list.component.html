@@ -124,7 +124,7 @@
     <p *ngIf="!projects.length" class="project-list__empty">
         Projects not found
     </p>
-    <project-item [@fadeIn]="''" *ngFor="let project of projects" [model]="project"></project-item>
+    <project-item  *ngFor="let project of projects" [model]="project"></project-item>
 
     <app-button (click)="newProject()" value="+" style="button--action" ></app-button>
 </div>

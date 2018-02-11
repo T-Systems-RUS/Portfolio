@@ -10,7 +10,12 @@ import {PowerPointService} from '../../../core/powerpoint.service';
 import {ProjectService} from '../project.service';
 
 import {groupBy} from '../../../shared/helpers/extensions';
-
+/**
+ * Project page
+ * @export
+ * @class ProjectComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'project',
   templateUrl: './project.component.html',
@@ -19,12 +24,16 @@ import {groupBy} from '../../../shared/helpers/extensions';
 export class ProjectComponent implements OnInit {
 
   model: Project = new Project();
+  // Entry point for dynamic components
   @ViewChild('entry', {read: ViewContainerRef}) entry: ViewContainerRef;
-
+  // stores id from url
   id: number;
   technologies;
+  // all roles in project with prop leadrole
+  // top of page
   leadContacts;
 
+  // show ribbon if project is closed (enddate has value)
   ribbonVisible = false;
 
   constructor(private dataService: ProjectService,
@@ -42,14 +51,16 @@ export class ProjectComponent implements OnInit {
       this.dataService.getProject(this.id).subscribe(data => {
         this.model = new Project(data);
         this.technologies = groupBy(this.model.technologies, 'domain');
+
+        // add pss prop to information block
         if (this.model.pss) {
           this.technologies.information = this.technologies.information
-            ? [...this.technologies.information, new Technology({name: `'PSS ${this.model.pss}'`})]
-            : [new Technology({name: `'PSS ${this.model.pss}'`})];
+            ? [...this.technologies.information, new Technology({name: `PSS ${this.model.pss}`})]
+            : [new Technology({name: `PSS ${this.model.pss}`})];
         }
 
         this.leadContacts = this.model.schedules.filter(schedule => schedule.role.leadrole);
-
+        // check if project is closed to show ribbon
         if (this.model.enddate) {
           this.ribbonVisible = new Date(this.model.enddate) <= new Date();
         }
@@ -63,19 +74,26 @@ export class ProjectComponent implements OnInit {
         modal.actionPerfomed.subscribe(action => {
           this.router.navigate(['/projects/']);
         });
-
+        // set grey background for backpanel
+        // if project's not found
         this.model.line = 'grey';
       });
     });
 
   }
-
-  archieveProject() {
+/**
+ * Show modal for deletion or
+ * archivation of project
+ * @memberof ProjectComponent
+ */
+archieveProject() {
     this.dynamic.setRootViewContainerRef(this.entry);
     const modal = this.dynamic.addDeleteComponent();
+    // word in question before deletion
     modal.type = 'Project';
     modal.name = this.model.name;
 
+    // subscribe to delete and archive buttons
     modal.deleted.subscribe(action => {
       modal.visible = false;
       this.dataService.deleteProject(this.model).subscribe(
@@ -105,15 +123,18 @@ export class ProjectComponent implements OnInit {
       );
     });
   }
-
-  showUpload() {
+/**
+ * Show modal 
+ * for image upload
+ * @memberof ProjectComponent
+ */
+showUpload() {
     this.dynamic.setRootViewContainerRef(this.entry);
     const modal = this.dynamic.addFileComponent();
     modal.project = this.model;
 
     modal.onUploaded.subscribe(image => {
       this.model.image = image;
-      console.log(this.model.image);
       modal.visible = false;
     });
 
@@ -133,8 +154,14 @@ export class ProjectComponent implements OnInit {
       modal.error.errors = [error];
     }
   }
-
-  searchProjects(name, value) {
+/**
+ * Redirects to project list with query parameters
+ * On click on technology or project property
+ * @param {any} name of property of project
+ * @param {any} value to be searched in project list
+ * @memberof ProjectComponent
+ */
+searchProjects(name, value) {
     const param = new Object();
     param[name] = value;
     this.router.navigate(['/projects'], {queryParams: param});

@@ -100,6 +100,7 @@
 
     &--active{
         background-color: $sap_bg;
+        @include transition(all .4s);
     }
 }
 

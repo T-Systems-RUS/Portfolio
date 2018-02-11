@@ -2,6 +2,13 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Project} from '../../../shared/models/project';
 import {Comparer} from '../../../shared/helpers/comparer';
 
+/**
+ * Modal window with project details
+ * Used in project history and create/update project show preview
+ * @export
+ * @class ProjectModalComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'project-modal',
   templateUrl: './project-modal.component.html',
@@ -11,10 +18,14 @@ import {Comparer} from '../../../shared/helpers/comparer';
 export class ProjectModalComponent implements OnInit {
 
   @Input() project: Project = new Project();
+  // project to be compared with
   @Input() compareProject: Project;
 
+  // helpers object from shared module
   comparer: Comparer;
 
+  // Stores properties with differences
+  // add classes to elements with difference
   validator = {};
   id: string;
 
@@ -29,8 +40,14 @@ export class ProjectModalComponent implements OnInit {
 
     this.id = this.project.id;
   }
-
-  compareProjects(project1, project2) {
+/**
+ * Compares two projects property by property
+ * add css classes to controls with diff
+ * @param {any} project1 main project
+ * @param {any} project2 project to be compared with
+ * @memberof ProjectModalComponent
+ */
+compareProjects(project1, project2) {
     const difference = this.comparer.deepCompare(project1, project2);
 
     for (const key in difference) {
