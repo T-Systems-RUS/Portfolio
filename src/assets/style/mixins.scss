@@ -1,23 +1,10 @@
-@mixin transition($val){
-	-webkit-transition: $val;
-	-moz-transition: $val;
-	-o-transition: $val;
-	transition: $val;
+// 
+@mixin transition($transition...) {
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
 }
-
-@mixin transition($val,$val2:''){
-	-webkit-transition: $val,$val2;
-	-moz-transition: $val,$val2;
-	-o-transition: $val,$val2;
-	transition: $val,$val2;
-}
-
-// @mixin transition($val,$val2,$val3, $val4){
-// 	-webkit-transition: $val,$val2,$val3, $val4;
-// 	-moz-transition: $val,$val2,$val3, $val4;
-// 	-o-transition: $val,$val2,$val3, $val4;
-// 	transition: $val,$val2,$val3, $val4;
-// }
 
 @mixin boxShadow($val){
 	-moz-box-shadow: $val;
