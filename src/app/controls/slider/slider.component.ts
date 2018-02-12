@@ -22,6 +22,6 @@ export class SliderComponent implements OnInit, OnChanges {
   }
 
   changePath(path) {
-    this.fullpath = path ? `'/server/images/${path}'` : '';
+    this.fullpath = path ? `/server/images/${path}` : '';
   }
 }

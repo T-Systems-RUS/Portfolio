@@ -10,6 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Comparer} from '../../../shared/helpers/comparer';
 
 import * as _ from 'lodash';
+
 /**
  * Page with projects list
  * start page
@@ -118,6 +119,7 @@ export class ProjectListComponent implements OnInit {
     this.projects.sort(Comparer.propCompare(event, this.isAssending));
     this.sortProperty = event;
   }
+
 /**
  * Filters projects by input in search field
  * not case-insensitive
