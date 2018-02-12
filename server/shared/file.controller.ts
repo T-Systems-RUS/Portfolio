@@ -10,19 +10,19 @@ const DIST = 'server/images/';
 const router = express.Router();
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, DIST)
+  destination: (req, file, cb) => {
+    cb(null, DIST);
   },
-  filename: function (req, file, cb) {
+  filename: (req, file, cb) => {
     cb(null, file.fieldname + '-' + req.body.name + path.extname(file.originalname));
   }
-})
+});
 
 const upload = multer({storage: storage}).single('image');
 
 // POST requests
-router.post('/images/add', function (req, res, next) {
-  upload(req, res, function (err) {
+router.post('/images/add', (req, res) => {
+  upload(req, res, err => {
     if (err) {
       console.log(err)
       return res.status(422).send(err);
@@ -36,9 +36,9 @@ router.post('/images/add', function (req, res, next) {
   });
 });
 
-router.put('/images/remove', function (req, res, next) {
+router.put('/images/remove', (req, res) => {
   const image = DIST + req.body.image;
-  fs.exists(image, function (exists) {
+  fs.exists(image, exists => {
     if (exists) {
       fs.unlink(image);
       req.body.image = null;
@@ -93,7 +93,7 @@ router.get('/presentation/images/:id?', (req, res) => {
 
     res.status(200).send(images);
   }).catch(err => {
-    console.log(err)
+    console.log(err);
     res.status(500).json({errors: {er: {msg: err}}});
   });
 });

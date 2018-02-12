@@ -1,6 +1,6 @@
 const parseService = {
 
-  parseShedules: function (project, schedules) {
+  parseShedules: (project, schedules) => {
     const parsed = [];
     if (Array.isArray(schedules)) {
       for (const schedule of schedules) {
@@ -33,7 +33,7 @@ const parseService = {
     return parsed;
   },
 
-  parseTechnology: function (technologies) {
+  parseTechnology: technologies => {
     const parsed = [];
     if (Array.isArray(technologies)) {
       for (const tech of technologies) {
