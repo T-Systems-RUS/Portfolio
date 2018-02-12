@@ -19,15 +19,14 @@ router.get('/technologies', (req, res) => {
   });
 });
 
-router.get('/technologies/exists/:name/:id?', (req, res) => {
-
-  return technologyService.doesTechnologyExist(req.params.name, req.params.id).then(doesExist => {
-    console.log(doesExist);
-    res.status(200).send(doesExist);
-  }).catch(err => {
+router.get('/technologies/exists/:name/:id?', (req, res) =>
+  technologyService.doesTechnologyExist(req.params.name, req.params.id)
+    .then(doesExist => {
+      console.log(doesExist);
+      res.status(200).send(doesExist);
+    }).catch(err => {
     res.status(500).send(err);
-  });
-});
+  }));
 
 // POST Requests
 router.post('/technology/create', technologyValidator.createValidators(), (req, res) => {
@@ -50,7 +49,7 @@ router.post('/technology/create', technologyValidator.createValidators(), (req, 
   }).catch(error => {
     res.status(500).json({errors: {er: {msg: error.message}}});
   });
-})
+});
 
 router.post('/technology/update', technologyValidator.createValidators(), (req, res) => {
 
@@ -63,7 +62,7 @@ router.post('/technology/update', technologyValidator.createValidators(), (req, 
     if (doesExist) {
       res.status(409).json({errors: {latest: {msg: 'Technology already exists'}}});
     } else {
-      technologyService.updateTechnology(req.body).then(function (technology) {
+      technologyService.updateTechnology(req.body).then(technology => {
         res.status(200).send(technology);
       }).catch(error => {
         res.status(500).json({errors: {er: {msg: error.message}}});
@@ -72,9 +71,9 @@ router.post('/technology/update', technologyValidator.createValidators(), (req, 
   }).catch(error => {
     res.status(500).json({errors: {er: {msg: error.message}}});
   });
-})
+});
 
-router.delete('/technology/delete/:id', technologyValidator.deleteValidators(), async (req, res, next) => {
+router.delete('/technology/delete/:id', technologyValidator.deleteValidators(), async (req, res) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -82,7 +81,7 @@ router.delete('/technology/delete/:id', technologyValidator.deleteValidators(), 
   }
 
   try {
-    const response = await technologyService.deleteTechnology(req.params.id);
+    await technologyService.deleteTechnology(req.params.id);
     res.status(200).json({message: 'ok'});
   } catch (error) {
     res.status(500).json({errors: {er: {msg: error}}});

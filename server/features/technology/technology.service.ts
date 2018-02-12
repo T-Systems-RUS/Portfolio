@@ -4,9 +4,9 @@ import * as Sequelize from 'sequelize';
 const op = Sequelize.Op;
 
 const technologyService = {
-  // GET Section
+
   // GET list of projects with teamcount
-  getTechnologies: function () {
+  getTechnologies: () => {
     try {
       return models.Technology.findAll({
           order: [
@@ -20,52 +20,40 @@ const technologyService = {
   },
 
   // GET check if project exists
-  doesTechnologyExist: function (name, id) {
+  doesTechnologyExist: (name, id) => {
     id = id || '';
-    return models.Technology.count({where: {name: name, id: {[op.ne]: id}}}).then(count => {
-      if (count != 0) {
-        return true;
-      } else {
-        return false;
-      }
-    }).catch(error => {
-      console.log(error);
-    });
+    return models.Technology.count({where: {name: name, id: {[op.ne]: id}}})
+      .then(count => count !== 0)
+      .catch(error => {
+        console.log(error);
+      });
   },
-  // POST Section
 
   // POST create new technology
-  createTechnology: function (Technology) {
-    return models.Technology.create({
-      name: Technology.name,
-      domain: Technology.domain,
-      active: 0,
-      image: Technology.image,
-      version: Technology.version || ''
-
-    }).then(function (technology) {
-
-      return technology;
-    }).catch(error => {
+  createTechnology: technology => models.Technology.create({
+    name: technology.name,
+    domain: technology.domain,
+    active: 0,
+    image: technology.image,
+    version: technology.version || ''
+  })
+    .then(newTechnology => newTechnology)
+    .catch(error => {
       throw new Error(error);
-    });
-  },
+    }),
 
 // PUT Update technology
-  updateTechnology: function (Technology) {
-    return models.Technology.update({
-        name: Technology.name,
-        domain: Technology.domain,
-        active: 0,
-        image: Technology.image,
-        version: Technology.version || ''
-      }, {where: {id: Technology.id}}
-    ).then(function (technology) {
-      return technology;
-    }).catch(error => {
+  updateTechnology: technology => models.Technology.update({
+    name: technology.name,
+    domain: technology.domain,
+    active: 0,
+    image: technology.image,
+    version: technology.version || ''
+  }, {where: {id: technology.id}})
+    .then(newTechnology => newTechnology)
+    .catch(error => {
       throw new Error(error);
-    });
-  },
+    }),
 
   deleteTechnology: async id => {
     try {

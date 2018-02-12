@@ -101,30 +101,33 @@ const projectService = {
     ishistory: false,              // default for new project
     version: project.version,                    // default for new project,
     technologies: project.technologies
-  }).then(projectNew => {
+  })
+    .then(projectNew => {
 
-    const technologies = parse.parseTechnology(projectNew.technologies);
-    const instances = technologies.map(tech => models.Technology.build(tech));
-    projectNew.setTechnologies(instances);
+      const technologies = parse.parseTechnology(projectNew.technologies);
+      const instances = technologies.map(tech => models.Technology.build(tech));
+      projectNew.setTechnologies(instances);
 
-    const schedules = parse.parseShedules(projectNew, projectNew.schedules);
-    models.Schedule.bulkCreate(schedules);
+      const schedules = parse.parseShedules(projectNew, projectNew.schedules);
+      models.Schedule.bulkCreate(schedules);
 
-    return projectNew;
-  }).catch(error => {
-    throw new Error(error);
-  }),
+      return projectNew;
+    })
+    .catch(error => {
+      throw new Error(error);
+    }),
 
 // POST request update Project
   updateProject: project => models.sequelize.transaction()
     .then(t => models.Project.update(
       {ishistory: true},
       {where: {id: project.id}, transaction: t},
-    ).then(() => projectService.createProject(project)
-      .then(newProject => {
-        t.commit();
-        return newProject;
-      })))
+    )
+      .then(() => projectService.createProject(project)
+        .then(newProject => {
+          t.commit();
+          return newProject;
+        })))
     .catch(error => {
       console.log(error);
       throw new Error(error);
