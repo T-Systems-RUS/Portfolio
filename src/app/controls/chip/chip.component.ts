@@ -11,7 +11,9 @@ export class ChipComponent implements OnInit {
 
   @Input() value = '';
   @Input() style = '';
+  // clickable like for technology picker
   @Input() clickable = false;
+  // functions as link like on project page
   @Input() isLink = false;
 
   @Output() clicked = new EventEmitter<string>();
@@ -20,7 +22,7 @@ export class ChipComponent implements OnInit {
   @Input() active = false;
   @Input() image = '';
   @Input() path = '/server/images/presentation/';
-
+  // for image
   fullpath;
 
   ngOnInit() {

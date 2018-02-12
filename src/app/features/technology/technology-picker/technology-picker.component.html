@@ -8,7 +8,7 @@
 
 <div class="technology-picker__wrapper technology-picker--pad10 {{pickerStyle}}">
       <button class="technology-picker__button {{selectStyle}}" 
-             (click)="switchAll(allSelected)">
+             (click)="switchAll()">
             {{ allSelected ? 'Deselect all' : 'Select all' }}
       </button>
       <chip *ngFor="let tech of technologies"

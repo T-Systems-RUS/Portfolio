@@ -1,5 +1,10 @@
 import {Component, Input} from '@angular/core';
 
+/**
+ * Base class/component for any modal window
+ * @export
+ * @class ModalComponent
+ */
 @Component({
   selector: 'modal',
   templateUrl: './modal.component.html',

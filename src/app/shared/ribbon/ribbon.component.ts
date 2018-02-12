@@ -1,5 +1,10 @@
 import {Component, Input} from '@angular/core';
 
+/**
+ * Marks project as finished
+ * @export
+ * @class RibbonComponent
+ */
 @Component({
   selector: 'ribbon',
   templateUrl: './ribbon.component.html',

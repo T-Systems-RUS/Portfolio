@@ -1,5 +1,10 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
+/**
+ * Round delete (X) Button
+ * @export
+ * @class DeleteButtonComponent
+ */
 @Component({
   selector: 'delete-button',
   styleUrls: [

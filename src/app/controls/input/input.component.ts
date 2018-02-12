@@ -25,6 +25,7 @@ export class InputComponent implements AfterViewInit {
   @Input() boxStyle = '';
   @Input() clearStyle = '';
   @Input() placeholder = '';
+  // autocomplete list
   @Input() complete = [];
 
   @Input() errorMessage = ''; // Field is required
@@ -32,8 +33,9 @@ export class InputComponent implements AfterViewInit {
 
   @Output() onModelChanged = new EventEmitter<Object>();
 
+  // reference to input control
   @ViewChild('searchBox') searchBox;
-
+  // stores initial list for autocomplete 
   completeInitial = [];
 
   showAutocomplete = false;
@@ -46,7 +48,7 @@ export class InputComponent implements AfterViewInit {
       this.showAutocomplete = false;
       this.completeInitial = this.complete;
       this.hasComplete = this.complete.length > 0;
-
+      // subscribe to key events to walk through autocomplete with arrows
       Observable.fromEvent(document, 'keydown')
         .pluck('key')
         .filter(char => char === 'ArrowDown' || char === 'ArrowUp' || char === 'Enter')

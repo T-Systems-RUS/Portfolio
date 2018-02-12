@@ -26,6 +26,7 @@ export class FilterItemComponent {
     this.onFilterAction.emit(this.name);
   }
 
+  // hides filter when clicked outside filter
   @HostListener('document:click', ['$event'])
   onClick(event) {
     if (!this._eref.nativeElement.contains(event.target)) {
