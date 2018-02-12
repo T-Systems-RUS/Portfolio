@@ -2,232 +2,182 @@ import * as models from '../../models/index';
 import parse from '../../shared/parse.service';
 
 const projectService = {
-  // GET Section
-
-// GET list of projects with teamcount
-  getProjects: function () {
-    return models.Project.findAll({
-        where: {ishistory: 0},
-        distinct: 'name',
-        include: [{
-          as: 'schedules',
-          model: models.Schedule
-        }, {
-          as: 'technologies',
-          model: models.Technology
-        }
-        ],
-        order: [
-          ['updatedAt', 'DESC']
-        ]
+  // GET list of projects with teamcount
+  getProjects: () => models.Project.findAll({
+      where: {ishistory: 0},
+      distinct: 'name',
+      include: [{
+        as: 'schedules',
+        model: models.Schedule
+      }, {
+        as: 'technologies',
+        model: models.Technology
       }
-    );
-  },
-
-// GET single project by id
-  getProject: function (id) {
-
-    return models.Project.findOne({
-      where: {
-        id: id,
-        ishistory: false
-      },
-      include: [{
-        as: 'schedules',
-        model: models.Schedule,
-        include: [{
-          as: 'employee',
-          model: models.Employee
-        }, {
-          as: 'role',
-          model: models.Role
-        }]
-      }, {
-        as: 'technologies',
-        model: models.Technology
-      }]
-    });
-  },
-
-// Get All Projects with same name
-  getProjectsByName: function (name) {
-
-    return models.Project.findAll({
-      where: {
-        name: name
-      },
-      include: [{
-        as: 'schedules',
-        model: models.Schedule,
-        include: [{
-          as: 'employee',
-          model: models.Employee
-        }, {
-          as: 'role',
-          model: models.Role
-        }]
-      }, {
-        as: 'technologies',
-        model: models.Technology
-      }],
+      ],
       order: [
-        ['version', 'DESC']
+        ['updatedAt', 'DESC']
       ]
-    });
-  },
+    }
+  ),
+
+  // GET single project by id
+  getProject: id => models.Project.findOne({
+    where: {
+      id: id,
+      ishistory: false
+    },
+    include: [{
+      as: 'schedules',
+      model: models.Schedule,
+      include: [{
+        as: 'employee',
+        model: models.Employee
+      }, {
+        as: 'role',
+        model: models.Role
+      }]
+    }, {
+      as: 'technologies',
+      model: models.Technology
+    }]
+  }),
+
+  // Get All Projects with same name
+  getProjectsByName: name => models.Project.findAll({
+    where: {
+      name: name
+    },
+    include: [{
+      as: 'schedules',
+      model: models.Schedule,
+      include: [{
+        as: 'employee',
+        model: models.Employee
+      }, {
+        as: 'role',
+        model: models.Role
+      }]
+    }, {
+      as: 'technologies',
+      model: models.Technology
+    }],
+    order: [
+      ['version', 'DESC']
+    ]
+  }),
 
 // GET check if project exists
-  doesProjectExist: function (name) {
-
-    return models.Project.count({where: {name: name}}).then(count => {
-      if (count != 0) {
-        return true;
-      } else {
-        return false;
-      }
-    }).catch(error => {
+  doesProjectExist: name => models.Project.count({where: {name: name}})
+    .then(count => count !== 0)
+    .catch(error => {
       console.log(error);
-    });
-  },
+    }),
 
 // GET Get latest project
-  isProjectLatest: function (id) {
-    return models.Project.findOne({
-      where: {
-        id: id
-      }
-    }).then(project => {
-      return project.ishistory ? false : true;
-    }).catch(error => {
+  isProjectLatest: id => models.Project.findOne({
+    where: {
+      id: id
+    }
+  }).then(project => !project.ishistory)
+    .catch(error => {
       console.log(error);
-    });
-  },
+    }),
 
-// POST create new project
-  createProject: function (Project) {
-    return models.Project.create({
-      name: Project.name,
-      line: Project.line,
-      customer: Project.customer,
-      domain: Project.domain,
-      description: Project.description,
-      active: false,
-      startdate: Project.startdate,
-      enddate: Project.enddate,
-      pss: Project.pss,
-      program: Project.program,
-      feedback: Project.feedback,
-      image: Project.image,
-      type: Project.type,
-      ishistory: false,              // default for new project
-      version: Project.version,                    // default for new project,
-      technologies: Project.technologies
-    }).then(function (project) {
+  // POST create new project
+  createProject: project => models.Project.create({
+    name: project.name,
+    line: project.line,
+    customer: project.customer,
+    domain: project.domain,
+    description: project.description,
+    active: false,
+    startdate: project.startdate,
+    enddate: project.enddate,
+    pss: project.pss,
+    program: project.program,
+    feedback: project.feedback,
+    image: project.image,
+    type: project.type,
+    ishistory: false,              // default for new project
+    version: project.version,                    // default for new project,
+    technologies: project.technologies
+  }).then(projectNew => {
 
-      const technologies = parse.parseTechnology(Project.technologies);
-      const instances = technologies.map(tech => {
-        return models.Technology.build(tech)
-      });
-      project.setTechnologies(instances);
+    const technologies = parse.parseTechnology(projectNew.technologies);
+    const instances = technologies.map(tech => models.Technology.build(tech));
+    projectNew.setTechnologies(instances);
 
-      const schedules = parse.parseShedules(project, Project.schedules);
-      models.Schedule.bulkCreate(schedules);
+    const schedules = parse.parseShedules(projectNew, projectNew.schedules);
+    models.Schedule.bulkCreate(schedules);
 
-      return project;
-    }).catch(error => {
-      throw new Error(error);
-    });
-  },
+    return projectNew;
+  }).catch(error => {
+    throw new Error(error);
+  }),
 
 // POST request update Project
-  updateProject: function (Project) {
-    return models.sequelize.transaction().then(function (t) {
-      return models.Project.update(
-        {ishistory: true},
-        {where: {id: Project.id}, transaction: t},
-      ).then(project => {
-        return projectService.createProject(Project).then(project => {
-          t.commit();
-          return project;
-        }).catch(error => {
-          console.log(error);
-          throw new Error(error);
-          return t.rollback();
-        })
-      }).catch(error => {
-        console.log(error);
-        throw new Error(error);
-        return t.rollback();
-      });
-    }).catch(error => {
+  updateProject: project => models.sequelize.transaction()
+    .then(t => models.Project.update(
+      {ishistory: true},
+      {where: {id: project.id}, transaction: t},
+    ).then(() => projectService.createProject(project)
+      .then(newProject => {
+        t.commit();
+        return newProject;
+      })))
+    .catch(error => {
       console.log(error);
       throw new Error(error);
-    });
+    }),
 
-  },
-
-// PUT request archieve project
+  // PUT request archieve project
   archieveProject: async id => {
     try {
-      const project = await  models.Project.update(
+      return await models.Project.update(
         {
           ishistory: true,
           updatedAt: new Date()
         },
         {where: {id: id}}
       );
-
-      return project;
     } catch (e) {
       console.log(e);
     }
   },
 
-  deleteProject:
-    async name => {
-      try {
-        const projects = await projectService.getProjectsByName(name);
-        projects.forEach(project => {
-          project.removeTechnologies(project.technologies);
-          models.Schedule.destroy({where: {projectid: project.id}});
-        });
-
-        const affectedRows = await models.Project.destroy({where: {name: name}, cascade: true});
-        return affectedRows;
-      } catch (error) {
-        console.log(error)
-        throw new Error(error);
-      }
-    },
-
-// PUT Save image
-  updateImage: (id, image) => {
-    return models.Project.update(
-      {
-        image: image,
-        updatedAt: new Date()
-      },
-      {
-        where: {id: id}
-      }
-    ).then(() => {
-      return projectService.getProject(id);
-    });
+  deleteProject: async name => {
+    try {
+      const projects = await projectService.getProjectsByName(name);
+      projects.forEach(project => {
+        project.removeTechnologies(project.technologies);
+        models.Schedule.destroy({where: {projectid: project.id}});
+      });
+      return await models.Project.destroy({where: {name: name}, cascade: true});
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }
   },
 
-  removeImage:
-    project => {
-      return models.Project.update(
-        {
-          image: project.image
-        },
-        {
-          where: {name: project.name}
-        }
-      ).then(() => {
-        return projectService.getProject(project.id);
-      });
+  // PUT Save image
+  updateImage: (id, image) => models.Project.update(
+    {
+      image: image,
+      updatedAt: new Date()
+    },
+    {
+      where: {id: id}
     }
+  ).then(() => projectService.getProject(id)),
+
+  removeImage: project => models.Project.update(
+    {
+      image: project.image
+    },
+    {
+      where: {name: project.name}
+    }
+  ).then(() => projectService.getProject(project.id))
 };
 
 export default projectService;

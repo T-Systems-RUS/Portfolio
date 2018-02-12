@@ -63,7 +63,7 @@ router.post('/projects/create', projectValidator.createValidators(), (req, res) 
   });
 });
 
-router.post('/projects/update', projectValidator.createValidators(), (req, res, next) => {
+router.post('/projects/update', projectValidator.createValidators(), (req, res) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -87,7 +87,7 @@ router.post('/projects/update', projectValidator.createValidators(), (req, res, 
 });
 
 // Put Requests
-router.put('/projects/archieve', projectValidator.archieveValidators(), async (req, res, next) => {
+router.put('/projects/archieve', projectValidator.archieveValidators(), async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({errors: errors.mapped()});
@@ -106,14 +106,14 @@ router.put('/projects/archieve', projectValidator.archieveValidators(), async (r
   }
 });
 
-router.delete('/projects/delete/:name', projectValidator.deleteValidators(), async (req, res, next) => {
+router.delete('/projects/delete/:name', projectValidator.deleteValidators(), async (req, res) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({errors: errors.mapped()});
   }
   try {
-    const response = await projectService.deleteProject(req.params.name);
+    await projectService.deleteProject(req.params.name);
     res.status(200).json({message: 'ok'});
   } catch (error) {
     res.status(500).json({errors: {er: {msg: error}}});
