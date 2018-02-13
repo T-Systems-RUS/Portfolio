@@ -7,7 +7,7 @@ import {AdminService} from '../../admin.service';
 @Component({
   selector: 'admin-role',
   templateUrl: './admin-role.component.html',
-  styleUrls: ['./admin-role.component.less', './../admin-form/admin-form.component.less'],
+  styleUrls: ['./admin-role.component.scss', './../admin-form/admin-form.component.scss'],
   animations: []
 })
 export class AdminRoleComponent implements OnInit {
@@ -17,7 +17,7 @@ export class AdminRoleComponent implements OnInit {
   roles: Role[];
   domains: string[];
   seniority: string[];
-  //for checkbox
+  // for checkbox
   leadrole = false;
   form = this.fb.group({
     id: [''],

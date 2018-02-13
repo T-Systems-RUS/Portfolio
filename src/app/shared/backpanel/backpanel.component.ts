@@ -1,16 +1,20 @@
 import {Component, Input} from '@angular/core';
-import {BACKPANEL_ANIMATION} from './backpanel.animation';
 
+/**
+ * Backpanel with different images
+ * 
+ * @export
+ * @class BackPanelComponent
+ */
 @Component({
   selector: 'backpanel',
   templateUrl: './backpanel.component.html',
-  styleUrls: ['./backpanel.component.less'],
-  animations: BACKPANEL_ANIMATION
+  styleUrls: ['./backpanel.component.scss']
 })
 export class BackPanelComponent {
 
-  @Input() color = '';
+  @Input() color = 'grey';
+  // both - 2 images | left side | right side
   @Input() image = 'left';
-  @Input() withAnimation = false;
 
 }

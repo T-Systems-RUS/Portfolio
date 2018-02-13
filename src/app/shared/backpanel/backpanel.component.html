@@ -1,13 +1,13 @@
-<div [@appear] class="backpanel {{color}}">
+<div class="backpanel {{color}}">
 
-    <img [@appear2] class="backpanel__img backpanel__img--left"  
+    <img class="backpanel__img backpanel__img--left"  
          src="./../../assets/images/stars.png" 
          alt="stars"
          [ngClass]="{'hidden': image==='right'}">
-    <div [@appear3] class="backpanel__content">
+    <div class="backpanel__content">
         <ng-content></ng-content>
     </div>
-    <img [@appear2] class="backpanel__img backpanel__img--right" 
+    <img class="backpanel__img backpanel__img--right" 
          src="./../../assets/images/stars_all.png"  
          alt="stars"
          [ngClass]="{'hidden': image==='left'}">

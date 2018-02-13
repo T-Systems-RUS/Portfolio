@@ -22,6 +22,7 @@ export class ExtractService {
     return body || {};
   }
 
+  // for get requests
   public handleError(error: MessageResponse) {
 
     const errors: Error = new Error();
@@ -37,6 +38,7 @@ export class ExtractService {
     return errors;
   }
 
+  // for post requests
   public handlePostError(error: Response | {}) {
 
     const errors: Error = new Error();

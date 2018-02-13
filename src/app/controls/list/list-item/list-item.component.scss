@@ -1,0 +1,109 @@
+@import './../../../../assets/style/colors.scss';
+@import './../../../../assets/style/mixins.scss';
+
+.list-item{
+    display: inline-block;
+    position: relative;
+    height: 50px;
+    width:100%;
+    margin-bottom: 20px;
+
+    @include boxSizing();
+
+    &__img{
+        float: left;   
+        margin-right: 10px;
+    }
+
+    &__block{
+        display: inline-block;
+        height: 36px;
+        position: absolute;
+        top:50%;
+        margin-top: -18px;
+    }
+
+    &__primary{
+        display: inline-block;
+        margin: 0;
+        font-family: ProximaRegular;
+        font-size: 14px;
+        margin-bottom: 2px;
+        color: $text_h;
+
+    }
+
+    &__secondary,&__select{
+        margin: 0;
+        font-family: ProximaRegularLight;
+        font-size: 14px;
+        color: $text_second2;
+    }
+
+    &__select{
+        display: block;
+        border: none;
+        outline: none;
+        @include borderRadius(2px);
+
+        &--active{
+            background-color: $sap_bg;
+        }
+    }
+
+
+
+    :host ::ng-deep &__info{
+        margin: 0;
+        font-family: ProximaRegularLight;
+        position: absolute;
+        right: 0;
+        height: 16px;
+        top:50%;
+        margin-top: -8px;
+        font-size: 14px;
+        color: $text_body;
+    }
+
+    :host ::ng-deep &__input{
+        position: absolute;
+        right: 20px;
+        height: 20px;
+        top:50%;
+        margin-top: -10px;
+        width: 40px;
+        font-family: ProximaRegularLight;
+        font-size: 18px;
+        outline: none;
+        border: none;
+        text-align: center;
+        @include borderRadius(2px);
+        @include transition(all .4s);
+        z-index: 200;
+        
+        &:focus{
+            border-bottom: 2px solid $text_h;
+        }
+
+    }
+
+    :host ::ng-deep &--picker{
+        border-bottom: 1px solid #dddddd;
+        margin: 0;
+        float: left;
+        padding: 10px;
+        height: auto;
+        cursor: pointer;
+
+        @include transition(all .4s);
+    }
+
+    &--active{
+        background-color: $sap_bg;
+        @include transition(all .4s);
+    }
+}
+
+.item--edited{
+    background-color: #FFEE58;
+}

@@ -4,9 +4,9 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
   selector: 'app-button',
   templateUrl: './button.component.html',
   styleUrls: [
-    './button.component.less',
-    './../../shared/backpanel/backpanel.component.less',
-    './../input/input.component.less']
+    './button.component.scss',
+    './../../shared/backpanel/backpanel.component.scss',
+    './../input/input.component.scss']
 })
 export class ButtonComponent {
 
@@ -16,10 +16,6 @@ export class ButtonComponent {
   @Input() disabled = false;
 
   @Output() click = new EventEmitter();
-
-  constructor() {
-
-  }
 
   clicked(event) {
     event.stopPropagation();

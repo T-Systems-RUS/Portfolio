@@ -1,0 +1,200 @@
+@import './../../../assets/style/colors.scss';
+@import './../../../assets/style/mixins.scss';
+
+
+.input{
+    display: inline-block;
+    position: relative;
+
+    @include boxSizing();
+
+    &__label{
+        display: block;
+        font-family: ProximaRegular;
+        font-size: 14px;
+        color:$text_h;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+    &__button{
+        position: absolute;
+        top:0;
+        right: 0;
+        z-index: 101;
+    }
+
+    &__error{
+        color:$error;
+        float: right;
+    }
+
+    &__clear{
+        display: inline-block;
+        cursor: pointer;
+        font-family: ProximaRegularThin;
+        font-size: 20px;
+        position: absolute;
+        color:$text_input;
+        top:17px;
+        right: 120px;
+
+        &--right20{
+            right: 20px;
+        }
+
+        &--top30{
+            top:30px;
+        }
+
+        &--hidden{
+            display: none;
+        }
+        
+        :host ::ng-deep &--filter{
+            right: 0;
+            font-size: 14px;
+        }
+    }
+
+    &__box, &__textbox{
+        display: block;
+        border: 1px solid #dddddd;
+        outline: none;
+        height: 54px;
+        font-family: ProximaRegular;
+        font-size: 18px;
+        padding: 0  20px;
+        width: 100%;
+        @include boxSizing();
+
+        &--uneditable{
+            pointer-events: none;
+            cursor: default;
+            background-color: #dddddd;
+        }
+
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:$text_input;
+          }
+        &::-moz-placeholder { /* Firefox 19+ */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:$text_input;
+          }
+        &:-ms-input-placeholder { /* IE 10+ */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:$text_input;
+          }
+        &:-moz-placeholder { /* Firefox 18- */
+            font-family: ProximaRegularThin;
+            font-size: 18px;
+            color:$text_input;
+          }
+
+        &--error{
+            border-color: $error;
+            @include transition(all .3s);
+        }
+    }
+
+    &__textbox{
+        padding-top: 10px;
+        height: 120px;
+        resize: none;
+    }
+
+     &--small{
+        width: 100%;
+        height: 40px;
+    }
+
+    $font14:14px;
+    :host ::ng-deep  &--filter{
+        background-color: #EEF1F3;
+        color:#777777;
+        font-size: 14px;
+        border: none;
+        border-bottom: 2px solid #777777;
+        height: 30px;
+        padding: 0;
+
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            font-size: $font14;
+          }
+        &::-moz-placeholder { /* Firefox 19+ */
+            font-size: $font14;
+          }
+        &:-ms-input-placeholder { /* IE 10+ */
+            font-size: $font14;
+          }
+        &:-moz-placeholder { /* Firefox 18- */
+            font-size: $font14;
+          }
+
+    }
+
+    &--width100{
+        width:100%;
+    }
+
+    &--marginB20{
+        margin-bottom: 20px;
+    }
+}
+
+.paddingR140{
+    padding-right: 140px;
+}
+
+
+.autocomplete{
+    display: inline-block;
+    background-color: $text_white;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    max-height: 400px;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    
+    @include boxSizing();
+    @include boxShadow(0 3px 3px 0 rgba(0,0,0,0.50));
+    @include transition(visibility 0.3s, opacity 0.5s);
+
+
+    &__item{
+        display: inline-block;
+        width: 100%;
+        padding: 10px 20px;
+        cursor: pointer;
+        color:$text_h;
+        font-size: 14px;
+        font-family: ProximaRegular;
+
+        @include boxSizing();
+        @include transition(all .4s);
+
+        &:hover{
+            background-color: $hor_bg;
+        }
+
+        &--active{
+            background-color: $hor_bg;
+        }
+    }
+
+    &__visible{
+        opacity: 1;
+        visibility: visible;
+        height: auto;
+    }
+
+    
+}

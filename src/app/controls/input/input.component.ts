@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ViewChild, AfterViewInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import 'rxjs/add/observable/fromEvent';
@@ -9,12 +9,12 @@ import 'rxjs/add/operator/filter';
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: [
-    './input.component.less',
-    './../../shared/backpanel/backpanel.component.less'
+    './input.component.scss',
+    './../../shared/backpanel/backpanel.component.scss'
   ]
 })
 
-export class InputComponent {
+export class InputComponent implements AfterViewInit {
 
   @Input() id = '';
   @Input() name = '';
@@ -25,6 +25,7 @@ export class InputComponent {
   @Input() boxStyle = '';
   @Input() clearStyle = '';
   @Input() placeholder = '';
+  // autocomplete list
   @Input() complete = [];
 
   @Input() errorMessage = ''; // Field is required
@@ -32,26 +33,22 @@ export class InputComponent {
 
   @Output() onModelChanged = new EventEmitter<Object>();
 
+  // reference to input control
   @ViewChild('searchBox') searchBox;
-
+  // stores initial list for autocomplete 
   completeInitial = [];
 
   showAutocomplete = false;
   activeItem = -1;
 
   hasComplete = false;
-
-  constructor() {
-
-  }
-
   ngAfterViewInit() {
 
     setTimeout(function () {
       this.showAutocomplete = false;
       this.completeInitial = this.complete;
       this.hasComplete = this.complete.length > 0;
-
+      // subscribe to key events to walk through autocomplete with arrows
       Observable.fromEvent(document, 'keydown')
         .pluck('key')
         .filter(char => char === 'ArrowDown' || char === 'ArrowUp' || char === 'Enter')
@@ -77,10 +74,13 @@ export class InputComponent {
     }.bind(this), 200);
   }
 
-  completeClick(data) {
-    console.log(data);
-    //this.searchString=(this.searchString+=', ' + data).replace(/(^[,\s]+)|([,\s]+$)/g, '');
-    this.model = data; //this.searchString;
+/**
+ * Click on autocomplete item
+ * @param {any} data autocomplete item will be set to input content
+ * @memberof InputComponent
+ */
+completeClick(data) {
+    this.model = data;
     this.modelChanged(data);
     this.showAutocomplete = false;
   }

@@ -1,0 +1,63 @@
+//background
+
+$grey_bg:#eef1f3;
+$grey:#DDDDDD;
+$green_bg:rgba(52,174,74,0.3);
+$sap_bg:#90d0fa;
+$auto_bg:#f9dabb;
+$hor_bg:#cde9e1;
+$ver_bg:#f2ede5;
+
+
+//main
+
+$green_main:#34ae4a;
+$green_main_hover:#2e8a41;
+
+
+//Typography
+
+$text_h:#063642;
+$text_body:#030302;
+$text_second:#a3a3a3;
+$text_second2:#757575;
+$text_navigation:#555859;
+$text_navigation2:#777777;
+$text_input:#707070;
+$text_white:#ffffff;
+
+$border:#CACACA;
+
+$error:#F44336;
+$error2:#f5554a;
+
+$yellow:#FFEE58;
+
+
+@font-face {
+    font-family: "ProximaRegular";
+    src: url("/assets/fonts/Proxima Nova Regular.otf") format("opentype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "ProximaRegularBold";
+    src: url("/assets/fonts/Proxima Nova Bold.otf") format("opentype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "ProximaRegularThin";
+    src: url("/assets/fonts/Proxima Nova Thin.otf") format("opentype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+font-family: "ProximaRegularLight";
+    src: url("/assets/fonts/Proxima Nova Light.otf") format("opentype");
+    font-style: normal;
+    font-weight: normal;
+}

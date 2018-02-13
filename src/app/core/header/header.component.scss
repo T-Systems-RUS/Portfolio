@@ -1,0 +1,63 @@
+@import './../../../assets/style/colors.scss';
+@import './../../../assets/style/mixins.scss';
+
+$header_height:60px;
+
+
+.header{     
+    background-color: #ffffff;
+    padding: 0 20px;
+    position: fixed;
+    top:0;
+    height: $header_height;
+    width: 100%;
+    z-index: 200;
+
+    @include boxShadow(0 3px 3px 0 rgba(0,0,0,0.50));
+    @include boxSizing();
+    @include flex-display();
+    @include align-content(center);
+
+    &__navigation{    
+        text-align: right;
+        line-height: 60px;
+        vertical-align: middle;
+        @include flex(2);
+    }
+
+    &__logo{
+         display: inline-block;
+         line-height: 60px;
+         vertical-align: middle;
+        // align-content: center;
+        // justify-content: left;
+        @include flex(1);
+    }
+
+
+}
+
+
+.navigation{
+    
+    &__item{
+        display: inline-block;
+        color:$text_navigation;
+        font-family: ProximaRegularLight;
+        font-size: 16px;
+        margin-left: 20px;
+        text-decoration: none;
+        @include transition(all .5s);
+
+        &--active{
+            color:$green_main;
+            text-decoration: underline;
+        }
+    }
+
+    &__item:hover{
+        color:$green_main;
+    }
+}
+
+

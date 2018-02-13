@@ -1,0 +1,48 @@
+@import './../../../assets/style/colors.scss';
+@import './../../../assets/style/mixins.scss';
+
+.footer{
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    vertical-align: middle;
+    position: fixed;
+    
+    text-align: center;
+    z-index: 300;
+    bottom:-100px;
+    @include boxSizing();
+    @include transition(all .4s);
+
+    :host ::ng-deep &__button{
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        height: 40px;
+        width:40px;
+        line-height: 40px;
+        vertical-align: middle;
+        text-align: center;
+        margin-right: 10px;
+        position: relative;
+
+        background-color: $text_white;
+        @include borderRadius(50%);
+
+        img{
+            display: inline-block;
+            height: 24px;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -12px;
+            width:21px;
+        }
+    }
+
+    &--visible{
+        bottom: 0;
+    }
+}

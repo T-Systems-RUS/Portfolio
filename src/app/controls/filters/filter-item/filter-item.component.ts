@@ -3,7 +3,8 @@ import {Component, Input, EventEmitter, Output, ElementRef, HostListener} from '
 @Component({
   selector: 'filter-item',
   templateUrl: './filter-item.component.html',
-  styleUrls: ['./filter-item.component.less'],
+  styleUrls: ['./filter-item.component.scss'],
+  // tslint:disable-next-line:use-host-property-decorator
   host: {'(document:click)': 'onClick($event)'}
 })
 
@@ -25,6 +26,7 @@ export class FilterItemComponent {
     this.onFilterAction.emit(this.name);
   }
 
+  // hides filter when clicked outside filter
   @HostListener('document:click', ['$event'])
   onClick(event) {
     if (!this._eref.nativeElement.contains(event.target)) {

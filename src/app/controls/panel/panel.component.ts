@@ -3,7 +3,7 @@ import {Component, Input} from '@angular/core';
 @Component({
   selector: 'panel',
   templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.less']
+  styleUrls: ['./panel.component.scss']
 })
 export class PanelComponent {
 

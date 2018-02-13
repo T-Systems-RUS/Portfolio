@@ -2,10 +2,17 @@ import {Component, Input, Output, EventEmitter, AfterContentInit} from '@angular
 import {Role} from '../../../shared/models/role';
 import {Schedule} from '../../../shared/models/schedule';
 
+/**
+ * Component for employee item
+ * and roles dropdown
+ * @export
+ * @class ListItemComponent
+ * @implements {AfterContentInit}
+ */
 @Component({
   selector: 'list-item',
   templateUrl: './list-item.component.html',
-  styleUrls: ['./list-item.component.less']
+  styleUrls: ['./list-item.component.scss']
 })
 export class ListItemComponent implements AfterContentInit {
 
@@ -21,6 +28,7 @@ export class ListItemComponent implements AfterContentInit {
   active = false;
 
   ngAfterContentInit() {
+    // set role of schedule if schedule has one, otherwise first role from roles list
     this.model.role = this.model.role.id === '' ? this.roles[0] : this.model.role;
   }
 
@@ -38,7 +46,8 @@ export class ListItemComponent implements AfterContentInit {
   }
 
   selectRole($event) {
-    this.model.role = this.roles.filter(item => item.id == $event.target.value)[0];
+    // tslint:disable-next-line:triple-equals
+    this.model.role = this.roles.filter(item => item.id.toString() === $event.target.value)[0];
     this.model.active = true;
     this.model.participation = 100.00;
     this.clicked.emit(this.model);

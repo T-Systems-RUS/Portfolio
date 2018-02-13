@@ -1,0 +1,90 @@
+@import './../../../../assets/style/colors.scss';
+@import './../../../../assets/style/mixins.scss';
+
+.file{
+
+
+    &__content{
+        height: 100%;
+        max-height: 400px;
+        overflow: auto;
+        position: relative;
+    }
+
+    &__list{
+        list-style-type: none;
+        width: 100%;
+        padding: 0;
+        padding-left: 10px;
+
+    }
+
+    &__item{
+        width: 100%;
+
+        span{
+            display: block;
+            font-family: ProximaRegular;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    }
+
+    &__image{
+        width: 300px;
+        height: 200px;
+    }
+
+    &__uploads{
+        display: flex;
+        padding-left: 10px;
+        align-items: center;
+
+        span{
+            display: block;
+            font-family: ProximaRegular;
+            font-size: 14px;
+            
+        }
+
+        &-item{
+            @include flex(1);
+        }
+
+        &--center{
+            text-align: center;
+        }
+    }
+
+    &__button{
+        background-color: $error;
+        color: $text_white;
+        cursor: pointer;
+        display: inline-block;
+        font-family: ProximaRegularLight;
+        font-size: 16px;
+        border: 2px solid $error;
+        line-height: 28px;
+        height: 30px;
+        padding: 0 10px;
+        text-decoration: none;
+        text-align: center;
+        vertical-align:middle;
+        @include boxSizing();
+        @include transition(all .3s);
+        @include borderRadius(2px);
+    
+        &:hover{
+            background-color: $error2;
+        }
+
+        i{
+            margin-right: 5px;
+        }
+    }
+
+}
+
+
+
+

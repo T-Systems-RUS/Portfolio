@@ -1,7 +1,7 @@
 <div #entry></div>
 <backpanel  [color]="model.line" image="both"></backpanel>
 
-<div @appear3 class="project project-history--height100">
+<div class="project project-history--height100">
     <div class="project__header">
         <h3 class="project__subheading">
             {{model.updatedAt | date: 'dd.MM.yyyy' }} - 
@@ -43,7 +43,8 @@
                             <img src="./../../assets/images/compare.png" alt="">
                             Compare with version:                            
                         </p>
-                        <select class="filter-item__dropdown" name="version" id="version" [(ngModel)]="v" (ngModelChange)="onChange($event,projects[i===projects.length-1 ? i : i+1],project)">
+                        <select class="filter-item__dropdown" name="version" id="version" [(ngModel)]="v" 
+                               (ngModelChange)="onChange($event,projects[i===projects.length-1 ? i : i+1],project)">
                             <option *ngFor="let v of versions" value="{{v}}">{{v}}</option>
                         </select>
                     </filter-item>

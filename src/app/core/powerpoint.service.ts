@@ -24,7 +24,9 @@ export class PowerPointService {
     this.createInstance();
   }
 
+  // default color
   magenta = 'e20074';
+  // default padding from left
   x = 0.39;
 
   capitalize(word) {
@@ -37,11 +39,17 @@ export class PowerPointService {
     return parsed;
   }
 
-  addSlide(project: Project) {
 
-  }
-
-  createPresentation(project: Project, name = '', saveToClient = false) {
+/**
+ * Creates one slide per project
+ * all images are downloaded from server
+ * @param {Project} project source of dynamic info
+ * @param {string} [name=''] name of presentation
+ * @param {boolean} [saveToClient=false] downloads presentation to browser if true
+ * @returns
+ * @memberof PowerPointService
+ */
+createPresentation(project: Project, name = '', saveToClient = false) {
     return this.http.get(this.routes.presentationImages + project.id)
       .subscribe(res => {
 
@@ -52,8 +60,6 @@ export class PowerPointService {
           const image = response.image;
           const technologies = response.technologies;
 
-          //  let PptxGenJS=Object.getPrototypeOf(pptx).constructor;
-          //  let presentation=new PptxGenJS();
 
           this.pptx.setBrowser(true);
 
@@ -409,6 +415,7 @@ export class PowerPointService {
             }
           }
 
+          // download to browser only after last slide is generated
           if (saveToClient) {
             this.pptx.save('POP Russia Portfolio ' + name);
 
@@ -422,7 +429,13 @@ export class PowerPointService {
       );
   }
 
-  private createInstance() {
+/**
+ * Instance must be new up before presentation creation
+ * concatinates presentations together
+ * @private
+ * @memberof PowerPointService
+ */
+private createInstance() {
     const PptxGenJS = Object.getPrototypeOf(pptx).constructor;
     this.pptx = new PptxGenJS();
   }
