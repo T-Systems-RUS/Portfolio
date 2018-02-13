@@ -5,7 +5,12 @@ let nextId = 1;
 export class UserServiceConfig {
   userName = 'Philip Marlowe';
 }
-
+/**
+ * Mock up for future
+ * UserService
+ * @export
+ * @class UserService
+ */
 @Injectable()
 export class UserService {
   id = nextId++;
