@@ -46,9 +46,8 @@ export class ListItemComponent implements AfterContentInit {
   }
 
   selectRole($event) {
-    // has to be == compares number with string by value
     // tslint:disable-next-line:triple-equals
-    this.model.role = this.roles.filter(item => item.id == $event.target.value)[0];
+    this.model.role = this.roles.filter(item => item.id.toString() === $event.target.value)[0];
     this.model.active = true;
     this.model.participation = 100.00;
     this.clicked.emit(this.model);

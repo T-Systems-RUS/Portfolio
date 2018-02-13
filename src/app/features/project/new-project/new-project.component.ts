@@ -44,7 +44,7 @@ export class NewProjectComponent implements OnInit {
 
   // properties for dropdowns
   // loads from constants.json
-  // TO DO - change json structure add parents/child
+  // TODO* - change json structure add parents/child
   lines: string[];
   domains: string[];
   types: string[];
@@ -164,16 +164,18 @@ changeProject() {
       }
     }
   }
+
 /**
  * Show overview dialog
  * before submit project
  * @memberof NewProjectComponent
  */
-showPreview() {
+  showPreview() {
     this.dynamic.setRootViewContainerRef(this.entry);
     const modal = this.dynamic.addProjectConfirmationComponent();
     modal.project = new Project(this.model);
   }
+
 /**
  * Updates model from controls components
  * inputs, dropdowns, tech-picker, employee-picker
@@ -181,21 +183,22 @@ showPreview() {
  * @param {any} prop prop on model to be changed
  * @memberof NewProjectComponent
  */
-setValue(value, prop) {
+  setValue(value, prop) {
     this.model[prop] = value;
     // check for changes to enable submit
     this.disableSubmit();
-    // console.log(this.model);
   }
+
 /**
  * Checks model required prop on model
  * @returns array of empty required fileds
  * @memberof NewProjectComponent
  */
-unvalidFields() {
+  unvalidFields() {
     return this.model.required.map(key =>
       !this.model[key] ? key : '').filter(item => item !== '');
   }
+
 /**
  * Change color of header
  * depending on production line
@@ -209,6 +212,7 @@ unvalidFields() {
   back() {
     window.history.back();
   }
+
 /**
  * check difference between model and modelCopy
  * no difference - > disable submit

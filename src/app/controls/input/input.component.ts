@@ -74,10 +74,13 @@ export class InputComponent implements AfterViewInit {
     }.bind(this), 200);
   }
 
-  completeClick(data) {
-    console.log(data);
-    // this.searchString=(this.searchString+=', ' + data).replace(/(^[,\s]+)|([,\s]+$)/g, '');
-    this.model = data; // this.searchString;
+/**
+ * Click on autocomplete item
+ * @param {any} data autocomplete item will be set to input content
+ * @memberof InputComponent
+ */
+completeClick(data) {
+    this.model = data;
     this.modelChanged(data);
     this.showAutocomplete = false;
   }

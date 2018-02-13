@@ -5,7 +5,9 @@ import {QuestionBase} from './question-base';
 import {QuestionControlService} from './question-control.service';
 
 /**
- * Unfinished 
+ * Was planned as universal reactive form component
+ * Copied from angular docs site
+ * Was not finished, not used anywhere in code
  * @export
  * @class FormComponent
  * @implements {OnInit}

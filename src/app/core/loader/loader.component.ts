@@ -2,7 +2,8 @@ import {Component} from '@angular/core';
 
 /**
  * Loader for data loading
- * Unfinished
+ * Implementation is not completed
+ * Not used anywhere in project
  * @export
  * @class LoaderComponent
  */
