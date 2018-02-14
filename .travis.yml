@@ -1,5 +1,12 @@
 dist: trusty
 
+services:
+  - mysql
+
+env:
+  # Use test credentials for sequelize
+  - NODE_ENV=test
+
 sudo: required
 addons:
   chrome: stable
@@ -18,5 +25,16 @@ install:
 script:
   # Use Chromium instead of Chrome.
   - export CHROME_BIN=chromium-browser
+  # Initialize database
+  - xvfb-run -a npm run db:init
+  # Run backend
+  - xvfb-run -a npm run server
+  # Run unit test
   - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+  # Run e2e test
   - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+#   - sleep 3
+
+after_script:
+  # Stop backend
+  - pkill node
