@@ -47,9 +47,11 @@
     "pg-hstore": "^2.3.2",
     "pptxgenjs": "^1.10.0",
     "primeng": "^4.2.1",
+    "reflect-metadata": "^0.1.12",
     "rxjs": "^5.1.0",
     "sequelize": "^4.13.5",
     "sequelize-cli": "^3.2.0",
+    "sequelize-typescript": "^0.6.2",
     "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.4"
   },
