@@ -6,15 +6,9 @@ import {Role} from './Role';
 @Scopes({
     full: {
         include: [
-            {
-                model: () => Project
-            },
-            {
-                model: () => Employee
-            },
-            {
-                model: () => Role
-            }
+            () => Project,
+            () => Employee,
+            () => Role
         ]
     }
 })

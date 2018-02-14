@@ -7,27 +7,15 @@ import {ProjectTechnology} from './ProjectTechnology';
 @Scopes({
     full: {
         include: [
-            {
-                model: () => Employee
-            },
-            {
-                model: () => Project
-            }
+            () => Employee,
+            () => Project
         ]
     },
     withEmployees: {
-        include: [
-            {
-                model: () => Employee
-            }
-        ]
+        include: [ () => Employee ]
     },
     withProjects: {
-        include: [
-            {
-                model: () => Project
-            }
-        ]
+        include: [ () => Project ]
     }
 })
 @Table

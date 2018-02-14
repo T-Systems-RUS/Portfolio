@@ -11,15 +11,12 @@ import {ProjectTechnology} from './ProjectTechnology';
         ]
     },
     withTechnologies: {
-        include: [
-            { model: () => Technology }
-        ]
+        include: [ () => Technology ]
     },
     withSchedules: {
-        include: [
-            { model: () => Schedule }
-        ]
-    }
+        include: [ () => Schedule ]
+    },
+    actualProjects: { where: {ishistory: false} }
 })
 @Table
 export class Project extends Model<Project> {

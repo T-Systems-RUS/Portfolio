@@ -4,9 +4,7 @@ import {Schedule} from './Schedule';
 @Scopes({
     withSchedules: {
         include: [
-            {
-                model: () => Schedule
-            }
+            () => Schedule
         ]
     }
 })
