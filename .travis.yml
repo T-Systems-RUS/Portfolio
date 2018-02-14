@@ -28,7 +28,7 @@ script:
   # Initialize database
   - xvfb-run -a npm run db:init
   # Run backend
-  - xvfb-run -a npm run server
+  - xvfb-run -a npm run server &
   # Run unit test
   - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
   # Run e2e test
