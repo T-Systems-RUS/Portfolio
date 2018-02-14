@@ -1,5 +1,7 @@
 # Portfolio
 
+[![Build Status](https://travis-ci.org/T-Systems-RUS/Portfolio.svg?branch=develop)](https://travis-ci.org/T-Systems-RUS/Portfolio)
+
 ## How to run
 
 1. Get MySQL server locally or via docker:
