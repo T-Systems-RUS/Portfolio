@@ -2,19 +2,14 @@ import * as express from 'express';
 import technologyService from './technology.service';
 import technologyValidator from './technology.validator';
 import {validationResult} from 'express-validator/check';
+import {Util} from '../../shared/Util';
 
 const router = express.Router();
 
 // GET requests
-router.get('/technologies', (req, res) => {
-
-  technologyService.getTechnologies().then(data => {
-    if (!data) {
-      res.status(404).send('No technologies found');
-    }
-    res.status(200).send(data);
-  });
-});
+router.get('/technologies', (req, res) =>
+  technologyService.getTechnologies()
+    .then(Util.handleData(res)));
 
 router.get('/technologies/exists/:name/:id?', (req, res) =>
   technologyService.doesTechnologyExist(req.params.name, req.params.id)
@@ -32,9 +27,7 @@ router.post('/technology/create', technologyValidator.createValidators(), (req, 
     if (doesExist) {
       res.status(409).json({errors: {latest: {msg: 'Technology already exists'}}});
     } else {
-      technologyService.createTechnology(req.body).then(technology => {
-        res.status(200).send(technology);
-      });
+      technologyService.createTechnology(req.body).then(Util.handleData(res));
     }
   });
 });
@@ -50,9 +43,7 @@ router.post('/technology/update', technologyValidator.createValidators(), (req, 
     if (doesExist) {
       res.status(409).json({errors: {latest: {msg: 'Technology already exists'}}});
     } else {
-      technologyService.updateTechnology(req.body).then(technology => {
-        res.status(200).send(technology);
-      });
+      technologyService.updateTechnology(req.body).then(Util.handleData(res));
     }
   });
 });

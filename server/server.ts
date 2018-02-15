@@ -39,17 +39,16 @@ app.use('/api', technologyController);
 app.use('/api', employeeController);
 app.use('/api', fileController);
 
-// Catch all other routes and return the index file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
-
 // Global error handling
 app.use((err, req, res, next) => {
   console.error(err);
-  // res.status(500).send('Server error');
   // Send in this format always, if there's a message - send message
   res.status(500).json({errors: {er: {msg: err.message ? err.message : err}}});
+});
+
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 /**
