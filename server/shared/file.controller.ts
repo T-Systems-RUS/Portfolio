@@ -30,8 +30,6 @@ router.post('/images/add', (req, res) => {
 
     projectService.updateImage(req.body.id, req.file.filename).then(project => {
       res.status(200).send(project.image);
-    }).catch(error => {
-      res.status(500).json({errors: {er: {msg: error}}});
     });
   });
 });
@@ -44,8 +42,6 @@ router.put('/images/remove', (req, res) => {
       req.body.image = null;
       projectService.removeImage(req.body).then(project => {
         res.status(200).send(project);
-      }).catch(error => {
-        res.status(500).json({errors: {er: {msg: error}}});
       });
     } else {
       console.log(exists);
@@ -92,9 +88,6 @@ router.get('/presentation/images/:id?', (req, res) => {
     };
 
     res.status(200).send(images);
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json({errors: {er: {msg: err}}});
   });
 });
 

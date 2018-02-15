@@ -12,21 +12,13 @@ router.get('/technologies', (req, res) => {
     if (!data) {
       res.status(404).send('No technologies found');
     }
-
     res.status(200).send(data);
-  }).catch(err => {
-    res.status(500).send(err);
   });
 });
 
 router.get('/technologies/exists/:name/:id?', (req, res) =>
   technologyService.doesTechnologyExist(req.params.name, req.params.id)
-    .then(doesExist => {
-      console.log(doesExist);
-      res.status(200).send(doesExist);
-    }).catch(err => {
-    res.status(500).send(err);
-  }));
+    .then(doesExist => res.status(200).send(doesExist)));
 
 // POST Requests
 router.post('/technology/create', technologyValidator.createValidators(), (req, res) => {
@@ -42,12 +34,8 @@ router.post('/technology/create', technologyValidator.createValidators(), (req, 
     } else {
       technologyService.createTechnology(req.body).then(technology => {
         res.status(200).send(technology);
-      }).catch(error => {
-        res.status(500).json({errors: {er: {msg: error.message}}});
       });
     }
-  }).catch(error => {
-    res.status(500).json({errors: {er: {msg: error.message}}});
   });
 });
 
@@ -64,12 +52,8 @@ router.post('/technology/update', technologyValidator.createValidators(), (req, 
     } else {
       technologyService.updateTechnology(req.body).then(technology => {
         res.status(200).send(technology);
-      }).catch(error => {
-        res.status(500).json({errors: {er: {msg: error.message}}});
       });
     }
-  }).catch(error => {
-    res.status(500).json({errors: {er: {msg: error.message}}});
   });
 });
 
@@ -80,12 +64,8 @@ router.delete('/technology/delete/:id', technologyValidator.deleteValidators(), 
     return res.status(422).json({errors: errors.mapped()});
   }
 
-  try {
-    await technologyService.deleteTechnology(req.params.id);
-    res.status(200).json({message: 'ok'});
-  } catch (error) {
-    res.status(500).json({errors: {er: {msg: error}}});
-  }
+  technologyService.deleteTechnology(req.params.id)
+    .then(() => res.status(200).json({message: 'ok'}));
 });
 
 module.exports = router;

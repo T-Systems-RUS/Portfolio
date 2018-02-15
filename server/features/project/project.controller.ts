@@ -13,8 +13,6 @@ router.get('/projects', (req, res) => {
       res.status(404).send('No projects found');
     }
     res.status(200).send(data);
-  }).catch(err => {
-    res.status(500).json({errors: {er: {msg: err.message}}});
   });
 });
 
@@ -24,8 +22,6 @@ router.get('/projects/:id', (req, res) => {
       res.status(404).send('No projects found');
     }
     res.status(200).send(data);
-  }).catch(err => {
-    res.status(500).json({errors: {er: {msg: err.message}}});
   });
 });
 
@@ -35,8 +31,6 @@ router.get('/projects/history/:name', (req, res) => {
       res.status(404).send('No projects found');
     }
     res.status(200).send(data);
-  }).catch(err => {
-    res.status(500).send({errors: {er: {msg: err.message}}});
   });
 });
 
@@ -54,12 +48,8 @@ router.post('/projects/create', projectValidator.createValidators(), (req, res) 
     } else {
       projectService.createProject(req.body).then(project => {
         res.status(200).send(project);
-      }).catch(error => {
-        res.status(500).json({errors: {er: {msg: error.message}}});
       });
     }
-  }).catch(error => {
-    res.status(500).json({errors: {er: {msg: error.message}}});
   });
 });
 
@@ -77,12 +67,8 @@ router.post('/projects/update', projectValidator.createValidators(), (req, res) 
     } else {
       projectService.updateProject(req.body).then(project => {
         res.status(200).send(project);
-      }).catch(error => {
-        res.status(500).json({errors: {er: {msg: error.message}}});
       });
     }
-  }).catch(error => {
-    res.status(500).json({errors: {er: {msg: error}}});
   });
 });
 
@@ -93,17 +79,14 @@ router.put('/projects/archieve', projectValidator.archieveValidators(), async (r
     return res.status(422).json({errors: errors.mapped()});
   }
 
-  try {
-    const isLatest = await projectService.isProjectLatest(req.body.id);
+  projectService.isProjectLatest(req.body.id).then(isLatest => {
     if (isLatest) {
-      const project = await projectService.archieveProject(req.body.id);
+      const project = projectService.archieveProject(req.body.id);
       res.status(200).send(project);
     } else {
       res.status(409).json({errors: {latest: {msg: 'Somebody has already deleted the project in background'}}});
     }
-  } catch (error) {
-    res.status(500).json({errors: {er: {msg: error}}});
-  }
+  });
 });
 
 router.delete('/projects/delete/:name', projectValidator.deleteValidators(), async (req, res) => {
@@ -112,13 +95,9 @@ router.delete('/projects/delete/:name', projectValidator.deleteValidators(), asy
   if (!errors.isEmpty()) {
     return res.status(422).json({errors: errors.mapped()});
   }
-  try {
-    await projectService.deleteProject(req.params.name);
-    res.status(200).json({message: 'ok'});
-  } catch (error) {
-    res.status(500).json({errors: {er: {msg: error}}});
-  }
 
+  projectService.deleteProject(req.params.name)
+    .then(() => res.status(200).json({message: 'ok'}))
 });
 
 module.exports = router;

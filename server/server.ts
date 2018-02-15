@@ -47,7 +47,9 @@ app.get('*', (req, res) => {
 // Global error handling
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).send('Server error');
+  // res.status(500).send('Server error');
+  // Send in this format always, if there's a message - send message
+  res.status(500).json({errors: {er: {msg: err.message ? err.message : err}}});
 });
 
 /**
