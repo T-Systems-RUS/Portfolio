@@ -23,4 +23,13 @@ export class Util {
       res.status(422).json({errors: errors.mapped()});
     }
   }
+
+  /**
+   * Handle update conflict and send error message
+   * @param res
+   * @param message
+   */
+  public static handleConflict(res, message) {
+    res.status(409).json({errors: {latest: {msg: message}}});
+  }
 }

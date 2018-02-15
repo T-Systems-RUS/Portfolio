@@ -22,38 +22,32 @@ router.get('/projects/history/:name', (req, res) =>
 router.post('/projects/create', projectValidator.createValidators(), (req, res) => {
   Util.validateRequest(req, res);
 
-  return projectService.doesProjectExist(req.body.name).then(doesExist => {
-    if (doesExist) {
-      res.status(409).json({errors: {latest: {msg: 'Project already exists or was archieved'}}});
-    } else {
-      projectService.createProject(req.body).then(Util.handleData(res));
-    }
-  });
+  return projectService.doesProjectExist(req.body.name).then(doesExist =>
+    doesExist ?
+      Util.handleConflict(res, 'Project already exists or was archieved') :
+      projectService.createProject(req.body)
+        .then(Util.handleData(res)));
 });
 
 router.post('/projects/update', projectValidator.createValidators(), (req, res) => {
   Util.validateRequest(req, res);
 
-  return projectService.isProjectLatest(req.body.id).then(isLatest => {
-    if (isLatest) {
-      projectService.updateProject(req.body).then(Util.handleData(res));
-    } else {
-      res.status(409).json({errors: {latest: {msg: 'Somebody has already updated the project in background'}}});
-    }
-  });
+  return projectService.isProjectLatest(req.body.id).then(isLatest =>
+    !isLatest ?
+      Util.handleConflict(res, 'Somebody has already updated the project in background') :
+      projectService.updateProject(req.body)
+        .then(Util.handleData(res)));
 });
 
 // Put Requests
 router.put('/projects/archieve', projectValidator.archieveValidators(), (req, res) => {
   Util.validateRequest(req, res);
 
-  projectService.isProjectLatest(req.body.id).then(isLatest => {
-    if (isLatest) {
-      projectService.archieveProject(req.body.id).then(Util.handleData(res));
-    } else {
-      res.status(409).json({errors: {latest: {msg: 'Somebody has already deleted the project in background'}}});
-    }
-  });
+  return projectService.isProjectLatest(req.body.id).then(isLatest =>
+    !isLatest ?
+      Util.handleConflict(res, 'Somebody has already deleted the project in background') :
+      projectService.archieveProject(req.body.id)
+        .then(Util.handleData(res)));
 });
 
 router.delete('/projects/delete/:name', projectValidator.deleteValidators(), (req, res) => {

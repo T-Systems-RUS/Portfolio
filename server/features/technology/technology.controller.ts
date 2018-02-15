@@ -18,25 +18,21 @@ router.get('/technologies/exists/:name/:id?', (req, res) =>
 router.post('/technology/create', technologyValidator.createValidators(), (req, res) => {
   Util.validateRequest(req, res);
 
-  return technologyService.doesTechnologyExist(req.body.name, req.body.id).then(doesExist => {
-    if (doesExist) {
-      res.status(409).json({errors: {latest: {msg: 'Technology already exists'}}});
-    } else {
-      technologyService.createTechnology(req.body).then(Util.handleData(res));
-    }
-  });
+  return technologyService.doesTechnologyExist(req.body.name, req.body.id).then(doesExist =>
+    doesExist ?
+      Util.handleConflict(res, 'Technology already exists') :
+      technologyService.createTechnology(req.body)
+        .then(Util.handleData(res)));
 });
 
 router.post('/technology/update', technologyValidator.createValidators(), (req, res) => {
   Util.validateRequest(req, res);
 
-  return technologyService.doesTechnologyExist(req.body.name, req.body.id).then(doesExist => {
-    if (doesExist) {
-      res.status(409).json({errors: {latest: {msg: 'Technology already exists'}}});
-    } else {
-      technologyService.updateTechnology(req.body).then(Util.handleData(res));
-    }
-  });
+  return technologyService.doesTechnologyExist(req.body.name, req.body.id).then(doesExist =>
+    doesExist ?
+      Util.handleConflict(res, 'Technology already exists') :
+      technologyService.updateTechnology(req.body)
+        .then(Util.handleData(res)));
 });
 
 router.delete('/technology/delete/:id', technologyValidator.deleteValidators(), (req, res) => {
