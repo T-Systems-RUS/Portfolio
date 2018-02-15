@@ -1,5 +1,4 @@
 import * as express from 'express';
-import {validationResult} from 'express-validator/check';
 import projectService from './project.service';
 import projectValidator from './project.validator';
 import {Util} from '../../shared/Util';
@@ -21,11 +20,7 @@ router.get('/projects/history/:name', (req, res) =>
 
 // POST Requests
 router.post('/projects/create', projectValidator.createValidators(), (req, res) => {
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({errors: errors.mapped()});
-  }
+  Util.validateRequest(req, res);
 
   return projectService.doesProjectExist(req.body.name).then(doesExist => {
     if (doesExist) {
@@ -37,28 +32,20 @@ router.post('/projects/create', projectValidator.createValidators(), (req, res) 
 });
 
 router.post('/projects/update', projectValidator.createValidators(), (req, res) => {
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({errors: errors.mapped()});
-  }
+  Util.validateRequest(req, res);
 
   return projectService.isProjectLatest(req.body.id).then(isLatest => {
-    if (!isLatest) {
-
-      res.status(409).json({errors: {latest: {msg: 'Somebody has already updated the project in background'}}});
-    } else {
+    if (isLatest) {
       projectService.updateProject(req.body).then(Util.handleData(res));
+    } else {
+      res.status(409).json({errors: {latest: {msg: 'Somebody has already updated the project in background'}}});
     }
   });
 });
 
 // Put Requests
-router.put('/projects/archieve', projectValidator.archieveValidators(), async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({errors: errors.mapped()});
-  }
+router.put('/projects/archieve', projectValidator.archieveValidators(), (req, res) => {
+  Util.validateRequest(req, res);
 
   projectService.isProjectLatest(req.body.id).then(isLatest => {
     if (isLatest) {
@@ -69,12 +56,8 @@ router.put('/projects/archieve', projectValidator.archieveValidators(), async (r
   });
 });
 
-router.delete('/projects/delete/:name', projectValidator.deleteValidators(), async (req, res) => {
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({errors: errors.mapped()});
-  }
+router.delete('/projects/delete/:name', projectValidator.deleteValidators(), (req, res) => {
+  Util.validateRequest(req, res);
 
   projectService.deleteProject(req.params.name)
     .then(() => res.status(200).json({message: 'ok'}));

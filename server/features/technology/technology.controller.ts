@@ -1,7 +1,6 @@
 import * as express from 'express';
 import technologyService from './technology.service';
 import technologyValidator from './technology.validator';
-import {validationResult} from 'express-validator/check';
 import {Util} from '../../shared/Util';
 
 const router = express.Router();
@@ -17,11 +16,7 @@ router.get('/technologies/exists/:name/:id?', (req, res) =>
 
 // POST Requests
 router.post('/technology/create', technologyValidator.createValidators(), (req, res) => {
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({errors: errors.mapped()});
-  }
+  Util.validateRequest(req, res);
 
   return technologyService.doesTechnologyExist(req.body.name, req.body.id).then(doesExist => {
     if (doesExist) {
@@ -33,11 +28,7 @@ router.post('/technology/create', technologyValidator.createValidators(), (req, 
 });
 
 router.post('/technology/update', technologyValidator.createValidators(), (req, res) => {
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({errors: errors.mapped()});
-  }
+  Util.validateRequest(req, res);
 
   return technologyService.doesTechnologyExist(req.body.name, req.body.id).then(doesExist => {
     if (doesExist) {
@@ -48,12 +39,8 @@ router.post('/technology/update', technologyValidator.createValidators(), (req, 
   });
 });
 
-router.delete('/technology/delete/:id', technologyValidator.deleteValidators(), async (req, res) => {
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({errors: errors.mapped()});
-  }
+router.delete('/technology/delete/:id', technologyValidator.deleteValidators(), (req, res) => {
+  Util.validateRequest(req, res);
 
   technologyService.deleteTechnology(req.params.id)
     .then(() => res.status(200).json({message: 'ok'}));
