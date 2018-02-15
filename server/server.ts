@@ -8,9 +8,6 @@ const bodyParser = require('body-parser');
 const validator = require('express-validator');
 //const fs = require('fs');
 
-// Get our API routes
-const api = require('./routes/api');
-
 const projectController = require('./features/project/project.controller');
 const technologyController = require('./features/technology/technology.controller');
 const employeeController = require('./features/employee/employee.controller');
@@ -47,6 +44,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
+// Global error handling
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send('Server error');
+});
 
 /**
  * Get port from environment and store in Express.
