@@ -1,7 +1,13 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
+    "declaration": false,
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es6"
+    "target": "es6",
+    "typeRoots": [
+      "../node_modules/@types"
+    ]
   }
 }

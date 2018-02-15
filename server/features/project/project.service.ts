@@ -1,6 +1,6 @@
 import {Project} from '../../models/Project';
-import {Scopes} from '../../models/Scopes';
-// import {Technology} from '../../models/Technology';
+import {Scopes} from '../../sequelize/Scopes';
+import {Technology} from '../../models/Technology';
 import {sequelize} from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
 
@@ -72,10 +72,9 @@ const projectService = {
     technologies: project.technologies
   })
     .then(projectNew => {
-
-      const technologies = parse.parseTechnology(projectNew.technologies);
-      // const instances = technologies.map(tech => Technology.build(tech));
-      projectNew.$set('technologies', technologies);
+      const technologies = parse.parseTechnology(project.technologies);
+      const instances = technologies.map(tech => Technology.build(tech));
+      projectNew.$set('technologies', instances);
 
       const schedules = parse.parseShedules(projectNew, projectNew.schedules);
       projectNew.$set('schedules', schedules);

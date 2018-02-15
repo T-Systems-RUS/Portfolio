@@ -1,6 +1,6 @@
 import {Employee} from '../../models/Employee';
 import {Role} from '../../models/Role';
-import {Scopes} from '../../models/Scopes';
+import {Scopes} from '../../sequelize/Scopes';
 
 const employeeService = {
   // GET list of projects with teamcount

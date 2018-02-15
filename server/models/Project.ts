@@ -44,7 +44,7 @@ export class Project extends Model<Project> {
     })
     description: string;
 
-    @Column({ allowNull: false })
+    @Column
     customer: string;
 
     @AllowNull(false)

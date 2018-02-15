@@ -1,5 +1,5 @@
 import {Technology} from '../../models/Technology';
-import {Scopes} from '../../models/Scopes';
+import {Scopes} from '../../sequelize/Scopes';
 import * as Sequelize from 'sequelize';
 
 const op = Sequelize.Op;
