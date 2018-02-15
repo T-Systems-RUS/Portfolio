@@ -1,23 +1,32 @@
 import {Project} from '../../models/Project';
+import {Scopes} from '../../models/Scopes';
 // import {Technology} from '../../models/Technology';
 import {sequelize} from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
 
 const projectService = {
 
-  getProjects: () => Project.scope(['full', 'actualProjects']).findAll({
-    order: [ ['updatedAt', 'DESC']]
+  getProjects: () => Project.scope([
+    Scopes.WITH_TECHNOLOGIES,
+    Scopes.WITH_SCHEDULES,
+    Scopes.ACTUAL_PROJECTS
+  ])
+    .findAll({ order: [ ['updatedAt', 'DESC']]
   }),
 
   // GET single project by id
-  getProject: id => Project.scope(['full', 'actualProjects']).findOne({
-    where: {
-      id: id
-    }
+  getProject: id => Project.scope([
+    Scopes.FULL,
+    Scopes.ACTUAL_PROJECTS
+  ])
+    .findOne({
+      where: {
+        id: id
+      }
   }),
 
   // Get All Projects with same name
-  getProjectsByName: name => Project.scope(['full', 'actualProjects']).findAll({
+  getProjectsByName: name => Project.scope([Scopes.FULL]).findAll({
     where: {
       name: name
     },

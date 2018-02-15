@@ -1,20 +1,23 @@
-import {Model, Column, Table, Scopes, CreatedAt, UpdatedAt, HasMany} from 'sequelize-typescript';
+import {Model, AllowNull, DataType, Column, Table, Scopes, CreatedAt, UpdatedAt, HasMany} from 'sequelize-typescript';
 import {Schedule} from './Schedule';
 
 @Scopes({
     withSchedules: {
-        include: [
-            () => Schedule
-        ]
+        include: [() => Schedule ]
     }
 })
-@Table
+@Table({
+    timestamps: true,
+    tableName: 'roles'
+})
 export class Role extends Model<Role> {
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     name: string;
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     domain: string;
 
     @Column
@@ -27,11 +30,15 @@ export class Role extends Model<Role> {
     active: boolean;
 
     @CreatedAt
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     createdAt: Date;
 
     @UpdatedAt
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     updatedAt: Date;
 
     @HasMany(() => Schedule)

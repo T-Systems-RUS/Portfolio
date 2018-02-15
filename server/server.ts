@@ -8,9 +8,6 @@ const bodyParser = require('body-parser');
 const validator = require('express-validator');
 //const fs = require('fs');
 
-// Get our API routes
-const api = require('./routes/api');
-
 const projectController = require('./features/project/project.controller');
 const technologyController = require('./features/technology/technology.controller');
 const employeeController = require('./features/employee/employee.controller');

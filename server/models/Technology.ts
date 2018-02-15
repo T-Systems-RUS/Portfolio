@@ -1,4 +1,4 @@
-import {Model, Column, Table, Scopes, CreatedAt, UpdatedAt, HasMany, BelongsToMany} from 'sequelize-typescript';
+import {Model, AllowNull, DataType, Column, Table, Scopes, CreatedAt, UpdatedAt, HasMany, BelongsToMany} from 'sequelize-typescript';
 import {Employee} from './Employee';
 import {EmployeeTechnology} from './EmployeeTechnology';
 import {Project} from './Project';
@@ -18,13 +18,18 @@ import {ProjectTechnology} from './ProjectTechnology';
         include: [ () => Project ]
     }
 })
-@Table
+@Table({
+    timestamps: true,
+    tableName: 'technologies'
+})
 export class Technology extends Model<Technology> {
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     name: string;
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     domain: string;
 
     @Column
@@ -37,11 +42,15 @@ export class Technology extends Model<Technology> {
     version: string;
 
     @CreatedAt
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     createdAt: Date;
 
     @UpdatedAt
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     updatedAt: Date;
 
     @BelongsToMany(() => Employee, () => EmployeeTechnology)

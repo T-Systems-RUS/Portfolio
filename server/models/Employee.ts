@@ -1,4 +1,4 @@
-import {Model, Column, Table, Scopes, CreatedAt, UpdatedAt, HasMany, BelongsToMany} from 'sequelize-typescript';
+import {Model, AllowNull, DataType, Column, Table, Scopes, CreatedAt, UpdatedAt, HasMany, BelongsToMany} from 'sequelize-typescript';
 import {Schedule} from './Schedule';
 import {Technology} from './Technology';
 import {EmployeeTechnology} from './EmployeeTechnology';
@@ -9,26 +9,38 @@ import {EmployeeTechnology} from './EmployeeTechnology';
             () => Schedule,
             () => Technology
         ]
+    },
+    withSchedules: {
+        include: [() => Schedule]
     }
 })
-@Table
+@Table({
+    timestamps: true,
+    tableName: 'employees'
+})
 export class Employee extends Model<Employee> {
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     firstname: string;
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     lastname: string;
 
     @Column
     active: boolean;
 
     @CreatedAt
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     createdAt: Date;
 
     @UpdatedAt
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     updatedAt: Date;
 
     @HasMany(() => Schedule)

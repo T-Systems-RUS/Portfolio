@@ -1,4 +1,5 @@
-import * as models from '../../models/index';
+import {Technology} from '../../models/Technology';
+import {Scopes} from '../../models/Scopes';
 import * as Sequelize from 'sequelize';
 
 const op = Sequelize.Op;
@@ -6,23 +7,16 @@ const op = Sequelize.Op;
 const technologyService = {
 
   // GET list of projects with teamcount
-  getTechnologies: () => {
-    try {
-      return models.Technology.findAll({
-          order: [
-            ['name', 'ASC'],
-          ]
-        }
-      );
-    } catch (e) {
-      console.log('fuck ', e);
-    }
-  },
+  getTechnologies: () => Technology.findAll({
+    order: [
+      ['name', 'ASC'],
+    ]
+  }),
 
   // GET check if project exists
   doesTechnologyExist: (name, id) => {
     id = id || '';
-    return models.Technology.count({where: {name: name, id: {[op.ne]: id}}})
+    return Technology.count({where: {name: name, id: {[op.ne]: id}}})
       .then(count => count !== 0)
       .catch(error => {
         console.log(error);
@@ -30,7 +24,7 @@ const technologyService = {
   },
 
   // POST create new technology
-  createTechnology: technology => models.Technology.create({
+  createTechnology: technology => Technology.create({
     name: technology.name,
     domain: technology.domain,
     active: 0,
@@ -43,7 +37,7 @@ const technologyService = {
     }),
 
 // PUT Update technology
-  updateTechnology: technology => models.Technology.update({
+  updateTechnology: technology => Technology.update({
     name: technology.name,
     domain: technology.domain,
     active: 0,
@@ -57,9 +51,9 @@ const technologyService = {
 
   deleteTechnology: async id => {
     try {
-      const technology = await models.Technology.findOne({where: {id: id}, include: [{as: 'projects', model: models.Project}]});
-      technology.removeProjects(technology.projects);
-      return await models.Technology.destroy({where: {id: id}, cascade: true});
+      const technology = await Technology.scope(Scopes.WITH_PROJECTS).findOne({where: {id: id}});
+      technology.$remove('projects', technology.projects);
+      return await Technology.destroy({where: {id: id}, cascade: true});
     } catch (error) {
       console.log(error);
       throw new Error(error);

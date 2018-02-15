@@ -12,7 +12,9 @@ import {Role} from './Role';
         ]
     }
 })
-@Table
+@Table({
+    tableName: 'schedules'
+})
 export class Schedule extends Model<Schedule> {
 
     @Column({
@@ -20,10 +22,14 @@ export class Schedule extends Model<Schedule> {
     })
     participation: number;
 
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     startdate: Date;
 
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     enddate: Date;
 
     // Project

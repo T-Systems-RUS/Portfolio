@@ -1,12 +1,14 @@
-import {Model, Column, DataType, Table, Scopes, CreatedAt, UpdatedAt, HasMany, BelongsToMany} from 'sequelize-typescript';
+import {Model, AllowNull, Column, DataType, Table, Scopes, CreatedAt, UpdatedAt, HasMany, BelongsToMany} from 'sequelize-typescript';
 import {Schedule} from './Schedule';
+import {Employee} from './Employee';
+import {Role} from './Role';
 import {Technology} from './Technology';
 import {ProjectTechnology} from './ProjectTechnology';
 
 @Scopes({
     full: {
         include: [
-            () => Schedule,
+            { model: () => Schedule, include: [() => Employee, () => Role]},
             () => Technology
         ]
     },
@@ -18,31 +20,39 @@ import {ProjectTechnology} from './ProjectTechnology';
     },
     actualProjects: { where: {ishistory: false} }
 })
-@Table
+@Table({
+    timestamps: true,
+    tableName: 'projects'
+})
 export class Project extends Model<Project> {
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     name: string;
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     line: string;
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     domain: string;
 
+    @AllowNull(false)
     @Column({
-        type: DataType.TEXT,
-        allowNull: false
+        type: DataType.TEXT
     })
     description: string;
 
     @Column({ allowNull: false })
     customer: string;
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     type: string;
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column
     program: string;
 
     @Column
@@ -66,18 +76,27 @@ export class Project extends Model<Project> {
     @Column
     version: number;
 
-    @Column({ allowNull: false })
+    @AllowNull(false)
+    @Column({
+        type: DataType.DATE
+    })
     startdate: Date;
 
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     enddate: Date;
 
     @CreatedAt
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     createdAt: Date;
 
     @UpdatedAt
-    @Column
+    @Column({
+        type: DataType.DATE
+    })
     updatedAt: Date;
 
     @HasMany(() => Schedule)

@@ -3,8 +3,9 @@ export const Configuration = {
       dialect: 'mysql',
       database: 'portfolio-dev',
       username: 'root',
-      host: 'localhost',
+      host: '127.0.0.1',
+      port: 3306,
       password: '1Ass-4ole2',
-      modelPaths: [`${__dirname}/models`]
+      modelPaths: [`${__dirname}/../models`]
     }
 };
