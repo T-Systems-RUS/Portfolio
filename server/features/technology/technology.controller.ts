@@ -15,31 +15,28 @@ router.get('/technologies/exists/:name/:id?', (req, res) =>
     .then(doesExist => res.status(200).send(doesExist)));
 
 // POST Requests
-router.post('/technology/create', technologyValidator.createValidators(), (req, res) => {
-  Util.validateRequest(req, res);
+router.post('/technology/create', technologyValidator.createValidators(), (req, res) =>
+  Util.handleValidation(req, res, () =>
+    technologyService.doesTechnologyExist(req.body.name, req.body.id).then(doesExist =>
+      doesExist ?
+        Util.handleConflict(res, 'Technology already exists') :
+        technologyService.createTechnology(req.body)
+          .then(Util.handleData(res)))
+  ));
 
-  return technologyService.doesTechnologyExist(req.body.name, req.body.id).then(doesExist =>
-    doesExist ?
-      Util.handleConflict(res, 'Technology already exists') :
-      technologyService.createTechnology(req.body)
-        .then(Util.handleData(res)));
-});
+router.post('/technology/update', technologyValidator.createValidators(), (req, res) =>
+  Util.handleValidation(req, res, () =>
+    technologyService.doesTechnologyExist(req.body.name, req.body.id).then(doesExist =>
+      doesExist ?
+        Util.handleConflict(res, 'Technology already exists') :
+        technologyService.updateTechnology(req.body)
+          .then(Util.handleData(res)))
+  ));
 
-router.post('/technology/update', technologyValidator.createValidators(), (req, res) => {
-  Util.validateRequest(req, res);
-
-  return technologyService.doesTechnologyExist(req.body.name, req.body.id).then(doesExist =>
-    doesExist ?
-      Util.handleConflict(res, 'Technology already exists') :
-      technologyService.updateTechnology(req.body)
-        .then(Util.handleData(res)));
-});
-
-router.delete('/technology/delete/:id', technologyValidator.deleteValidators(), (req, res) => {
-  Util.validateRequest(req, res);
-
-  technologyService.deleteTechnology(req.params.id)
-    .then(() => res.status(200).json({message: 'ok'}));
-});
+router.delete('/technology/delete/:id', technologyValidator.deleteValidators(), (req, res) =>
+  Util.handleValidation(req, res, () =>
+    technologyService.deleteTechnology(req.params.id)
+      .then(() => res.status(200).json({message: 'ok'}))
+  ));
 
 module.exports = router;

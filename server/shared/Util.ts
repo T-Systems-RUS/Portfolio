@@ -13,16 +13,17 @@ export class Util {
         data ? res.status(200).send(data) : res.status(404).send('Not found')
 
   /**
-   * Validate request for errors and send client error if there are any
+   * Handle validation and execute provided callback afterwards
    * @param req
    * @param res
+   * @param callback
+   * @returns {any}
    */
-  public static validateRequest(req, res) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      res.status(422).json({errors: errors.mapped()});
+  public static handleValidation =
+    (req, res, callback) => {
+      Util.validateRequest(req, res);
+      return callback();
     }
-  }
 
   /**
    * Handle update conflict and send error message
@@ -31,5 +32,17 @@ export class Util {
    */
   public static handleConflict(res, message) {
     res.status(409).json({errors: {latest: {msg: message}}});
+  }
+
+  /**
+   * Validate request for errors and send client error if there are any
+   * @param req
+   * @param res
+   */
+  private static validateRequest(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(422).json({errors: errors.mapped()});
+    }
   }
 }
