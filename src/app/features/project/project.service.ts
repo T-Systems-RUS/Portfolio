@@ -1,56 +1,41 @@
 import {Injectable} from '@angular/core';
-import {ExtractService} from '../../core/extract.service';
-import {Observable} from 'rxjs/Observable';
 import {Project} from '../../shared/models/project';
-import {HttpClient} from '@angular/common/http';
 import routes from '../../shared/constants/routes';
+import {HttpClientService} from '../../core/http-client.service';
 
 @Injectable()
 export class ProjectService {
 
-  constructor(private http: HttpClient, private extract: ExtractService) {
+  constructor(private http: HttpClientService) {
   }
 
   // GET requests
-  getProjects(): Observable<Project[]> {
-    // ...using get request
-    return this.http.get(routes.getProjects)
-    // ...errors if any
-      .catch(error => Observable.throw(this.extract.handleError(error)));
+  getProjects() {
+    return this.http.get<Project[]>(routes.getProjects);
   }
 
-  getProjectsByName(name): Observable<Project[]> {
-    // ...using get request
-    return this.http.get(routes.history + name)
-    // ...errors if any
-      .catch(error => Observable.throw(this.extract.handleError(error)));
+  getProjectsByName(name) {
+    return this.http.get<Project[]>(routes.history + name);
   }
 
-  getProject(id): Observable<Project> {
-    // ...using get request
-    return this.http.get(routes.getProjects + id)
-    // ...errors if any
-      .catch(error => Observable.throw(this.extract.handleError(error)));
+  getProject(id) {
+    return this.http.get<Project>(routes.getProjects + id);
   }
 
   // POST requests
   createProject(project: Project) {
-    return this.http.post(routes.createProject, project)
-      .catch(error => Observable.throw(this.extract.handlePostError(error)));
+    return this.http.post(routes.createProject, project);
   }
 
   updateProject(project: Project) {
-    return this.http.post(routes.updateProject, project)
-      .catch(error => Observable.throw(this.extract.handlePostError(error)));
+    return this.http.post<Project>(routes.updateProject, project);
   }
 
   archieveProject(project: Project) {
-    return this.http.put(routes.archieve, project)
-      .catch(error => Observable.throw(this.extract.handlePostError(error)));
+    return this.http.put(routes.archieve, project);
   }
 
   deleteProject(project: Project) {
-    return this.http.delete(routes.deleteProject + project.name)
-      .catch(error => Observable.throw(this.extract.handlePostError(error)));
+    return this.http.delete(routes.deleteProject + project.name);
   }
 }

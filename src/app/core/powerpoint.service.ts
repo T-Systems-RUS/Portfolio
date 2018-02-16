@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Project} from '../shared/models/project';
 import {ExtractService} from './extract.service';
 import {Observable} from 'rxjs/Observable';
-import {HttpClient} from '@angular/common/http';
 import routes from '../shared/constants/routes';
 import pptx from 'pptxgenjs';
+import {HttpClientService} from './http-client.service';
 
 interface IPresenationResponse {
   header;
@@ -18,7 +18,7 @@ interface IPresenationResponse {
 export class PowerPointService {
   pptx;
 
-  constructor(private http: HttpClient, private extract: ExtractService) {
+  constructor(private http: HttpClientService, private extract: ExtractService) {
     this.createInstance();
   }
 

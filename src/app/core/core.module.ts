@@ -10,6 +10,7 @@ import {UserServiceConfig} from './user.service';
 import {HeaderComponent} from './header/header.component';
 import {LoaderComponent} from './loader/loader.component';
 
+import {HttpClientService} from './http-client.service';
 import {DynamicService} from './dynamic.service';
 import {ExtractService} from './extract.service';
 import {FileService} from './file.service';
@@ -37,7 +38,8 @@ import 'rxjs/add/observable/throw';
     UserService,
     ExtractService,
     FileService,
-    PowerPointService
+    PowerPointService,
+    HttpClientService
   ]
 })
 export class CoreModule {

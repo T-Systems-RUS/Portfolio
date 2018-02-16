@@ -1,33 +1,24 @@
 import {Injectable} from '@angular/core';
-import {ExtractService} from '../../core/extract.service';
 import {Observable} from 'rxjs/Observable';
 
 import {Employee} from '../../shared/models/employee';
 import {Role} from '../../shared/models/role';
-import {HttpClient} from '@angular/common/http';
 import routes from '../../shared/constants/routes';
+import {HttpClientService} from '../../core/http-client.service';
 
 @Injectable()
 export class EmployeeService {
 
-
-  constructor(private http: HttpClient, private extract: ExtractService) {
+  constructor(private http: HttpClientService) {
   }
 
   // GET requests
-  getEmployees(): Observable<Employee[]> {
-    // ...using get request
-    return this.http.get(routes.getEmployees)
-    // ...errors if any
-      .catch(error => Observable.throw(this.extract.handleError(error)));
-
+  getEmployees() {
+    return this.http.get<Employee[]>(routes.getEmployees);
   }
 
-  getRoles(): Observable<Role[]> {
-    // ...using get request
-    return this.http.get(routes.getRoles)
-    // ...errors if any
-      .catch(error => Observable.throw(this.extract.handleError(error)));
+  getRoles() {
+    return this.http.get<Role[]>(routes.getRoles);
   }
 
   getRolesAndEmploees(): Observable<[Employee[], Role[]]> {
