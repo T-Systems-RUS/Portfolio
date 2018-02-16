@@ -10,7 +10,7 @@ export const Configuration = {
     },
     test: {
       username: 'root',
-      password: 'null',
+      password: null,
       database: 'database_test',
       host: '127.0.0.1',
       dialect: 'mysql',
