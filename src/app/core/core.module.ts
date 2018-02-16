@@ -7,12 +7,9 @@ import {SharedModule} from '../shared/shared.module';
 import {UserService} from './user.service';
 import {UserServiceConfig} from './user.service';
 
-/*Feature Modules */
-
 import {HeaderComponent} from './header/header.component';
 import {LoaderComponent} from './loader/loader.component';
 
-import {HttpService} from './http.service';
 import {DynamicService} from './dynamic.service';
 import {ExtractService} from './extract.service';
 import {FileService} from './file.service';
@@ -38,7 +35,6 @@ import 'rxjs/add/observable/throw';
   providers: [
     DynamicService,
     UserService,
-    HttpService,
     ExtractService,
     FileService,
     PowerPointService

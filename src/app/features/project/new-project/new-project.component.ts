@@ -13,6 +13,8 @@ import {DynamicService} from '../../../core/dynamic.service';
 // primeng and third libraries
 import {Message} from 'primeng/components/common/api';
 import {Comparer} from '../../../shared/helpers/comparer';
+import constants from '../../../shared/constants';
+
 /**
  * One form for create and update
  * @export
@@ -61,15 +63,10 @@ export class NewProjectComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.dataService.getConstants().subscribe(res => {
-      this.lines = res.lines;
-      this.domains = res.domains;
-      this.types = res.types;
-      this.programs = res.programs;
-    }, error => {
-      console.log(error);
-    });
+    this.lines = constants.lines;
+    this.domains = constants.domains;
+    this.types = constants.types;
+    this.programs = constants.programs;
 
     this.route.params.subscribe(params => {
       if (params['id']) {
@@ -107,12 +104,13 @@ export class NewProjectComponent implements OnInit {
     });
 
   }
-/**
- * Create or update Project
- * depending on editMode prop
- * @memberof NewProjectComponent
- */
-changeProject() {
+
+  /**
+   * Create or update Project
+   * depending on editMode prop
+   * @memberof NewProjectComponent
+   */
+  changeProject() {
     // reset all errors classes on conrols
     this.model.errors = {};
     const unvalidFields = this.unvalidFields();
@@ -165,46 +163,46 @@ changeProject() {
     }
   }
 
-/**
- * Show overview dialog
- * before submit project
- * @memberof NewProjectComponent
- */
+  /**
+   * Show overview dialog
+   * before submit project
+   * @memberof NewProjectComponent
+   */
   showPreview() {
     this.dynamic.setRootViewContainerRef(this.entry);
     const modal = this.dynamic.addProjectConfirmationComponent();
     modal.project = new Project(this.model);
   }
 
-/**
- * Updates model from controls components
- * inputs, dropdowns, tech-picker, employee-picker
- * @param {any} value new value
- * @param {any} prop prop on model to be changed
- * @memberof NewProjectComponent
- */
+  /**
+   * Updates model from controls components
+   * inputs, dropdowns, tech-picker, employee-picker
+   * @param {any} value new value
+   * @param {any} prop prop on model to be changed
+   * @memberof NewProjectComponent
+   */
   setValue(value, prop) {
     this.model[prop] = value;
     // check for changes to enable submit
     this.disableSubmit();
   }
 
-/**
- * Checks model required prop on model
- * @returns array of empty required fileds
- * @memberof NewProjectComponent
- */
+  /**
+   * Checks model required prop on model
+   * @returns array of empty required fileds
+   * @memberof NewProjectComponent
+   */
   unvalidFields() {
     return this.model.required.map(key =>
       !this.model[key] ? key : '').filter(item => item !== '');
   }
 
-/**
- * Change color of header
- * depending on production line
- * @param {any} event name of chosen production line
- * @memberof NewProjectComponent
- */
+  /**
+   * Change color of header
+   * depending on production line
+   * @param {any} event name of chosen production line
+   * @memberof NewProjectComponent
+   */
   changeLine(event) {
     this.model.line = event;
   }
@@ -213,12 +211,12 @@ changeProject() {
     window.history.back();
   }
 
-/**
- * check difference between model and modelCopy
- * no difference - > disable submit
- * @memberof NewProjectComponent
- */
-disableSubmit() {
+  /**
+   * check difference between model and modelCopy
+   * no difference - > disable submit
+   * @memberof NewProjectComponent
+   */
+  disableSubmit() {
     const comparer = new Comparer();
     const diff = comparer.deepCompare(this.model, this.modelCopy);
     this.disabled = Object.keys(diff).length === 0;

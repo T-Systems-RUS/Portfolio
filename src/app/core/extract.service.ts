@@ -11,14 +11,6 @@ export class ExtractService {
 
   @Output() errorMessage = new EventEmitter();
 
-  public extractData(res: Response) {
-    let body;
-    if (res.text()) {
-      body = res.json();
-    }
-    return body || {};
-  }
-
   // for get requests
   public handleError(error: MessageResponse) {
 

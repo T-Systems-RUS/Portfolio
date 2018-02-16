@@ -4,6 +4,7 @@ import {groupBy} from '../../../shared/helpers/extensions';
 import {FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import {AdminValidators} from '../../admin.validators';
 import {AdminService} from '../../admin.service';
+import constants from '../../../shared/constants';
 
 @Component({
   selector: 'admin-technology',
@@ -30,7 +31,7 @@ export class AdminTechnologyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getConstants().subscribe(data => this.domains = data.technologies);
+    this.domains = constants.technologies;
     this.getTechnologies();
   }
 
