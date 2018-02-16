@@ -5,9 +5,6 @@ import {Observable} from 'rxjs/Observable';
 import {Routes} from '../../shared/helpers/routes';
 import {Project} from '../../shared/models/project';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
 @Injectable()
 export class ProjectService {
   routes: Routes;

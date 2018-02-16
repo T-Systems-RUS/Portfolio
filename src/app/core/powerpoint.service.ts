@@ -7,9 +7,6 @@ import {Observable} from 'rxjs/Observable';
 
 import {Routes} from './../shared/helpers/routes';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
 import pptx from 'pptxgenjs';
 
 @Injectable()

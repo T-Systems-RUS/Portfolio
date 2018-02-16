@@ -19,6 +19,11 @@ import {ExtractService} from './extract.service';
 import {FileService} from './file.service';
 import {PowerPointService} from './powerpoint.service';
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/observable/throw';
+
 @NgModule({
   imports: [
     SharedModule

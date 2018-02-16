@@ -6,10 +6,6 @@ import {Observable} from 'rxjs/Observable';
 import {Technology} from '../../shared/models/technology';
 import {Routes} from '../../shared/helpers/routes';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/toPromise';
-
 @Injectable()
 export class TechnologyService {
 

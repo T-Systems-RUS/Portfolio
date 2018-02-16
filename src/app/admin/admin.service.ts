@@ -8,9 +8,6 @@ import {Employee} from '../shared/models/employee';
 import {Role} from '../shared/models/role';
 import {Technology} from '../shared/models/technology';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
 @Injectable()
 export class AdminService {
 

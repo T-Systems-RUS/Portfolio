@@ -6,10 +6,6 @@ import {Observable} from 'rxjs/Observable';
 import {Project} from '../shared/models/project';
 import {Routes} from '../shared/helpers/routes';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/toPromise';
-
 @Injectable()
 export class FileService {
 

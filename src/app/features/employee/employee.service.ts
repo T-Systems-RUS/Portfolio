@@ -7,10 +7,6 @@ import {Employee} from '../../shared/models/employee';
 import {Role} from '../../shared/models/role';
 import {Routes} from '../../shared/helpers/routes';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/forkJoin';
-
 @Injectable()
 export class EmployeeService {
 
