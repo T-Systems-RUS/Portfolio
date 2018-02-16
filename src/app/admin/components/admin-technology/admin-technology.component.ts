@@ -4,7 +4,7 @@ import {groupBy} from '../../../shared/helpers/extensions';
 import {FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import {AdminValidators} from '../../admin.validators';
 import {AdminService} from '../../admin.service';
-import constants from '../../../shared/constants';
+import constants from '../../../shared/constants/constants';
 
 @Component({
   selector: 'admin-technology',

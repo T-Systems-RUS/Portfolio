@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Comparer} from '../../../shared/helpers/comparer';
 
 import * as _ from 'lodash';
-import constants from '../../../shared/constants';
+import constants from '../../../shared/constants/constants';
 
 /**
  * Page with projects list

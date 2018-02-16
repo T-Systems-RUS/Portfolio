@@ -3,7 +3,7 @@ import {Role} from 'app/shared/models/role';
 import {groupBy} from '../../../shared/helpers/extensions';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AdminService} from '../../admin.service';
-import constants from '../../../shared/constants';
+import constants from '../../../shared/constants/constants';
 
 @Component({
   selector: 'admin-role',

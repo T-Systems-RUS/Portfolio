@@ -1,13 +1,10 @@
 import {Injectable} from '@angular/core';
-
 import {Project} from '../shared/models/project';
 import {ExtractService} from './extract.service';
 import {Observable} from 'rxjs/Observable';
-
-import {Routes} from './../shared/helpers/routes';
-
-import pptx from 'pptxgenjs';
 import {HttpClient} from '@angular/common/http';
+import routes from '../shared/constants/routes';
+import pptx from 'pptxgenjs';
 
 interface IPresenationResponse {
   header;
@@ -19,13 +16,9 @@ interface IPresenationResponse {
 
 @Injectable()
 export class PowerPointService {
-
-  routes: Routes;
   pptx;
 
   constructor(private http: HttpClient, private extract: ExtractService) {
-    this.routes = new Routes();
-
     this.createInstance();
   }
 
@@ -55,7 +48,7 @@ export class PowerPointService {
    * @memberof PowerPointService
    */
   createPresentation(project: Project, name = '', saveToClient = false) {
-    return this.http.get(this.routes.presentationImages + project.id)
+    return this.http.get(routes.presentationImages + project.id)
       .subscribe((response: IPresenationResponse) => {
           const header = response.header;
           const header2 = response.header2;

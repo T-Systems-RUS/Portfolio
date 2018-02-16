@@ -13,7 +13,7 @@ import {DynamicService} from '../../../core/dynamic.service';
 // primeng and third libraries
 import {Message} from 'primeng/components/common/api';
 import {Comparer} from '../../../shared/helpers/comparer';
-import constants from '../../../shared/constants';
+import constants from '../../../shared/constants/constants';
 
 /**
  * One form for create and update
