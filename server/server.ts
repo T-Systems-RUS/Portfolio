@@ -8,9 +8,6 @@ const bodyParser = require('body-parser');
 const validator = require('express-validator');
 //const fs = require('fs');
 
-// Get our API routes
-const api = require('./routes/api');
-
 const projectController = require('./features/project/project.controller');
 const technologyController = require('./features/technology/technology.controller');
 const employeeController = require('./features/employee/employee.controller');
@@ -42,11 +39,17 @@ app.use('/api', technologyController);
 app.use('/api', employeeController);
 app.use('/api', fileController);
 
+// Global error handling
+app.use((err, req, res, next) => {
+  console.error(err);
+  // Send in this format always, if there's a message - send message
+  res.status(500).json({errors: {er: {msg: err.message ? err.message : err}}});
+});
+
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
-
 
 /**
  * Get port from environment and store in Express.

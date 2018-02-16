@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as multer from 'multer';
 
 import projectService from '../features/project/project.service';
+import {Util} from './Util';
 
 const DIST = 'server/images/';
 
@@ -28,11 +29,7 @@ router.post('/images/add', (req, res) => {
       return res.status(422).send(err);
     }
 
-    projectService.updateImage(req.body.id, req.file.filename).then(project => {
-      res.status(200).send(project.image);
-    }).catch(error => {
-      res.status(500).json({errors: {er: {msg: error}}});
-    });
+    projectService.updateImage(req.body.id, req.file.filename).then(Util.handleData(res));
   });
 });
 
@@ -42,11 +39,8 @@ router.put('/images/remove', (req, res) => {
     if (exists) {
       fs.unlink(image);
       req.body.image = null;
-      projectService.removeImage(req.body).then(project => {
-        res.status(200).send(project);
-      }).catch(error => {
-        res.status(500).json({errors: {er: {msg: error}}});
-      });
+      projectService.removeImage(req.body)
+        .then(Util.handleData(res));
     } else {
       console.log(exists);
       res.status(404).send('File not found.');
@@ -92,9 +86,6 @@ router.get('/presentation/images/:id?', (req, res) => {
     };
 
     res.status(200).send(images);
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json({errors: {er: {msg: err}}});
   });
 });
 

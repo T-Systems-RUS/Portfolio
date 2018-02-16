@@ -38,3 +38,6 @@ script:
 after_script:
   # Stop backend
   - pkill node
+
+notifications:
+  email: false
