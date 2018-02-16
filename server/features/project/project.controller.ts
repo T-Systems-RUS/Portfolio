@@ -6,9 +6,9 @@ import {Util} from '../../shared/Util';
 const router = express.Router();
 
 // GET requests
-router.get('/projects', (req, res) => {
-  throw new Error('asdasd')
-})
+router.get('/projects', (req, res) =>
+  projectService.getProjects()
+    .then(Util.handleData(res)));
 
 router.get('/projects/:id', (req, res) =>
   projectService.getProject(req.params.id)
@@ -21,7 +21,11 @@ router.get('/projects/history/:name', (req, res) =>
 // POST Requests
 router.post('/projects/create', projectValidator.createValidators(), (req, res) =>
   Util.handleValidation(req, res, () =>
-    {throw new Error('asdasd')}
+    projectService.doesProjectExist(req.body.name).then(doesExist =>
+      doesExist ?
+        Util.handleConflict(res, 'Project already exists or was archieved') :
+        projectService.createProject(req.body)
+          .then(Util.handleData(res)))
   ));
 
 router.post('/projects/update', projectValidator.createValidators(), (req, res) =>
