@@ -1,7 +1,7 @@
 import {Project} from '../../models/Project';
 import {Scopes} from '../../sequelize/Scopes';
 import {Technology} from '../../models/Technology';
-import { Schedule } from '../../models/Schedule';
+import {Schedule} from '../../models/Schedule';
 import {sequelize} from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
 
@@ -77,13 +77,9 @@ const projectService = {
       const instances = technologies.map(tech => Technology.build(tech));
       projectNew.$set('technologies', instances);
 
-      // const schedules = parse.parseShedules(projectNew, projectNew.schedules);
-      // projectNew.$set('schedules', schedules);
-
       return projectNew;
     })
     .catch(error => {
-      console.log(error);
       throw new Error(error);
     }),
 
@@ -99,7 +95,6 @@ const projectService = {
           return newProject;
         })))
     .catch(error => {
-      console.log(error);
       throw new Error(error);
     }),
 

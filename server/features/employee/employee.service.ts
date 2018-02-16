@@ -4,7 +4,7 @@ import {Scopes} from '../../sequelize/Scopes';
 
 const employeeService = {
   // GET list of projects with teamcount
-  getEmployees: () => Employee.scope(Scopes.WITH_SCHEDULES).findAll({}),
+  getEmployees: () => Employee.scope(Scopes.WITH_SCHEDULES).findAll(),
 
   getRoles: async () => await Role.findAll({
     order: [

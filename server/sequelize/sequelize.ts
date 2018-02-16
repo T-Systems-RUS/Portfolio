@@ -1,4 +1,7 @@
 import {Sequelize} from 'sequelize-typescript';
 import {Configuration} from './sequelize.config';
 
-export const sequelize = new Sequelize(Configuration['development']);
+// dynamic configuration depending on env
+const env = process.env.NODE_ENV || 'development';
+
+export const sequelize = new Sequelize(Configuration[env]);
