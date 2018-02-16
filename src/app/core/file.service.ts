@@ -1,30 +1,15 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from './http.service';
-import {ExtractService} from './extract.service';
-import {Observable} from 'rxjs/Observable';
-
 import {Project} from '../shared/models/project';
-import {Routes} from '../shared/helpers/routes';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/toPromise';
+import routes from '../shared/constants/routes';
+import {HttpClientService} from './http-client.service';
 
 @Injectable()
 export class FileService {
 
-  routes: Routes;
-
-  constructor(private http: HttpService, private extract: ExtractService) {
-    this.routes = new Routes();
+  constructor(private http: HttpClientService) {
   }
 
-  // GET requests
-  removeImage(project: Project): Observable<Project> {
-    const data = this.http.createParams(project);
-    return this.http.put(this.routes.removeImage, data)
-      .map(this.extract.extractData)
-      .catch((error: {}) => Observable.throw(this.extract.handlePostError(error)));
+  removeImage(project: Project) {
+    return this.http.put<Project>(routes.removeImage, project);
   }
-
 }

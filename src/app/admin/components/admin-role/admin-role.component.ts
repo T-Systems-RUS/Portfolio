@@ -3,6 +3,7 @@ import {Role} from 'app/shared/models/role';
 import {groupBy} from '../../../shared/helpers/extensions';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AdminService} from '../../admin.service';
+import constants from '../../../shared/constants/constants';
 
 @Component({
   selector: 'admin-role',
@@ -32,10 +33,8 @@ export class AdminRoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getConstants().subscribe(data => {
-      this.domains = data.roles;
-      this.seniority = data.seniority;
-    });
+    this.domains = constants.roles;
+    this.seniority = constants.seniority;
     this.service.getRoles().subscribe(data => {
       this.roles = groupBy(data || [], 'domain') as Role[];
       console.log(this.roles);

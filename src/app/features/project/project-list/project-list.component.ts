@@ -10,6 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Comparer} from '../../../shared/helpers/comparer';
 
 import * as _ from 'lodash';
+import constants from '../../../shared/constants/constants';
 
 /**
  * Page with projects list
@@ -67,15 +68,10 @@ export class ProjectListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // used in filter lists of checkboxes
-    this.dataService.getConstants().subscribe(res => {
-      this.constants.lines = res.lines;
-      this.constants.domains = res.domains;
-      this.constants.types = res.types;
-      this.constants.programs = res.programs;
-    }, error => {
-      console.log(error);
-    });
+    this.constants.lines = constants.lines;
+    this.constants.domains = constants.domains;
+    this.constants.types = constants.types;
+    this.constants.programs = constants.programs;
 
     this.dataService.getProjects().subscribe(data => {
       this.projects = data;
@@ -120,13 +116,13 @@ export class ProjectListComponent implements OnInit {
     this.sortProperty = event;
   }
 
-/**
- * Filters projects by input in search field
- * not case-insensitive
- * @param {any} event input from search field
- * @memberof ProjectListComponent
- */
-filterProjects(event) {
+  /**
+   * Filters projects by input in search field
+   * not case-insensitive
+   * @param {any} event input from search field
+   * @memberof ProjectListComponent
+   */
+  filterProjects(event) {
     this.clearFilters();
     this.projects = this.initialProjects;
     this.projects = this.projects.filter(item => item.name.toLowerCase().indexOf(event.toLowerCase()) != -1);
@@ -137,13 +133,13 @@ filterProjects(event) {
     this.router.navigate(['/project/new']);
   }
 
-/**
- * Changes filter object
- * @param {any} $event value from control component
- * @param {any} name property to be set on filter
- * @memberof ProjectListComponent
- */
-check($event, name) {
+  /**
+   * Changes filter object
+   * @param {any} $event value from control component
+   * @param {any} name property to be set on filter
+   * @memberof ProjectListComponent
+   */
+  check($event, name) {
     if (this[name]) {
       if (name === 'technologies') {
         this[name] = $event;
@@ -152,12 +148,13 @@ check($event, name) {
       this.complexFilter();
     }
   }
-/**
- * Filters project list with properties
- * on filter object
- * @memberof ProjectListComponent
- */
-complexFilter() {
+
+  /**
+   * Filters project list with properties
+   * on filter object
+   * @memberof ProjectListComponent
+   */
+  complexFilter() {
     this.projects = this.initialProjects;
     for (const key of Object.keys(this.filter)) {
       this.projects = this.projects.filter(item => {
@@ -183,13 +180,13 @@ complexFilter() {
     this.complete = this.refreshCompleteList(this.projects);
   }
 
-/**
- * Resets all filter objects
- * Resets project list to initial state
- * Deselect selected technologies in technology picker
- * @memberof ProjectListComponent
- */
-clearFilters() {
+  /**
+   * Resets all filter objects
+   * Resets project list to initial state
+   * Deselect selected technologies in technology picker
+   * @memberof ProjectListComponent
+   */
+  clearFilters() {
     this.line = [];
     this.type = [];
     this.program = [];

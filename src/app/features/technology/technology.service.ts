@@ -1,31 +1,15 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '../../core/http.service';
-import {ExtractService} from '../../core/extract.service';
-import {Observable} from 'rxjs/Observable';
-
 import {Technology} from '../../shared/models/technology';
-import {Routes} from '../../shared/helpers/routes';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/toPromise';
+import routes from '../../shared/constants/routes';
+import {HttpClientService} from '../../core/http-client.service';
 
 @Injectable()
 export class TechnologyService {
 
-  routes: Routes;
-
-  constructor(private http: HttpService, private extract: ExtractService) {
-    this.routes = new Routes();
+  constructor(private http: HttpClientService) {
   }
 
-  // GET requests
-  getTechnologies(): Observable<Technology[]> {
-    // ...using get request
-    return this.http.get(this.routes.getTechnologies)
-    // ...and calling .json() on the response to return data
-      .map(this.extract.extractData)
-      // ...errors if any
-      .catch(error => Observable.throw(this.extract.handleError(error)));
+  getTechnologies() {
+    return this.http.get<Technology[]>(routes.getTechnologies);
   }
 }
