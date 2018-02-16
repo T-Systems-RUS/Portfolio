@@ -46,7 +46,6 @@ export class ListItemComponent implements AfterContentInit {
   }
 
   selectRole($event) {
-    // tslint:disable-next-line:triple-equals
     this.model.role = this.roles.filter(item => item.id.toString() === $event.target.value)[0];
     this.model.active = true;
     this.model.participation = 100.00;

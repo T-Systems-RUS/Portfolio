@@ -1,4 +1,3 @@
-/* tslint:disable:member-ordering no-unused-variable */
 import {
   ModuleWithProviders, NgModule,
   Optional, SkipSelf
