@@ -55,4 +55,18 @@ export class Schedule extends Model<Schedule> {
 
     @BelongsTo(() => Role)
     role: Role;
+
+    @CreatedAt
+    @Column({
+        type: DataType.DATE,
+        defaultValue: DataType.NOW
+    })
+    createdAt: Date;
+
+    @UpdatedAt
+    @Column({
+        type: DataType.DATE,
+        defaultValue: DataType.NOW
+    })
+    updatedAt: Date;
 }

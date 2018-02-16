@@ -89,13 +89,15 @@ export class Project extends Model<Project> {
 
     @CreatedAt
     @Column({
-        type: DataType.DATE
+        type: DataType.DATE,
+        defaultValue: DataType.NOW
     })
     createdAt: Date;
 
     @UpdatedAt
     @Column({
-        type: DataType.DATE
+        type: DataType.DATE,
+        defaultValue: DataType.NOW
     })
     updatedAt: Date;
 

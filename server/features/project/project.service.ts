@@ -1,6 +1,7 @@
 import {Project} from '../../models/Project';
 import {Scopes} from '../../sequelize/Scopes';
 import {Technology} from '../../models/Technology';
+import { Schedule } from '../../models/Schedule';
 import {sequelize} from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
 
@@ -69,19 +70,20 @@ const projectService = {
     type: project.type,
     ishistory: false,              // default for new project
     version: project.version,                    // default for new project,
-    technologies: project.technologies
-  })
+    schedules: parse.parseShedules(project, project.schedules)
+  }, { include: [Schedule ]})
     .then(projectNew => {
       const technologies = parse.parseTechnology(project.technologies);
       const instances = technologies.map(tech => Technology.build(tech));
       projectNew.$set('technologies', instances);
 
-      const schedules = parse.parseShedules(projectNew, projectNew.schedules);
-      projectNew.$set('schedules', schedules);
+      // const schedules = parse.parseShedules(projectNew, projectNew.schedules);
+      // projectNew.$set('schedules', schedules);
 
       return projectNew;
     })
     .catch(error => {
+      console.log(error);
       throw new Error(error);
     }),
 
@@ -121,11 +123,10 @@ const projectService = {
       const projects = await projectService.getProjectsByName(name);
       projects.forEach(project => {
         project.$remove('technologies', project.technologies);
-        project.$remove('schedules', project.schedules);
+        Schedule.destroy({where: {projectid: project.id}});
       });
       return await Project.destroy({where: {name: name}, cascade: true});
     } catch (error) {
-      console.log(error);
       throw new Error(error);
     }
   },
