@@ -13,6 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       domain: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       version: {

@@ -1,80 +1,50 @@
-import * as models from '../../models/index';
+import {Project} from '../../models/Project';
+import {Scopes} from '../../sequelize/Scopes';
+import {Technology} from '../../models/Technology';
+import {Schedule} from '../../models/Schedule';
+import {sequelize} from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
 
 const projectService = {
-  // GET list of projects with teamcount
-  getProjects: () => models.Project.findAll({
-      where: {ishistory: 0},
-      distinct: 'name',
-      include: [{
-        as: 'schedules',
-        model: models.Schedule
-      }, {
-        as: 'technologies',
-        model: models.Technology
-      }
-      ],
-      order: [
-        ['updatedAt', 'DESC']
-      ]
-    }
-  ),
+
+  getProjects: () => Project.scope([
+    Scopes.WITH_TECHNOLOGIES,
+    Scopes.WITH_SCHEDULES,
+    Scopes.ACTUAL_PROJECTS
+  ])
+    .findAll({ order: [ ['updatedAt', 'DESC']]
+  }),
 
   // GET single project by id
-  getProject: id => models.Project.findOne({
-    where: {
-      id: id,
-      ishistory: false
-    },
-    include: [{
-      as: 'schedules',
-      model: models.Schedule,
-      include: [{
-        as: 'employee',
-        model: models.Employee
-      }, {
-        as: 'role',
-        model: models.Role
-      }]
-    }, {
-      as: 'technologies',
-      model: models.Technology
-    }]
+  getProject: id => Project.scope([
+    Scopes.FULL,
+    Scopes.ACTUAL_PROJECTS
+  ])
+    .findOne({
+      where: {
+        id: id
+      }
   }),
 
   // Get All Projects with same name
-  getProjectsByName: name => models.Project.findAll({
+  getProjectsByName: name => Project.scope([Scopes.FULL]).findAll({
     where: {
       name: name
     },
-    include: [{
-      as: 'schedules',
-      model: models.Schedule,
-      include: [{
-        as: 'employee',
-        model: models.Employee
-      }, {
-        as: 'role',
-        model: models.Role
-      }]
-    }, {
-      as: 'technologies',
-      model: models.Technology
-    }],
     order: [
       ['version', 'DESC']
     ]
   }),
 
 // GET check if project exists
-  doesProjectExist: name => models.Project.count({where: {name: name}})
+  doesProjectExist: name => Project.count({where: {name: name}})
     .then(count => count !== 0)
     .catch(error => {
       console.log(error);
     }),
 
 // GET Get latest project
-  isProjectLatest: id => models.Project.findOne({
+  isProjectLatest: id => Project.findOne({
     where: {
       id: id
     }
@@ -84,7 +54,7 @@ const projectService = {
     }),
 
   // POST create new project
-  createProject: project => models.Project.create({
+  createProject: project => Project.create({
     name: project.name,
     line: project.line,
     customer: project.customer,
@@ -100,16 +70,12 @@ const projectService = {
     type: project.type,
     ishistory: false,              // default for new project
     version: project.version,                    // default for new project,
-    technologies: project.technologies
-  })
+    schedules: parse.parseShedules(project, project.schedules)
+  }, { include: [Schedule ]})
     .then(projectNew => {
-
-      const technologies = parse.parseTechnology(projectNew.technologies);
-      const instances = technologies.map(tech => models.Technology.build(tech));
-      projectNew.setTechnologies(instances);
-
-      const schedules = parse.parseShedules(projectNew, projectNew.schedules);
-      models.Schedule.bulkCreate(schedules);
+      const technologies = parse.parseTechnology(project.technologies);
+      const instances = technologies.map(tech => Technology.build(tech));
+      projectNew.$set('technologies', instances);
 
       return projectNew;
     })
@@ -118,8 +84,8 @@ const projectService = {
     }),
 
 // POST request update Project
-  updateProject: project => models.sequelize.transaction()
-    .then(t => models.Project.update(
+  updateProject: project => sequelize.transaction()
+    .then(t => Project.update(
       {ishistory: true},
       {where: {id: project.id}, transaction: t},
     )
@@ -129,14 +95,13 @@ const projectService = {
           return newProject;
         })))
     .catch(error => {
-      console.log(error);
       throw new Error(error);
     }),
 
   // PUT request archieve project
   archieveProject: async id => {
     try {
-      return await models.Project.update(
+      return await Project.update(
         {
           ishistory: true,
           updatedAt: new Date()
@@ -152,18 +117,17 @@ const projectService = {
     try {
       const projects = await projectService.getProjectsByName(name);
       projects.forEach(project => {
-        project.removeTechnologies(project.technologies);
-        models.Schedule.destroy({where: {projectid: project.id}});
+        project.$remove('technologies', project.technologies);
+        Schedule.destroy({where: {projectid: project.id}});
       });
-      return await models.Project.destroy({where: {name: name}, cascade: true});
+      return await Project.destroy({where: {name: name}, cascade: true});
     } catch (error) {
-      console.log(error);
       throw new Error(error);
     }
   },
 
   // PUT Save image
-  updateImage: (id, image) => models.Project.update(
+  updateImage: (id, image) => Project.update(
     {
       image: image,
       updatedAt: new Date()
@@ -173,7 +137,7 @@ const projectService = {
     }
   ).then(() => projectService.getProject(id)),
 
-  removeImage: project => models.Project.update(
+  removeImage: project => Project.update(
     {
       image: project.image
     },

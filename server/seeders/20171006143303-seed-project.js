@@ -9,7 +9,9 @@ module.exports = {
         domain: 'Automotive',
         description:'123',
         active:false,
-        //ishistor
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -19,6 +21,9 @@ module.exports = {
         domain: 'Multimedia solutions',
         description:'123',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -28,6 +33,9 @@ module.exports = {
         domain: 'Automotive',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -37,6 +45,9 @@ module.exports = {
         domain: 'Health',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -46,6 +57,9 @@ module.exports = {
         domain: 'Telekom',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -55,6 +69,9 @@ module.exports = {
         domain: 'Public',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -64,6 +81,9 @@ module.exports = {
         domain: 'Transportation',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -73,6 +93,9 @@ module.exports = {
         domain: 'Transportation',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -82,6 +105,9 @@ module.exports = {
         domain: 'Automotive',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -91,6 +117,9 @@ module.exports = {
         domain: 'Transportation',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -100,6 +129,9 @@ module.exports = {
         domain: 'Health',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -109,6 +141,9 @@ module.exports = {
         domain: 'public',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
+        type:'Project',
+        program:'Sales and Aftersales',
+        startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       }], {});

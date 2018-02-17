@@ -1,24 +1,24 @@
 {
   "development": {
+    "dialect": "mysql",
     "username": "root",
     "password": "1Ass-4ole2",
     "database": "portfolio-dev",
     "host": "127.0.0.1",
-    "port": 3306,
-    "dialect": "mysql"
+    "port": 3306
   },
   "test": {
+    "dialect": "mysql",
     "username": "root",
     "password": null,
     "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "host": "127.0.0.1"
   },
   "production": {
+    "dialect": "mysql",
     "username": "portfolio-prod",
     "password": "DFS34rRGFE4gf",
     "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "host": "127.0.0.1"
   }
 }

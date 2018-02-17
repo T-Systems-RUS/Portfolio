@@ -6,13 +6,11 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const validator = require('express-validator');
-//const fs = require('fs');
 
 const projectController = require('./features/project/project.controller');
 const technologyController = require('./features/technology/technology.controller');
 const employeeController = require('./features/employee/employee.controller');
 const fileController = require('./shared/file.controller');
-
 const app = express();
 
 // var sslOptions = {
@@ -54,12 +52,14 @@ app.get('*', (req, res) => {
 /**
  * Get port from environment and store in Express.
  */
+
 const port = process.env.PORT || '3000';
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
+
 //const server = https.createServer(sslOptions,app);
 const server = http.createServer(app);
 /**

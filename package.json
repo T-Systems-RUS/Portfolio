@@ -4,9 +4,10 @@
   "license": "MIT",
   "scripts": {
     "client": "ng build",
-    "server": "ts-node server/server.ts",
+
+    "server": "ts-node --project server server/server.ts",
     "client:watch": "ng serve --proxy-config proxy.conf.json",
-    "server:watch": "nodemon --watch server --exec ts-node server/server.ts",
+    "server:watch": "nodemon --watch server --exec ts-node --project server server/server.ts",
     "client-server": "ng serve --proxy-config proxy.conf.json | npm run server:watch",
     "build:dev": "ng build  && npm run server",
     "build:prod": "ng build --prod --env=prod && npm run server",
@@ -50,6 +51,7 @@
     "rxjs": "^5.1.0",
     "sequelize": "^4.13.5",
     "sequelize-cli": "^3.2.0",
+    "sequelize-typescript": "^0.6.2",
     "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.4"
   },
@@ -81,6 +83,7 @@
     "postcss-url": "^5.1.2",
     "protractor": "~5.1.0",
     "raw-loader": "^0.5.1",
+    "reflect-metadata": "^0.1.12",
     "sass-loader": "^6.0.3",
     "script-loader": "^0.7.0",
     "source-map-loader": "^0.1.5",
