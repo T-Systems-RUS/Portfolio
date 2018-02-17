@@ -3,4 +3,7 @@ const config = require('./../config/config.json');
 
 // dynamic configuration depending on env
 const env = process.env.NODE_ENV || 'test';
-export const sequelize = new Sequelize(config[env]).addModels([`${__dirname}/../models`]);
+const sequelize = new Sequelize(config[env]);
+sequelize.addModels([`${__dirname}/../models`]);
+
+export default sequelize;
