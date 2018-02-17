@@ -10,7 +10,7 @@
   "test": {
     "dialect": "mysql",
     "username": "root",
-    "password": "1Ass-4ole2",
+    "password": null,
     "database": "database_test",
     "host": "127.0.0.1"
   },
