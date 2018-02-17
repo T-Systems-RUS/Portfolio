@@ -11,7 +11,6 @@ const projectController = require('./features/project/project.controller');
 const technologyController = require('./features/technology/technology.controller');
 const employeeController = require('./features/employee/employee.controller');
 const fileController = require('./shared/file.controller');
-// import sequelize from './sequelize/sequelize';
 const app = express();
 
 // var sslOptions = {
@@ -60,7 +59,6 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-// sequelize.sync();
 
 //const server = https.createServer(sslOptions,app);
 const server = http.createServer(app);

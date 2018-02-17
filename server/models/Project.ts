@@ -22,7 +22,7 @@ import {ProjectTechnology} from './ProjectTechnology';
 })
 @Table({
     timestamps: true,
-    tableName: 'projects'
+    tableName: 'Projects'
 })
 export class Project extends Model<Project> {
 

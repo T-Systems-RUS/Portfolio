@@ -13,7 +13,7 @@ import {Role} from './Role';
     }
 })
 @Table({
-    tableName: 'schedules'
+    tableName: 'Schedules'
 })
 export class Schedule extends Model<Schedule> {
 

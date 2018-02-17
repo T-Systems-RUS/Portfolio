@@ -16,7 +16,7 @@ import {EmployeeTechnology} from './EmployeeTechnology';
 })
 @Table({
     timestamps: true,
-    tableName: 'employees'
+    tableName: 'Employees'
 })
 export class Employee extends Model<Employee> {
 

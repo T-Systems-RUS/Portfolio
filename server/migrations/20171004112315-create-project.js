@@ -13,18 +13,22 @@ module.exports = {
         type: Sequelize.STRING
       },
       line: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       customer: {
         type: Sequelize.STRING
       },
       domain: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       type: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       program: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       pss: {
@@ -58,6 +62,7 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       startdate: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       enddate: {

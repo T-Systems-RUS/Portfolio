@@ -8,7 +8,7 @@ import {Schedule} from './Schedule';
 })
 @Table({
     timestamps: true,
-    tableName: 'roles'
+    tableName: 'Roles'
 })
 export class Role extends Model<Role> {
 
