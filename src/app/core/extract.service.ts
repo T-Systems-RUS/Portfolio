@@ -1,8 +1,5 @@
 import {Output, EventEmitter, Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
 import {Error} from '../shared/models/error';
 
 class MessageResponse extends Error {
@@ -13,14 +10,6 @@ class MessageResponse extends Error {
 export class ExtractService {
 
   @Output() errorMessage = new EventEmitter();
-
-  public extractData(res: Response) {
-    let body;
-    if (res.text()) {
-      body = res.json();
-    }
-    return body || {};
-  }
 
   // for get requests
   public handleError(error: MessageResponse) {

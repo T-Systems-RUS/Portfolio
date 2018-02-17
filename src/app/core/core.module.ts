@@ -1,4 +1,3 @@
-/* tslint:disable:member-ordering no-unused-variable */
 import {
   ModuleWithProviders, NgModule,
   Optional, SkipSelf
@@ -8,16 +7,19 @@ import {SharedModule} from '../shared/shared.module';
 import {UserService} from './user.service';
 import {UserServiceConfig} from './user.service';
 
-/*Feature Modules */
-
 import {HeaderComponent} from './header/header.component';
 import {LoaderComponent} from './loader/loader.component';
 
-import {HttpService} from './http.service';
+import {HttpClientService} from './http-client.service';
 import {DynamicService} from './dynamic.service';
 import {ExtractService} from './extract.service';
 import {FileService} from './file.service';
 import {PowerPointService} from './powerpoint.service';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/observable/throw';
 
 @NgModule({
   imports: [
@@ -34,10 +36,10 @@ import {PowerPointService} from './powerpoint.service';
   providers: [
     DynamicService,
     UserService,
-    HttpService,
     ExtractService,
     FileService,
-    PowerPointService
+    PowerPointService,
+    HttpClientService
   ]
 })
 export class CoreModule {

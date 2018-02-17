@@ -1,88 +1,41 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '../../core/http.service';
-import {ExtractService} from '../../core/extract.service';
-import {Observable} from 'rxjs/Observable';
-import {Routes} from '../../shared/helpers/routes';
 import {Project} from '../../shared/models/project';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import routes from '../../shared/constants/routes';
+import {HttpClientService} from '../../core/http-client.service';
 
 @Injectable()
 export class ProjectService {
-  routes: Routes;
 
-  constructor(private http: HttpService, private extract: ExtractService) {
-    this.routes = new Routes();
+  constructor(private http: HttpClientService) {
   }
 
   // GET requests
-  getProjects(): Observable<Project[]> {
-    // ...using get request
-    return this.http.get(this.routes.getProjects)
-    // ...and calling .json() on the response to return data
-      .map(this.extract.extractData)
-      // ...errors if any
-      .catch(error => Observable.throw(this.extract.handleError(error)));
-
+  getProjects() {
+    return this.http.get<Project[]>(routes.getProjects);
   }
 
-  getProjectsByName(name): Observable<Project[]> {
-    // ...using get request
-    return this.http.get(this.routes.history + name)
-    // ...and calling .json() on the response to return data
-      .map(this.extract.extractData)
-      // ...errors if any
-      .catch(error => Observable.throw(this.extract.handleError(error)));
-
+  getProjectsByName(name) {
+    return this.http.get<Project[]>(routes.history + name);
   }
 
-  getProject(id): Observable<Project> {
-    // ...using get request
-    return this.http.get(this.routes.getProjects + id)
-    // ...and calling .json() on the response to return data
-      .map(this.extract.extractData)
-      // ...errors if any
-      .catch(error => Observable.throw(this.extract.handleError(error)));
-
+  getProject(id) {
+    return this.http.get<Project>(routes.getProjects + id);
   }
 
   // POST requests
   createProject(project: Project) {
-    const data = this.http.createParams(project);
-    return this.http.post(this.routes.createProject, data)
-      .map(this.extract.extractData)
-      .catch(error => Observable.throw(this.extract.handlePostError(error)));
+    return this.http.post(routes.createProject, project);
   }
 
   updateProject(project: Project) {
-
-    const data = this.http.createParams(project);
-    return this.http.post(this.routes.updateProject, data)
-      .map(this.extract.extractData)
-      .catch(error => Observable.throw(this.extract.handlePostError(error)));
-
+    return this.http.post<Project>(routes.updateProject, project);
   }
 
   archieveProject(project: Project) {
-
-    const data = this.http.createParams(project);
-    return this.http.put(this.routes.archieve, data)
-      .map(this.extract.extractData)
-      .catch(error => Observable.throw(this.extract.handlePostError(error)));
-
+    return this.http.put(routes.archieve, project);
   }
 
   deleteProject(project: Project) {
-    return this.http.delete(this.routes.deleteProject + project.name)
-      .map(this.extract.extractData)
-      .catch(error => Observable.throw(this.extract.handlePostError(error)));
-
-  }
-
-  getConstants(): Observable<{ lines: string[]; domains: string[]; types: string[]; programs: string[] }> {
-    return this.http.getConstants()
-      .map(this.extract.extractData)
-      .catch(error => Observable.throw(this.extract.handleError(error)));
+    return this.http.delete(routes.deleteProject + project.name);
   }
 }

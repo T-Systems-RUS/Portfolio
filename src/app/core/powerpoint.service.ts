@@ -1,26 +1,24 @@
 import {Injectable} from '@angular/core';
-
 import {Project} from '../shared/models/project';
-import {HttpService} from './http.service';
 import {ExtractService} from './extract.service';
 import {Observable} from 'rxjs/Observable';
-
-import {Routes} from './../shared/helpers/routes';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
+import routes from '../shared/constants/routes';
 import pptx from 'pptxgenjs';
+import {HttpClientService} from './http-client.service';
+
+interface IPresenationResponse {
+  header;
+  header2;
+  domain;
+  image;
+  technologies;
+}
 
 @Injectable()
 export class PowerPointService {
-
-  routes: Routes;
   pptx;
 
-  constructor(private http: HttpService, private extract: ExtractService) {
-    this.routes = new Routes();
-
+  constructor(private http: HttpClientService, private extract: ExtractService) {
     this.createInstance();
   }
 
@@ -40,20 +38,18 @@ export class PowerPointService {
   }
 
 
-/**
- * Creates one slide per project
- * all images are downloaded from server
- * @param {Project} project source of dynamic info
- * @param {string} [name=''] name of presentation
- * @param {boolean} [saveToClient=false] downloads presentation to browser if true
- * @returns
- * @memberof PowerPointService
- */
-createPresentation(project: Project, name = '', saveToClient = false) {
-    return this.http.get(this.routes.presentationImages + project.id)
-      .subscribe(res => {
-
-          const response = res.json();
+  /**
+   * Creates one slide per project
+   * all images are downloaded from server
+   * @param {Project} project source of dynamic info
+   * @param {string} [name=''] name of presentation
+   * @param {boolean} [saveToClient=false] downloads presentation to browser if true
+   * @returns
+   * @memberof PowerPointService
+   */
+  createPresentation(project: Project, name = '', saveToClient = false) {
+    return this.http.get(routes.presentationImages + project.id)
+      .subscribe((response: IPresenationResponse) => {
           const header = response.header;
           const header2 = response.header2;
           const domain = response.domain;
@@ -429,13 +425,13 @@ createPresentation(project: Project, name = '', saveToClient = false) {
       );
   }
 
-/**
- * Instance must be new up before presentation creation
- * concatinates presentations together
- * @private
- * @memberof PowerPointService
- */
-private createInstance() {
+  /**
+   * Instance must be new up before presentation creation
+   * concatinates presentations together
+   * @private
+   * @memberof PowerPointService
+   */
+  private createInstance() {
     const PptxGenJS = Object.getPrototypeOf(pptx).constructor;
     this.pptx = new PptxGenJS();
   }
