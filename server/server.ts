@@ -6,7 +6,6 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const validator = require('express-validator');
-//const fs = require('fs');
 
 const projectController = require('./features/project/project.controller');
 const technologyController = require('./features/technology/technology.controller');
@@ -48,6 +47,7 @@ app.get('*', (req, res) => {
 /**
  * Get port from environment and store in Express.
  */
+
 const port = process.env.PORT || '3000';
 app.set('port', port);
 
