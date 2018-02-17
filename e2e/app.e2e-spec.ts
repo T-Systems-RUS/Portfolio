@@ -1,4 +1,5 @@
-import { PortfolioPage } from './app.po';
+import {PortfolioPage} from './app.po';
+import {browser, by, element} from 'protractor';
 
 describe('portfolio App', () => {
   let page: PortfolioPage;
@@ -7,8 +8,15 @@ describe('portfolio App', () => {
     page = new PortfolioPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should at least 1 project', () => {
+    browser.waitForAngularEnabled(false); // TODO: remove when app is optimized for e2e
+
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+
+    browser.sleep(1000); // TODO: remove when app is optimized for e2e
+
+    expect(element.all(by.css('project-item')).count()).toBeGreaterThan(0);
+
+    browser.waitForAngularEnabled(true); // TODO: remove when app is optimized for e2e
   });
 });
