@@ -1,5 +1,5 @@
 import {Sequelize} from 'sequelize-typescript';
-const config = require('./../config/config.json');
+const config = require('../config/config.json');
 
 // dynamic configuration depending on env
 const env = process.env.NODE_ENV || 'development';
