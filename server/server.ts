@@ -27,7 +27,6 @@ app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(validator());
 
-
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/server/images', express.static('server/images'));

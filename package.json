@@ -6,7 +6,7 @@
     "client": "ng build",
     "server": "ts-node --project server server/server.ts",
     "client:watch": "ng serve --proxy-config proxy.conf.json",
-    "server:watch": "nodemon --watch server --exec ts-node --project server server/server.ts",
+    "server:watch": "nodemon",
     "client-server": "ng serve --proxy-config proxy.conf.json | npm run server:watch",
     "build:dev": "ng build  && npm run server",
     "build:prod": "ng build --prod --env=prod && npm run server",
