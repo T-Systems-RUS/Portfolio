@@ -1,16 +1,17 @@
 // Get dependencies
 import * as express from 'express';
 
-const path = require('path');
+import * as path from 'path';
 //const https = require('https');
-const http = require('http');
-const bodyParser = require('body-parser');
-const validator = require('express-validator');
+import * as http from 'http';
+import * as bodyParser from 'body-parser';
+import * as validator from 'express-validator';
 
-const projectController = require('./features/project/project.controller');
-const technologyController = require('./features/technology/technology.controller');
-const employeeController = require('./features/employee/employee.controller');
-const fileController = require('./shared/file.controller');
+import * as projectController from './features/project/project.controller';
+import * as technologyController from './features/technology/technology.controller';
+import * as employeeController from './features/employee/employee.controller';
+import * as fileController from './shared/file.controller';
+
 const app = express();
 
 // var sslOptions = {
@@ -26,10 +27,10 @@ app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(validator());
 
+
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/server/images', express.static('server/images'));
-
 
 // Set our api routes
 app.use('/api', projectController);
