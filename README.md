@@ -4,9 +4,9 @@
 
 ## How to run
 
-1. Get MySQL server locally or via docker:
-`docker run -p 3306:3306 --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest`
-(where `my-secret-pw` is your `root` user password)
+1. Get PostgreSQL server locally or via docker:
+`docker run --name some-postgres -e POSTGRES_PASSWORD=my-secret-pw -d postgres`
+(where `my-secret-pw` is your `postgres` user password)
 
 2. Run `npm install` to install all dependencies
 
