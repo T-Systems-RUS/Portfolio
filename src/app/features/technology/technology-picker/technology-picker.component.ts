@@ -69,7 +69,7 @@ export class TechnologyPickerComponent {
         let tech=this.initialTechnologies.filter(item=>item.name===event)[0];
         tech.active=!tech.active;
 
-        let selected=this.technologies.filter(item=>item.active);
+        let selected=this.initialTechnologies.filter(item=>item.active);
         this.onSelect.emit(selected);
     }
 

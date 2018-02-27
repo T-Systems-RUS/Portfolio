@@ -135,16 +135,18 @@ projectService.createProject=function(Project){
         technologies:Project.technologies
       }).then(function (project) {
 
-        let technologies=parse.parseTechnology(Project.technologies);
-        let instances=technologies.map(tech=> { return models.Technology.build(tech) });
-        project.setTechnologies(instances);
-
         let schedules=parse.parseShedules(project, Project.schedules);
         models.Schedule.bulkCreate(schedules);
-        
 
+        let technologies=parse.parseTechnology(Project.technologies);
+        let instances=technologies.map(tech=> { return models.Technology.build(tech) });
+        return project.setTechnologies(instances).then(function(){
+            return project;
+        }).catch(error=>{
+            throw new Error(error);
+        })
 
-         return project;
+         
       }).catch(error=>{
           throw new Error(error);
       })
