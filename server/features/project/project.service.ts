@@ -75,9 +75,10 @@ const projectService = {
     .then(projectNew => {
       const technologies = parse.parseTechnology(project.technologies);
       const instances = technologies.map(tech => Technology.build(tech));
-      projectNew.$set('technologies', instances);
 
-      return projectNew;
+      // return project only after technologies added
+      return projectNew.$set('technologies', instances).then(() => projectNew);
+
     })
     .catch(error => {
       throw new Error(error);
