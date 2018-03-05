@@ -1,0 +1,8 @@
+{
+  "name": "t-portfolio",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "install": "(cd client && yarn); (cd server && yarn);"
+  }
+}
