@@ -7,6 +7,7 @@ describe('Projects', () => {
   const wrapper = mount(Projects, {store});
 
   it('should render correct contents', () => {
-    expect(wrapper.vm.$el).toMatchSnapshot();
+    wrapper.vm.newProject();
+    expect(wrapper.vm.projects.length).toBe(1);
   });
 });
