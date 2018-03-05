@@ -74,16 +74,14 @@ const projectService = {
   })
     .then(projectNew => {
       const schedules = parse.parseShedules(projectNew, project.schedules);
-      console.log(schedules);
       const instances = parse.parseTechnology(project.technologies);
-      // // return project only after technologies added
+      // return project only after technologies added
       return Promise.all([
         Schedule.bulkCreate(schedules),
         projectNew.$set('technologies', instances)
       ]).then(() =>  projectNew);
     })
     .catch(error => {
-      console.log(error);
       throw new Error(error);
     }),
 
