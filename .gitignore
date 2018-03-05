@@ -5,14 +5,16 @@
 /client/.DS_Store
 /client/node_modules/
 /client/dist/
-/client/npm-debug.log*
-/client/yarn-debug.log*
-/client/yarn-error.log*
 /client/test/unit/reports/
 /client/test/e2e/reports/
-/client/test/e2e/reatures/undefined-steps.js
+/client/test/e2e/features/undefined-steps.js
 /client/selenium-debug.log
 
 # Editor directories and files
 .idea
 .vscode
+
+#misc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
