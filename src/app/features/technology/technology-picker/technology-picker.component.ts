@@ -85,7 +85,9 @@ export class TechnologyPickerComponent implements OnInit {
     const tech = this.initialTechnologies.filter(item => item.name === event)[0];
     tech.active = !tech.active;
 
-    const selected = this.technologies.filter(item => item.active);
+    // filter through initial technologies otherwise not all technologies
+    // will be selected when filter apllied
+    const selected = this.initialTechnologies.filter(item => item.active);
     this.onSelect.emit(selected);
   }
 
