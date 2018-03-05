@@ -24,7 +24,10 @@ $size-3: 36px;
 $size-4: 24px;
 $size-5: 21px;
 $size-6: 15px;
+$size-7: 12px;
 $sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7;
+
+$subtitle-size: $size-7;
 
 // Radius for forms and buttons
 $radius: $telekom-radius;
@@ -45,3 +48,4 @@ $size-large: $size-5;
 @import '~bulma/sass/elements/title';
 @import '~bulma/sass/elements/button';
 @import '~bulma/sass/elements/form';
+@import '~bulma/sass/grid/columns';

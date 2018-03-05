@@ -35,10 +35,6 @@
   @import '~bulma/sass/utilities/mixins';
 
   .footer {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
     height: $header-bar-height;
     padding: 26px;
     color: $white;
