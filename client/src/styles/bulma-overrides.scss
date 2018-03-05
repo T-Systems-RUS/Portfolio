@@ -1,0 +1,47 @@
+@import 'variables';
+
+// Override bulma defaults
+// Remember to override derived variables from @import '~bulma/sass/utilities/derived-variables.sass';
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/_all';
+
+// Fonts
+$family-serif: 'TeleGrotesk Next', serif;
+$family-primary: $family-serif;
+
+// Colors
+$primary: $magenta;
+$primary-invert: $white;
+$colors: map-merge($colors, (
+  'primary':($primary, $primary-invert)
+));
+
+// Titles
+$title-weight: 200;
+$size-1: 60px;
+$size-2: 48px;
+$size-3: 36px;
+$size-4: 24px;
+$size-5: 21px;
+$size-6: 15px;
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7;
+
+// Radius for forms and buttons
+$radius: $telekom-radius;
+$control-radius: $radius;
+
+// Forms
+$input-shadow: none;
+$label-weight: normal;
+
+// Buttons
+$size-large: $size-5;
+
+// Global bulma base styles
+@import '~bulma/sass/base/all';
+
+// Other global bulma imports
+@import '~bulma/sass/elements/container';
+@import '~bulma/sass/elements/title';
+@import '~bulma/sass/elements/button';
+@import '~bulma/sass/elements/form';
