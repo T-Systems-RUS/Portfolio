@@ -4,6 +4,7 @@
 # Client files
 /client/.DS_Store
 /client/node_modules/
+/legacy-client/node_modules/
 /client/dist/
 /client/test/unit/reports/
 /client/test/e2e/reports/
