@@ -3,7 +3,7 @@ import {Given, Then, When} from 'cucumber';
 
 Given('I open button test page', async () =>
   client
-    .url(client.globals.devServerURL)
+    .url(`${client.globals.devServerURL}/#/button-test`)
     .waitForElementVisible('#app', 5000));
 
 When('test button is present', async () =>
