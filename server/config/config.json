@@ -2,7 +2,7 @@
   "development": {
     "dialect": "postgres",
     "username": "postgres",
-    "password": "123",
+    "password": null,
     "database": "portfolio-dev"
   },
   "test": {

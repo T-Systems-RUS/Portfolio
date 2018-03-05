@@ -11,6 +11,6 @@ export enum ServerConstants {
     DEFAULT_STATIC_PATH = 'dist',
     IMAGES_ROUTE = '/server/images',
     IMAGES_PATH = 'server/images',
-    PORT_ALLIAS = 'port',
+    PORT_ALIAS = 'port',
     MAX_REQUEST_SIZE = '10mb'
 }

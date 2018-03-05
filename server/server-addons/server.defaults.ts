@@ -26,8 +26,8 @@ const ServerDefaults = {
     port: process.env.PORT || ServerConstants.DEFAULT_PORT,
 
     setPort: app => {
-        app.set(ServerConstants.PORT_ALLIAS, this.port);
+        app.set(ServerConstants.PORT_ALIAS, this.port);
     }
 };
 
-export default ServerDefaults;
+export {ServerDefaults};

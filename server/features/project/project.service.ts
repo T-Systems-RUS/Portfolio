@@ -3,7 +3,7 @@ import {Scopes} from '../../sequelize/Scopes';
 import {Technology} from '../../models/Technology';
 import {Schedule} from '../../models/Schedule';
 import {ProjectTechnology} from '../../models/ProjectTechnology';
-import sequelize from '../../sequelize/sequelize';
+import {sequelize} from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
 
 const projectService = {
@@ -72,15 +72,13 @@ const projectService = {
     ishistory: false,              // default for new project
     version: project.version,                    // default for new project,
   })
-    .then(projectNew => {
-      const schedules = parse.parseShedules(projectNew, project.schedules);
-      const instances = parse.parseTechnology(project.technologies);
+    .then(projectNew =>
       // return project only after technologies added
-      return Promise.all([
-        Schedule.bulkCreate(schedules),
-        projectNew.$set('technologies', instances)
-      ]).then(() =>  projectNew);
-    })
+       Promise.all([
+        Schedule.bulkCreate(parse.parseShedules(projectNew, project.schedules)),
+        projectNew.$set('technologies', parse.parseTechnology(project.technologies))
+      ]).then(() =>  projectNew)
+    )
     .catch(error => {
       throw new Error(error);
     }),

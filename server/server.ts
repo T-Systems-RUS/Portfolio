@@ -1,7 +1,7 @@
 import * as http from 'http';
-import app from './server-addons/server.config';
-import ServerRoutes from './server-addons/server.routes';
-import ServerDefaults from './server-addons/server.defaults';
+import {app} from './server-addons/server.config';
+import {ServerRoutes} from './server-addons/server.routes';
+import {ServerDefaults} from './server-addons/server.defaults';
 
 ServerRoutes.configureRoutes(app);
 ServerDefaults.setGlobalErrorHandling(app);
