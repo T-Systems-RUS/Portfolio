@@ -3,6 +3,15 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "install": "(cd client && yarn); (cd server && yarn);"
+    "db": "cd server && yarn run db",
+    "client": "cd client && yarn run dev",
+    "client:install": "cd client && yarn",
+    "client:unit": "cd client && yarn run unit",
+    "client:e2e": "cd client && yarn run e2e",
+    "server": "cd server && yarn run server",
+    "server:watch": "cd server && yarn run server:watch",
+    "server:install": "cd server && yarn",
+    "client-server": "yarn run client | yarn run server",
+    "client-server:install": "yarn run client:install && yarn run server:install"
   }
 }

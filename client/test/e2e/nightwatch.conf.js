@@ -49,7 +49,9 @@ module.exports = {
         acceptSslCerts: true,
         chromeOptions: {
           args: [
-            '--headless'
+            '--headless',
+            // Required for Travis
+            '--no-sandbox'
           ]
         }
       }

@@ -6,11 +6,11 @@
   "scripts": {
     "server": "ts-node server.ts",
     "server:watch": "nodemon",
+    "db": "npm run db:create && npm run db:migrate && npm run db:seed",
     "db:drop": "sequelize db:drop",
     "db:create": "sequelize db:create",
     "db:migrate": "sequelize db:migrate",
-    "db:seed": "sequelize db:seed:all",
-    "db:init": "npm run db:create && npm run db:migrate && npm run db:seed"
+    "db:seed": "sequelize db:seed:all"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
