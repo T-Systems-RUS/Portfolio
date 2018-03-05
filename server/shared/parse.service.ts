@@ -1,70 +1,20 @@
+import {Technology} from '../models/Technology';
+
 const parseService = {
 
-  parseShedules: (project, schedules) => {
-    const parsed = [];
-    if (Array.isArray(schedules)) {
-      for (const schedule of schedules) {
-        const s = JSON.parse(schedule);
+  parseShedules: (project, schedules) => schedules.map(schedule => Object.create({
+    projectid: project.id,
+    employeeid: schedule.employee.id,
+    roleid: schedule.role.id
+  })),
 
-        parsed.push(
-          {
-            projectid: project.id,
-            employeeid: s.employee.id,
-            roleid: s.role.id,
-            participation: s.participation,
-          }
-        );
-      }
-
-    } else {
-      if (schedules) {
-        const s = JSON.parse(schedules);
-        parsed.push(
-          {
-            projectid: project.id,
-            employeeid: s.employee.id,
-            roleid: s.role.id,
-            participation: s.participation,
-          }
-        );
-      }
-    }
-
-    return parsed;
-  },
-
-  parseTechnology: technologies => {
-    const parsed = [];
-    if (Array.isArray(technologies)) {
-      for (const tech of technologies) {
-        const t = JSON.parse(tech);
-
-        parsed.push(
-          {
-            id: t.id,
-            name: t.name,
-            domain: t.domain,
-            active: 0
-          }
-        );
-      }
-
-    } else {
-      if (technologies) {
-        const t = JSON.parse(technologies);
-        parsed.push(
-          {
-            id: t.id,
-            name: t.name,
-            domain: t.domain,
-            active: 0
-          }
-        );
-      }
-    }
-    return parsed;
-
-  }
+  parseTechnology: technologies => technologies.map(technology => new Technology({
+    id: technology.id,
+    name: technology.name,
+    domain: technology.domain,
+    image: technology.image,
+    version: technology.version
+  }))
 };
 
 export default parseService;

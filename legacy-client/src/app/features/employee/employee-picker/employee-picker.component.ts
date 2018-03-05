@@ -75,7 +75,7 @@ export class EmployeePickerComponent implements OnInit {
  * @memberof EmployeePickerComponent
  */
 selectEmployee() {
-    const selected = this.schedules.filter(item => item.active);
+    const selected = this.initialSchedules.filter(item => item.active);
     this.onSelect.emit(selected);
   }
 }
