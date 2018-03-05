@@ -1,8 +1,6 @@
-Feature: Button Test Feature
+Feature: Test Feature
 
-  Scenario: Opening Button Test Page
+  Scenario: Opening Projects Page
 
-    Given I open button test page
-    Then test button is present
-    And button text is "Test Button"
-    And and button is green
+    Given I open project page
+    Then project is present

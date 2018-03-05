@@ -1,3 +1,4 @@
-export const SET_ITEMS = 'SET_ITEMS';
-export const EDIT_ITEM = 'EDIT_ITEM';
-export const DELETE_ITEM = 'DELETE_ITEM';
+export const NEW_PROJECT = 'NEW_PROJECT';
+export const SET_PROJECTS = 'SET_PROJECTS';
+export const EDIT_PROJECT = 'EDIT_PROJECT';
+export const DELETE_PROJECT = 'DELETE_PROJECT';

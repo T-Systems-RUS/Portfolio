@@ -1,25 +1,37 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import {DELETE_ITEM, EDIT_ITEM, SET_ITEMS} from './mutation-types'
+import {DELETE_PROJECT, EDIT_PROJECT, NEW_PROJECT, SET_PROJECTS} from './mutation-types'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-export default new Vuex.Store({
+interface IProjectState {
+  projects: IProject[],
+  loading: boolean;
+}
+
+export interface IProject {
+  name: string;
+}
+
+export default new Vuex.Store<IProjectState>({
   state: {
-    items: [],
+    projects: [],
     loading: true
   },
   mutations: {
-    [SET_ITEMS](state, payload) {
-      state.items = payload;
+    [SET_PROJECTS](state, payload) {
+      state.projects = payload;
       state.loading = false;
     },
-    [DELETE_ITEM](state, index: number) {
-      state.items.splice(index, 1)
+    [NEW_PROJECT](state, payload: IProject) {
+      state.projects.push(payload)
     },
-    [EDIT_ITEM](state, payload) {
-      Vue.set(state.items, payload.index, payload.item)
+    [DELETE_PROJECT](state, index: number) {
+      state.projects.splice(index, 1)
+    },
+    [EDIT_PROJECT](state, payload) {
+      Vue.set(state.projects, payload.index, payload.item)
     },
   },
 })
