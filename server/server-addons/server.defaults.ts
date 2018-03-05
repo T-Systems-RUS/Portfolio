@@ -30,4 +30,4 @@ const ServerDefaults = {
     }
 };
 
-export {ServerDefaults};
+export default ServerDefaults;

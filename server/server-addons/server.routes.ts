@@ -25,4 +25,4 @@ const ServerRoutes = {
     }
 };
 
-export {ServerRoutes};
+export default ServerRoutes;

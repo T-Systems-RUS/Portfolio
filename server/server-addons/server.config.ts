@@ -22,4 +22,4 @@ app.use(express.static(path.join(__dirname, ServerConstants.DEFAULT_STATIC_PATH)
 // 3rd library for validation of POST/PUT REST requests
 app.use(validator());
 
-export {app};
+export default app;
