@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'mixins';
+// Import Telekom fonts
+@import 'fonts';
+// Override bulma overrides
+@import './bulma-overrides';
+
+body {
+  font-size: $base-font-size;
+}
+
+.title.is-6 {
+  font-weight: bold;
+}
+
+.centered {
+  @include centered;
+}
+
+.button.is-large {
+  border-color: $magenta-dark;
+}

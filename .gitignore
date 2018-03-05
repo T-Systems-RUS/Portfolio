@@ -1,40 +1,21 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# Server files
+/server/node_modules
 
-# compiled output
-/dist
-/tmp
-/out-tsc
+# Client files
+/client/.DS_Store
+/client/node_modules/
+/legacy-client/node_modules/
+/client/dist/
+/client/test/unit/reports/
+/client/test/e2e/reports/
+/client/test/e2e/features/undefined-steps.js
+/client/selenium-debug.log
 
-# dependencies
-/node_modules
+# Editor directories and files
+.idea
+.vscode
 
-# IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-
-# IDE - VSCode
-.vscode/*
-.vs
-
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-testem.log
-/typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
-
-# System Files
-.DS_Store
-Thumbs.db
-
+#misc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,41 +1,31 @@
-# Portfolio
+# T-Portfolio
 
 [![Build Status](https://travis-ci.org/T-Systems-RUS/Portfolio.svg?branch=develop)](https://travis-ci.org/T-Systems-RUS/Portfolio)
 
 ## How to run
 
-1. Get PostgreSQL server locally or via docker:
-`docker run --name some-postgres -e POSTGRES_PASSWORD=my-secret-pw -d postgres`
-(where `my-secret-pw` is your `postgres` user password)
+**PREREQUISITE**: Get PostgreSQL server locally or via docker:
+`docker run --name some-postgres -e POSTGRES_PASSWORD=my-secret-pw -d postgres` (where `my-secret-pw` is your `postgres` user password)
 
-2. Run `npm install` to install all dependencies
+There are to possible scenarios to start the app:
 
-3. Run `npm run db:init` to initialize database (tweak DB connection settings via`server/config/config.json`)
+### One process for client and server (easy to start with)
 
-4. Run `npm run client-server` to run both client and server in development watch mode. 
+1. Run `yarn run client-server:install` to install both server and client dependencies
+
+3. Run `yarn run db` to initialize database (tweak DB connection settings via`server/config/config.json`)
+
+4. Run `yarn run client-server` to run both client and server in development watch mode. 
 
 
-## Development server
+### Separate processes for client and server (easier to manage)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Go to `server` folder and run `yarn` to install server dependencies
 
-## Code scaffolding
+3. Run `yarn run db` to initialize database (tweak DB connection settings via`server/config/config.json`)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+4. Run `yarn run server:watch` to run server in development watch mode
 
-## Build
+5. Go to `client` folder and run `yarn` to install client dependencies
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+6. Run `yarn run dev` to run client in development watch mode. 
