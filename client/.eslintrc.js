@@ -57,7 +57,6 @@ module.exports = {
     'object-curly-spacing': ['error', 'never'],
     'comma-dangle': ['error', 'never'],
     'arrow-parens': ['error', 'as-needed'],
-    'linebreak-style': ['error', 'windows'],
     // TODO remove after fix in TS parser - TypeScript interfaces broken
     'no-undef': 'off'
   }
