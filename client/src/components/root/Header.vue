@@ -1,28 +1,34 @@
 <template>
-  <div class="header">
-    <div class="header-bar brand-bar">
-      <div class="container">
-        <img src="./assets/deutsche-telekom-logo.svg">
-        <strong class="is-pulled-right title is-6 is-uppercase">
-          Life is for sharing.
-        </strong>
+  <div class="header level">
+    <div class="level-left">
+      <div class="header-logo level-item">
+        <img src="./assets/logo-tportfolio.svg">
       </div>
+      <nav class="header-nav level-item">
+        <a href="/" class="header-nav-item is-active">
+          Projects
+        </a>
+        <a href="#" class="header-nav-item">
+          Employees
+        </a>
+        <a href="#" class="header-nav-item">
+          Technologies
+        </a>
+        <a href="#" class="header-nav-item">
+          Statistik
+        </a>
+        <a href="#" class="header-nav-item">
+          Help
+        </a>
+      </nav>
     </div>
-    <div class="header-bar nav-bar">
-      <div class="container">
-        <strong class="inline title is-5 is-uppercase">
-          T-Portfolio
-        </strong>
-
-        <div class="control is-pulled-right">
-          <div class="select">
-            <select>
-              <option>EN</option>
-              <option>DE</option>
-            </select>
-          </div>
-        </div>
-      </div>
+    <div class="level-right">
+        <a class="level-item">
+          <img  src="./assets/search.svg" alt="">
+        </a>
+        <a class="level-item">
+          <img  src="./assets/user.svg" alt="">
+        </a>
     </div>
   </div>
 </template>
@@ -30,6 +36,7 @@
 <style lang="scss" scoped>
   @import '../../styles/variables';
   @import '~bulma/sass/utilities/mixins';
+  @import '~bulma/sass/components/level';
 
   .header {
     position: fixed;
@@ -37,34 +44,28 @@
     left: 0;
     right: 0;
     z-index: 2;
+    background-color: $white;
+    border-top: $top-border-height solid $magenta;
+    height: $header-height;
+    padding: 0 20px;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.5);
 
-    .header-bar {
-      height: $header-bar-height;
-      background-color: $white;
-      padding: 24px;
+    
 
-      strong {
-        position: relative;
-        font-weight: bold;
-      }
+    &-nav{
+      margin-left: 20px;
 
-      &.brand-bar {
-        background-color: $magenta;
-        color: $white;
+      &-item{
+        color:$text-color;
+        margin-right: 30px;
+        transition: all .3s;
 
-        strong {
-          top: 10px;
-          color: $white;
+        &.is-active{
+          font-weight: bold;
         }
-      }
 
-      &.nav-bar {
-        strong {
-          top: 6px;
-
-          @include mobile {
-            display: none;
-          }
+        &:hover{
+          text-decoration: underline;
         }
       }
     }

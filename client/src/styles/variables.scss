@@ -1,15 +1,20 @@
 // Colors
-$magenta: #E20074;
+$magenta: #C41065;
 $magenta-dark: #A00053;
 $white: #FFFFFF;
 $light-black: #262626;
+$text-color:#383838;
+$text-secondary:#7C7C7C;
 
 // Font sizes
 $small-font-size: 15px;
 $base-font-size: 18px;
 
 // Header
+$header-height:65px;
 $header-bar-height: 82px;
-$header-height: $header-bar-height * 2;
+
+//Shared
+$top-border-height:5px;
 
 $telekom-radius: 4px;

@@ -10,20 +10,12 @@
         </a>
       </div>
 
-      <div
-        class="project"
+      <project-card
         v-for="project in projects"
         :key="project.id"
-        @click="deleteProject(index)">
-        <h6 class="project-header title is-6 is-uppercase">{{ project.line }}</h6>
-        <div class="project-body">
-          <h6 class="title is-6">{{ project.name }}</h6>
-          <h6 class="subtitle">{{ project.domain }}</h6>
-          <div class="is-size-6">{{ project.description }}</div>
-          <strong>{{ project.teamcount }}</strong>
-          <div class="is-size-7">{{ new Date(project.startdate).toLocaleDateString() }}</div>
-        </div>
-      </div>
+        v-bind:project="project">
+      </project-card>
+     
     </div>
   </div>
 </template>
@@ -33,13 +25,17 @@
   import axios from 'axios';
   import {Util} from '../../shared/classes/Util';
   import {DELETE_PROJECT, EDIT_PROJECT, NEW_PROJECT, SET_PROJECTS} from '../../store/mutation-types';
-  import {IProject} from '../../store';
+  import {IProject} from '../../shared/interfaces/project';
+  import ProjectCard from './project-card/ProjectCard.vue';
 
   export default Vue.extend({
     computed: {
       projects(): IProject[] {
         return this.$store.state.projects;
       }
+    },
+    components:{
+      ProjectCard
     },
     created() {
       axios.get(Util.getApiUrl('projects'))
@@ -65,7 +61,7 @@
   @import '../../styles/variables';
 
   .project {
-    vertical-align: middle;
+    vertical-align: top;
     display: inline-block;
     height: 250px;
     width: 200px;

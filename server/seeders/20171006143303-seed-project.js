@@ -17,7 +17,7 @@ module.exports = {
       },
       {
         name: 'MMS',
-        line:'horizontal',
+        line:'digital integration',
         domain: 'Multimedia solutions',
         description:'123',
         active:false,
@@ -41,7 +41,7 @@ module.exports = {
       },
       {
         name: 'T-Vision',
-        line:'vertical',
+        line:'digital integration',
         domain: 'Health',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
@@ -65,7 +65,7 @@ module.exports = {
       },
       {
         name: 'AS1313',
-        line:'horizontal',
+        line:'digital integration',
         domain: 'Public',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
@@ -77,7 +77,7 @@ module.exports = {
       },
       {
         name: 'SBB',
-        line:'vertical',
+        line:'digital integration',
         domain: 'Transportation',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
@@ -89,7 +89,7 @@ module.exports = {
       },
       {
         name: 'Sopre AOM',
-        line:'vertical',
+        line:'digital integration',
         domain: 'Transportation',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
@@ -113,7 +113,7 @@ module.exports = {
       },
       {
         name: 'Aeroports',
-        line:'vertical',
+        line:'digital integration',
         domain: 'Transportation',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
@@ -125,7 +125,7 @@ module.exports = {
       },
       {
         name: 'DFMG',
-        line:'horizontal',
+        line:'digital integration',
         domain: 'Health',
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,

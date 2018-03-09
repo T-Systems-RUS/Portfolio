@@ -1,18 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import {IProjectState,IProject} from './../shared/interfaces/project';
 import {DELETE_PROJECT, EDIT_PROJECT, NEW_PROJECT, SET_PROJECTS} from './mutation-types'
 
 Vue.use(Vuex);
 
-interface IProjectState {
-  projects: IProject[],
-  loading: boolean;
-}
 
-export interface IProject {
-  name: string;
-}
 
 export default new Vuex.Store<IProjectState>({
   state: {
