@@ -7,6 +7,7 @@
       src="./check.svg"
       v-if="checkedValue"
     >
+    <!-- <label>{{ label }}</label> -->
   </div>
 </template>
 
@@ -15,9 +16,12 @@
 
   export default Vue.extend({
     name: 'Checkbox',
-    props: {
-      checked: Boolean
+    data: function(){
+      return {
+        checked: false
+      }
     },
+    props: ['label'],
     computed: {
       checkedValue(): boolean {
         return this.checked;
@@ -26,13 +30,14 @@
     methods: {
       toggleCheck() {
         this.$emit('update:checked', !this.checked);
+        this.checked=!this.checked;
       }
     }
   });
 </script>
 
 <style lang="scss" scoped>
-  @import '../../styles/variables';
+  @import '../../../styles/variables';
 
   $checkbox-size: 22px;
   $checkbox-background-color: #ededed;

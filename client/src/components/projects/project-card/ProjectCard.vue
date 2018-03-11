@@ -20,7 +20,7 @@
                 <span>{{ project.teamcount }}</span>
             </div>
             <div class="is-secondary">
-                {{ project.updatedAt }}
+                {{ project.updatedAt | date }}
             </div>
         </div>
     </div>
@@ -28,9 +28,15 @@
 
 <script>
     import Vue from 'vue';
+    import {IProject} from '../../../shared/interfaces/project'; 
 
     export default Vue.extend({
-        props:['project'],
+        props:{
+            project: {
+                type: IProject,
+                required: true
+            }
+        },
         computed: {
             teamcount() {
                 return this.project.schedules.length;

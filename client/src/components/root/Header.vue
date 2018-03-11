@@ -36,7 +36,7 @@
 <style lang="scss" scoped>
   @import '../../styles/variables';
   @import '~bulma/sass/utilities/mixins';
-  @import '~bulma/sass/components/level';
+
 
   .header {
     position: fixed;
@@ -47,7 +47,7 @@
     background-color: $white;
     border-top: $top-border-height solid $magenta;
     height: $header-height;
-    padding: 0 20px;
+    padding: 0 $side-padding;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.5);
 
     

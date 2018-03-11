@@ -6,8 +6,11 @@ import store from './store'
 // Global styles
 import './styles/styles.scss';
 
-import Checkbox from './components/common/Checkbox.vue';
+import Checkbox from './components/common/Checkbox/Checkbox.vue';
+import DateFilter from './shared/filters/Date';
+
 Vue.component('Checkbox', Checkbox);
+Vue.filter('date',DateFilter);
 
 Vue.config.productionTip = false;
 

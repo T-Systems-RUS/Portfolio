@@ -1,13 +1,26 @@
 <template>
-  <div class="columns">
-    <div class="column is-one-quarter">FILTER</div>
-    <div class="column">
+  <div class="columns projects">
+    <div class="column is-one-quarter">
+      <div class="filters"></div>
       <div>
-        <a
-          class="button is-small"
-          @click="newProject()">
-          New project
-        </a>
+        <Accordeon
+          name="Production line" 
+          v-bind:items="lines"/>
+         <Accordeon
+          name="Program" />
+      </div>
+    </div>
+    <div class="column">
+      <div class="level filters no-margin">
+        <div class="level-left">
+          <div class="filter">
+            <img class="filter-img" src="../common/assets/download.svg" alt="">
+          </div>
+          <div class="filter">
+            <img class="filter-img" src="../common/assets/sort.svg" alt="">
+            <span class="filter-text">Sorted by: production line</span>
+          </div>
+        </div>
       </div>
 
       <project-card
@@ -26,15 +39,20 @@
   import {Util} from '../../shared/classes/Util';
   import {DELETE_PROJECT, EDIT_PROJECT, NEW_PROJECT, SET_PROJECTS} from '../../store/mutation-types';
   import {IProject} from '../../shared/interfaces/project';
+  import Accordeon from '../common/Accordeon/Accordeon.vue';
   import ProjectCard from './project-card/ProjectCard.vue';
 
   export default Vue.extend({
     computed: {
       projects(): IProject[] {
         return this.$store.state.projects;
+      },
+      lines(): String[] {
+        return Array.from(new Set(this.projects.map(project => project.line)));
       }
     },
     components:{
+      Accordeon,
       ProjectCard
     },
     created() {
@@ -60,24 +78,34 @@
 <style lang="scss" scoped>
   @import '../../styles/variables';
 
-  .project {
-    vertical-align: top;
-    display: inline-block;
-    height: 250px;
-    width: 200px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-    margin: 10px;
+  .projects{
+    padding: 0 $side-padding;
+  }
 
-    .project-header {
-      padding: 10px;
-      background-color: $magenta;
-      color: $white;
-      margin-bottom: 0;
-    }
+  .filters{
+    height: 60px;
 
-    .project-body {
-      padding: 10px;
+    &.no-margin{
+      margin: 0;
     }
   }
+
+  .filter{
+    margin-right: 20px;
+
+    &-text{
+      color: $text-secondary;
+      font-size: 14px;
+      margin-left: 20px;
+    }
+
+    &-img{
+      cursor: pointer;
+      height: 27px;
+    }
+  }
+
+
+
 
 </style>

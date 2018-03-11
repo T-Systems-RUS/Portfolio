@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>sort_outline</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Start-Page-Telekom-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-301.000000, -89.000000)">
+            <g id="Filter-panel" transform="translate(263.000000, 85.000000)">
+                <g id="sort_outline" transform="translate(36.000000, 2.000000)">
+                    <rect id="Rectangle-path" x="0" y="0" width="26" height="26"></rect>
+                    <path d="M7.71875,2.4375 L2.4375,7.71875 L7.109375,7.71875 L7.109375,22.953125 C7.109375,23.2896735 7.38220148,23.5625 7.71875,23.5625 C8.05529852,23.5625 8.328125,23.2896735 8.328125,22.953125 L8.328125,7.71875 L13,7.71875 L7.71875,2.4375 Z M18.890625,18.28125 L18.890625,3.046875 C18.890625,2.71032648 18.6177985,2.4375 18.28125,2.4375 C17.9447015,2.4375 17.671875,2.71032648 17.671875,3.046875 L17.671875,18.28125 L13,18.28125 L18.28125,23.5625 L23.5625,18.28125 L18.890625,18.28125 Z" id="Shape" fill="#777777" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

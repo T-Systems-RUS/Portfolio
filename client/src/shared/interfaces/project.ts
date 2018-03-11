@@ -9,5 +9,8 @@ export interface IProject {
     description: string;
     domain: string;
     line: string;
+    startdate:string;
+    enddate:string;
+    createdAt:Date;
     updatedAt: Date;
 }
