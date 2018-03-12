@@ -2,24 +2,24 @@
   <div class="accordeon">
     <div class="accordeon-header">
       <span>{{ name }}</span>
-      <div class="accordeon-button is-pulled-right">
-        <img v-if="closedValue" src="../assets/arrowUp.svg">
-        <img v-if="!closedValue" src="../assets/arrowDown.svg" alt="">
+      <div class="accordeon-button is-pulled-right" @click="opened = !opened">
+        <img v-if="opened" src="../assets/arrowUp.svg">
+        <img v-if="!opened" src="../assets/arrowDown.svg">
       </div>
     </div>
-    <div class="accordeon-body">
+    <div v-if="opened" class="accordeon-body">
       <div v-for="item in items"
-                      :key="item"
-                      >
-                <Checkbox  />
-            </div>
+        :key="item"
+        >
+        <Checkbox  />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
-   import Checkbox from '../Checkbox/Checkbox.vue';
+  import Vue from 'vue'; 
+  import Checkbox from '../Checkbox/Checkbox.vue';
 
   export default Vue.extend({
     name: 'Accordeon',
@@ -27,14 +27,14 @@
     components:{
         Checkbox
     },
-
-    props:['name', 'closed', 'items'],
+    data: function() {
+        return{
+            opened: false
+        }
+    },
+    props:['name', 'items'],
     
-    computed: {
-      closedValue(): boolean {
-        return this.closed;
-      }
-    }
+    
   });
 </script>
 
@@ -52,6 +52,7 @@
         &-button{
             background-color: $lite-grey;
             display: inline-block;
+            cursor: pointer;
             height: 24px;
             width: 24px;
             line-height: 24px;

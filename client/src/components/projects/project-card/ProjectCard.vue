@@ -20,7 +20,7 @@
         <span>{{ project.teamcount }}</span>
       </div>
       <div class="is-secondary">
-        {{ project.updatedAt }}
+        {{ project.updatedAt | date }}
       </div>
     </div>
   </div>
