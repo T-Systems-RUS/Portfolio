@@ -23,17 +23,13 @@
 
   export default Vue.extend({
     name: 'Accordeon',
+    
     components:{
         Checkbox
-     },
-    // props: {
-    //   name: {
-    //     type: String,
-    //     required: true
-    //   },
-    //   closed: Boolean
-    // },
+    },
+
     props:['name', 'closed', 'items'],
+    
     computed: {
       closedValue(): boolean {
         return this.closed;
