@@ -7,7 +7,6 @@
       src="./check.svg"
       v-if="checkedValue"
     >
-    <!-- <label>{{ label }}</label> -->
   </div>
 </template>
 
@@ -16,12 +15,9 @@
 
   export default Vue.extend({
     name: 'Checkbox',
-    data: function(){
-      return {
-        checked: false
-      }
+    props: {
+      checked: Boolean
     },
-    props: ['label'],
     computed: {
       checkedValue(): boolean {
         return this.checked;
@@ -30,7 +26,6 @@
     methods: {
       toggleCheck() {
         this.$emit('update:checked', !this.checked);
-        this.checked=!this.checked;
       }
     }
   });
@@ -52,15 +47,12 @@
     border-radius: $telekom-radius;
     border: 1px solid $checkbox-border-color;
     transition: all 200ms ease;
-
     .check {
       position: absolute;
     }
-
     &:hover {
       background-color: $checkbox-background-color-hover;
     }
-
     &:active {
       background-color: $checkbox-background-color-active;
     }

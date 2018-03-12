@@ -1,23 +1,27 @@
 <template>
   <div class="columns projects">
     <div class="column is-one-quarter">
-      <div class="filters"></div>
+      <div class="filters"/>
       <div>
         <Accordeon
-          name="Production line" 
-          v-bind:items="lines"/>
-         <Accordeon
-          name="Program" />
+          name="Production line"
+          v-bind:items="lines"
+          />
+        <Accordeon
+        name="Program" 
+        />
       </div>
     </div>
     <div class="column">
       <div class="level filters no-margin">
         <div class="level-left">
           <div class="filter">
-            <img class="filter-img" src="../common/assets/download.svg" alt="">
+            <img class="filter-img"
+                 src="../common/assets/download.svg">
           </div>
           <div class="filter">
-            <img class="filter-img" src="../common/assets/sort.svg" alt="">
+            <img class="filter-img"
+                 src="../common/assets/sort.svg">
             <span class="filter-text">Sorted by: production line</span>
           </div>
         </div>
@@ -26,9 +30,9 @@
       <project-card
         v-for="project in projects"
         :key="project.id"
-        v-bind:project="project">
-      </project-card>
-     
+        :project="project"
+      />
+
     </div>
   </div>
 </template>
@@ -51,7 +55,7 @@
         return Array.from(new Set(this.projects.map(project => project.line)));
       }
     },
-    components:{
+    components: {
       Accordeon,
       ProjectCard
     },
@@ -104,8 +108,6 @@
       height: 27px;
     }
   }
-
-
 
 
 </style>

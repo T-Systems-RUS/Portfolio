@@ -5,30 +5,40 @@
         <img src="./assets/logo-tportfolio.svg">
       </div>
       <nav class="header-nav level-item">
-        <a href="/" class="header-nav-item is-active">
+        <a 
+           href="/"
+           class="header-nav-item is-active">
           Projects
         </a>
-        <a href="#" class="header-nav-item">
+        <a 
+           href="#"
+           class="header-nav-item">
           Employees
         </a>
-        <a href="#" class="header-nav-item">
+        <a 
+           href="#"
+           class="header-nav-item">
           Technologies
         </a>
-        <a href="#" class="header-nav-item">
+        <a 
+           href="#"
+           class="header-nav-item">
           Statistik
         </a>
-        <a href="#" class="header-nav-item">
+        <a 
+           href="#"
+           class="header-nav-item">
           Help
         </a>
       </nav>
     </div>
     <div class="level-right">
-        <a class="level-item">
-          <img  src="./assets/search.svg" alt="">
-        </a>
-        <a class="level-item">
-          <img  src="./assets/user.svg" alt="">
-        </a>
+      <a class="level-item">
+        <img src="./assets/search.svg">
+      </a>
+      <a class="level-item">
+        <img src="./assets/user.svg">
+      </a>
     </div>
   </div>
 </template>
@@ -50,7 +60,6 @@
     padding: 0 $side-padding;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.5);
 
-    
 
     &-nav{
       margin-left: 20px;

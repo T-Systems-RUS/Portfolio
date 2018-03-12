@@ -1,48 +1,48 @@
 <template>
-    <div class="project-card is-clickable">
-        <div class="project-card-header is-centered is-uppercase">
-            {{project.line}}
-        </div>
-        <div class="project-card-body">
-            <h6 class="project-card-title">
-                {{ project.name }}
-            </h6>
-            <div class="is-secondary">
-                {{ project.domain }}
-            </div>
-            <div class="project-card-description">
-                {{ project.description }}
-            </div>
-        </div>
-        <div class="project-card-footer">
-            <div class="project-card-team">
-                <img src="../../root/assets/team.svg" alt="">
-                <span>{{ project.teamcount }}</span>
-            </div>
-            <div class="is-secondary">
-                {{ project.updatedAt}}
-            </div>
-        </div>
+  <div class="project-card is-clickable">
+    <div class="project-card-header is-centered is-uppercase">
+      {{ project.line }}
     </div>
+    <div class="project-card-body">
+      <h6 class="project-card-title">
+        {{ project.name }}
+      </h6>
+      <div class="is-secondary">
+        {{ project.domain }}
+      </div>
+      <div class="project-card-description">
+        {{ project.description }}
+      </div>
+    </div>
+    <div class="project-card-footer">
+      <div class="project-card-team">
+        <img src="../../root/assets/team.svg">
+        <span>{{ project.teamcount }}</span>
+      </div>
+      <div class="is-secondary">
+        {{ project.updatedAt | date }}
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-    import Vue from 'vue';
-    import {IProject} from '../../../shared/interfaces/project'; 
+  import Vue from 'vue';
+  import {IProject} from '../../../shared/interfaces/project';
 
-    export default Vue.extend({
-        props:{
-            project: {
-                type: IProject,
-                required: true
-            }
-        },
-        computed: {
-            teamcount() {
-                return this.project.schedules.length;
-            }
-        }
-    })
+  export default Vue.extend({
+    props: {
+      project: {
+        type: IProject,
+        required: true
+      }
+    },
+    computed: {
+      teamcount() {
+        return this.project.schedules.length;
+      }
+    }
+  });
 </script>
 
 <style lang="scss" scoped>
@@ -79,7 +79,7 @@
             height: $header-height;
             margin-bottom: 20px;
             padding: 0 $padding;
-            
+
 
             &.is-centered{
                 line-height: $header-height;
