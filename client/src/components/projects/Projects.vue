@@ -6,6 +6,8 @@
         <Accordeon
           name="Production line"
           v-bind:items="lines"
+          v-bind:opened="accordionOpened"
+          v-on:update:opened="accordionOpened=!accordionOpened"
           />
         <Accordeon
         name="Program" 
@@ -47,6 +49,11 @@
   import ProjectCard from './project-card/ProjectCard.vue';
 
   export default Vue.extend({
+    data:function(){
+      return {
+        accordionOpened: true
+      }
+    },
     computed: {
       projects(): IProject[] {
         return this.$store.state.projects;

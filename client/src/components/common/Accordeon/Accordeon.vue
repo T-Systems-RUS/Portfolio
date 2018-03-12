@@ -2,9 +2,9 @@
   <div class="accordeon">
     <div class="accordeon-header">
       <span>{{ name }}</span>
-      <div class="accordeon-button is-pulled-right" @click="opened = !opened">
-        <img v-if="opened" src="../assets/arrowUp.svg">
-        <img v-if="!opened" src="../assets/arrowDown.svg">
+      <div class="accordeon-button is-pulled-right" @click="toggleOpened">
+        <img v-if="openedValue" src="../assets/arrowUp.svg">
+        <img v-if="!openedValue" src="../assets/arrowDown.svg">
       </div>
     </div>
     <div v-if="opened" class="accordeon-body">
@@ -27,14 +27,17 @@
     components:{
         Checkbox
     },
-    data: function() {
-        return{
-            opened: false
-        }
+    props:['name', 'opened', 'items'],
+    computed:{
+       openedValue(): boolean{
+         return this.opened;
+       }
     },
-    props:['name', 'items'],
-    
-    
+    methods: {
+      toggleOpened() {
+        this.$emit('update:opened', !this.opened);
+      }
+    }
   });
 </script>
 
