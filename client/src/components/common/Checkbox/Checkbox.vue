@@ -43,6 +43,7 @@
   .checkbox {
     width: $checkbox-size;
     height: $checkbox-size;
+    min-width: $checkbox-size;
     background-color: $checkbox-background-color;
     border-radius: $telekom-radius;
     border: 1px solid $checkbox-border-color;

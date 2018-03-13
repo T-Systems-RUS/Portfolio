@@ -14,10 +14,15 @@ describe('Project Card', () => {
     const wrapper = mount(ProjectCard, {
         propsData: {
           project: project
+        },
+        filters: {
+          date(value) {
+            return ""
+          }
         }
     });
 
-    expect(wrapper.hasProp('project', project)).toBe(true)
+    expect(wrapper.props().project).toBe(project)
 
   });
 });

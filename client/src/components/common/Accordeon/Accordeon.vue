@@ -56,5 +56,9 @@
             text-align: center;
             border-radius: 50%;
         }
+
+        &-body{
+          margin-top: 15px;
+        }
     }
 </style>

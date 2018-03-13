@@ -1,17 +1,19 @@
 <template>
-  <div class="project-filter">
+  <div class="filter">
     <Accordeon
           name="Production line"
           :opened="accordionOpened"
           @update:opened="accordionOpened=!accordionOpened"
         >
           <div
-            class="" 
-            v-for="line in lines"
-            :key="line"
+            v-for="item in lines"
+            :key="item.line"
           >
-          <Checkbox /> 
-          <span>{{ line }}</span>
+          <div class="filter-item">
+              <Checkbox :checked = "item.checked"
+                        v-on:update:checked="handle($event, item)"/> 
+              <span class="title is-5 is-size-16 is-uppercase">{{ item.line }}</span>
+          </div>
         </div>
     </Accordeon>
     <Accordeon
@@ -20,12 +22,13 @@
           @update:opened="accordionOpened=!accordionOpened"
         >
           <div
-            class="" 
             v-for="program in programs"
             :key="program"
           >
-            <Checkbox /> 
-            <span>{{ program }}</span>
+            <div class="filter-item">
+              <Checkbox /> 
+              <span class="title is-5 is-size-16">{{ program }}</span>
+            </div>
           </div>
     </Accordeon>
     <Accordeon
@@ -38,8 +41,10 @@
             v-for="t in types"
             :key="t"
           >
-            <Checkbox /> 
-            <span>{{ t }}</span>
+            <div class="filter-item">
+              <Checkbox /> 
+              <span class="title is-5 is-size-16">{{ t }}</span>
+            </div>
           </div>
     </Accordeon>
     <Accordeon
@@ -52,11 +57,14 @@
             v-for="domain in domains"
             :key="domain"
           >
-            <Checkbox /> 
-            <span>{{ domain }}</span>
+            <div class="filter-item">
+              <Checkbox /> 
+              <span class="title is-5 is-size-16">{{ domain }}</span>
+            </div>
           </div>
     </Accordeon>
     <Accordeon
+          v-if="customers && customers.length"
           name="Customers"
           :opened="accordionOpened"
           @update:opened="accordionOpened=!accordionOpened"
@@ -66,8 +74,10 @@
             v-for="customer in customers"
             :key="customer"
           >
-            <Checkbox /> 
-            <span>{{ customer }}</span>
+            <div class="filter-item">
+              <Checkbox /> 
+              <span class="title is-5 is-size-16">{{ customer }}</span>
+            </div>
           </div>
     </Accordeon>
   </div>
@@ -94,7 +104,7 @@
       
       props: {
         customers: {
-            type: []
+            type: Array
         }
       },
 
@@ -104,12 +114,21 @@
       },
       created() {
         const constants = Constants["project"];
-        this.lines = Extension.getKeys(constants["lines"]);
+        this.lines = Extension.getKeys(constants["lines"]).map(
+          item => new Object({
+            line: item,
+            checked: false
+          })
+        );
         this.domains = constants["domains"];
         this.types = constants["types"];
-        // this.programs = constants["lines"];
-        console.log(constants["lines"]);
-        console.log(this.programs);
+        this.programs = constants["programs"];
+      },
+      methods: {
+        handle(event, item){
+          item.checked = event;
+          console.log(event, item);
+        }
       }
   });
 </script>
@@ -117,5 +136,19 @@
 <style lang="scss" scoped>
     @import '../../../styles/variables';
 
+    .filter{
+      margin-right: 0;
+
+      &-item{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+
+        &>span{
+          margin-left: 7px;
+        }
+      }
+    }
 
 </style>

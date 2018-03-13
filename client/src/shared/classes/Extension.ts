@@ -11,7 +11,7 @@ export class Extension {
      */
 
     public static getUniqueValues(source: any[] ,key: string):string[] {
-        const uniqueSet=new Set(source.map(item=> item[key] ));
+        const uniqueSet=new Set(source.map(item=> item[key] ).filter(i => i));
         
         return Array.from(uniqueSet).sort();
     }

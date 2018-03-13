@@ -1,8 +1,12 @@
 {
     "project": {
       "lines": {
-        "automotive": [ "Sales and Aftersales", "Product Lifecycle Management", "Supply Chain Management" ],
-        "digital_division": [
+        "automotive": [ 
+            "Sales and Aftersales", 
+            "Product Lifecycle Management",
+            "Supply Chain Management"
+          ],
+        "digital division": [
           "Airport Management",
           "Big Data Solutions",
           "Innovation & Product Enabling",
@@ -15,7 +19,19 @@
 
         "sap": []
     },
-
+    "programs": [
+        "Sales and Aftersales",   
+        "Product Lifecycle Management",
+        "Supply Chain Management",
+        "Airport Management",
+        "Big Data Solutions",
+        "Innovation & Product Enabling",
+        "HealthCare Solutions",
+        "Cloud Consulting & Transformation Services",
+        "ECM Solutions",
+        "Telecom Solutions",
+        "Rail & Transport Management"
+    ],
     "domains": [
       "Automotive",
       "Content management",

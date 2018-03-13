@@ -7,10 +7,11 @@ import store from './store'
 import './styles/styles.scss';
 
 import Checkbox from './components/common/Checkbox/Checkbox.vue';
-import DateFilter from './shared/filters/Date';
+import date from './shared/filters/Date';
 
 Vue.component('Checkbox', Checkbox);
-Vue.filter('date', DateFilter);
+Vue.filter('date', date);
+
 
 Vue.config.productionTip = false;
 

@@ -107,6 +107,7 @@ module.exports = {
         active:false,
         type:'Project',
         program:'Sales and Aftersales',
+        customer: 'Daimler',
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
@@ -143,6 +144,7 @@ module.exports = {
         active:false,
         type:'Project',
         program:'Sales and Aftersales',
+        customer: 'Strabag',
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
