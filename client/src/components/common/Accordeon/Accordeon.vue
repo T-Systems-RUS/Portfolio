@@ -2,36 +2,29 @@
   <div class="accordeon">
     <div class="accordeon-header">
       <span>{{ name }}</span>
-      <div class="accordeon-button is-pulled-right" @click="toggleOpened">
+      <div class="accordeon-button is-pulled-right" 
+           @click="toggleOpened">
         <img v-if="openedValue" src="../assets/arrowUp.svg">
         <img v-if="!openedValue" src="../assets/arrowDown.svg">
       </div>
     </div>
     <div v-if="opened" class="accordeon-body">
-      <div v-for="item in items"
-        :key="item"
-        >
-        <Checkbox  />
-      </div>
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'; 
-  import Checkbox from '../Checkbox/Checkbox.vue';
+  import Vue from 'vue';
 
   export default Vue.extend({
     name: 'Accordeon',
-    
-    components:{
-        Checkbox
-    },
-    props:['name', 'opened', 'items'],
-    computed:{
-       openedValue(): boolean{
-         return this.opened;
-       }
+
+    props: ['name', 'opened'],
+    computed: {
+      openedValue(): boolean {
+        return this.opened;
+      }
     },
     methods: {
       toggleOpened() {

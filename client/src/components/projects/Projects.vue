@@ -3,15 +3,9 @@
     <div class="column is-one-quarter">
       <div class="filters"/>
       <div>
-        <Accordeon
-          name="Production line"
-          v-bind:items="lines"
-          v-bind:opened="accordionOpened"
-          v-on:update:opened="accordionOpened=!accordionOpened"
-          />
-        <Accordeon
-        name="Program" 
-        />
+        <ProjectFilter
+          :customers="customers"
+         />
       </div>
     </div>
     <div class="column">
@@ -43,28 +37,24 @@
   import Vue from 'vue';
   import axios from 'axios';
   import {Util} from '../../shared/classes/Util';
+  import { Extension } from '../../shared/classes/Extension';
   import {DELETE_PROJECT, EDIT_PROJECT, NEW_PROJECT, SET_PROJECTS} from '../../store/mutation-types';
   import {IProject} from '../../shared/interfaces/project';
-  import Accordeon from '../common/Accordeon/Accordeon.vue';
   import ProjectCard from './project-card/ProjectCard.vue';
+  import ProjectFilter from './project-filter/ProjectFilter.vue';
 
   export default Vue.extend({
-    data:function(){
-      return {
-        accordionOpened: true
-      }
-    },
     computed: {
       projects(): IProject[] {
         return this.$store.state.projects;
       },
-      lines(): String[] {
-        return Array.from(new Set(this.projects.map(project => project.line)));
+      customers(): String[] {
+        return Extension.getUniqueValues(this.projects, 'customer');
       }
     },
     components: {
-      Accordeon,
-      ProjectCard
+      ProjectCard,
+      ProjectFilter
     },
     created() {
       axios.get(Util.getApiUrl('projects'))

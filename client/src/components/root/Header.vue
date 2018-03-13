@@ -5,29 +5,29 @@
         <img src="./assets/logo-tportfolio.svg">
       </div>
       <nav class="header-nav level-item">
-        <a 
-           href="/"
-           class="header-nav-item is-active">
+        <a
+          href="/"
+          class="header-nav-item is-active">
           Projects
         </a>
-        <a 
-           href="#"
-           class="header-nav-item">
+        <a
+          href="#"
+          class="header-nav-item">
           Employees
         </a>
-        <a 
-           href="#"
-           class="header-nav-item">
+        <a
+          href="#"
+          class="header-nav-item">
           Technologies
         </a>
-        <a 
-           href="#"
-           class="header-nav-item">
+        <a
+          href="#"
+          class="header-nav-item">
           Statistik
         </a>
-        <a 
-           href="#"
-           class="header-nav-item">
+        <a
+          href="#"
+          class="header-nav-item">
           Help
         </a>
       </nav>
@@ -45,7 +45,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  
+
   export default Vue.extend({
     name: 'Header'
   });

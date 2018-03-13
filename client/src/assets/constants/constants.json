@@ -1,0 +1,61 @@
+{
+    "project": {
+      "lines": {
+        "automotive": [ "Sales and Aftersales", "Product Lifecycle Management", "Supply Chain Management" ],
+        "digital_division": [
+          "Airport Management",
+          "Big Data Solutions",
+          "Innovation & Product Enabling",
+          "HealthCare Solutions",
+          "Cloud Consulting & Transformation Services",
+          "ECM Solutions",
+          "Telecom Solutions",
+          "Rail & Transport Management"
+        ],
+
+        "sap": []
+    },
+
+    "domains": [
+      "Automotive",
+      "Content management",
+      "Health",
+      "Transportation",
+      "Public",
+      "Logistics"
+    ],
+
+    "types": [
+      "Project",
+      "Service"
+    ]
+  
+  },
+
+  "employee": {
+    "roles": [
+      "Configuration",
+      "Development",
+      "Management",
+      "Testing"
+    ],
+    "seniority": [
+      "Junior",
+      "Middle",
+      "Senior",
+      "PM"
+    ]
+  },
+
+  "technology": {
+    "technologies": [
+      "backend",
+      "frontend",
+      "information",
+      "language",
+      "methodology",
+      "tools"
+    ]
+  }
+    
+}
