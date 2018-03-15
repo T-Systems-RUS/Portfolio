@@ -22,6 +22,8 @@
 
     props: ['name', 'opened'],
     computed: {
+
+      // possibility to define accordeon default open/closed
       openedValue(): boolean {
         return this.opened;
       }

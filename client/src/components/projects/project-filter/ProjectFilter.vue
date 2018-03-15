@@ -96,12 +96,15 @@
   export default Vue.extend({
       data() {
         return {
+            // properties for accordion sections open/closed
             lineAccordionOpened: true,
             programAccordionOpened: false,
             typeAccordionOpened: false,
             domainAccordionOpened: false,
             customerAccordionOpened: false,
             technologyAccordionOpened: false,
+
+            // models for accordeon section
             lines: new Array(),
             domains: new Array(),
             programs: new Array(),
@@ -112,6 +115,8 @@
       props: ['customers'],
 
       computed: {
+        // customers come from parent
+        // no customers in constants.ts
         convertedCustomers(): any[] {
           return this.createModelForCheckboxes(this.customers);
         }
@@ -122,18 +127,26 @@
           Checkbox
       },
       created() {
+         // convert for accordeon section with checkboxes
          this.lines = this.createModelForCheckboxes(Constants['lines']);
          this.domains =  this.createModelForCheckboxes(Constants['domains']);
          this.types = this.createModelForCheckboxes(Constants['types']);
          this.programs = this.createModelForCheckboxes(Constants['programs']);
       },
       methods: {
+        
+        // rerender checkbox
+        // will be used later for project filtering via store
         handle(item:any, key: string){
           item.checked = !item.checked;
-          console.log( item);
+
+          // computed  property convertedCustomers won't render automatically after 
+          // checkbox change
           if(key === 'customer') this.$forceUpdate();
         },
 
+        // Model for checkboxes must have a label
+        // and boolean property checked
         createModelForCheckboxes(sourse: String[]){
           return sourse.map(item =>  new Object({   
               name: item,
