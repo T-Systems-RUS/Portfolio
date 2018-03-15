@@ -2,109 +2,118 @@
   <div class="filter">
     <Accordeon
           name="Production line"
-          :opened="accordionOpened"
-          @update:opened="accordionOpened=!accordionOpened"
+          :opened="lineAccordionOpened"
+          @update:opened="lineAccordionOpened=!lineAccordionOpened"
         >
           <div
-            v-for="item in lines"
-            :key="item.line"
+            v-for="line in lines"
+            :key="line.name"
           >
           <div class="filter-item">
-              <Checkbox :checked = "item.checked"
-                        v-on:update:checked="handle($event, item)"/> 
-              <span class="title is-5 is-size-16 is-uppercase">{{ item.line }}</span>
+              <Checkbox :checked = "line.checked"
+                        v-on:update:checked="handle(line, 'line')"/> 
+              <span class="title is-5 is-size-16 is-uppercase">{{ line.name }}</span>
           </div>
         </div>
     </Accordeon>
     <Accordeon
           name="Program"
-          :opened="accordionOpened"
-          @update:opened="accordionOpened=!accordionOpened"
+          :opened="programAccordionOpened"
+          @update:opened="programAccordionOpened=!programAccordionOpened"
         >
           <div
             v-for="program in programs"
-            :key="program"
+            :key="program.name"
           >
             <div class="filter-item">
-              <Checkbox /> 
-              <span class="title is-5 is-size-16">{{ program }}</span>
+              <Checkbox :checked = "program.checked"
+                        v-on:update:checked="handle(program, 'program')"/> 
+              <span class="title is-5 is-size-16">{{ program.name }}</span>
             </div>
           </div>
     </Accordeon>
     <Accordeon
           name="Project type"
-          :opened="accordionOpened"
-          @update:opened="accordionOpened=!accordionOpened"
+          :opened="typeAccordionOpened"
+          @update:opened="typeAccordionOpened=!typeAccordionOpened"
         >
           <div
-            class="" 
             v-for="t in types"
-            :key="t"
+            :key="t.name"
           >
             <div class="filter-item">
-              <Checkbox /> 
-              <span class="title is-5 is-size-16">{{ t }}</span>
+              <Checkbox :checked = "t.checked"
+                        v-on:update:checked="handle(t, 'type')"/>
+              <span class="title is-5 is-size-16">{{ t.name }}</span>
             </div>
           </div>
     </Accordeon>
     <Accordeon
           name="Domains"
-          :opened="accordionOpened"
-          @update:opened="accordionOpened=!accordionOpened"
+          :opened="domainAccordionOpened"
+          @update:opened="domainAccordionOpened=!domainAccordionOpened"
         >
           <div
-            class="" 
             v-for="domain in domains"
-            :key="domain"
+            :key="domain.name"
           >
             <div class="filter-item">
-              <Checkbox /> 
-              <span class="title is-5 is-size-16">{{ domain }}</span>
+              <Checkbox :checked = "domain.checked"
+                        v-on:update:checked="handle(domain, 'domain')"/>
+              <span class="title is-5 is-size-16">{{ domain.name }}</span>
             </div>
           </div>
     </Accordeon>
     <Accordeon
           v-if="customers && customers.length"
           name="Customers"
-          :opened="accordionOpened"
-          @update:opened="accordionOpened=!accordionOpened"
+          :opened="customerAccordionOpened"
+          @update:opened="customerAccordionOpened=!customerAccordionOpened"
         >
           <div
-            class="" 
-            v-for="customer in customers"
-            :key="customer"
+            v-for="customer in convertedCustomers"
+            :key="customer.name"
           >
             <div class="filter-item">
-              <Checkbox /> 
-              <span class="title is-5 is-size-16">{{ customer }}</span>
+              <Checkbox :checked = "customer.checked"
+                        v-on:update:checked="handle(customer, 'customer')" /> 
+              <span class="title is-5 is-size-16">{{ customer.name }}</span>
             </div>
           </div>
     </Accordeon>
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import Vue from 'vue';
   import {IProject} from '../../../shared/interfaces/project';
   import Accordeon from '../../common/Accordeon/Accordeon.vue';
   import Checkbox from '../../common/Checkbox/Checkbox.vue';
-  import Constants from '../../../assets/constants/constants.json';
+  import Constants from '../../../shared/constants/constants';
   import { Extension } from '../../../shared/classes/Extension';
+  
 
   export default Vue.extend({
       data() {
         return {
-            accordionOpened: true,
-            lines: [],
-            domains: [],
-            programs:[],
-            types: []
+            lineAccordionOpened: true,
+            programAccordionOpened: false,
+            typeAccordionOpened: false,
+            domainAccordionOpened: false,
+            customerAccordionOpened: false,
+            technologyAccordionOpened: false,
+            lines: new Array(),
+            domains: new Array(),
+            programs: new Array(),
+            types: new Array()
         };
       },
-      
-      props: {
-        customers: {
-            type: Array
+
+      props: ['customers'],
+
+      computed: {
+        convertedCustomers(): any[] {
+          return this.createModelForCheckboxes(this.customers);
         }
       },
 
@@ -113,21 +122,24 @@
           Checkbox
       },
       created() {
-        const constants = Constants["project"];
-        this.lines = Extension.getKeys(constants["lines"]).map(
-          item => new Object({
-            line: item,
-            checked: false
-          })
-        );
-        this.domains = constants["domains"];
-        this.types = constants["types"];
-        this.programs = constants["programs"];
+         this.lines = this.createModelForCheckboxes(Constants['lines']);
+         this.domains =  this.createModelForCheckboxes(Constants['domains']);
+         this.types = this.createModelForCheckboxes(Constants['types']);
+         this.programs = this.createModelForCheckboxes(Constants['programs']);
       },
       methods: {
-        handle(event, item){
-          item.checked = event;
-          console.log(event, item);
+        handle(item:any, key: string){
+          item.checked = !item.checked;
+          console.log( item);
+          if(key === 'customer') this.$forceUpdate();
+        },
+
+        createModelForCheckboxes(sourse: String[]){
+          return sourse.map(item =>  new Object({   
+              name: item,
+              checked: false
+            })
+          )
         }
       }
   });
