@@ -8,7 +8,7 @@ describe('Accordeon', () => {
   it('change value on close button click', () => {
     wrapper.vm.toggleOpened();
 
-    expect(wrapper.emitted()['update:opened']).toEqual([[true]]);
+    expect(wrapper.emitted()['update:opened']).toEqual([[false]]);
   });
 
 });

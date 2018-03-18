@@ -20,7 +20,15 @@
   export default Vue.extend({
     name: 'Accordeon',
 
-    props: ['name', 'opened'],
+    props: {
+      name: {
+        type: String
+      },
+      opened: {
+        type: Boolean,
+        default: true
+      }
+    },
     computed: {
 
       // possibility to define accordeon default open/closed

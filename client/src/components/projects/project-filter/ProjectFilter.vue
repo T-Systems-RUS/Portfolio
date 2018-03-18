@@ -11,7 +11,7 @@
           >
           <div class="filter-item">
               <Checkbox :checked = "line.checked"
-                        v-on:update:checked="handle(line, 'line')"/> 
+                        v-on:update:checked="handleFilterAction(line, 'line')"/> 
               <span class="title is-5 is-size-16 is-uppercase">{{ line.name }}</span>
           </div>
         </div>
@@ -27,7 +27,7 @@
           >
             <div class="filter-item">
               <Checkbox :checked = "program.checked"
-                        v-on:update:checked="handle(program, 'program')"/> 
+                        v-on:update:checked="handleFilterAction(program, 'program')"/> 
               <span class="title is-5 is-size-16">{{ program.name }}</span>
             </div>
           </div>
@@ -43,7 +43,7 @@
           >
             <div class="filter-item">
               <Checkbox :checked = "t.checked"
-                        v-on:update:checked="handle(t, 'type')"/>
+                        v-on:update:checked="handleFilterAction(t, 'type')"/>
               <span class="title is-5 is-size-16">{{ t.name }}</span>
             </div>
           </div>
@@ -59,7 +59,7 @@
           >
             <div class="filter-item">
               <Checkbox :checked = "domain.checked"
-                        v-on:update:checked="handle(domain, 'domain')"/>
+                        v-on:update:checked="handleFilterAction(domain, 'domain')"/>
               <span class="title is-5 is-size-16">{{ domain.name }}</span>
             </div>
           </div>
@@ -76,7 +76,7 @@
           >
             <div class="filter-item">
               <Checkbox :checked = "customer.checked"
-                        v-on:update:checked="handle(customer, 'customer')" /> 
+                        v-on:update:checked="handleFilterAction(customer, 'customer')" /> 
               <span class="title is-5 is-size-16">{{ customer.name }}</span>
             </div>
           </div>
@@ -98,11 +98,11 @@
         return {
             // properties for accordion sections open/closed
             lineAccordionOpened: true,
-            programAccordionOpened: false,
-            typeAccordionOpened: false,
-            domainAccordionOpened: false,
-            customerAccordionOpened: false,
-            technologyAccordionOpened: false,
+            programAccordionOpened: true,
+            typeAccordionOpened: true,
+            domainAccordionOpened: true,
+            customerAccordionOpened: true,
+            technologyAccordionOpened: true,
 
             // models for accordeon section
             lines: new Array(),
@@ -137,9 +137,8 @@
         
         // rerender checkbox
         // will be used later for project filtering via store
-        handle(item:any, key: string){
+        handleFilterAction(item:any, key: string){
           item.checked = !item.checked;
-
           // computed  property convertedCustomers won't render automatically after 
           // checkbox change
           if(key === 'customer') this.$forceUpdate();
