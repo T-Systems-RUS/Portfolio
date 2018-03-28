@@ -1,9 +1,9 @@
 import {mount} from '@vue/test-utils';
-import Accordeon from './Accordeon.vue';
+import Accordion from './Accordion.vue';
 
-describe('Accordeon', () => {
+describe('Accordion', () => {
 
-  const wrapper = mount(Accordeon);
+  const wrapper = mount(Accordion);
 
   it('change value on close button click', () => {
     wrapper.vm.toggleOpened();

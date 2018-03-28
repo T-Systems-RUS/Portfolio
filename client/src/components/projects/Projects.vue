@@ -3,9 +3,7 @@
     <div class="column is-one-quarter">
       <div class="filters"/>
       <div>
-        <ProjectFilter
-          :customers="customers"
-         />
+        <ProjectFilter/>
       </div>
     </div>
     <div class="column">
@@ -35,21 +33,16 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import axios from 'axios';
-  import {Util} from '../../shared/classes/Util';
-  import { Extension } from '../../shared/classes/Extension';
-  import {DELETE_PROJECT, EDIT_PROJECT, NEW_PROJECT, SET_PROJECTS} from '../../store/mutation-types';
-  import {IProject} from '../../shared/interfaces/project';
+  import {mapActions} from 'vuex';
+  import * as types from '../../store/modules/projects/project-types';
+  import {IProject} from '../../shared/interfaces/IProject';
   import ProjectCard from './project-card/ProjectCard.vue';
   import ProjectFilter from './project-filter/ProjectFilter.vue';
 
   export default Vue.extend({
     computed: {
       projects(): IProject[] {
-        return this.$store.state.projects;
-      },
-      customers(): String[] {
-        return Extension.getUniqueValues(this.projects, 'customer');
+        return this.$store.state.projects.projects;
       }
     },
     components: {
@@ -57,21 +50,13 @@
       ProjectFilter
     },
     created() {
-      axios.get(Util.getApiUrl('projects'))
-        .then(response => {
-          this.$store.commit(SET_PROJECTS, response.data);
-        });
+      this.fetchProjects();
     },
+
     methods: {
-      newProject() {
-        this.$store.commit(NEW_PROJECT, {name: 'test'});
-      },
-      editProject(index: number, item: IProject) {
-        this.$store.commit(EDIT_PROJECT, {item, index});
-      },
-      deleteProject(index: number) {
-        this.$store.commit(DELETE_PROJECT, index);
-      }
+      ...mapActions({
+        fetchProjects: types.FETCH_PROJECTS
+      })
     }
   });
 </script>

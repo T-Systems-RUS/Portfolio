@@ -28,7 +28,7 @@
 
 <script>
   import Vue from 'vue';
-  import {IProject} from '../../../shared/interfaces/project';
+  import {IProject} from '../../../shared/interfaces/IProject';
 
   export default Vue.extend({
     props: {

@@ -1,6 +1,6 @@
 <template>
   <div class="filter">
-    <Accordeon
+    <Accordion
           name="Production line"
           :opened="lineAccordionOpened"
           @update:opened="lineAccordionOpened=!lineAccordionOpened"
@@ -11,12 +11,12 @@
           >
           <div class="filter-item">
               <Checkbox :checked = "line.checked"
-                        v-on:update:checked="handleFilterAction(line, 'line')"/> 
+                        v-on:update:checked="handleFilterAction(line, 'line')"/>
               <span class="title is-5 is-size-16 is-uppercase">{{ line.name }}</span>
           </div>
         </div>
-    </Accordeon>
-    <Accordeon
+    </Accordion>
+    <Accordion
           name="Program"
           :opened="programAccordionOpened"
           @update:opened="programAccordionOpened=!programAccordionOpened"
@@ -27,12 +27,12 @@
           >
             <div class="filter-item">
               <Checkbox :checked = "program.checked"
-                        v-on:update:checked="handleFilterAction(program, 'program')"/> 
+                        v-on:update:checked="handleFilterAction(program, 'program')"/>
               <span class="title is-5 is-size-16">{{ program.name }}</span>
             </div>
           </div>
-    </Accordeon>
-    <Accordeon
+    </Accordion>
+    <Accordion
           name="Project type"
           :opened="typeAccordionOpened"
           @update:opened="typeAccordionOpened=!typeAccordionOpened"
@@ -47,8 +47,8 @@
               <span class="title is-5 is-size-16">{{ t.name }}</span>
             </div>
           </div>
-    </Accordeon>
-    <Accordeon
+    </Accordion>
+    <Accordion
           name="Domains"
           :opened="domainAccordionOpened"
           @update:opened="domainAccordionOpened=!domainAccordionOpened"
@@ -63,9 +63,9 @@
               <span class="title is-5 is-size-16">{{ domain.name }}</span>
             </div>
           </div>
-    </Accordeon>
-    <Accordeon
-          v-if="customers && customers.length"
+    </Accordion>
+    <Accordion
+          v-if="convertedCustomers && convertedCustomers.length"
           name="Customers"
           :opened="customerAccordionOpened"
           @update:opened="customerAccordionOpened=!customerAccordionOpened"
@@ -76,22 +76,21 @@
           >
             <div class="filter-item">
               <Checkbox :checked = "customer.checked"
-                        v-on:update:checked="handleFilterAction(customer, 'customer')" /> 
+                        v-on:update:checked="handleFilterAction(customer, 'customer')" />
               <span class="title is-5 is-size-16">{{ customer.name }}</span>
             </div>
           </div>
-    </Accordeon>
+    </Accordion>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import {IProject} from '../../../shared/interfaces/project';
-  import Accordeon from '../../common/Accordeon/Accordeon.vue';
+  import {IProject} from '../../../shared/interfaces/IProject';
+  import Accordion from '../../common/Accordion/Accordion.vue';
   import Checkbox from '../../common/Checkbox/Checkbox.vue';
   import Constants from '../../../shared/constants/constants';
-  import { Extension } from '../../../shared/classes/Extension';
-  
+
 
   export default Vue.extend({
       data() {
@@ -104,7 +103,7 @@
             customerAccordionOpened: true,
             technologyAccordionOpened: true,
 
-            // models for accordeon section
+            // models for Accordion section
             lines: new Array(),
             domains: new Array(),
             programs: new Array(),
@@ -112,34 +111,32 @@
         };
       },
 
-      props: ['customers'],
-
       computed: {
         // customers come from parent
         // no customers in constants.ts
         convertedCustomers(): any[] {
-          return this.createModelForCheckboxes(this.customers);
+          return this.createModelForCheckboxes(this.$store.state.projects.customers);
         }
       },
 
       components: {
-          Accordeon,
+          Accordion,
           Checkbox
       },
       created() {
-         // convert for accordeon section with checkboxes
+         // convert for Accordion section with checkboxes
          this.lines = this.createModelForCheckboxes(Constants['lines']);
          this.domains =  this.createModelForCheckboxes(Constants['domains']);
          this.types = this.createModelForCheckboxes(Constants['types']);
          this.programs = this.createModelForCheckboxes(Constants['programs']);
       },
       methods: {
-        
-        // rerender checkbox
+
+        // re render checkbox
         // will be used later for project filtering via store
         handleFilterAction(item:any, key: string){
           item.checked = !item.checked;
-          // computed  property convertedCustomers won't render automatically after 
+          // computed  property convertedCustomers won't render automatically after
           // checkbox change
           if(key === 'customer') this.$forceUpdate();
         },
@@ -147,7 +144,7 @@
         // Model for checkboxes must have a label
         // and boolean property checked
         createModelForCheckboxes(sourse: String[]){
-          return sourse.map(item =>  new Object({   
+          return sourse.map(item =>  new Object({
               name: item,
               checked: false
             })

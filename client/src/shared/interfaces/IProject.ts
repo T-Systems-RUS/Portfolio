@@ -1,8 +1,9 @@
 export interface IProjectState {
     projects: IProject[],
+    customers: String[],
     loading: boolean;
 }
-  
+
 export interface IProject {
     id: string;
     name: string;

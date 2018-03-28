@@ -1,14 +1,14 @@
 <template>
-  <div class="accordeon">
-    <div class="accordeon-header">
+  <div class="accordion">
+    <div class="accordion-header">
       <span>{{ name }}</span>
-      <div class="accordeon-button is-pulled-right" 
+      <div class="accordion-button is-pulled-right"
            @click="toggleOpened">
-        <img v-if="openedValue" src="../assets/arrowUp.svg">
-        <img v-if="!openedValue" src="../assets/arrowDown.svg">
+            <img src="../assets/arrowDown.svg"
+              :class="{'is-closed' :openedValue}">
       </div>
     </div>
-    <div v-if="opened" class="accordeon-body">
+    <div v-if="opened" class="accordion-body">
       <slot></slot>
     </div>
   </div>
@@ -18,7 +18,7 @@
   import Vue from 'vue';
 
   export default Vue.extend({
-    name: 'Accordeon',
+    name: 'accordion',
 
     props: {
       name: {
@@ -31,7 +31,7 @@
     },
     computed: {
 
-      // possibility to define accordeon default open/closed
+      // possibility to define accordion default open/closed
       openedValue(): boolean {
         return this.opened;
       }
@@ -47,7 +47,9 @@
 <style lang="scss" scoped>
     @import '../../../styles/variables';
 
-    .accordeon{
+    $button-size: 24px;
+
+    .accordion {
         display: block;
         margin-bottom: 20px;
 
@@ -59,12 +61,16 @@
             background-color: $lite-grey;
             display: inline-block;
             cursor: pointer;
-            height: 24px;
-            width: 24px;
-            line-height: 24px;
+            height: $button-size;
+            width: $button-size;
+            line-height: $button-size;
             vertical-align: middle;
             text-align: center;
             border-radius: 50%;
+
+            img.is-closed {
+              transform: rotate(180deg);
+            }
         }
 
         &-body{
