@@ -1,68 +1,19 @@
 <template>
   <div class="filter">
     <Accordion
-          name="Production line"
-          :opened="lineAccordionOpened"
-          @update:opened="lineAccordionOpened=!lineAccordionOpened"
-        >
-          <div
-            v-for="line in lines"
-            :key="line.name"
-          >
-          <div class="filter-item">
-              <Checkbox :checked = "line.checked"
-                        v-on:update:checked="handleFilterAction(line, 'line')"/>
-              <span class="title is-5 is-size-16 is-uppercase">{{ line.name }}</span>
-          </div>
+      :name="model.name"
+      v-for="model in models"
+    >
+      <div
+        v-for="item in model.items"
+        :key="item.value"
+      >
+        <div class="filter-item">
+          <Checkbox :checked = "item.checked"
+                    v-on:update:checked="handleFilterAction(item, 'line')"/>
+          <span class="title is-5 is-size-16 is-uppercase">{{ item.value }}</span>
         </div>
-    </Accordion>
-    <Accordion
-          name="Program"
-          :opened="programAccordionOpened"
-          @update:opened="programAccordionOpened=!programAccordionOpened"
-        >
-          <div
-            v-for="program in programs"
-            :key="program.name"
-          >
-            <div class="filter-item">
-              <Checkbox :checked = "program.checked"
-                        v-on:update:checked="handleFilterAction(program, 'program')"/>
-              <span class="title is-5 is-size-16">{{ program.name }}</span>
-            </div>
-          </div>
-    </Accordion>
-    <Accordion
-          name="Project type"
-          :opened="typeAccordionOpened"
-          @update:opened="typeAccordionOpened=!typeAccordionOpened"
-        >
-          <div
-            v-for="t in types"
-            :key="t.name"
-          >
-            <div class="filter-item">
-              <Checkbox :checked = "t.checked"
-                        v-on:update:checked="handleFilterAction(t, 'type')"/>
-              <span class="title is-5 is-size-16">{{ t.name }}</span>
-            </div>
-          </div>
-    </Accordion>
-    <Accordion
-          name="Domains"
-          :opened="domainAccordionOpened"
-          @update:opened="domainAccordionOpened=!domainAccordionOpened"
-        >
-          <div
-            v-for="domain in domains"
-            :key="domain.name"
-          >
-            <div class="filter-item">
-              <Checkbox :checked = "domain.checked"
-                        v-on:update:checked="handleFilterAction(domain, 'domain')"/>
-              <span class="title is-5 is-size-16">{{ domain.name }}</span>
-            </div>
-          </div>
+      </div>
     </Accordion>
     <Accordion
           v-if="convertedCustomers && convertedCustomers.length"
@@ -72,12 +23,12 @@
         >
           <div
             v-for="customer in convertedCustomers"
-            :key="customer.name"
+            :key="customer.value"
           >
             <div class="filter-item">
               <Checkbox :checked = "customer.checked"
                         v-on:update:checked="handleFilterAction(customer, 'customer')" />
-              <span class="title is-5 is-size-16">{{ customer.name }}</span>
+              <span class="title is-5 is-size-16">{{ customer.value }}</span>
             </div>
           </div>
     </Accordion>
@@ -89,32 +40,31 @@
   import {IProject} from '../../../shared/interfaces/IProject';
   import Accordion from '../../common/Accordion/Accordion.vue';
   import Checkbox from '../../common/Checkbox/Checkbox.vue';
-  import Constants from '../../../shared/constants/constants';
+  import Constants from '../../../shared/constants/project.constants';
+  import {IProjectFilter, IProjectFilterCheck} from './IProjectFilter';
 
 
   export default Vue.extend({
       data() {
         return {
-            // properties for accordion sections open/closed
-            lineAccordionOpened: true,
-            programAccordionOpened: true,
-            typeAccordionOpened: true,
-            domainAccordionOpened: true,
-            customerAccordionOpened: true,
-            technologyAccordionOpened: true,
-
-            // models for Accordion section
-            lines: new Array(),
-            domains: new Array(),
-            programs: new Array(),
-            types: new Array()
-        };
+          customerAccordionOpened: true
+        }
       },
-
       computed: {
+        models() :IProjectFilter[] {
+          return Object.keys(Constants).map(key => {
+            const model: IProjectFilter = {
+              name: key,
+              opened: true,
+              items: this.createModelForCheckboxes(Constants[key])
+            };
+
+            return model;
+          })
+        },
         // customers come from parent
-        // no customers in constants.ts
-        convertedCustomers(): any[] {
+        // no customers in project.constants.ts
+        convertedCustomers(): IProjectFilterCheck[] {
           return this.createModelForCheckboxes(this.$store.state.projects.customers);
         }
       },
@@ -123,13 +73,7 @@
           Accordion,
           Checkbox
       },
-      created() {
-         // convert for Accordion section with checkboxes
-         this.lines = this.createModelForCheckboxes(Constants['lines']);
-         this.domains =  this.createModelForCheckboxes(Constants['domains']);
-         this.types = this.createModelForCheckboxes(Constants['types']);
-         this.programs = this.createModelForCheckboxes(Constants['programs']);
-      },
+
       methods: {
 
         // re render checkbox
@@ -143,12 +87,12 @@
 
         // Model for checkboxes must have a label
         // and boolean property checked
-        createModelForCheckboxes(sourse: String[]){
+        createModelForCheckboxes(sourse: String[]) :IProjectFilterCheck[]{
           return sourse.map(item =>  new Object({
-              name: item,
+              value: item,
               checked: false
             })
-          )
+          ) as IProjectFilterCheck[]
         }
       }
   });

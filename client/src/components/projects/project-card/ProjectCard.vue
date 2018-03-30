@@ -1,25 +1,25 @@
 <template>
   <div class="project-card is-clickable">
-    <div class="project-card-header is-centered is-uppercase">
+    <div class="project-card-header title is-7 is-size-16 is-centered is-uppercase">
       {{ project.line }}
     </div>
     <div class="project-card-body">
-      <h6 class="project-card-title">
+      <h6 class="project-card-title title is-7 is-size-16">
         {{ project.name }}
       </h6>
-      <div class="is-secondary">
+      <div class="title is-5 is-size-12 is-secondary">
         {{ project.domain }}
       </div>
-      <div class="project-card-description">
+      <div class="project-card-description title is-4 is-size-14">
         {{ project.description }}
       </div>
     </div>
     <div class="project-card-footer">
       <div class="project-card-team">
         <img src="../../root/assets/team.svg">
-        <span>{{ project.teamcount }}</span>
+        <span class="title is-6 is-size-19">{{ teamcount }}</span>
       </div>
-      <div class="is-secondary">
+      <div class="title is-5 is-size-12 is-secondary">
         {{ project.updatedAt | date }}
       </div>
     </div>
@@ -50,34 +50,29 @@
 
     $header-height:35px;
     $padding: 17px;
+    $margin: 20px;
+    $card-width: 230px;
+    $card-height: 245px;
 
-    .project-card{
+    .project-card {
         display: inline-block;
         line-height: 1;
-        margin: 0 20px 20px 0;
-        height: 245px;
+        margin: 0 $margin $margin 0;
+        height: $card-height;
         position: relative;
-        width:230px;
-        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.5);
+        width:$card-width;
+        box-shadow: $shadow;
         vertical-align: top;
 
         &.is-clickable{
             cursor: pointer;
         }
 
-        .is-secondary{
-            color: $text-secondary;
-            font-weight: 500;
-            font-size: 12px;
-        }
-
         &-header{
             background-color: $magenta;
             color: $white;
-            font-size: 16px;
-            font-weight: 900;
             height: $header-height;
-            margin-bottom: 20px;
+            margin-bottom: $margin;
             padding: 0 $padding;
 
 
@@ -94,8 +89,6 @@
         }
 
         &-title{
-            font-size: 16px;
-            font-weight: 900;
             margin-bottom: 3px;
         }
 
@@ -106,14 +99,10 @@
         }
 
         &-team{
-            font-size: 19px;
-            font-weight: bold;
             margin-bottom: 10px;
         }
 
         &-description{
-            font-size: 14px;
-            color: $text-color;
             margin-top: 24px;
         }
     }

@@ -66,7 +66,7 @@
     border-top: $top-border-height solid $magenta;
     height: $header-height;
     padding: 0 $side-padding;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: $shadow;
 
 
     &-nav{

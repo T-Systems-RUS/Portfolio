@@ -1,10 +1,12 @@
-const constants = {
-    'lines': [
+import {Types} from './constant-types';
+
+const constants: { [key: string]: string[] } = {
+    [Types.PRODUCTION_LINE]: [
       'automotive',
       'digital integration',
       'sap'
     ],
-    'domains': [
+    [Types.DOMAIN]: [
       'Automotive',
       'Content management',
       'Health',
@@ -12,7 +14,7 @@ const constants = {
       'Public',
       'Logistics'
     ],
-    'programs': [
+    [Types.PROGRAM]: [
       'Sales and Aftersales',
       'Product Lifecycle Management',
       'Supply Chain Management',
@@ -25,32 +27,11 @@ const constants = {
       'Telecom Solutions',
       'Rail & Transport Management'
     ],
-    'types': [
+    [Types.PROJECT_TYPE]: [
       'Project',
       'Service',
       'Test'
     ],
-    'roles': [
-      'Configuration',
-      'Development',
-      'Management',
-      'Testing'
-    ],
-    'technologies': [
-      'backend',
-      'frontend',
-      'information',
-      'language',
-      'methodology',
-      'tools'
-    ],
-    'seniority': [
-      'Junior',
-      'Middle',
-      'Senior',
-      'PM'
-    ]
   };
-  
+
   export default constants;
-  
