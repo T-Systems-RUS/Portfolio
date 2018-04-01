@@ -8,7 +8,7 @@
               :class="{'is-closed' :openedValue}">
       </div>
     </div>
-    <div v-if="opened" class="accordion-body">
+    <div v-if="openedValue" class="accordion-body">
       <slot></slot>
     </div>
   </div>

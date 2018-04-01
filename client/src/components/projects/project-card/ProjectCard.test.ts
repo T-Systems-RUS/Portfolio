@@ -1,15 +1,23 @@
-import Projects from '../Projects.vue';
 import ProjectCard from './ProjectCard.vue';
-import store from '../../../store/index';
+import {IProject} from '../../../shared/interfaces/IProject';
+import {ISchedule} from '../../../shared/interfaces/ISchedule';
 import {mount} from '@vue/test-utils';
 
 describe('Project Card', () => {
 
-  const projects = mount(Projects, {store});
-
   it('should render correct contents', () => {
-    projects.vm.newProject();
-    const project = projects.vm.projects[0];
+    const project: IProject = {
+      id: '1',
+      name: 'Test',
+      description: '123',
+      domain: 'Test domain',
+      line: 'auto',
+      schedules: [] as ISchedule[],
+      startdate: new Date().toLocaleDateString(),
+      enddate: new Date().toLocaleDateString(),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
 
     const wrapper = mount(ProjectCard, {
         propsData: {
@@ -22,7 +30,7 @@ describe('Project Card', () => {
         }
     });
 
-    expect(wrapper.props().project).toBe(project)
+    expect(wrapper.props().project).toMatchObject(project)
 
   });
 });

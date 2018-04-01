@@ -1,5 +1,6 @@
 import Projects from './Projects.vue';
 import store from '../../store/index';
+import {FETCH_PROJECTS} from '../../store/modules/projects/project-types';
 import {mount} from '@vue/test-utils';
 
 describe('Projects', () => {
@@ -14,7 +15,9 @@ describe('Projects', () => {
   });
 
   it('should render correct contents', () => {
-    wrapper.vm.newProject();
-    expect(wrapper.vm.projects.length).toBe(1);
+    const result = store.dispatch(FETCH_PROJECTS);
+    result.then((responce) => {
+      expect(wrapper.vm.projects.length).toBe(1);
+    })
   });
 });
