@@ -1,12 +1,11 @@
 <template>
   <div class="columns projects">
-    <div class="column is-one-quarter">
-      <div class="filters"/>
+    <div class="column is-one-quarter projects-left">
       <div>
         <ProjectFilter/>
       </div>
     </div>
-    <div class="column">
+    <div class="column projects-right">
       <div class="level filters no-margin">
         <div class="level-left">
           <div class="filter">
@@ -64,8 +63,37 @@
 <style lang="scss" scoped>
   @import '../../styles/variables';
 
+  $filters-top: 125px;
+
   .projects{
     padding: 0 $side-padding;
+
+    &-left {
+      position: fixed;
+      padding-top: 0;
+      top: $filters-top;
+      bottom: 0;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        //width: 0;
+        width: 5px;
+
+        &-track {
+          -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3);
+        }
+
+        &-thumb {
+          background-color: $lite-grey;
+          outline: 1px solid $lite-grey;
+        }
+      }
+    }
+
+    &-right {
+      margin-left: 25%;
+      padding-left: 20px;
+    }
   }
 
   .filters{
@@ -89,7 +117,8 @@
       cursor: pointer;
       height: 27px;
     }
-  }
 
+
+  }
 
 </style>
