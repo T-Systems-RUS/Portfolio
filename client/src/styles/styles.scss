@@ -9,8 +9,42 @@ body {
   font-size: $base-font-size;
 }
 
-.title.is-6 {
-  font-weight: bold;
+.title{
+  &.is-7 {
+    font-weight: 900;
+  }
+
+  &.is-6{
+    font-weight: bold;
+  }
+
+  &.is-5{
+    font-weight: 500;
+  }
+
+  &.is-4 {
+    font-weight: normal;
+  }
+
+  &.is-size-12 {
+    font-size: 12px;
+  }
+
+  &.is-size-14{
+    font-size: 14px;
+  }
+
+  &.is-size-16{
+    font-size: 16px;
+  }
+
+  &.is-size-19{
+    font-size: 19px;
+  }
+
+  &.is-secondary {
+    color: $text-secondary;
+  }
 }
 
 .centered {

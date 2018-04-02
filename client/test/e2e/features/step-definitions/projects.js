@@ -7,4 +7,4 @@ Given('I open project page', async () =>
     .waitForElementVisible('#app', 5000));
 
 Then('project is present', async () =>
-  client.waitForElementVisible('.project', 5000));
+  client.waitForElementVisible('.project-card', 5000));

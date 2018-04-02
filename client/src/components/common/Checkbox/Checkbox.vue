@@ -32,7 +32,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../styles/variables';
+  @import '../../../styles/variables';
 
   $checkbox-size: 22px;
   $checkbox-background-color: #ededed;
@@ -43,19 +43,17 @@
   .checkbox {
     width: $checkbox-size;
     height: $checkbox-size;
+    min-width: $checkbox-size;
     background-color: $checkbox-background-color;
     border-radius: $telekom-radius;
     border: 1px solid $checkbox-border-color;
     transition: all 200ms ease;
-
     .check {
       position: absolute;
     }
-
     &:hover {
       background-color: $checkbox-background-color-hover;
     }
-
     &:active {
       background-color: $checkbox-background-color-active;
     }
