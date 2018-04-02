@@ -12,7 +12,8 @@ module.exports = {
   extends: ['plugin:vue/recommended', 'airbnb-base'],
   // required to lint *.vue files
   plugins: [
-    'vue'
+    'vue',
+    'typescript'
   ],
   // check if imports actually resolve
   settings: {
@@ -48,16 +49,45 @@ module.exports = {
     }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'indent': 'off',
-    'vue/script-indent': [
-      'error',
-      2,
-      {'baseIndent': 1}
-    ],
+    'indent': ['error', 2],
     'object-curly-spacing': ['error', 'never'],
     'comma-dangle': ['error', 'never'],
     'arrow-parens': ['error', 'as-needed'],
-    // TODO remove after fix in TS parser - TypeScript interfaces broken
-    'no-undef': 'off'
-  }
+    'max-len': ['error', { "code": 120 }],
+    // Broken
+    'space-infix-ops': 'off',
+    // TypeScript checks this via compiler options - see tsconfig
+    'no-undef': 'off',
+    'no-unused-vars': 'off',
+    // TODO fix after parser fixed https://github.com/eslint/typescript-eslint-parser#known-issues
+    'import/prefer-default-export': 'off',
+    // TODO enable later if really needed
+    'vue/require-v-for-key': 'off',
+
+    // Typescript Plugin
+    'typescript/adjacent-overload-signatures': ['error'],
+    'typescript/class-name-casing': ['error'],
+    'typescript/interface-name-prefix': ['error', 'always'],
+    'typescript/member-ordering': ['error'],
+    'typescript/no-angle-bracket-type-assertion': ['error'],
+    'typescript/no-array-constructor': ['error'],
+    'typescript/no-empty-interface': ['error'],
+    'typescript/no-explicit-any': ['error'],
+    'typescript/no-namespace': ['error'],
+    'typescript/no-triple-slash-reference': ['error'],
+    'typescript/type-annotation-spacing': ['error'],
+  },
+  overrides: [
+    {
+      files: ["*.vue"],
+      rules: {
+        'indent': 'off',
+        'vue/script-indent': [
+          'error',
+          2,
+          {'baseIndent': 1}
+        ],
+      }
+    }
+  ]
 }
