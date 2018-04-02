@@ -13,8 +13,5 @@
     "server:install": "cd server && yarn",
     "client-server": "yarn run server | yarn run client",
     "client-server:install": "yarn run client:install && yarn run server:install"
-  },
-  "dependencies": {
-    "eslint-plugin-typescript": "^0.11.0"
   }
 }
