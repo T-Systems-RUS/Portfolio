@@ -76,7 +76,6 @@
       overflow-y: auto;
 
       &::-webkit-scrollbar {
-        //width: 0;
         width: 5px;
 
         &-track {
