@@ -34,6 +34,7 @@
         }
       },
       created() {
+        // TODO make it in computed property after moving constants to db
         this.models = Object.keys(Constants).map(key => {
           const model: IProjectFilter = {
             name: key,
@@ -49,7 +50,6 @@
           opened: true,
           items: this.createModelForCheckboxes(this.$store.state.projects.customers)
         };
-
         this.models.push(customers);
       },
 
@@ -67,8 +67,8 @@
 
         // Model for checkboxes must have a label
         // and boolean property checked
-        createModelForCheckboxes(sourse: String[]) :IProjectFilterCheck[]{
-          return sourse.map(item =>  new Object({
+        createModelForCheckboxes(source: String[]) :IProjectFilterCheck[]{
+          return source.map(item =>  new Object({
               value: item,
               checked: false
             })

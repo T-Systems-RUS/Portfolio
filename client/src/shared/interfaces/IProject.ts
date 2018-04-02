@@ -1,13 +1,8 @@
+import {IModel} from './IModel';
 import {ISchedule} from './ISchedule';
 
-export interface IProjectState {
-    projects: IProject[],
-    customers: String[],
-    loading: boolean;
-}
 
-export interface IProject {
-    id: string;
+export interface IProject extends IModel{
     name: string;
     description: string;
     domain: string;

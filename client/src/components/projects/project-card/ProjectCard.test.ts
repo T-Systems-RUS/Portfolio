@@ -30,7 +30,7 @@ describe('Project Card', () => {
         }
     });
 
-    expect(wrapper.props().project).toMatchObject(project)
+    expect(wrapper.props().project).toMatchObject(project);
 
   });
 });

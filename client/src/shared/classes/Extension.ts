@@ -1,7 +1,9 @@
+import {IModel} from '../interfaces/IModel';
+
 export class Extension {
 
     /**
-     * Get specific property from each object in Array 
+     * Get specific property from each object in Array
      * and returns list of unique values
      * @static
      * @param {Object[]} source array of objects to extract from
@@ -10,19 +12,9 @@ export class Extension {
      * @memberof Extension
      */
 
-    public static getUniqueValues(source: any[] ,key: string):string[] {
-        const uniqueSet=new Set(source.map(item=> item[key] ).filter(i => i));
-        
+    public static getUniqueValues(source: IModel[] ,key: string):string[] {
+        const uniqueSet=new Set(source.map(item=> item[key]).filter(i => i));
+
         return Array.from(uniqueSet).sort();
     }
-
-    public static getKeys(source:any){
-        const keys = [];
-        for (const key in source) {
-            keys.push(key);
-        }
-
-        return keys.sort();
-    }
   }
-  
