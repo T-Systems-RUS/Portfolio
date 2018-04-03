@@ -39,7 +39,7 @@ export class Domain extends Model<Domain> {
   updatedAt: Date;
 
   @HasMany(() => Project)
-  programs: Project[];
+  projects: Project[];
 
   @HasMany(() => Customer)
   customers: Customer[];
