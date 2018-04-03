@@ -3,6 +3,7 @@ import {Employee} from './Employee';
 import {EmployeeTechnology} from './EmployeeTechnology';
 import {Project} from './Project';
 import {ProjectTechnology} from './ProjectTechnology';
+import {Tables} from '../sequelize/Tables';
 
 @Scopes({
     full: {
@@ -20,7 +21,7 @@ import {ProjectTechnology} from './ProjectTechnology';
 })
 @Table({
     timestamps: true,
-    tableName: 'Technologies'
+    tableName: Tables.TECHNOLOGIES
 })
 export class Technology extends Model<Technology> {
 

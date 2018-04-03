@@ -6,7 +6,7 @@
     <defs></defs>
     <g id="Shared" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="SAP">
-            <rect id="Line-logo-background" fill="#90D0FA" x="0" y="0" width="220" height="80"></rect>
+            <rect id="Line.ts-logo-background" fill="#90D0FA" x="0" y="0" width="220" height="80"></rect>
             <g id="Star-Copy" transform="translate(80.000000, 10.000000)">
                 <circle id="Outside-ring" stroke="#FFFFFF" stroke-width="3" cx="30" cy="30" r="30"></circle>
                 <circle id="Inside-oval" fill="#FFFFFF" opacity="0.8" cx="30" cy="30" r="25"></circle>

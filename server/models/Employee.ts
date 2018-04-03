@@ -2,6 +2,7 @@ import {Model, AllowNull, DataType, Column, Table, Scopes, CreatedAt, UpdatedAt,
 import {Schedule} from './Schedule';
 import {Technology} from './Technology';
 import {EmployeeTechnology} from './EmployeeTechnology';
+import {Tables} from '../sequelize/Tables';
 
 @Scopes({
     full: {
@@ -16,7 +17,7 @@ import {EmployeeTechnology} from './EmployeeTechnology';
 })
 @Table({
     timestamps: true,
-    tableName: 'Employees'
+    tableName: Tables.EMPLOYEES
 })
 export class Employee extends Model<Employee> {
 

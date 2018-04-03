@@ -1,15 +1,27 @@
-import {Model, AllowNull, Column, DataType, Table, Scopes, CreatedAt, UpdatedAt, HasMany, BelongsToMany} from 'sequelize-typescript';
+import {
+  Model, AllowNull, Column, DataType, Table, Scopes, CreatedAt, UpdatedAt, HasMany, BelongsToMany,
+  ForeignKey, BelongsTo
+} from 'sequelize-typescript';
 import {Schedule} from './Schedule';
+import {Customer} from './Customer';
+import {ProjectCustomer} from './ProjectCustomer';
+import {Domain} from './Domain';
 import {Employee} from './Employee';
 import {Role} from './Role';
+import {Program} from './Program';
 import {Technology} from './Technology';
+import {Type} from './Type';
 import {ProjectTechnology} from './ProjectTechnology';
+import {Tables} from '../sequelize/Tables';
 
 @Scopes({
     full: {
         include: [
-            { model: () => Schedule, include: [() => Employee, () => Role]},
-            () => Technology
+          { model: () => Schedule, include: [() => Employee, () => Role]},
+          () => Technology,
+          () => Program,
+          () => Domain,
+          () => Type
         ]
     },
     withTechnologies: {
@@ -22,21 +34,13 @@ import {ProjectTechnology} from './ProjectTechnology';
 })
 @Table({
     timestamps: true,
-    tableName: 'Projects'
+    tableName: Tables.PROJECTS
 })
 export class Project extends Model<Project> {
 
     @AllowNull(false)
     @Column
     name: string;
-
-    @AllowNull(false)
-    @Column
-    line: string;
-
-    @AllowNull(false)
-    @Column
-    domain: string;
 
     @AllowNull(false)
     @Column({
@@ -47,22 +51,11 @@ export class Project extends Model<Project> {
     @Column
     customer: string;
 
-    @AllowNull(false)
-    @Column
-    type: string;
-
-    @AllowNull(false)
-    @Column
-    program: string;
-
     @Column
     image: string;
 
     @Column
     feedback: string;
-
-    @Column
-    teamcount: string;
 
     @Column({type: DataType.DECIMAL })
     pss: string;
@@ -75,6 +68,27 @@ export class Project extends Model<Project> {
 
     @Column
     version: number;
+
+    @ForeignKey(() => Program)
+    @Column
+    programId: number;
+
+    @BelongsTo(() => Program)
+    program: Program;
+
+    @ForeignKey(() => Domain)
+    @Column
+    domainId: number;
+
+    @BelongsTo(() => Domain)
+    domain: Domain;
+
+    @ForeignKey(() => Type)
+    @Column
+    typeId: number;
+
+    @BelongsTo(() => Type)
+    type: Type;
 
     @AllowNull(false)
     @Column({
@@ -106,5 +120,8 @@ export class Project extends Model<Project> {
 
     @BelongsToMany(() => Technology, () => ProjectTechnology)
     technologies: Technology[];
+
+    @BelongsToMany(() => Customer, () => ProjectCustomer)
+    customers: Customer[];
 
 }

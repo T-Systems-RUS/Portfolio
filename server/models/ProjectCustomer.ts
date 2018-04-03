@@ -1,18 +1,18 @@
 import {Model, Column, Table, ForeignKey} from 'sequelize-typescript';
 import {Project} from './Project';
-import {Technology} from './Technology';
+import {Customer} from './Customer';
 import {Tables} from '../sequelize/Tables';
 
 @Table({
-  tableName: Tables.PROJECT_TECHNOLOGY
+  tableName: Tables.PROJECT_CUSTOMER
 })
-export class ProjectTechnology extends Model<ProjectTechnology> {
+export class ProjectCustomer extends Model<ProjectCustomer> {
 
   @ForeignKey(() => Project)
   @Column
   projectId: number;
 
-  @ForeignKey(() => Technology)
+  @ForeignKey(() => Customer)
   @Column
-  technologyId: number;
+  customerId: number;
 }

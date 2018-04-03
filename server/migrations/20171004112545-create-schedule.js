@@ -18,21 +18,21 @@ module.exports = {
       enddate: {
         type: Sequelize.DATE
       },
-      projectid: {
+      projectId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Projects',
           key: 'id'
         },
       },
-      employeeid: {
+      employeeId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Employees',
           key: 'id'
         },
       },
-      roleid: {
+      roleId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Roles',

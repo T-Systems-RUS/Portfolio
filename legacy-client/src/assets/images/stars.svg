@@ -291,15 +291,15 @@
                         </text>
                     </g>
                 </g>
-                <path d="M212.5,23.5 L299.5,15.5" id="Line" stroke="#FFFFFF" stroke-linecap="square"></path>
-                <path d="M93.5,115.5 L22.5,30.5" id="Line-2" stroke="#FFFFFF" stroke-linecap="square"></path>
-                <path d="M117.5,106.5 L127.5,81.5" id="Line-3" stroke="#FFFFFF" stroke-linecap="square"></path>
-                <path d="M147.5,54.5 L180.5,30.5" id="Line-4" stroke="#FFFFFF" stroke-linecap="square"></path>
-                <path d="M32.5,110.5 L84.5,126.5" id="Line-5" stroke="#FFFFFF" stroke-linecap="square"></path>
-                <path d="M121.5,149.5 L151.5,182.5" id="Line-6" stroke="#FFFFFF" stroke-linecap="square"></path>
-                <path d="M112.5,206.5 L147.5,196.5" id="Line-8" stroke="#FFFFFF" stroke-linecap="square"></path>
-                <path d="M46.5,196.5 L78.5,205.5" id="Line-9" stroke="#FFFFFF" stroke-linecap="square"></path>
-                <path d="M179.5,198.5 L232.5,217.5" id="Line-7" stroke="#FFFFFF" stroke-linecap="square"></path>
+                <path d="M212.5,23.5 L299.5,15.5" id="Line.ts" stroke="#FFFFFF" stroke-linecap="square"></path>
+                <path d="M93.5,115.5 L22.5,30.5" id="Line.ts-2" stroke="#FFFFFF" stroke-linecap="square"></path>
+                <path d="M117.5,106.5 L127.5,81.5" id="Line.ts-3" stroke="#FFFFFF" stroke-linecap="square"></path>
+                <path d="M147.5,54.5 L180.5,30.5" id="Line.ts-4" stroke="#FFFFFF" stroke-linecap="square"></path>
+                <path d="M32.5,110.5 L84.5,126.5" id="Line.ts-5" stroke="#FFFFFF" stroke-linecap="square"></path>
+                <path d="M121.5,149.5 L151.5,182.5" id="Line.ts-6" stroke="#FFFFFF" stroke-linecap="square"></path>
+                <path d="M112.5,206.5 L147.5,196.5" id="Line.ts-8" stroke="#FFFFFF" stroke-linecap="square"></path>
+                <path d="M46.5,196.5 L78.5,205.5" id="Line.ts-9" stroke="#FFFFFF" stroke-linecap="square"></path>
+                <path d="M179.5,198.5 L232.5,217.5" id="Line.ts-7" stroke="#FFFFFF" stroke-linecap="square"></path>
             </g>
         </g>
     </g>

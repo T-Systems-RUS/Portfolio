@@ -1,5 +1,6 @@
 import {Model, AllowNull, DataType, Column, Table, Scopes, CreatedAt, UpdatedAt, HasMany} from 'sequelize-typescript';
 import {Schedule} from './Schedule';
+import {Tables} from '../sequelize/Tables';
 
 @Scopes({
     withSchedules: {
@@ -8,7 +9,7 @@ import {Schedule} from './Schedule';
 })
 @Table({
     timestamps: true,
-    tableName: 'Roles'
+    tableName: Tables.ROLES
 })
 export class Role extends Model<Role> {
 

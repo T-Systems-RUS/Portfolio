@@ -12,24 +12,29 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      line: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       customer: {
         type: Sequelize.STRING
       },
-      domain: {
-        allowNull: false,
-        type: Sequelize.STRING
+      domainId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Domains',
+          key: 'id'
+        },
       },
-      type: {
-        allowNull: false,
-        type: Sequelize.STRING
+      typeId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Types',
+          key: 'id'
+        },
       },
-      program: {
-        allowNull: false,
-        type: Sequelize.STRING
+      programId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Programs',
+          key: 'id'
+        },
       },
       pss: {
         type: Sequelize.DECIMAL
@@ -41,10 +46,6 @@ module.exports = {
       description: {
         type: Sequelize.TEXT,
         validate: { len: [0,100000] }
-      },
-      teamcount: {
-        defaultValue:"0",
-        type: Sequelize.STRING
       },
       image: {
         type: Sequelize.STRING
