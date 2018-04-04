@@ -49,9 +49,6 @@ export class Project extends Model<Project> {
     description: string;
 
     @Column
-    customer: string;
-
-    @Column
     image: string;
 
     @Column

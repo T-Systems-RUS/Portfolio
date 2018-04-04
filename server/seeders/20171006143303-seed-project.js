@@ -1,162 +1,153 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {    
-      return queryInterface.bulkInsert('Projects', [
+  up: async (queryInterface, Sequelize) => {
+
+    const domains = await queryInterface.sequelize.query(
+      'Select id from "Domains"'
+    );
+
+    const programs = await queryInterface.sequelize.query(
+      'Select id from "Programs"'
+    );
+
+    const types = await queryInterface.sequelize.query(
+      'Select id from "Types"'
+    );
+
+    const domainRows = domains[0];
+    const programRows = programs[0];
+    const typeRows = types[0];
+
+    return await queryInterface.bulkInsert('Projects', [
       {
-        name: 'Dai VB',
-        line:'automotive',
-        domain: 'Automotive',
-        description:'123',
-        active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
-        startdate: new Date(),
-        createdAt:new Date(),
-        updatedAt:new Date()
-      },
-      {
-        name: 'MMS',
-        line:'digital integration',
-        domain: 'Multimedia solutions',
-        description:'123',
-        active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
-        startdate: new Date(),
-        createdAt:new Date(),
-        updatedAt:new Date()
-      },
-      {
-        name: 'OSM',
-        line:'automotive',
-        domain: 'Automotive',
+        name: 'PPA',
+        programId: programRows[1].id,
+        domainId: domainRows[0].id,
+        typeId: typeRows[0].id,
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
+        pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'T-Vision',
-        line:'digital integration',
-        domain: 'Health',
+        name: 'BMW PFS',
+        programId: programRows[0].id,
+        domainId: domainRows[0].id,
+        typeId: typeRows[0].id,
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
+        pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'T-Mobile Austria',
-        line:'sap',
-        domain: 'Telekom',
+        name: 'BMW OSM',
+        programId: programRows[0].id,
+        domainId: domainRows[0].id,
+        typeId: typeRows[0].id,
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
+        pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'AS1313',
-        line:'digital integration',
-        domain: 'Public',
+        name: 'LogiWeb_ContiEOBR',
+        programId: programRows[1].id,
+        domainId: domainRows[0].id,
+        typeId: typeRows[0].id,
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
+        pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
         name: 'SBB',
-        line:'digital integration',
-        domain: 'Transportation',
+        programId: programRows[10].id,
+        domainId: domainRows[0].id,
+        typeId: typeRows[0].id,
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
+        pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'Sopre AOM',
-        line:'digital integration',
-        domain: 'Transportation',
+        name: 'SOPRE',
+        programId: programRows[10].id,
+        domainId: domainRows[0].id,
+        typeId: typeRows[0].id,
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
+        pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'PPA',
-        line:'automotive',
-        domain: 'Automotive',
+        name: 'T-Mobile Austria',
+        programId: programRows[5].id,
+        domainId: domainRows[0].id,
+        typeId: typeRows[0].id,
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
-        customer: 'Daimler',
+        pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'Aeroports',
-        line:'digital integration',
-        domain: 'Transportation',
+        name: 'AMS Truck',
+        programId: programRows[2].id,
+        domainId: domainRows[0].id,
+        typeId: typeRows[1].id,
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
+        pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'DFMG',
-        line:'digital integration',
-        domain: 'Health',
+        name: 'Integration Layer',
+        programId: programRows[4].id,
+        domainId: domainRows[1].id,
+        typeId: typeRows[0].id,
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
+        pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
-        name: 'Strabag',
-        line:'sap',
-        domain: 'public',
+        name: 'BMW PFS',
+        programId: programRows[0].id,
+        domainId: domainRows[0].id,
+        typeId: typeRows[0].id,
         description:'Online Sales Management system for dealers and  customers. Used for selling vehicles of BMW AG online',
         active:false,
-        type:'Project',
-        program:'Sales and Aftersales',
-        customer: 'Strabag',
+        pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
       }], {});
-    
+
   },
 
   down: (queryInterface, Sequelize) => {
       return queryInterface.bulkDelete('Projects', [{
         //name :'Angular 2.x'
       }], {});
-    
+
   }
 };
 

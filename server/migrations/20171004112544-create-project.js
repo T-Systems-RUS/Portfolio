@@ -12,9 +12,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      customer: {
-        type: Sequelize.STRING
-      },
       domainId: {
         type: Sequelize.INTEGER,
         references: {
