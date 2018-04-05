@@ -1,10 +1,9 @@
 import {Project} from '../../models/Project';
 import {Scopes} from '../../sequelize/Scopes';
-import {Technology} from '../../models/Technology';
 import {Schedule} from '../../models/Schedule';
-import {ProjectTechnology} from '../../models/ProjectTechnology';
 import sequelize from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
+import {Line} from '../../models/Line';
 
 const projectService = {
 
@@ -52,7 +51,7 @@ const projectService = {
     .catch(error => {
       console.log(error);
     }),
-
+  
   // POST create new project
   createProject: project => Project.create({
     name: project.name,

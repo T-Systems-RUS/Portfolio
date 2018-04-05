@@ -2,6 +2,7 @@ import * as express from 'express';
 import projectService from './project.service';
 import projectValidator from './project.validator';
 import {Util} from '../../shared/Util';
+import projectAddonsService from './shared/project-addons.service';
 
 const router = express.Router();
 
@@ -16,6 +17,10 @@ router.get('/projects/:id', (req, res) =>
 
 router.get('/projects/history/:name', (req, res) =>
   projectService.getProjectsByName(req.params.name)
+    .then(Util.handleData(res)));
+
+router.get('/projects/dto', (req, res) =>
+  projectAddonsService.getProjectFilterModel()
     .then(Util.handleData(res)));
 
 // POST Requests
