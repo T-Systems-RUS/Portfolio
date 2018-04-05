@@ -9,8 +9,7 @@ import parse from '../../shared/parse.service';
 const projectService = {
 
   getProjects: () => Project.scope([
-    Scopes.WITH_TECHNOLOGIES,
-    Scopes.WITH_SCHEDULES,
+    Scopes.PROJECT_LIST,
     Scopes.ACTUAL_PROJECTS
   ])
     .findAll({ order: [ ['updatedAt', 'DESC']]

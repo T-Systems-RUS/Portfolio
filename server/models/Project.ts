@@ -13,6 +13,7 @@ import {Technology} from './Technology';
 import {Type} from './Type';
 import {ProjectTechnology} from './ProjectTechnology';
 import {Tables} from '../sequelize/Tables';
+import {DataTypeUUID} from 'sequelize';
 
 @Scopes({
     full: {
@@ -21,8 +22,19 @@ import {Tables} from '../sequelize/Tables';
           () => Technology,
           () => Program,
           () => Domain,
-          () => Type
+          () => Type,
+          () => Customer
         ]
+    },
+    projectList: {
+      include: [
+        () => Schedule,
+        () => Technology,
+        () => Program,
+        () => Domain,
+        () => Type,
+        () => Customer
+      ]
     },
     withTechnologies: {
         include: [ () => Technology ]
@@ -37,6 +49,12 @@ import {Tables} from '../sequelize/Tables';
     tableName: Tables.PROJECTS
 })
 export class Project extends Model<Project> {
+
+    @AllowNull(false)
+    @Column({
+      type: DataType.INTEGER
+    })
+    uniqueId: number;
 
     @AllowNull(false)
     @Column
@@ -66,6 +84,7 @@ export class Project extends Model<Project> {
     @Column
     version: number;
 
+    @AllowNull(false)
     @ForeignKey(() => Program)
     @Column
     programId: number;

@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
       return queryInterface.bulkInsert('Technologies', [
       {
-        name: 'Angular 2.x',
+        name: 'Angular 6',
         domain: 'frontend',
         active:false,
         createdAt:new Date(),
@@ -79,7 +79,7 @@ module.exports = {
         updatedAt:new Date()
       },
       {
-        name: 'Angular 4',
+        name: 'AngularJs',
         domain: 'frontend',
         active:false,
         createdAt:new Date(),

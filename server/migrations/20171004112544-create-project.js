@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      uniqueId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       name: {
         allowNull: false,
         type: Sequelize.STRING
@@ -27,6 +31,7 @@ module.exports = {
         },
       },
       programId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: 'Programs',

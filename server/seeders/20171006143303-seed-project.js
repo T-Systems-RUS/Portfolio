@@ -22,6 +22,7 @@ module.exports = {
     return await queryInterface.bulkInsert('Projects', [
       {
         name: 'PPA',
+        uniqueId: 1,
         programId: programRows[1].id,
         domainId: domainRows[0].id,
         typeId: typeRows[0].id,
@@ -34,6 +35,7 @@ module.exports = {
       },
       {
         name: 'BMW PFS',
+        uniqueId: 2,
         programId: programRows[0].id,
         domainId: domainRows[0].id,
         typeId: typeRows[0].id,
@@ -46,6 +48,7 @@ module.exports = {
       },
       {
         name: 'BMW OSM',
+        uniqueId: 3,
         programId: programRows[0].id,
         domainId: domainRows[0].id,
         typeId: typeRows[0].id,
@@ -58,6 +61,7 @@ module.exports = {
       },
       {
         name: 'LogiWeb_ContiEOBR',
+        uniqueId: 4,
         programId: programRows[1].id,
         domainId: domainRows[0].id,
         typeId: typeRows[0].id,
@@ -70,6 +74,7 @@ module.exports = {
       },
       {
         name: 'SBB',
+        uniqueId: 5,
         programId: programRows[10].id,
         domainId: domainRows[0].id,
         typeId: typeRows[0].id,
@@ -82,6 +87,7 @@ module.exports = {
       },
       {
         name: 'SOPRE',
+        uniqueId: 6,
         programId: programRows[10].id,
         domainId: domainRows[0].id,
         typeId: typeRows[0].id,
@@ -94,6 +100,7 @@ module.exports = {
       },
       {
         name: 'T-Mobile Austria',
+        uniqueId: 7,
         programId: programRows[5].id,
         domainId: domainRows[0].id,
         typeId: typeRows[0].id,
@@ -106,6 +113,7 @@ module.exports = {
       },
       {
         name: 'AMS Truck',
+        uniqueId: 8,
         programId: programRows[2].id,
         domainId: domainRows[0].id,
         typeId: typeRows[1].id,
@@ -118,6 +126,7 @@ module.exports = {
       },
       {
         name: 'Integration Layer',
+        uniqueId: 9,
         programId: programRows[4].id,
         domainId: domainRows[1].id,
         typeId: typeRows[0].id,
@@ -129,7 +138,8 @@ module.exports = {
         updatedAt:new Date()
       },
       {
-        name: 'BMW PFS',
+        name: 'VPS',
+        uniqueId: 10,
         programId: programRows[0].id,
         domainId: domainRows[0].id,
         typeId: typeRows[0].id,
@@ -139,7 +149,8 @@ module.exports = {
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
-      }], {});
+      }
+      ], {});
 
   },
 
