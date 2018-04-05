@@ -13,7 +13,7 @@ import {Technology} from './Technology';
 import {Type} from './Type';
 import {ProjectTechnology} from './ProjectTechnology';
 import {Tables} from '../sequelize/Tables';
-import {DataTypeUUID} from 'sequelize';
+import {Line} from './Line';
 
 @Scopes({
     full: {
@@ -28,9 +28,9 @@ import {DataTypeUUID} from 'sequelize';
     },
     projectList: {
       include: [
+        { model: () => Program, include: [() => Line]},
         () => Schedule,
         () => Technology,
-        () => Program,
         () => Domain,
         () => Type,
         () => Customer

@@ -19,6 +19,7 @@ module.exports = {
           type: Sequelize.BOOLEAN
         },
         lineId: {
+          allowNull: false,
           type: Sequelize.INTEGER,
           references: {
             model: 'Lines',

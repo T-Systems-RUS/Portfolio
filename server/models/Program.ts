@@ -24,6 +24,7 @@ export class Program extends Model<Program> {
   @Column
   active: boolean;
 
+  @AllowNull(false)
   @ForeignKey(() => Line)
   @Column
   lineId: number;
