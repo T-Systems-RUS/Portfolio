@@ -15,7 +15,6 @@ const projectAddonsService = {
     const domains = await Domain.findAll({ order: [['name', 'ASC']] });
     const customers = await  Customer.findAll({ order: [['name', 'ASC']] });
 
-    console.log(lines);
     const dto = new ProjectFilterDto();
     dto.lines = lines;
     dto.programs = programs;

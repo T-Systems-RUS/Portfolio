@@ -11,16 +11,16 @@ router.get('/projects', (req, res) =>
   projectService.getProjects()
     .then(Util.handleData(res)));
 
+router.get('/projects/addons', (req, res) =>
+  projectAddonsService.getProjectFilterModel()
+    .then(Util.handleData(res)));
+
 router.get('/projects/:id', (req, res) =>
   projectService.getProject(req.params.id)
     .then(Util.handleData(res)));
 
 router.get('/projects/history/:name', (req, res) =>
   projectService.getProjectsByName(req.params.name)
-    .then(Util.handleData(res)));
-
-router.get('/projects/dto', (req, res) =>
-  projectAddonsService.getProjectFilterModel()
     .then(Util.handleData(res)));
 
 // POST Requests

@@ -1,4 +1,4 @@
-import {Types} from './constant-types';
+import {Types} from '../../store/modules/projects/constant-types';
 
 const constants: { [key: string]: string[] } = {
     [Types.PRODUCTION_LINE]: [
