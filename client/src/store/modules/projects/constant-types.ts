@@ -1,4 +1,5 @@
 export enum Types {
+  CUSTOMER = 'Customer',
   PRODUCTION_LINE = 'Production line',
   PROGRAM = 'Program',
   DOMAIN = 'Domain',

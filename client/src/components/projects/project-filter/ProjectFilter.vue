@@ -4,7 +4,7 @@
       :name="model.name"
       :opened="model.opened"
       @update:opened="model.opened = !model.opened"
-      v-for="model in models">
+      v-for="model in modelsComputed">
       <div
         v-for="item in model.items"
         :key="item.value">
@@ -25,44 +25,35 @@
   import Checkbox from '../../common/Checkbox/Checkbox.vue';
   import {IProjectFilter, IProjectFilterCheck} from './IProjectFilter';
   import * as types from '../../../store/modules/projects/project-types';
-  import {mapActions, mapGetters} from 'vuex';
-  import {ILine} from '../../../shared/interfaces/ILine';
+  import {IModel} from '../../../shared/interfaces/IModel';
 
   export default Vue.extend({
-      // data() {
-      //   // return {
-      //   //   models: new Array<IProjectFilter>()
-      //   // }
-      // },
+      data() {
+        return {
+          models: [] as IProjectFilter[]
+        }
+      },
       created() {
-        this.fetchAddons();
-
-        // // TODO make it in computed property after moving constants to db
-        // this.models = Object.keys(Constants).map(key => {
-        //   const model: IProjectFilter = {
-        //     name: key,
-        //     opened: true,
-        //     items: this.createModelForCheckboxes(Constants[key])
-        //   };
-        //
-        //   return model;
-        // });
-        //
-        // const customers: IProjectFilter = {
-        //   name: 'Customers',
-        //   opened: true,
-        //   items: this.createModelForCheckboxes(this.$store.state.projects.customers)
-        // };
-        // this.models.push(customers);
+        this.$store.dispatch(types.FETCH_ADDONS);
       },
       computed: {
-        models(): ILine[] {
-          console.log(this.things)
-          return this.$store.state.projects.lines;
+
+        modelsComputed(): IProjectFilter[] {
+          const addons = this.$store.getters[types.GET_ADDONS];
+          this.models = [] as IProjectFilter[];
+
+          Object.keys(addons).forEach(key => {
+            const model: IProjectFilter = {
+              name: key,
+              opened: true,
+              items: this.createModelForCheckboxes(addons[key])
+            };
+
+            this.models.push(model);
+          });
+
+          return this.models;
         },
-        ...mapGetters({
-          things: types.GET_ADDONS
-        })
       },
       components: {
           Accordion,
@@ -70,24 +61,21 @@
       },
 
       methods: {
-        ...mapActions({
-          fetchAddons: types.FETCH_ADDONS
-        }),
         // re render checkbox
         // will be used later for project filtering via store
-        // handleFilterAction(item:any, key: string){
-        //   item.checked = !item.checked;
-        // },
-        //
-        // // Model for checkboxes must have a label
-        // // and boolean property checked
-        // createModelForCheckboxes(source: String[]) :IProjectFilterCheck[]{
-        //   return source.map(item =>  new Object({
-        //       value: item,
-        //       checked: false
-        //     })
-        //   ) as IProjectFilterCheck[]
-        // }
+        handleFilterAction(item:any, key: string){
+          item.checked = !item.checked;
+        },
+
+        // Model for checkboxes must have a label
+        // and boolean property checked
+        createModelForCheckboxes(source: IModel[]) :IProjectFilterCheck[]{
+          return source.map(item =>  new Object({
+              value: item.name,
+              checked: false
+            })
+          ) as IProjectFilterCheck[]
+        }
       }
   });
 </script>

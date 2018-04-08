@@ -4,5 +4,6 @@
  */
 export interface IModel {
   [key: string]: any;
+  active: boolean;
   id:string;
 }
