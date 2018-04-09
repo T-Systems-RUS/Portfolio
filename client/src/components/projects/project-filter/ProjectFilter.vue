@@ -4,7 +4,7 @@
       :name="model.name"
       :opened="model.opened"
       @update:opened="model.opened = !model.opened"
-      v-for="model in modelsComputed">
+      v-for="model in models">
       <div
         v-for="item in model.items"
         :key="item.value">
@@ -31,7 +31,7 @@
   export default Vue.extend({
     data() {
       return {
-        models: [] as IProjectFilter[]
+        accordionModels: [] as IProjectFilter[]
       };
     },
     created() {
@@ -39,9 +39,9 @@
     },
     computed: {
 
-      modelsComputed(): IProjectFilter[] {
+      models(): IProjectFilter[] {
         const addons = this.$store.getters[types.GET_ADDONS];
-        this.models = [] as IProjectFilter[];
+        this.accordionModels = [] as IProjectFilter[];
 
         Object.keys(addons).forEach(key => {
           const model: IProjectFilter = {
@@ -50,10 +50,10 @@
             items: this.createModelForCheckboxes(addons[key])
           };
 
-          this.models.push(model);
+          this.accordionModels.push(model);
         });
 
-        return this.models;
+        return this.accordionModels;
       }
     },
     components: {
