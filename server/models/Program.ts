@@ -9,6 +9,9 @@ import {Tables} from '../sequelize/Tables';
 @Scopes({
   withProjects: {
     include: [() => Project ]
+  },
+  withLine: {
+    include: [() => Line]
   }
 })
 @Table({

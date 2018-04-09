@@ -10,7 +10,7 @@
         :key="item.value">
         <div class="filter-item">
           <Checkbox :checked = "item.checked"
-                    v-on:update:checked="handleFilterAction(item, 'line')"/>
+                    v-on:update:checked="handleFilterAction(item, model.name)"/>
           <span class="title is-5 is-size-16 is-uppercase">{{ item.value }}</span>
         </div>
       </div>
@@ -26,6 +26,7 @@
   import {IProjectFilter, IProjectFilterCheck} from './IProjectFilter';
   import * as types from '../../../store/modules/projects/project-types';
   import {IModel} from '../../../shared/interfaces/IModel';
+  import {IProgram} from "../../../shared/interfaces/IProgram";
 
   export default Vue.extend({
       data() {

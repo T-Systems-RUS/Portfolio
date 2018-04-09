@@ -10,7 +10,7 @@ const projectAddonsService = {
 
   getProjectFilterModel: async () => {
     const lines = await Line.scope([Scopes.WITH_PROGRAMS]).findAll();
-    const programs = await Program.findAll({ order: [['name', 'ASC']] });
+    const programs = await Program.scope([Scopes.WITH_LINE]).findAll({ order: [['name', 'ASC']] });
     const types = await Type.findAll();
     const domains = await Domain.findAll({ order: [['name', 'ASC']] });
     const customers = await  Customer.findAll({ order: [['name', 'ASC']] });
