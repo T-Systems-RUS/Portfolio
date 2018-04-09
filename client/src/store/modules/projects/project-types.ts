@@ -16,3 +16,5 @@ export const SET_DOMAINS = 'projects/SET_DOMAINS';
 export const SET_TYPES = 'projects/SET_TYPES';
 export const SET_CUSTOMERS = 'projects/SET_CUSTOMERS';
 export const SET_PROJECTS = 'projects/SET_PROJECTS';
+
+export const FINISH_LOADING = 'projects/FINISH_LOADING';
