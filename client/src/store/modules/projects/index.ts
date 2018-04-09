@@ -19,12 +19,12 @@ export interface IProjectState {
 }
 
 const initialState: IProjectState = {
-  projects: new Array<IProject>(),
-  customers: new Array<ICustomer>(),
-  lines: new Array<ILine>(),
-  programs: new Array<IProgram>(),
-  domains: new Array<IDomain>(),
-  types: new Array<IType>(),
+  projects: [],
+  customers: [],
+  lines: [],
+  programs: [],
+  domains: [],
+  types: [],
   loading: true
 };
 
