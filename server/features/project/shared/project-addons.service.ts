@@ -15,12 +15,7 @@ const projectAddonsService = {
     const domains = await Domain.findAll({ order: [['name', 'ASC']] });
     const customers = await  Customer.findAll({ order: [['name', 'ASC']] });
 
-    const dto = new ProjectFilterDto();
-    dto.lines = lines;
-    dto.programs = programs;
-    dto.types = types;
-    dto.domains = domains;
-    dto.customers = customers;
+    const dto = new ProjectFilterDto(lines, programs, domains, types, customers);
 
     return dto;
   }

@@ -10,4 +10,17 @@ export class ProjectFilterDto {
   domains: Domain[];
   types: Type[];
   customers: Customer[];
+
+  constructor(
+    lines: Line[],
+    programs: Program[],
+    domains: Domain[],
+    types: Type[],
+    customers: Customer[]) {
+    this.lines = lines;
+    this.programs = programs;
+    this.domains = domains;
+    this.types = types;
+    this.customers = customers;
+  }
 }
