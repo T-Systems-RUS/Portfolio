@@ -10,7 +10,7 @@
         :key="item.value">
         <div class="filter-item">
           <Checkbox :checked = "item.checked"
-                    v-on:update:checked="handleFilterAction(item, 'line')"/>
+                    @update:checked="handleFilterAction(item, model.name)"/>
           <span class="title is-5 is-size-16 is-uppercase">{{ item.value }}</span>
         </div>
       </div>
@@ -23,58 +23,61 @@
   import {IProject} from '../../../shared/interfaces/IProject';
   import Accordion from '../../common/Accordion/Accordion.vue';
   import Checkbox from '../../common/Checkbox/Checkbox.vue';
-  import Constants from '../../../shared/constants/project.constants';
   import {IProjectFilter, IProjectFilterCheck} from './IProjectFilter';
-
+  import * as types from '../../../store/modules/projects/project-types';
+  import {IModel} from '../../../shared/interfaces/IModel';
+  import {IProgram} from '../../../shared/interfaces/IProgram';
 
   export default Vue.extend({
-      data() {
-        return {
-          models: new Array<IProjectFilter>()
-        }
-      },
-      created() {
-        // TODO make it in computed property after moving constants to db
-        this.models = Object.keys(Constants).map(key => {
+    data() {
+      return {
+        accordionModels: [] as IProjectFilter[]
+      };
+    },
+    created() {
+      this.$store.dispatch(types.FETCH_ADDONS);
+    },
+    computed: {
+
+      models(): IProjectFilter[] {
+        const addons = this.$store.getters[types.GET_ADDONS];
+        this.accordionModels = [] as IProjectFilter[];
+
+        Object.keys(addons).forEach(key => {
           const model: IProjectFilter = {
             name: key,
             opened: true,
-            items: this.createModelForCheckboxes(Constants[key])
+            items: this.createModelForCheckboxes(addons[key])
           };
 
-          return model;
+          this.accordionModels.push(model);
         });
 
-        const customers: IProjectFilter = {
-          name: 'Customers',
-          opened: true,
-          items: this.createModelForCheckboxes(this.$store.state.projects.customers)
-        };
-        this.models.push(customers);
+        return this.accordionModels;
+      }
+    },
+    components: {
+      Accordion,
+      Checkbox
+    },
+
+    methods: {
+      // re render checkbox
+      // will be used later for project filtering via store
+      handleFilterAction(item:any, key: string) {
+        item.checked = !item.checked;
       },
 
-      components: {
-          Accordion,
-          Checkbox
-      },
-
-      methods: {
-        // re render checkbox
-        // will be used later for project filtering via store
-        handleFilterAction(item:any, key: string){
-          item.checked = !item.checked;
-        },
-
-        // Model for checkboxes must have a label
-        // and boolean property checked
-        createModelForCheckboxes(source: String[]) :IProjectFilterCheck[]{
-          return source.map(item =>  new Object({
-              value: item,
+      // Model for checkboxes must have a label
+      // and boolean property checked
+      createModelForCheckboxes(source: IModel[]) :IProjectFilterCheck[] {
+        return source.map(item => new Object({
+              value: item.name,
               checked: false
             })
-          ) as IProjectFilterCheck[]
-        }
+          ) as IProjectFilterCheck[];
       }
+    }
   });
 </script>
 

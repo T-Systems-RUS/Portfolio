@@ -1,14 +1,14 @@
 <template>
   <div class="project-card is-clickable">
     <div class="project-card-header title is-7 is-size-16 is-centered is-uppercase">
-      {{ project.line }}
+      {{ project.program.line.name }}
     </div>
     <div class="project-card-body">
       <h6 class="project-card-title title is-7 is-size-16">
         {{ project.name }}
       </h6>
       <div class="title is-5 is-size-12 is-secondary">
-        {{ project.domain }}
+        {{ project.domain.name }}
       </div>
       <div class="project-card-description title is-4 is-size-14">
         {{ project.description }}
@@ -17,7 +17,7 @@
     <div class="project-card-footer">
       <div class="project-card-team">
         <img src="../../root/assets/team.svg">
-        <span class="title is-6 is-size-19">{{ teamcount }}</span>
+        <span class="title is-6 is-size-19">{{ teamCount }}</span>
       </div>
       <div class="title is-5 is-size-12 is-secondary">
         {{ project.updatedAt | date }}
@@ -38,7 +38,7 @@
       }
     },
     computed: {
-      teamcount() {
+      teamCount() {
         return this.project.schedules.length;
       }
     }

@@ -47,7 +47,7 @@
             <g id="Badge" transform="translate(21.000000, 7.000000)">
                 <rect id="Rectangle-3" fill="#FFFFFF" x="0" y="26" width="191.847656" height="217.183594" rx="8"></rect>
                 <g id="Logo" transform="translate(10.000000, 208.000000)">
-                    <g id="Line-logo">
+                    <g id="Line.ts-logo">
                         <circle id="Oval-" fill="#34AE4A" cx="3.87573242" cy="19.3786621" r="3.87573242"></circle>
                         <circle id="Oval-" fill="#34AE4A" cx="20.1538086" cy="6.20117188" r="3.87573242"></circle>
                         <circle id="Oval-3" fill="#34AE4A" cx="26.3549805" cy="21.7041016" r="3.87573242"></circle>
@@ -55,12 +55,12 @@
                         <circle id="Oval-6" fill="#34AE4A" cx="44.1833496" cy="13.1774902" r="3.87573242"></circle>
                         <circle id="Oval-6-Copy" fill="#34AE4A" cx="58.1359863" cy="16.2780762" r="3.87573242"></circle>
                         <circle id="Oval-4" fill="#34AE4A" cx="34.1064453" cy="3.87573242" r="3.87573242"></circle>
-                        <path d="M4.26330566,19.7662354 L19.7662354,7.3638916" id="Line" stroke="#34AE4A" stroke-linecap="square"></path>
-                        <path d="M25.9674072,21.3165283 L21.3165283,6.58874512" id="Line-Copy" stroke="#34AE4A" stroke-linecap="square"></path>
-                        <path d="M26.7425537,22.0916748 L34.4940186,3.48815918" id="Line-Copy-2" stroke="#34AE4A" stroke-linecap="square"></path>
-                        <path d="M38.369751,28.2928467 L34.4940186,4.26330566" id="Line-Copy-3" stroke="#34AE4A" stroke-linecap="square"></path>
-                        <path d="M38.369751,26.7425537 L43.7957764,14.34021" id="Line-Copy-4" stroke="#34AE4A" stroke-linecap="round"></path>
-                        <path d="M44.5709229,13.5650635 L57.7484131,15.8905029" id="Line-Copy-5" stroke="#34AE4A" stroke-linecap="round"></path>
+                        <path d="M4.26330566,19.7662354 L19.7662354,7.3638916" id="Line.ts" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M25.9674072,21.3165283 L21.3165283,6.58874512" id="Line.ts-Copy" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M26.7425537,22.0916748 L34.4940186,3.48815918" id="Line.ts-Copy-2" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M38.369751,28.2928467 L34.4940186,4.26330566" id="Line.ts-Copy-3" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M38.369751,26.7425537 L43.7957764,14.34021" id="Line.ts-Copy-4" stroke="#34AE4A" stroke-linecap="round"></path>
+                        <path d="M44.5709229,13.5650635 L57.7484131,15.8905029" id="Line.ts-Copy-5" stroke="#34AE4A" stroke-linecap="round"></path>
                         <text id="" font-family="Ionicons" font-size="5" font-weight="400" fill="#FFFFFF">
                             <tspan x="2.55029297" y="21.3786621"></tspan>
                         </text>

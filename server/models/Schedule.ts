@@ -2,6 +2,7 @@ import {Model, Column, DataType, Table, Scopes, CreatedAt, UpdatedAt, ForeignKey
 import {Employee} from './Employee';
 import {Project} from './Project';
 import {Role} from './Role';
+import {Tables} from '../sequelize/Tables';
 
 @Scopes({
     full: {
@@ -13,7 +14,7 @@ import {Role} from './Role';
     }
 })
 @Table({
-    tableName: 'Schedules'
+    tableName: Tables.SCHEDULES
 })
 export class Schedule extends Model<Schedule> {
 
@@ -35,7 +36,7 @@ export class Schedule extends Model<Schedule> {
     // Project
     @ForeignKey(() => Project)
     @Column
-    projectid: number;
+    projectId: number;
 
     @BelongsTo(() => Project)
     project: Project;
@@ -43,7 +44,7 @@ export class Schedule extends Model<Schedule> {
     // Employee
     @ForeignKey(() => Employee)
     @Column
-    employeeid: number;
+    employeeId: number;
 
     @BelongsTo(() => Employee)
     employee: Employee;
@@ -51,7 +52,7 @@ export class Schedule extends Model<Schedule> {
     // Role
     @ForeignKey(() => Role)
     @Column
-    roleid: number;
+    roleId: number;
 
     @BelongsTo(() => Role)
     role: Role;

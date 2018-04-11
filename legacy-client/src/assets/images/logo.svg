@@ -7,7 +7,7 @@
     <g id="Shared" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Header" transform="translate(-11.000000, -10.000000)">
             <g id="Logo" transform="translate(11.000000, 10.000000)">
-                <g id="Line-logo">
+                <g id="Line.ts-logo">
                     <g>
                         <circle id="Oval-" fill="#34AE4A" cx="5" cy="25" r="5"></circle>
                         <circle id="Oval-" fill="#34AE4A" cx="26" cy="8" r="5"></circle>
@@ -16,12 +16,12 @@
                         <circle id="Oval-6" fill="#34AE4A" cx="57" cy="17" r="5"></circle>
                         <circle id="Oval-6-Copy" fill="#34AE4A" cx="75" cy="21" r="5"></circle>
                         <circle id="Oval-4" fill="#34AE4A" cx="44" cy="5" r="5"></circle>
-                        <path d="M5.5,25.5 L25.5,9.5" id="Line" stroke="#34AE4A" stroke-linecap="square"></path>
-                        <path d="M33.5,27.5 L27.5,8.5" id="Line-Copy" stroke="#34AE4A" stroke-linecap="square"></path>
-                        <path d="M34.5,28.5 L44.5,4.5" id="Line-Copy-2" stroke="#34AE4A" stroke-linecap="square"></path>
-                        <path d="M49.5,36.5 L44.5,5.5" id="Line-Copy-3" stroke="#34AE4A" stroke-linecap="square"></path>
-                        <path d="M49.5,34.5 L56.5,18.5" id="Line-Copy-4" stroke="#34AE4A" stroke-linecap="round"></path>
-                        <path d="M57.5,17.5 L74.5,20.5" id="Line-Copy-5" stroke="#34AE4A" stroke-linecap="round"></path>
+                        <path d="M5.5,25.5 L25.5,9.5" id="Line.ts" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M33.5,27.5 L27.5,8.5" id="Line.ts-Copy" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M34.5,28.5 L44.5,4.5" id="Line.ts-Copy-2" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M49.5,36.5 L44.5,5.5" id="Line.ts-Copy-3" stroke="#34AE4A" stroke-linecap="square"></path>
+                        <path d="M49.5,34.5 L56.5,18.5" id="Line.ts-Copy-4" stroke="#34AE4A" stroke-linecap="round"></path>
+                        <path d="M57.5,17.5 L74.5,20.5" id="Line.ts-Copy-5" stroke="#34AE4A" stroke-linecap="round"></path>
                         <text id="ion-ios-search---Ionicons" font-family="Ionicons" font-size="8" font-weight="400" fill="#FFFFFF">
                             <tspan x="2" y="28"></tspan>
                         </text>

@@ -4,12 +4,12 @@
       <span>{{ name }}</span>
       <div class="accordion-button is-pulled-right"
            @click="toggleOpened">
-            <img src="../assets/arrowDown.svg"
-              :class="{'is-closed' :openedValue}">
+        <img src="../assets/arrowDown.svg"
+             :class="{'is-closed' :openedValue}">
       </div>
     </div>
     <div v-if="openedValue" class="accordion-body">
-      <slot></slot>
+      <slot/>
     </div>
   </div>
 </template>

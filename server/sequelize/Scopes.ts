@@ -8,8 +8,11 @@
 export enum Scopes {
     ACTUAL_PROJECTS = 'actualProjects',
     FULL = 'full',
+    PROJECT_LIST = 'projectList',
     WITH_EMPLOYESS = 'withEmployees',
     WITH_PROJECTS = 'withProjects',
+    WITH_PROGRAMS = 'withPrograms',
+    WITH_LINE = 'withLine',
     WITH_SCHEDULES = 'withSchedules',
     WITH_TECHNOLOGIES = 'withTechnologies'
 }

@@ -8,28 +8,35 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      uniqueId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       name: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      line: {
-        allowNull: false,
-        type: Sequelize.STRING
+      domainId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Domains',
+          key: 'id'
+        },
       },
-      customer: {
-        type: Sequelize.STRING
+      typeId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Types',
+          key: 'id'
+        },
       },
-      domain: {
+      programId: {
         allowNull: false,
-        type: Sequelize.STRING
-      },
-      type: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      program: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Programs',
+          key: 'id'
+        },
       },
       pss: {
         type: Sequelize.DECIMAL
@@ -41,10 +48,6 @@ module.exports = {
       description: {
         type: Sequelize.TEXT,
         validate: { len: [0,100000] }
-      },
-      teamcount: {
-        defaultValue:"0",
-        type: Sequelize.STRING
       },
       image: {
         type: Sequelize.STRING

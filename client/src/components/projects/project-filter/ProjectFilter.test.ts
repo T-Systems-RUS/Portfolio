@@ -7,7 +7,7 @@ describe('Project Filter', () => {
   const wrapper = mount(ProjectFilter, {
     store: store
   });
-  const lines = ['digital integration', 'sap'];
+  const lines = [{ name: 'digital integration'}, { name: 'sap'}];
 
   it('should convert strings to same number of models for Checkboxes', () => {
 
