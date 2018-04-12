@@ -1,6 +1,6 @@
 import ProjectFilter from './ProjectFilter.vue';
 import {mount} from '@vue/test-utils';
-import store from '../../../store/index';
+import store from '../../../store/modules/index';
 
 describe('Project Filter', () => {
 
