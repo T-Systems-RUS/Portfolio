@@ -16,7 +16,9 @@
       </div>
     </Accordion>
     <Accordion
-      name = "Technologies">
+      name = "Technologies"
+      :opened="accordionOpened"
+      @update:opened="accordionOpened = !accordionOpened">
       <technology-picker></technology-picker>
     </Accordion>
   </div>
@@ -36,6 +38,7 @@
   export default Vue.extend({
     data() {
       return {
+        accordionOpened: true,
         accordionModels: [] as IProjectFilter[]
       };
     },

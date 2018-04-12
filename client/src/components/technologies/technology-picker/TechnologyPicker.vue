@@ -1,5 +1,15 @@
 <template>
   <div class="technology-picker">
+    <div class="technology-picker-search input">
+      <img
+        class="input-image"
+        src="../assets/search.svg">
+      <input
+        class="input-box with-image"
+        type="text"
+        placeholder="Search technology"
+        v-model = "search">
+    </div>
     <chip
       v-for="technology in technologies"
       :key="technology.id"
@@ -14,6 +24,11 @@
   import {ITechnology} from "../../../shared/interfaces/ITechnology";
 
   export default Vue.extend({
+    data() {
+      return {
+        search: ''
+      }
+    },
     components: {
       Chip
     },
@@ -24,10 +39,25 @@
       technologies(): ITechnology[] {
         return this.$store.state.technologies.technologies;
       }
+    },
+    watch: {
+      search: function (val) {
+        // TODO implement filtering through technologies
+        // best practice? 
+        console.log(val);
+      }
     }
   })
 </script>
 
 <style lang="scss" scoped>
+  @import '../../../styles/variables';
 
+  .technology-picker {
+    position: relative;
+
+    &-search {
+      margin-bottom: 10px;
+    }
+  }
 </style>
