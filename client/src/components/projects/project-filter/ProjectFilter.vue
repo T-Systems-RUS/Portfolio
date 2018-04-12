@@ -15,6 +15,10 @@
         </div>
       </div>
     </Accordion>
+    <Accordion
+      name = "Technologies">
+      <technology-picker></technology-picker>
+    </Accordion>
   </div>
 </template>
 
@@ -23,6 +27,7 @@
   import {IProject} from '../../../shared/interfaces/IProject';
   import Accordion from '../../common/Accordion/Accordion.vue';
   import Checkbox from '../../common/Checkbox/Checkbox.vue';
+  import TechnologyPicker from '../../technologies/technology-picker/TechnologyPicker.vue';
   import {IProjectFilter, IProjectFilterCheck} from './IProjectFilter';
   import * as types from '../../../store/modules/projects/project-types';
   import {IModel} from '../../../shared/interfaces/IModel';
@@ -58,7 +63,8 @@
     },
     components: {
       Accordion,
-      Checkbox
+      Checkbox,
+      TechnologyPicker
     },
 
     methods: {
