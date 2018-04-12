@@ -22,6 +22,11 @@ describe('Chips', () => {
     expect(wrapper.vm.isActive).toEqual(false);
   });
 
+  it('should change active state', () => {
+    wrapper.vm.toggleActive();
+    expect(wrapper.vm.isActive).toEqual(true);
+  });
+
   it('should render correct name property', () => {
     expect(wrapper.props().name).toBe(name);
   });

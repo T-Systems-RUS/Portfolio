@@ -2,7 +2,7 @@
   <div
     class="chip"
     :class ="{'is-active': isActive}"
-    @click="isActive = ! isActive">
+    @click="toggleActive">
     <!--TODO implement later-->
     <!--<img class="chip-image" src="">-->
     <span class="chip-content title is-4 is-size-14">{{ name }}</span>
@@ -26,6 +26,11 @@
         type: String,
         required: true,
         default: ''
+      }
+    },
+    methods: {
+      toggleActive() {
+        this.isActive = !this.isActive;
       }
     }
   });
