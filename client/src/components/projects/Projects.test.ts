@@ -1,5 +1,5 @@
 import Projects from './Projects.vue';
-import store from '../../store/modules/index';
+import store from '../../store/index';
 import {FETCH_PROJECTS} from '../../store/modules/projects/project-types';
 import {mount} from '@vue/test-utils';
 

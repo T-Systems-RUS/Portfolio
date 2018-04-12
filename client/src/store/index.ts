@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import projects from './projects/index';
-import technologies from './technologies/index';
+import projects from './modules/projects/index';
+import technologies from './modules/technologies/index';
 
 Vue.use(Vuex);
 
