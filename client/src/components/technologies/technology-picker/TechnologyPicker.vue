@@ -8,7 +8,8 @@
         class="input-box with-image"
         type="text"
         placeholder="Search technology"
-        v-model = "search">
+        v-model = "search"
+        @change = "filterTechnologies(search)">
     </div>
     <chip
       v-for="technology in technologies"
@@ -40,11 +41,9 @@
         return this.$store.state.technologies.technologies;
       }
     },
-    watch: {
-      search: function (val) {
-        // TODO implement filtering through technologies
-        // best practice? 
-        console.log(val);
+    methods: {
+      filterTechnologies(search: string) {
+        console.log(search);
       }
     }
   })
