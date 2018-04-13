@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router/index';
-import store from './store'
+import store from './store/index'
 
 // Global styles
 import './styles/styles.scss';

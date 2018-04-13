@@ -1,6 +1,5 @@
 import {FETCH_PROJECTS, FETCH_ADDONS,SET_CUSTOMERS, FINISH_LOADING,SET_PROJECTS, SET_LINES, SET_PROGRAMS, SET_DOMAINS, SET_TYPES} from './project-types';
 import {ProjectService} from './project.service';
-import {Extension} from '../../../shared/classes/Extension';
 import {ActionTree} from 'vuex';
 import {IProjectState} from './index';
 
@@ -12,7 +11,6 @@ export const actions:ActionTree<IProjectState,{}> = {
     return service.getProjects()
       .then((response) => {
         commit(SET_PROJECTS, response.data);
-        commit(SET_CUSTOMERS, Extension.getUniqueValues(response.data, 'customer'));
       })
   },
 

@@ -26,19 +26,19 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import Vue from 'vue';
   import {IProject} from '../../../shared/interfaces/IProject';
 
   export default Vue.extend({
     props: {
       project: {
-        type: IProject,
+        type: Object as () => IProject,
         required: true
       }
     },
     computed: {
-      teamCount() {
+      teamCount(): number {
         return this.project.schedules.length;
       }
     }

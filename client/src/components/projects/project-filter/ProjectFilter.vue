@@ -15,6 +15,12 @@
         </div>
       </div>
     </Accordion>
+    <Accordion
+      name = "Technologies"
+      :opened="accordionOpened"
+      @update:opened="accordionOpened = !accordionOpened">
+      <technology-picker></technology-picker>
+    </Accordion>
   </div>
 </template>
 
@@ -23,6 +29,7 @@
   import {IProject} from '../../../shared/interfaces/IProject';
   import Accordion from '../../common/Accordion/Accordion.vue';
   import Checkbox from '../../common/Checkbox/Checkbox.vue';
+  import TechnologyPicker from '../../technologies/technology-picker/TechnologyPicker.vue';
   import {IProjectFilter, IProjectFilterCheck} from './IProjectFilter';
   import * as types from '../../../store/modules/projects/project-types';
   import {IModel} from '../../../shared/interfaces/IModel';
@@ -31,6 +38,7 @@
   export default Vue.extend({
     data() {
       return {
+        accordionOpened: true,
         accordionModels: [] as IProjectFilter[]
       };
     },
@@ -58,7 +66,8 @@
     },
     components: {
       Accordion,
-      Checkbox
+      Checkbox,
+      TechnologyPicker
     },
 
     methods: {
