@@ -15,6 +15,7 @@ export interface IProjectState {
   domains: IDomain[];
   types: IType[];
   customers: ICustomer[];
+  filter: Object;
   loading: boolean;
 }
 
@@ -25,6 +26,7 @@ const initialState: IProjectState = {
   programs: [],
   domains: [],
   types: [],
+  filter: {},
   loading: true
 };
 

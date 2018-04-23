@@ -1,4 +1,4 @@
-import {SET_CUSTOMERS, SET_PROJECTS, SET_LINES, SET_PROGRAMS, SET_DOMAINS, SET_TYPES, FINISH_LOADING} from './project-types';
+import {SET_CUSTOMERS, SET_PROJECTS, SET_LINES, SET_PROGRAMS, SET_DOMAINS, SET_TYPES, FINISH_LOADING, SET_FILTER} from './project-types';
 import {IProject} from '../../../shared/interfaces/IProject';
 import {IProjectState} from './index';
 import {ICustomer} from '../../../shared/interfaces/ICustomer';
@@ -10,6 +10,10 @@ import {IType} from '../../../shared/interfaces/IType';
 export const mutations = {
   [SET_PROJECTS](state: IProjectState, payload: IProject[]) {
     state.projects = payload;
+    state.loading = false;
+  },
+  [SET_FILTER](state: IProjectState, payload: Object) {
+    //state.filter[payload.key] = payload.value;
     state.loading = false;
   },
   [SET_LINES](state: IProjectState, payload: ILine[]) {

@@ -1,4 +1,4 @@
-import {GET_ADDONS} from './project-types';
+import {GET_ADDONS, GET_PROJECTS} from './project-types';
 import {IProjectState} from './index';
 import {Types} from './constant-types';
 
@@ -18,5 +18,9 @@ export const getters = {
       [Types.PROJECT_TYPE]: state.types,
       [Types.CUSTOMER]: state.customers,
     };
+  },
+
+  [GET_PROJECTS](state: IProjectState) {
+    return state.projects;
   }
 }
