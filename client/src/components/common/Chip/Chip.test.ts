@@ -7,7 +7,7 @@ const name = 'Agile';
 describe('Chips', () => {
 
   const wrapper = mount(Chip, {
-
+    store: store,
     propsData: {
       name: name
     },
