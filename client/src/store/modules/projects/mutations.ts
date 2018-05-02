@@ -6,14 +6,20 @@ import {ILine} from '../../../shared/interfaces/ILine';
 import {IProgram} from '../../../shared/interfaces/IProgram';
 import {IDomain} from '../../../shared/interfaces/IDomain';
 import {IType} from '../../../shared/interfaces/IType';
+import {Extension} from '../../../shared/classes/Extension';
+import Vue from 'vue';
 
 export const mutations = {
   [SET_PROJECTS](state: IProjectState, payload: IProject[]) {
     state.projects = payload;
     state.loading = false;
   },
-  [SET_FILTER](state: IProjectState, payload: Object) {
-    //state.filter[payload.key] = payload.value;
+  [SET_FILTER](state: IProjectState, payload: { key: string, value: string }) {
+    Vue.set(
+      state.filter,
+      payload.key,
+      Extension.toggleArray(state.filter[payload.key], payload.value)
+    );
     state.loading = false;
   },
   [SET_LINES](state: IProjectState, payload: ILine[]) {

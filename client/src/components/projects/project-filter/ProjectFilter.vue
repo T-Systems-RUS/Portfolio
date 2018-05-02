@@ -19,7 +19,7 @@
       name = "Technologies"
       :opened="accordionOpened"
       @update:opened="accordionOpened = !accordionOpened">
-      <technology-picker></technology-picker>
+      <technology-picker/>
     </Accordion>
   </div>
 </template>
@@ -73,8 +73,9 @@
     methods: {
       // re render checkbox
       // will be used later for project filtering via store
-      handleFilterAction(item:any, key: string) {
+      handleFilterAction(item: IProjectFilterCheck, key: string) {
         item.checked = !item.checked;
+        this.$store.commit(types.SET_FILTER, { key: key, value: item.id});
       },
 
       // Model for checkboxes must have a label
@@ -82,7 +83,8 @@
       createModelForCheckboxes(source: IModel[]) :IProjectFilterCheck[] {
         return source.map(item => new Object({
               value: item.name,
-              checked: false
+              checked: false,
+              id: item.id
             })
           ) as IProjectFilterCheck[];
       }

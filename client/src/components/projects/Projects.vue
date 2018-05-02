@@ -37,12 +37,12 @@
   import {IProject} from '../../shared/interfaces/IProject';
   import ProjectCard from './project-card/ProjectCard.vue';
   import ProjectFilter from './project-filter/ProjectFilter.vue';
-  import { mapGetters } from 'vuex';
+  import {mapGetters} from 'vuex';
 
   export default Vue.extend({
     computed: {
       ...mapGetters({
-        'projects': types.GET_PROJECTS
+        projects: types.GET_PROJECTS
       })
     },
     components: {

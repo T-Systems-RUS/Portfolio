@@ -13,24 +13,31 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import * as types from '../../../store/modules/projects/project-types';
 
 
   export default Vue.extend({
     data() {
       return {
         isActive: false
-      }
+      };
     },
     props: {
       name: {
         type: String,
         required: true,
         default: ''
+      },
+      id: {
+        type: String,
+        required: false,
+        default: ''
       }
     },
     methods: {
       toggleActive() {
         this.isActive = !this.isActive;
+        this.$store.commit(types.SET_FILTER, {key: 'Technologies', value: this.id});
       }
     }
   });

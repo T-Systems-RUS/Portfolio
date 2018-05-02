@@ -17,4 +17,11 @@ export class Extension {
 
         return Array.from(uniqueSet).sort();
     }
+
+    public static toggleArray(source: string[]=[], value: string) {
+      const index = source.indexOf(value);
+      return index === -1
+        ? [...source, value]
+        : source.filter(item => item !== value);
+    }
   }
