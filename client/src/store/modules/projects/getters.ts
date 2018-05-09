@@ -21,6 +21,22 @@ export const getters = {
   },
 
   [GET_PROJECTS](state: IProjectState) {
-    return state.projects;
+    let projects = state.projects;
+
+    for (const  key in state.filter) {
+      projects = projects.filter(project => {
+        if(state.filter[key].length){
+          if(Array.isArray(project[key])) {
+
+          } else {
+            return state.filter[key].indexOf(project[key].id) > -1;
+          }
+        } else {
+          return project;
+        }
+      })
+    }
+
+    return projects;
   }
 }

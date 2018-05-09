@@ -1,6 +1,8 @@
 <template>
   <div class="technology-picker">
-    <div class="technology-picker-search input">
+    <div
+      class="technology-picker-search input"
+      v-if="technologies.length">
       <img
         class="input-image"
         src="../assets/search.svg">

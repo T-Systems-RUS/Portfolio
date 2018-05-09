@@ -37,7 +37,7 @@
     methods: {
       toggleActive() {
         this.isActive = !this.isActive;
-        this.$store.commit(types.SET_FILTER, {key: 'Technologies', value: this.id});
+        this.$store.commit(types.SET_FILTER, {key: 'technologies', value: this.id});
       }
     }
   });
