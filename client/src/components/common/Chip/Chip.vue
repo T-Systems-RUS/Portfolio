@@ -29,9 +29,8 @@
         default: ''
       },
       id: {
-        type: String,
-        required: false,
-        default: ''
+        type: Number,
+        required: false
       }
     },
     methods: {

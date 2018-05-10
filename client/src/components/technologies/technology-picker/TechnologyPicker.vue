@@ -17,7 +17,7 @@
       v-for="technology in technologies"
       :key="technology.id"
       :name="technology.name"
-      :id="technology.id.toString()"/>
+      :id="technology.id"/>
   </div>
 </template>
 
