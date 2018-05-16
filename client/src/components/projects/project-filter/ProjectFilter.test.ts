@@ -24,4 +24,12 @@ describe('Project Filter', () => {
     expect(model[0]).toMatchObject({value: 'digital integration', checked: false});
 
   });
+
+  it('correctly filter by object property', () => {
+
+    const model =  wrapper.vm.createModelForCheckboxes(lines);
+
+    expect(model[0]).toMatchObject({value: 'digital integration', checked: false});
+
+  });
 });
