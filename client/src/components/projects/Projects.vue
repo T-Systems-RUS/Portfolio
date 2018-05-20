@@ -19,6 +19,9 @@
           </div>
         </div>
       </div>
+      <p
+        class="projects is-empty"
+        v-if="!projects.length">No projects found</p>
 
       <project-card
         v-for="project in projects"
@@ -93,6 +96,12 @@
     &-right {
       margin-left: 25%;
       padding-left: 20px;
+    }
+
+    &.is-empty {
+      font-size: 40px;
+      margin-top: 100px;
+      text-align: center;
     }
   }
 
