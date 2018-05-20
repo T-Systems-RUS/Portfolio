@@ -9,7 +9,7 @@ import {ITechnology} from '../interfaces/ITechnology';
 
 export class TestMocks {
 
-  static TestDomain(d:string = 'Automotive') {
+  static TestDomain(d:string = 'Health') {
     const domain: IDomain = {
       id: '1',
       name: d,
@@ -23,9 +23,9 @@ export class TestMocks {
     return domain;
   }
 
-  static TestTechnology(t:string = 'Agile') {
+  static TestTechnology(i:string = '1', t:string = 'React') {
     const technology: ITechnology = {
-      id: '1',
+      id: i,
       name: t,
       domain: 'backend',
       active: false,
@@ -72,6 +72,7 @@ export class TestMocks {
       name: p,
       active: false,
       line: line,
+      lineId: '1',
       projects: [] as IProject[],
       createdAt:new Date(),
       updatedAt: new Date()
@@ -80,11 +81,11 @@ export class TestMocks {
     return program;
   }
 
-  static TestCustomer(c:string = 'BMW AG') {
+  static TestCustomer(i:string = '1', c:string = 'BMW AG') {
     const domain = this.TestDomain();
 
     const customer: ICustomer = {
-      id: 'id',
+      id: i,
       name: c,
       active: false,
       domain: domain,
@@ -101,9 +102,9 @@ export class TestMocks {
     const program = this.TestProgram();
     const type = this.TestType();
     const customer1 = this.TestCustomer();
-    const customer2 = this.TestCustomer('Daimler');
+    const customer2 = this.TestCustomer('2','Daimler');
     const technology1 = this.TestTechnology();
-    const technology2 = this.TestTechnology('React');
+    const technology2 = this.TestTechnology('2', 'Angular 6');
 
     const project: IProject = {
       id: '1',
