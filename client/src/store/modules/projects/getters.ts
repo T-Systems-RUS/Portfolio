@@ -25,9 +25,13 @@ export const getters = {
   [GET_PROJECTS](state: IProjectState) {
     let projects = state.projects;
 
+    // iterates over keys in filter
     for (const  key in state.filter) {
       projects = projects.filter(project => {
+        // only if filter property has values in it
         if(state.filter[key].length){
+
+          // if property is array many-to-many relations in db
           if(Array.isArray(project[key])) {
             // OR condition at least one element of project
             // in filter customers

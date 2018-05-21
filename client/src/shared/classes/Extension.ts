@@ -18,6 +18,13 @@ export class Extension {
         return Array.from(uniqueSet).sort();
     }
 
+  /**
+   * Checks if array has element
+   * if has removes it if not adds it
+   * @param {string[]} source array to be checked
+   * @param {string} value to be checked if add or remove from array
+   * @returns {(any | string)[] | string[]}
+   */
     public static toggleArray(source: string[]=[], value: string) {
       const index = source.indexOf(value);
       return index === -1

@@ -9,10 +9,10 @@ import {ITechnology} from '../interfaces/ITechnology';
 
 export class TestMocks {
 
-  static TestDomain(d:string = 'Health') {
+  static TestDomain(domainName:string = 'Health') {
     const domain: IDomain = {
       id: '1',
-      name: d,
+      name: domainName,
       active: false,
       createdAt:new Date(),
       updatedAt: new Date(),
@@ -23,10 +23,10 @@ export class TestMocks {
     return domain;
   }
 
-  static TestTechnology(i:string = '1', t:string = 'React') {
+  static TestTechnology(techId:string = '1', techName:string = 'React') {
     const technology: ITechnology = {
-      id: i,
-      name: t,
+      id: techId,
+      name: techName,
       domain: 'backend',
       active: false,
       image: '',
@@ -39,10 +39,10 @@ export class TestMocks {
     return technology;
   }
 
-  static TestType(t:string = 'Project') {
+  static TestType(typeName:string = 'Project') {
     const type: IType = {
       id: '1',
-      name: t,
+      name: typeName,
       active: false,
       createdAt:new Date(),
       updatedAt: new Date()
@@ -51,10 +51,10 @@ export class TestMocks {
     return type;
   }
 
-  static TestLine(l:string = 'Automotive') {
+  static TestLine(lineName:string = 'Automotive') {
     const line: ILine = {
       id: '1',
-      name: l,
+      name: lineName,
       active: false,
       programs: [] as IProgram[],
       createdAt:new Date(),
@@ -64,12 +64,12 @@ export class TestMocks {
     return line;
   }
 
-  static TestProgram(p:string = 'Sales and Autosales') {
+  static TestProgram(programName:string = 'Sales and Autosales') {
     const line = this.TestLine();
 
     const program: IProgram = {
       id: '1',
-      name: p,
+      name: programName,
       active: false,
       line: line,
       lineId: '1',
@@ -81,12 +81,12 @@ export class TestMocks {
     return program;
   }
 
-  static TestCustomer(i:string = '1', c:string = 'BMW AG') {
+  static TestCustomer(customerId:string = '1', customerName:string = 'BMW AG') {
     const domain = this.TestDomain();
 
     const customer: ICustomer = {
-      id: i,
-      name: c,
+      id: customerId,
+      name: customerName,
       active: false,
       domain: domain,
       projects: [],
@@ -97,7 +97,7 @@ export class TestMocks {
     return customer;
   }
 
-  static TestProject(p:string = 'PPA') {
+  static TestProject(projectName:string = 'PPA') {
     const domain = this.TestDomain();
     const program = this.TestProgram();
     const type = this.TestType();
@@ -109,7 +109,7 @@ export class TestMocks {
     const project: IProject = {
       id: '1',
       active: false,
-      name: p,
+      name: projectName,
       description: '123',
       domain: domain,
       program: program,

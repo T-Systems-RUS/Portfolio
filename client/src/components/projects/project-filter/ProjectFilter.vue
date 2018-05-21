@@ -19,7 +19,7 @@
       name = "Technologies"
       :opened="accordionOpened"
       @update:opened="accordionOpened = !accordionOpened">
-      <technology-picker/>
+      <TechnologyPicker/>
     </Accordion>
   </div>
 </template>
@@ -76,8 +76,7 @@
       // will be used later for project filtering via store
       handleFilterAction(item: IProjectFilterCheck, key: string) {
         item.checked = !item.checked;
-        const property = Util.mapNameToProperty(key);
-        this.$store.commit(types.SET_FILTER, { key: property, value: item.id });
+        this.$store.commit(types.SET_FILTER, { key: Util.mapNameToProperty(key), value: item.id });
       },
 
       // Model for checkboxes must have a label
