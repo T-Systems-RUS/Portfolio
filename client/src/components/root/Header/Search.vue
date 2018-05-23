@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Autocomplete :value="search" :items="projectNames" @input="setSearch($event)"/>
+    <Autocomplete
+      :placeholder="'Search projects...'"
+      :value="search"
+      :items="projectNames"
+      @input="setSearch($event)"/>
   </div>
 </template>
 
