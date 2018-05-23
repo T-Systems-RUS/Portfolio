@@ -8,7 +8,7 @@
             @input="valueChanged()"
             class="input"
             type="text"
-            placeholder="Input text...">
+            :placeholder="placeholderText">
         </button>
       </div>
       <div
@@ -30,13 +30,15 @@
   import Vue from 'vue';
 
   interface IAutocompleteData {
+    placeholderText: string;
     inputValue: string;
   }
 
   export default Vue.extend({
-    props: ['items', 'value'],
+    props: ['items', 'value', 'placeholder'],
     data(): IAutocompleteData {
       return {
+        placeholderText: this.placeholder || 'Input text...',
         inputValue: this.value
       };
     },

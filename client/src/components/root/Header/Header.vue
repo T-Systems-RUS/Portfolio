@@ -33,15 +33,20 @@
       </nav>
     </div>
     <div class="level-right">
-      <a
-        v-if="searchToggled"
-        class="level-item">
-        <Search/>
+      <a class="search-bar level-item">
+        <transition name="search">
+          <Search v-if="searchToggled"/>
+        </transition>
       </a>
+
       <a
         class="level-item"
         @click="toggleSearch">
-        <img src="../assets/search.svg">
+        <img v-if="!searchToggled"
+             src="../assets/search.svg">
+        <img v-if="searchToggled"
+             class="close-icon"
+             src="../assets/close.svg">
       </a>
       <a class="level-item">
         <img src="../assets/user.svg">
@@ -75,7 +80,6 @@
   @import '../../../styles/variables';
   @import '../../../../node_modules/bulma/sass/utilities/mixins';
 
-
   .header {
     position: fixed;
     top: 0;
@@ -88,23 +92,37 @@
     padding: 0 $side-padding;
     box-shadow: $shadow;
 
-
-    &-nav{
+    &-nav {
       margin-left: 20px;
 
-      &-item{
-        color:$text-color;
+      &-item {
+        color: $text-color;
         margin-right: 30px;
         transition: all .3s;
 
-        &.is-active{
+        &.is-active {
           font-weight: bold;
         }
 
-        &:hover{
+        &:hover {
           text-decoration: underline;
         }
       }
     }
+
+    .close-icon {
+      width: 20px;
+    }
+  }
+
+  .search-enter-active, .search-leave-active {
+    width: 100%;
+    transition: all 0.5s ease;
+    opacity: 1;
+  }
+
+  .search-enter, .search-leave-to {
+    width: 0;
+    opacity: 0;
   }
 </style>

@@ -18,9 +18,12 @@
     },
     computed: {
       ...mapGetters({
-        search: SEARCH,
-        projectNames: PROJECT_NAMES
-      })
+        search: SEARCH
+      }),
+      projectNames(): string[] {
+        // Only set items if there's a search
+        return this.$store.getters[SEARCH] ? this.$store.getters[PROJECT_NAMES] : [];
+      }
     },
     methods: {
       setSearch(value: string) {
@@ -29,16 +32,3 @@
     },
   });
 </script>
-
-<style lang="scss" scoped>
-  @import '~bulma/sass/utilities/initial-variables';
-  @import '~bulma/sass/utilities/derived-variables';
-  @import '~bulma/sass/components/dropdown';
-
-  .dropdown {
-    .input:focus {
-      border: none;
-      box-shadow: none;
-    }
-  }
-</style>
