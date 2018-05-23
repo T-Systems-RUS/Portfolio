@@ -4,6 +4,7 @@ export const DELETE_PROJECT = 'projects/DELETE_PROJECT';
 
 // GET
 export const GET_ADDONS = 'projects/GET_ADDONS';
+export const GET_PROJECTS = 'projects/GET_PROJECTS';
 
 // FETCH
 export const FETCH_ADDONS = 'projects/FETCH_ADDONS';
@@ -16,5 +17,6 @@ export const SET_DOMAINS = 'projects/SET_DOMAINS';
 export const SET_TYPES = 'projects/SET_TYPES';
 export const SET_CUSTOMERS = 'projects/SET_CUSTOMERS';
 export const SET_PROJECTS = 'projects/SET_PROJECTS';
+export const SET_FILTER = 'projects/SET_FILTER';
 
 export const FINISH_LOADING = 'projects/FINISH_LOADING';

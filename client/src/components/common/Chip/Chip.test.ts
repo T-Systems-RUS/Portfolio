@@ -7,9 +7,9 @@ const name = 'Agile';
 describe('Chips', () => {
 
   const wrapper = mount(Chip, {
-
+    store,
     propsData: {
-      name: name
+      name
     },
     filters: {
       date(value) {

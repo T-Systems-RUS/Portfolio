@@ -19,7 +19,7 @@
       name = "Technologies"
       :opened="accordionOpened"
       @update:opened="accordionOpened = !accordionOpened">
-      <technology-picker></technology-picker>
+      <TechnologyPicker/>
     </Accordion>
   </div>
 </template>
@@ -34,6 +34,7 @@
   import * as types from '../../../store/modules/projects/project-types';
   import {IModel} from '../../../shared/interfaces/IModel';
   import {IProgram} from '../../../shared/interfaces/IProgram';
+  import {Util} from "../../../shared/classes/Util";
 
   export default Vue.extend({
     data() {
@@ -73,8 +74,9 @@
     methods: {
       // re render checkbox
       // will be used later for project filtering via store
-      handleFilterAction(item:any, key: string) {
+      handleFilterAction(item: IProjectFilterCheck, key: string) {
         item.checked = !item.checked;
+        this.$store.commit(types.SET_FILTER, { key: Util.mapNameToProperty(key), value: item.id });
       },
 
       // Model for checkboxes must have a label
@@ -82,7 +84,8 @@
       createModelForCheckboxes(source: IModel[]) :IProjectFilterCheck[] {
         return source.map(item => new Object({
               value: item.name,
-              checked: false
+              checked: false,
+              id: item.id
             })
           ) as IProjectFilterCheck[];
       }

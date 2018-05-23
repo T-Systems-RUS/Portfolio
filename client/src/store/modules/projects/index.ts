@@ -7,6 +7,7 @@ import {ILine} from '../../../shared/interfaces/ILine';
 import {IProgram} from '../../../shared/interfaces/IProgram';
 import {IDomain} from '../../../shared/interfaces/IDomain';
 import {IType} from '../../../shared/interfaces/IType';
+import {IFilter} from '../../../shared/interfaces/IFilter';
 
 export interface IProjectState {
   projects: IProject[];
@@ -15,6 +16,7 @@ export interface IProjectState {
   domains: IDomain[];
   types: IType[];
   customers: ICustomer[];
+  filter: IFilter;
   loading: boolean;
 }
 
@@ -25,6 +27,7 @@ const initialState: IProjectState = {
   programs: [],
   domains: [],
   types: [],
+  filter: {} as IFilter,
   loading: true
 };
 

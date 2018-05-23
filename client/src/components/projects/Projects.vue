@@ -19,6 +19,9 @@
           </div>
         </div>
       </div>
+      <p
+        class="projects is-empty"
+        v-if="!projects.length">No projects found</p>
 
       <project-card
         v-for="project in projects"
@@ -37,12 +40,13 @@
   import {IProject} from '../../shared/interfaces/IProject';
   import ProjectCard from './project-card/ProjectCard.vue';
   import ProjectFilter from './project-filter/ProjectFilter.vue';
+  import {mapGetters} from 'vuex';
 
   export default Vue.extend({
     computed: {
-      projects(): IProject[] {
-        return this.$store.state.projects.projects;
-      }
+      ...mapGetters({
+        projects: types.GET_PROJECTS
+      })
     },
     components: {
       ProjectCard,
@@ -92,6 +96,12 @@
     &-right {
       margin-left: 25%;
       padding-left: 20px;
+    }
+
+    &.is-empty {
+      font-size: 40px;
+      margin-top: 100px;
+      text-align: center;
     }
   }
 

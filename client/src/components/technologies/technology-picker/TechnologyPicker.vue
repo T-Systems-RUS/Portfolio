@@ -1,6 +1,8 @@
 <template>
   <div class="technology-picker">
-    <div class="technology-picker-search input">
+    <div
+      class="technology-picker-search input"
+      v-if="technologies.length">
       <img
         class="input-image"
         src="../assets/search.svg">
@@ -14,7 +16,8 @@
     <chip
       v-for="technology in technologies"
       :key="technology.id"
-      :name="technology.name"></chip>
+      :name="technology.name"
+      :id="technology.id"/>
   </div>
 </template>
 
@@ -22,13 +25,13 @@
   import Vue from 'vue';
   import Chip from '../../common/Chip/Chip.vue';
   import * as types from '../../../store/modules/technologies/technology-types';
-  import {ITechnology} from "../../../shared/interfaces/ITechnology";
+  import {ITechnology} from '../../../shared/interfaces/ITechnology';
 
   export default Vue.extend({
     data() {
       return {
         search: ''
-      }
+      };
     },
     components: {
       Chip
@@ -46,7 +49,7 @@
         console.log(search);
       }
     }
-  })
+  });
 </script>
 
 <style lang="scss" scoped>
