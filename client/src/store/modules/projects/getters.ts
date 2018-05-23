@@ -1,4 +1,4 @@
-import {ADDONS, PROJECT_NAMES, PROJECTS} from './project-types';
+import {ADDONS, PROJECT_NAMES, PROJECTS, SEARCH} from './project-types';
 import {IProjectState} from './index';
 import {Types} from './constant-types';
 import {Util} from '../../../shared/classes/Util';
@@ -23,7 +23,6 @@ export const getters: GetterTree<IProjectState, {}> = {
       [Types.CUSTOMER]: state.customers,
     };
   },
-
   [PROJECTS](state) {
     let projects = state.projects;
 
@@ -64,11 +63,12 @@ export const getters: GetterTree<IProjectState, {}> = {
 
     // Check if projects match search filter
     if (state.search) {
-      projects = projects.filter(project => project.name.indexOf(state.search) > -1);
+      projects = projects.filter(project => project.name.toLowerCase().indexOf(state.search.toLowerCase()) > -1);
     }
 
     return projects;
   },
+  [SEARCH]: state => state.search,
   [PROJECT_NAMES](state, getters) {
     return getters[PROJECTS].map((project: IProject) => project.name);
   }

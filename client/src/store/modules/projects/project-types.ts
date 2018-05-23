@@ -6,6 +6,7 @@ export const DELETE_PROJECT = 'projects/DELETE_PROJECT';
 export const ADDONS = 'projects/ADDONS';
 export const PROJECTS = 'projects/PROJECTS';
 export const PROJECT_NAMES = 'projects/PROJECT_NAMES';
+export const SEARCH = 'projects/SEARCH';
 
 // FETCH
 export const FETCH_ADDONS = 'projects/FETCH_ADDONS';

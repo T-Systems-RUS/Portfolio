@@ -1,13 +1,13 @@
 <template>
   <div>
-    <Autocomplete :items="projectNames" @input="setSearch($event)"/>
+    <Autocomplete :value="search" :items="projectNames" @input="setSearch($event)"/>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
-  import {PROJECT_NAMES, SET_SEARCH} from '../../../store/modules/projects/project-types';
+  import {PROJECT_NAMES, SEARCH, SET_SEARCH} from '../../../store/modules/projects/project-types';
 
   export default Vue.extend({
     data() {
@@ -18,6 +18,7 @@
     },
     computed: {
       ...mapGetters({
+        search: SEARCH,
         projectNames: PROJECT_NAMES
       })
     },

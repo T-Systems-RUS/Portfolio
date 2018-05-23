@@ -4,14 +4,11 @@
       <div class="dropdown-trigger">
         <button class="button">
           <input
-            v-model="value"
+            v-model="inputValue"
             @input="valueChanged()"
             class="input"
             type="text"
             placeholder="Input text...">
-          <span class="icon is-small">
-            <i class="fas fa-angle-down"></i>
-          </span>
         </button>
       </div>
       <div
@@ -33,22 +30,22 @@
   import Vue from 'vue';
 
   interface IAutocompleteData {
-    value: string;
+    inputValue: string;
   }
 
   export default Vue.extend({
-    props: ['items'],
+    props: ['items', 'value'],
     data(): IAutocompleteData {
       return {
-        value: ''
+        inputValue: this.value
       };
     },
     methods: {
       valueChanged() {
-        this.$emit('input', this.value);
+        this.$emit('input', this.inputValue);
       },
       itemSelected(item: string) {
-        this.value = item;
+        this.inputValue = item;
         this.valueChanged();
       }
     }
