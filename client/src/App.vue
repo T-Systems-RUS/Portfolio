@@ -9,7 +9,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import Header from './components/root/Header.vue';
+  import Header from './components/root/Header/Header.vue';
   import Footer from './components/root/Footer.vue';
 
   export default Vue.extend({

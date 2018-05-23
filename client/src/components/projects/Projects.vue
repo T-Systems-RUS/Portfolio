@@ -36,16 +36,15 @@
 <script lang="ts">
   import Vue from 'vue';
   import {mapActions} from 'vuex';
-  import * as types from '../../store/modules/projects/project-types';
-  import {IProject} from '../../shared/interfaces/IProject';
   import ProjectCard from './project-card/ProjectCard.vue';
   import ProjectFilter from './project-filter/ProjectFilter.vue';
   import {mapGetters} from 'vuex';
+  import {FETCH_PROJECTS, PROJECTS} from '../../store/modules/projects/project-types';
 
   export default Vue.extend({
     computed: {
       ...mapGetters({
-        projects: types.GET_PROJECTS
+        projects: PROJECTS
       })
     },
     components: {
@@ -58,7 +57,7 @@
 
     methods: {
       ...mapActions({
-        fetchProjects: types.FETCH_PROJECTS
+        fetchProjects: FETCH_PROJECTS
       })
     }
   });

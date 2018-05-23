@@ -5,7 +5,7 @@
 ## How to run
 
 **PREREQUISITE**: Get PostgreSQL server locally or via docker:
-`docker run --name some-postgres -e POSTGRES_PASSWORD=my-secret-pw -d postgres` (where `my-secret-pw` is your `postgres` user password)
+`docker run --name -p 5432:5432 some-postgres -e POSTGRES_PASSWORD=123 -d postgres` (where `123` is your `postgres` user password)
 
 There are to possible scenarios to start the app:
 

@@ -7,9 +7,11 @@ import store from './store/index'
 import './styles/styles.scss';
 
 import Checkbox from './components/common/Checkbox/Checkbox.vue';
+import Autocomplete from './components/common/Autocomplete/Autocomplete.vue';
 import date from './shared/filters/Date';
 
 Vue.component('Checkbox', Checkbox);
+Vue.component('Autocomplete', Autocomplete);
 Vue.filter('date', date);
 
 

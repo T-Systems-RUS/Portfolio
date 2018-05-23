@@ -2,7 +2,7 @@
   <div class="header level">
     <div class="level-left">
       <div class="header-logo level-item">
-        <img src="./assets/logo-tportfolio.svg">
+        <img src="../assets/logo-tportfolio.svg">
       </div>
       <nav class="header-nav level-item">
         <a
@@ -33,11 +33,18 @@
       </nav>
     </div>
     <div class="level-right">
-      <a class="level-item">
-        <img src="./assets/search.svg">
+      <a
+        v-if="searchToggled"
+        class="level-item">
+        <Search/>
+      </a>
+      <a
+        class="level-item"
+        @click="toggleSearch">
+        <img src="../assets/search.svg">
       </a>
       <a class="level-item">
-        <img src="./assets/user.svg">
+        <img src="../assets/user.svg">
       </a>
     </div>
   </div>
@@ -45,15 +52,28 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import Search from './Search.vue';
 
   export default Vue.extend({
-    name: 'Header'
+    components: {
+      Search
+    },
+    data() {
+      return {
+        searchToggled: false
+      };
+    },
+    methods: {
+      toggleSearch() {
+        this.searchToggled = !this.searchToggled;
+      }
+    }
   });
 </script>
 
 <style lang="scss" scoped>
-  @import '../../styles/variables';
-  @import '~bulma/sass/utilities/mixins';
+  @import '../../../styles/variables';
+  @import '../../../../node_modules/bulma/sass/utilities/mixins';
 
 
   .header {

@@ -11,7 +11,7 @@
         <div class="filter-item">
           <Checkbox :checked = "item.checked"
                     @update:checked="handleFilterAction(item, model.name)"/>
-          <span class="title is-5 is-size-16 is-uppercase">{{ item.value }}</span>
+          <span class="title is-5 is-size-16">{{ item.value }}</span>
         </div>
       </div>
     </Accordion>
@@ -26,15 +26,13 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {IProject} from '../../../shared/interfaces/IProject';
   import Accordion from '../../common/Accordion/Accordion.vue';
   import Checkbox from '../../common/Checkbox/Checkbox.vue';
   import TechnologyPicker from '../../technologies/technology-picker/TechnologyPicker.vue';
   import {IProjectFilter, IProjectFilterCheck} from './IProjectFilter';
-  import * as types from '../../../store/modules/projects/project-types';
   import {IModel} from '../../../shared/interfaces/IModel';
-  import {IProgram} from '../../../shared/interfaces/IProgram';
   import {Util} from "../../../shared/classes/Util";
+  import {ADDONS, FETCH_ADDONS, SET_FILTER} from '../../../store/modules/projects/project-types';
 
   export default Vue.extend({
     data() {
@@ -44,12 +42,12 @@
       };
     },
     created() {
-      this.$store.dispatch(types.FETCH_ADDONS);
+      this.$store.dispatch(FETCH_ADDONS);
     },
     computed: {
 
       models(): IProjectFilter[] {
-        const addons = this.$store.getters[types.GET_ADDONS];
+        const addons = this.$store.getters[ADDONS];
         this.accordionModels = [] as IProjectFilter[];
 
         Object.keys(addons).forEach(key => {
@@ -76,7 +74,7 @@
       // will be used later for project filtering via store
       handleFilterAction(item: IProjectFilterCheck, key: string) {
         item.checked = !item.checked;
-        this.$store.commit(types.SET_FILTER, { key: Util.mapNameToProperty(key), value: item.id });
+        this.$store.commit(SET_FILTER, { key: Util.mapNameToProperty(key), value: item.id });
       },
 
       // Model for checkboxes must have a label

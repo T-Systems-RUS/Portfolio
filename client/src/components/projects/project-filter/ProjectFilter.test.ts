@@ -2,7 +2,7 @@ import ProjectFilter from './ProjectFilter.vue';
 import {mount} from '@vue/test-utils';
 import store from '../../../store/index';
 import {TestMocks} from '../../../shared/classes/TestMocks';
-import * as types from '../../../store/modules/projects/project-types';
+import {PROJECTS, SET_FILTER, SET_PROJECTS} from '../../../store/modules/projects/project-types';
 
 describe('Project Filter', () => {
 
@@ -38,16 +38,16 @@ describe('Project Filter', () => {
 
   it('correctly filter by all properties', () => {
 
-    store.commit(types.SET_PROJECTS, [project]);
-    store.commit(types.SET_FILTER, { key: 'line', value: line.id});
-    store.commit(types.SET_FILTER, { key: 'program', value: program.id});
-    store.commit(types.SET_FILTER, { key: 'domain', value: domain.id})
-    store.commit(types.SET_FILTER, { key: 'customers', value: customer.id});
-    store.commit(types.SET_FILTER, { key: 'customers', value: customer2.id});
-    store.commit(types.SET_FILTER, { key: 'technologies', value: technology.id});
-    store.commit(types.SET_FILTER, { key: 'technologies', value: technology2.id});
+    store.commit(SET_PROJECTS, [project]);
+    store.commit(SET_FILTER, { key: 'line', value: line.id});
+    store.commit(SET_FILTER, { key: 'program', value: program.id});
+    store.commit(SET_FILTER, { key: 'domain', value: domain.id})
+    store.commit(SET_FILTER, { key: 'customers', value: customer.id});
+    store.commit(SET_FILTER, { key: 'customers', value: customer2.id});
+    store.commit(SET_FILTER, { key: 'technologies', value: technology.id});
+    store.commit(SET_FILTER, { key: 'technologies', value: technology2.id});
 
-    const filtered = store.getters[types.GET_PROJECTS];
+    const filtered = store.getters[PROJECTS];
 
     expect(filtered.length).toBe(1);
 
@@ -55,11 +55,11 @@ describe('Project Filter', () => {
 
   it('should correctly filter by line', () => {
 
-    store.commit(types.SET_PROJECTS, [project]);
-    store.commit(types.SET_FILTER, { key: 'line', value: line.id});
+    store.commit(SET_PROJECTS, [project]);
+    store.commit(SET_FILTER, { key: 'line', value: line.id});
 
 
-    const filtered = store.getters[types.GET_PROJECTS];
+    const filtered = store.getters[PROJECTS];
 
     expect(filtered[0].program.lineId).toBe(line.id);
 
@@ -67,11 +67,11 @@ describe('Project Filter', () => {
 
   it('should correctly filter by program', () => {
 
-    store.commit(types.SET_PROJECTS, [project]);
-    store.commit(types.SET_FILTER, { key: 'program', value: program.id});
+    store.commit(SET_PROJECTS, [project]);
+    store.commit(SET_FILTER, { key: 'program', value: program.id});
 
 
-    const filtered = store.getters[types.GET_PROJECTS];
+    const filtered = store.getters[PROJECTS];
 
     expect(filtered[0].program.id).toBe(program.id);
 
@@ -79,11 +79,11 @@ describe('Project Filter', () => {
 
   it('should correctly filter by domain', () => {
 
-    store.commit(types.SET_PROJECTS, [project]);
-    store.commit(types.SET_FILTER, { key: 'domain', value: domain.id});
+    store.commit(SET_PROJECTS, [project]);
+    store.commit(SET_FILTER, { key: 'domain', value: domain.id});
 
 
-    const filtered = store.getters[types.GET_PROJECTS];
+    const filtered = store.getters[PROJECTS];
 
     expect(filtered[0].domain.id).toBe(domain.id);
 
@@ -91,11 +91,11 @@ describe('Project Filter', () => {
 
   it('should correctly filter by customer', () => {
 
-    store.commit(types.SET_PROJECTS, [project]);
-    store.commit(types.SET_FILTER, { key: 'customers', value: customer.id});
+    store.commit(SET_PROJECTS, [project]);
+    store.commit(SET_FILTER, { key: 'customers', value: customer.id});
 
 
-    const filtered = store.getters[types.GET_PROJECTS];
+    const filtered = store.getters[PROJECTS];
 
     expect(filtered.length).toBe(1);
 
@@ -104,11 +104,11 @@ describe('Project Filter', () => {
   it('should correctly filter by technology', () => {
     const technology3 = TestMocks.TestTechnology('3','React');
 
-    store.commit(types.SET_PROJECTS, [project]);
-    store.commit(types.SET_FILTER, { key: 'technologies', value: technology.id});
-    store.commit(types.SET_FILTER, { key: 'technologies', value: technology3.id});
+    store.commit(SET_PROJECTS, [project]);
+    store.commit(SET_FILTER, { key: 'technologies', value: technology.id});
+    store.commit(SET_FILTER, { key: 'technologies', value: technology3.id});
 
-    const filtered = store.getters[types.GET_PROJECTS];
+    const filtered = store.getters[PROJECTS];
 
     expect(filtered.length).toBe(0);
 
