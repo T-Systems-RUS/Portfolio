@@ -40,7 +40,8 @@
   import {mapActions, mapGetters} from 'vuex';
   import ProjectCard from './project-card/ProjectCard.vue';
   import ProjectFilter from './project-filter/ProjectFilter.vue';
-  import {FETCH_PROJECTS, PROJECTS} from '../../store/modules/projects/project-types';
+  import {FETCH_PROJECTS} from '../../store/modules/projects/action-types';
+  import {PROJECTS} from '../../store/modules/projects/getter-types';
 
   export default Vue.extend({
     computed: {

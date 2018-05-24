@@ -1,10 +1,10 @@
-import {ADDONS, PROJECT_NAMES, PROJECTS, SEARCH} from './project-types';
+import {GetterTree} from 'vuex';
 import {IProjectState} from './index';
 import {Types} from './constant-types';
 import {Util} from '../../../shared/classes/Util';
 import {IModel} from '../../../shared/interfaces/IModel';
-import {GetterTree} from 'vuex';
 import {IProject} from '../../../shared/interfaces/IProject';
+import {ADDONS, AUTOCOMPLETE_SEARCH, PROJECT_NAMES, PROJECTS, SEARCH} from './getter-types';
 
 export const getters: GetterTree<IProjectState, {}> = {
 
@@ -38,7 +38,7 @@ export const getters: GetterTree<IProjectState, {}> = {
             // in filter customers
             if (key === Util.mapNameToProperty(Types.CUSTOMER)) {
               return project[key].map((item: IModel) => item.id).some((id: string) =>
-                state.filter[key].indexOf(id) > -1)
+                state.filter[key].indexOf(id) > -1);
             }
 
             // AND condition
@@ -46,7 +46,6 @@ export const getters: GetterTree<IProjectState, {}> = {
             return project[key].map((item: IModel) => item.id).filter((id: string) =>
               state.filter[key].indexOf(id) > -1).length === state.filter[key].length;
           } else {
-
             // Project property is an object filter by object id
             // exception is line it is nested object
             const searchedId = key === Util.mapNameToProperty(Types.PRODUCTION_LINE)
@@ -58,7 +57,7 @@ export const getters: GetterTree<IProjectState, {}> = {
         } else {
           return project;
         }
-      })
+      });
     }
 
     // Check if projects match search filter
@@ -69,7 +68,10 @@ export const getters: GetterTree<IProjectState, {}> = {
     return projects;
   },
   [SEARCH]: state => state.search,
-  [PROJECT_NAMES](state, getters) {
-    return getters[PROJECTS].map((project: IProject) => project.name);
+  [AUTOCOMPLETE_SEARCH]: state => state.autocompleteSearch,
+  [PROJECT_NAMES](state) {
+    return state.projects
+      .filter(project => project.name.toLowerCase().indexOf(state.autocompleteSearch.toLowerCase()) > -1)
+      .map(project => project.name);
   }
 };

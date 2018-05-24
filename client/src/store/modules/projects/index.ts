@@ -20,6 +20,7 @@ export interface IProjectState {
   filter: IFilter;
   loading: boolean;
   search: string;
+  autocompleteSearch: string;
 }
 
 const projectState: Module<IProjectState, {}> = {
@@ -32,7 +33,8 @@ const projectState: Module<IProjectState, {}> = {
     types: [],
     filter: {} as IFilter,
     loading: true,
-    search: ''
+    search: '',
+    autocompleteSearch: ''
   },
   mutations,
   actions,

@@ -5,10 +5,13 @@
         <button class="button">
           <input
             v-model="inputValue"
-            @input="valueChanged()"
             class="input"
             type="text"
-            :placeholder="placeholderText">
+            :placeholder="placeholderText"
+            @input="suggest"
+            @keyup.up="selectUp"
+            @keyup.down="selectDown"
+            @keyup.enter="valueChanged">
         </button>
       </div>
       <div
@@ -17,6 +20,7 @@
         <div class="dropdown-content">
           <a
             v-for="item of items"
+            :class="{'is-active': item == inputValue}"
             @click="itemSelected(item)"
             class="dropdown-item">
             {{ item }}
@@ -33,31 +37,63 @@
   interface IAutocompleteData {
     placeholderText: string;
     inputValue: string;
+    scrollPosition: number;
   }
 
   export default Vue.extend({
     props: ['items', 'value', 'placeholder'],
     data(): IAutocompleteData {
       return {
+        scrollPosition: -1,
         placeholderText: this.placeholder || 'Input text...',
         inputValue: this.value
       };
     },
     methods: {
+      suggest() {
+        this.$emit('suggest', this.inputValue);
+        this.scrollPosition = -1;
+      },
       valueChanged() {
-        this.$emit('input', this.inputValue);
+        this.$emit('change', this.inputValue);
       },
       itemSelected(item: string) {
         this.inputValue = item;
         this.valueChanged();
+      },
+      selectUp() {
+        if (this.scrollPosition > 0) {
+          this.scrollPosition -= 1;
+          this.setSelecteditemByIndex();
+        } else {
+          this.inputValue = '';
+          this.scrollPosition = -1;
+        }
+      },
+      selectDown() {
+        if (this.scrollPosition < this.items.length - 1) {
+          this.scrollPosition += 1;
+          this.setSelecteditemByIndex();
+        }
+      },
+      // Private
+      setSelecteditemByIndex() {
+        if (this.scrollPosition >= 0) {
+          this.inputValue = this.items[this.scrollPosition];
+        }
       }
     }
   });
 </script>
 
 <style lang="scss" scoped>
+  @import '../../../styles/variables';
   @import '~bulma/sass/utilities/initial-variables';
   @import '~bulma/sass/utilities/derived-variables';
+
+  $dropdown-item-active-color: $white;
+  $dropdown-item-active-background-color: $magenta;
+
   @import '~bulma/sass/components/dropdown';
 
   .dropdown {

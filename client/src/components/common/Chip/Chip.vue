@@ -13,7 +13,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {SET_FILTER} from '../../../store/modules/projects/project-types';
+  import {SET_FILTER} from '../../../store/modules/projects/mutation-types';
 
   export default Vue.extend({
     data() {
