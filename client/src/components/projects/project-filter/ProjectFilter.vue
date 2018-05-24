@@ -4,7 +4,8 @@
       :name="model.name"
       :opened="model.opened"
       @update:opened="model.opened = !model.opened"
-      v-for="model in models">
+      v-for="(model,index) in models"
+      :key="index">
       <div
         v-for="item in model.items"
         :key="item.value">
