@@ -61,9 +61,18 @@
   @import '~bulma/sass/components/dropdown';
 
   .dropdown {
-    .input:focus {
+
+    &-trigger .button {
+      padding: 0;
+    }
+
+    .input {
       border: none;
-      box-shadow: none;
+
+      &:focus {
+        border: none;
+        box-shadow: none;
+      }
     }
   }
 </style>
