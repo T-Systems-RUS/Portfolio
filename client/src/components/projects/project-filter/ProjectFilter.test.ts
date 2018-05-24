@@ -2,7 +2,7 @@ import ProjectFilter from './ProjectFilter.vue';
 import {mount} from '@vue/test-utils';
 import store from '../../../store/index';
 import {TestMocks} from '../../../shared/classes/TestMocks';
-import {PROJECTS, SET_FILTER, SET_PROJECTS} from '../../../store/modules/projects/project-types';
+import {PROJECTS, SET_FILTER, SET_PROJECTS} from '../../../store/modules/projects/action-types';
 
 describe('Project Filter', () => {
 

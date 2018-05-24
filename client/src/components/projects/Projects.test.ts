@@ -1,6 +1,6 @@
 import Projects from './Projects.vue';
 import store from '../../store/index';
-import {FETCH_PROJECTS} from '../../store/modules/projects/project-types';
+import {FETCH_PROJECTS} from '../../store/modules/projects/action-types';
 import {mount} from '@vue/test-utils';
 
 describe('Projects', () => {

@@ -1,13 +1,5 @@
-import {
-  SET_CUSTOMERS,
-  SET_PROJECTS,
-  SET_LINES,
-  SET_PROGRAMS,
-  SET_DOMAINS,
-  SET_TYPES,
-  FINISH_LOADING,
-  SET_FILTER, SET_SEARCH
-} from './project-types';
+import Vue from 'vue';
+import {MutationTree} from 'vuex';
 import {IProject} from '../../../shared/interfaces/IProject';
 import {IProjectState} from './index';
 import {ICustomer} from '../../../shared/interfaces/ICustomer';
@@ -16,8 +8,11 @@ import {IProgram} from '../../../shared/interfaces/IProgram';
 import {IDomain} from '../../../shared/interfaces/IDomain';
 import {IType} from '../../../shared/interfaces/IType';
 import {Extension} from '../../../shared/classes/Extension';
-import Vue from 'vue';
-import {MutationTree} from 'vuex';
+import {
+  FINISH_LOADING, SET_AUTOCOMPLETE_SEARCH,
+  SET_CUSTOMERS, SET_DOMAINS, SET_FILTER, SET_LINES, SET_PROGRAMS, SET_PROJECTS, SET_SEARCH,
+  SET_TYPES
+} from './mutation-types';
 
 export const mutations: MutationTree<IProjectState> = {
   [SET_PROJECTS](state, payload: IProject[]) {
@@ -52,5 +47,8 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_SEARCH](state, search: string){
     state.search = search;
+  },
+  [SET_AUTOCOMPLETE_SEARCH](state, search: string){
+    state.autocompleteSearch = search;
   }
 };

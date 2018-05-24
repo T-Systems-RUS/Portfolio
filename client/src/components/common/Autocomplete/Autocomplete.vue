@@ -8,6 +8,7 @@
             class="input"
             type="text"
             :placeholder="placeholderText"
+            @input="suggest"
             @keyup.up="selectUp"
             @keyup.down="selectDown"
             @keyup.enter="valueChanged">
@@ -49,8 +50,11 @@
       };
     },
     methods: {
+      suggest() {
+        this.$emit('suggest', this.inputValue);
+      },
       valueChanged() {
-        this.$emit('input', this.inputValue);
+        this.$emit('change', this.inputValue);
         this.scrollPosition = -1;
       },
       itemSelected(item: string) {

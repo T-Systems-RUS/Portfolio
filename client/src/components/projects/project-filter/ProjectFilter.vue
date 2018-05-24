@@ -34,7 +34,9 @@
   import {IProjectFilter, IProjectFilterCheck} from './IProjectFilter';
   import {IModel} from '../../../shared/interfaces/IModel';
   import {Util} from '../../../shared/classes/Util';
-  import {ADDONS, FETCH_ADDONS, SET_FILTER} from '../../../store/modules/projects/project-types';
+  import {FETCH_ADDONS} from '../../../store/modules/projects/action-types';
+  import {ADDONS} from '../../../store/modules/projects/getter-types';
+  import {SET_FILTER} from '../../../store/modules/projects/mutation-types';
 
   export default Vue.extend({
     data() {

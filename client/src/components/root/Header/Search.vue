@@ -2,16 +2,18 @@
   <div>
     <Autocomplete
       :placeholder="'Search projects...'"
-      :value="search"
+      :value="autocompleteSearch"
       :items="projectNames"
-      @input="setSearch($event)"/>
+      @suggest="setSuggestions($event)"
+      @change="setSearch($event)"/>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
-  import {PROJECT_NAMES, SEARCH, SET_SEARCH} from '../../../store/modules/projects/project-types';
+  import {AUTOCOMPLETE_SEARCH, PROJECT_NAMES} from '../../../store/modules/projects/getter-types';
+  import {SET_AUTOCOMPLETE_SEARCH, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
 
   export default Vue.extend({
     data() {
@@ -22,14 +24,17 @@
     },
     computed: {
       ...mapGetters({
-        search: SEARCH
+        autocompleteSearch: AUTOCOMPLETE_SEARCH
       }),
       projectNames(): string[] {
         // Only set items if there's a search
-        return this.$store.getters[SEARCH] ? this.$store.getters[PROJECT_NAMES] : [];
+        return this.$store.getters[AUTOCOMPLETE_SEARCH] ? this.$store.getters[PROJECT_NAMES] : [];
       }
     },
     methods: {
+      setSuggestions(value: string) {
+        this.$store.commit(SET_AUTOCOMPLETE_SEARCH, value);
+      },
       setSearch(value: string) {
         this.$store.commit(SET_SEARCH, value);
       }
