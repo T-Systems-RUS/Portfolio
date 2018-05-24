@@ -5,6 +5,8 @@
 @import '~bulma/sass/utilities/initial-variables';
 @import '~bulma/sass/utilities/_all';
 
+$container-max-size: 984px;
+
 // Fonts
 $family-serif: 'TeleGrotesk Next', serif;
 $family-primary: $family-serif;
@@ -23,9 +25,11 @@ $size-2: 48px;
 $size-3: 36px;
 $size-4: 24px;
 $size-5: 21px;
-$size-6: 15px;
-$size-7: 12px;
-$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7;
+$size-6: 18px;
+$size-7: 15px;
+$size-8: 12px;
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 $size-8;
+$magenta-title-margin-bottom: $building-unit / 2;
 
 $subtitle-size: $size-7;
 
@@ -50,5 +54,4 @@ $size-large: $size-5;
 @import '~bulma/sass/elements/form';
 @import '~bulma/sass/grid/columns';
 @import '~bulma/sass/components/level';
-
-
+@import '~bulma/sass/components/modal';

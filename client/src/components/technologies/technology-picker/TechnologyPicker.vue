@@ -57,6 +57,11 @@
   .technology-picker {
     position: relative;
 
+    .input {
+      border: none;
+      height: auto;
+    }
+
     &-search {
       margin-bottom: 10px;
     }
