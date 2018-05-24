@@ -13,8 +13,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import * as types from '../../../store/modules/projects/project-types';
-
+  import {SET_FILTER} from '../../../store/modules/projects/project-types';
 
   export default Vue.extend({
     data() {
@@ -36,7 +35,7 @@
     methods: {
       toggleActive() {
         this.isActive = !this.isActive;
-        this.$store.commit(types.SET_FILTER, {key: 'technologies', value: this.id});
+        this.$store.commit(SET_FILTER, {key: 'technologies', value: this.id});
       }
     }
   });

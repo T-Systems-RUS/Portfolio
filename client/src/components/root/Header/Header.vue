@@ -2,7 +2,7 @@
   <div class="header level">
     <div class="level-left">
       <div class="header-logo level-item">
-        <img src="./assets/logo-tportfolio.svg">
+        <img src="../assets/logo-tportfolio.svg">
       </div>
       <nav class="header-nav level-item">
         <a
@@ -33,11 +33,23 @@
       </nav>
     </div>
     <div class="level-right">
-      <a class="level-item">
-        <img src="./assets/search.svg">
+      <a class="search-bar level-item">
+        <transition name="search">
+          <Search v-if="searchToggled"/>
+        </transition>
+      </a>
+
+      <a
+        class="level-item"
+        @click="toggleSearch">
+        <img v-if="!searchToggled"
+             src="../assets/search.svg">
+        <img v-if="searchToggled"
+             class="close-icon"
+             src="../assets/close.svg">
       </a>
       <a class="level-item">
-        <img src="./assets/user.svg">
+        <img src="../assets/user.svg">
       </a>
     </div>
   </div>
@@ -45,16 +57,28 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import Search from './Search.vue';
 
   export default Vue.extend({
-    name: 'Header'
+    components: {
+      Search
+    },
+    data() {
+      return {
+        searchToggled: false
+      };
+    },
+    methods: {
+      toggleSearch() {
+        this.searchToggled = !this.searchToggled;
+      }
+    }
   });
 </script>
 
 <style lang="scss" scoped>
-  @import '../../styles/variables';
-  @import '~bulma/sass/utilities/mixins';
-
+  @import '../../../styles/variables';
+  @import '../../../../node_modules/bulma/sass/utilities/mixins';
 
   .header {
     position: fixed;
@@ -68,23 +92,37 @@
     padding: 0 $side-padding;
     box-shadow: $shadow;
 
-
-    &-nav{
+    &-nav {
       margin-left: 20px;
 
-      &-item{
-        color:$text-color;
+      &-item {
+        color: $text-color;
         margin-right: 30px;
         transition: all .3s;
 
-        &.is-active{
+        &.is-active {
           font-weight: bold;
         }
 
-        &:hover{
+        &:hover {
           text-decoration: underline;
         }
       }
     }
+
+    .close-icon {
+      width: 20px;
+    }
+  }
+
+  .search-enter-active, .search-leave-active {
+    width: 100%;
+    transition: all 0.5s ease;
+    opacity: 1;
+  }
+
+  .search-enter, .search-leave-to {
+    width: 0;
+    opacity: 0;
   }
 </style>

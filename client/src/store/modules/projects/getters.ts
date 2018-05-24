@@ -1,10 +1,12 @@
-import {GET_ADDONS, GET_PROJECTS} from './project-types';
+import {ADDONS, PROJECT_NAMES, PROJECTS, SEARCH} from './project-types';
 import {IProjectState} from './index';
 import {Types} from './constant-types';
 import {Util} from '../../../shared/classes/Util';
 import {IModel} from '../../../shared/interfaces/IModel';
+import {GetterTree} from 'vuex';
+import {IProject} from '../../../shared/interfaces/IProject';
 
-export const getters = {
+export const getters: GetterTree<IProjectState, {}> = {
 
   /**
    * Get properties only for
@@ -12,7 +14,7 @@ export const getters = {
    * @param {IProjectState} state
    * @returns {{}}
    */
-  [GET_ADDONS](state: IProjectState) {
+  [ADDONS](state) {
     return {
       [Types.PRODUCTION_LINE]: state.lines,
       [Types.PROGRAM]: state.programs,
@@ -21,21 +23,20 @@ export const getters = {
       [Types.CUSTOMER]: state.customers,
     };
   },
-
-  [GET_PROJECTS](state: IProjectState) {
+  [PROJECTS](state) {
     let projects = state.projects;
 
     // iterates over keys in filter
-    for (const  key in state.filter) {
+    for (const key in state.filter) {
       projects = projects.filter(project => {
         // only if filter property has values in it
-        if(state.filter[key].length){
+        if (state.filter[key].length) {
 
           // if property is array many-to-many relations in db
-          if(Array.isArray(project[key])) {
+          if (Array.isArray(project[key])) {
             // OR condition at least one element of project
             // in filter customers
-            if(key === Util.mapNameToProperty(Types.CUSTOMER)) {
+            if (key === Util.mapNameToProperty(Types.CUSTOMER)) {
               return project[key].map((item: IModel) => item.id).some((id: string) =>
                 state.filter[key].indexOf(id) > -1)
             }
@@ -48,9 +49,9 @@ export const getters = {
 
             // Project property is an object filter by object id
             // exception is line it is nested object
-            const searchedId = key === Util.mapNameToProperty(Types.PRODUCTION_LINE )
-                             ? project[Util.mapNameToProperty(Types.PROGRAM)].lineId
-                             : project[key].id;
+            const searchedId = key === Util.mapNameToProperty(Types.PRODUCTION_LINE)
+              ? project[Util.mapNameToProperty(Types.PROGRAM)].lineId
+              : project[key].id;
 
             return state.filter[key].indexOf(searchedId) > -1;
           }
@@ -60,6 +61,15 @@ export const getters = {
       })
     }
 
+    // Check if projects match search filter
+    if (state.search) {
+      projects = projects.filter(project => project.name.toLowerCase().indexOf(state.search.toLowerCase()) > -1);
+    }
+
     return projects;
+  },
+  [SEARCH]: state => state.search,
+  [PROJECT_NAMES](state, getters) {
+    return getters[PROJECTS].map((project: IProject) => project.name);
   }
-}
+};

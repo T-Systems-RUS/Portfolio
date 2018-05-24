@@ -8,6 +8,7 @@ import {IProgram} from '../../../shared/interfaces/IProgram';
 import {IDomain} from '../../../shared/interfaces/IDomain';
 import {IType} from '../../../shared/interfaces/IType';
 import {IFilter} from '../../../shared/interfaces/IFilter';
+import {Module} from 'vuex';
 
 export interface IProjectState {
   projects: IProject[];
@@ -18,22 +19,24 @@ export interface IProjectState {
   customers: ICustomer[];
   filter: IFilter;
   loading: boolean;
+  search: string;
 }
 
-const initialState: IProjectState = {
-  projects: [],
-  customers: [],
-  lines: [],
-  programs: [],
-  domains: [],
-  types: [],
-  filter: {} as IFilter,
-  loading: true
-};
-
-export default {
-  state: {...initialState},
+const projectState: Module<IProjectState, {}> = {
+  state: {
+    projects: [],
+    customers: [],
+    lines: [],
+    programs: [],
+    domains: [],
+    types: [],
+    filter: {} as IFilter,
+    loading: true,
+    search: ''
+  },
   mutations,
   actions,
   getters
-}
+};
+
+export default projectState;
