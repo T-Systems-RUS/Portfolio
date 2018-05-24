@@ -1,5 +1,5 @@
 <template>
-  <CommonModal>
+  <CommonModal @exit="goBack">
     <template slot="modal-title">Edit project</template>
     <p
       class="manage-user-subtitle common-modal-subtitle has-text-centered is-size-5 is-size-6-mobile"
@@ -65,3 +65,16 @@
     </template>
   </CommonModal>
 </template>
+
+<script lang="ts">
+  import Vue from 'vue';
+
+  export default Vue.extend({
+    methods: {
+      goBack() {
+        this.$router.push({path: '/'});
+      }
+    }
+  });
+</script>
+
