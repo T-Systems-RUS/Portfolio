@@ -57,7 +57,7 @@ export const getters: GetterTree<IProjectState, {}> = {
         } else {
           return project;
         }
-      })
+      });
     }
 
     // Check if projects match search filter
