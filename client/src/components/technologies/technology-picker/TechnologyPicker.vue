@@ -1,20 +1,14 @@
 <template>
   <div class="technology-picker">
-    <div
-      class="technology-picker-search input"
-      v-if="technologies.length">
-      <img
-        class="input-image"
-        src="../assets/search.svg">
-      <input
-        class="input-box with-image"
-        type="text"
-        placeholder="Search technology"
-        v-model = "search"
-        @change = "filterTechnologies(search)">
-    </div>
+    <input
+      class="input"
+      type="text"
+      placeholder="Search technology"
+      v-if="technologies.length"
+      v-model="search"
+      @input="filterTechnologies()">
     <chip
-      v-for="technology in technologies"
+      v-for="technology in technologiesFiltered"
       :key="technology.id"
       :name="technology.name"
       :id="technology.id"/>
@@ -23,9 +17,11 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import {mapGetters} from 'vuex';
   import Chip from '../../common/Chip/Chip.vue';
-  import * as types from '../../../store/modules/technologies/technology-types';
-  import {ITechnology} from '../../../shared/interfaces/ITechnology';
+  import {TECHNOLGOGIES_FILTERED, TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
+  import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
+  import {SET_TECHNOLOGIES_FILTER} from '../../../store/modules/technologies/mutation-types';
 
   export default Vue.extend({
     data() {
@@ -37,15 +33,17 @@
       Chip
     },
     created() {
-      this.$store.dispatch(types.FETCH_TECHNOLOGIES);
+      this.$store.dispatch(FETCH_TECHNOLOGIES);
     },
     computed: {
-      technologies(): ITechnology[] {
-        return this.$store.state.technologies.technologies;
-      }
+      ...mapGetters({
+        technologies: TECHNOLOGIES,
+        technologiesFiltered: TECHNOLGOGIES_FILTERED
+      })
     },
     methods: {
-      filterTechnologies(search: string) {
+      filterTechnologies() {
+        this.$store.commit(SET_TECHNOLOGIES_FILTER, this.search);
       }
     }
   });
@@ -58,11 +56,6 @@
     position: relative;
 
     .input {
-      border: none;
-      height: auto;
-    }
-
-    &-search {
       margin-bottom: 10px;
     }
   }
