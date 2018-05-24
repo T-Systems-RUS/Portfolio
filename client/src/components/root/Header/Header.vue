@@ -42,11 +42,13 @@
       <a
         class="level-item"
         @click="toggleSearch">
-        <img v-if="!searchToggled"
-             src="../assets/search.svg">
-        <img v-if="searchToggled"
-             class="close-icon"
-             src="../assets/close.svg">
+        <img
+          v-if="!searchToggled"
+          src="../assets/search.svg">
+        <img
+          v-if="searchToggled"
+          class="close-icon"
+          src="../assets/close.svg">
       </a>
       <a class="level-item">
         <img src="../assets/user.svg">

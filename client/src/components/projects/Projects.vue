@@ -9,12 +9,14 @@
       <div class="level filters no-margin">
         <div class="level-left">
           <div class="filter">
-            <img class="filter-img"
-                 src="../common/assets/download.svg">
+            <img
+              class="filter-img"
+              src="../common/assets/download.svg">
           </div>
           <div class="filter">
-            <img class="filter-img"
-                 src="../common/assets/sort.svg">
+            <img
+              class="filter-img"
+              src="../common/assets/sort.svg">
             <span class="filter-text">Sorted by: production line</span>
           </div>
         </div>
@@ -35,10 +37,9 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {mapActions} from 'vuex';
+  import {mapActions, mapGetters} from 'vuex';
   import ProjectCard from './project-card/ProjectCard.vue';
   import ProjectFilter from './project-filter/ProjectFilter.vue';
-  import {mapGetters} from 'vuex';
   import {FETCH_PROJECTS, PROJECTS} from '../../store/modules/projects/project-types';
 
   export default Vue.extend({
@@ -68,7 +69,7 @@
 
   $filters-top: 125px;
 
-  .projects{
+  .projects {
     padding: 0 $side-padding;
 
     &-left {
@@ -82,7 +83,7 @@
         width: 5px;
 
         &-track {
-          -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3);
+          -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
         }
 
         &-thumb {
@@ -104,28 +105,27 @@
     }
   }
 
-  .filters{
+  .filters {
     height: 60px;
 
-    &.no-margin{
+    &.no-margin {
       margin: 0;
     }
   }
 
-  .filter{
+  .filter {
     margin-right: 20px;
 
-    &-text{
+    &-text {
       color: $text-secondary;
       font-size: 14px;
       margin-left: 20px;
     }
 
-    &-img{
+    &-img {
       cursor: pointer;
       height: 27px;
     }
-
 
   }
 

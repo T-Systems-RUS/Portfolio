@@ -15,9 +15,10 @@
         v-if="items.length"
         class="dropdown-menu">
         <div class="dropdown-content">
-          <a v-for="item of items"
-             @click="itemSelected(item)"
-             class="dropdown-item">
+          <a
+            v-for="item of items"
+            @click="itemSelected(item)"
+            class="dropdown-item">
             {{ item }}
           </a>
         </div>

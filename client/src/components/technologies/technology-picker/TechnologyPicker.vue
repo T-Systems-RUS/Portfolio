@@ -46,7 +46,6 @@
     },
     methods: {
       filterTechnologies(search: string) {
-        console.log(search);
       }
     }
   });
