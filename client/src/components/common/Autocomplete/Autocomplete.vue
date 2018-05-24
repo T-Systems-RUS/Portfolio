@@ -87,8 +87,13 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '../../../styles/variables';
   @import '~bulma/sass/utilities/initial-variables';
   @import '~bulma/sass/utilities/derived-variables';
+
+  $dropdown-item-active-color: $white;
+  $dropdown-item-active-background-color: $magenta;
+
   @import '~bulma/sass/components/dropdown';
 
   .dropdown {
