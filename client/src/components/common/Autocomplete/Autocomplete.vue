@@ -52,10 +52,10 @@
     methods: {
       suggest() {
         this.$emit('suggest', this.inputValue);
+        this.scrollPosition = -1;
       },
       valueChanged() {
         this.$emit('change', this.inputValue);
-        this.scrollPosition = -1;
       },
       itemSelected(item: string) {
         this.inputValue = item;
