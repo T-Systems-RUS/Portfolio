@@ -4,7 +4,7 @@
     <p
       class="manage-user-subtitle common-modal-subtitle has-text-centered is-size-5 is-size-6-mobile"
       slot="modal-subtitle">
-      This is modal
+      Please edit project information here
     </p>
     <template slot="modal-content">
       <div class="form-container">
@@ -58,9 +58,8 @@
         </div>
       </div>
       <div class="action-buttons field centered">
-        <button class="button is-default is-size-6 is-width-auto is-pulled-left"> Cancel
-        </button>
-        <button class="button is-primary is-size-6 is-width-auto is-pulled-right">Save
+        <button class="button is-primary is-size-6 is-width-auto  centered">
+          Save
         </button>
       </div>
     </template>
