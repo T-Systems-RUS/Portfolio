@@ -15,9 +15,10 @@
         v-if="items.length"
         class="dropdown-menu">
         <div class="dropdown-content">
-          <a v-for="item of items"
-             @click="itemSelected(item)"
-             class="dropdown-item">
+          <a
+            v-for="item of items"
+            @click="itemSelected(item)"
+            class="dropdown-item">
             {{ item }}
           </a>
         </div>
@@ -60,9 +61,18 @@
   @import '~bulma/sass/components/dropdown';
 
   .dropdown {
-    .input:focus {
+
+    &-trigger .button {
+      padding: 0;
+    }
+
+    .input {
       border: none;
-      box-shadow: none;
+
+      &:focus {
+        border: none;
+        box-shadow: none;
+      }
     }
   }
 </style>

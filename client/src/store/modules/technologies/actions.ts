@@ -1,7 +1,8 @@
-import {FETCH_TECHNOLOGIES, SET_TECHNOLOGIES} from './technology-types';
-import {TechnologyService} from './technology-service';
 import {ActionTree} from 'vuex';
+import {FETCH_TECHNOLOGIES} from './action-types';
+import {TechnologyService} from './technology-service';
 import {ITechnologyState} from './index';
+import {SET_TECHNOLOGIES} from './mutation-types';
 
 const service = new TechnologyService();
 
@@ -10,6 +11,6 @@ export const actions: ActionTree<ITechnologyState, {}> = {
     return service.getTechnologies()
       .then((response) => {
         commit(SET_TECHNOLOGIES, response.data);
-      })
+      });
   }
 }

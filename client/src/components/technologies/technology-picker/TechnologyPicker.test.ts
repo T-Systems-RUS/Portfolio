@@ -1,7 +1,7 @@
 import {mount} from '@vue/test-utils';
 import store from '../../../store/index';
 import TechnologyPicker from './TechnologyPicker.vue';
-import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/technology-types';
+import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
 
 describe('TechnologyPicker', () => {
 

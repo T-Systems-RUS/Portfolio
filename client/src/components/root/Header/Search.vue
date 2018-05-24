@@ -33,6 +33,6 @@
       setSearch(value: string) {
         this.$store.commit(SET_SEARCH, value);
       }
-    },
+    }
   });
 </script>

@@ -75,7 +75,8 @@ module.exports = {
     'typescript/no-explicit-any': ['error'],
     'typescript/no-namespace': ['error'],
     'typescript/no-triple-slash-reference': ['error'],
-    'typescript/type-annotation-spacing': ['error'],
+    // Broken
+    // 'typescript/type-annotation-spacing': ['error'],
   },
   overrides: [
     {

@@ -5,6 +5,9 @@
 // Override bulma overrides
 @import './bulma-overrides';
 
+@import './typography';
+@import './forms';
+
 body {
   font-size: $base-font-size;
 }
@@ -57,10 +60,6 @@ body {
 
 
 .input {
-  border: none;
-  height: auto;
-  padding: 0;
-
   &-box {
     border: 1px solid $border-color;
     border-radius: 2px;
