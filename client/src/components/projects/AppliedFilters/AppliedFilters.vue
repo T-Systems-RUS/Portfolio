@@ -25,6 +25,20 @@
           </span>
         </span>
       </div>
+      <div class="filter">
+        <span
+          class="filter-text"
+          v-for="(filterMap, filterKey) in filterMaps"
+          v-if="filterMap.length">
+          <span class="is-capitalized">{{ filterKey }}</span>:
+          <span
+            v-for="filter of filterMap"
+            class="active-chip">
+            {{ filterValue(filterKey, filter) }}
+            <img src="../../../assets/images/close.svg">
+          </span>
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -32,16 +46,20 @@
 <script lang="ts">
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
-  import {SEARCH} from '../../../store/modules/projects/getter-types';
+  import {FILTER_VALUE, FILTERS, SEARCH} from '../../../store/modules/projects/getter-types';
   import {SET_SEARCH} from '../../../store/modules/projects/mutation-types';
 
   export default Vue.extend({
     computed: {
       ...mapGetters({
-        search: SEARCH
+        search: SEARCH,
+        filterMaps: FILTERS
       })
     },
     methods: {
+      filterValue(filterKey: string, id: number): string {
+        return this.$store.getters[FILTER_VALUE](filterKey, id);
+      },
       removeSearch() {
         this.$store.commit(SET_SEARCH, '');
       }
@@ -67,13 +85,14 @@
     &-text {
       color: $text-secondary;
       font-size: 14px;
-      margin-left: 20px;
+      margin-left: 6px;
 
       .active-chip {
         padding: 2px 6px;
         background-color: $gray-237;
         color: $gray-38;
         cursor: pointer;
+        margin-right: 6px;
 
         img {
           position: relative;
