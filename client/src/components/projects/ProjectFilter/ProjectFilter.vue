@@ -30,7 +30,7 @@
   import Vue from 'vue';
   import Accordion from '../../common/Accordion/Accordion.vue';
   import Checkbox from '../../common/Checkbox/Checkbox.vue';
-  import TechnologyPicker from '../../technologies/technology-picker/TechnologyPicker.vue';
+  import TechnologyPicker from '../../technologies/TechnologyPicker/TechnologyPicker.vue';
   import {IProjectFilter, IProjectFilterCheck} from './IProjectFilter';
   import {IModel} from '../../../shared/interfaces/IModel';
   import {Util} from '../../../shared/classes/Util';

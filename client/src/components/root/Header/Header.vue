@@ -48,7 +48,7 @@
         <img
           v-if="searchToggled"
           class="close-icon"
-          src="../assets/close.svg">
+          src="../../../assets/images/close.svg">
       </a>
       <a class="level-item">
         <img src="../assets/user.svg">

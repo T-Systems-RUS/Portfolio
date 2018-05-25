@@ -113,7 +113,7 @@
       border: 0;
       cursor: pointer;
       outline: none;
-      background: $gray-38 center / $close-bg-size $close-bg-size url('../../../assets/images/close.svg') no-repeat;
+      background: $gray-38 center/$close-bg-size $close-bg-size url('../../../assets/images/close_fill.svg') no-repeat;
 
       @include widescreen {
         right: $close-right;

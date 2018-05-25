@@ -6,21 +6,7 @@
       </div>
     </div>
     <div class="column projects-right">
-      <div class="level filters no-margin">
-        <div class="level-left">
-          <div class="filter">
-            <img
-              class="filter-img"
-              src="../common/assets/download.svg">
-          </div>
-          <div class="filter">
-            <img
-              class="filter-img"
-              src="../common/assets/sort.svg">
-            <span class="filter-text">Sorted by: production line</span>
-          </div>
-        </div>
-      </div>
+      <AppliedFilters/>
       <p
         class="projects is-empty"
         v-if="!projects.length">No projects found</p>
@@ -38,8 +24,9 @@
 <script lang="ts">
   import Vue from 'vue';
   import {mapActions, mapGetters} from 'vuex';
-  import ProjectCard from './project-card/ProjectCard.vue';
-  import ProjectFilter from './project-filter/ProjectFilter.vue';
+  import ProjectCard from './ProjectCard/ProjectCard.vue';
+  import ProjectFilter from './ProjectFilter/ProjectFilter.vue';
+  import AppliedFilters from './AppliedFilters/AppliedFilters.vue';
   import {FETCH_PROJECTS} from '../../store/modules/projects/action-types';
   import {PROJECTS} from '../../store/modules/projects/getter-types';
 
@@ -51,7 +38,8 @@
     },
     components: {
       ProjectCard,
-      ProjectFilter
+      ProjectFilter,
+      AppliedFilters
     },
     created() {
       this.fetchProjects();
@@ -104,30 +92,6 @@
       margin-top: 100px;
       text-align: center;
     }
-  }
-
-  .filters {
-    height: 60px;
-
-    &.no-margin {
-      margin: 0;
-    }
-  }
-
-  .filter {
-    margin-right: 20px;
-
-    &-text {
-      color: $text-secondary;
-      font-size: 14px;
-      margin-left: 20px;
-    }
-
-    &-img {
-      cursor: pointer;
-      height: 27px;
-    }
-
   }
 
 </style>
