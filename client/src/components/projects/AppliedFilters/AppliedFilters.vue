@@ -1,0 +1,97 @@
+<template>
+  <div class="level filters no-margin">
+    <div class="level-left">
+      <div class="filter">
+        <img
+          class="filter-img"
+          src="../../common/assets/download.svg">
+      </div>
+      <div class="filter">
+        <img
+          class="filter-img"
+          src="../../common/assets/sort.svg">
+        <span class="filter-text">Sorted by: production line</span>
+      </div>
+      <div
+        class="filter"
+        v-if="search">
+        <span class="filter-text">
+          Search:
+          <span
+            class="active-chip"
+            @click="removeSearch">
+            {{ search }}
+            <img src="../../../assets/images/close.svg">
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+  import Vue from 'vue';
+  import {mapGetters} from 'vuex';
+  import {SEARCH} from '../../../store/modules/projects/getter-types';
+  import {SET_SEARCH} from '../../../store/modules/projects/mutation-types';
+
+  export default Vue.extend({
+    computed: {
+      ...mapGetters({
+        search: SEARCH
+      })
+    },
+    methods: {
+      removeSearch() {
+        this.$store.commit(SET_SEARCH, '');
+      }
+    }
+  });
+</script>
+
+
+<style lang="scss" scoped>
+  @import '../../../styles/variables';
+
+  .filters {
+    height: 60px;
+
+    &.no-margin {
+      margin: 0;
+    }
+  }
+
+  .filter {
+    margin-right: 20px;
+
+    &-text {
+      color: $text-secondary;
+      font-size: 14px;
+      margin-left: 20px;
+
+      .active-chip {
+        padding: 2px 6px;
+        background-color: $gray-237;
+        color: $gray-38;
+        cursor: pointer;
+
+        img {
+          position: relative;
+          top: 9px;
+          width: 12px;
+        }
+
+        &:hover {
+          background-color: $gray-194;
+        }
+      }
+    }
+
+    &-img {
+      cursor: pointer;
+      height: 27px;
+    }
+
+  }
+
+</style>
