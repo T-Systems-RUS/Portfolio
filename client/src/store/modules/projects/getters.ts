@@ -5,6 +5,7 @@ import {Util} from '../../../shared/classes/Util';
 import {IModel} from '../../../shared/interfaces/IModel';
 import {IProject} from '../../../shared/interfaces/IProject';
 import {ADDONS, AUTOCOMPLETE_SEARCH, FILTER_VALUE, FILTERS, PROJECT_NAMES, PROJECTS, SEARCH} from './getter-types';
+import {TECHNOLOGIES} from '../technologies/getter-types';
 
 export const getters: GetterTree<IProjectState, {}> = {
 
@@ -76,14 +77,15 @@ export const getters: GetterTree<IProjectState, {}> = {
   },
   [FILTERS]: state => state.filter,
   [FILTER_VALUE]: (state, projectGetters) => (key: string, id: number) => {
-    const keyMap: {[key: string]: string} = {
+    const keyMap: { [key: string]: string } = {
       customers: 'Customers',
       domain: 'Domain',
       line: 'Production line',
       program: 'Program',
       type: 'Project type'
     };
-    const project = projectGetters[ADDONS][keyMap[key]].filter((proj:IProject) => Number(proj.id) === id)[0];
-    return project ? project.name : '';
+    const arrayToSearch = key === 'technologies' ? projectGetters[TECHNOLOGIES] : projectGetters[ADDONS][keyMap[key]];
+    const item = arrayToSearch.filter((filtered: IProject) => Number(filtered.id) === id)[0];
+    return item ? item.name : '';
   }
 };
