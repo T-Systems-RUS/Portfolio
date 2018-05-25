@@ -33,6 +33,7 @@
           <span class="is-capitalized">{{ filterKey }}</span>:
           <span
             v-for="filter of filterMap"
+            @click="removeFilter(filterKey, filter)"
             class="active-chip">
             {{ filterValue(filterKey, filter) }}
             <img src="../../../assets/images/close.svg">
@@ -47,7 +48,7 @@
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
   import {FILTER_VALUE, FILTERS, SEARCH} from '../../../store/modules/projects/getter-types';
-  import {SET_SEARCH} from '../../../store/modules/projects/mutation-types';
+  import {SET_FILTER, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
 
   export default Vue.extend({
     computed: {
@@ -62,6 +63,9 @@
       },
       removeSearch() {
         this.$store.commit(SET_SEARCH, '');
+      },
+      removeFilter(filterKey: string, id: number) {
+        this.$store.commit(SET_FILTER, {key: filterKey, value: id});
       }
     }
   });
