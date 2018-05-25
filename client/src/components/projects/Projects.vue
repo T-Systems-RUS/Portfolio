@@ -24,8 +24,8 @@
 <script lang="ts">
   import Vue from 'vue';
   import {mapActions, mapGetters} from 'vuex';
-  import ProjectCard from './project-card/ProjectCard.vue';
-  import ProjectFilter from './project-filter/ProjectFilter.vue';
+  import ProjectCard from './ProjectCard/ProjectCard.vue';
+  import ProjectFilter from './ProjectFilter/ProjectFilter.vue';
   import AppliedFilters from './AppliedFilters/AppliedFilters.vue';
   import {FETCH_PROJECTS} from '../../store/modules/projects/action-types';
   import {PROJECTS} from '../../store/modules/projects/getter-types';
