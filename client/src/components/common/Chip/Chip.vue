@@ -1,7 +1,7 @@
 <template>
   <div
     class="chip"
-    :class ="{'is-active': isActive}"
+    :class  ="{'is-selected': isSelected, 'is-disabled': !active}"
     @click="toggleActive">
     <!--TODO implement later-->
     <!--<img class="chip-image" src="">-->
@@ -18,7 +18,7 @@
   export default Vue.extend({
     data() {
       return {
-        isActive: false
+        isSelected: false
       };
     },
     props: {
@@ -30,11 +30,15 @@
       id: {
         type: Number,
         required: false
+      },
+      active: {
+        type: Boolean,
+        default: true
       }
     },
     methods: {
       toggleActive() {
-        this.isActive = !this.isActive;
+        this.isSelected = !this.isSelected;
         this.$store.commit(SET_FILTER, {key: 'technologies', value: this.id});
       }
     }
@@ -67,7 +71,15 @@
       cursor: pointer;
     }
 
-    &.is-active {
+    &.is-disabled {
+      //border: 1px solid $text-secondary;
+
+      >span {
+        color: $text-secondary;
+      }
+    }
+
+    &.is-selected {
       background-color: $magenta;
       border: 1px solid $magenta;
 

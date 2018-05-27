@@ -5,6 +5,7 @@ export  interface IProjectFilter {
 }
 
 export interface IProjectFilterCheck {
+  active: boolean,
   checked: boolean,
   value: String,
   id: String

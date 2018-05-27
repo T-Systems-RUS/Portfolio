@@ -15,13 +15,13 @@ export const getters: GetterTree<IProjectState, {}> = {
    * @param {IProjectState} state
    * @returns {{}}
    */
-  [ADDONS](state) {
+  [ADDONS](state, projectGetters) {
     return {
-      [Types.PRODUCTION_LINE]: state.lines,
-      [Types.PROGRAM]: state.programs,
-      [Types.DOMAIN]: state.domains,
-      [Types.PROJECT_TYPE]: state.types,
-      [Types.CUSTOMER]: state.customers,
+      [Types.PRODUCTION_LINE]: Util.checkFIltersInProjects('line', state.lines, projectGetters[PROJECTS]),
+      [Types.PROGRAM]: Util.checkFIltersInProjects('program', state.programs, projectGetters[PROJECTS]),
+      [Types.DOMAIN]: Util.checkFIltersInProjects('domain', state.domains, projectGetters[PROJECTS]),
+      [Types.PROJECT_TYPE]: Util.checkFIltersInProjects('type', state.types, projectGetters[PROJECTS]),
+      [Types.CUSTOMER]: Util.checkFIltersInProjects('customers', state.customers, projectGetters[PROJECTS]),
     };
   },
   [PROJECTS](state) {
@@ -78,11 +78,11 @@ export const getters: GetterTree<IProjectState, {}> = {
   [FILTERS]: state => state.filter,
   [FILTER_VALUE]: (state, projectGetters) => (key: string, id: number) => {
     const keyMap: { [key: string]: string } = {
-      customers: 'Customers',
-      domain: 'Domain',
-      line: 'Production line',
-      program: 'Program',
-      type: 'Project type'
+      customers: Types.CUSTOMER,
+      domain: Types.DOMAIN,
+      line: Types.PRODUCTION_LINE,
+      program: Types.PROGRAM,
+      type: Types.PROJECT_TYPE
     };
     const arrayToSearch = key === 'technologies' ? projectGetters[TECHNOLOGIES] : projectGetters[ADDONS][keyMap[key]];
     const item = arrayToSearch.filter((filtered: IProject) => Number(filtered.id) === id)[0];

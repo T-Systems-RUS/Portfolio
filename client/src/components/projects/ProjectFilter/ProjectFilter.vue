@@ -9,7 +9,9 @@
       <div
         v-for="item in model.items"
         :key="item.value">
-        <div class="filter-item">
+        <div
+          class="filter-item"
+          :class="{'is-disabled': !item.active}">
           <Checkbox
             :checked="item.checked"
             @update:checked="handleFilterAction(item, model.name)"/>
@@ -52,7 +54,7 @@
 
       models(): IProjectFilter[] {
         const addons = this.$store.getters[ADDONS];
-        this.accordionModels = [] as IProjectFilter[];
+        let accordionModels = [] as IProjectFilter[];
 
         Object.keys(addons).forEach(key => {
           const model: IProjectFilter = {
@@ -61,10 +63,10 @@
             items: this.createModelForCheckboxes(addons[key])
           };
 
-          this.accordionModels.push(model);
+          accordionModels.push(model);
         });
 
-        return this.accordionModels;
+        return accordionModels;
       }
     },
     components: {
@@ -87,7 +89,8 @@
         return source.map(item => ({
           value: item.name,
           checked: false,
-          id: item.id
+          id: item.id,
+          active: item.active
         })) as IProjectFilterCheck[];
       }
     }
@@ -105,6 +108,13 @@
       display: flex;
       align-items: center;
       margin-bottom: 10px;
+
+      &.is-disabled {
+
+        span {
+          color: $text-secondary;
+        }
+      }
 
       & > span {
         margin-left: 7px;

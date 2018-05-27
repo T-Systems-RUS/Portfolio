@@ -19,7 +19,7 @@ const technologiesModule: Module<ITechnologyState, {}> = {
   mutations,
   actions,
   getters: {
-    [TECHNOLOGIES]: state => state.technologies,
+    [TECHNOLOGIES]: state =>  state.technologies,
     [TECHNOLGOGIES_FILTERED]: state => state.technologies.filter(technology =>
       technology.name.toLowerCase().indexOf(state.filter.toLowerCase()) > -1)
   }
