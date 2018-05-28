@@ -109,7 +109,7 @@ export class TestMocks {
     const project: IProject = {
       id: '1',
       active: false,
-      name: projectName,
+      name: projectName ,
       description: '123',
       domain: domain,
       program: program,

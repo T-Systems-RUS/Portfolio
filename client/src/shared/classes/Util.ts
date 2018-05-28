@@ -24,7 +24,6 @@ export class Util {
 
     if(key === this.mapNameToProperty(Types.CUSTOMER)) {
       const newArray = [].concat.apply([], projects.map(project => project[key]));
-      console.log(key, newArray);
 
       itemsToCheck.forEach(item => item.active =
         newArray.map((model: IModel)=> model.id).indexOf(item.id) > -1 );

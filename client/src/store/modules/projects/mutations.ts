@@ -9,7 +9,7 @@ import {IDomain} from '../../../shared/interfaces/IDomain';
 import {IType} from '../../../shared/interfaces/IType';
 import {Extension} from '../../../shared/classes/Extension';
 import {
-  FINISH_LOADING, SET_AUTOCOMPLETE_SEARCH,
+  FINISH_LOADING, SET_ADDON, SET_AUTOCOMPLETE_SEARCH,
   SET_CUSTOMERS, SET_DOMAINS, SET_FILTER, SET_LINES, SET_PROGRAMS, SET_PROJECTS, SET_SEARCH,
   SET_TYPES
 } from './mutation-types';

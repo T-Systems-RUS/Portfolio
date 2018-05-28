@@ -14,13 +14,14 @@
 <script lang="ts">
   import Vue from 'vue';
   import {SET_FILTER} from '../../../store/modules/projects/mutation-types';
+  import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
 
   export default Vue.extend({
-    data() {
-      return {
-        isSelected: false
-      };
-    },
+    // data() {
+    //   return {
+    //     isSelected: false
+    //   };
+    // },
     props: {
       name: {
         type: String,
@@ -34,11 +35,20 @@
       active: {
         type: Boolean,
         default: true
+      },
+      selected: {
+        type: Boolean,
+        default: false
+      }
+    },
+    computed: {
+      isSelected(): boolean {
+        return this.selected;
       }
     },
     methods: {
       toggleActive() {
-        this.isSelected = !this.isSelected;
+        this.$store.commit(TOGGLE_TECHNOLOGY, { id: this.id });
         this.$store.commit(SET_FILTER, {key: 'technologies', value: this.id});
       }
     }

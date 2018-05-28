@@ -4,13 +4,14 @@
       class="input"
       type="text"
       placeholder="Search technology"
-      v-if="technologies.length"
+      v-if="technologiesFiltered.length"
       v-model="search"
       @input="filterTechnologies()">
     <chip
       v-for="technology in technologiesFiltered"
       :key="technology.id"
       :name="technology.name"
+      :selected = "technology.active"
       :id="technology.id"/>
   </div>
 </template>
@@ -37,7 +38,6 @@
     },
     computed: {
       ...mapGetters({
-        technologies: TECHNOLOGIES,
         technologiesFiltered: TECHNOLGOGIES_FILTERED
       })
     },

@@ -14,6 +14,7 @@
           :class="{'is-disabled': !item.active}">
           <Checkbox
             :checked="item.checked"
+
             @update:checked="handleFilterAction(item, model.name)"/>
           <span class="title is-5 is-size-16">{{ item.value }}</span>
         </div>
@@ -37,7 +38,7 @@
   import {IModel} from '../../../shared/interfaces/IModel';
   import {Util} from '../../../shared/classes/Util';
   import {FETCH_ADDONS} from '../../../store/modules/projects/action-types';
-  import {ADDONS} from '../../../store/modules/projects/getter-types';
+  import {ADDONS, PROJECT_FILTER} from "../../../store/modules/projects/getter-types";
   import {SET_FILTER} from '../../../store/modules/projects/mutation-types';
 
   export default Vue.extend({
@@ -53,20 +54,18 @@
     computed: {
 
       models(): IProjectFilter[] {
-        const addons = this.$store.getters[ADDONS];
-        let accordionModels = [] as IProjectFilter[];
-
-        Object.keys(addons).forEach(key => {
-          const model: IProjectFilter = {
-            name: key,
-            opened: true,
-            items: this.createModelForCheckboxes(addons[key])
-          };
-
-          accordionModels.push(model);
-        });
-
-        return accordionModels;
+        return this.$store.getters[PROJECT_FILTER];
+        // let accordionModels = [] as IProjectFilter[];
+        //
+        // return accordionModels = Object.keys(addons).map(key => {
+        //   const model: IProjectFilter = {
+        //         name: key,
+        //         opened: true,
+        //         items: this.createModelForCheckboxes(addons[key])
+        //       };
+        //
+        //   return model;
+        // })
       }
     },
     components: {
@@ -112,7 +111,7 @@
       &.is-disabled {
 
         span {
-          color: $text-secondary;
+          color: $lite-grey;
         }
       }
 

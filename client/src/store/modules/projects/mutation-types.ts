@@ -1,3 +1,4 @@
+export const SET_ADDON = 'projects/SET_ADDON';
 export const SET_LINES = 'projects/SET_LINES';
 export const SET_PROGRAMS = 'projects/SET_PROGRAMS';
 export const SET_DOMAINS = 'projects/SET_DOMAINS';

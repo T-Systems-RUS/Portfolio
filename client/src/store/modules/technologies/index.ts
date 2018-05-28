@@ -1,11 +1,13 @@
 import {Module} from 'vuex';
 import {actions} from './actions';
+import {getters} from './getters';
 import {mutations} from './mutations';
 import {ITechnology} from '../../../shared/interfaces/ITechnology';
-import {TECHNOLGOGIES_FILTERED, TECHNOLOGIES} from './getter-types';
+
 
 export interface ITechnologyState {
   technologies: ITechnology[];
+  selected: string[];
   loading: boolean;
   filter: string;
 }
@@ -13,16 +15,13 @@ export interface ITechnologyState {
 const technologiesModule: Module<ITechnologyState, {}> = {
   state: {
     technologies: [],
+    selected:[],
     loading: true,
     filter: ''
   },
   mutations,
   actions,
-  getters: {
-    [TECHNOLOGIES]: state =>  state.technologies,
-    [TECHNOLGOGIES_FILTERED]: state => state.technologies.filter(technology =>
-      technology.name.toLowerCase().indexOf(state.filter.toLowerCase()) > -1)
-  }
+  getters
 };
 
 export default technologiesModule;
