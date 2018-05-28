@@ -6,7 +6,8 @@ import {IModel} from '../../../shared/interfaces/IModel';
 import {IProject} from '../../../shared/interfaces/IProject';
 import {ADDONS, AUTOCOMPLETE_SEARCH, FILTER_VALUE, FILTERS, PROJECT_FILTER, PROJECT_NAMES, PROJECTS, SEARCH} from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
-import {IProjectFilter, IProjectFilterCheck} from '../../../components/projects/ProjectFilter/IProjectFilter';
+import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
+import {FilterTypes} from './filter-types';
 
 export const getters: GetterTree<IProjectState, {}> = {
 
@@ -18,11 +19,11 @@ export const getters: GetterTree<IProjectState, {}> = {
    */
   [ADDONS](state, projectGetters) {
     return {
-      [Types.PRODUCTION_LINE]: Util.checkFIltersInProjects('line', state.lines, projectGetters[PROJECTS]),
-      [Types.PROGRAM]: Util.checkFIltersInProjects('program', state.programs, projectGetters[PROJECTS]),
-      [Types.DOMAIN]: Util.checkFIltersInProjects('domain', state.domains, projectGetters[PROJECTS]),
-      [Types.PROJECT_TYPE]: Util.checkFIltersInProjects('type', state.types, projectGetters[PROJECTS]),
-      [Types.CUSTOMER]: Util.checkFIltersInProjects('customers', state.customers, projectGetters[PROJECTS])
+      [Types.PRODUCTION_LINE]: Util.checkFIltersInProjects(FilterTypes.LINE, state.lines, projectGetters[PROJECTS]),
+      [Types.PROGRAM]: Util.checkFIltersInProjects(FilterTypes.PROGRAM, state.programs, projectGetters[PROJECTS]),
+      [Types.DOMAIN]: Util.checkFIltersInProjects(FilterTypes.DOMAIN, state.domains, projectGetters[PROJECTS]),
+      [Types.PROJECT_TYPE]: Util.checkFIltersInProjects(FilterTypes.TYPE, state.types, projectGetters[PROJECTS]),
+      [Types.CUSTOMER]: Util.checkFIltersInProjects(FilterTypes.CUSTOMERS, state.customers, projectGetters[PROJECTS])
     };
   },
 
@@ -33,11 +34,15 @@ export const getters: GetterTree<IProjectState, {}> = {
     return Object.keys(addons).map(key => {
       const mapKey = Util.mapNameToProperty(key);
 
+      //create model for project filter
       const model: IProjectFilter = {
         name: key,
         opened: true,
         items: addons[key].map((item: IModel) => ({
           value: item.name,
+          //if technology selected in filter it will be marked active
+          //else will be marked un active
+          //for activated filters sync
           checked: state.filter[mapKey] ? state.filter[mapKey].indexOf(item.id)>-1 : false,
           id: item.id,
           active: item.active

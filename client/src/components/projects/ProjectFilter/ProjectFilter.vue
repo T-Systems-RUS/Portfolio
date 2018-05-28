@@ -14,7 +14,6 @@
           :class="{'is-disabled': !item.active}">
           <Checkbox
             :checked="item.checked"
-
             @update:checked="handleFilterAction(item, model.name)"/>
           <span class="title is-5 is-size-16">{{ item.value }}</span>
         </div>
@@ -34,7 +33,7 @@
   import Accordion from '../../common/Accordion/Accordion.vue';
   import Checkbox from '../../common/Checkbox/Checkbox.vue';
   import TechnologyPicker from '../../technologies/TechnologyPicker/TechnologyPicker.vue';
-  import {IProjectFilter, IProjectFilterCheck} from './IProjectFilter';
+  import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
   import {IModel} from '../../../shared/interfaces/IModel';
   import {Util} from '../../../shared/classes/Util';
   import {FETCH_ADDONS} from '../../../store/modules/projects/action-types';
@@ -55,17 +54,6 @@
 
       models(): IProjectFilter[] {
         return this.$store.getters[PROJECT_FILTER];
-        // let accordionModels = [] as IProjectFilter[];
-        //
-        // return accordionModels = Object.keys(addons).map(key => {
-        //   const model: IProjectFilter = {
-        //         name: key,
-        //         opened: true,
-        //         items: this.createModelForCheckboxes(addons[key])
-        //       };
-        //
-        //   return model;
-        // })
       }
     },
     components: {
@@ -78,19 +66,7 @@
       // re render checkbox
       // will be used later for project filtering via store
       handleFilterAction(item: IProjectFilterCheck, key: string) {
-        item.checked = !item.checked;
         this.$store.commit(SET_FILTER, {key: Util.mapNameToProperty(key), value: item.id});
-      },
-
-      // Model for checkboxes must have a label
-      // and boolean property checked
-      createModelForCheckboxes(source: IModel[]): IProjectFilterCheck[] {
-        return source.map(item => ({
-          value: item.name,
-          checked: false,
-          id: item.id,
-          active: item.active
-        })) as IProjectFilterCheck[];
       }
     }
   });
@@ -111,7 +87,7 @@
       &.is-disabled {
 
         span {
-          color: $lite-grey;
+          color: $text-secondary2;
         }
       }
 

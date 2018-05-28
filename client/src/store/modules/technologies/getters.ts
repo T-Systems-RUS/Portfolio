@@ -8,6 +8,7 @@ export const getters: GetterTree<ITechnologyState, {}> = {
   [TECHNOLOGIES]: state =>  state.technologies,
   [TECHNOLGOGIES_FILTERED](state: ITechnologyState) {
     return state.technologies.filter(technology => {
+      //check selected technologies for activated filters
       technology.active = state.selected.indexOf(technology.id) > -1;
       return technology.name.toLowerCase().indexOf(state.filter.toLowerCase()) > -1
     })

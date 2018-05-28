@@ -15,13 +15,9 @@
   import Vue from 'vue';
   import {SET_FILTER} from '../../../store/modules/projects/mutation-types';
   import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
+  import {FilterTypes} from '../../../store/modules/projects/filter-types';
 
   export default Vue.extend({
-    // data() {
-    //   return {
-    //     isSelected: false
-    //   };
-    // },
     props: {
       name: {
         type: String,
@@ -49,7 +45,7 @@
     methods: {
       toggleActive() {
         this.$store.commit(TOGGLE_TECHNOLOGY, { id: this.id });
-        this.$store.commit(SET_FILTER, {key: 'technologies', value: this.id});
+        this.$store.commit(SET_FILTER, {key: FilterTypes.TECHNOLOGIES, value: this.id});
       }
     }
   });
