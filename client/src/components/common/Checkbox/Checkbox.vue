@@ -1,6 +1,7 @@
 <template>
   <div
     class="checkbox"
+    :class="{'is-disabled': disabled}"
     @click="toggleCheck">
     <img
       class="check"
@@ -16,7 +17,11 @@
   export default Vue.extend({
     name: 'Checkbox',
     props: {
-      checked: Boolean
+      checked: Boolean,
+      disabled: {
+        type: Boolean,
+        default: false
+      }
     },
     computed: {
       checkedValue(): boolean {
@@ -25,7 +30,9 @@
     },
     methods: {
       toggleCheck() {
-        this.$emit('update:checked', !this.checked);
+        if(!this.disabled) {
+          this.$emit('update:checked', !this.checked);
+        }
       }
     }
   });
@@ -50,6 +57,13 @@
     transition: all 200ms ease;
     .check {
       position: absolute;
+    }
+    &.is-disabled {
+
+      &:hover {
+        cursor: default;
+        background-color: $checkbox-background-color;
+      }
     }
     &:hover {
       background-color: $checkbox-background-color-hover;

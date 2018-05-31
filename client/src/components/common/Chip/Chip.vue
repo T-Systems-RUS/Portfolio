@@ -1,7 +1,7 @@
 <template>
   <div
     class="chip"
-    :class ="{'is-active': isActive}"
+    :class  ="{'is-selected': isSelected, 'is-disabled': !active}"
     @click="toggleActive">
     <!--TODO implement later-->
     <!--<img class="chip-image" src="">-->
@@ -14,13 +14,10 @@
 <script lang="ts">
   import Vue from 'vue';
   import {SET_FILTER} from '../../../store/modules/projects/mutation-types';
+  import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
+  import {FilterTypes} from '../../../store/modules/projects/filter-types';
 
   export default Vue.extend({
-    data() {
-      return {
-        isActive: false
-      };
-    },
     props: {
       name: {
         type: String,
@@ -30,12 +27,25 @@
       id: {
         type: Number,
         required: false
+      },
+      active: {
+        type: Boolean,
+        default: true
+      },
+      selected: {
+        type: Boolean,
+        default: false
+      }
+    },
+    computed: {
+      isSelected(): boolean {
+        return this.selected;
       }
     },
     methods: {
       toggleActive() {
-        this.isActive = !this.isActive;
-        this.$store.commit(SET_FILTER, {key: 'technologies', value: this.id});
+        this.$store.commit(TOGGLE_TECHNOLOGY, { id: this.id });
+        this.$store.commit(SET_FILTER, {key: FilterTypes.TECHNOLOGIES, value: this.id});
       }
     }
   });
@@ -67,7 +77,15 @@
       cursor: pointer;
     }
 
-    &.is-active {
+    &.is-disabled {
+      //border: 1px solid $text-secondary;
+
+      >span {
+        color: $text-secondary;
+      }
+    }
+
+    &.is-selected {
       background-color: $magenta;
       border: 1px solid $magenta;
 

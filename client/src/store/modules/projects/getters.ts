@@ -4,8 +4,10 @@ import {Types} from './constant-types';
 import {Util} from '../../../shared/classes/Util';
 import {IModel} from '../../../shared/interfaces/IModel';
 import {IProject} from '../../../shared/interfaces/IProject';
-import {ADDONS, AUTOCOMPLETE_SEARCH, FILTER_VALUE, FILTERS, PROJECT_NAMES, PROJECTS, SEARCH} from './getter-types';
+import {ADDONS, AUTOCOMPLETE_SEARCH, FILTER_VALUE, FILTERS, PROJECT_FILTER, PROJECT_NAMES, PROJECTS, SEARCH} from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
+import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
+import {FilterTypes} from './filter-types';
 
 export const getters: GetterTree<IProjectState, {}> = {
 
@@ -15,14 +17,40 @@ export const getters: GetterTree<IProjectState, {}> = {
    * @param {IProjectState} state
    * @returns {{}}
    */
-  [ADDONS](state) {
+  [ADDONS](state, projectGetters) {
     return {
-      [Types.PRODUCTION_LINE]: state.lines,
-      [Types.PROGRAM]: state.programs,
-      [Types.DOMAIN]: state.domains,
-      [Types.PROJECT_TYPE]: state.types,
-      [Types.CUSTOMER]: state.customers,
+      [Types.PRODUCTION_LINE]: Util.checkFIltersInProjects(FilterTypes.LINE, state.lines, projectGetters[PROJECTS]),
+      [Types.PROGRAM]: Util.checkFIltersInProjects(FilterTypes.PROGRAM, state.programs, projectGetters[PROJECTS]),
+      [Types.DOMAIN]: Util.checkFIltersInProjects(FilterTypes.DOMAIN, state.domains, projectGetters[PROJECTS]),
+      [Types.PROJECT_TYPE]: Util.checkFIltersInProjects(FilterTypes.TYPE, state.types, projectGetters[PROJECTS]),
+      [Types.CUSTOMER]: Util.checkFIltersInProjects(FilterTypes.CUSTOMERS, state.customers, projectGetters[PROJECTS])
     };
+  },
+
+  [PROJECT_FILTER](state, projectGetters) {
+
+    const addons: {[key: string]: any } = projectGetters[ADDONS];
+
+    return Object.keys(addons).map(key => {
+      const mapKey = Util.mapNameToProperty(key);
+
+      //create model for project filter
+      const model: IProjectFilter = {
+        name: key,
+        opened: state.accordion[key],
+        items: addons[key].map((item: IModel) => ({
+          value: item.name,
+          //if technology selected in filter it will be marked active
+          //else will be marked un active
+          //for activated filters sync
+          checked: state.filter[mapKey] ? state.filter[mapKey].indexOf(item.id)>-1 : false,
+          id: item.id,
+          active: item.active
+        })) as IProjectFilterCheck[]
+      };
+
+      return model;
+    })
   },
   [PROJECTS](state) {
     let projects = state.projects;
@@ -78,11 +106,11 @@ export const getters: GetterTree<IProjectState, {}> = {
   [FILTERS]: state => state.filter,
   [FILTER_VALUE]: (state, projectGetters) => (key: string, id: number) => {
     const keyMap: { [key: string]: string } = {
-      customers: 'Customers',
-      domain: 'Domain',
-      line: 'Production line',
-      program: 'Program',
-      type: 'Project type'
+      customers: Types.CUSTOMER,
+      domain: Types.DOMAIN,
+      line: Types.PRODUCTION_LINE,
+      program: Types.PROGRAM,
+      type: Types.PROJECT_TYPE
     };
     const arrayToSearch = key === 'technologies' ? projectGetters[TECHNOLOGIES] : projectGetters[ADDONS][keyMap[key]];
     const item = arrayToSearch.filter((filtered: IProject) => Number(filtered.id) === id)[0];

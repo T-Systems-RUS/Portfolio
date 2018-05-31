@@ -49,6 +49,8 @@
   import {mapGetters} from 'vuex';
   import {FILTER_VALUE, FILTERS, SEARCH} from '../../../store/modules/projects/getter-types';
   import {SET_FILTER, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
+  import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
+  import {FilterTypes} from '../../../store/modules/projects/filter-types';
 
   export default Vue.extend({
     computed: {
@@ -65,6 +67,7 @@
         this.$store.commit(SET_SEARCH, '');
       },
       removeFilter(filterKey: string, id: number) {
+        if(filterKey === FilterTypes.TECHNOLOGIES)  this.$store.commit(TOGGLE_TECHNOLOGY, {id: id});
         this.$store.commit(SET_FILTER, {key: filterKey, value: id});
       }
     }
