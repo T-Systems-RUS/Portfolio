@@ -9,12 +9,20 @@ import {IDomain} from '../../../shared/interfaces/IDomain';
 import {IType} from '../../../shared/interfaces/IType';
 import {Extension} from '../../../shared/classes/Extension';
 import {
-  FINISH_LOADING, SET_ADDON, SET_AUTOCOMPLETE_SEARCH,
+  FINISH_LOADING, SET_ACCORDION, SET_ADDON, SET_AUTOCOMPLETE_SEARCH,
   SET_CUSTOMERS, SET_DOMAINS, SET_FILTER, SET_LINES, SET_PROGRAMS, SET_PROJECTS, SET_SEARCH,
   SET_TYPES
 } from './mutation-types';
 
 export const mutations: MutationTree<IProjectState> = {
+  [SET_ACCORDION](state, payload: {  key:string, value: boolean }) {
+    Vue.set(
+      state.accordion,
+      payload.key,
+      payload.value
+    );
+    state.loading = false;
+  },
   [SET_PROJECTS](state, payload: IProject[]) {
     state.projects = payload;
     state.loading = false;

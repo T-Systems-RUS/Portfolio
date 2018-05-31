@@ -37,7 +37,7 @@ export const getters: GetterTree<IProjectState, {}> = {
       //create model for project filter
       const model: IProjectFilter = {
         name: key,
-        opened: true,
+        opened: state.accordion[key],
         items: addons[key].map((item: IModel) => ({
           value: item.name,
           //if technology selected in filter it will be marked active

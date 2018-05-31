@@ -9,8 +9,10 @@ import {IDomain} from '../../../shared/interfaces/IDomain';
 import {IType} from '../../../shared/interfaces/IType';
 import {IFilter} from '../../../shared/interfaces/IFilter';
 import {Module} from 'vuex';
+import {IAccordion} from '../../../shared/interfaces/ui/IAccordion';
 
 export interface IProjectState {
+  accordion: IAccordion;
   projects: IProject[];
   lines: ILine[];
   programs: IProgram[];
@@ -25,6 +27,7 @@ export interface IProjectState {
 
 const projectState: Module<IProjectState, {}> = {
   state: {
+    accordion: {} as IAccordion,
     projects: [],
     customers: [],
     lines: [],

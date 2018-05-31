@@ -3,7 +3,7 @@
     <Accordion
       :name="model.name"
       :opened="model.opened"
-      @update:opened="model.opened = !model.opened"
+      @update:opened="toggleAccordion(model.name, !model.opened)"
       v-for="(model,index) in models"
       :key="index">
       <div
@@ -38,13 +38,12 @@
   import {Util} from '../../../shared/classes/Util';
   import {FETCH_ADDONS} from '../../../store/modules/projects/action-types';
   import {ADDONS, PROJECT_FILTER} from "../../../store/modules/projects/getter-types";
-  import {SET_FILTER} from '../../../store/modules/projects/mutation-types';
+  import {SET_FILTER, SET_ACCORDION} from '../../../store/modules/projects/mutation-types';
 
   export default Vue.extend({
     data() {
       return {
-        accordionOpened: true,
-        accordionModels: [] as IProjectFilter[]
+        accordionOpened: true
       };
     },
     created() {
@@ -61,12 +60,17 @@
       Checkbox,
       TechnologyPicker
     },
-
+    mounted() {
+      this.models.forEach(item => this.$store.commit(SET_ACCORDION, { key: item.name, value: true }))
+    },
     methods: {
       // re render checkbox
       // will be used later for project filtering via store
       handleFilterAction(item: IProjectFilterCheck, key: string) {
         this.$store.commit(SET_FILTER, {key: Util.mapNameToProperty(key), value: item.id});
+      },
+      toggleAccordion(key:string, value: boolean) {
+        this.$store.commit(SET_ACCORDION, { key: key, value: value });
       }
     }
   });
