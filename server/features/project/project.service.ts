@@ -51,7 +51,7 @@ const projectService = {
     .catch(error => {
       console.log(error);
     }),
-  
+
   // POST create new project
   createProject: project => Project.create({
     name: project.name,
@@ -81,7 +81,7 @@ const projectService = {
       throw new Error(error);
     }),
 
-// POST request update Project
+// POST request update ProjectChange
   updateProject: project => sequelize.transaction()
     .then(t => Project.update(
       {ishistory: true},

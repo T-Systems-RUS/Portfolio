@@ -4,7 +4,7 @@ import {Types} from './constant-types';
 import {Util} from '../../../shared/classes/Util';
 import {IModel} from '../../../shared/interfaces/IModel';
 import {IProject} from '../../../shared/interfaces/IProject';
-import {ADDONS, AUTOCOMPLETE_SEARCH, FILTER_VALUE, FILTERS, PROJECT_FILTER, PROJECT_NAMES, PROJECTS, SEARCH} from './getter-types';
+import {ADDONS, AUTOCOMPLETE_SEARCH, FILTER_VALUE, FILTERS, PROJECT, PROJECT_FILTER, PROJECT_NAMES, PROJECTS, SEARCH} from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
 import {FilterTypes} from './filter-types';
@@ -75,7 +75,7 @@ export const getters: GetterTree<IProjectState, {}> = {
             return project[key].map((item: IModel) => item.id).filter((id: string) =>
               state.filter[key].indexOf(id) > -1).length === state.filter[key].length;
           } else {
-            // Project property is an object filter by object id
+            // ProjectChange property is an object filter by object id
             // exception is line it is nested object
             const searchedId = key === Util.mapNameToProperty(Types.PRODUCTION_LINE)
               ? project[Util.mapNameToProperty(Types.PROGRAM)].lineId
@@ -96,6 +96,7 @@ export const getters: GetterTree<IProjectState, {}> = {
 
     return projects;
   },
+  [PROJECT]: state => state.project,
   [SEARCH]: state => state.search,
   [AUTOCOMPLETE_SEARCH]: state => state.autocompleteSearch,
   [PROJECT_NAMES](state) {

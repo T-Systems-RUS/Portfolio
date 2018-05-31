@@ -1,5 +1,6 @@
 export const ADDONS = 'projects/ADDONS';
 export const PROJECTS = 'projects/PROJECTS';
+export const PROJECT = 'projects/PROJECT';
 export const PROJECT_FILTER = 'projects/PROJECT_FILTER';
 export const PROJECT_NAMES = 'projects/PROJECT_NAMES';
 export const SEARCH = 'projects/SEARCH';

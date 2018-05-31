@@ -10,7 +10,7 @@ import {ILine} from '../../../shared/interfaces/ILine';
 import {ITechnology} from '../../../shared/interfaces/ITechnology';
 import {TestMocks} from '../../../shared/classes/TestMocks';
 
-describe('Project Card', () => {
+describe('ProjectChange Card', () => {
 
   it('should render correct contents', () => {
 

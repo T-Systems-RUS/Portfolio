@@ -5,7 +5,7 @@ import {TestMocks} from '../../../shared/classes/TestMocks';
 import {SET_FILTER, SET_PROJECTS} from '../../../store/modules/projects/mutation-types';
 import {PROJECTS} from '../../../store/modules/projects/getter-types';
 
-describe('Project Filter', () => {
+describe('ProjectChange Filter', () => {
 
   const wrapper = mount(ProjectFilter, {
     store: store

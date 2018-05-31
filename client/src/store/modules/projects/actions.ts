@@ -1,9 +1,9 @@
 import {ActionTree} from 'vuex';
 import {ProjectService} from './project.service';
 import {IProjectState} from './index';
-import {FETCH_ADDONS, FETCH_PROJECTS} from './action-types';
+import {FETCH_ADDONS, FETCH_PROJECT, FETCH_PROJECTS} from './action-types';
 import {
-  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECTS,
+  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS,
   SET_TYPES
 } from './mutation-types';
 
@@ -15,6 +15,13 @@ export const actions: ActionTree<IProjectState, {}> = {
     return service.getProjects()
       .then(response => {
         commit(SET_PROJECTS, response.data);
+      });
+  },
+
+  [FETCH_PROJECT]({commit}, id:string) {
+    return service.getProject(id)
+      .then(response => {
+        commit(SET_PROJECT, response.data);
       });
   },
 

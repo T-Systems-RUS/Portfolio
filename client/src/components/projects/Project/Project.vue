@@ -1,80 +1,33 @@
 <template>
-  <CommonModal @exit="goBack">
-    <template slot="modal-title">Edit project</template>
-    <p
-      class="manage-user-subtitle common-modal-subtitle has-text-centered is-size-5 is-size-6-mobile"
-      slot="modal-subtitle">
-      Please edit project information here
-    </p>
-    <template slot="modal-content">
-      <div class="form-container">
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">Some select</label>
-          <div class="control">
-            <div class="select">
-              <select/>
-            </div>
-          </div>
-        </div>
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">Field</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text">
-          </div>
-        </div>
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">Other field</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text">
-          </div>
-        </div>
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">More fields</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text">
-          </div>
-        </div>
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">Even more</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text">
-          </div>
-        </div>
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">Some select</label>
-          <div class="control">
-            <div class="select">
-              <select/>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="action-buttons field centered">
-        <button class="button is-primary is-size-6 is-width-auto  centered">
-          Save
-        </button>
-      </div>
-    </template>
-  </CommonModal>
+  <div class="column project">
+    Hello {{project.id}}
+  </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
+  import {FETCH_PROJECT} from '../../../store/modules/projects/action-types';
+  import {PROJECT} from '../../../store/modules/projects/getter-types';
+  import {mapActions, mapGetters} from "vuex";
 
   export default Vue.extend({
+    computed: {
+      ...mapGetters({
+        project: PROJECT
+      })
+    },
+    created() {
+      this.$store.dispatch(FETCH_PROJECT, this.$route.params.id);
+    },
     methods: {
-      goBack() {
-        this.$router.push({path: '/'});
-      }
+
+      // ...mapActions({
+      //   fetchProject: FETCH_PROJECT
+      // })
     }
   });
 </script>
 
+<style lang="scss" scoped>
+  @import '../../../styles/variables';
+</style>

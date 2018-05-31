@@ -39,7 +39,7 @@ export class TestMocks {
     return technology;
   }
 
-  static TestType(typeName:string = 'Project') {
+  static TestType(typeName:string = 'ProjectChange') {
     const type: IType = {
       id: '1',
       name: typeName,

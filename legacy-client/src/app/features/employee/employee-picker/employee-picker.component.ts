@@ -5,7 +5,7 @@ import {Schedule} from '../../../shared/models/schedule';
 import {EmployeeService} from '../employee.service';
 
 /**
- * Used in create/update Project form
+ * Used in create/update ProjectChange form
  * Select Employees Roles and participation
  * @export
  * @class EmployeePickerComponent
