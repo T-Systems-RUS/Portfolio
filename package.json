@@ -6,6 +6,7 @@
     "db": "cd server && yarn run db",
     "client": "cd client && yarn run dev",
     "client:install": "cd client && yarn",
+    "client:lint": "cd client && yarn run lint --fix",
     "client:unit": "cd client && yarn run unit",
     "client:e2e": "cd client && yarn run e2e",
     "server": "cd server && yarn run server",
