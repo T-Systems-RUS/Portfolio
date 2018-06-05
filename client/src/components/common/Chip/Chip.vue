@@ -1,7 +1,7 @@
 <template>
   <div
     class="chip"
-    :class  ="{'is-selected': isSelected, 'is-disabled': !active}"
+    :class ="{'is-selected': isSelected, 'is-disabled': !active}"
     @click="toggleActive">
     <!--TODO implement later-->
     <!--<img class="chip-image" src="">-->
@@ -44,7 +44,7 @@
     },
     methods: {
       toggleActive() {
-        this.$store.commit(TOGGLE_TECHNOLOGY, { id: this.id });
+        this.$store.commit(TOGGLE_TECHNOLOGY, {id: this.id});
         this.$store.commit(SET_FILTER, {key: FilterTypes.TECHNOLOGIES, value: this.id});
       }
     }

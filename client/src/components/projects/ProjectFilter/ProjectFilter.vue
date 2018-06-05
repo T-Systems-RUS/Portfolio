@@ -37,7 +37,7 @@
   import {IModel} from '../../../shared/interfaces/IModel';
   import {Util} from '../../../shared/classes/Util';
   import {FETCH_ADDONS} from '../../../store/modules/projects/action-types';
-  import {ADDONS, PROJECT_FILTER} from "../../../store/modules/projects/getter-types";
+  import {ADDONS, PROJECT_FILTER} from '../../../store/modules/projects/getter-types';
   import {SET_FILTER, SET_ACCORDION} from '../../../store/modules/projects/mutation-types';
 
   export default Vue.extend({
@@ -61,7 +61,7 @@
       TechnologyPicker
     },
     mounted() {
-      this.models.forEach(item => this.$store.commit(SET_ACCORDION, { key: item.name, value: true }))
+      this.models.forEach(item => this.$store.commit(SET_ACCORDION, {key: item.name, value: true}));
     },
     methods: {
       // re render checkbox
@@ -70,7 +70,7 @@
         this.$store.commit(SET_FILTER, {key: Util.mapNameToProperty(key), value: item.id});
       },
       toggleAccordion(key:string, value: boolean) {
-        this.$store.commit(SET_ACCORDION, { key: key, value: value });
+        this.$store.commit(SET_ACCORDION, {key, value});
       }
     }
   });

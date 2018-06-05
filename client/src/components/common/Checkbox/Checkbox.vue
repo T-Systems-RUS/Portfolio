@@ -30,7 +30,7 @@
     },
     methods: {
       toggleCheck() {
-        if(!this.disabled) {
+        if (!this.disabled) {
           this.$emit('update:checked', !this.checked);
         }
       }

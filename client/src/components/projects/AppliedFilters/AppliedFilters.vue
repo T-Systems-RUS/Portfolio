@@ -67,7 +67,7 @@
         this.$store.commit(SET_SEARCH, '');
       },
       removeFilter(filterKey: string, id: number) {
-        if(filterKey === FilterTypes.TECHNOLOGIES)  this.$store.commit(TOGGLE_TECHNOLOGY, {id: id});
+        if (filterKey === FilterTypes.TECHNOLOGIES) this.$store.commit(TOGGLE_TECHNOLOGY, {id});
         this.$store.commit(SET_FILTER, {key: filterKey, value: id});
       }
     }
