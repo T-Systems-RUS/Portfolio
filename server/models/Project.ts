@@ -19,8 +19,8 @@ import {Line} from './Line';
     full: {
         include: [
           { model: () => Schedule, include: [() => Employee, () => Role]},
+          { model: () => Program, include: [() => Line] },
           () => Technology,
-          () => Program,
           () => Domain,
           () => Type,
           () => Customer

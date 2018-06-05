@@ -4,10 +4,14 @@ import {Types} from './constant-types';
 import {Util} from '../../../shared/classes/Util';
 import {IModel} from '../../../shared/interfaces/IModel';
 import {IProject} from '../../../shared/interfaces/IProject';
-import {ADDONS, AUTOCOMPLETE_SEARCH, FILTER_VALUE, FILTERS, PROJECT, PROJECT_FILTER, PROJECT_NAMES, PROJECTS, SEARCH} from './getter-types';
+import {
+  ADDONS, AUTOCOMPLETE_SEARCH, FILTER_VALUE, FILTERS, PROJECT, PROJECT_FILTER, PROJECT_NAMES, PROJECT_TECHNOLOGIES, PROJECTS,
+  SEARCH
+} from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
 import {FilterTypes} from './filter-types';
+import {Extension} from '../../../shared/classes/Extension';
 
 export const getters: GetterTree<IProjectState, {}> = {
 
@@ -97,6 +101,9 @@ export const getters: GetterTree<IProjectState, {}> = {
     return projects;
   },
   [PROJECT]: state => state.project,
+  [PROJECT_TECHNOLOGIES](state) {
+    return Extension.groupBy(state.project.technologies, 'domain');
+  },
   [SEARCH]: state => state.search,
   [AUTOCOMPLETE_SEARCH]: state => state.autocompleteSearch,
   [PROJECT_NAMES](state) {

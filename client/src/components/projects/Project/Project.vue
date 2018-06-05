@@ -1,33 +1,129 @@
 <template>
-  <div class="column project">
-    Hello {{project.id}}
+  <div class="container project">
+    <div class="level">
+      <p class="title is-4 is-size-18 project-secondary">{{project.updatedAt | date }} {{ project.program.line.name }}</p>
+    </div>
+    <div class="level">
+      <p class="title is-7 project-header">{{ project.name }}</p>
+    </div>
+    <div class="columns">
+      <div
+        class="column"
+        :class="{'is-half': project.image}">
+        <div class="project-customers">
+          <chip
+            v-for="customer in project.customers"
+            :key="customer.id"
+            :name="customer.name"
+            :selected = "customer.active"
+            :id="customer.id"/>
+        </div>
+        <p class="project-description">
+          {{ project.description }}
+        </p>
+      </div>
+      <div v-if="project.image" class="column is-half">
+        <img class="project-image" :src="image" alt="">
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <p class="title is-6 is-size-22">
+          Details
+        </p>
+        <p>
+          <span class="title is-5 is-size-16">Project duration: </span>
+          <span class="title is-6 is-size-16">
+            {{project.startdate | date}}
+          </span>
+          <span v-if="project.enddate">- {{project.enddate | date}}</span>
+        </p>
+        <p>
+          <span class="title is-5 is-size-16">Production line: </span>
+          <router-link to="/" class="title is-6 is-size-16 project-link is-magenta">
+            {{project.program.line.name}}
+          </router-link>
+        </p>
+        <p>
+          <span class="title is-5 is-size-16">Program: </span>
+          <router-link to="/" class="title is-6 is-size-16 project-link is-magenta">
+            {{project.program.name}}
+          </router-link>
+        </p>
+        <p class="project-mb30">
+          <span class="title is-5 is-size-16">Domain: </span>
+          <router-link to="/" class="title is-6 is-size-16 project-link is-magenta">
+            {{project.domain.name}}
+          </router-link>
+        </p>
+
+        <TechnologyPanel
+          v-for="domain in Object.keys(technologies)"
+          :domain="domain"
+          :technologies="technologies[domain]"></TechnologyPanel>
+      </div>
+      <div class="column"></div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import {FETCH_PROJECT} from '../../../store/modules/projects/action-types';
-  import {PROJECT} from '../../../store/modules/projects/getter-types';
-  import {mapActions, mapGetters} from "vuex";
+  import {PROJECT, PROJECT_TECHNOLOGIES} from '../../../store/modules/projects/getter-types';
+  import Chip from '../../common/Chip/Chip.vue';
+  import TechnologyPanel from '../../technologies/TechnologyPanel/TechnologyPanel.vue';
+  import {IProject} from "../../../shared/interfaces/IProject";
+  import {ITechnology} from "../../../shared/interfaces/ITechnology";
 
   export default Vue.extend({
-    computed: {
-      ...mapGetters({
-        project: PROJECT
-      })
+    components: {
+      Chip,
+      TechnologyPanel
     },
-    created() {
-      this.$store.dispatch(FETCH_PROJECT, this.$route.params.id);
+    computed: {
+      project(): IProject {
+        return this.$store.getters[PROJECT];
+      },
+      technologies() :ITechnology[] {
+        return this.$store.getters[PROJECT_TECHNOLOGIES];
+      },
+      image(): string {
+        return `./server/images/${this.project.image}`;
+      }
+    },
+    props: {
+      id: {
+        type: String
+      }
+    },
+    mounted() {
+      this.$store.dispatch(FETCH_PROJECT, this.id);
     },
     methods: {
 
-      // ...mapActions({
-      //   fetchProject: FETCH_PROJECT
-      // })
     }
   });
 </script>
 
 <style lang="scss" scoped>
   @import '../../../styles/variables';
+
+  .project {
+    &-secondary {
+      color: $text-secondary3;
+    }
+
+    &-header {
+      font-size: 40px;
+    }
+
+    &-link {
+      color: $magenta;
+    }
+
+    &-mb30 {
+      margin-bottom: 30px;
+    }
+  }
 </style>

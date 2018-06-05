@@ -31,4 +31,17 @@ export class Extension {
         ? [...source, value]
         : source.filter(item => item !== value);
     }
+
+  /**
+   * group array by key
+   * @param {{}[]} xs source array
+   * @param {string} key property of all objects in array
+   * @returns {{}}
+   */
+    public static groupBy(xs: {}[], key: string) {
+      return xs.reduce((rv:any, x:any) => {
+        (rv[x[key]] = rv[x[key]] || []).push(x);
+        return rv;
+      }, {});
+    }
   }
