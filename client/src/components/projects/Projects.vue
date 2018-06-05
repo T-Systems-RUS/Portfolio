@@ -11,11 +11,14 @@
         class="projects is-empty"
         v-if="!projects.length">No projects found</p>
 
-      <project-card
-        v-for="project in projects"
-        :key="project.id"
-        :project="project"
-      />
+      <div>
+        <project-card
+          v-for="project in projects"
+          :key="project.id"
+          :project="project"
+        />
+      </div>
+
 
     </div>
   </div>

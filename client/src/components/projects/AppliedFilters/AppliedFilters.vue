@@ -1,17 +1,6 @@
 <template>
-  <div class="level filters no-margin">
-    <div class="level-left">
-      <div class="filter">
-        <img
-          class="filter-img"
-          src="../../common/assets/download.svg">
-      </div>
-      <div class="filter">
-        <img
-          class="filter-img"
-          src="../../common/assets/sort.svg">
-        <span class="filter-text">Sorted by: production line</span>
-      </div>
+  <div class="filters">
+    <div>
       <div
         class="filter"
         v-if="search">
@@ -67,7 +56,7 @@
         this.$store.commit(SET_SEARCH, '');
       },
       removeFilter(filterKey: string, id: number) {
-        if(filterKey === FilterTypes.TECHNOLOGIES)  this.$store.commit(TOGGLE_TECHNOLOGY, {id: id});
+        if (filterKey === FilterTypes.TECHNOLOGIES) this.$store.commit(TOGGLE_TECHNOLOGY, {id});
         this.$store.commit(SET_FILTER, {key: filterKey, value: id});
       }
     }
@@ -79,11 +68,7 @@
   @import '../../../styles/variables';
 
   .filters {
-    height: 60px;
-
-    &.no-margin {
-      margin: 0;
-    }
+    margin: 10px 0;
   }
 
   .filter {
@@ -95,15 +80,17 @@
       margin-left: 6px;
 
       .active-chip {
+        display: inline-block;
         padding: 2px 6px;
         background-color: $gray-237;
         color: $gray-38;
         cursor: pointer;
         margin-right: 6px;
+        margin-bottom: 6px;
 
         img {
           position: relative;
-          top: 9px;
+          top: 2px;
           width: 12px;
         }
 

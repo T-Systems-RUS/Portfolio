@@ -37,6 +37,8 @@ script:
   - xvfb-run -a yarn run db
   # Run backend
   - xvfb-run -a yarn run server &
+  # Run linter
+  - xvfb-run -a yarn run client:lint
   # Run unit tests
   - xvfb-run -a yarn run client:unit
   # Run e2e tests
