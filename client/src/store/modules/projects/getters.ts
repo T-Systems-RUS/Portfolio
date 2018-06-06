@@ -4,7 +4,17 @@ import {Types} from './constant-types';
 import {Util} from '../../../shared/classes/Util';
 import {IModel} from '../../../shared/interfaces/IModel';
 import {IProject} from '../../../shared/interfaces/IProject';
-import {ADDONS, AUTOCOMPLETE_SEARCH, FILTER_VALUE, FILTERS, PROJECT_FILTER, PROJECT_NAMES, PROJECTS, SEARCH} from './getter-types';
+import {
+  ADDONS,
+  AUTOCOMPLETE_SEARCH,
+  FILTER_VALUE,
+  FILTERS,
+  PROJECT_FILTER,
+  PROJECT_NAMES,
+  PROJECTS,
+  SEARCH,
+  SORT, SORT_REVERSE
+} from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
 import {FilterTypes} from './filter-types';
@@ -117,5 +127,7 @@ export const getters: GetterTree<IProjectState, {}> = {
     const arrayToSearch = key === 'technologies' ? projectGetters[TECHNOLOGIES] : projectGetters[ADDONS][keyMap[key]];
     const item = arrayToSearch.filter((filtered: IProject) => Number(filtered.id) === id)[0];
     return item ? item.name : '';
-  }
+  },
+  [SORT]: state => state.sort,
+  [SORT_REVERSE]: state => state.sortReverse
 };

@@ -6,3 +6,5 @@ export const SEARCH = 'projects/SEARCH';
 export const AUTOCOMPLETE_SEARCH = 'projects/AUTOCOMPLETE_SEARCH';
 export const FILTERS = 'FILTERS';
 export const FILTER_VALUE = 'FILTER_VALUE';
+export const SORT = 'SORT';
+export const SORT_REVERSE = 'SORT_REVERSE';

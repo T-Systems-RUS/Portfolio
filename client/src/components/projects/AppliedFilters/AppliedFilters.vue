@@ -10,6 +10,17 @@
           </span>
         </span>
       </div>
+      <div class="filter">
+        <span class="filter-text">
+          <span>Sorted by:</span>
+          <span class="active-chip">
+            {{ sort }}
+            <img
+              src="./assets/export_outline.svg"
+              :class="{'reverse': sortReverse}">
+          </span>
+        </span>
+      </div>
       <div
         class="filter"
         v-if="search">
@@ -45,7 +56,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
-  import {FILTER_VALUE, FILTERS, SEARCH} from '../../../store/modules/projects/getter-types';
+  import {FILTER_VALUE, FILTERS, SEARCH, SORT, SORT_REVERSE} from '../../../store/modules/projects/getter-types';
   import {SET_FILTER, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
   import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
   import {FilterTypes} from '../../../store/modules/projects/filter-types';
@@ -55,7 +66,9 @@
     computed: {
       ...mapGetters({
         search: SEARCH,
-        filterMaps: FILTERS
+        filterMaps: FILTERS,
+        sort: SORT,
+        sortReverse: SORT_REVERSE
       })
     },
     methods: {
@@ -85,7 +98,8 @@
   }
 
   .filter {
-    margin-right: 20px;
+    display: inline-block;
+    margin-right: 6px;
 
     &-text {
       color: $text-secondary;
@@ -105,6 +119,10 @@
           position: relative;
           top: 2px;
           width: 12px;
+
+          &.reverse {
+            transform: rotate(180deg);
+          }
         }
 
         &:hover {
