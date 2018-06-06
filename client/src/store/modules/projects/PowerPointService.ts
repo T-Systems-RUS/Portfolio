@@ -3,7 +3,6 @@ import PptxGenJS from 'pptxgenjs';
 import {IProject} from '../../../shared/interfaces/IProject';
 import {ITechnology} from '../../../shared/interfaces/ITechnology';
 
-
 interface ISlide {
   addText(text: string, params: {}): void
 
@@ -25,7 +24,6 @@ interface IPptx {
   addNewSlide(): ISlide
 }
 
-
 interface IPresentationResponse {
   header: string;
   header2: string;
@@ -38,9 +36,11 @@ interface IPresentationResponse {
 const HEADLINE_FONT = 'TELEGROTESK HEADLINE ULTRA';
 const NORMAL_FONT = 'Tele-GroteskNor';
 
-// default color
 const MAGENTA = 'e20074';
 const WHITE = 'ffffff';
+const GRAY = '7f7f7f';
+const LIGHT_GRAY = 'a4a4a4';
+const BLACK = '000000';
 // default padding from left
 const X = 0.39;
 
@@ -89,46 +89,40 @@ export class PowerPointService {
 
         const slide = pptx!.addNewSlide();
 
-        // header
-        slide.addImage({data: `image/png;base64,${header}`, x: 0.0, y: 0.0, w: '100%', h: '0.5'});
-
-        slide.addImage({data: `image/png;base64,${header2}`, x: 0.0, y: 0.0, w: '100%', h: '0.5'});
-
+        this.addImage(slide, header, 0, 0, '100%', 0.5);
+        this.addImage(slide, header2, 0, 0, '100%', 0.5);
         if (domain) {
-          slide.addImage({data: `image/png;base64,${domain}`, x: '92%', y: '0.05', w: '0.45', h: '0.45'});
+          this.addImage(slide, domain, '92%', 0.05, 0.45, 0.45);
         }
 
-        this.addText(slide, project.name, X, 0, HEADLINE_FONT, 28, '7F7F7F');
-
+        this.addText(slide, project.name, X, 0, HEADLINE_FONT, 28, GRAY);
         this.addText(slide, 'Description of Project', X, 0.6, HEADLINE_FONT, 18, MAGENTA);
-
-        this.addText(slide, project.description, X, 1.6, NORMAL_FONT, 14, '000000');
+        this.addText(slide, project.description, X, 1.0, NORMAL_FONT, 14, BLACK);
 
         if (image) {
-          slide.addImage({data: `image/png;base64,${image}`, x: '60%', y: 1.1, w: 3.2, h: 1.9});
+          this.addImage(slide, image, '60%', 1.1, 3.2, 1.9);
         }
 
         slide.addShape(pptx!.shapes.RECTANGLE, {x: 0.0, y: 5.5, w: '50%', h: 2.0, fill: MAGENTA});
-        slide.addShape(pptx!.shapes.RECTANGLE, {x: '50%', y: 5.5, w: '50%', h: 2.0, fill: 'a4a4a4'});
+        slide.addShape(pptx!.shapes.RECTANGLE, {x: '50%', y: 5.5, w: '50%', h: 2.0, fill: LIGHT_GRAY});
 
         this.addText(slide, 'Details', X, 5.45, HEADLINE_FONT, 18);
 
         const start = 5.75;
         const lineheight = 0.25;
 
-        this.addText(slide, 'Project duration::', X, start, NORMAL_FONT, 18);
-
+        this.addText(slide, 'Project duration:', X, start, NORMAL_FONT, 18);
         this.addText(slide,
-          this.getDate(project.startdate) + (project.enddate ? '-' : '') + this.getDate(project.enddate),
+          this.getDate(project.startdate) + (project.enddate ? ` - ${this.getDate(project.enddate)}` : ''),
           1.9, start, NORMAL_FONT, 18, WHITE, true);
 
-        this.addText(slide, 'Program:', X, start + lineheight, NORMAL_FONT, 18);
+        const programY = start + lineheight;
+        this.addText(slide, 'Program:', X, programY, NORMAL_FONT, 18);
+        this.addText(slide, project.program.name, 1.3, programY, NORMAL_FONT, 18, WHITE, true);
 
-        this.addText(slide, project.program.name, 1.3, start + lineheight, NORMAL_FONT, 18, WHITE, true);
-
-        this.addText(slide, 'Domain:', X, start + (lineheight * 2), NORMAL_FONT, 18);
-
-        this.addText(slide, project.domain.name, 1.3, start + (lineheight * 2), NORMAL_FONT, 18, WHITE, true);
+        const domainY = start + (lineheight * 2);
+        this.addText(slide, 'Domain:', X, domainY, NORMAL_FONT, 18);
+        this.addText(slide, project.domain.name, 1.3, domainY, NORMAL_FONT, 18, WHITE, true);
 
         let interval = 0;
         const language = project.technologies.filter(tech => tech.domain === 'language');
@@ -136,18 +130,18 @@ export class PowerPointService {
           interval += 0.25;
           const text = language.map(item => item.name).join(' ');
 
-          this.addText(slide, 'Language:', X, start + (lineheight * 3), NORMAL_FONT, 18);
-
-          this.addText(slide, text, 1.4, start + (lineheight * 3), NORMAL_FONT, 18, WHITE, true);
+          const languageY = start + (lineheight * 3);
+          this.addText(slide, 'Language:', X, languageY, NORMAL_FONT, 18);
+          this.addText(slide, text, 1.4, languageY, NORMAL_FONT, 18, WHITE, true);
         }
 
         const methodology = project.technologies.filter(tech => tech.domain === 'methodology');
         if (methodology.length) {
           const text = methodology.map(item => item.name).join(' ');
 
-          this.addText(slide, 'Methodology:', X, start + (lineheight * 3) + interval, NORMAL_FONT, 18);
-
-          this.addText(slide, text, 1.7, start + (lineheight * 3) + interval, NORMAL_FONT, 18, WHITE, true);
+          const methodologyY = start + (lineheight * 3) + interval;
+          this.addText(slide, 'Methodology:', X, methodologyY, NORMAL_FONT, 18);
+          this.addText(slide, text, 1.7, methodologyY, NORMAL_FONT, 18, WHITE, true);
         }
 
         const backend = technologies.filter(item => item.domain === 'backend');
@@ -163,8 +157,7 @@ export class PowerPointService {
           let bside = 5.2;
           let bsidetext = 5.1;
           backend.forEach(item => {
-            slide.addImage({data: `image/png;base64,${item.image}`, x: bside, y: iconY, w: 0.4, h: 0.3});
-
+            this.addImage(slide, item.image, bside, iconY, 0.4, 0.3);
             this.addText(slide, item.name, bsidetext, textY);
 
             bside += 0.7;
@@ -183,8 +176,7 @@ export class PowerPointService {
           let bsidetext = 5.1;
 
           backend.forEach(item => {
-            slide.addImage({data: `image/png;base64,${item.image}`, x: bside, y: iconY, w: 0.4, h: 0.3});
-
+            this.addImage(slide, item.image, bside, iconY, 0.4, 0.3);
             this.addText(slide, item.name, bsidetext, textY);
 
             bside += 0.7;
@@ -194,7 +186,7 @@ export class PowerPointService {
       });
   }
 
-  private static addText(slide: ISlide, text: string, x: number, y: number, font = NORMAL_FONT, fontSize = 14,
+  private static addText(slide: ISlide, text: string, x: number, y: number, fontFace = NORMAL_FONT, fontSize = 14,
                          color = WHITE, underline = false) {
     slide.addText(text, {
       x,
@@ -203,14 +195,20 @@ export class PowerPointService {
       h: 0.5,
       align: 'l',
       valign: 'middle',
-      font_size: fontSize,
-      font_face: font,
+      fontSize,
+      fontFace,
       color,
       underline
     });
   }
 
+  private static addImage(slide: ISlide, imageBase64: string, x: number | string, y: number, w: number | string,
+                          h: number) {
+    slide.addImage({data: `image/png;base64,${imageBase64}`, x, y, w, h});
+  }
+
   private static getDate(date: string) {
+    console.log(date)
     const newDate = new Date(date);
     return newDate ? `${newDate.getDate()}.${newDate.getMonth()}.${newDate.getFullYear()}` : '';
   }
