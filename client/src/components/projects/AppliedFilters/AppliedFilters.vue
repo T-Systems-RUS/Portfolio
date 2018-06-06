@@ -1,6 +1,13 @@
 <template>
   <div class="filters">
     <div>
+      <div class="filter" @click="generatePresentation()">
+        <span class="filter-text">
+          <span class="active-chip">
+            <img src="./assets/presentation-file_outline.svg">
+          </span>
+        </span>
+      </div>
       <div
         class="filter"
         v-if="search">
@@ -40,6 +47,7 @@
   import {SET_FILTER, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
   import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
   import {FilterTypes} from '../../../store/modules/projects/filter-types';
+  import {GENERATE_PRESENTATION} from '../../../store/modules/projects/action-types';
 
   export default Vue.extend({
     computed: {
@@ -49,6 +57,9 @@
       })
     },
     methods: {
+      generatePresentation() {
+        this.$store.dispatch(GENERATE_PRESENTATION);
+      },
       filterValue(filterKey: string, id: number): string {
         return this.$store.getters[FILTER_VALUE](filterKey, id);
       },
