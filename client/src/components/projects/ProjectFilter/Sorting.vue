@@ -7,25 +7,25 @@
       <RadioButton
         :name="'sorting'"
         :checked="true"
-        :label="'Name'"
+        :label="mapName('name')"
         @toggle="toggle('name')"/>
     </div>
     <div class="radio-button-wrapper">
       <RadioButton
         :name="'sorting'"
-        :label="'Production line'"
+        :label="mapName('program.line.name')"
         @toggle="toggle('program.line.name')"/>
     </div>
     <div class="radio-button-wrapper">
       <RadioButton
         :name="'sorting'"
-        :label="'Team size'"
+        :label="mapName('schedules.length')"
         @toggle="toggle('schedules.length')"/>
     </div>
     <div class="radio-button-wrapper">
       <RadioButton
         :name="'sorting'"
-        :label="'Date modified'"
+        :label="mapName('updatedAt')"
         @toggle="toggle('updatedAt')"/>
     </div>
 
@@ -40,6 +40,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import {SET_SORT, SET_SORT_REVERSE} from '../../../store/modules/projects/mutation-types';
+  import {SORT_FIELD_NAME} from '../../../store/modules/projects/getter-types';
 
 
   export default Vue.extend({
@@ -49,9 +50,10 @@
         reverse: true
       };
     },
-    created() {
-    },
     methods: {
+      mapName(key: string) {
+        return this.$store.getters[SORT_FIELD_NAME](key);
+      },
       toggle(name: string) {
         this.$store.commit(SET_SORT, name);
       },

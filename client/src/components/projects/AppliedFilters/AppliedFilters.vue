@@ -14,7 +14,7 @@
         <span class="filter-text">
           <span>Sorted by:</span>
           <span class="active-chip">
-            {{ sort }}
+            {{ mapName(sort) }}
             <img
               src="./assets/export_outline.svg"
               :class="{'reverse': sortReverse}">
@@ -56,7 +56,14 @@
 <script lang="ts">
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
-  import {FILTER_VALUE, FILTERS, SEARCH, SORT, SORT_REVERSE} from '../../../store/modules/projects/getter-types';
+  import {
+    FILTER_VALUE,
+    FILTERS,
+    SEARCH,
+    SORT,
+    SORT_FIELD_NAME,
+    SORT_REVERSE
+  } from '../../../store/modules/projects/getter-types';
   import {SET_FILTER, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
   import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
   import {FilterTypes} from '../../../store/modules/projects/filter-types';
@@ -72,6 +79,9 @@
       })
     },
     methods: {
+      mapName(key: string) {
+        return this.$store.getters[SORT_FIELD_NAME](key);
+      },
       generatePresentation() {
         this.$store.dispatch(GENERATE_PRESENTATION);
       },

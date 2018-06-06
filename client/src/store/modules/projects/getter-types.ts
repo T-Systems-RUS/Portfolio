@@ -8,3 +8,4 @@ export const FILTERS = 'FILTERS';
 export const FILTER_VALUE = 'FILTER_VALUE';
 export const SORT = 'SORT';
 export const SORT_REVERSE = 'SORT_REVERSE';
+export const SORT_FIELD_NAME = 'SORT_FIELD_NAME';

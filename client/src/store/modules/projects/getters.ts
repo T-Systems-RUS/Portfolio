@@ -13,7 +13,7 @@ import {
   PROJECT_NAMES,
   PROJECTS,
   SEARCH,
-  SORT, SORT_REVERSE
+  SORT, SORT_FIELD_NAME, SORT_REVERSE
 } from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
@@ -39,7 +39,7 @@ export const getters: GetterTree<IProjectState, {}> = {
 
   [PROJECT_FILTER](state, projectGetters) {
 
-    const addons: {[key: string]: any } = projectGetters[ADDONS];
+    const addons: { [key: string]: any } = projectGetters[ADDONS];
 
     return Object.keys(addons).map(key => {
       const mapKey = Util.mapNameToProperty(key);
@@ -53,7 +53,7 @@ export const getters: GetterTree<IProjectState, {}> = {
           //if technology selected in filter it will be marked active
           //else will be marked un active
           //for activated filters sync
-          checked: state.filter[mapKey] ? state.filter[mapKey].indexOf(item.id)>-1 : false,
+          checked: state.filter[mapKey] ? state.filter[mapKey].indexOf(item.id) > -1 : false,
           id: item.id,
           active: item.active
         })) as IProjectFilterCheck[]
@@ -129,5 +129,14 @@ export const getters: GetterTree<IProjectState, {}> = {
     return item ? item.name : '';
   },
   [SORT]: state => state.sort,
-  [SORT_REVERSE]: state => state.sortReverse
+  [SORT_REVERSE]: state => state.sortReverse,
+  [SORT_FIELD_NAME]: () => (key: string) => {
+    const sortMap: { [key: string]: string } = {
+      name: 'Name',
+      'program.line.name': 'Production line',
+      'schedules.length': 'Team size',
+      updatedAt: 'Date modified'
+    };
+    return sortMap[key];
+  },
 };
