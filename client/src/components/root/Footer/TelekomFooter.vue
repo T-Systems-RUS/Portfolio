@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content has-text-centered">
         <span class="is-pulled-left logo">
-          <img src="./assets/deutsche-telekom-logo.svg">
+          <img src="../assets/deutsche-telekom-logo.svg">
         </span>
         <span>
           Imprint
@@ -26,13 +26,13 @@
 </template>
 
 <style lang='scss' scoped>
-  @import '../../styles/variables';
-  @import '~bulma/sass/utilities/initial-variables';
+  @import '../../../styles/variables';
+  @import '../../../../node_modules/bulma/sass/utilities/initial-variables';
 
   $footer-background-color: $light-black;
 
-  @import '~bulma/sass/layout/footer';
-  @import '~bulma/sass/utilities/mixins';
+  @import '../../../../node_modules/bulma/sass/layout/footer';
+  @import '../../../../node_modules/bulma/sass/utilities/mixins';
 
   .footer {
     height: $header-bar-height;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="28px" viewBox="0 0 23 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Project-Page-telekom" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-Alternate" transform="translate(-339.000000, -1170.000000)" fill="#D80074" fill-rule="nonzero">
+            <g id="Footer" transform="translate(-1.000000, 1087.000000)">
+                <g id="Footer-buttons" transform="translate(113.000000, 65.000000)">
+                    <g id="Footer-button" transform="translate(159.000000, 0.000000)">
+                        <g id="ic_content_copy_black_24px" transform="translate(67.000000, 18.000000)">
+                            <path d="M17.9849624,0.8 L3.97744361,0.8 C2.69342105,0.8 1.64285714,1.91272727 1.64285714,3.27272727 L1.64285714,20.5818182 L3.97744361,20.5818182 L3.97744361,3.27272727 L17.9849624,3.27272727 L17.9849624,0.8 Z M21.4868421,5.74545455 L8.64661654,5.74545455 C7.36259398,5.74545455 6.31203008,6.85818182 6.31203008,8.21818182 L6.31203008,25.5272727 C6.31203008,26.8872727 7.36259398,28 8.64661654,28 L21.4868421,28 C22.7708647,28 23.8214286,26.8872727 23.8214286,25.5272727 L23.8214286,8.21818182 C23.8214286,6.85818182 22.7708647,5.74545455 21.4868421,5.74545455 Z M21.4868421,25.5272727 L8.64661654,25.5272727 L8.64661654,8.21818182 L21.4868421,8.21818182 L21.4868421,25.5272727 Z" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

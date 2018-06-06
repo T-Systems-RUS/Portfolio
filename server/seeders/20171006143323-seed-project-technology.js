@@ -101,13 +101,19 @@ module.exports = {
       },
       {
         projectId: projectRows[1].id,
-        technologyId: technologieRows[6].id,
+        technologyId: technologieRows[14].id,
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
         projectId: projectRows[1].id,
-        technologyId: technologieRows[7].id,
+        technologyId: technologieRows[13].id,
+        createdAt:new Date(),
+        updatedAt:new Date()
+      },
+      {
+        projectId: projectRows[1].id,
+        technologyId: technologieRows[10].id,
         createdAt:new Date(),
         updatedAt:new Date()
       }], {});

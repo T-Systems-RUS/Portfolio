@@ -29,7 +29,7 @@
         <img class="project-image is-pulled-right" :src="image" alt="">
       </div>
     </div>
-    <div class="columns">
+    <div class="columns project-nomb">
       <div class="column">
         <p class="title is-6 is-size-22">
           Details
@@ -77,6 +77,8 @@
           :schedule="schedule"/>
       </div>
     </div>
+
+    <Footer/>
   </div>
 </template>
 
@@ -85,6 +87,7 @@
   import {FETCH_PROJECT} from '../../../store/modules/projects/action-types';
   import {PROJECT, PROJECT_TECHNOLOGIES} from '../../../store/modules/projects/getter-types';
   import Chip from '../../common/Chip/Chip.vue';
+  import Footer from '../../root/Footer/Footer.vue';
   import ScheduleItem from '../../employees/ScheduleItem/ScheduleItem.vue';
   import TechnologyPanel from '../../technologies/TechnologyPanel/TechnologyPanel.vue';
   import {IProject} from "../../../shared/interfaces/IProject";
@@ -93,6 +96,7 @@
   export default Vue.extend({
     components: {
       Chip,
+      Footer,
       TechnologyPanel,
       ScheduleItem
     },
@@ -128,6 +132,8 @@
   $image-height: 250px;
 
   .project {
+    margin-bottom: 100px;
+
     &-secondary {
       color: $text-secondary3;
       margin-top: 30px;
@@ -155,6 +161,10 @@
 
     &-mb30 {
       margin-bottom: 30px;
+    }
+
+    &-nomb{
+      margin-bottom: 0;
     }
   }
 </style>
