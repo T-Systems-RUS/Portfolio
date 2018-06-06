@@ -88,6 +88,7 @@ export class TestMocks {
     const customer: ICustomer = {
       id: customerId,
       name: customerName,
+      image:'',
       active: false,
       domain: domain,
       projects: [],

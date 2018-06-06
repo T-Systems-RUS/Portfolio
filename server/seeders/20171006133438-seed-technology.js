@@ -7,6 +7,7 @@ module.exports = {
         name: 'Angular 6',
         domain: 'frontend',
         active:false,
+        image: 'angular.png',
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -14,6 +15,7 @@ module.exports = {
         name: 'Java 1.8',
         domain: 'backend',
         active:false,
+        image: 'Java.png',
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -21,6 +23,7 @@ module.exports = {
         name: 'JSF',
         domain: 'backend',
         active:false,
+        image: 'JSF.png',
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -28,6 +31,7 @@ module.exports = {
         name: 'Jenkins',
         domain: 'backend',
         active:false,
+        image: 'Jenkins.png',
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -35,18 +39,22 @@ module.exports = {
         name: 'React',
         domain: 'frontend',
         active:false,
+        image: 'react.png',
         createdAt:new Date(),
         updatedAt:new Date()
-      },{
+      },
+        {
         name: 'VueJs',
         domain: 'frontend',
         active:false,
+          image: 'vue.png',
         createdAt:new Date(),
         updatedAt:new Date()
       },{
         name: '.NET 4.5',
         domain: 'backend',
         active:false,
+          image: 'sass.png',
         createdAt:new Date(),
         updatedAt:new Date()
       },
@@ -81,6 +89,7 @@ module.exports = {
       {
         name: 'AngularJs',
         domain: 'frontend',
+        image: 'angular.png',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -88,6 +97,7 @@ module.exports = {
       {
         name: 'Node JS',
         domain: 'backend',
+        image: 'node.png',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -95,13 +105,15 @@ module.exports = {
       {
         name: 'Entity Framework',
         domain: 'backend',
+        image: 'db.png',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()
       },
       {
         name: 'Swagger',
-        domain: 'backend',
+        domain: 'tools',
+        image: 'swagger.png',
         active:false,
         createdAt:new Date(),
         updatedAt:new Date()

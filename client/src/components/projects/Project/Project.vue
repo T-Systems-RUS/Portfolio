@@ -12,7 +12,9 @@
           v-for="customer in project.customers"
           :key="customer.id"
           :name="customer.name"
-          :selected = "customer.active"/>
+          :selected = "customer.active"
+          :withImage="true"
+          :image="customer.image"/>
       </div>
     </div>
     <div class="columns project-main">
@@ -64,7 +66,9 @@
           :technologies="technologies[domain]"></TechnologyPanel>
       </div>
       <div class="column">
-        <p class="title is-6 is-size-22">
+        <p
+          class="title is-6 is-size-22"
+          v-if="project.schedules.length">
           Team
           <span class="is-pulled-right">{{project.schedules.length}} FTE</span>
         </p>

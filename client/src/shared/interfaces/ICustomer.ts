@@ -5,5 +5,6 @@ import {IDomain} from './IDomain';
 export interface ICustomer extends IModel{
   name: string;
   domain: IDomain;
+  image: string;
   projects: IProject[];
 }

@@ -31,6 +31,9 @@ export class Customer extends Model<Customer> {
   @Column
   active: boolean;
 
+  @Column
+  image: string;
+
   @CreatedAt
   @Column({
     type: DataType.DATE,

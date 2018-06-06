@@ -8,7 +8,9 @@
       v-for="technology in technologies"
       :key="technology.id"
       :name="technology.name"
-      :selected = "technology.active"/>
+      :selected = "technology.active"
+      :withImage = "true"
+      :image="technology.image"/>
   </div>
 </template>
 

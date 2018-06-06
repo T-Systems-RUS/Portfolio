@@ -13,6 +13,7 @@ module.exports = {
       {
         name: 'Daimler AG',
         active:false,
+        image: 'bmw.png',
         domainId: domains[0].id,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -20,6 +21,7 @@ module.exports = {
       {
         name: 'BMW AG',
         active:false,
+        image: 'bmw.png',
         domainId: domains[0].id,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -27,6 +29,7 @@ module.exports = {
       {
         name: 'MAN AG',
         active:false,
+        image: 'bmw.png',
         domainId: domains[0].id,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -34,6 +37,7 @@ module.exports = {
       {
         name: 'Continental AG',
         active:false,
+        image: 'bmw.png',
         domainId: domains[0].id,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -41,6 +45,7 @@ module.exports = {
       {
         name: 'SBB',
         active:false,
+        image: 'sbb.png',
         domainId: domains[3].id,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -48,6 +53,7 @@ module.exports = {
       {
         name: 'Slovak Telekom',
         active:false,
+        image: 'dd.png',
         domainId: domains[4].id,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -55,6 +61,7 @@ module.exports = {
       {
         name: 'Digital Division',
         active:false,
+        image: 'dd.png',
         domainId: domains[4].id,
         createdAt:new Date(),
         updatedAt:new Date()
@@ -62,6 +69,7 @@ module.exports = {
       {
         name: 'AXA Deutschland',
         active:false,
+        image: 'sbb.png',
         domainId: domains[1].id,
         createdAt:new Date(),
         updatedAt:new Date()

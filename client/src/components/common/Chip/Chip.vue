@@ -4,7 +4,10 @@
     :class  ="{'is-selected': isSelected, 'is-disabled': !active}"
     @click="toggleActive">
     <!--TODO implement later-->
-    <!--<img class="chip-image" src="">-->
+    <img
+      class="chip-image"
+      :src="imagePath"
+      v-if="withImage && image">
     <span class="chip-content title is-4 is-size-14">{{ name }}</span>
     <!--TODO implement later-->
     <!--<span class="chip-button title is-4 is-size-14">X</span>-->
@@ -24,6 +27,11 @@
         required: true,
         default: ''
       },
+      image: {
+        type: String,
+        required: false,
+        default: ''
+      },
       id: {
         type: Number,
         required: false
@@ -35,11 +43,18 @@
       selected: {
         type: Boolean,
         default: false
+      },
+      withImage: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {
       isSelected(): boolean {
         return this.selected;
+      },
+      imagePath(): string {
+        return `./server/images/presentation/${this.image}`;
       }
     },
     methods: {
@@ -55,6 +70,8 @@
   @import '../../../styles/variables';
 
   $height: 24px;
+  $image: 20px;
+  $image-max-width: 38px;
   $padding-sides: 12px;
   $padding-top: 0px;
   $margin: 10px;
@@ -67,14 +84,25 @@
     margin-right: $margin;
     padding: $padding-top $padding-sides;
     transition: all .4s;
+    position: relative;
+    height: 30px;
+    line-height: 25px;
 
     &-content, &-button {
       margin: 0;
+
     }
 
     &-button {
       margin-left: 7px;
       cursor: pointer;
+    }
+
+    &-image {
+      height: $image;
+      max-width: $image-max-width;
+      vertical-align: middle;
+      margin-right: 5px;
     }
 
     &.is-disabled {
