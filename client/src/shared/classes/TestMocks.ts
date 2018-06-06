@@ -6,6 +6,7 @@ import {IProgram} from '../interfaces/IProgram';
 import {ILine} from '../interfaces/ILine';
 import {ISchedule} from '../interfaces/ISchedule';
 import {ITechnology} from '../interfaces/ITechnology';
+import {IEmployee} from '../interfaces/IEmployee';
 
 export class TestMocks {
 
@@ -97,6 +98,23 @@ export class TestMocks {
     return customer;
   }
 
+  static TestEmployee(employeeId:string = '1', employeeLastName:string = 'Fedorov') {
+    const technology = this.TestTechnology();
+
+    const employee: IEmployee = {
+      id: employeeId,
+      lastname: employeeLastName,
+      active: false,
+      firstname: 'Artur',
+      schedules: [] as ISchedule[],
+      technologies: [technology],
+      createdAt:new Date(),
+      updatedAt: new Date()
+    };
+
+    return employee;
+  }
+
   static TestProject(projectName:string = 'PPA') {
     const domain = this.TestDomain();
     const program = this.TestProgram();
@@ -106,6 +124,7 @@ export class TestMocks {
     const technology1 = this.TestTechnology();
     const technology2 = this.TestTechnology('2', 'Angular 6');
 
+
     const project: IProject = {
       id: '1',
       active: false,
@@ -113,7 +132,7 @@ export class TestMocks {
       description: '123',
       domain: domain,
       program: program,
-      image: 'AS1313.jpg',
+      image: '',
       type: type,
       schedules: [] as ISchedule[],
       customers: [customer1, customer2],

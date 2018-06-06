@@ -22,7 +22,7 @@ module.exports = {
         updatedAt:new Date()
       },
       {
-        name: 'ProjectChange Manager',
+        name: 'Project Manager',
         domain: 'Management',
         leadrole:false,
         active:false,

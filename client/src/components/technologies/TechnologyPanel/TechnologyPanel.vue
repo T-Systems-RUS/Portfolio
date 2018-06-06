@@ -39,6 +39,7 @@
 
   .technology-panel {
     position: relative;
+    margin-bottom: 15px;
 
     .is-margin-7 {
       margin-bottom: 7px;

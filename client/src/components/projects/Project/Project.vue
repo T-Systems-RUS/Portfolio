@@ -1,28 +1,30 @@
 <template>
   <div class="container project">
-    <div class="level">
+    <div class="level  is-marginless">
       <p class="title is-4 is-size-18 project-secondary">{{project.updatedAt | date }} {{ project.program.line.name }}</p>
     </div>
-    <div class="level">
+    <div class="level  is-marginless">
       <p class="title is-7 project-header">{{ project.name }}</p>
     </div>
-    <div class="columns">
+    <div class="level is-marginless">
+      <div class="project-customers">
+        <chip
+          v-for="customer in project.customers"
+          :key="customer.id"
+          :name="customer.name"
+          :selected = "customer.active"/>
+      </div>
+    </div>
+    <div class="columns project-main">
       <div
         class="column"
         :class="{'is-half': project.image}">
-        <div class="project-customers">
-          <chip
-            v-for="customer in project.customers"
-            :key="customer.id"
-            :name="customer.name"
-            :selected = "customer.active"/>
-        </div>
         <p class="project-description">
           {{ project.description }}
         </p>
       </div>
       <div v-if="project.image" class="column is-half">
-        <img class="project-image" :src="image" alt="">
+        <img class="project-image is-pulled-right" :src="image" alt="">
       </div>
     </div>
     <div class="columns">
@@ -61,7 +63,15 @@
           :domain="domain"
           :technologies="technologies[domain]"></TechnologyPanel>
       </div>
-      <div class="column"></div>
+      <div class="column">
+        <p class="title is-6 is-size-22">
+          Team
+          <span class="is-pulled-right">{{project.schedules.length}} FTE</span>
+        </p>
+        <ScheduleItem
+          v-for="schedule in project.schedules"
+          :schedule="schedule"/>
+      </div>
     </div>
   </div>
 </template>
@@ -71,6 +81,7 @@
   import {FETCH_PROJECT} from '../../../store/modules/projects/action-types';
   import {PROJECT, PROJECT_TECHNOLOGIES} from '../../../store/modules/projects/getter-types';
   import Chip from '../../common/Chip/Chip.vue';
+  import ScheduleItem from '../../employees/ScheduleItem/ScheduleItem.vue';
   import TechnologyPanel from '../../technologies/TechnologyPanel/TechnologyPanel.vue';
   import {IProject} from "../../../shared/interfaces/IProject";
   import {ITechnology} from "../../../shared/interfaces/ITechnology";
@@ -78,7 +89,8 @@
   export default Vue.extend({
     components: {
       Chip,
-      TechnologyPanel
+      TechnologyPanel,
+      ScheduleItem
     },
     computed: {
       project(): IProject {
@@ -108,13 +120,29 @@
 <style lang="scss" scoped>
   @import '../../../styles/variables';
 
+  $image-width: 370px;
+  $image-height: 250px;
+
   .project {
     &-secondary {
       color: $text-secondary3;
+      margin-top: 30px;
+      margin-bottom: 5px;
     }
 
     &-header {
       font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    &-main{
+      margin-top: 5px;
+      margin-bottom: 30px;
+    }
+
+    &-image {
+      width: $image-width;
+      height: $image-height;
     }
 
     &-link {
