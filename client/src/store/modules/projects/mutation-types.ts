@@ -9,5 +9,7 @@ export const SET_PROJECTS = 'projects/SET_PROJECTS';
 export const SET_FILTER = 'projects/SET_FILTER';
 export const SET_SEARCH = 'projects/SET_SEARCH';
 export const SET_AUTOCOMPLETE_SEARCH = 'projects/SET_AUTOCOMPLETE_SEARCH';
+export const SET_SORT = 'SET_SORT';
+export const SET_SORT_REVERSE = 'SET_SORT_REVERSE';
 
 export const FINISH_LOADING = 'projects/FINISH_LOADING';
