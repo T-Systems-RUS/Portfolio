@@ -63,7 +63,7 @@ export class PowerPointService {
     });
 
     Promise.all(promises)
-      .then(() => this.generatePresentation())
+      .then(() => this.generatePresentation());
   }
 
   private static newPresentation() {
@@ -187,7 +187,7 @@ export class PowerPointService {
   }
 
   private static addText(slide: ISlide, text: string, x: number, y: number, fontFace = NORMAL_FONT, fontSize = 14,
-                         color = WHITE, underline = false) {
+    color = WHITE, underline = false) {
     slide.addText(text, {
       x,
       y,
@@ -203,13 +203,12 @@ export class PowerPointService {
   }
 
   private static addImage(slide: ISlide, imageBase64: string, x: number | string, y: number, w: number | string,
-                          h: number) {
+    h: number) {
     slide.addImage({data: `image/png;base64,${imageBase64}`, x, y, w, h});
   }
 
   private static getDate(date: string) {
-    console.log(date)
     const newDate = new Date(date);
-    return newDate ? `${newDate.getDate()}.${newDate.getMonth()}.${newDate.getFullYear()}` : '';
+    return `${newDate.getDate()}.${newDate.getMonth()}.${newDate.getFullYear()}`;
   }
 }

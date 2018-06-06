@@ -1,7 +1,9 @@
 <template>
   <div class="filters">
     <div>
-      <div class="filter" @click="generatePresentation()">
+      <div
+        class="filter"
+        @click="generatePresentation()">
         <span class="filter-text">
           <span class="active-chip">
             <img src="./assets/presentation-file_outline.svg">
