@@ -26,9 +26,9 @@ const projectService = {
   }),
 
   // Get All Projects with same name
-  getProjectsByName: name => Project.scope([Scopes.FULL]).findAll({
+  getProjectsByUniqueId: uniqueId => Project.scope([Scopes.FULL]).findAll({
     where: {
-      name: name
+      uniqueId: uniqueId
     },
     order: [
       ['version', 'DESC']
