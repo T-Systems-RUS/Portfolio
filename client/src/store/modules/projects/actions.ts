@@ -1,11 +1,13 @@
 import {ActionTree} from 'vuex';
 import {ProjectService} from './project.service';
 import {IProjectState} from './index';
-import {FETCH_ADDONS, FETCH_PROJECTS} from './action-types';
+import {FETCH_ADDONS, FETCH_PROJECTS, GENERATE_PRESENTATION} from './action-types';
 import {
   FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECTS,
   SET_TYPES
 } from './mutation-types';
+import {PowerPointService} from './PowerPointService';
+import {PROJECTS} from './getter-types';
 
 const service = new ProjectService();
 
@@ -28,5 +30,9 @@ export const actions: ActionTree<IProjectState, {}> = {
         commit(SET_CUSTOMERS, response.data.customers);
         commit(FINISH_LOADING);
       });
+  },
+
+  [GENERATE_PRESENTATION]({getters}) {
+    return PowerPointService.createProjectsPresentation(getters[PROJECTS]);
   }
 };
