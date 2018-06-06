@@ -31,6 +31,7 @@ module.exports = {
         ishistory: false,
         image: 'image-PPA.png',
         pss: 5,
+        version: 2,
         startdate: new Date(),
         createdAt:new Date(),
         updatedAt:new Date()
@@ -177,6 +178,7 @@ module.exports = {
         active:false,
         ishistory: true,
         image: 'image-PPA.png',
+        version: 1,
         pss: 5,
         startdate: new Date(),
         createdAt:new Date(),
