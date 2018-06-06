@@ -11,6 +11,7 @@ interface ISlide {
 
   addShape(type: string, shape: {}): void
 }
+
 interface IPptx {
 
   shapes: { RECTANGLE: string }
@@ -33,10 +34,15 @@ interface IPresentationResponse {
   technologies: ITechnology[];
 }
 
+// Constants
+const HEADLINE_FONT = 'TELEGROTESK HEADLINE ULTRA';
+const NORMAL_FONT = 'Tele-GroteskNor';
+
 // default color
-const magenta = 'e20074';
+const MAGENTA = 'e20074';
+const WHITE = 'ffffff';
 // default padding from left
-const x = 0.39;
+const X = 0.39;
 
 let pptx: IPptx | null = null;
 
@@ -92,204 +98,56 @@ export class PowerPointService {
           slide.addImage({data: `image/png;base64,${domain}`, x: '92%', y: '0.05', w: '0.45', h: '0.45'});
         }
 
-        slide.addText(project.name, {
-          x,
-          y: 0.0,
-          w: '100%',
-          h: 0.5,
-          align: 'l',
-          valign: 'middle',
-          font_size: 28,
-          font_face: 'TELEGROTESK HEADLINE ULTRA',
-          color: '7F7F7F'
-        });
+        this.addText(slide, project.name, X, 0, HEADLINE_FONT, 28, '7F7F7F');
 
-        slide.addText('Description of Project', {
-          x,
-          y: 0.6,
-          w: '50%',
-          h: 0.5,
-          align: 'l',
-          valign: 'middle',
-          font_size: 18,
-          font_face: 'TELEGROTESK HEADLINE ULTRA',
-          color: magenta
-        });
+        this.addText(slide, 'Description of Project', X, 0.6, HEADLINE_FONT, 18, MAGENTA);
 
-        slide.addText(project.description, {
-          x,
-          y: 1.0,
-          w: '50%',
-          h: 1.0,
-          align: 'l',
-          valign: 'top',
-          font_size: 14,
-          font_face: 'Tele-GroteskNor',
-          color: '000000'
-        });
+        this.addText(slide, project.description, X, 1.6, NORMAL_FONT, 14, '000000');
 
         if (image) {
           slide.addImage({data: `image/png;base64,${image}`, x: '60%', y: 1.1, w: 3.2, h: 1.9});
         }
 
-        // y = 3.625 for 16_9
-        slide.addShape(pptx!.shapes.RECTANGLE, {x: 0.0, y: 5.5, w: '50%', h: 2.0, fill: magenta});
+        slide.addShape(pptx!.shapes.RECTANGLE, {x: 0.0, y: 5.5, w: '50%', h: 2.0, fill: MAGENTA});
         slide.addShape(pptx!.shapes.RECTANGLE, {x: '50%', y: 5.5, w: '50%', h: 2.0, fill: 'a4a4a4'});
 
-        //
-        slide.addText('Details', {
-          x,
-          y: 5.45,
-          w: '50%',
-          h: 0.5,
-          align: 'l',
-          valign: 'middle',
-          font_size: 18,
-          font_face: 'TELEGROTESK HEADLINE ULTRA',
-          color: 'ffffff'
-        });
+        this.addText(slide, 'Details', X, 5.45, HEADLINE_FONT, 18);
 
-        // y=3.9
-        // duration
         const start = 5.75;
         const lineheight = 0.25;
-        slide.addText('Project duration:', {
-          x,
-          y: start,
-          w: '50%',
-          h: 0.5,
-          align: 'l',
-          valign: 'middle',
-          font_size: 18,
-          font_face: 'Tele-GroteskNor',
-          color: 'ffffff'
-        });
 
-        slide.addText(this.getDate(project.startdate) + (project.enddate ? '-' : '') + this.getDate(project.enddate), {
-          x: 1.9,
-          y: start,
-          w: '50%',
-          h: 0.5,
-          align: 'l',
-          valign: 'middle',
-          underline: true,
-          font_size: 18,
-          font_face: 'Tele-GroteskNor',
-          color: 'ffffff'
-        });
+        this.addText(slide, 'Project duration::', X, start, NORMAL_FONT, 18);
 
-        // program
-        slide.addText('Program:', {
-          x,
-          y: start + (lineheight),
-          w: '50%',
-          h: 0.5,
-          align: 'l',
-          valign: 'middle',
-          font_size: 18,
-          font_face: 'Tele-GroteskNor',
-          color: 'ffffff'
-        });
+        this.addText(slide,
+          this.getDate(project.startdate) + (project.enddate ? '-' : '') + this.getDate(project.enddate),
+          1.9, start, NORMAL_FONT, 18, WHITE, true);
 
-        slide.addText(project.program.name, {
-          x: 1.3,
-          y: start + (lineheight),
-          w: '50%',
-          h: 0.5,
-          align: 'l',
-          valign: 'middle',
-          underline: true,
-          font_size: 18,
-          font_face: 'Tele-GroteskNor',
-          color: 'ffffff'
-        });
+        this.addText(slide, 'Program:', X, start + lineheight, NORMAL_FONT, 18);
 
-        // domain
-        slide.addText('Domain:', {
-          x,
-          y: start + (lineheight * 2),
-          w: '50%',
-          h: 0.5,
-          align: 'l',
-          valign: 'middle',
-          font_size: 18,
-          font_face: 'Tele-GroteskNor',
-          color: 'ffffff'
-        });
+        this.addText(slide, project.program.name, 1.3, start + lineheight, NORMAL_FONT, 18, WHITE, true);
 
-        slide.addText(project.domain.name, {
-          x: 1.3,
-          y: start + (lineheight * 2),
-          w: '50%',
-          h: 0.5,
-          align: 'l',
-          valign: 'middle',
-          underline: true,
-          font_size: 18,
-          font_face: 'Tele-GroteskNor',
-          color: 'ffffff'
-        });
+        this.addText(slide, 'Domain:', X, start + (lineheight * 2), NORMAL_FONT, 18);
 
-        // Language
+        this.addText(slide, project.domain.name, 1.3, start + (lineheight * 2), NORMAL_FONT, 18, WHITE, true);
+
         let interval = 0;
         const language = project.technologies.filter(tech => tech.domain === 'language');
         if (language.length) {
           interval += 0.25;
           const text = language.map(item => item.name).join(' ');
-          slide.addText('Language:', {
-            x,
-            y: start + (lineheight * 3),
-            w: '50%',
-            h: 0.5,
-            align: 'l',
-            valign: 'middle',
-            font_size: 18,
-            font_face: 'Tele-GroteskNor',
-            color: 'ffffff'
-          });
 
-          slide.addText(text, {
-            x: 1.4,
-            y: start + (lineheight * 3),
-            w: '50%',
-            h: 0.5,
-            align: 'l',
-            valign: 'middle',
-            underline: true,
-            font_size: 18,
-            font_face: 'Tele-GroteskNor',
-            color: 'ffffff'
-          });
+          this.addText(slide, 'Language:', X, start + (lineheight * 3), NORMAL_FONT, 18);
+
+          this.addText(slide, text, 1.4, start + (lineheight * 3), NORMAL_FONT, 18, WHITE, true);
         }
 
-        // Methology
         const methodology = project.technologies.filter(tech => tech.domain === 'methodology');
         if (methodology.length) {
           const text = methodology.map(item => item.name).join(' ');
-          slide.addText('Methodology:', {
-            x,
-            y: start + (lineheight * 3) + interval,
-            w: '50%',
-            h: 0.5,
-            align: 'l',
-            valign: 'middle',
-            font_size: 18,
-            font_face: 'Tele-GroteskNor',
-            color: 'ffffff'
-          });
 
-          slide.addText(text, {
-            x: 1.7,
-            y: start + (lineheight * 3) + interval,
-            w: '50%',
-            h: 0.5,
-            align: 'l',
-            valign: 'middle',
-            underline: true,
-            font_size: 18,
-            font_face: 'Tele-GroteskNor',
-            color: 'ffffff'
-          });
+          this.addText(slide, 'Methodology:', X, start + (lineheight * 3) + interval, NORMAL_FONT, 18);
+
+          this.addText(slide, text, 1.7, start + (lineheight * 3) + interval, NORMAL_FONT, 18, WHITE, true);
         }
 
         const backend = technologies.filter(item => item.domain === 'backend');
@@ -300,34 +158,14 @@ export class PowerPointService {
         let textY = 6.1;
 
         if (backend.length) {
-          slide.addText('Back-end', {
-            x: 5.1,
-            y: headerY,
-            w: '50%',
-            h: 0.5,
-            align: 'l',
-            valign: 'middle',
-            font_size: 18,
-            font_face: 'TELEGROTESK HEADLINE ULTRA',
-            color: 'ffffff'
-          });
+          this.addText(slide, 'Back-end', 5.1, headerY, HEADLINE_FONT, 18);
 
           let bside = 5.2;
           let bsidetext = 5.1;
           backend.forEach(item => {
             slide.addImage({data: `image/png;base64,${item.image}`, x: bside, y: iconY, w: 0.4, h: 0.3});
 
-            slide.addText(item.name, {
-              x: bsidetext,
-              y: textY,
-              w: '50%',
-              h: 0.5,
-              align: 'l',
-              valign: 'middle',
-              font_size: 14,
-              font_face: 'Tele-GroteskNor',
-              color: 'ffffff'
-            });
+            this.addText(slide, item.name, bsidetext, textY);
 
             bside += 0.7;
             bsidetext += 0.7;
@@ -339,17 +177,7 @@ export class PowerPointService {
         }
 
         if (frontend.length) {
-          slide.addText('Front-end', {
-            x: 5.1,
-            y: headerY,
-            w: '50%',
-            h: 0.5,
-            align: 'l',
-            valign: 'middle',
-            font_size: 18,
-            font_face: 'TELEGROTESK HEADLINE ULTRA',
-            color: 'ffffff'
-          });
+          this.addText(slide, 'Front-end', 5.1, headerY, HEADLINE_FONT, 18);
 
           let bside = 5.2;
           let bsidetext = 5.1;
@@ -357,23 +185,29 @@ export class PowerPointService {
           backend.forEach(item => {
             slide.addImage({data: `image/png;base64,${item.image}`, x: bside, y: iconY, w: 0.4, h: 0.3});
 
-            slide.addText(item.name, {
-              x: bsidetext,
-              y: textY,
-              w: '50%',
-              h: 0.5,
-              align: 'l',
-              valign: 'middle',
-              font_size: 14,
-              font_face: 'Tele-GroteskNor',
-              color: 'ffffff'
-            });
+            this.addText(slide, item.name, bsidetext, textY);
 
             bside += 0.7;
             bsidetext += 0.7;
           });
         }
       });
+  }
+
+  private static addText(slide: ISlide, text: string, x: number, y: number, font = NORMAL_FONT, fontSize = 14,
+                         color = WHITE, underline = false) {
+    slide.addText(text, {
+      x,
+      y,
+      w: '50%',
+      h: 0.5,
+      align: 'l',
+      valign: 'middle',
+      font_size: fontSize,
+      font_face: font,
+      color,
+      underline
+    });
   }
 
   private static getDate(date: string) {
