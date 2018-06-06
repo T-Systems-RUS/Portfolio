@@ -10,6 +10,9 @@ import {IType} from '../../../shared/interfaces/IType';
 import {IFilter} from '../../../shared/interfaces/IFilter';
 import {Module} from 'vuex';
 import {IAccordion} from '../../../shared/interfaces/ui/IAccordion';
+import {ISchedule} from '../../../shared/interfaces/ISchedule';
+import {ITechnology} from '../../../shared/interfaces/ITechnology';
+import {TestMocks} from '../../../shared/classes/TestMocks';
 
 export interface IProjectState {
   accordion: IAccordion;
@@ -26,11 +29,14 @@ export interface IProjectState {
   autocompleteSearch: string;
 }
 
+
+const initialProject: IProject = TestMocks.TestProject();
+
 const projectState: Module<IProjectState, {}> = {
   state: {
     accordion: {} as IAccordion,
     projects: [],
-    project: {} as IProject,
+    project: initialProject,
     customers: [],
     lines: [],
     programs: [],

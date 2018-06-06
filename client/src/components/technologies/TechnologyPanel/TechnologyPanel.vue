@@ -2,14 +2,13 @@
   <div class="technology-panel">
     <p
       class="title is-6 is-size-16 is-margin-7">
-      {{ domain }}
+      {{ domain | capitalize}}
     </p>
     <chip
       v-for="technology in technologies"
       :key="technology.id"
       :name="technology.name"
-      :selected = "technology.active"
-      :id="technology.id"/>
+      :selected = "technology.active"/>
   </div>
 </template>
 

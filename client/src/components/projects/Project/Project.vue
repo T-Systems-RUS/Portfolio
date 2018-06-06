@@ -15,8 +15,7 @@
             v-for="customer in project.customers"
             :key="customer.id"
             :name="customer.name"
-            :selected = "customer.active"
-            :id="customer.id"/>
+            :selected = "customer.active"/>
         </div>
         <p class="project-description">
           {{ project.description }}
