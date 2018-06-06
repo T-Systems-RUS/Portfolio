@@ -10,11 +10,13 @@
           :class="{'is-closed' :openedValue}">
       </div>
     </div>
-    <div
-      v-if="openedValue"
-      class="accordion-body">
-      <slot/>
-    </div>
+    <transition name="fade-vertical">
+      <div
+        v-if="openedValue"
+        class="accordion-body">
+        <slot/>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -79,4 +81,15 @@
       margin-top: 15px;
     }
   }
+
+  .fade-vertical-enter-active, .fade-vertical-leave-active {
+    transition: all .5s;
+    max-height: 1000px;
+  }
+
+  .fade-vertical-enter, .fade-vertical-leave-to {
+    opacity: 0;
+    max-height: 0;
+  }
+
 </style>

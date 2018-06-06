@@ -5,8 +5,19 @@ import {Util} from '../../../shared/classes/Util';
 import {IModel} from '../../../shared/interfaces/IModel';
 import {IProject} from '../../../shared/interfaces/IProject';
 import {
-  ADDONS, AUTOCOMPLETE_SEARCH, FILTER_VALUE, FILTERS, PROJECT, PROJECT_FILTER, PROJECT_NAMES, PROJECT_TECHNOLOGIES, PROJECTS,
-  SEARCH
+
+  ADDONS,
+  AUTOCOMPLETE_SEARCH,
+  FILTER_VALUE,
+  FILTERS,
+  PROJECT_FILTER,
+  PROJECT_NAMES,
+  PROJECTS,    
+  PROJECT,
+  PROJECT_TECHNOLOGIES,
+  SEARCH,
+  SORT, SORT_FIELD_NAME, SORT_REVERSE
+
 } from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
@@ -33,7 +44,7 @@ export const getters: GetterTree<IProjectState, {}> = {
 
   [PROJECT_FILTER](state, projectGetters) {
 
-    const addons: {[key: string]: any } = projectGetters[ADDONS];
+    const addons: { [key: string]: any } = projectGetters[ADDONS];
 
     return Object.keys(addons).map(key => {
       const mapKey = Util.mapNameToProperty(key);
@@ -47,7 +58,7 @@ export const getters: GetterTree<IProjectState, {}> = {
           //if technology selected in filter it will be marked active
           //else will be marked un active
           //for activated filters sync
-          checked: state.filter[mapKey] ? state.filter[mapKey].indexOf(item.id)>-1 : false,
+          checked: state.filter[mapKey] ? state.filter[mapKey].indexOf(item.id) > -1 : false,
           id: item.id,
           active: item.active
         })) as IProjectFilterCheck[]
@@ -98,6 +109,8 @@ export const getters: GetterTree<IProjectState, {}> = {
       projects = projects.filter(project => project.name.toLowerCase().indexOf(state.search.toLowerCase()) > -1);
     }
 
+    projects.sort(Util.sortByField(state.sort, state.sortReverse, true));
+
     return projects;
   },
   [PROJECT]: state => state.project,
@@ -123,5 +136,16 @@ export const getters: GetterTree<IProjectState, {}> = {
     const arrayToSearch = key === 'technologies' ? projectGetters[TECHNOLOGIES] : projectGetters[ADDONS][keyMap[key]];
     const item = arrayToSearch.filter((filtered: IProject) => Number(filtered.id) === id)[0];
     return item ? item.name : '';
-  }
+  },
+  [SORT]: state => state.sort,
+  [SORT_REVERSE]: state => state.sortReverse,
+  [SORT_FIELD_NAME]: () => (key: string) => {
+    const sortMap: { [key: string]: string } = {
+      name: 'Name',
+      'program.line.name': 'Production line',
+      'schedules.length': 'Team size',
+      updatedAt: 'Date modified'
+    };
+    return sortMap[key];
+  },
 };

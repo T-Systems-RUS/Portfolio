@@ -1,16 +1,25 @@
 <template>
-  <div class="level filters no-margin">
-    <div class="level-left">
-      <div class="filter">
-        <img
-          class="filter-img"
-          src="../../common/assets/download.svg">
+  <div class="filters">
+    <div>
+      <div
+        class="filter"
+        @click="generatePresentation()">
+        <span class="filter-text">
+          <span class="active-chip">
+            <img src="./assets/presentation-file_outline.svg">
+          </span>
+        </span>
       </div>
       <div class="filter">
-        <img
-          class="filter-img"
-          src="../../common/assets/sort.svg">
-        <span class="filter-text">Sorted by: production line</span>
+        <span class="filter-text">
+          <span>Sorted by:</span>
+          <span class="active-chip">
+            {{ mapName(sort) }}
+            <img
+              src="./assets/export_outline.svg"
+              :class="{'reverse': sortReverse}">
+          </span>
+        </span>
       </div>
       <div
         class="filter"
@@ -47,19 +56,35 @@
 <script lang="ts">
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
-  import {FILTER_VALUE, FILTERS, SEARCH} from '../../../store/modules/projects/getter-types';
+  import {
+    FILTER_VALUE,
+    FILTERS,
+    SEARCH,
+    SORT,
+    SORT_FIELD_NAME,
+    SORT_REVERSE
+  } from '../../../store/modules/projects/getter-types';
   import {SET_FILTER, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
   import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
   import {FilterTypes} from '../../../store/modules/projects/filter-types';
+  import {GENERATE_PRESENTATION} from '../../../store/modules/projects/action-types';
 
   export default Vue.extend({
     computed: {
       ...mapGetters({
         search: SEARCH,
-        filterMaps: FILTERS
+        filterMaps: FILTERS,
+        sort: SORT,
+        sortReverse: SORT_REVERSE
       })
     },
     methods: {
+      mapName(key: string) {
+        return this.$store.getters[SORT_FIELD_NAME](key);
+      },
+      generatePresentation() {
+        this.$store.dispatch(GENERATE_PRESENTATION);
+      },
       filterValue(filterKey: string, id: number): string {
         return this.$store.getters[FILTER_VALUE](filterKey, id);
       },
@@ -67,7 +92,7 @@
         this.$store.commit(SET_SEARCH, '');
       },
       removeFilter(filterKey: string, id: number) {
-        if(filterKey === FilterTypes.TECHNOLOGIES)  this.$store.commit(TOGGLE_TECHNOLOGY, {id: id});
+        if (filterKey === FilterTypes.TECHNOLOGIES) this.$store.commit(TOGGLE_TECHNOLOGY, {id});
         this.$store.commit(SET_FILTER, {key: filterKey, value: id});
       }
     }
@@ -79,15 +104,12 @@
   @import '../../../styles/variables';
 
   .filters {
-    height: 60px;
-
-    &.no-margin {
-      margin: 0;
-    }
+    margin: 10px 0;
   }
 
   .filter {
-    margin-right: 20px;
+    display: inline-block;
+    margin-right: 6px;
 
     &-text {
       color: $text-secondary;
@@ -95,16 +117,22 @@
       margin-left: 6px;
 
       .active-chip {
+        display: inline-block;
         padding: 2px 6px;
         background-color: $gray-237;
         color: $gray-38;
         cursor: pointer;
         margin-right: 6px;
+        margin-bottom: 6px;
 
         img {
           position: relative;
-          top: 9px;
+          top: 2px;
           width: 12px;
+
+          &.reverse {
+            transform: rotate(180deg);
+          }
         }
 
         &:hover {

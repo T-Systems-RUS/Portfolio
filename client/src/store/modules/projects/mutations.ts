@@ -10,12 +10,15 @@ import {IType} from '../../../shared/interfaces/IType';
 import {Extension} from '../../../shared/classes/Extension';
 import {
   FINISH_LOADING, SET_ACCORDION, SET_ADDON, SET_AUTOCOMPLETE_SEARCH,
-  SET_CUSTOMERS, SET_DOMAINS, SET_FILTER, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS, SET_SEARCH,
+
+
+  SET_CUSTOMERS, SET_DOMAINS, SET_FILTER, SET_LINES, SET_PROGRAMS, SET_PROJECTS,SET_PROJECT, SET_SEARCH, SET_SORT, SET_SORT_REVERSE,
+
   SET_TYPES
 } from './mutation-types';
 
 export const mutations: MutationTree<IProjectState> = {
-  [SET_ACCORDION](state, payload: {  key:string, value: boolean }) {
+  [SET_ACCORDION](state, payload: { key: string, value: boolean }) {
     Vue.set(
       state.accordion,
       payload.key,
@@ -57,10 +60,16 @@ export const mutations: MutationTree<IProjectState> = {
   [FINISH_LOADING](state) {
     state.loading = false;
   },
-  [SET_SEARCH](state, search: string){
+  [SET_SEARCH](state, search: string) {
     state.search = search;
   },
-  [SET_AUTOCOMPLETE_SEARCH](state, search: string){
+  [SET_AUTOCOMPLETE_SEARCH](state, search: string) {
     state.autocompleteSearch = search;
+  },
+  [SET_SORT](state, sort: string) {
+    state.sort = sort;
+  },
+  [SET_SORT_REVERSE](state, reverse: boolean) {
+    state.sortReverse = reverse;
   }
 };

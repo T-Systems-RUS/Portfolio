@@ -27,6 +27,8 @@ export interface IProjectState {
   loading: boolean;
   search: string;
   autocompleteSearch: string;
+  sort: string;
+  sortReverse: boolean;
 }
 
 
@@ -45,7 +47,9 @@ const projectState: Module<IProjectState, {}> = {
     filter: {} as IFilter,
     loading: true,
     search: '',
-    autocompleteSearch: ''
+    autocompleteSearch: '',
+    sort: 'name',
+    sortReverse: true
   },
   mutations,
   actions,
