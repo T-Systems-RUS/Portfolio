@@ -3,6 +3,7 @@
     <input
       :name="name"
       :checked="checked"
+      @change="toggle"
       type="radio">
     <span class="radio-icon"/>
     <span class="radio-label">{{ label }}</span>
@@ -17,6 +18,11 @@
       name: String,
       checked: Boolean,
       label: String
+    },
+    methods: {
+      toggle() {
+        this.$emit('toggle');
+      }
     }
   });
 </script>

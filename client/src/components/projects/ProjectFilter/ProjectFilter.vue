@@ -15,8 +15,9 @@
           :class="{'is-disabled': !item.active}">
           <Checkbox
             :checked="item.checked"
-            @update:checked="handleFilterAction(item, model.name)"/>
-          <span class="title is-5 is-size-16">{{ item.value }}</span>
+            @update:checked="handleFilterAction(item, model.name)">
+            {{ item.value }}
+          </Checkbox>
         </div>
       </div>
     </Accordion>
@@ -88,7 +89,7 @@
 
       &.is-disabled {
 
-        span {
+        label {
           color: $text-secondary2;
         }
       }

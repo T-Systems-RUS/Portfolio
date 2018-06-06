@@ -94,6 +94,8 @@ export const getters: GetterTree<IProjectState, {}> = {
       projects = projects.filter(project => project.name.toLowerCase().indexOf(state.search.toLowerCase()) > -1);
     }
 
+    projects.sort(Util.sortByField(state.sort, state.sortReverse, true));
+
     return projects;
   },
   [SEARCH]: state => state.search,
