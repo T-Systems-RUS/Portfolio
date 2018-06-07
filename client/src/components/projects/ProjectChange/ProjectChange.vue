@@ -112,6 +112,10 @@
               @typing="getFilteredTechnologies">
               <template slot-scope="props">
                 <strong class="is-capitalized">{{ props.option.domain }}</strong>: {{ props.option.name }}
+                <img
+                  class="tag-image"
+                  :src="imagePath(props.option.image)"
+                  v-if="props.option.image">
               </template>
               <template slot="empty">
                 There are no items
@@ -163,6 +167,9 @@
       this.$store.dispatch(FETCH_TECHNOLOGIES);
     },
     methods: {
+      imagePath(path: string): string {
+        return `./server/images/presentation/${path}`;
+      },
       getFilteredTechnologies(text: string) {
         this.filteredTechnologies = this.$store.getters[TECHNOLOGIES]
           .filter((tech: ITechnology) => tech.name.indexOf(text) > -1);
@@ -173,3 +180,14 @@
     }
   });
 </script>
+
+
+<style lang="scss" scoped>
+  @import '../../../styles/variables';
+
+  .tag-image {
+    width: 18px;
+    position: absolute;
+    margin-left: 10px;
+  }
+</style>
