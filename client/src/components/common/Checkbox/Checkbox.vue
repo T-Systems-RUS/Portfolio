@@ -79,6 +79,11 @@
     }
   }
 
+  .checkbox-label {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
   .checkbox-icon {
     position: absolute;
     top: 0;
