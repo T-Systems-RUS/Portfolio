@@ -1,9 +1,12 @@
 <template>
   <footer class="footer container">
-    <a class="footer-button">
+    <router-link
+      to="edit"
+      append
+      class="footer-button">
       <img src="../assets/edit.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Edit</span>
-    </a>
+    </router-link>
     <a class="footer-button">
       <img src="../assets/copy.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Create copy</span>
