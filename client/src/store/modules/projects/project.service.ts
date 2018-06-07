@@ -7,6 +7,10 @@ export class ProjectService extends HttpClientService{
     return this.get(routes.GET_PROJECTS);
   };
 
+  getProject(id:string) {
+    return this.get(routes.GET_PROJECT + id);
+  }
+
   getProjectAddons() {
     return this.get(routes.GET_PROJECT_ADDONS);
   }

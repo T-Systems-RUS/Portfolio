@@ -33,7 +33,7 @@ export class Schedule extends Model<Schedule> {
     })
     enddate: Date;
 
-    // Project
+    // ProjectChange
     @ForeignKey(() => Project)
     @Column
     projectId: number;

@@ -85,7 +85,7 @@
 
     &-body {
       padding: 0 $padding;
-      max-height: 125px;
+      max-height: 119px;
       overflow: hidden;
     }
 

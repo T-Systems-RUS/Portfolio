@@ -10,7 +10,10 @@ import {IType} from '../../../shared/interfaces/IType';
 import {Extension} from '../../../shared/classes/Extension';
 import {
   FINISH_LOADING, SET_ACCORDION, SET_ADDON, SET_AUTOCOMPLETE_SEARCH,
-  SET_CUSTOMERS, SET_DOMAINS, SET_FILTER, SET_LINES, SET_PROGRAMS, SET_PROJECTS, SET_SEARCH, SET_SORT, SET_SORT_REVERSE,
+
+
+  SET_CUSTOMERS, SET_DOMAINS, SET_FILTER, SET_LINES, SET_PROGRAMS, SET_PROJECTS,SET_PROJECT, SET_SEARCH, SET_SORT, SET_SORT_REVERSE,
+
   SET_TYPES
 } from './mutation-types';
 
@@ -25,6 +28,10 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_PROJECTS](state, payload: IProject[]) {
     state.projects = payload;
+    state.loading = false;
+  },
+  [SET_PROJECT](state, payload: IProject) {
+    state.project = payload;
     state.loading = false;
   },
   [SET_FILTER](state, payload: { key: string, value: string }) {

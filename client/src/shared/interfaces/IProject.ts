@@ -13,6 +13,7 @@ export interface IProject extends IModel{
     domain: IDomain;
     program: IProgram;
     type: IType;
+    image: string;
     schedules: ISchedule[];
     customers: ICustomer[];
     technologies: ITechnology[];

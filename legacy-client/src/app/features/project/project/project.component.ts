@@ -11,7 +11,7 @@ import {ProjectService} from '../project.service';
 
 import {groupBy} from '../../../shared/helpers/extensions';
 /**
- * Project page
+ * ProjectChange page
  * @export
  * @class ProjectComponent
  * @implements {OnInit}
@@ -124,7 +124,7 @@ archieveProject() {
     });
   }
 /**
- * Show modal 
+ * Show modal
  * for image upload
  * @memberof ProjectComponent
  */

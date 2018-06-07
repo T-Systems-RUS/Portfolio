@@ -94,7 +94,7 @@ export class PowerPointService {
           );
 
           slide.addText(
-            'Description of Project',
+            'Description of ProjectChange',
             {
               x: this.x,
               y: 0.6,
@@ -144,7 +144,7 @@ export class PowerPointService {
           const start = 5.75;
           const lineheight = 0.25;
           slide.addText(
-            'Project duration:',
+            'ProjectChange duration:',
             {
               x: this.x,
               y: start,

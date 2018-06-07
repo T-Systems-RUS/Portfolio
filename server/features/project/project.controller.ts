@@ -19,8 +19,8 @@ router.get('/projects/:id', (req, res) =>
   projectService.getProject(req.params.id)
     .then(Util.handleData(res)));
 
-router.get('/projects/history/:name', (req, res) =>
-  projectService.getProjectsByName(req.params.name)
+router.get('/projects/history/:uniqueId', (req, res) =>
+  projectService.getProjectsByUniqueId(req.params.uniqueId)
     .then(Util.handleData(res)));
 
 // POST Requests
@@ -28,7 +28,7 @@ router.post('/projects/create', projectValidator.createValidators(), (req, res) 
   Util.handleValidation(req, res, () =>
     projectService.doesProjectExist(req.body.name).then(doesExist =>
       doesExist ?
-        Util.handleConflict(res, 'Project already exists or was archieved') :
+        Util.handleConflict(res, 'ProjectChange already exists or was archieved') :
         projectService.createProject(req.body)
           .then(Util.handleData(res)))
   ));

@@ -106,7 +106,7 @@ export class NewProjectComponent implements OnInit {
   }
 
   /**
-   * Create or update Project
+   * Create or update ProjectChange
    * depending on editMode prop
    * @memberof NewProjectComponent
    */

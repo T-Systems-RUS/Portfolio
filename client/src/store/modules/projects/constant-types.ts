@@ -3,7 +3,7 @@ export enum Types {
   PRODUCTION_LINE = 'Production line',
   PROGRAM = 'Program',
   DOMAIN = 'Domain',
-  PROJECT_TYPE = 'Project type',
+  PROJECT_TYPE = 'ProjectChange type',
 
   ROLES = 'Roles',
   TECHNOLOGIES = 'Technologies',

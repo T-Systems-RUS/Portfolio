@@ -10,10 +10,14 @@ import {IType} from '../../../shared/interfaces/IType';
 import {IFilter} from '../../../shared/interfaces/IFilter';
 import {Module} from 'vuex';
 import {IAccordion} from '../../../shared/interfaces/ui/IAccordion';
+import {ISchedule} from '../../../shared/interfaces/ISchedule';
+import {ITechnology} from '../../../shared/interfaces/ITechnology';
+import {TestMocks} from '../../../shared/classes/TestMocks';
 
 export interface IProjectState {
   accordion: IAccordion;
   projects: IProject[];
+  project: IProject,
   lines: ILine[];
   programs: IProgram[];
   domains: IDomain[];
@@ -27,10 +31,14 @@ export interface IProjectState {
   sortReverse: boolean;
 }
 
+
+const initialProject: IProject = TestMocks.TestProject();
+
 const projectState: Module<IProjectState, {}> = {
   state: {
     accordion: {} as IAccordion,
     projects: [],
+    project: initialProject,
     customers: [],
     lines: [],
     programs: [],

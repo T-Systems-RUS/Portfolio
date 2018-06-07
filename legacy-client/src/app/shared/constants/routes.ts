@@ -1,5 +1,5 @@
 const routes = {
-  // Project
+  // ProjectChange
   getProjects: '/api/projects/',
   createProject: '/api/projects/create/',
   updateProject: '/api/projects/update/',

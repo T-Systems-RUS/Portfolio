@@ -19,7 +19,7 @@
             </div>
             <!-- <div>
                 <p class="project__h">Dietmar Bernreuther</p>
-                <p class="project__sh">Project manager</p>
+                <p class="project__sh">ProjectChange manager</p>
             </div> -->
         </div>
         <!-- <div class="project__block-item">
@@ -38,7 +38,7 @@
         </div>
         <div *ngIf="model.image" class="project__block-item">
             <slider [(image)]="model.image"></slider>
-        </div>      
+        </div>
     </div>
 
     <h1 class="project__heading  project__heading--small">
@@ -72,40 +72,40 @@
                 </p>
 
                 <p *ngIf="technologies['backend']" class="project__t project__t--small project__mt30 project__mb10">Back-end</p>
-                <chip *ngFor="let tech of technologies['backend']" 
+                <chip *ngFor="let tech of technologies['backend']"
                       (linkClicked)="searchProjects('technologies',$event)"
                       [isLink]="true"
                       [image]="tech.image"
-                      [value]="tech.name" 
+                      [value]="tech.name"
                       style="horizontal"></chip>
 
 
                 <p *ngIf="technologies['frontend']" class="project__t project__t--small project__mt30 project__mb10">Front-end</p>
-                <chip *ngFor="let tech of technologies['frontend']" 
+                <chip *ngFor="let tech of technologies['frontend']"
                       (linkClicked)="searchProjects('technologies',$event)"
                       [isLink]="true"
                       [image]="tech.image"
-                      [value]="tech.name" 
+                      [value]="tech.name"
                       style="grey"></chip>
 
                 <p *ngIf="technologies['tools']" class="project__t project__t--small project__mt30 project__mb10">Tools</p>
-                <chip *ngFor="let tech of technologies['tools']" 
+                <chip *ngFor="let tech of technologies['tools']"
                       (linkClicked)="searchProjects('technologies',$event)"
                       [isLink]="true"
                       [image]="tech.image"
-                      [value]="tech.name" 
+                      [value]="tech.name"
                       style="horizontal"></chip>
 
                 <p *ngIf="technologies['information']" class="project__t project__t--small project__mt30 project__mb10">Information</p>
-                <chip *ngFor="let info of technologies['information']" 
-                      [value]="info.name" 
+                <chip *ngFor="let info of technologies['information']"
+                      [value]="info.name"
                       style="sap"></chip>
             </div>
 
             <div class="project__block-item">
                 <p class="project__h project__mb30">TEAM</p>
-                <list-item  *ngFor="let schedule of model.schedules" 
-                            [clickable]="false" 
+                <list-item  *ngFor="let schedule of model.schedules"
+                            [clickable]="false"
                             [roles]="[schedule.role]"
                             [model]="schedule">
                 </list-item>
@@ -114,7 +114,7 @@
 </div>
 
 <app-footer [color]="model.line">
-        <a [routerLink]="['/project/update', model.id]" 
+        <a [routerLink]="['/project/update', model.id]"
            class="footer__button"
            pTooltip="Edit project" tooltipPosition="top">
             <img src="./../../assets/images/edit.png" alt="edit">
@@ -124,7 +124,7 @@
         </a>
         <a *ngIf="model.version>1" pTooltip="Project history" tooltipPosition="top" [routerLink]="['/project/history', model.name]" class="footer__button">
             <img src="./../../assets/images/history.png" alt="powerpoint">
-        </a>      
+        </a>
         <a pTooltip="Generate presentation" tooltipPosition="top" (click)="createPresentation()" class="footer__button">
             <img src="./../../assets/images/powerpoint.png" alt="powerpoint">
         </a>
