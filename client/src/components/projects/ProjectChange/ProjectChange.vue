@@ -8,52 +8,100 @@
     </p>
     <template slot="modal-content">
       <div class="form-container">
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">Some select</label>
+
+        <div class="field centered-margin">
+          <label class="label is-pulled-left">Project name</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text">
+          </div>
+        </div>
+        <div class="field centered-margin">
+          <label class="label is-pulled-left">Production line</label>
           <div class="control">
             <div class="select">
               <select/>
             </div>
           </div>
         </div>
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">Field</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text">
+        <div class="field centered-margin">
+          <label class="label is-pulled-left">Domain</label>
+          <div class="select">
+            <select/>
           </div>
         </div>
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">Other field</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text">
+        <div class="field centered-margin">
+          <label class="label is-pulled-left">Program</label>
+          <div class="select">
+            <select/>
           </div>
         </div>
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">More fields</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text">
+        <div class="field centered-margin">
+          <label class="label is-pulled-left">Project type</label>
+          <div class="select">
+            <select/>
           </div>
         </div>
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">Even more</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text">
-          </div>
-        </div>
-        <div class="field centered">
-          <label class="label is-pulled-left is-required">Some select</label>
-          <div class="control">
-            <div class="select">
-              <select/>
+        <div class="field centered-margin">
+          <div class="columns">
+            <div class="column">
+              <div class="field">
+                <label class="label is-pulled-left">Project start</label>
+                <div class="control">
+                  <b-datepicker
+                    placeholder="Type or select a date..."
+                    icon="calendar-today"
+                    :readonly="false">
+                  </b-datepicker>
+                </div>
+              </div>
             </div>
+            <div class="column">
+              <div class="field">
+                <label class="label is-pulled-left">Project end</label>
+                <div class="control">
+                  <b-datepicker
+                    placeholder="Type or select a date..."
+                    icon="calendar-today"
+                    :readonly="false">
+                  </b-datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field centered-margin">
+          <label class="label is-pulled-left">Customer</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text">
+          </div>
+        </div>
+        <div class="field centered-margin">
+          <label class="label is-pulled-left">PSS</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text">
+          </div>
+        </div>
+        <div class="field centered-margin">
+          <label class="label is-pulled-left">Description</label>
+          <div class="control">
+            <textarea class="textarea"/>
+          </div>
+        </div>
+        <div class="field centered-margin">
+          <label class="label is-pulled-left">Technologies</label>
+          <div class="control">
+            <b-taginput
+              :allow-new="true"
+              autocomplete
+              icon="label"
+              placeholder="Add a tag">
+            </b-taginput>
           </div>
         </div>
       </div>
@@ -77,4 +125,3 @@
     }
   });
 </script>
-
