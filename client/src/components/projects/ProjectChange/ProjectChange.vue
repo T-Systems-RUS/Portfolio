@@ -13,6 +13,7 @@
           <label class="label is-pulled-left">Project name</label>
           <div class="control">
             <input
+              v-model="project.name"
               class="input"
               type="text"
               placeholder="Project name">
@@ -92,6 +93,7 @@
           <label class="label is-pulled-left">Description</label>
           <div class="control">
             <textarea
+              v-model="project.description"
               class="textarea"
               placeholder="Description"/>
           </div>
@@ -100,15 +102,26 @@
           <label class="label is-pulled-left">Technologies</label>
           <div class="control">
             <b-taginput
-              :allow-new="true"
+              v-model="projectTech"
+              :data="filteredTechnologies"
+              :field="'name'"
+              :allow-new="false"
               autocomplete
               icon="label"
-              placeholder="Technologies"/>
+              placeholder="Technologies"
+              @typing="getFilteredTechnologies">
+              <template slot-scope="props">
+                <strong class="is-capitalized">{{ props.option.domain }}</strong>: {{ props.option.name }}
+              </template>
+              <template slot="empty">
+                There are no items
+              </template>
+            </b-taginput>
           </div>
         </div>
       </div>
       <div class="action-buttons field centered">
-        <button class="button is-primary is-size-6 is-width-auto  centered">
+        <button class="button is-primary is-size-6 is-width-auto centered">
           Save
         </button>
       </div>
@@ -118,9 +131,42 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import {FETCH_PROJECT} from '../../../store/modules/projects/action-types';
+  import {PROJECT} from '../../../store/modules/projects/getter-types';
+  import {ITechnology} from '../../../shared/interfaces/ITechnology';
+  import {IProject} from '../../../shared/interfaces/IProject';
+  import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
+  import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
 
   export default Vue.extend({
+    data() {
+      return {
+        projectTech: [],
+        filteredTechnologies: []
+      };
+    },
+    props: {
+      id: {
+        type: String
+      }
+    },
+    computed: {
+      project(): IProject {
+        return this.$store.getters[PROJECT];
+      },
+      technologies(): ITechnology[] {
+        return this.$store.getters[TECHNOLOGIES];
+      }
+    },
+    mounted() {
+      this.$store.dispatch(FETCH_PROJECT, this.id);
+      this.$store.dispatch(FETCH_TECHNOLOGIES);
+    },
     methods: {
+      getFilteredTechnologies(text: string) {
+        this.filteredTechnologies = this.$store.getters[TECHNOLOGIES]
+          .filter((tech: ITechnology) => tech.name.indexOf(text) > -1);
+      },
       goBack() {
         this.$router.back();
       }
