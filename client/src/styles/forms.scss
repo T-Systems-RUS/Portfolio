@@ -159,10 +159,10 @@ $button-box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
       border-color: $magenta-dark;
     }
 
-      &:active {
-        background-color: $magenta-188;
-        border-color: $magenta-140;
-      }
+    &:active {
+      background-color: $magenta-188;
+      border-color: $magenta-140;
+    }
   }
 }
 
@@ -206,4 +206,8 @@ $button-box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
       padding-right: $select-padding;
     }
   }
+}
+
+.control.has-icons-left .input {
+  padding-left: 10px;
 }

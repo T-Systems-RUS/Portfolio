@@ -14,7 +14,8 @@
           <div class="control">
             <input
               class="input"
-              type="text">
+              type="text"
+              placeholder="Project name">
           </div>
         </div>
         <div class="field centered-margin">
@@ -50,10 +51,9 @@
                 <label class="label is-pulled-left">Project start</label>
                 <div class="control">
                   <b-datepicker
-                    placeholder="Type or select a date..."
+                    placeholder="Project start"
                     icon="calendar-today"
-                    :readonly="false">
-                  </b-datepicker>
+                    :readonly="false"/>
                 </div>
               </div>
             </div>
@@ -62,10 +62,9 @@
                 <label class="label is-pulled-left">Project end</label>
                 <div class="control">
                   <b-datepicker
-                    placeholder="Type or select a date..."
+                    placeholder="Project end"
                     icon="calendar-today"
-                    :readonly="false">
-                  </b-datepicker>
+                    :readonly="false"/>
                 </div>
               </div>
             </div>
@@ -76,7 +75,8 @@
           <div class="control">
             <input
               class="input"
-              type="text">
+              type="text"
+              placeholder="Customer">
           </div>
         </div>
         <div class="field centered-margin">
@@ -84,13 +84,16 @@
           <div class="control">
             <input
               class="input"
-              type="text">
+              type="text"
+              placeholder="PSS">
           </div>
         </div>
         <div class="field centered-margin">
           <label class="label is-pulled-left">Description</label>
           <div class="control">
-            <textarea class="textarea"/>
+            <textarea
+              class="textarea"
+              placeholder="Description"/>
           </div>
         </div>
         <div class="field centered-margin">
@@ -100,8 +103,7 @@
               :allow-new="true"
               autocomplete
               icon="label"
-              placeholder="Add a tag">
-            </b-taginput>
+              placeholder="Technologies"/>
           </div>
         </div>
       </div>
