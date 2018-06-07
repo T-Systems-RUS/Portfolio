@@ -1,9 +1,13 @@
 <template>
   <div
-    class="list-item">
-    <img class="list-item-image" src="../assets/person.svg"/>
+  class="list-item">
+    <img
+      class="list-item-image"
+      src="../assets/person.svg">
     <div class="list-item-left">
-      <span class="title is-5 is-size-14">{{ fullname }}</span>
+      <span class="title is-5 is-size-14">
+        {{ schedule.employee.firstname }} {{ schedule.employee.lastname }}
+      </span>
       <span class="title is-4 is-size-14 is-block"> {{ schedule.role.name }}</span>
     </div>
     <div class="list-item-right is-pulled-right">
@@ -14,18 +18,13 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {ISchedule} from "../../../shared/interfaces/ISchedule";
+  import {ISchedule} from '../../../shared/interfaces/ISchedule';
 
   export default Vue.extend({
     props: {
       schedule: {
         type: Object as () => ISchedule,
         required: true
-      }
-    },
-    computed: {
-      fullname(): string {
-        return `${this.schedule.employee.firstname} ${this.schedule.employee.lastname}`;
       }
     }
   });

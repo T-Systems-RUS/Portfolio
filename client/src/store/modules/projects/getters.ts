@@ -12,7 +12,7 @@ import {
   FILTERS,
   PROJECT_FILTER,
   PROJECT_NAMES,
-  PROJECTS,    
+  PROJECTS,
   PROJECT,
   PROJECT_TECHNOLOGIES,
   SEARCH,
@@ -114,9 +114,7 @@ export const getters: GetterTree<IProjectState, {}> = {
     return projects;
   },
   [PROJECT]: state => state.project,
-  [PROJECT_TECHNOLOGIES](state) {
-    return Extension.groupBy(state.project.technologies, 'domain');
-  },
+  [PROJECT_TECHNOLOGIES]: state => Extension.groupBy(state.project.technologies, 'domain'),
   [SEARCH]: state => state.search,
   [AUTOCOMPLETE_SEARCH]: state => state.autocompleteSearch,
   [PROJECT_NAMES](state) {

@@ -1,23 +1,23 @@
 <template>
   <footer class="footer container">
     <a class="footer-button">
-      <img src="../assets/edit.svg" alt="">
+      <img src="../assets/edit.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Edit</span>
     </a>
     <a class="footer-button">
-      <img src="../assets/copy.svg" alt="">
+      <img src="../assets/copy.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Create copy</span>
     </a>
     <a class="footer-button">
-      <img src="../assets/history.svg" alt="">
+      <img src="../assets/history.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Project history</span>
     </a>
     <a class="footer-button">
-      <img src="../assets/image.svg" alt="">
+      <img src="../assets/image.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Upload image</span>
     </a>
     <a class="footer-button">
-      <img src="../assets/trash.svg" alt="">
+      <img src="../assets/trash.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Delete project</span>
     </a>
   </footer>
