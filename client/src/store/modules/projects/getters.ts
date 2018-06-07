@@ -16,7 +16,7 @@ import {
   PROJECT,
   PROJECT_TECHNOLOGIES,
   SEARCH,
-  SORT, SORT_FIELD_NAME, SORT_REVERSE
+  SORT, SORT_FIELD_NAME, SORT_REVERSE, ROLES
 
 } from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
@@ -135,6 +135,7 @@ export const getters: GetterTree<IProjectState, {}> = {
     const item = arrayToSearch.filter((filtered: IProject) => Number(filtered.id) === id)[0];
     return item ? item.name : '';
   },
+  [ROLES]: state => state.roles,
   [SORT]: state => state.sort,
   [SORT_REVERSE]: state => state.sortReverse,
   [SORT_FIELD_NAME]: () => (key: string) => {

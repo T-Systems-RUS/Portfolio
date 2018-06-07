@@ -14,4 +14,8 @@ export class ProjectService extends HttpClientService{
   getProjectAddons() {
     return this.get(routes.GET_PROJECT_ADDONS);
   }
+
+  getRoles() {
+    return this.get(routes.GET_ROLES);
+  }
 }

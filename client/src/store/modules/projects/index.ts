@@ -10,9 +10,8 @@ import {IType} from '../../../shared/interfaces/IType';
 import {IFilter} from '../../../shared/interfaces/IFilter';
 import {Module} from 'vuex';
 import {IAccordion} from '../../../shared/interfaces/ui/IAccordion';
-import {ISchedule} from '../../../shared/interfaces/ISchedule';
-import {ITechnology} from '../../../shared/interfaces/ITechnology';
 import {TestMocks} from '../../../shared/classes/TestMocks';
+import {IRole} from '../../../shared/interfaces/IRole';
 
 export interface IProjectState {
   accordion: IAccordion;
@@ -25,6 +24,7 @@ export interface IProjectState {
   customers: ICustomer[];
   filter: IFilter;
   loading: boolean;
+  roles: IRole[],
   search: string;
   autocompleteSearch: string;
   sort: string;
@@ -44,6 +44,7 @@ const projectState: Module<IProjectState, {}> = {
     programs: [],
     domains: [],
     types: [],
+    roles: [],
     filter: {} as IFilter,
     loading: true,
     search: '',

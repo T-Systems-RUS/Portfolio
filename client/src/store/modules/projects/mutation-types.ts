@@ -10,6 +10,7 @@ export const SET_PROJECT = 'projects/SET_PROJECT';
 export const SET_FILTER = 'projects/SET_FILTER';
 export const SET_SEARCH = 'projects/SET_SEARCH';
 export const SET_AUTOCOMPLETE_SEARCH = 'projects/SET_AUTOCOMPLETE_SEARCH';
+export const SET_ROLES = 'projects/SET_ROLES';
 export const SET_SORT = 'SET_SORT';
 export const SET_SORT_REVERSE = 'SET_SORT_REVERSE';
 

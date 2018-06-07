@@ -7,7 +7,7 @@
       Please edit project information here
     </p>
     <template slot="modal-content">
-      <div class="form-container">
+      <div class="form-container project-change">
         <div class="field centered-margin">
           <Stepper
             step="1"
@@ -51,7 +51,7 @@
             <div class="field">
               <div class="columns">
                 <div class="column">
-                  <div class="field">
+                  <div class="field is-short">
                     <label class="label is-pulled-left">Project start</label>
                     <div class="control">
                       <b-datepicker
@@ -62,7 +62,7 @@
                   </div>
                 </div>
                 <div class="column">
-                  <div class="field">
+                  <div class="field is-short">
                     <label class="label is-pulled-left">Project end</label>
                     <div class="control">
                       <b-datepicker
@@ -148,12 +148,43 @@
           </Stepper>
         </div>
 
+        <div class="field centered-margin">
+          <Stepper
+            step="5"
+            name="Team">
+            <div class="field">
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  placeholder="Select employee">
+              </div>
+            </div>
+            <EmployeeItem
+              v-for="schedule of project.schedules"
+              :key="schedule.id"
+              :schedule="schedule"></EmployeeItem>
+          </Stepper>
+        </div>
+
 
 
       </div>
-      <div class="action-buttons field centered">
-        <button class="button is-primary is-size-6 is-width-auto centered">
+      <div class="project-change-footer">
+        <button class="button
+                 is-primary
+                 is-size-6
+                 is-width-auto
+                 is-pulled-right">
           Save
+        </button>
+        <button class="button
+                       is-default
+                       is-size-6
+                       is-width-auto
+                       is-pulled-right
+                       is-pushed-left">
+          Cancel
         </button>
       </div>
     </template>
@@ -163,8 +194,9 @@
 <script lang="ts">
   import Vue from 'vue';
   import Stepper from '../../common/Stepper/Stepper.vue';
-  import {FETCH_PROJECT} from '../../../store/modules/projects/action-types';
-  import {PROJECT} from '../../../store/modules/projects/getter-types';
+  import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
+  import {FETCH_PROJECT, FETCH_ROLES} from "../../../store/modules/projects/action-types";
+  import {PROJECT} from "../../../store/modules/projects/getter-types";
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {IProject} from '../../../shared/interfaces/IProject';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
@@ -172,6 +204,7 @@
 
   export default Vue.extend({
     components: {
+      EmployeeItem,
       Stepper
     },
     data() {
@@ -196,6 +229,7 @@
     mounted() {
       this.$store.dispatch(FETCH_PROJECT, this.id);
       this.$store.dispatch(FETCH_TECHNOLOGIES);
+      this.$store.dispatch(FETCH_ROLES);
     },
     methods: {
       imagePath(path: string): string {
@@ -216,9 +250,36 @@
 <style lang="scss" scoped>
   @import '../../../styles/variables';
 
+  .project-change {
+    margin-bottom: 80px;
+
+    &-footer {
+      background-color: $white;
+      height: 70px;
+      border-top: 1px solid $border-color;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 1000;
+      left: 0;
+      align-items: center;
+      padding: 20px;
+    }
+  }
+
   .tag-image {
     width: 18px;
     position: absolute;
     margin-left: 10px;
+  }
+
+  .field {
+    max-width: 420px;
+    width: 420px;
+
+    &.is-short {
+      width: 100%;
+      box-sizing: border-box;
+    }
   }
 </style>

@@ -3,10 +3,10 @@ import {ProjectService} from './project.service';
 import {IProjectState} from './index';
 
 
-import {FETCH_ADDONS,FETCH_PROJECT, FETCH_PROJECTS, GENERATE_PRESENTATION} from './action-types';
+import {FETCH_ADDONS, FETCH_PROJECT, FETCH_PROJECTS, FETCH_ROLES, GENERATE_PRESENTATION} from './action-types';
 
 import {
-  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS,
+  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS, SET_ROLES,
   SET_TYPES
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
@@ -27,6 +27,13 @@ export const actions: ActionTree<IProjectState, {}> = {
     return service.getProject(id)
       .then(response => {
         commit(SET_PROJECT, response.data);
+      });
+  },
+
+  [FETCH_ROLES]({commit}) {
+    return service.getRoles()
+      .then(response => {
+        commit(SET_ROLES, response.data);
       });
   },
 

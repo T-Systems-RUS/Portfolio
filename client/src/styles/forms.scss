@@ -133,6 +133,10 @@ $button-box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
     border-color: $blue;
   }
 
+  &.is-pushed-left {
+    margin-right: 10px;
+  }
+
   &.is-default {
     height: $button-default-height;
     background-color: $gray-237;
@@ -153,6 +157,7 @@ $button-box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
 
   &.is-primary {
     border-color: $magenta-dark;
+    height: $button-default-height;
 
     &:hover {
       background-color: $magenta-208;
