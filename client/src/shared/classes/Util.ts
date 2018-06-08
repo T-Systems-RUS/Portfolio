@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import {IModel} from '../interfaces/IModel';
 import {IProject} from '../interfaces/IProject';
 import {Types} from '../../store/modules/projects/constant-types';
@@ -37,6 +38,23 @@ export class Util {
 
 
     return itemsToCheck;
+  }
+
+  /**
+   * Create two way mapper Getter <-> Mutation for computed property
+   * @param {string} getter
+   * @param {string} mutation
+   * @returns {any} Mapper for computed property
+   */
+  static mapTwoWay<T>(getter: string, mutation: string) {
+    return {
+      get(this: Vue): T {
+        return this.$store.getters[getter];
+      },
+      set(this: Vue, value: T) {
+        this.$store.commit(mutation, value);
+      }
+    };
   }
 
   /**

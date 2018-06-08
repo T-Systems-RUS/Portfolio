@@ -16,7 +16,7 @@
               <label class="label is-pulled-left">Project name</label>
               <div class="control">
                 <input
-                  v-model="project.name"
+                  v-model="name"
                   class="input"
                   type="text"
                   placeholder="Project name">
@@ -26,7 +26,7 @@
               <label class="label is-pulled-left">Production line</label>
               <div class="control">
                 <div class="select">
-                  <select>
+                  <select v-model="line">
                     <option
                       v-for="option in addons['Production line']"
                       :value="option.value">
@@ -39,7 +39,7 @@
             <div class="field">
               <label class="label is-pulled-left">Domain</label>
               <div class="select">
-                <select>
+                <select v-model="domain">
                   <option
                     v-for="option in addons['Domain']"
                     :value="option.value">
@@ -51,7 +51,7 @@
             <div class="field">
               <label class="label is-pulled-left">Program</label>
               <div class="select">
-                <select>
+                <select v-model="program">
                   <option
                     v-for="option in addons['Program']"
                     :value="option.value">
@@ -63,7 +63,7 @@
             <div class="field">
               <label class="label is-pulled-left">Project type</label>
               <div class="select">
-                <select>
+                <select v-model="type">
                   <option
                     v-for="option in addons['Project type']"
                     :value="option.value">
@@ -80,7 +80,6 @@
                     <div class="control">
                       <b-datepicker
                         placeholder="Project start"
-                        icon="calendar-today"
                         :readonly="false"/>
                     </div>
                   </div>
@@ -91,7 +90,6 @@
                     <div class="control">
                       <b-datepicker
                         placeholder="Project end"
-                        icon="calendar-today"
                         :readonly="false"/>
                     </div>
                   </div>
@@ -108,7 +106,7 @@
             <div class="field">
               <div class="control">
                 <textarea
-                  v-model="project.description"
+                  v-model="description"
                   class="textarea"
                   placeholder="Description"/>
               </div>
@@ -185,7 +183,7 @@
               </div>
             </div>
             <EmployeeItem
-              v-for="schedule of project.schedules"
+              v-for="schedule of schedules"
               :key="schedule.id"
               :schedule="schedule"/>
           </Stepper>
@@ -221,11 +219,25 @@
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {FETCH_ADDONS, FETCH_PROJECT, FETCH_ROLES} from '../../../store/modules/projects/action-types';
-  import {ADDONS, PROJECT} from '../../../store/modules/projects/getter-types';
+  import {
+    ADDONS,
+    PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN, PROJECT_END_DATE,
+    PROJECT_LINE,
+    PROJECT_NAME,
+    PROJECT_PROGRAM, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TYPE
+  } from '../../../store/modules/projects/getter-types';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
-  import {IProject} from '../../../shared/interfaces/IProject';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
   import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
+  import {
+    SET_PROJECT_CUSTOMERS,
+    SET_PROJECT_DESCRIPTION,
+    SET_PROJECT_DOMAIN, SET_PROJECT_END_DATE,
+    SET_PROJECT_LINE,
+    SET_PROJECT_NAME,
+    SET_PROJECT_PROGRAM, SET_PROJECT_SCHEDULES, SET_PROJECT_START_DATE, SET_PROJECT_TYPE
+  } from '../../../store/modules/projects/mutation-types';
+  import {Util} from '../../../shared/classes/Util';
 
   export default Vue.extend({
     components: {
@@ -244,9 +256,17 @@
       }
     },
     computed: {
-      project(): IProject {
-        return this.$store.getters[PROJECT];
-      },
+      name: Util.mapTwoWay<string>(PROJECT_NAME, SET_PROJECT_NAME),
+      program: Util.mapTwoWay<string>(PROJECT_PROGRAM, SET_PROJECT_PROGRAM),
+      line: Util.mapTwoWay<string>(PROJECT_LINE, SET_PROJECT_LINE),
+      domain: Util.mapTwoWay<string>(PROJECT_DOMAIN, SET_PROJECT_DOMAIN),
+      type: Util.mapTwoWay<string>(PROJECT_TYPE, SET_PROJECT_TYPE),
+      startDate: Util.mapTwoWay<string>(PROJECT_START_DATE, SET_PROJECT_START_DATE),
+      endDate: Util.mapTwoWay<string>(PROJECT_END_DATE, SET_PROJECT_END_DATE),
+      description: Util.mapTwoWay<string>(PROJECT_DESCRIPTION, SET_PROJECT_DESCRIPTION),
+      customers: Util.mapTwoWay<string>(PROJECT_CUSTOMERS, SET_PROJECT_CUSTOMERS),
+      schedules: Util.mapTwoWay<string>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
+
       technologies(): ITechnology[] {
         return this.$store.getters[TECHNOLOGIES];
       },
