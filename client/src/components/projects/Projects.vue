@@ -70,19 +70,6 @@
       top: $filters-top;
       bottom: 0;
       overflow-y: auto;
-
-      &::-webkit-scrollbar {
-        width: 5px;
-
-        &-track {
-          -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
-        }
-
-        &-thumb {
-          background-color: $lite-grey;
-          outline: 1px solid $lite-grey;
-        }
-      }
     }
 
     &-right {
