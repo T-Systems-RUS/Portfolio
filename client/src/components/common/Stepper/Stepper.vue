@@ -1,10 +1,10 @@
 <template>
   <div class="stepper">
     <div class="stepper-number">
-      <span class="title is-7 is-size-14">{{step}}</span>
+      <span class="title is-7 is-size-14">{{ step }}</span>
     </div>
     <div class="stepper-name title is-5 is-size-14">
-      {{name}}
+      {{ name }}
     </div>
     <div class="stepper-content">
       <slot/>

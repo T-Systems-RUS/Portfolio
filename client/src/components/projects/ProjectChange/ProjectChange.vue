@@ -163,27 +163,28 @@
             <EmployeeItem
               v-for="schedule of project.schedules"
               :key="schedule.id"
-              :schedule="schedule"></EmployeeItem>
+              :schedule="schedule"/>
           </Stepper>
         </div>
 
 
-
       </div>
       <div class="project-change-footer">
-        <button class="button
-                 is-primary
-                 is-size-6
-                 is-width-auto
-                 is-pulled-right">
+        <button
+          class="button
+               is-primary
+               is-size-6
+               is-width-auto
+               is-pulled-right">
           Save
         </button>
-        <button class="button
-                       is-default
-                       is-size-6
-                       is-width-auto
-                       is-pulled-right
-                       is-pushed-left">
+        <button
+          class="button
+                 is-default
+                 is-size-6
+                 is-width-auto
+                 is-pulled-right
+                 is-pushed-left">
           Cancel
         </button>
       </div>
@@ -195,8 +196,8 @@
   import Vue from 'vue';
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
-  import {FETCH_PROJECT, FETCH_ROLES} from "../../../store/modules/projects/action-types";
-  import {PROJECT} from "../../../store/modules/projects/getter-types";
+  import {FETCH_PROJECT, FETCH_ROLES} from '../../../store/modules/projects/action-types';
+  import {PROJECT} from '../../../store/modules/projects/getter-types';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {IProject} from '../../../shared/interfaces/IProject';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="employee-item">
+  class="employee-item">
     <img
       class="employee-item-image"
       src="../assets/person.svg">
@@ -14,7 +14,7 @@
             v-for="role in roles"
             :key="role.id"
             :value="role.id">
-            {{role.name}} ({{role.seniority}})
+            {{ role.name }} ({{ role.seniority }})
           </option>
         </select>
       </div>
