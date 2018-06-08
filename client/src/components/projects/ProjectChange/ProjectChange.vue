@@ -26,26 +26,50 @@
               <label class="label is-pulled-left">Production line</label>
               <div class="control">
                 <div class="select">
-                  <select/>
+                  <select>
+                    <option
+                      v-for="option in addons['Production line']"
+                      :value="option.value">
+                      {{ option.name }}
+                    </option>
+                  </select>
                 </div>
               </div>
             </div>
             <div class="field">
               <label class="label is-pulled-left">Domain</label>
               <div class="select">
-                <select/>
+                <select>
+                  <option
+                    v-for="option in addons['Domain']"
+                    :value="option.value">
+                    {{ option.name }}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="field">
               <label class="label is-pulled-left">Program</label>
               <div class="select">
-                <select/>
+                <select>
+                  <option
+                    v-for="option in addons['Program']"
+                    :value="option.value">
+                    {{ option.name }}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="field">
               <label class="label is-pulled-left">Project type</label>
               <div class="select">
-                <select/>
+                <select>
+                  <option
+                    v-for="option in addons['Project type']"
+                    :value="option.value">
+                    {{ option.name }}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="field">
@@ -196,8 +220,8 @@
   import Vue from 'vue';
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
-  import {FETCH_PROJECT, FETCH_ROLES} from '../../../store/modules/projects/action-types';
-  import {PROJECT} from '../../../store/modules/projects/getter-types';
+  import {FETCH_ADDONS, FETCH_PROJECT, FETCH_ROLES} from '../../../store/modules/projects/action-types';
+  import {ADDONS, PROJECT} from '../../../store/modules/projects/getter-types';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {IProject} from '../../../shared/interfaces/IProject';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
@@ -225,11 +249,15 @@
       },
       technologies(): ITechnology[] {
         return this.$store.getters[TECHNOLOGIES];
+      },
+      addons(): {} {
+        return this.$store.getters[ADDONS];
       }
     },
     mounted() {
       this.$store.dispatch(FETCH_PROJECT, this.id);
       this.$store.dispatch(FETCH_TECHNOLOGIES);
+      this.$store.dispatch(FETCH_ADDONS);
       this.$store.dispatch(FETCH_ROLES);
     },
     methods: {
