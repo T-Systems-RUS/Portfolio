@@ -252,7 +252,6 @@
   @import '../../../styles/variables';
 
   .project-change {
-    margin-bottom: 80px;
 
     &-footer {
       background-color: $white;

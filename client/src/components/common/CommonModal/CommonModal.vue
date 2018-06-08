@@ -89,6 +89,7 @@
 
     .modal-card-body {
       padding: 0 $building-unit 50px;
+      margin-bottom: 72px;
 
       @include mobile {
         padding: 0 $building-unit;
