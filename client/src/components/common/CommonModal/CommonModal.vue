@@ -48,7 +48,7 @@
 
   $common-bg-color: $white;
   $modal-border-top: 4px solid $magenta;
-  $modal-card-padding-top: 160px;
+  $modal-card-padding-top: 50px;
 
   $title-margin-bottom: $building-unit * 2;
   $subtitle-margin-bottom: $building-unit * 3;
@@ -84,11 +84,11 @@
       border-bottom: 0;
       padding-top: $modal-card-padding-top;
       flex-direction: column;
-      padding-bottom: 0;
+      padding-bottom: 20px;
     }
 
     .modal-card-body {
-      padding: 0 $building-unit;
+      padding: 0 $building-unit 50px;
 
       @include mobile {
         padding: 0 $building-unit;

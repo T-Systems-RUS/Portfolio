@@ -1,0 +1,50 @@
+@import '~buefy/src/scss/components/_autocomplete.scss';
+@import '~buefy/src/scss/components/_datepicker.scss';
+@import '~buefy/src/scss/components/_tag.scss';
+@import '~buefy/src/scss/components/_taginput.scss';
+@import './typography';
+@import './mixins';
+
+$delete-button-size: $building-unit;
+$delete-button-icon-size: $building-unit/2;
+
+.taginput {
+  .taginput-container {
+    position: relative;
+    padding-bottom: 0 !important;
+
+    .control,
+    .autocomplete {
+      position: static;
+    }
+
+    .tag {
+      @include font-size(7);
+      a.delete {
+        width: $delete-button-size;
+        height: $delete-button-size;
+        border-radius: 50%;
+        background-color: $gray-199;
+        position: relative;
+
+        &::after,
+        &::before {
+          content: '';
+          width: $delete-button-icon-size;
+          height: 1px;
+          @include absolute-xy-center;
+          background-color: $white;
+          transform-origin: center center;
+        }
+
+        &::after {
+          transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        &::before {
+          transform: translate(-50%, -50%) rotate(-45deg);
+        }
+      }
+    }
+  }
+}

@@ -1383,6 +1383,12 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
+buefy@^0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.6.6.tgz#e59df5258ad254498b888cd612bb1a4cc8773d0a"
+  dependencies:
+    bulma "^0.7.1"
+
 buffer-indexof@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-indexof/-/buffer-indexof-1.1.1.tgz#52fabcc6a606d1a00302802648ef68f639da268c"
@@ -1410,6 +1416,10 @@ builtin-status-codes@^3.0.0:
 bulma@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.6.2.tgz#f4b1d11d5acc51a79644eb0a2b0b10649d3d71f5"
+
+bulma@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.1.tgz#73c2e3b2930c90cc272029cbd19918b493fca486"
 
 bytes@3.0.0:
   version "3.0.0"

@@ -133,6 +133,10 @@ $button-box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
     border-color: $blue;
   }
 
+  &.is-pushed-left {
+    margin-right: 10px;
+  }
+
   &.is-default {
     height: $button-default-height;
     background-color: $gray-237;
@@ -153,16 +157,17 @@ $button-box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
 
   &.is-primary {
     border-color: $magenta-dark;
+    height: $button-default-height;
 
     &:hover {
       background-color: $magenta-208;
       border-color: $magenta-dark;
     }
 
-      &:active {
-        background-color: $magenta-188;
-        border-color: $magenta-140;
-      }
+    &:active {
+      background-color: $magenta-188;
+      border-color: $magenta-140;
+    }
   }
 }
 
@@ -206,4 +211,8 @@ $button-box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
       padding-right: $select-padding;
     }
   }
+}
+
+.control.has-icons-left .input {
+  padding-left: 10px;
 }
