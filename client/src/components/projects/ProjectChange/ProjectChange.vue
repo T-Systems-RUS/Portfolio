@@ -29,7 +29,7 @@
                   <select v-model="line">
                     <option
                       v-for="option in addons['Production line']"
-                      :value="option.value">
+                      :value="option">
                       {{ option.name }}
                     </option>
                   </select>
@@ -42,7 +42,7 @@
                 <select v-model="domain">
                   <option
                     v-for="option in addons['Domain']"
-                    :value="option.value">
+                    :value="option">
                     {{ option.name }}
                   </option>
                 </select>
@@ -54,7 +54,7 @@
                 <select v-model="program">
                   <option
                     v-for="option in addons['Program']"
-                    :value="option.value">
+                    :value="option">
                     {{ option.name }}
                   </option>
                 </select>
@@ -66,7 +66,7 @@
                 <select v-model="type">
                   <option
                     v-for="option in addons['Project type']"
-                    :value="option.value">
+                    :value="option">
                     {{ option.name }}
                   </option>
                 </select>
@@ -79,6 +79,7 @@
                     <label class="label is-pulled-left">Project start</label>
                     <div class="control">
                       <b-datepicker
+                        v-model="startDate"
                         placeholder="Project start"
                         :readonly="false"/>
                     </div>
@@ -239,15 +240,24 @@
   } from '../../../store/modules/projects/mutation-types';
   import {Util} from '../../../shared/classes/Util';
 
+  interface IData {
+    projectTech: {}[];
+    filteredTechnologies: {}[];
+    startDate: Date | null;
+    endDate: Date | null;
+  }
+
   export default Vue.extend({
     components: {
       EmployeeItem,
       Stepper
     },
-    data() {
+    data(): IData {
       return {
         projectTech: [],
-        filteredTechnologies: []
+        filteredTechnologies: [],
+        startDate: null,
+        endDate: null
       };
     },
     props: {
@@ -261,8 +271,6 @@
       line: Util.mapTwoWay<string>(PROJECT_LINE, SET_PROJECT_LINE),
       domain: Util.mapTwoWay<string>(PROJECT_DOMAIN, SET_PROJECT_DOMAIN),
       type: Util.mapTwoWay<string>(PROJECT_TYPE, SET_PROJECT_TYPE),
-      startDate: Util.mapTwoWay<string>(PROJECT_START_DATE, SET_PROJECT_START_DATE),
-      endDate: Util.mapTwoWay<string>(PROJECT_END_DATE, SET_PROJECT_END_DATE),
       description: Util.mapTwoWay<string>(PROJECT_DESCRIPTION, SET_PROJECT_DESCRIPTION),
       customers: Util.mapTwoWay<string>(PROJECT_CUSTOMERS, SET_PROJECT_CUSTOMERS),
       schedules: Util.mapTwoWay<string>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
@@ -275,7 +283,13 @@
       }
     },
     mounted() {
-      this.$store.dispatch(FETCH_PROJECT, this.id);
+      this.$store.dispatch(FETCH_PROJECT, this.id)
+        .then(() => {
+          // Hack necessary due to https://github.com/buefy/buefy/issues/700
+          // TODO change to actual computed+getter after fixed
+          this.startDate = new Date(this.$store.getters[PROJECT_START_DATE]);
+          this.endDate = new Date(this.$store.getters[PROJECT_END_DATE]);
+        });
       this.$store.dispatch(FETCH_TECHNOLOGIES);
       this.$store.dispatch(FETCH_ADDONS);
       this.$store.dispatch(FETCH_ROLES);
