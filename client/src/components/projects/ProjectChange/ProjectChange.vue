@@ -319,11 +319,11 @@
       },
       getFilteredTechnologies(text: string) {
         this.filteredTechnologies = this.$store.getters[TECHNOLOGIES]
-          .filter((tech: ITechnology) => tech.name.indexOf(text) > -1);
+          .filter((tech: ITechnology) => Util.containsIgnoreCase(tech.name, text));
       },
       getFilteredCustomers(text: string) {
         this.filteredCustomers = this.$store.getters[ADDONS][Types.CUSTOMER]
-          .filter((customer: ICustomer) => customer.name.indexOf(text) > -1);
+          .filter((customer: ICustomer) => Util.containsIgnoreCase(customer.name, text));
       },
       goBack() {
         this.$router.back();

@@ -58,6 +58,16 @@ export class Util {
   }
 
   /**
+   * Checks if strings contains a substring ignoring casing of both
+   * @param {string} text
+   * @param {string} part
+   * @returns {boolean}
+   */
+  static containsIgnoreCase(text: string, part: string) {
+    return text.toLowerCase().indexOf(part.toLowerCase()) > -1;
+  }
+
+  /**
    * Sort by field function
    * @param {string} field Field to sort for
    * @param {boolean} reverse Reverse sorting direction
