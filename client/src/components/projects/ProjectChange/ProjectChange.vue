@@ -122,10 +122,25 @@
             <div class="field">
               <label class="label is-pulled-left">Customer</label>
               <div class="control">
-                <input
-                  class="input"
-                  type="text"
-                  placeholder="Customer">
+                <b-taginput
+                  :data="filteredCustomers"
+                  :field="'name'"
+                  :allow-new="false"
+                  autocomplete
+                  icon="label"
+                  placeholder="Customers"
+                  @typing="getFilteredCustomers">
+                  <template slot-scope="props">
+                    <img
+                      class="tag-image-left"
+                      :src="imagePath(props.option.image)"
+                      v-if="props.option.image">
+                    {{ props.option.name }}
+                  </template>
+                  <template slot="empty">
+                    There are no items
+                  </template>
+                </b-taginput>
               </div>
             </div>
             <div class="field">
@@ -239,10 +254,13 @@
     SET_PROJECT_PROGRAM, SET_PROJECT_SCHEDULES, SET_PROJECT_START_DATE, SET_PROJECT_TYPE
   } from '../../../store/modules/projects/mutation-types';
   import {Util} from '../../../shared/classes/Util';
+  import {Types} from '../../../store/modules/projects/constant-types';
+  import {ICustomer} from '../../../shared/interfaces/ICustomer';
 
   interface IData {
     projectTech: {}[];
     filteredTechnologies: {}[];
+    filteredCustomers: {}[];
     startDate: Date | null;
     endDate: Date | null;
   }
@@ -256,6 +274,7 @@
       return {
         projectTech: [],
         filteredTechnologies: [],
+        filteredCustomers: [],
         startDate: null,
         endDate: null
       };
@@ -302,6 +321,10 @@
         this.filteredTechnologies = this.$store.getters[TECHNOLOGIES]
           .filter((tech: ITechnology) => tech.name.indexOf(text) > -1);
       },
+      getFilteredCustomers(text: string) {
+        this.filteredCustomers = this.$store.getters[ADDONS][Types.CUSTOMER]
+          .filter((customer: ICustomer) => customer.name.indexOf(text) > -1);
+      },
       goBack() {
         this.$router.back();
       }
@@ -333,6 +356,12 @@
     width: 18px;
     position: absolute;
     margin-left: 10px;
+
+    &-left {
+      position: relative;
+      top: 5px;
+      margin-right: 10px;
+    }
   }
 
   .field {
