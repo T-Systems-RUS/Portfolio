@@ -12,7 +12,7 @@
         v-if="!projects.length">No projects found</p>
 
       <div>
-        <project-card
+        <ProjectCard
           v-for="project in projects"
           :key="project.id"
           :project="project"

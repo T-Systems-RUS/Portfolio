@@ -1,6 +1,6 @@
 <template>
-  <div class="project-card is-clickable">
-    <router-link :to="{ path: 'projects/' + project.id }">
+  <router-link :to="{ path: 'projects/' + project.id }">
+    <div class="project-card is-clickable">
       <div class="project-card-header title is-7 is-size-16 is-centered is-uppercase">
         {{ project.program.line.name }}
       </div>
@@ -24,8 +24,8 @@
           {{ project.updatedAt | date }}
         </div>
       </div>
-    </router-link>
-  </div>
+    </div>
+  </router-link>
 </template>
 
 <script lang="ts">
