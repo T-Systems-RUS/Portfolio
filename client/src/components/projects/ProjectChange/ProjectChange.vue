@@ -32,10 +32,10 @@
             <div class="field">
               <label class="label is-pulled-left">Domain</label>
               <div class="select">
-                <select v-model="domain">
+                <select v-model="domain.id">
                   <option
                     v-for="option in addons['Domain']"
-                    :value="option">
+                    :value="option.id">
                     {{ option.name }}
                   </option>
                 </select>
@@ -44,10 +44,10 @@
             <div class="field">
               <label class="label is-pulled-left">Program</label>
               <div class="select">
-                <select v-model="program">
+                <select v-model="program.id">
                   <option
                     v-for="option in addons['Program']"
-                    :value="option">
+                    :value="option.id">
                     {{ option.name }}
                   </option>
                 </select>
@@ -56,10 +56,10 @@
             <div class="field">
               <label class="label is-pulled-left">Project type</label>
               <div class="select">
-                <select v-model="type">
+                <select v-model="type.id">
                   <option
                     v-for="option in addons['Project type']"
-                    :value="option">
+                    :value="option.id">
                     {{ option.name }}
                   </option>
                 </select>
