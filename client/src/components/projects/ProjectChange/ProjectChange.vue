@@ -66,7 +66,7 @@
               </div>
             </div>
             <div class="field">
-              <div class="columns">
+              <div class="columns horizontal-field">
                 <div class="column">
                   <div class="is-short">
                     <label class="label is-pulled-left">Project start</label>
@@ -395,6 +395,15 @@
     &.is-short {
       width: 100%;
       box-sizing: border-box;
+    }
+  }
+
+  .horizontal-field {
+    padding-bottom: 0;
+    margin-bottom: 0;
+
+    .column {
+      padding-bottom: 0;
     }
   }
 </style>
