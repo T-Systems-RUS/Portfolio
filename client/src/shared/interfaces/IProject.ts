@@ -7,18 +7,19 @@ import {IType} from './IType';
 import {ITechnology} from './ITechnology';
 
 
-export interface IProject extends IModel{
-    name: string;
-    description: string;
-    domain: IDomain;
-    program: IProgram;
-    type: IType;
-    image: string;
-    schedules: ISchedule[];
-    customers: ICustomer[];
-    technologies: ITechnology[];
-    startdate:string;
-    enddate:string;
-    createdAt:Date;
-    updatedAt: Date;
+export interface IProject extends IModel {
+  name: string;
+  description: string;
+  domain: IDomain;
+  program: IProgram;
+  type: IType;
+  image: string;
+  schedules: ISchedule[];
+  customers: ICustomer[];
+  technologies: ITechnology[];
+  startdate: string;
+  enddate: string;
+  createdAt: Date;
+  updatedAt: Date;
+  pss: number;
 }

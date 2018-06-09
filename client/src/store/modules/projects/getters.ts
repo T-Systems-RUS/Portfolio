@@ -28,7 +28,7 @@ import {
   PROJECT_DESCRIPTION,
   PROJECT_CUSTOMERS,
   PROJECT_SCHEDULES,
-  PROJECT_TECHNOLOGIES_GROUPED
+  PROJECT_TECHNOLOGIES_GROUPED, PROJECT_PSS
 } from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
@@ -163,7 +163,8 @@ export const getters: GetterTree<IProjectState, {}> = {
   [PROJECT_START_DATE]: state => state.project.startdate,
   [PROJECT_END_DATE]: state => state.project.enddate,
   [PROJECT_DESCRIPTION]: state => state.project.description,
+  [PROJECT_PSS]: state => state.project.pss,
   [PROJECT_CUSTOMERS]: state => state.project.customers,
   [PROJECT_SCHEDULES]: state => state.project.schedules,
-  [PROJECT_TECHNOLOGIES]: state => state.project.technologies,
+  [PROJECT_TECHNOLOGIES]: state => state.project.technologies
 };

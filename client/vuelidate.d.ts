@@ -249,4 +249,5 @@ declare module "vuelidate/lib/validators" {
   function requiredIf(value: any): boolean;
   function requiredUnless(value: any): boolean;
   function minValue(value: any): boolean;
+  function decimal(value: any): boolean;
 }

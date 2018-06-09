@@ -163,7 +163,15 @@
                 <input
                   class="input"
                   type="text"
-                  placeholder="PSS">
+                  placeholder="PSS"
+                  v-model="pss"
+                  @input="$v.pss.$touch()"
+                  :class="{'is-danger': $v.pss.$error}">
+              </div>
+              <div v-if="$v.pss.$dirty">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.pss.decimal">PSS must be decimal</p>
               </div>
             </div>
           </Stepper>
@@ -248,7 +256,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {minValue, required} from 'vuelidate/lib/validators';
+  import {decimal, minValue, required} from 'vuelidate/lib/validators';
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {FETCH_ADDONS, FETCH_PROJECT, FETCH_ROLES} from '../../../store/modules/projects/action-types';
@@ -257,7 +265,7 @@
     PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN, PROJECT_END_DATE,
     PROJECT_LINE,
     PROJECT_NAME,
-    PROJECT_PROGRAM, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE
+    PROJECT_PROGRAM, PROJECT_PSS, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE
   } from '../../../store/modules/projects/getter-types';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
@@ -265,10 +273,16 @@
   import {
     SET_PROJECT_CUSTOMERS,
     SET_PROJECT_DESCRIPTION,
-    SET_PROJECT_DOMAIN, SET_PROJECT_END_DATE,
+    SET_PROJECT_DOMAIN,
+    SET_PROJECT_END_DATE,
     SET_PROJECT_LINE,
     SET_PROJECT_NAME,
-    SET_PROJECT_PROGRAM, SET_PROJECT_SCHEDULES, SET_PROJECT_START_DATE, SET_PROJECT_TECHNOLOGIES, SET_PROJECT_TYPE
+    SET_PROJECT_PROGRAM,
+    SET_PROJECT_PSS,
+    SET_PROJECT_SCHEDULES,
+    SET_PROJECT_START_DATE,
+    SET_PROJECT_TECHNOLOGIES,
+    SET_PROJECT_TYPE
   } from '../../../store/modules/projects/mutation-types';
   import {Util} from '../../../shared/classes/Util';
   import {Types} from '../../../store/modules/projects/constant-types';
@@ -310,6 +324,7 @@
       domain: Util.mapTwoWay<IDomain>(PROJECT_DOMAIN, SET_PROJECT_DOMAIN),
       type: Util.mapTwoWay<IType>(PROJECT_TYPE, SET_PROJECT_TYPE),
       description: Util.mapTwoWay<string>(PROJECT_DESCRIPTION, SET_PROJECT_DESCRIPTION),
+      pss: Util.mapTwoWay<number>(PROJECT_PSS, SET_PROJECT_PSS),
       customers: Util.mapTwoWay<ICustomer[]>(PROJECT_CUSTOMERS, SET_PROJECT_CUSTOMERS),
       schedules: Util.mapTwoWay<ISchedule[]>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
       technologies: Util.mapTwoWay<ITechnology[]>(PROJECT_TECHNOLOGIES, SET_PROJECT_TECHNOLOGIES),
@@ -330,6 +345,9 @@
         },
         description: {
           required
+        },
+        pss: {
+          decimal
         }
       };
     },

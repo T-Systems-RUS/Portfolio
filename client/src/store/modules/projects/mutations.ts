@@ -33,7 +33,7 @@ import {
   SET_PROJECT_DESCRIPTION,
   SET_PROJECT_CUSTOMERS,
   SET_PROJECT_SCHEDULES,
-  SET_PROJECT_TECHNOLOGIES
+  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
@@ -120,6 +120,9 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_PROJECT_DESCRIPTION](state, description: string) {
     state.project.description = description;
+  },
+  [SET_PROJECT_PSS](state, pss: number) {
+    state.project.pss = pss;
   },
   [SET_PROJECT_CUSTOMERS](state, customers: ICustomer[]) {
     state.project.customers = customers;
