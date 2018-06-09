@@ -93,7 +93,7 @@ body {
   }
 }
 
-*::-webkit-scrollbar {
+*:not(textarea)::-webkit-scrollbar  {
   width: 5px;
 
   &-track {
