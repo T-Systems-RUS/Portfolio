@@ -245,10 +245,10 @@
   import {Types} from '../../../store/modules/projects/constant-types';
   import {ICustomer} from '../../../shared/interfaces/ICustomer';
   import {Routes} from '../../../router';
-  import {ISchedule} from "../../../shared/interfaces/ISchedule";
-  import {IType} from "../../../shared/interfaces/IType";
-  import {IDomain} from "../../../shared/interfaces/IDomain";
-  import {IProgram} from "../../../shared/interfaces/IProgram";
+  import {ISchedule} from '../../../shared/interfaces/ISchedule';
+  import {IType} from '../../../shared/interfaces/IType';
+  import {IDomain} from '../../../shared/interfaces/IDomain';
+  import {IProgram} from '../../../shared/interfaces/IProgram';
 
   interface IData {
     filteredTechnologies: {}[];
