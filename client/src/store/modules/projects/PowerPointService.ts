@@ -175,7 +175,7 @@ export class PowerPointService {
           let bside = 5.2;
           let bsidetext = 5.1;
 
-          backend.forEach(item => {
+          frontend.forEach(item => {
             this.addImage(slide, item.image, bside, iconY, 0.4, 0.3);
             this.addText(slide, item.name, bsidetext, textY);
 
