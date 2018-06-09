@@ -19,7 +19,14 @@
                   v-model="name"
                   class="input"
                   type="text"
-                  placeholder="Project name">
+                  placeholder="Project name"
+                  @input="$v.name.$touch()"
+                  :class="{'is-danger': $v.name.$error}">
+              </div>
+              <div v-if="$v.name.$dirty">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.name.required">Project name is required</p>
               </div>
             </div>
             <div class="field">
@@ -61,18 +68,20 @@
             <div class="field">
               <div class="columns">
                 <div class="column">
-                  <div class="field is-short">
+                  <div class="is-short">
                     <label class="label is-pulled-left">Project start</label>
                     <div class="control">
                       <b-datepicker
                         v-model="startDate"
+                        @input="$v.startDate.$touch()"
+                        :class="{'is-danger': $v.startDate.$error}"
                         placeholder="Project start"
                         :readonly="false"/>
                     </div>
                   </div>
                 </div>
                 <div class="column">
-                  <div class="field is-short">
+                  <div class="is-short">
                     <label class="label is-pulled-left">Project end</label>
                     <div class="control">
                       <b-datepicker
@@ -81,6 +90,11 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <div v-if="$v.startDate.$dirty">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.startDate.required">Start date is required</p>
               </div>
             </div>
           </Stepper>
@@ -95,7 +109,14 @@
                 <textarea
                   v-model="description"
                   class="textarea"
-                  placeholder="Description"/>
+                  placeholder="Description"
+                  @input="$v.description.$touch()"
+                  :class="{'is-danger': $v.description.$error}"/>
+              </div>
+              <div v-if="$v.description.$dirty">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.description.required">Description is required</p>
               </div>
             </div>
           </Stepper>
@@ -220,6 +241,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import {required} from 'vuelidate/lib/validators';
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {FETCH_ADDONS, FETCH_PROJECT, FETCH_ROLES} from '../../../store/modules/projects/action-types';
@@ -288,6 +310,17 @@
         return this.$store.getters[ADDONS];
       }
     },
+    validations: {
+      name: {
+        required
+      },
+      startDate: {
+        required
+      },
+      description: {
+        required
+      }
+    },
     mounted() {
       this.$store.dispatch(FETCH_PROJECT, this.id)
         .then(() => {
@@ -305,18 +338,16 @@
         return `./server/images/presentation/${path}`;
       },
       getFilteredTechnologies(text: string) {
+        // Filter already selected
         this.filteredTechnologies = this.$store.getters[TECHNOLOGIES]
-          // Filter already selected
           .filter((tech: ITechnology) => !this.technologies.some((selected: ITechnology) => selected.id === tech.id))
-          // Search
-          .filter((tech: ITechnology) => Util.containsIgnoreCase(tech.name, text));
+          .filter((tech: ITechnology) => Util.containsIgnoreCase(tech.name, text)); // Search
       },
       getFilteredCustomers(text: string) {
+        // Filter already selected
         this.filteredCustomers = this.$store.getters[ADDONS][Types.CUSTOMER]
-          // Filter already selected
           .filter((customer: ICustomer) => !this.customers.some((selected: ICustomer) => selected.id === customer.id))
-          // Search
-          .filter((customer: ICustomer) => Util.containsIgnoreCase(customer.name, text));
+          .filter((customer: ICustomer) => Util.containsIgnoreCase(customer.name, text)); // Search
       },
       goBack() {
         this.$router.push({name: Routes.Project, params: {id: this.id}});

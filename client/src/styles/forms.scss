@@ -114,6 +114,16 @@ $button-box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
   }
 }
 
+.datepicker.is-danger {
+  .input {
+    border-color: $red;
+
+    &:focus {
+      box-shadow: $input-focus-box-shadow-size rgba($red, .5);
+    }
+  }
+}
+
 .button {
   transition: $transition-default;
   width: 100%;

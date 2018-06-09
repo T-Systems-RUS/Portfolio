@@ -1,8 +1,9 @@
 import Vue from 'vue';
-import Buefy from 'buefy'
+import Buefy from 'buefy';
+import Vuelidate from 'vuelidate';
 import App from './App.vue';
 import router from './router/index';
-import store from './store/index'
+import store from './store/index';
 
 // Global styles
 import './styles/styles.scss';
@@ -23,7 +24,8 @@ Vue.component('Accordion', Accordion);
 Vue.filter('date', date);
 Vue.filter('capitalize', capitalize);
 
-Vue.use(Buefy)
+Vue.use(Buefy);
+Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;
 
