@@ -222,7 +222,8 @@
                  is-size-6
                  is-width-auto
                  is-pulled-right
-                 is-pushed-left">
+                 is-pushed-left"
+          @click="goBack">
           Cancel
         </button>
       </div>
@@ -256,6 +257,7 @@
   import {Util} from '../../../shared/classes/Util';
   import {Types} from '../../../store/modules/projects/constant-types';
   import {ICustomer} from '../../../shared/interfaces/ICustomer';
+  import {Routes} from "../../../router";
 
   interface IData {
     projectTech: {}[];
@@ -326,7 +328,7 @@
           .filter((customer: ICustomer) => Util.containsIgnoreCase(customer.name, text));
       },
       goBack() {
-        this.$router.back();
+        this.$router.push({name: Routes.Project, params: {id: this.id}});
       }
     }
   });
