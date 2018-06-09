@@ -85,6 +85,9 @@
                     <label class="label is-pulled-left">Project end</label>
                     <div class="control">
                       <b-datepicker
+                        v-model="endDate"
+                        @input="$v.endDate.$touch()"
+                        :class="{'is-danger': $v.endDate.$error}"
                         placeholder="Project end"
                         :readonly="false"/>
                     </div>
@@ -95,6 +98,9 @@
                 <p
                   class="help is-danger is-size-7"
                   v-if="!$v.startDate.required">Start date is required</p>
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="$v.endDate && !$v.endDate.minValue">End date must be higher than a start date</p>
               </div>
             </div>
           </Stepper>
@@ -221,7 +227,8 @@
                is-primary
                is-size-6
                is-width-auto
-               is-pulled-right">
+               is-pulled-right"
+          :disabled="$v.$invalid">
           Save
         </button>
         <button
@@ -241,7 +248,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {required} from 'vuelidate/lib/validators';
+  import {minValue, required} from 'vuelidate/lib/validators';
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {FETCH_ADDONS, FETCH_PROJECT, FETCH_ROLES} from '../../../store/modules/projects/action-types';
@@ -310,16 +317,21 @@
         return this.$store.getters[ADDONS];
       }
     },
-    validations: {
-      name: {
-        required
-      },
-      startDate: {
-        required
-      },
-      description: {
-        required
-      }
+    validations() {
+      return {
+        name: {
+          required
+        },
+        startDate: {
+          required
+        },
+        endDate: {
+          minValue: minValue(this.startDate)
+        },
+        description: {
+          required
+        }
+      };
     },
     mounted() {
       this.$store.dispatch(FETCH_PROJECT, this.id)
@@ -327,7 +339,10 @@
           // Hack necessary due to https://github.com/buefy/buefy/issues/700
           // TODO change to actual computed+getter after fixed
           this.startDate = new Date(this.$store.getters[PROJECT_START_DATE]);
-          this.endDate = new Date(this.$store.getters[PROJECT_END_DATE]);
+          const endDate = this.$store.getters[PROJECT_END_DATE];
+          if (endDate) {
+            this.endDate = new Date(endDate);
+          }
         });
       this.$store.dispatch(FETCH_TECHNOLOGIES);
       this.$store.dispatch(FETCH_ADDONS);
