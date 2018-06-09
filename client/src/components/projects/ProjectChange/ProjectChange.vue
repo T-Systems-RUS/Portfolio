@@ -109,6 +109,7 @@
               <label class="label is-pulled-left">Customer</label>
               <div class="control">
                 <b-taginput
+                  v-model="customers"
                   :data="filteredCustomers"
                   :field="'name'"
                   :allow-new="false"
@@ -148,7 +149,7 @@
             <div class="field">
               <div class="control">
                 <b-taginput
-                  v-model="projectTech"
+                  v-model="technologies"
                   :data="filteredTechnologies"
                   :field="'name'"
                   :allow-new="false"
@@ -227,7 +228,7 @@
     PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN, PROJECT_END_DATE,
     PROJECT_LINE,
     PROJECT_NAME,
-    PROJECT_PROGRAM, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TYPE
+    PROJECT_PROGRAM, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE
   } from '../../../store/modules/projects/getter-types';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
@@ -238,15 +239,18 @@
     SET_PROJECT_DOMAIN, SET_PROJECT_END_DATE,
     SET_PROJECT_LINE,
     SET_PROJECT_NAME,
-    SET_PROJECT_PROGRAM, SET_PROJECT_SCHEDULES, SET_PROJECT_START_DATE, SET_PROJECT_TYPE
+    SET_PROJECT_PROGRAM, SET_PROJECT_SCHEDULES, SET_PROJECT_START_DATE, SET_PROJECT_TECHNOLOGIES, SET_PROJECT_TYPE
   } from '../../../store/modules/projects/mutation-types';
   import {Util} from '../../../shared/classes/Util';
   import {Types} from '../../../store/modules/projects/constant-types';
   import {ICustomer} from '../../../shared/interfaces/ICustomer';
-  import {Routes} from "../../../router";
+  import {Routes} from '../../../router';
+  import {ISchedule} from "../../../shared/interfaces/ISchedule";
+  import {IType} from "../../../shared/interfaces/IType";
+  import {IDomain} from "../../../shared/interfaces/IDomain";
+  import {IProgram} from "../../../shared/interfaces/IProgram";
 
   interface IData {
-    projectTech: {}[];
     filteredTechnologies: {}[];
     filteredCustomers: {}[];
     startDate: Date | null;
@@ -260,7 +264,6 @@
     },
     data(): IData {
       return {
-        projectTech: [],
         filteredTechnologies: [],
         filteredCustomers: [],
         startDate: null,
@@ -274,16 +277,13 @@
     },
     computed: {
       name: Util.mapTwoWay<string>(PROJECT_NAME, SET_PROJECT_NAME),
-      program: Util.mapTwoWay<string>(PROJECT_PROGRAM, SET_PROJECT_PROGRAM),
-      domain: Util.mapTwoWay<string>(PROJECT_DOMAIN, SET_PROJECT_DOMAIN),
-      type: Util.mapTwoWay<string>(PROJECT_TYPE, SET_PROJECT_TYPE),
+      program: Util.mapTwoWay<IProgram>(PROJECT_PROGRAM, SET_PROJECT_PROGRAM),
+      domain: Util.mapTwoWay<IDomain>(PROJECT_DOMAIN, SET_PROJECT_DOMAIN),
+      type: Util.mapTwoWay<IType>(PROJECT_TYPE, SET_PROJECT_TYPE),
       description: Util.mapTwoWay<string>(PROJECT_DESCRIPTION, SET_PROJECT_DESCRIPTION),
-      customers: Util.mapTwoWay<string>(PROJECT_CUSTOMERS, SET_PROJECT_CUSTOMERS),
-      schedules: Util.mapTwoWay<string>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
-
-      technologies(): ITechnology[] {
-        return this.$store.getters[TECHNOLOGIES];
-      },
+      customers: Util.mapTwoWay<ICustomer[]>(PROJECT_CUSTOMERS, SET_PROJECT_CUSTOMERS),
+      schedules: Util.mapTwoWay<ISchedule[]>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
+      technologies: Util.mapTwoWay<ITechnology[]>(PROJECT_TECHNOLOGIES, SET_PROJECT_TECHNOLOGIES),
       addons(): {} {
         return this.$store.getters[ADDONS];
       }
@@ -306,10 +306,16 @@
       },
       getFilteredTechnologies(text: string) {
         this.filteredTechnologies = this.$store.getters[TECHNOLOGIES]
+          // Filter already selected
+          .filter((tech: ITechnology) => !this.technologies.some((selected: ITechnology) => selected.id === tech.id))
+          // Search
           .filter((tech: ITechnology) => Util.containsIgnoreCase(tech.name, text));
       },
       getFilteredCustomers(text: string) {
         this.filteredCustomers = this.$store.getters[ADDONS][Types.CUSTOMER]
+          // Filter already selected
+          .filter((customer: ICustomer) => !this.customers.some((selected: ICustomer) => selected.id === customer.id))
+          // Search
           .filter((customer: ICustomer) => Util.containsIgnoreCase(customer.name, text));
       },
       goBack() {

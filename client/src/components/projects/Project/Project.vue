@@ -103,7 +103,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import {FETCH_PROJECT} from '../../../store/modules/projects/action-types';
-  import {PROJECT, PROJECT_TECHNOLOGIES} from '../../../store/modules/projects/getter-types';
+  import {PROJECT, PROJECT_TECHNOLOGIES_GROUPED} from '../../../store/modules/projects/getter-types';
   import Chip from '../../common/Chip/Chip.vue';
   import Footer from '../../root/Footer/Footer.vue';
   import ScheduleItem from '../../employees/ScheduleItem/ScheduleItem.vue';
@@ -123,7 +123,7 @@
         return this.$store.getters[PROJECT];
       },
       technologies() :ITechnology[] {
-        return this.$store.getters[PROJECT_TECHNOLOGIES];
+        return this.$store.getters[PROJECT_TECHNOLOGIES_GROUPED];
       }
     },
     props: {

@@ -23,7 +23,12 @@ import {
   PROJECT_PROGRAM,
   PROJECT_DOMAIN,
   PROJECT_TYPE,
-  PROJECT_START_DATE, PROJECT_END_DATE, PROJECT_DESCRIPTION, PROJECT_CUSTOMERS, PROJECT_SCHEDULES
+  PROJECT_START_DATE,
+  PROJECT_END_DATE,
+  PROJECT_DESCRIPTION,
+  PROJECT_CUSTOMERS,
+  PROJECT_SCHEDULES,
+  PROJECT_TECHNOLOGIES_GROUPED
 } from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
@@ -147,6 +152,7 @@ export const getters: GetterTree<IProjectState, {}> = {
     return projects;
   },
 
+  [PROJECT_TECHNOLOGIES_GROUPED]: state => Extension.groupBy(state.project.technologies, 'domain'),
   [ROLES]: state => state.roles,
   // Project page and edit form
   [PROJECT]: state => state.project,
@@ -159,5 +165,5 @@ export const getters: GetterTree<IProjectState, {}> = {
   [PROJECT_DESCRIPTION]: state => state.project.description,
   [PROJECT_CUSTOMERS]: state => state.project.customers,
   [PROJECT_SCHEDULES]: state => state.project.schedules,
-  [PROJECT_TECHNOLOGIES]: state => Extension.groupBy(state.project.technologies, 'domain')
+  [PROJECT_TECHNOLOGIES]: state => state.project.technologies,
 };

@@ -28,10 +28,16 @@ import {
   SET_PROJECT_PROGRAM,
   SET_PROJECT_DOMAIN,
   SET_PROJECT_TYPE,
-  SET_PROJECT_START_DATE, SET_PROJECT_END_DATE, SET_PROJECT_DESCRIPTION, SET_PROJECT_CUSTOMERS, SET_PROJECT_SCHEDULES
+  SET_PROJECT_START_DATE,
+  SET_PROJECT_END_DATE,
+  SET_PROJECT_DESCRIPTION,
+  SET_PROJECT_CUSTOMERS,
+  SET_PROJECT_SCHEDULES,
+  SET_PROJECT_TECHNOLOGIES
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
+import {ITechnology} from "../../../shared/interfaces/ITechnology";
 
 export const mutations: MutationTree<IProjectState> = {
   [SET_ACCORDION](state, payload: { key: string, value: boolean }) {
@@ -120,5 +126,8 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_PROJECT_SCHEDULES](state, schedules: ISchedule[]) {
     state.project.schedules = schedules;
+  },
+  [SET_PROJECT_TECHNOLOGIES](state, technologies: ITechnology[]) {
+    state.project.technologies = technologies;
   }
 };
