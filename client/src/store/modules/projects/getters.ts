@@ -21,7 +21,6 @@ import {
   ROLES,
   PROJECT_NAME,
   PROJECT_PROGRAM,
-  PROJECT_LINE,
   PROJECT_DOMAIN,
   PROJECT_TYPE,
   PROJECT_START_DATE, PROJECT_END_DATE, PROJECT_DESCRIPTION, PROJECT_CUSTOMERS, PROJECT_SCHEDULES
@@ -153,7 +152,6 @@ export const getters: GetterTree<IProjectState, {}> = {
   [PROJECT]: state => state.project,
   [PROJECT_NAME]: state => state.project.name,
   [PROJECT_PROGRAM]: state => state.project.program,
-  [PROJECT_LINE]: state => state.project.program.line,
   [PROJECT_DOMAIN]: state => state.project.domain,
   [PROJECT_TYPE]: state => state.project.type,
   [PROJECT_START_DATE]: state => state.project.startdate,

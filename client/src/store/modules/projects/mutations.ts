@@ -26,13 +26,12 @@ import {
   SET_ROLES,
   SET_PROJECT_NAME,
   SET_PROJECT_PROGRAM,
-  SET_PROJECT_LINE,
   SET_PROJECT_DOMAIN,
   SET_PROJECT_TYPE,
   SET_PROJECT_START_DATE, SET_PROJECT_END_DATE, SET_PROJECT_DESCRIPTION, SET_PROJECT_CUSTOMERS, SET_PROJECT_SCHEDULES
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
-import {ISchedule} from "../../../shared/interfaces/ISchedule";
+import {ISchedule} from '../../../shared/interfaces/ISchedule';
 
 export const mutations: MutationTree<IProjectState> = {
   [SET_ACCORDION](state, payload: { key: string, value: boolean }) {
@@ -100,9 +99,6 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_PROJECT_PROGRAM](state, program: IProgram) {
     state.project.program = program;
-  },
-  [SET_PROJECT_LINE](state, line: ILine) {
-    state.project.program.line = line;
   },
   [SET_PROJECT_DOMAIN](state, domain: IDomain) {
     state.project.domain = domain;

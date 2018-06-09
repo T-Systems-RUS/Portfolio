@@ -23,20 +23,6 @@
               </div>
             </div>
             <div class="field">
-              <label class="label is-pulled-left">Production line</label>
-              <div class="control">
-                <div class="select">
-                  <select v-model="line">
-                    <option
-                      v-for="option in addons['Production line']"
-                      :value="option">
-                      {{ option.name }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="field">
               <label class="label is-pulled-left">Domain</label>
               <div class="select">
                 <select v-model="domain">
@@ -289,7 +275,6 @@
     computed: {
       name: Util.mapTwoWay<string>(PROJECT_NAME, SET_PROJECT_NAME),
       program: Util.mapTwoWay<string>(PROJECT_PROGRAM, SET_PROJECT_PROGRAM),
-      line: Util.mapTwoWay<string>(PROJECT_LINE, SET_PROJECT_LINE),
       domain: Util.mapTwoWay<string>(PROJECT_DOMAIN, SET_PROJECT_DOMAIN),
       type: Util.mapTwoWay<string>(PROJECT_TYPE, SET_PROJECT_TYPE),
       description: Util.mapTwoWay<string>(PROJECT_DESCRIPTION, SET_PROJECT_DESCRIPTION),
