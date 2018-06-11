@@ -20,7 +20,9 @@
           <img src="../../root/assets/team.svg">
           <span class="title is-6 is-size-19">{{ teamCount }}</span>
 
-          <Label value="Completed" :visible="Boolean(project.enddate)"></Label>
+          <Label
+            value="Completed"
+            :visible="isCompleted"></Label>
         </div>
         <div class="title is-5 is-size-12 is-secondary">
           {{ project.updatedAt | date }}
@@ -44,6 +46,9 @@
     computed: {
       teamCount(): number {
         return this.project.schedules.length;
+      },
+      isCompleted(): boolean {
+        return Boolean(this.project.enddate) && (new Date(this.project.enddate) <= new Date());
       }
     }
   });

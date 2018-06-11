@@ -14,7 +14,7 @@
       <Label
         value="Completed"
         :isBig="true"
-        :visible="Boolean(project.enddate)"></Label>
+        :visible="isCompleted"></Label>
     </div>
     <div class="level is-marginless">
       <div class="project-customers">
@@ -53,7 +53,11 @@
           <span class="title is-6 is-size-16">
             {{ project.startdate | date }}
           </span>
-          <span v-if="project.enddate">- {{ project.enddate | date }}</span>
+          <span
+            v-if="project.enddate"
+            class="title is-6 is-size-16">
+            - {{ project.enddate | date }}
+          </span>
         </p>
         <p>
           <span class="title is-5 is-size-16">Production line: </span>
@@ -128,6 +132,9 @@
       },
       technologies() :ITechnology[] {
         return this.$store.getters[PROJECT_TECHNOLOGIES_GROUPED];
+      },
+      isCompleted(): boolean {
+        return Boolean(this.project.enddate) && (new Date(this.project.enddate) <= new Date());
       }
     },
     props: {
