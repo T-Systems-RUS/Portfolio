@@ -19,6 +19,8 @@
         <div class="project-card-team">
           <img src="../../root/assets/team.svg">
           <span class="title is-6 is-size-19">{{ teamCount }}</span>
+
+          <Label value="Completed" :visible="Boolean(project.enddate)"></Label>
         </div>
         <div class="title is-5 is-size-12 is-secondary">
           {{ project.updatedAt | date }}
@@ -97,6 +99,7 @@
       padding: 0 $padding;
       position: absolute;
       bottom: 10px;
+      width: 100%;
     }
 
     &-team {

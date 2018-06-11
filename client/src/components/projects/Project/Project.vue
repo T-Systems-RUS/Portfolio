@@ -11,6 +11,10 @@
     </div>
     <div class="level  is-marginless">
       <p class="title is-7 project-header">{{ project.name }}</p>
+      <Label
+        value="Completed"
+        :isBig="true"
+        :visible="Boolean(project.enddate)"></Label>
     </div>
     <div class="level is-marginless">
       <div class="project-customers">
