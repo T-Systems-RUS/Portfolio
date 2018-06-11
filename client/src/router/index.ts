@@ -6,6 +6,10 @@ import ProjectChange from '../components/projects/ProjectChange/ProjectChange.vu
 
 Vue.use(Router);
 
+export enum Routes {
+  Project = 'Project'
+}
+
 export default new Router({
   routes: [
     {
@@ -15,7 +19,8 @@ export default new Router({
     {
       path: '/projects/:id',
       component: Project,
-      props: true
+      props: true,
+      name: Routes.Project
     },
     {
       path: '/projects/:id/edit',

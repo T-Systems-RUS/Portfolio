@@ -97,7 +97,7 @@ export class PowerPointService {
 
         this.addText(slide, project.name, X, 0, HEADLINE_FONT, 28, GRAY);
         this.addText(slide, 'Description of Project', X, 0.6, HEADLINE_FONT, 18, MAGENTA);
-        this.addText(slide, project.description, X, 1.0, NORMAL_FONT, 14, BLACK);
+        this.addText(slide, project.description, X, 1.0, NORMAL_FONT, 14, BLACK, false, 'top');
 
         if (image) {
           this.addImage(slide, image, '60%', 1.1, 3.2, 1.9);
@@ -175,7 +175,7 @@ export class PowerPointService {
           let bside = 5.2;
           let bsidetext = 5.1;
 
-          backend.forEach(item => {
+          frontend.forEach(item => {
             this.addImage(slide, item.image, bside, iconY, 0.4, 0.3);
             this.addText(slide, item.name, bsidetext, textY);
 
@@ -187,14 +187,14 @@ export class PowerPointService {
   }
 
   private static addText(slide: ISlide, text: string, x: number, y: number, fontFace = NORMAL_FONT, fontSize = 14,
-    color = WHITE, underline = false) {
+    color = WHITE, underline = false, valign = 'middle') {
     slide.addText(text, {
       x,
       y,
       w: '50%',
       h: 0.5,
       align: 'l',
-      valign: 'middle',
+      valign,
       fontSize,
       fontFace,
       color,

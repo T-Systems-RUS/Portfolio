@@ -19,6 +19,7 @@
     "./src/**/*test.ts"
   ],
   "files": [
-    "vue-shims.d.ts"
+    "vue-shims.d.ts",
+    "vuelidate.d.ts"
   ]
 }

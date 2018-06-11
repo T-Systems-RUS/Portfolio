@@ -16,33 +16,26 @@
               <label class="label is-pulled-left">Project name</label>
               <div class="control">
                 <input
-                  v-model="project.name"
+                  v-model="name"
                   class="input"
                   type="text"
-                  placeholder="Project name">
+                  placeholder="Project name"
+                  @input="$v.name.$touch()"
+                  :class="{'is-danger': $v.name.$error}">
               </div>
-            </div>
-            <div class="field">
-              <label class="label is-pulled-left">Production line</label>
-              <div class="control">
-                <div class="select">
-                  <select>
-                    <option
-                      v-for="option in addons['Production line']"
-                      :value="option.value">
-                      {{ option.name }}
-                    </option>
-                  </select>
-                </div>
+              <div v-if="$v.name.$dirty">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.name.required">Project name is required</p>
               </div>
             </div>
             <div class="field">
               <label class="label is-pulled-left">Domain</label>
               <div class="select">
-                <select>
+                <select v-model="domain.id">
                   <option
                     v-for="option in addons['Domain']"
-                    :value="option.value">
+                    :value="option.id">
                     {{ option.name }}
                   </option>
                 </select>
@@ -51,10 +44,10 @@
             <div class="field">
               <label class="label is-pulled-left">Program</label>
               <div class="select">
-                <select>
+                <select v-model="program.id">
                   <option
                     v-for="option in addons['Program']"
-                    :value="option.value">
+                    :value="option.id">
                     {{ option.name }}
                   </option>
                 </select>
@@ -63,39 +56,51 @@
             <div class="field">
               <label class="label is-pulled-left">Project type</label>
               <div class="select">
-                <select>
+                <select v-model="type.id">
                   <option
                     v-for="option in addons['Project type']"
-                    :value="option.value">
+                    :value="option.id">
                     {{ option.name }}
                   </option>
                 </select>
               </div>
             </div>
             <div class="field">
-              <div class="columns">
+              <div class="columns horizontal-field">
                 <div class="column">
-                  <div class="field is-short">
+                  <div class="is-short">
                     <label class="label is-pulled-left">Project start</label>
                     <div class="control">
                       <b-datepicker
+                        v-model="startDate"
+                        @input="$v.startDate.$touch()"
+                        :class="{'is-danger': $v.startDate.$error}"
                         placeholder="Project start"
-                        icon="calendar-today"
                         :readonly="false"/>
                     </div>
                   </div>
                 </div>
                 <div class="column">
-                  <div class="field is-short">
+                  <div class="is-short">
                     <label class="label is-pulled-left">Project end</label>
                     <div class="control">
                       <b-datepicker
+                        v-model="endDate"
+                        @input="$v.endDate.$touch()"
+                        :class="{'is-danger': $v.endDate.$error}"
                         placeholder="Project end"
-                        icon="calendar-today"
                         :readonly="false"/>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div v-if="$v.startDate.$dirty">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.startDate.required">Start date is required</p>
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="$v.endDate && !$v.endDate.minValue">End date must be higher than a start date</p>
               </div>
             </div>
           </Stepper>
@@ -108,9 +113,16 @@
             <div class="field">
               <div class="control">
                 <textarea
-                  v-model="project.description"
+                  v-model="description"
                   class="textarea"
-                  placeholder="Description"/>
+                  placeholder="Description"
+                  @input="$v.description.$touch()"
+                  :class="{'is-danger': $v.description.$error}"/>
+              </div>
+              <div v-if="$v.description.$dirty">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.description.required">Description is required</p>
               </div>
             </div>
           </Stepper>
@@ -123,10 +135,26 @@
             <div class="field">
               <label class="label is-pulled-left">Customer</label>
               <div class="control">
-                <input
-                  class="input"
-                  type="text"
-                  placeholder="Customer">
+                <b-taginput
+                  v-model="customers"
+                  :data="filteredCustomers"
+                  :field="'name'"
+                  :allow-new="false"
+                  autocomplete
+                  icon="label"
+                  placeholder="Customers"
+                  @typing="getFilteredCustomers">
+                  <template slot-scope="props">
+                    <img
+                      class="tag-image-left"
+                      :src="imagePath(props.option.image)"
+                      v-if="props.option.image">
+                    {{ props.option.name }}
+                  </template>
+                  <template slot="empty">
+                    There are no items
+                  </template>
+                </b-taginput>
               </div>
             </div>
             <div class="field">
@@ -135,7 +163,15 @@
                 <input
                   class="input"
                   type="text"
-                  placeholder="PSS">
+                  placeholder="PSS"
+                  v-model="pss"
+                  @input="$v.pss.$touch()"
+                  :class="{'is-danger': $v.pss.$error}">
+              </div>
+              <div v-if="$v.pss.$dirty">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.pss.decimal">PSS must be decimal</p>
               </div>
             </div>
           </Stepper>
@@ -148,7 +184,7 @@
             <div class="field">
               <div class="control">
                 <b-taginput
-                  v-model="projectTech"
+                  v-model="technologies"
                   :data="filteredTechnologies"
                   :field="'name'"
                   :allow-new="false"
@@ -185,7 +221,7 @@
               </div>
             </div>
             <EmployeeItem
-              v-for="schedule of project.schedules"
+              v-for="schedule of schedules"
               :key="schedule.id"
               :schedule="schedule"/>
           </Stepper>
@@ -199,7 +235,8 @@
                is-primary
                is-size-6
                is-width-auto
-               is-pulled-right">
+               is-pulled-right"
+          :disabled="$v.$invalid">
           Save
         </button>
         <button
@@ -208,7 +245,8 @@
                  is-size-6
                  is-width-auto
                  is-pulled-right
-                 is-pushed-left">
+                 is-pushed-left"
+          @click="goBack">
           Cancel
         </button>
       </div>
@@ -218,24 +256,61 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import {decimal, minValue, required} from 'vuelidate/lib/validators';
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {FETCH_ADDONS, FETCH_PROJECT, FETCH_ROLES} from '../../../store/modules/projects/action-types';
-  import {ADDONS, PROJECT} from '../../../store/modules/projects/getter-types';
+  import {
+    ADDONS,
+    PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN, PROJECT_END_DATE,
+    PROJECT_LINE,
+    PROJECT_NAME,
+    PROJECT_PROGRAM, PROJECT_PSS, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE
+  } from '../../../store/modules/projects/getter-types';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
-  import {IProject} from '../../../shared/interfaces/IProject';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
   import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
+  import {
+    SET_PROJECT_CUSTOMERS,
+    SET_PROJECT_DESCRIPTION,
+    SET_PROJECT_DOMAIN,
+    SET_PROJECT_END_DATE,
+    SET_PROJECT_LINE,
+    SET_PROJECT_NAME,
+    SET_PROJECT_PROGRAM,
+    SET_PROJECT_PSS,
+    SET_PROJECT_SCHEDULES,
+    SET_PROJECT_START_DATE,
+    SET_PROJECT_TECHNOLOGIES,
+    SET_PROJECT_TYPE
+  } from '../../../store/modules/projects/mutation-types';
+  import {Util} from '../../../shared/classes/Util';
+  import {Types} from '../../../store/modules/projects/constant-types';
+  import {ICustomer} from '../../../shared/interfaces/ICustomer';
+  import {Routes} from '../../../router';
+  import {ISchedule} from '../../../shared/interfaces/ISchedule';
+  import {IType} from '../../../shared/interfaces/IType';
+  import {IDomain} from '../../../shared/interfaces/IDomain';
+  import {IProgram} from '../../../shared/interfaces/IProgram';
+
+  interface IData {
+    filteredTechnologies: {}[];
+    filteredCustomers: {}[];
+    startDate: Date | null;
+    endDate: Date | null;
+  }
 
   export default Vue.extend({
     components: {
       EmployeeItem,
       Stepper
     },
-    data() {
+    data(): IData {
       return {
-        projectTech: [],
-        filteredTechnologies: []
+        filteredTechnologies: [],
+        filteredCustomers: [],
+        startDate: null,
+        endDate: null
       };
     },
     props: {
@@ -244,18 +319,49 @@
       }
     },
     computed: {
-      project(): IProject {
-        return this.$store.getters[PROJECT];
-      },
-      technologies(): ITechnology[] {
-        return this.$store.getters[TECHNOLOGIES];
-      },
+      name: Util.mapTwoWay<string>(PROJECT_NAME, SET_PROJECT_NAME),
+      program: Util.mapTwoWay<IProgram>(PROJECT_PROGRAM, SET_PROJECT_PROGRAM),
+      domain: Util.mapTwoWay<IDomain>(PROJECT_DOMAIN, SET_PROJECT_DOMAIN),
+      type: Util.mapTwoWay<IType>(PROJECT_TYPE, SET_PROJECT_TYPE),
+      description: Util.mapTwoWay<string>(PROJECT_DESCRIPTION, SET_PROJECT_DESCRIPTION),
+      pss: Util.mapTwoWay<number>(PROJECT_PSS, SET_PROJECT_PSS),
+      customers: Util.mapTwoWay<ICustomer[]>(PROJECT_CUSTOMERS, SET_PROJECT_CUSTOMERS),
+      schedules: Util.mapTwoWay<ISchedule[]>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
+      technologies: Util.mapTwoWay<ITechnology[]>(PROJECT_TECHNOLOGIES, SET_PROJECT_TECHNOLOGIES),
       addons(): {} {
         return this.$store.getters[ADDONS];
       }
     },
+    validations() {
+      return {
+        name: {
+          required
+        },
+        startDate: {
+          required
+        },
+        endDate: {
+          minValue: minValue(this.startDate)
+        },
+        description: {
+          required
+        },
+        pss: {
+          decimal
+        }
+      };
+    },
     mounted() {
-      this.$store.dispatch(FETCH_PROJECT, this.id);
+      this.$store.dispatch(FETCH_PROJECT, this.id)
+        .then(() => {
+          // Hack necessary due to https://github.com/buefy/buefy/issues/700
+          // TODO change to actual computed+getter after fixed
+          this.startDate = new Date(this.$store.getters[PROJECT_START_DATE]);
+          const endDate = this.$store.getters[PROJECT_END_DATE];
+          if (endDate) {
+            this.endDate = new Date(endDate);
+          }
+        });
       this.$store.dispatch(FETCH_TECHNOLOGIES);
       this.$store.dispatch(FETCH_ADDONS);
       this.$store.dispatch(FETCH_ROLES);
@@ -265,11 +371,19 @@
         return `./server/images/presentation/${path}`;
       },
       getFilteredTechnologies(text: string) {
+        // Filter already selected
         this.filteredTechnologies = this.$store.getters[TECHNOLOGIES]
-          .filter((tech: ITechnology) => tech.name.indexOf(text) > -1);
+          .filter((tech: ITechnology) => !this.technologies.some((selected: ITechnology) => selected.id === tech.id))
+          .filter((tech: ITechnology) => Util.containsIgnoreCase(tech.name, text)); // Search
+      },
+      getFilteredCustomers(text: string) {
+        // Filter already selected
+        this.filteredCustomers = this.$store.getters[ADDONS][Types.CUSTOMER]
+          .filter((customer: ICustomer) => !this.customers.some((selected: ICustomer) => selected.id === customer.id))
+          .filter((customer: ICustomer) => Util.containsIgnoreCase(customer.name, text)); // Search
       },
       goBack() {
-        this.$router.back();
+        this.$router.push({name: Routes.Project, params: {id: this.id}});
       }
     }
   });
@@ -299,6 +413,12 @@
     width: 18px;
     position: absolute;
     margin-left: 10px;
+
+    &-left {
+      position: relative;
+      top: 5px;
+      margin-right: 10px;
+    }
   }
 
   .field {
@@ -308,6 +428,15 @@
     &.is-short {
       width: 100%;
       box-sizing: border-box;
+    }
+  }
+
+  .horizontal-field {
+    padding-bottom: 0;
+    margin-bottom: 0;
+
+    .column {
+      padding-bottom: 0;
     }
   }
 </style>

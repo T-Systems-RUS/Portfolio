@@ -5,11 +5,11 @@
         <img src="../assets/logo-tportfolio.svg">
       </div>
       <nav class="header-nav level-item">
-        <a
-          href="/"
+        <router-link
+          to="/"
           class="header-nav-item is-active">
           Projects
-        </a>
+        </router-link>
         <a
           href="#"
           class="header-nav-item">
