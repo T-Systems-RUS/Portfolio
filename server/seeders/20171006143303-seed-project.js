@@ -48,6 +48,7 @@ module.exports = {
         image: 'image-AS1313.jpg',
         pss: 5,
         startdate: new Date(),
+        enddate: new Date(new Date().setDate(new Date().getDate() + 1)),
         createdAt:new Date(),
         updatedAt:new Date()
       },
