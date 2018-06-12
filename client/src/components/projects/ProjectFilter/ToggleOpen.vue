@@ -27,8 +27,8 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {SET_COMPLETION} from "../../../store/modules/projects/mutation-types";
-  import {SORT_FIELD_NAME} from "../../../store/modules/projects/getter-types";
+  import {SET_COMPLETION} from '../../../store/modules/projects/mutation-types';
+  import {SORT_FIELD_NAME} from '../../../store/modules/projects/getter-types';
 
 
   export default Vue.extend({

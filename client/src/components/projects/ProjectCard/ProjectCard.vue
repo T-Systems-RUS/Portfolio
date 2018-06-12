@@ -22,7 +22,7 @@
 
           <Label
             value="Completed"
-            :visible="isCompleted"></Label>
+            :visible="isCompleted"/>
         </div>
         <div class="title is-5 is-size-12 is-secondary">
           {{ project.updatedAt | date }}

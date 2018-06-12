@@ -3,7 +3,7 @@
     class="ribbon help is-danger is-pulled-right"
     v-if="visible"
     :class="{'is-big': isBig}">
-    <span class="ribbon-text">{{value}}</span>
+    <span class="ribbon-text">{{ value }}</span>
   </div>
 </template>
 

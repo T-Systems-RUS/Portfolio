@@ -14,7 +14,7 @@
       <Label
         value="Completed"
         :isBig="true"
-        :visible="isCompleted"></Label>
+        :visible="isCompleted"/>
     </div>
     <div class="level is-marginless">
       <div class="project-customers">
