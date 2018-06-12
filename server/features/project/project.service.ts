@@ -3,7 +3,7 @@ import {Scopes} from '../../sequelize/Scopes';
 import {Schedule} from '../../models/Schedule';
 import sequelize from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
-import {Line} from '../../models/Line';
+import {ProjectCustomer} from '../../models/ProjectCustomer';
 
 const projectService = {
 
@@ -111,14 +111,15 @@ const projectService = {
     }
   },
 
-  deleteProject: async name => {
+  deleteProject: async uniqueId => {
     try {
-      const projects = await projectService.getProjectsByName(name);
+      const projects = await projectService.getProjectsByUniqueId(uniqueId);
       projects.forEach(project => {
         project.$remove('technologies', project.technologies);
-        Schedule.destroy({where: {projectid: project.id}});
+        Schedule.destroy({where: {projectId: project.id}});
+        ProjectCustomer.destroy({where: {projectId: project.id}});
       });
-      return await Project.destroy({where: {name: name}, cascade: true});
+      return await Project.destroy({where: {uniqueId: uniqueId}, cascade: true});
     } catch (error) {
       throw new Error(error);
     }

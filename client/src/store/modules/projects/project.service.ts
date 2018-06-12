@@ -18,4 +18,8 @@ export class ProjectService extends HttpClientService{
   getRoles() {
     return this.get(routes.GET_ROLES);
   }
+
+  deleteProject(id:string) {
+    return this.delete(routes.DELETE_PROJECT + id);
+  }
 }

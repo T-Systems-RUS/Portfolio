@@ -3,7 +3,7 @@ import {ProjectService} from './project.service';
 import {IProjectState} from './index';
 
 
-import {FETCH_ADDONS, FETCH_PROJECT, FETCH_PROJECTS, FETCH_ROLES, GENERATE_PRESENTATION} from './action-types';
+import {DELETE_PROJECT, FETCH_ADDONS, FETCH_PROJECT, FETCH_PROJECTS, FETCH_ROLES, GENERATE_PRESENTATION} from './action-types';
 
 import {
   FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS, SET_ROLES,
@@ -47,6 +47,10 @@ export const actions: ActionTree<IProjectState, {}> = {
         commit(SET_CUSTOMERS, response.data.customers);
         commit(FINISH_LOADING);
       });
+  },
+
+  [DELETE_PROJECT]({commit}, id:string) {
+    return service.deleteProject(id);
   },
 
   [GENERATE_PRESENTATION]({getters}) {
