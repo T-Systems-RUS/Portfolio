@@ -52,9 +52,9 @@ router.put('/projects/archieve', projectValidator.archieveValidators(), (req, re
           .then(Util.handleData(res)))
   ));
 
-router.delete('/projects/delete/:name', projectValidator.deleteValidators(), (req, res) =>
+router.delete('/projects/delete/:uniqueId', projectValidator.deleteValidators(), (req, res) =>
   Util.handleValidation(req, res, () =>
-    projectService.deleteProject(req.params.name)
+    projectService.deleteProject(req.params.uniqueId)
       .then(() => res.status(200).json({message: 'ok'}))
   ));
 

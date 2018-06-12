@@ -9,4 +9,9 @@ export class HttpClientService {
     return axios.get(url)
       .catch(this.catcher);
   }
+
+  delete(url: string) {
+    return axios.delete(url)
+      .catch(this.catcher);
+  }
 }

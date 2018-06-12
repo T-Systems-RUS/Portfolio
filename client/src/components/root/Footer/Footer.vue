@@ -19,13 +19,25 @@
       <img src="../assets/image.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Upload image</span>
     </a>
-    <a class="footer-button">
+    <a
+      @click="emitAction('delete')"
+      class="footer-button">
       <img src="../assets/trash.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Delete project</span>
     </a>
   </footer>
 </template>
+<script lang="ts">
+  import Vue from 'vue';
 
+  export default Vue.extend({
+    methods:{
+      emitAction(action:string) {
+        this.$emit(action);
+      }
+    }
+  })
+</script>
 <style lang='scss' scoped>
   @import '../../../styles/variables';
 
