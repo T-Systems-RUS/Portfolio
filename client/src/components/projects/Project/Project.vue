@@ -1,5 +1,17 @@
 <template>
   <div class="container project">
+    <ConfirmModal
+      v-if="modalVisible"
+      @exit="closeModal"
+      @confirm="deleteProject">
+      <template slot="modal-body">
+        <p class="title is-4 is-size-18 has-text-centered">
+          Would you like to delete project
+          <span class="title is-5">{{project.name}}?</span>
+        </p>
+      </template>
+      <template slot="confirm-button-text">Delete project</template>
+    </ConfirmModal>
     <div class="level  is-marginless">
       <p
         class="title
@@ -96,27 +108,35 @@
       </div>
     </div>
 
-    <Footer/>
+    <Footer @delete="showDeleteModal"/>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import {FETCH_PROJECT} from '../../../store/modules/projects/action-types';
+  import {DELETE_PROJECT, FETCH_PROJECT} from "../../../store/modules/projects/action-types";
   import {PROJECT, PROJECT_TECHNOLOGIES_GROUPED} from '../../../store/modules/projects/getter-types';
+  import ConfirmModal from '../../common/ConfirmModal/ConfirmModal.vue';
   import Chip from '../../common/Chip/Chip.vue';
   import Footer from '../../root/Footer/Footer.vue';
   import ScheduleItem from '../../employees/ScheduleItem/ScheduleItem.vue';
   import TechnologyPanel from '../../technologies/TechnologyPanel/TechnologyPanel.vue';
   import {IProject} from '../../../shared/interfaces/IProject';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
+  import {Routes} from '../../../router';
 
   export default Vue.extend({
     components: {
       Chip,
       Footer,
       TechnologyPanel,
-      ScheduleItem
+      ScheduleItem,
+      ConfirmModal
+    },
+    data() {
+      return {
+        modalVisible: false
+      }
     },
     computed: {
       project(): IProject {
@@ -133,6 +153,18 @@
     },
     mounted() {
       this.$store.dispatch(FETCH_PROJECT, this.id);
+    },
+    methods: {
+      showDeleteModal() {
+        this.modalVisible = !this.modalVisible;
+      },
+      closeModal() {
+        this.modalVisible = false;
+      },
+      deleteProject() {
+        this.$store.dispatch(DELETE_PROJECT, this.project.id)
+          .then( () => this.$router.push({ name: Routes.Projects}));
+      }
     }
   });
 </script>
