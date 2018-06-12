@@ -33,7 +33,7 @@ import {
   SET_PROJECT_DESCRIPTION,
   SET_PROJECT_CUSTOMERS,
   SET_PROJECT_SCHEDULES,
-  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS
+  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
@@ -74,6 +74,9 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_SORT](state, sort: string) {
     state.sort = sort;
+  },
+  [SET_COMPLETION](state, completion: string) {
+    state.completion = completion;
   },
   [SET_LINES](state, payload: ILine[]) {
     state.lines = payload;

@@ -7,6 +7,7 @@ export const PROJECT_FILTER = 'projects/PROJECT_FILTER';
 export const PROJECT_NAMES = 'projects/PROJECT_NAMES';
 export const SEARCH = 'projects/SEARCH';
 export const AUTOCOMPLETE_SEARCH = 'projects/AUTOCOMPLETE_SEARCH';
+export const COMPLETION = 'projects/COMPLETION';
 export const FILTERS = 'FILTERS';
 export const FILTER_VALUE = 'FILTER_VALUE';
 export const ROLES = 'ROLES';

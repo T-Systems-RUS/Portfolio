@@ -21,6 +21,14 @@
           </span>
         </span>
       </div>
+      <div class="filter">
+        <span class="filter-text">
+          <span>Completion:</span>
+          <span class="active-chip">
+            {{ mapName(completion) }}
+          </span>
+        </span>
+      </div>
       <div
         class="filter"
         v-if="search">
@@ -57,6 +65,7 @@
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
   import {
+    COMPLETION,
     FILTER_VALUE,
     FILTERS,
     SEARCH,
@@ -75,6 +84,7 @@
         search: SEARCH,
         filterMaps: FILTERS,
         sort: SORT,
+        completion: COMPLETION,
         sortReverse: SORT_REVERSE
       })
     },

@@ -7,7 +7,7 @@
       <template slot="modal-body">
         <p class="title is-4 is-size-18 has-text-centered">
           Would you like to delete project
-          <span class="title is-5">{{project.name}}?</span>
+          <span class="title is-5">{{ project.name }}?</span>
         </p>
       </template>
       <template slot="confirm-button-text">Delete project</template>
@@ -23,6 +23,10 @@
     </div>
     <div class="level  is-marginless">
       <p class="title is-7 project-header">{{ project.name }}</p>
+      <Label
+        value="Completed"
+        :isBig="true"
+        :visible="isCompleted"/>
     </div>
     <div class="level is-marginless">
       <div class="project-customers">
@@ -61,7 +65,11 @@
           <span class="title is-6 is-size-16">
             {{ project.startdate | date }}
           </span>
-          <span v-if="project.enddate">- {{ project.enddate | date }}</span>
+          <span
+            v-if="project.enddate"
+            class="title is-6 is-size-16">
+            - {{ project.enddate | date }}
+          </span>
         </p>
         <p>
           <span class="title is-5 is-size-16">Production line: </span>
@@ -114,7 +122,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {DELETE_PROJECT, FETCH_PROJECT} from "../../../store/modules/projects/action-types";
+  import {DELETE_PROJECT, FETCH_PROJECT} from '../../../store/modules/projects/action-types';
   import {PROJECT, PROJECT_TECHNOLOGIES_GROUPED} from '../../../store/modules/projects/getter-types';
   import ConfirmModal from '../../common/ConfirmModal/ConfirmModal.vue';
   import Chip from '../../common/Chip/Chip.vue';
@@ -124,6 +132,7 @@
   import {IProject} from '../../../shared/interfaces/IProject';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {Routes} from '../../../router';
+  import {Util} from '../../../shared/classes/Util';
 
   export default Vue.extend({
     components: {
@@ -136,7 +145,7 @@
     data() {
       return {
         modalVisible: false
-      }
+      };
     },
     computed: {
       project(): IProject {
@@ -144,6 +153,9 @@
       },
       technologies() :ITechnology[] {
         return this.$store.getters[PROJECT_TECHNOLOGIES_GROUPED];
+      },
+      isCompleted(): boolean {
+        return Util.projectCompleted(this.project);
       }
     },
     props: {
@@ -163,7 +175,7 @@
       },
       deleteProject() {
         this.$store.dispatch(DELETE_PROJECT, this.project.id)
-          .then( () => this.$router.push({ name: Routes.Projects}));
+          .then(() => this.$router.push({name: Routes.Projects}));
       }
     }
   });

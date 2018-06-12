@@ -19,6 +19,10 @@
         <div class="project-card-team">
           <img src="../../root/assets/team.svg">
           <span class="title is-6 is-size-19">{{ teamCount }}</span>
+
+          <Label
+            value="Completed"
+            :visible="isCompleted"/>
         </div>
         <div class="title is-5 is-size-12 is-secondary">
           {{ project.updatedAt | date }}
@@ -31,6 +35,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import {IProject} from '../../../shared/interfaces/IProject';
+  import {Util} from '../../../shared/classes/Util';
 
   export default Vue.extend({
     props: {
@@ -42,6 +47,9 @@
     computed: {
       teamCount(): number {
         return this.project.schedules.length;
+      },
+      isCompleted(): boolean {
+        return Util.projectCompleted(this.project);
       }
     }
   });
@@ -97,6 +105,7 @@
       padding: 0 $padding;
       position: absolute;
       bottom: 10px;
+      width: 100%;
     }
 
     &-team {

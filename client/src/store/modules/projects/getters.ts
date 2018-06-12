@@ -28,7 +28,7 @@ import {
   PROJECT_DESCRIPTION,
   PROJECT_CUSTOMERS,
   PROJECT_SCHEDULES,
-  PROJECT_TECHNOLOGIES_GROUPED, PROJECT_PSS
+  PROJECT_TECHNOLOGIES_GROUPED, PROJECT_PSS, COMPLETION
 } from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
@@ -68,6 +68,7 @@ export const getters: GetterTree<IProjectState, {}> = {
         })) as IProjectFilterCheck[]
       };
 
+
       return model;
     });
   },
@@ -84,6 +85,9 @@ export const getters: GetterTree<IProjectState, {}> = {
     const item = arrayToSearch.filter((filtered: IProject) => Number(filtered.id) === id)[0];
     return item ? item.name : '';
   },
+
+  //Completion of project
+  [COMPLETION]: state => state.completion,
   // Sorting
   [SORT]: state => state.sort,
   [SORT_REVERSE]: state => state.sortReverse,
@@ -92,10 +96,14 @@ export const getters: GetterTree<IProjectState, {}> = {
       name: 'Name',
       'program.line.name': 'Production line',
       'schedules.length': 'Team size',
-      updatedAt: 'Date modified'
+      updatedAt: 'Date modified',
+      all: 'All projects',
+      opened: 'Opened projects',
+      completed: 'Completed projects'
     };
     return sortMap[key];
   },
+
   // Search
   [SEARCH]: state => state.search,
   [AUTOCOMPLETE_SEARCH]: state => state.autocompleteSearch,
@@ -104,6 +112,7 @@ export const getters: GetterTree<IProjectState, {}> = {
       .filter(project => project.name.toLowerCase().indexOf(state.autocompleteSearch.toLowerCase()) > -1)
       .map(project => project.name);
   },
+
   // Filtered, sorted and searched projects
   [PROJECTS](state) {
     let projects = state.projects;
@@ -146,6 +155,8 @@ export const getters: GetterTree<IProjectState, {}> = {
     if (state.search) {
       projects = projects.filter(project => project.name.toLowerCase().indexOf(state.search.toLowerCase()) > -1);
     }
+
+    projects = Util.filterCompletedProjects(projects, state.completion);
 
     projects.sort(Util.sortByField(state.sort, state.sortReverse, true));
 

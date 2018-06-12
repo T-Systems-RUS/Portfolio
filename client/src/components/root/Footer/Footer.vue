@@ -31,12 +31,12 @@
   import Vue from 'vue';
 
   export default Vue.extend({
-    methods:{
+    methods: {
       emitAction(action:string) {
         this.$emit(action);
       }
     }
-  })
+  });
 </script>
 <style lang='scss' scoped>
   @import '../../../styles/variables';

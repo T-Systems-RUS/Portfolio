@@ -47,7 +47,8 @@ module.exports = {
         ishistory: false,
         image: 'image-AS1313.jpg',
         pss: 5,
-        startdate: new Date(),
+        startdate: new Date('2017-12-17T03:24:00'),
+        enddate: new Date('2017-12-25T03:24:00'),
         createdAt:new Date(),
         updatedAt:new Date()
       },

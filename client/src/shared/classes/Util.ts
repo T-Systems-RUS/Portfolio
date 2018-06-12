@@ -2,6 +2,7 @@ import Vue from 'vue';
 import {IModel} from '../interfaces/IModel';
 import {IProject} from '../interfaces/IProject';
 import {Types} from '../../store/modules/projects/constant-types';
+import {CompleteTypes} from '../types/complete-types';
 
 export class Util {
   public static getApiUrl(url: string) {
@@ -86,6 +87,21 @@ export class Util {
         Util.compareValues(aField, bField) :
         Util.compareValues(bField, aField);
     };
+  }
+
+  static filterCompletedProjects(projects: IProject[], completion: string) {
+    switch (completion) {
+      case CompleteTypes.OPENED:
+        return projects.filter(project => !Boolean(project.enddate));
+      case CompleteTypes.COMPLETED:
+        return projects.filter(project => this.projectCompleted(project));
+      default:
+        return projects;
+    }
+  }
+
+  static projectCompleted(project: IProject) {
+    return Boolean(project.enddate) && (new Date(project.enddate) <= new Date());
   }
 
   private static getNestedProperty(object: { [key: string]: {} }, property: string): {} {
