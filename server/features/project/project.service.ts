@@ -4,6 +4,7 @@ import {Schedule} from '../../models/Schedule';
 import sequelize from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
 import {ProjectCustomer} from '../../models/ProjectCustomer';
+import { newGuid } from 'ts-guid';
 
 const projectService = {
 
@@ -55,26 +56,26 @@ const projectService = {
   // POST create new project
   createProject: project => Project.create({
     name: project.name,
-    line: project.line,
-    customer: project.customer,
-    domain: project.domain,
+    uniqueId: project.uniqueId || newGuid(),
     description: project.description,
-    active: false,
-    startdate: project.startdate,
-    enddate: project.enddate,
-    pss: project.pss,
-    program: project.program,
-    feedback: project.feedback,
     image: project.image,
-    type: project.type,
-    ishistory: false,              // default for new project
-    version: project.version,                    // default for new project,
+    feedback: project.feedback,
+    pss: project.pss,
+    active: false,
+    ishistory: false,
+    version: project.version,
+    programId: project.programId,
+    domainId: project.domainId,
+    typeId: project.typeId,
+    startdate: project.startdate,
+    enddate: project.enddate
   })
     .then(projectNew =>
       // return project only after technologies added
        Promise.all([
-        Schedule.bulkCreate(parse.parseShedules(projectNew, project.schedules)),
-        projectNew.$set('technologies', parse.parseTechnology(project.technologies))
+        Schedule.bulkCreate(parse.parseShedules(projectNew, project.schedules || [])),
+        projectNew.$set('technologies', parse.parseTechnology(project.technologies || [])),
+         projectNew.$set('customers', parse.parseCustomers(project.customers || []))
       ]).then(() =>  projectNew)
     )
     .catch(error => {
