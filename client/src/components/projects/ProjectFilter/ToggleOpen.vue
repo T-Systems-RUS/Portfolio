@@ -6,19 +6,21 @@
     <div class="radio-button-wrapper">
       <RadioButton
         :name="'completion'"
-        :checked="true"
+        :checked="checkedOption === 'all'"
         :label="mapName('all')"
         @toggle="toggle('all')"/>
     </div>
     <div class="radio-button-wrapper">
       <RadioButton
         :name="'completion'"
+        :checked="checkedOption === 'opened'"
         :label="mapName('opened')"
         @toggle="toggle('opened')"/>
     </div>
     <div class="radio-button-wrapper">
       <RadioButton
         :name="'completion'"
+        :checked="checkedOption === 'completed'"
         :label="mapName('completed')"
         @toggle="toggle('completed')"/>
     </div>
@@ -28,7 +30,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import {SET_COMPLETION} from '../../../store/modules/projects/mutation-types';
-  import {SORT_FIELD_NAME} from '../../../store/modules/projects/getter-types';
+  import {COMPLETION, SORT_FIELD_NAME} from "../../../store/modules/projects/getter-types";
 
 
   export default Vue.extend({
@@ -37,6 +39,11 @@
         sortingOpened: true,
         reverse: true
       };
+    },
+    computed: {
+      checkedOption(): string {
+        return this.$store.getters[COMPLETION];
+      }
     },
     methods: {
       mapName(key: string) {
