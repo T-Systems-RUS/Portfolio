@@ -88,6 +88,17 @@ export class Util {
     };
   }
 
+  static checkProjectCompletion(projects: IProject[], completion: string) {
+    switch (completion) {
+      case 'opened':
+        return projects.filter(project => !Boolean(project.enddate));
+      case 'completed':
+        return projects.filter(project => Boolean(project.enddate) && (new Date(project.enddate) <= new Date()));
+      default:
+        return projects;
+    }
+  }
+
   private static getNestedProperty(object: { [key: string]: {} }, property: string): {} {
     if (typeof object === 'undefined') {
       return false;

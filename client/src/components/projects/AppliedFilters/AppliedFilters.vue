@@ -21,6 +21,14 @@
           </span>
         </span>
       </div>
+      <div class="filter">
+        <span class="filter-text">
+          <span>Completion:</span>
+          <span class="active-chip">
+            {{ mapName(completion) }}
+          </span>
+        </span>
+      </div>
       <div
         class="filter"
         v-if="search">
@@ -57,13 +65,14 @@
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
   import {
+    COMPLETION,
     FILTER_VALUE,
     FILTERS,
     SEARCH,
     SORT,
     SORT_FIELD_NAME,
     SORT_REVERSE
-  } from '../../../store/modules/projects/getter-types';
+  } from "../../../store/modules/projects/getter-types";
   import {SET_FILTER, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
   import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
   import {FilterTypes} from '../../../store/modules/projects/filter-types';
@@ -75,6 +84,7 @@
         search: SEARCH,
         filterMaps: FILTERS,
         sort: SORT,
+        completion: COMPLETION,
         sortReverse: SORT_REVERSE
       })
     },

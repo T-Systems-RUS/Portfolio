@@ -24,6 +24,7 @@ export interface IProjectState {
   customers: ICustomer[];
   filter: IFilter;
   loading: boolean;
+  completion: string,
   roles: IRole[],
   search: string;
   autocompleteSearch: string;
@@ -47,6 +48,7 @@ const projectState: Module<IProjectState, {}> = {
     roles: [],
     filter: {} as IFilter,
     loading: true,
+    completion: 'all',
     search: '',
     autocompleteSearch: '',
     sort: 'name',
