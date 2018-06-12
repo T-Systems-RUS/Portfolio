@@ -77,7 +77,6 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_COMPLETION](state, completion: string) {
     state.completion = completion;
-    state.loading = false;
   },
   [SET_LINES](state, payload: ILine[]) {
     state.lines = payload;

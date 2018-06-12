@@ -1,7 +1,7 @@
 <template>
   <div class="filter">
     <Sorting/>
-    <ToggleOpen/>
+    <CompletedProjects/>
     <Accordion
       :name="model.name"
       :opened="model.opened"
@@ -34,7 +34,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import Sorting from './Sorting.vue';
-  import ToggleOpen from './ToggleOpen.vue';
+  import CompletedProjects from './CompletedProjects.vue';
   import TechnologyPicker from '../../technologies/TechnologyPicker/TechnologyPicker.vue';
   import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
   import {Util} from '../../../shared/classes/Util';
@@ -60,7 +60,7 @@
     components: {
       TechnologyPicker,
       Sorting,
-      ToggleOpen
+      CompletedProjects
     },
     mounted() {
       this.models.forEach(item => this.$store.commit(SET_ACCORDION, {key: item.name, value: true}));

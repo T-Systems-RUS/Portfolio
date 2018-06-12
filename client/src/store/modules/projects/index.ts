@@ -12,6 +12,7 @@ import {Module} from 'vuex';
 import {IAccordion} from '../../../shared/interfaces/ui/IAccordion';
 import {TestMocks} from '../../../shared/classes/TestMocks';
 import {IRole} from '../../../shared/interfaces/IRole';
+import {CompleteTypes} from '../../../shared/types/complete-types';
 
 export interface IProjectState {
   accordion: IAccordion;
@@ -48,7 +49,7 @@ const projectState: Module<IProjectState, {}> = {
     roles: [],
     filter: {} as IFilter,
     loading: true,
-    completion: 'all',
+    completion: CompleteTypes.ALL,
     search: '',
     autocompleteSearch: '',
     sort: 'name',

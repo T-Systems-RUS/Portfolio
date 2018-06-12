@@ -50,7 +50,7 @@ export const getters: GetterTree<IProjectState, {}> = {
   [PROJECT_FILTER](state, projectGetters) {
     const addons: { [key: string]: any } = projectGetters[ADDONS];
 
-    let models = Object.keys(addons).map(key => {
+    return Object.keys(addons).map(key => {
       const mapKey = Util.mapNameToProperty(key);
 
       // create model for project filter
@@ -71,8 +71,6 @@ export const getters: GetterTree<IProjectState, {}> = {
 
       return model;
     });
-
-    return models;
   },
   [FILTERS]: state => state.filter,
   [FILTER_VALUE]: (state, projectGetters) => (key: string, id: number) => {
@@ -114,6 +112,7 @@ export const getters: GetterTree<IProjectState, {}> = {
       .filter(project => project.name.toLowerCase().indexOf(state.autocompleteSearch.toLowerCase()) > -1)
       .map(project => project.name);
   },
+
   // Filtered, sorted and searched projects
   [PROJECTS](state) {
     let projects = state.projects;
@@ -157,7 +156,7 @@ export const getters: GetterTree<IProjectState, {}> = {
       projects = projects.filter(project => project.name.toLowerCase().indexOf(state.search.toLowerCase()) > -1);
     }
 
-    projects = Util.checkProjectCompletion(projects, state.completion);
+    projects = Util.filterCompletedProjects(projects, state.completion);
 
     projects.sort(Util.sortByField(state.sort, state.sortReverse, true));
 

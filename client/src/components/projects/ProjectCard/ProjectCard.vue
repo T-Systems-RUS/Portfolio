@@ -35,6 +35,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import {IProject} from '../../../shared/interfaces/IProject';
+  import {Util} from '../../../shared/classes/Util';
 
   export default Vue.extend({
     props: {
@@ -48,7 +49,7 @@
         return this.project.schedules.length;
       },
       isCompleted(): boolean {
-        return Boolean(this.project.enddate) && (new Date(this.project.enddate) <= new Date());
+        return Util.projectCompleted(this.project);
       }
     }
   });

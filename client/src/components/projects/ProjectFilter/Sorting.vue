@@ -43,7 +43,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import {SET_SORT, SET_SORT_REVERSE} from '../../../store/modules/projects/mutation-types';
-  import {SORT, SORT_FIELD_NAME} from "../../../store/modules/projects/getter-types";
+  import {SORT, SORT_FIELD_NAME} from '../../../store/modules/projects/getter-types';
 
 
   export default Vue.extend({

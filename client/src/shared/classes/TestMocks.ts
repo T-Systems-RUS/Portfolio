@@ -133,6 +133,7 @@ export class TestMocks {
       domain,
       program,
       image: '',
+      completed: false,
       type,
       schedules: [] as ISchedule[],
       customers: [customer1, customer2],

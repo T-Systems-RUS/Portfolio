@@ -10,6 +10,7 @@ import {ITechnology} from './ITechnology';
 export interface IProject extends IModel {
   name: string;
   description: string;
+  completed: boolean,
   domain: IDomain;
   program: IProgram;
   type: IType;
