@@ -64,9 +64,9 @@ const projectService = {
     active: false,
     ishistory: false,
     version: project.version,
-    programId: project.programId,
-    domainId: project.domainId,
-    typeId: project.typeId,
+    programId: project.program.id,
+    domainId: project.domain.id,
+    typeId: project.type.id,
     startdate: project.startdate,
     enddate: project.enddate
   })
