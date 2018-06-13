@@ -226,8 +226,30 @@
               :schedule="schedule"/>
           </Stepper>
         </div>
-
-
+      </div>
+      <div class="field centered-margin">
+        <Stepper
+          step="6"
+          name="Project image">
+          <div class="field">
+            <div class="control">
+              <FileUploader
+                :is-image-upload="true"
+                :is-multiple="false">
+                <span slot="button-text">Select project image</span>
+                <span slot="upload-title">Upload project image</span>
+                <span slot="upload-optional">Select an image to upload from your computer</span>
+                <div
+                  slot="upload-info"
+                  class="has-text-centered">
+                  <p class="is-size-6">Maximum file size: 10 MB</p>
+                  <p class="is-size-6">Supported file formats: jpg, jpeg, png</p>
+                </div>
+                <template slot="upload-btn-text">Upload</template>
+              </FileUploader>
+            </div>
+          </div>
+        </Stepper>
       </div>
       <div class="project-change-footer">
         <button
@@ -259,7 +281,12 @@
   import {decimal, minValue, required} from 'vuelidate/lib/validators';
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
-  import {FETCH_ADDONS, FETCH_PROJECT, FETCH_ROLES} from '../../../store/modules/projects/action-types';
+  import {
+    FETCH_ADDONS,
+    FETCH_PROJECT,
+    FETCH_PROJECT_WITH_IMAGE,
+    FETCH_ROLES
+  } from '../../../store/modules/projects/action-types';
   import {
     ADDONS,
     PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_END_DATE,
@@ -374,7 +401,7 @@
       };
     },
     mounted() {
-      this.$store.dispatch(FETCH_PROJECT, this.id)
+      this.$store.dispatch(FETCH_PROJECT_WITH_IMAGE, this.id)
         .then(() => {
           // Hack necessary due to https://github.com/buefy/buefy/issues/700
           // TODO change to actual computed+getter after fixed
