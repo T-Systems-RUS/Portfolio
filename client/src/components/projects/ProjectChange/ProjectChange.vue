@@ -226,8 +226,28 @@
               :schedule="schedule"/>
           </Stepper>
         </div>
-
-
+      </div>
+      <div class="field centered-margin">
+        <Stepper
+          step="6"
+          name="Project image">
+          <div class="field">
+            <div class="control">
+              <FileUploader
+                :is-image-upload="true"
+                :is-multiple="false">
+                <span slot="upload-title">Upload image</span>
+                <div
+                  slot="upload-info"
+                  class="has-text-centered">
+                  <p class="is-size-6">Maximum file size: 10 MB</p>
+                  <p class="is-size-6">Supported file formats: jpg, jpeg, png</p>
+                </div>
+                <template slot="upload-btn-text">Upload</template>
+              </FileUploader>
+            </div>
+          </div>
+        </Stepper>
       </div>
       <div class="project-change-footer">
         <button

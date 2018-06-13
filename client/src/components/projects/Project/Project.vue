@@ -23,7 +23,7 @@
     </div>
     <div class="level  is-marginless">
       <p class="title is-7 project-header">{{ project.name }}</p>
-      <Label
+      <Ribbon
         value="Completed"
         :isBig="true"
         :visible="isCompleted"/>
