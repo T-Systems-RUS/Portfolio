@@ -46,7 +46,9 @@
             class="is-size-6"
             @click="isImageUrl = false"
             :class="{'is-active': !isImageUrl}">{{ $t('uploadImage') }}</span>
+          <!--URL selection disabled-->
           <span
+            v-if="false"
             class="is-size-6"
             @click="isImageUrl = true"
             :class="{'is-active': isImageUrl}">{{ $t('addUrl') }}</span>

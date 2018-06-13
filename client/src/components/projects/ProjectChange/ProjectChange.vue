@@ -236,7 +236,9 @@
               <FileUploader
                 :is-image-upload="true"
                 :is-multiple="false">
-                <span slot="upload-title">Upload image</span>
+                <span slot="button-text">Select project image</span>
+                <span slot="upload-title">Upload project image</span>
+                <span slot="upload-optional">Select an image to upload from your computer</span>
                 <div
                   slot="upload-info"
                   class="has-text-centered">
