@@ -15,13 +15,15 @@
     <!--<img src="../assets/history.svg">-->
     <!--<span class="title is-5 is-size-16 is-uppercase is-block">Project history</span>-->
     <!--</a>-->
-    <a class="footer-button">
+    <a
+      class="footer-button"
+      @click="generatePresentation()">
       <img src="./assets/presentation.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Presentation</span>
     </a>
     <a
-      @click="deleteProject()"
-      class="footer-button">
+      class="footer-button"
+      @click="deleteProject()">
       <img src="./assets/trash.svg">
       <span class="title is-5 is-size-16 is-uppercase is-block">Delete project</span>
     </a>
@@ -29,9 +31,13 @@
 </template>
 <script lang="ts">
   import Vue from 'vue';
+  import {GENERATE_PRESENTATION_SINGLE} from '../../../store/modules/projects/action-types';
 
   export default Vue.extend({
     methods: {
+      generatePresentation() {
+        this.$store.dispatch(GENERATE_PRESENTATION_SINGLE);
+      },
       deleteProject() {
         this.$emit('delete');
       }
