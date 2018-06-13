@@ -44,12 +44,14 @@ export const actions: ActionTree<IProjectState, {}> = {
   [FETCH_PROJECT_WITH_IMAGE]({commit, dispatch}, id:string) {
     return dispatch(FETCH_PROJECT, id)
       .then(project => {
-        // Set image for file uploader
-        commit(SET_IMAGE_URL, {
-          url: `./server/images/${project.image}`,
-          name: project.image,
-          loadingStatus: FileUploadStatus.NULL
-        });
+        if (project.image) {
+          // Set image for file uploader
+          commit(SET_IMAGE_URL, {
+            url: `./server/images/${project.image}`,
+            name: project.image,
+            loadingStatus: FileUploadStatus.NULL
+          });
+        }
       });
   },
 
