@@ -14,13 +14,6 @@ import date from './shared/filters/Date';
 import capitalize from './shared/filters/Capitalize';
 
 
-Vue.component('Checkbox', Checkbox);
-Vue.component('RadioButton', RadioButton);
-Vue.component('Autocomplete', Autocomplete);
-Vue.component('CommonModal', CommonModal);
-Vue.component('Ribbon', Ribbon);
-Vue.component('Accordion', Accordion);
-
 Vue.filter('date', date);
 Vue.filter('capitalize', capitalize);
 

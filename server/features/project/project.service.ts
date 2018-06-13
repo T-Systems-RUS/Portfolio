@@ -4,7 +4,7 @@ import {Schedule} from '../../models/Schedule';
 import sequelize from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
 import {ProjectCustomer} from '../../models/ProjectCustomer';
-import { newGuid } from 'ts-guid';
+import Guid from '../../shared/Guid';
 
 const projectService = {
 
@@ -56,7 +56,7 @@ const projectService = {
   // POST create new project
   createProject: project => Project.create({
     name: project.name,
-    uniqueId: project.uniqueId || newGuid(),
+    uniqueId: project.uniqueId || Guid.newGuid(),
     description: project.description,
     image: project.image,
     feedback: project.feedback,
@@ -75,7 +75,7 @@ const projectService = {
        Promise.all([
         Schedule.bulkCreate(parse.parseShedules(projectNew, project.schedules || [])),
         projectNew.$set('technologies', parse.parseTechnology(project.technologies || [])),
-         projectNew.$set('customers', parse.parseCustomers(project.customers || []))
+        projectNew.$set('customers', parse.parseCustomers(project.customers || []))
       ]).then(() =>  projectNew)
     )
     .catch(error => {
@@ -83,16 +83,16 @@ const projectService = {
     }),
 
 // POST request update Project
-  updateProject: project => sequelize.transaction(t =>
+  updateProject: project => sequelize.transaction(transaction =>
     Project.update(
       { ishistory: true},
-      { where: { id: project.id},  transaction: t  }
+      { where: { id: project.id},  transaction }
 
     ).then( () => projectService.createProject(project))
       .then(newProject => {
         return newProject;
       }).catch(error => {
-        t.rollback();
+        transaction.rollback();
         throw new Error(error);
     })
   ),
