@@ -52,9 +52,9 @@ export class Project extends Model<Project> {
 
     @AllowNull(false)
     @Column({
-      type: DataType.INTEGER
+      type: DataType.STRING
     })
-    uniqueId: number;
+    uniqueId: string;
 
     @AllowNull(false)
     @Column

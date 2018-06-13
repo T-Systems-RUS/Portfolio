@@ -14,6 +14,7 @@ import './components/common';
 import date from './shared/filters/Date';
 import capitalize from './shared/filters/Capitalize';
 
+
 Vue.filter('date', date);
 Vue.filter('capitalize', capitalize);
 

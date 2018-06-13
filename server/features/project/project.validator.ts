@@ -4,7 +4,6 @@ const projectValidator = {
 
   createValidators: () =>  [
       check('name', 'Field name is required').exists().isLength({min: 1, max: 100}),
-      check('line', 'Field line is required').exists().isLength({min: 1, max: 100}),
       check('domain', 'Field domain is required').exists().isLength({min: 1, max: 100}),
       check('type', 'Field type is required').exists().isLength({min: 1, max: 100}),
       check('program', 'Field program is required').exists().isLength({min: 1, max: 100}),

@@ -4,6 +4,7 @@ import {Schedule} from '../../models/Schedule';
 import sequelize from '../../sequelize/sequelize';
 import parse from '../../shared/parse.service';
 import {ProjectCustomer} from '../../models/ProjectCustomer';
+import Guid from '../../shared/Guid';
 
 const projectService = {
 
@@ -36,7 +37,7 @@ const projectService = {
   }),
 
 // GET check if project exists
-  doesProjectExist: name => Project.count({where: {name: name}})
+  doesProjectExist: uniqueId => Project.count({where: {uniqueId: uniqueId}})
     .then(count => count !== 0)
     .catch(error => {
       console.log(error);
@@ -55,46 +56,48 @@ const projectService = {
   // POST create new project
   createProject: project => Project.create({
     name: project.name,
-    line: project.line,
-    customer: project.customer,
-    domain: project.domain,
+    uniqueId: project.uniqueId || Guid.newGuid(),
     description: project.description,
-    active: false,
-    startdate: project.startdate,
-    enddate: project.enddate,
-    pss: project.pss,
-    program: project.program,
-    feedback: project.feedback,
     image: project.image,
-    type: project.type,
-    ishistory: false,              // default for new project
-    version: project.version,                    // default for new project,
+    feedback: project.feedback,
+    pss: project.pss,
+    active: false,
+    ishistory: false,
+    version: project.version,
+    programId: project.program.id,
+    domainId: project.domain.id,
+    typeId: project.type.id,
+    startdate: project.startdate,
+    enddate: project.enddate
   })
     .then(projectNew =>
       // return project only after technologies added
        Promise.all([
-        Schedule.bulkCreate(parse.parseShedules(projectNew, project.schedules)),
-        projectNew.$set('technologies', parse.parseTechnology(project.technologies))
+        Schedule.bulkCreate(parse.parseShedules(projectNew, project.schedules || [])),
+        projectNew.$set('technologies', parse.parseTechnology(project.technologies || [])),
+        projectNew.$set('customers', parse.parseCustomers(project.customers || []))
       ]).then(() =>  projectNew)
     )
     .catch(error => {
       throw new Error(error);
     }),
 
-// POST request update ProjectChange
-  updateProject: project => sequelize.transaction()
-    .then(t => Project.update(
-      {ishistory: true},
-      {where: {id: project.id}, transaction: t},
-    )
-      .then(() => projectService.createProject(project)
-        .then(newProject => {
-          t.commit();
-          return newProject;
-        })))
-    .catch(error => {
-      throw new Error(error);
-    }),
+// POST request update Project
+  updateProject: project => sequelize.transaction(transaction =>
+    Project.update(
+      { ishistory: true},
+      { where: { id: project.id},  transaction }
+
+    ).then( () => projectService.createProject(project))
+      .then(newProject => {
+        return newProject;
+      }).catch(error => {
+        transaction.rollback();
+        throw new Error(error);
+    })
+  ),
+
+
 
   // PUT request archieve project
   archieveProject: async id => {

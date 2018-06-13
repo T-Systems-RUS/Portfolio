@@ -4,6 +4,9 @@
       v-if="modalVisible"
       @exit="closeModal"
       @confirm="deleteProject">
+      <template slot="modal-title">
+        Delete project?
+      </template>
       <template slot="modal-body">
         <p class="title is-4 is-size-18 has-text-centered">
           Would you like to delete project
@@ -174,7 +177,7 @@
         this.modalVisible = false;
       },
       deleteProject() {
-        this.$store.dispatch(DELETE_PROJECT, this.project.id)
+        this.$store.dispatch(DELETE_PROJECT, this.project.uniqueId)
           .then(() => this.$router.push({name: Routes.Projects}));
       }
     }

@@ -26,9 +26,9 @@ router.get('/projects/history/:uniqueId', (req, res) =>
 // POST Requests
 router.post('/projects/create', projectValidator.createValidators(), (req, res) =>
   Util.handleValidation(req, res, () =>
-    projectService.doesProjectExist(req.body.name).then(doesExist =>
+    projectService.doesProjectExist(req.body.uniqueId).then(doesExist =>
       doesExist ?
-        Util.handleConflict(res, 'ProjectChange already exists or was archieved') :
+        Util.handleConflict(res, 'Project already exists or was archieved') :
         projectService.createProject(req.body)
           .then(Util.handleData(res)))
   ));
