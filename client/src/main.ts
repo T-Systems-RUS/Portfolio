@@ -5,6 +5,7 @@ import App from './App.vue';
 import router from './router/index';
 import store from './store/index';
 import {i18n} from './i18n';
+import './shared/http/interceptors/loading';
 
 // Global styles
 import './styles/styles.scss';
