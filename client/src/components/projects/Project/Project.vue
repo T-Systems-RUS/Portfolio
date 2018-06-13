@@ -4,6 +4,9 @@
       v-if="modalVisible"
       @exit="closeModal"
       @confirm="deleteProject">
+      <template slot="modal-title">
+        Delete project?
+      </template>
       <template slot="modal-body">
         <p class="title is-4 is-size-18 has-text-centered">
           Would you like to delete project
@@ -23,7 +26,7 @@
     </div>
     <div class="level  is-marginless">
       <p class="title is-7 project-header">{{ project.name }}</p>
-      <Label
+      <Ribbon
         value="Completed"
         :isBig="true"
         :visible="isCompleted"/>

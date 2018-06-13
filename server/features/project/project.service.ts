@@ -37,7 +37,7 @@ const projectService = {
   }),
 
 // GET check if project exists
-  doesProjectExist: name => Project.count({where: {name: name}})
+  doesProjectExist: uniqueId => Project.count({where: {uniqueId: uniqueId}})
     .then(count => count !== 0)
     .catch(error => {
       console.log(error);
@@ -82,20 +82,22 @@ const projectService = {
       throw new Error(error);
     }),
 
-// POST request update ProjectChange
-  updateProject: project => sequelize.transaction()
-    .then(t => Project.update(
-      {ishistory: true},
-      {where: {id: project.id}, transaction: t},
-    )
-      .then(() => projectService.createProject(project)
-        .then(newProject => {
-          t.commit();
-          return newProject;
-        })))
-    .catch(error => {
-      throw new Error(error);
-    }),
+// POST request update Project
+  updateProject: project => sequelize.transaction(t =>
+    Project.update(
+      { ishistory: true},
+      { where: { id: project.id},  transaction: t  }
+
+    ).then( () => projectService.createProject(project))
+      .then(newProject => {
+        return newProject;
+      }).catch(error => {
+        t.rollback();
+        throw new Error(error);
+    })
+  ),
+
+
 
   // PUT request archieve project
   archieveProject: async id => {

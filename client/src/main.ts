@@ -21,7 +21,7 @@ Vue.component('Checkbox', Checkbox);
 Vue.component('RadioButton', RadioButton);
 Vue.component('Autocomplete', Autocomplete);
 Vue.component('CommonModal', CommonModal);
-Vue.component('Label', Ribbon);
+Vue.component('Ribbon', Ribbon);
 Vue.component('Accordion', Accordion);
 Vue.filter('date', date);
 Vue.filter('capitalize', capitalize);

@@ -20,7 +20,7 @@
           <img src="../../root/assets/team.svg">
           <span class="title is-6 is-size-19">{{ teamCount }}</span>
 
-          <Label
+          <Ribbon
             value="Completed"
             :visible="isCompleted"/>
         </div>
