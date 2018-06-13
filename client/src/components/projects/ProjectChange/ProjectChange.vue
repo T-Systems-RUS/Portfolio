@@ -73,7 +73,7 @@
                     <div class="control">
                       <b-datepicker
                         v-model="startDate"
-                        @input="$v.startDate.$touch()"
+                        @input="$v.startDate.$touch();setStartDate()"
                         :class="{'is-danger': $v.startDate.$error}"
                         placeholder="Project start"
                         :readonly="false"/>
@@ -86,7 +86,7 @@
                     <div class="control">
                       <b-datepicker
                         v-model="endDate"
-                        @input="$v.endDate.$touch()"
+                        @input="$v.endDate.$touch();setEndDate()"
                         :class="{'is-danger': $v.endDate.$error}"
                         placeholder="Project end"
                         :readonly="false"/>
@@ -263,7 +263,6 @@
   import {
     ADDONS,
     PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_END_DATE,
-    PROJECT_LINE,
     PROJECT_NAME,
     PROJECT_PROGRAM_ID, PROJECT_PSS, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE_ID
   } from '../../../store/modules/projects/getter-types';
@@ -275,7 +274,6 @@
     SET_PROJECT_DESCRIPTION,
     SET_PROJECT_DOMAIN,
     SET_PROJECT_END_DATE,
-    SET_PROJECT_LINE,
     SET_PROJECT_NAME,
     SET_PROJECT_PROGRAM,
     SET_PROJECT_PSS,
@@ -325,7 +323,6 @@
       customers: Util.mapTwoWay<ICustomer[]>(PROJECT_CUSTOMERS, SET_PROJECT_CUSTOMERS),
       schedules: Util.mapTwoWay<ISchedule[]>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
       technologies: Util.mapTwoWay<ITechnology[]>(PROJECT_TECHNOLOGIES, SET_PROJECT_TECHNOLOGIES),
-
       programId: {
         get(): string {
           return this.$store.getters[PROJECT_PROGRAM_ID];
@@ -409,6 +406,12 @@
       },
       goBack() {
         this.$router.push({name: Routes.Project, params: {id: this.id}});
+      },
+      setStartDate() {
+        this.$store.commit(SET_PROJECT_START_DATE, this.startDate);
+      },
+      setEndDate() {
+        this.$store.commit(SET_PROJECT_END_DATE, this.endDate);
       }
     }
   });
