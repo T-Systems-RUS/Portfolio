@@ -119,7 +119,7 @@
       </div>
     </div>
 
-    <Footer @delete="showDeleteModal"/>
+    <ProjectFooter @delete="showDeleteModal"/>
   </div>
 </template>
 
@@ -129,7 +129,7 @@
   import {PROJECT, PROJECT_TECHNOLOGIES_GROUPED} from '../../../store/modules/projects/getter-types';
   import ConfirmModal from '../../common/ConfirmModal/ConfirmModal.vue';
   import Chip from '../../common/Chip/Chip.vue';
-  import Footer from '../../root/Footer/Footer.vue';
+  import ProjectFooter from './ProjectFooter.vue';
   import ScheduleItem from '../../employees/ScheduleItem/ScheduleItem.vue';
   import TechnologyPanel from '../../technologies/TechnologyPanel/TechnologyPanel.vue';
   import {IProject} from '../../../shared/interfaces/IProject';
@@ -140,7 +140,7 @@
   export default Vue.extend({
     components: {
       Chip,
-      Footer,
+      ProjectFooter,
       TechnologyPanel,
       ScheduleItem,
       ConfirmModal
