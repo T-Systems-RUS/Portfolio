@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .a {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>presentation-file_outline</title>
+  <rect class="a" width="64" height="64"/>
+  <path fill="#D80074" d="M40,4H11A2,2,0,0,0,9,6V58a2,2,0,0,0,2,2H53a2,2,0,0,0,2-2V19Zm0,4.24L50.76,19H41a1,1,0,0,1-1-1ZM52,57H12V7H38V18a3,3,0,0,0,3,3H52ZM20,25.49V27H44V25.49A1.5,1.5,0,0,0,42.51,24h-21A1.5,1.5,0,0,0,20,25.49Zm0,21A1.5,1.5,0,0,0,21.49,48h21A1.5,1.5,0,0,0,44,46.51V29H20ZM37,31h4V46H37Zm-7,4h4V46H30Zm-7,4h4v7H23Z"/>
+</svg>

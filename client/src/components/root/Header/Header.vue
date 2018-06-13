@@ -54,12 +54,15 @@
         <img src="../assets/user.svg">
       </a>
     </div>
+    <b-loading :active.sync="loading"/>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
+  import {mapGetters} from 'vuex';
   import Search from './Search.vue';
+  import {GET_LOADING_STATE} from '../../../store/modules/loading/getter-types';
 
   export default Vue.extend({
     components: {
@@ -69,6 +72,11 @@
       return {
         searchToggled: false
       };
+    },
+    computed: {
+      ...mapGetters({
+        loading: GET_LOADING_STATE
+      })
     },
     methods: {
       toggleSearch() {

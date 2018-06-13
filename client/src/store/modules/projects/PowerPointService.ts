@@ -47,11 +47,11 @@ const X = 0.39;
 let pptx: IPptx | null = null;
 
 export class PowerPointService {
-  static createProjectPresentation(project: IProject) {
+  static createSingleProjectPresentation(project: IProject) {
     this.newPresentation();
 
     this.addProjectSlide(project)
-      .then(() => this.generatePresentation());
+      .then(() => this.generatePresentation(project.name));
   }
 
   static createProjectsPresentation(projects: IProject[]) {
@@ -73,7 +73,7 @@ export class PowerPointService {
     pptx!.setLayout('LAYOUT_4x3');
   }
 
-  private static generatePresentation() {
+  private static generatePresentation(name = '') {
     pptx!.save(`POP Russia Portfolio ${name}`);
     pptx = null;
   }

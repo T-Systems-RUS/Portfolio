@@ -10,7 +10,7 @@ import {
   FETCH_PROJECT_WITH_IMAGE,
   FETCH_PROJECTS,
   FETCH_ROLES,
-  GENERATE_PRESENTATION
+  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE
 } from './action-types';
 
 import {
@@ -18,7 +18,7 @@ import {
   SET_TYPES
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
-import {PROJECTS} from './getter-types';
+import {PROJECT, PROJECTS} from './getter-types';
 import {SET_IMAGE_URL} from '../../../components/common/FileUploader/fileUploadStore/mutation-types';
 import {FileUploadStatus} from '../../../components/common/FileUploader/IFileUploadList';
 
@@ -44,12 +44,14 @@ export const actions: ActionTree<IProjectState, {}> = {
   [FETCH_PROJECT_WITH_IMAGE]({commit, dispatch}, id:string) {
     return dispatch(FETCH_PROJECT, id)
       .then(project => {
-        // Set image for file uploader
-        commit(SET_IMAGE_URL, {
-          url: `./server/images/${project.image}`,
-          name: project.image,
-          loadingStatus: FileUploadStatus.NULL
-        });
+        if (project.image) {
+          // Set image for file uploader
+          commit(SET_IMAGE_URL, {
+            url: `./server/images/${project.image}`,
+            name: project.image,
+            loadingStatus: FileUploadStatus.NULL
+          });
+        }
       });
   },
 
@@ -78,5 +80,9 @@ export const actions: ActionTree<IProjectState, {}> = {
 
   [GENERATE_PRESENTATION]({getters}) {
     return PowerPointService.createProjectsPresentation(getters[PROJECTS]);
+  },
+
+  [GENERATE_PRESENTATION_SINGLE]({getters}) {
+    return PowerPointService.createSingleProjectPresentation(getters[PROJECT]);
   }
 };
