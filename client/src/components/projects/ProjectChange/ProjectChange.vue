@@ -281,7 +281,12 @@
   import {decimal, minValue, required} from 'vuelidate/lib/validators';
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
-  import {FETCH_ADDONS, FETCH_PROJECT, FETCH_ROLES} from '../../../store/modules/projects/action-types';
+  import {
+    FETCH_ADDONS,
+    FETCH_PROJECT,
+    FETCH_PROJECT_WITH_IMAGE,
+    FETCH_ROLES
+  } from '../../../store/modules/projects/action-types';
   import {
     ADDONS,
     PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_END_DATE,
@@ -396,7 +401,7 @@
       };
     },
     mounted() {
-      this.$store.dispatch(FETCH_PROJECT, this.id)
+      this.$store.dispatch(FETCH_PROJECT_WITH_IMAGE, this.id)
         .then(() => {
           // Hack necessary due to https://github.com/buefy/buefy/issues/700
           // TODO change to actual computed+getter after fixed
