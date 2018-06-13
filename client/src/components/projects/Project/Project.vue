@@ -28,7 +28,7 @@
       <p class="title is-7 project-header">{{ project.name }}</p>
       <Ribbon
         value="Completed"
-        :isBig="true"
+        :is-big="true"
         :visible="isCompleted"/>
     </div>
     <div class="level is-marginless">

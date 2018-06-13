@@ -3,7 +3,15 @@ import {ProjectService} from './project.service';
 import {IProjectState} from './index';
 
 
-import {DELETE_PROJECT, FETCH_ADDONS, FETCH_PROJECT, FETCH_PROJECTS, FETCH_ROLES, GENERATE_PRESENTATION} from './action-types';
+import {
+  DELETE_PROJECT,
+  FETCH_ADDONS,
+  FETCH_PROJECT,
+  FETCH_PROJECT_WITH_IMAGE,
+  FETCH_PROJECTS,
+  FETCH_ROLES,
+  GENERATE_PRESENTATION
+} from './action-types';
 
 import {
   FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS, SET_ROLES,
@@ -11,6 +19,8 @@ import {
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
 import {PROJECTS} from './getter-types';
+import {SET_IMAGE_URL} from '../../../components/common/FileUploader/fileUploadStore/mutation-types';
+import {FileUploadStatus} from '../../../components/common/FileUploader/IFileUploadList';
 
 const service = new ProjectService();
 
@@ -27,6 +37,19 @@ export const actions: ActionTree<IProjectState, {}> = {
     return service.getProject(id)
       .then(response => {
         commit(SET_PROJECT, response.data);
+        return response.data;
+      });
+  },
+
+  [FETCH_PROJECT_WITH_IMAGE]({commit, dispatch}, id:string) {
+    return dispatch(FETCH_PROJECT, id)
+      .then(project => {
+        // Set image for file uploader
+        commit(SET_IMAGE_URL, {
+          url: `./server/images/${project.image}`,
+          name: project.image,
+          loadingStatus: FileUploadStatus.NULL
+        });
       });
   },
 
