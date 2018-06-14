@@ -47,7 +47,7 @@
   import Vue from 'vue';
   import {ISchedule} from '../../../shared/interfaces/ISchedule';
   import {IRole} from '../../../shared/interfaces/IRole';
-  import {ROLES} from '../../../store/modules/projects/getter-types';
+  import {ROLES} from '../../../store/modules/employees/getter-types';
 
   export default Vue.extend({
     props: {

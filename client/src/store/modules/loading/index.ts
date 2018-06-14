@@ -19,7 +19,7 @@ const loadingState: Module<ILoadingState, {}> = {
     }
   },
   getters: {
-    [GET_LOADING_STATE]: state => state.loading.length
+    [GET_LOADING_STATE]: state => Boolean(state.loading.length)
   }
 };
 

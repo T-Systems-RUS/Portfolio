@@ -10,7 +10,6 @@ export const AUTOCOMPLETE_SEARCH = 'projects/AUTOCOMPLETE_SEARCH';
 export const COMPLETION = 'projects/COMPLETION';
 export const FILTERS = 'FILTERS';
 export const FILTER_VALUE = 'FILTER_VALUE';
-export const ROLES = 'ROLES';
 export const SORT = 'SORT';
 export const SORT_REVERSE = 'SORT_REVERSE';
 export const SORT_FIELD_NAME = 'SORT_FIELD_NAME';

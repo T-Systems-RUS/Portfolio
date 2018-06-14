@@ -18,7 +18,6 @@ import {
   SORT,
   SORT_FIELD_NAME,
   SORT_REVERSE,
-  ROLES,
   PROJECT_NAME,
   PROJECT_PROGRAM_ID,
   PROJECT_DOMAIN_ID,
@@ -164,7 +163,6 @@ export const getters: GetterTree<IProjectState, {}> = {
   },
 
   [PROJECT_TECHNOLOGIES_GROUPED]: state => Extension.groupBy(state.project.technologies, 'domain'),
-  [ROLES]: state => state.roles,
   // Project page and edit form
   [PROJECT]: state => state.project,
   [PROJECT_NAME]: state => state.project.name,

@@ -214,10 +214,19 @@
             name="Team">
             <div class="field">
               <div class="control">
-                <input
-                  class="input"
-                  type="text"
-                  placeholder="Select employee">
+                <b-autocomplete
+                  v-model="employee"
+                  :data="employees"
+                  :field="'firstname'"
+                  placeholder="Select employee"
+                  icon="magnify"
+                  @input="getFilteredEmployees"
+                  @select="selectEmployee">
+                  <template slot-scope="props">
+                    {{props.option.firstname}} {{props.option.lastname}}
+                  </template>
+                  <template slot="empty">No results found</template>
+                </b-autocomplete>
               </div>
             </div>
             <EmployeeItem
@@ -283,10 +292,9 @@
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {
     FETCH_ADDONS,
-    FETCH_PROJECT,
-    FETCH_PROJECT_WITH_IMAGE,
-    FETCH_ROLES
+    FETCH_PROJECT_WITH_IMAGE
   } from '../../../store/modules/projects/action-types';
+  import {FETCH_ROLES, FETCH_EMPLOYEES} from "../../../store/modules/employees/action-types";
   import {
     ADDONS,
     PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_END_DATE,
@@ -317,10 +325,14 @@
   import {IType} from '../../../shared/interfaces/IType';
   import {IDomain} from '../../../shared/interfaces/IDomain';
   import {IProgram} from '../../../shared/interfaces/IProgram';
+  import {EMPLOYEES} from '../../../store/modules/employees/getter-types';
+  import {IEmployee} from "../../../shared/interfaces/IEmployee";
 
   interface IData {
     filteredTechnologies: {}[];
     filteredCustomers: {}[];
+    filteredEmployees: {}[];
+    employee: string,
     startDate: Date | null;
     endDate: Date | null;
   }
@@ -334,6 +346,8 @@
       return {
         filteredTechnologies: [],
         filteredCustomers: [],
+        filteredEmployees: [],
+        employee:'',
         startDate: null,
         endDate: null
       };
@@ -350,6 +364,9 @@
       customers: Util.mapTwoWay<ICustomer[]>(PROJECT_CUSTOMERS, SET_PROJECT_CUSTOMERS),
       schedules: Util.mapTwoWay<ISchedule[]>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
       technologies: Util.mapTwoWay<ITechnology[]>(PROJECT_TECHNOLOGIES, SET_PROJECT_TECHNOLOGIES),
+      employees(): IEmployee[] {
+        return this.$store.getters[EMPLOYEES];
+      },
       programId: {
         get(): string {
           return this.$store.getters[PROJECT_PROGRAM_ID];
@@ -414,6 +431,7 @@
       this.$store.dispatch(FETCH_TECHNOLOGIES);
       this.$store.dispatch(FETCH_ADDONS);
       this.$store.dispatch(FETCH_ROLES);
+      this.$store.dispatch(FETCH_EMPLOYEES);
     },
     methods: {
       imagePath(path: string): string {
@@ -430,6 +448,33 @@
         this.filteredCustomers = this.$store.getters[ADDONS][Types.CUSTOMER]
           .filter((customer: ICustomer) => !this.customers.some((selected: ICustomer) => selected.id === customer.id))
           .filter((customer: ICustomer) => Util.containsIgnoreCase(customer.name, text)); // Search
+      },
+      getFilteredEmployees(text:string) {
+        this.filteredEmployees = this.$store.getters[EMPLOYEES]
+          .filter((employee: IEmployee) => !this.employees.some((selected: IEmployee) => selected.id === employee.id))
+          .filter((employee: IEmployee) => Util.containsIgnoreCase(employee.firstname, text)); // Search
+      },
+      selectEmployee(employee: IEmployee) {
+        console.log('123',employee);
+        const updatedSchedules = [
+          ...this.schedules,
+          {
+            employee: employee,
+            employeeId: employee.id,
+            role: {},
+            roleId:'',
+            projectId: this.id.toString(),
+            participation: 100.00,
+            startdate: new Date(),
+            enddate: new Date(),
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            active: true,
+            id: ''
+          } as ISchedule
+        ];
+
+        this.$store.commit(SET_PROJECT_SCHEDULES, updatedSchedules);
       },
       goBack() {
         this.$router.push({name: Routes.Project, params: {id: this.id}});

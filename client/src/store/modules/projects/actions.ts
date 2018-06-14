@@ -9,12 +9,11 @@ import {
   FETCH_PROJECT,
   FETCH_PROJECT_WITH_IMAGE,
   FETCH_PROJECTS,
-  FETCH_ROLES,
   GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE
 } from './action-types';
 
 import {
-  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS, SET_ROLES,
+  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS,
   SET_TYPES
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
@@ -52,13 +51,6 @@ export const actions: ActionTree<IProjectState, {}> = {
             loadingStatus: FileUploadStatus.NULL
           });
         }
-      });
-  },
-
-  [FETCH_ROLES]({commit}) {
-    return service.getRoles()
-      .then(response => {
-        commit(SET_ROLES, response.data);
       });
   },
 

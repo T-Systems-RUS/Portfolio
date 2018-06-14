@@ -23,7 +23,6 @@ import {
   SET_SORT,
   SET_SORT_REVERSE,
   SET_TYPES,
-  SET_ROLES,
   SET_PROJECT_NAME,
   SET_PROJECT_PROGRAM,
   SET_PROJECT_DOMAIN,
@@ -98,10 +97,6 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_SORT_REVERSE](state, reverse: boolean) {
     state.sortReverse = reverse;
-  },
-  [SET_ROLES](state, payload: IRole[]) {
-    state.roles = payload;
-    state.loading = false;
   },
   [SET_PROJECT_NAME](state, name: string) {
     state.project.name = name;
