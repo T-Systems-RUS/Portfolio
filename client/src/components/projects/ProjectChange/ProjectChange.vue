@@ -215,15 +215,19 @@
             <div class="field">
               <div class="control">
                 <b-autocomplete
+                  :open-on-focus="true"
+                  :clear-on-select="true"
                   v-model="employee"
                   :data="employees"
                   :field="'firstname'"
                   placeholder="Select employee"
                   icon="magnify"
-                  @input="getFilteredEmployees"
                   @select="selectEmployee">
                   <template slot-scope="props">
                     {{props.option.firstname}} {{props.option.lastname}}
+                    <img
+                      class="tag-image"
+                      src="../../employees/assets/person.svg">
                   </template>
                   <template slot="empty">No results found</template>
                 </b-autocomplete>
@@ -231,7 +235,7 @@
             </div>
             <EmployeeItem
               v-for="schedule of schedules"
-              :key="schedule.id"
+              :key="schedule.employeeId"
               :schedule="schedule"/>
           </Stepper>
         </div>
@@ -297,10 +301,10 @@
   import {FETCH_ROLES, FETCH_EMPLOYEES} from "../../../store/modules/employees/action-types";
   import {
     ADDONS,
-    PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_END_DATE,
+    PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_EMPLOYEES, PROJECT_END_DATE,
     PROJECT_NAME,
     PROJECT_PROGRAM_ID, PROJECT_PSS, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE_ID
-  } from '../../../store/modules/projects/getter-types';
+  } from "../../../store/modules/projects/getter-types";
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
   import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
@@ -327,11 +331,11 @@
   import {IProgram} from '../../../shared/interfaces/IProgram';
   import {EMPLOYEES} from '../../../store/modules/employees/getter-types';
   import {IEmployee} from "../../../shared/interfaces/IEmployee";
+  import {ModelFactory} from '../../../shared/classes/ModelFactory';
 
   interface IData {
     filteredTechnologies: {}[];
     filteredCustomers: {}[];
-    filteredEmployees: {}[];
     employee: string,
     startDate: Date | null;
     endDate: Date | null;
@@ -346,7 +350,6 @@
       return {
         filteredTechnologies: [],
         filteredCustomers: [],
-        filteredEmployees: [],
         employee:'',
         startDate: null,
         endDate: null
@@ -365,13 +368,18 @@
       schedules: Util.mapTwoWay<ISchedule[]>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
       technologies: Util.mapTwoWay<ITechnology[]>(PROJECT_TECHNOLOGIES, SET_PROJECT_TECHNOLOGIES),
       employees(): IEmployee[] {
-        return this.$store.getters[EMPLOYEES];
+        return this.$store.getters[EMPLOYEES]
+                   .filter((employee: IEmployee) => ! (this.$store.getters[PROJECT_EMPLOYEES]
+                      .map((prEmplojee:IEmployee) => prEmplojee.id).indexOf(employee.id) >-1))
+                   .filter((employee: IEmployee) =>
+                     Util.containsIgnoreCase(`${employee.firstname} ${employee.lastname}`, this.employee))
       },
       programId: {
         get(): string {
           return this.$store.getters[PROJECT_PROGRAM_ID];
         },
         set(value: string) {
+          console.log(this.schedules);
           this.$store.commit(SET_PROJECT_PROGRAM, this.$store.getters[ADDONS][Types.PROGRAM]
           .filter((program: IProgram) => program.id === value)[0]);
         }
@@ -449,32 +457,15 @@
           .filter((customer: ICustomer) => !this.customers.some((selected: ICustomer) => selected.id === customer.id))
           .filter((customer: ICustomer) => Util.containsIgnoreCase(customer.name, text)); // Search
       },
-      getFilteredEmployees(text:string) {
-        this.filteredEmployees = this.$store.getters[EMPLOYEES]
-          .filter((employee: IEmployee) => !this.employees.some((selected: IEmployee) => selected.id === employee.id))
-          .filter((employee: IEmployee) => Util.containsIgnoreCase(employee.firstname, text)); // Search
-      },
       selectEmployee(employee: IEmployee) {
-        console.log('123',employee);
-        const updatedSchedules = [
-          ...this.schedules,
-          {
-            employee: employee,
-            employeeId: employee.id,
-            role: {},
-            roleId:'',
-            projectId: this.id.toString(),
-            participation: 100.00,
-            startdate: new Date(),
-            enddate: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            active: true,
-            id: ''
-          } as ISchedule
-        ];
+        if(employee) {
+          const updatedSchedules = [
+            ModelFactory.createSchedule(employee, this.id.toString()) ,
+            ...this.schedules
+          ];
 
-        this.$store.commit(SET_PROJECT_SCHEDULES, updatedSchedules);
+          this.$store.commit(SET_PROJECT_SCHEDULES, updatedSchedules);
+        }
       },
       goBack() {
         this.$router.push({name: Routes.Project, params: {id: this.id}});

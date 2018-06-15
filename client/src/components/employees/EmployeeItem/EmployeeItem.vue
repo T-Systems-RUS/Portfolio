@@ -30,15 +30,23 @@
       </div>
       <div class="employee-item-block">
         <b-datepicker
+          v-model="startdate"
           placeholder="Start date"
           icon="calendar-today"
+          @input="setDate($event, 'startdate')"
           :readonly="false"/>
-        <input
-          class="input is-pulled-right"
-          type="text"
-          placeholder="End date"
-          v-model="schedule.enddate">
+        <b-datepicker
+          v-model="enddate"
+          placeholder="Start date"
+          icon="calendar-today"
+          @input="setDate($event, 'enddate')"
+          :readonly="false"/>
       </div>
+    </div>
+    <div class="employee-item-delete">
+      <a>
+        <img src="../../projects/Project/assets/trash.svg">
+      </a>
     </div>
   </div>
 </template>
@@ -48,6 +56,7 @@
   import {ISchedule} from '../../../shared/interfaces/ISchedule';
   import {IRole} from '../../../shared/interfaces/IRole';
   import {ROLES} from '../../../store/modules/employees/getter-types';
+  import {SET_SCHEDULE_DATE} from '../../../store/modules/projects/mutation-types';
 
   export default Vue.extend({
     props: {
@@ -56,9 +65,20 @@
         required: true
       }
     },
+    data() {
+      return {
+        startdate: new Date(this.schedule.startdate),
+        enddate: new Date(this.schedule.enddate)
+      }
+    },
     computed: {
       roles(): IRole[] {
         return this.$store.getters[ROLES];
+      }
+    },
+    methods: {
+      setDate(date:Date,mutation: string) {
+        this.$store.commit(SET_SCHEDULE_DATE, { key:mutation, targetId:this.schedule.id, date })
       }
     }
   });

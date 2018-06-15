@@ -1,4 +1,5 @@
 import {IModel} from '../interfaces/IModel';
+import {ISchedule} from '../interfaces/ISchedule';
 
 export class Extension {
 
@@ -43,5 +44,13 @@ export class Extension {
         (rv[x[key]] = rv[x[key]] || []).push(x);
         return rv;
       }, {});
+    }
+
+    public static setScheduleDate(schedules: ISchedule[], property:string, targetId:string, value: Date) {
+      schedules.forEach(schedule => {
+        if(schedule.id===targetId) schedule[property]=value;
+      });
+
+      return schedules;
     }
   }

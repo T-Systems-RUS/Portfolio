@@ -89,6 +89,12 @@ export class Util {
     };
   }
 
+  /**
+   * Filters opened or completed or all projects
+   * @param {IProject[]} projects
+   * @param {string} completion
+   * @returns {IProject[]}
+   */
   static filterCompletedProjects(projects: IProject[], completion: string) {
     switch (completion) {
       case CompleteTypes.OPENED:
@@ -100,6 +106,12 @@ export class Util {
     }
   }
 
+  /**
+   * Checks if project if completed
+   * has to have enddate and date has to be in past
+   * @param {IProject} project
+   * @returns {boolean}
+   */
   static projectCompleted(project: IProject) {
     return Boolean(project.enddate) && (new Date(project.enddate) <= new Date());
   }
