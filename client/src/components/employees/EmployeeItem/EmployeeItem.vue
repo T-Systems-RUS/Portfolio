@@ -9,7 +9,7 @@
         {{ schedule.employee.firstname }} {{ schedule.employee.lastname }}
       </span>
       <div class="select">
-        <select>
+        <select v-model="role.id">
           <option
             v-for="role in roles"
             :key="role.id"
@@ -25,26 +25,43 @@
         <input
           class="input"
           type="text"
-          placeholder="Customer"
-          v-model="schedule.participation">
+          placeholder="Participation"
+          v-model="participation"
+          @input="$v.participation.$touch(); setParticipation">
+        <div v-if="$v.participation.$dirty">
+          <p
+            class="help is-danger is-size-7"
+            v-if="!$v.participation.required">Participation is required</p>
+          <p
+            class="help is-danger is-size-7"
+            v-if="!$v.participation.decimal">Participation must be decimal</p>
+        </div>
       </div>
       <div class="employee-item-block">
         <b-datepicker
           v-model="startdate"
           placeholder="Start date"
           icon="calendar-today"
-          @input="setDate($event, 'startdate')"
+          @input="$v.startdate.$touch();setDate($event, 'startdate')"
           :readonly="false"/>
         <b-datepicker
           v-model="enddate"
           placeholder="Start date"
           icon="calendar-today"
-          @input="setDate($event, 'enddate')"
+          @input="$v.enddate.$touch(); setDate($event, 'enddate')"
           :readonly="false"/>
+        <div v-if="$v.startdate.$dirty">
+          <p
+            class="help is-danger is-size-7"
+            v-if="!$v.startdate.required">Start date is required</p>
+          <p
+            class="help is-danger is-size-7"
+            v-if="$v.enddate && !$v.enddate.minValue">End date must be higher than a start date</p>
+        </div>
       </div>
     </div>
     <div class="employee-item-delete">
-      <a>
+      <a @click="removeSchedule">
         <img src="../../projects/Project/assets/trash.svg">
       </a>
     </div>
@@ -56,7 +73,12 @@
   import {ISchedule} from '../../../shared/interfaces/ISchedule';
   import {IRole} from '../../../shared/interfaces/IRole';
   import {ROLES} from '../../../store/modules/employees/getter-types';
-  import {SET_SCHEDULE_DATE} from '../../../store/modules/projects/mutation-types';
+  import {
+    REMOVE_PROJECT_SCHEDULE,
+    SET_SCHEDULE_DATE,
+    SET_SCHEDULE_PARTICIPATION
+  } from "../../../store/modules/projects/mutation-types";
+  import {decimal, minValue, required} from 'vuelidate/lib/validators';
 
   export default Vue.extend({
     props: {
@@ -67,9 +89,25 @@
     },
     data() {
       return {
+        role: this.schedule.role || {} as IRole,
         startdate: new Date(this.schedule.startdate),
-        enddate: new Date(this.schedule.enddate)
+        enddate: new Date(this.schedule.enddate),
+        participation: this.schedule.participation || 100.00
       }
+    },
+    validations() {
+      return {
+        startdate: {
+          required
+        },
+        enddate: {
+          minValue: minValue(this.startdate)
+        },
+        participation: {
+          required,
+          decimal
+        }
+      };
     },
     computed: {
       roles(): IRole[] {
@@ -78,7 +116,16 @@
     },
     methods: {
       setDate(date:Date,mutation: string) {
-        this.$store.commit(SET_SCHEDULE_DATE, { key:mutation, targetId:this.schedule.id, date })
+        this.$store.commit(SET_SCHEDULE_DATE, { key:mutation, targetId:this.schedule.employee.id, date })
+      },
+      setRole(role:IRole) {
+        console.log(role);
+      },
+      setParticipation() {
+        this.$store.commit(SET_SCHEDULE_PARTICIPATION, {targetId: this.schedule.employee.id, participation: this.participation });
+      },
+      removeSchedule() {
+        this.$store.commit(REMOVE_PROJECT_SCHEDULE, this.schedule.employee.id);
       }
     }
   });

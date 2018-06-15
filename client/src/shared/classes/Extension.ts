@@ -48,7 +48,15 @@ export class Extension {
 
     public static setScheduleDate(schedules: ISchedule[], property:string, targetId:string, value: Date) {
       schedules.forEach(schedule => {
-        if(schedule.id===targetId) schedule[property]=value;
+        if(schedule.employee.id===targetId) schedule[property]=value;
+      });
+
+      return schedules;
+    }
+
+    public static setScheduleParticipation(schedules: ISchedule[],  targetId:string, value: number) {
+      schedules.forEach(schedule => {
+        if(schedule.employee.id===targetId) schedule.participation=value;
       });
 
       return schedules;
