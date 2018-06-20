@@ -379,7 +379,6 @@
           return this.$store.getters[PROJECT_PROGRAM_ID];
         },
         set(value: string) {
-          console.log(this.schedules);
           this.$store.commit(SET_PROJECT_PROGRAM, this.$store.getters[ADDONS][Types.PROGRAM]
           .filter((program: IProgram) => program.id === value)[0]);
         }

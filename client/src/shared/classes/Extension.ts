@@ -1,5 +1,6 @@
 import {IModel} from '../interfaces/IModel';
 import {ISchedule} from '../interfaces/ISchedule';
+import {IRole} from '../interfaces/IRole';
 
 export class Extension {
 
@@ -49,6 +50,17 @@ export class Extension {
     public static setScheduleDate(schedules: ISchedule[], property:string, targetId:string, value: Date) {
       schedules.forEach(schedule => {
         if(schedule.employee.id===targetId) schedule[property]=value;
+      });
+
+      return schedules;
+    }
+
+    public static setScheduleRole(schedules: ISchedule[], targetId:string, role:IRole) {
+      schedules.forEach(schedule => {
+        if(schedule.employee.id===targetId) {
+          schedule.roleId = role.id;
+          schedule.role = role;
+        }
       });
 
       return schedules;

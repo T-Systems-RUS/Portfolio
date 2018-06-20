@@ -1,63 +1,84 @@
 <template>
   <div
-  class="employee-item">
+    class="employee-item">
     <img
       class="employee-item-image"
       src="../assets/person.svg">
-    <div class="employee-item-left">
-      <span class="title is-5 is-size-14">
-        {{ schedule.employee.firstname }} {{ schedule.employee.lastname }}
-      </span>
-      <div class="select">
-        <select v-model="role.id">
-          <option
-            v-for="role in roles"
-            :key="role.id"
-            :value="role.id">
-            {{ role.name }} ({{ role.seniority }})
-          </option>
-        </select>
-      </div>
-    </div>
-    <div class="employee-item-right is-pulled-right">
-      <div class="employee-item-block">
-        <span class="title is-5 is-size-12 is-marginless">Participation:</span>
-        <input
-          class="input"
-          type="text"
-          placeholder="Participation"
-          v-model="participation"
-          @input="$v.participation.$touch(); setParticipation">
-        <div v-if="$v.participation.$dirty">
-          <p
-            class="help is-danger is-size-7"
-            v-if="!$v.participation.required">Participation is required</p>
-          <p
-            class="help is-danger is-size-7"
-            v-if="!$v.participation.decimal">Participation must be decimal</p>
+    <div class="employee-item-content columns is-gapless is-marginless">
+      <div class="employee-item-left column">
+        <div>
+          <span class="title is-5 is-size-14">
+            {{ schedule.employee.firstname }} {{ schedule.employee.lastname }}
+          </span>
+        </div>
+        <div class="select">
+          <select v-model="roleId">
+            <option
+              v-for="role in roles"
+              :key="role.id"
+              :value="role.id">
+              {{ role.name }} ({{ role.seniority }})
+            </option>
+          </select>
         </div>
       </div>
-      <div class="employee-item-block">
-        <b-datepicker
-          v-model="startdate"
-          placeholder="Start date"
-          icon="calendar-today"
-          @input="$v.startdate.$touch();setDate($event, 'startdate')"
-          :readonly="false"/>
-        <b-datepicker
-          v-model="enddate"
-          placeholder="Start date"
-          icon="calendar-today"
-          @input="$v.enddate.$touch(); setDate($event, 'enddate')"
-          :readonly="false"/>
-        <div v-if="$v.startdate.$dirty">
-          <p
-            class="help is-danger is-size-7"
-            v-if="!$v.startdate.required">Start date is required</p>
-          <p
-            class="help is-danger is-size-7"
-            v-if="$v.enddate && !$v.enddate.minValue">End date must be higher than a start date</p>
+      <div class="employee-item-right column is-marginless">
+        <div>
+          <div>
+            <span class="title is-5 is-size-12 is-marginless">Participation(%):</span>
+            <!--<span-->
+              <!--class="title-->
+                     <!--is-6-->
+                     <!--is-size-12-->
+                     <!--is-pulled-right-->
+                     <!--employee-item-percent">%</span>-->
+            <input
+              class="input is-pulled-right"
+              type="text"
+              placeholder="Participation"
+              v-model="participation"
+              @input="$v.participation.$touch(); setParticipation">
+            <div
+              class="employee-item-error"
+              v-if="$v.participation.$dirty">
+              <p
+                class="help is-danger is-size-7"
+                v-if="!$v.participation.required">Participation is required</p>
+              <p
+                class="help is-danger is-size-7"
+                v-if="!$v.participation.decimal">Participation must be decimal</p>
+              <p
+                class="help is-danger is-size-7"
+                v-if="!$v.participation.between">Participation must be between 0 and 100</p>
+            </div>
+          </div>
         </div>
+        <div class="is-pushed-top">
+            <div>
+              <b-datepicker
+                v-model="startdate"
+                placeholder="Start date"
+                class="employee-item-datepicker"
+                @input="$v.startdate.$touch();setDate($event, 'startdate')"
+                :readonly="false"/>
+              <b-datepicker
+                v-model="enddate"
+                placeholder="End date"
+                class="employee-item-datepicker"
+                @input="$v.enddate.$touch(); setDate($event, 'enddate')"
+                :readonly="false"/>
+              <div v-if="$v.startdate.$dirty">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.startdate.required">Start date is required</p>
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="$v.enddate && !$v.enddate.minValue">End date must be higher than a start date</p>
+              </div>
+            </div>
+        </div>
+
+
       </div>
     </div>
     <div class="employee-item-delete">
@@ -76,9 +97,9 @@
   import {
     REMOVE_PROJECT_SCHEDULE,
     SET_SCHEDULE_DATE,
-    SET_SCHEDULE_PARTICIPATION
+    SET_SCHEDULE_PARTICIPATION, SET_SCHEDULE_ROLE
   } from "../../../store/modules/projects/mutation-types";
-  import {decimal, minValue, required} from 'vuelidate/lib/validators';
+  import {decimal, minValue, required, between} from 'vuelidate/lib/validators';
 
   export default Vue.extend({
     props: {
@@ -89,7 +110,6 @@
     },
     data() {
       return {
-        role: this.schedule.role || {} as IRole,
         startdate: new Date(this.schedule.startdate),
         enddate: new Date(this.schedule.enddate),
         participation: this.schedule.participation || 100.00
@@ -105,13 +125,24 @@
         },
         participation: {
           required,
-          decimal
+          decimal,
+          between: between(0, 100)
         }
       };
     },
     computed: {
       roles(): IRole[] {
         return this.$store.getters[ROLES];
+      },
+      roleId: {
+        get(): string {
+          return this.schedule.role.id || this.roles[0].id;
+        },
+        set(value: string) {
+          console.log(value);
+          this.$store.commit(SET_SCHEDULE_ROLE, {targetId: this.schedule.employee.id,
+            role: this.roles.filter(role => role.id !== value)[0]});
+        }
       }
     },
     methods: {
@@ -145,25 +176,42 @@
     padding: 13px;
     width: 420px;
 
-    &-block {
-      display: flex;
-      align-items: center;
+    &-image {
+      margin-right: 10px;
     }
 
     &:last-child {
       border-bottom: 1px solid $border-color;
     }
 
-    &-left {
-      flex: 2;
-      padding-left: $padding;
+    &-percent {
+      margin: 4px 0 0 3px;
     }
+
+    &-content {
+      flex: 2;
+    }
+
+    &-delete {
+      padding-left: 5px;
+    }
+
+    &-error {
+      position: absolute;
+      background-color: $white;
+
+    }
+  }
+
+  .is-pushed-top {
+    margin-top: -6px;
   }
 
   .select {
     display: block;
     height: 20px;
     max-width: 140px;
+
 
     select {
       height: 20px;

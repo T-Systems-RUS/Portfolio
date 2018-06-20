@@ -6,6 +6,7 @@ export class ModelFactory {
   static createSchedule(employee: IEmployee, projectId?: string, role? :IRole): ISchedule {
     return {
       id:'',
+      active: false,
       employee,
       employeeId: employee ? employee.id : '',
       role: role || {} as IRole,

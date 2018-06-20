@@ -32,7 +32,8 @@ import {
   SET_PROJECT_DESCRIPTION,
   SET_PROJECT_CUSTOMERS,
   SET_PROJECT_SCHEDULES,
-  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION, SET_SCHEDULE_DATE, REMOVE_PROJECT_SCHEDULE, SET_SCHEDULE_PARTICIPATION
+  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION, SET_SCHEDULE_DATE, REMOVE_PROJECT_SCHEDULE, SET_SCHEDULE_PARTICIPATION,
+  SET_SCHEDULE_ROLE
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
@@ -145,6 +146,9 @@ export const mutations: MutationTree<IProjectState> = {
         payload.targetId,
         payload.date
       );
+  },
+  [SET_SCHEDULE_ROLE](state, payload: {targetId:string, role:IRole }) {
+    state.project.schedules = Extension.setScheduleRole(state.project.schedules, payload.targetId, payload.role);
   },
   [REMOVE_PROJECT_SCHEDULE](state, targetId:string) {
     state.project.schedules = state.project.schedules.filter(schedule => schedule.employee.id !== targetId);
