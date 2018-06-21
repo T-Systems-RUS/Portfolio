@@ -1,6 +1,8 @@
 import {ActionTree} from 'vuex';
 import {ProjectService} from './project.service';
 import {IProjectState} from './index';
+import {Routes} from './../../../router/index';
+import router from './../../../router/index';
 
 
 import {
@@ -9,12 +11,11 @@ import {
   FETCH_PROJECT,
   FETCH_PROJECT_WITH_IMAGE,
   FETCH_PROJECTS,
-  FETCH_ROLES,
   GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE
 } from './action-types';
 
 import {
-  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS, SET_ROLES,
+  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS,
   SET_TYPES
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
@@ -55,13 +56,6 @@ export const actions: ActionTree<IProjectState, {}> = {
       });
   },
 
-  [FETCH_ROLES]({commit}) {
-    return service.getRoles()
-      .then(response => {
-        commit(SET_ROLES, response.data);
-      });
-  },
-
   [FETCH_ADDONS]({commit}) {
     return service.getProjectAddons()
       .then(response => {
@@ -75,7 +69,8 @@ export const actions: ActionTree<IProjectState, {}> = {
   },
 
   [DELETE_PROJECT]({commit}, id:string) {
-    return service.deleteProject(id);
+    return service.deleteProject(id)
+      .then(() => router.push({name: Routes.Projects}));
   },
 
   [GENERATE_PRESENTATION]({getters}) {

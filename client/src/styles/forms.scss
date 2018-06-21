@@ -124,6 +124,25 @@ $button-box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
   }
 }
 
+.employee-item-datepicker {
+  display: inline-block;
+  margin-right: 25px;
+
+  .input {
+    font-size: 12px;
+    min-width: 75px;
+    height: 20px;
+
+    &::placeholder {
+      font-size: 12px;
+    }
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
 .button {
   transition: $transition-default;
   width: 100%;

@@ -18,7 +18,6 @@ import {
   SORT,
   SORT_FIELD_NAME,
   SORT_REVERSE,
-  ROLES,
   PROJECT_NAME,
   PROJECT_PROGRAM_ID,
   PROJECT_DOMAIN_ID,
@@ -28,7 +27,7 @@ import {
   PROJECT_DESCRIPTION,
   PROJECT_CUSTOMERS,
   PROJECT_SCHEDULES,
-  PROJECT_TECHNOLOGIES_GROUPED, PROJECT_PSS, COMPLETION
+  PROJECT_TECHNOLOGIES_GROUPED, PROJECT_PSS, COMPLETION, PROJECT_EMPLOYEES
 } from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
@@ -164,7 +163,6 @@ export const getters: GetterTree<IProjectState, {}> = {
   },
 
   [PROJECT_TECHNOLOGIES_GROUPED]: state => Extension.groupBy(state.project.technologies, 'domain'),
-  [ROLES]: state => state.roles,
   // Project page and edit form
   [PROJECT]: state => state.project,
   [PROJECT_NAME]: state => state.project.name,
@@ -177,5 +175,6 @@ export const getters: GetterTree<IProjectState, {}> = {
   [PROJECT_PSS]: state => state.project.pss,
   [PROJECT_CUSTOMERS]: state => state.project.customers,
   [PROJECT_SCHEDULES]: state => state.project.schedules,
-  [PROJECT_TECHNOLOGIES]: state => state.project.technologies
+  [PROJECT_TECHNOLOGIES]: state => state.project.technologies,
+  [PROJECT_EMPLOYEES]: state => state.project.schedules.map(schedule => schedule.employee)
 };

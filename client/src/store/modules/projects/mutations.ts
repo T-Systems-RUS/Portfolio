@@ -23,7 +23,6 @@ import {
   SET_SORT,
   SET_SORT_REVERSE,
   SET_TYPES,
-  SET_ROLES,
   SET_PROJECT_NAME,
   SET_PROJECT_PROGRAM,
   SET_PROJECT_DOMAIN,
@@ -33,7 +32,8 @@ import {
   SET_PROJECT_DESCRIPTION,
   SET_PROJECT_CUSTOMERS,
   SET_PROJECT_SCHEDULES,
-  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION
+  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION, SET_SCHEDULE_DATE, REMOVE_PROJECT_SCHEDULE, SET_SCHEDULE_PARTICIPATION,
+  SET_SCHEDULE_ROLE
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
@@ -99,10 +99,6 @@ export const mutations: MutationTree<IProjectState> = {
   [SET_SORT_REVERSE](state, reverse: boolean) {
     state.sortReverse = reverse;
   },
-  [SET_ROLES](state, payload: IRole[]) {
-    state.roles = payload;
-    state.loading = false;
-  },
   [SET_PROJECT_NAME](state, name: string) {
     state.project.name = name;
   },
@@ -135,5 +131,26 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_PROJECT_TECHNOLOGIES](state, technologies: ITechnology[]) {
     state.project.technologies = technologies;
+  },
+  [SET_SCHEDULE_PARTICIPATION](state, payload: {targetId:string, participation:number}){
+    state.project.schedules = Extension.setScheduleParticipation(
+      state.project.schedules,
+      payload.targetId,
+      payload.participation
+    );
+  },
+  [SET_SCHEDULE_DATE](state, payload: { key:string, targetId:string, date: Date}){
+    state.project.schedules = Extension.setScheduleDate(
+        state.project.schedules,
+        payload.key,
+        payload.targetId,
+        payload.date
+      );
+  },
+  [SET_SCHEDULE_ROLE](state, payload: {targetId:string, role:IRole }) {
+    state.project.schedules = Extension.setScheduleRole(state.project.schedules, payload.targetId, payload.role);
+  },
+  [REMOVE_PROJECT_SCHEDULE](state, targetId:string) {
+    state.project.schedules = state.project.schedules.filter(schedule => schedule.employee.id !== targetId);
   }
 };

@@ -1,4 +1,6 @@
 import {IModel} from '../interfaces/IModel';
+import {ISchedule} from '../interfaces/ISchedule';
+import {IRole} from '../interfaces/IRole';
 
 export class Extension {
 
@@ -43,5 +45,54 @@ export class Extension {
         (rv[x[key]] = rv[x[key]] || []).push(x);
         return rv;
       }, {});
+    }
+
+  /**
+   * Set start/end date for schedule
+   * @param {ISchedule[]} schedules
+   * @param {string} property startdate or enddate
+   * @param {string} targetId id of employee of schedule
+   * @param {Date} value
+   * @returns {ISchedule[]}
+   */
+    public static setScheduleDate(schedules: ISchedule[], property:string, targetId:string, value: Date) {
+      schedules.forEach(schedule => {
+        if(schedule.employee.id===targetId) schedule[property]=value;
+      });
+
+      return schedules;
+    }
+
+  /**
+   * Set role of selected schedule
+   * @param {ISchedule[]} schedules
+   * @param {string} targetId id of employee of schedule
+   * @param {IRole} role to be set
+   * @returns {ISchedule[]}
+   */
+    public static setScheduleRole(schedules: ISchedule[], targetId:string, role:IRole) {
+      schedules.forEach(schedule => {
+        if(schedule.employee.id===targetId) {
+          schedule.roleId = role.id;
+          schedule.role = role;
+        }
+      });
+
+      return schedules;
+    }
+
+  /**
+   * Set participation of schedule
+   * @param {ISchedule[]} schedules
+   * @param {string} targetId id of employee of schedule
+   * @param {number} value
+   * @returns {ISchedule[]}
+   */
+    public static setScheduleParticipation(schedules: ISchedule[],  targetId:string, value: number) {
+      schedules.forEach(schedule => {
+        if(schedule.employee.id===targetId) schedule.participation=value;
+      });
+
+      return schedules;
     }
   }
