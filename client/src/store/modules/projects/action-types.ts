@@ -4,6 +4,8 @@ export const FETCH_PROJECTS = 'projects/FETCH_PROJECTS';
 export const FETCH_PROJECT = 'projects/FETCH_PROJECT';
 export const FETCH_PROJECT_WITH_IMAGE = 'FETCH_PROJECT_WITH_IMAGE';
 
+export const EDIT_PROJECT = 'projects/EDIT_PROJECT';
+
 export const DELETE_PROJECT = 'projects/DELETE_PROJECT';
 
 export const GENERATE_PRESENTATION = 'GENERATE_PRESENTATION';

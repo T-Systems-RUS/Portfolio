@@ -1,5 +1,6 @@
 import {HttpClientService} from '../../http/http-client.service';
 import {routes} from '../../http/routes';
+import {IProject} from '../../../shared/interfaces/IProject';
 
 export class ProjectService extends HttpClientService{
 
@@ -13,6 +14,10 @@ export class ProjectService extends HttpClientService{
 
   getProjectAddons() {
     return this.get(routes.GET_PROJECT_ADDONS);
+  }
+
+  editProject(data:IProject) {
+    return this.post(routes.EDIT_PROJECT, data);
   }
 
   deleteProject(id:string) {

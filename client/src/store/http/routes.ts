@@ -5,5 +5,6 @@ export enum routes {
   GET_TECHNOLOGIES = '/api/technologies',
   GET_ROLES = '/api/roles',
   GET_EMPLOYEES = '/api/employees',
+  EDIT_PROJECT = '/api/projects/update',
   DELETE_PROJECT = '/api/projects/delete/'
 }

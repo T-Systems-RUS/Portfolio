@@ -271,7 +271,8 @@
                is-size-6
                is-width-auto
                is-pulled-right"
-          :disabled="$v.$invalid">
+          :disabled="$v.$invalid"
+          @click="editProject">
           Save
         </button>
         <button
@@ -295,9 +296,10 @@
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {
+    EDIT_PROJECT,
     FETCH_ADDONS,
     FETCH_PROJECT_WITH_IMAGE
-  } from '../../../store/modules/projects/action-types';
+  } from "../../../store/modules/projects/action-types";
   import {FETCH_ROLES, FETCH_EMPLOYEES} from '../../../store/modules/employees/action-types';
   import {
     ADDONS,
@@ -474,6 +476,9 @@
       },
       setEndDate() {
         this.$store.commit(SET_PROJECT_END_DATE, this.endDate);
+      },
+      editProject() {
+        this.$store.dispatch(EDIT_PROJECT);
       }
     }
   });

@@ -6,7 +6,7 @@ import router from './../../../router/index';
 
 
 import {
-  DELETE_PROJECT,
+  DELETE_PROJECT, EDIT_PROJECT,
   FETCH_ADDONS,
   FETCH_PROJECT,
   FETCH_PROJECT_WITH_IMAGE,
@@ -66,6 +66,11 @@ export const actions: ActionTree<IProjectState, {}> = {
         commit(SET_CUSTOMERS, response.data.customers);
         commit(FINISH_LOADING);
       });
+  },
+
+  [EDIT_PROJECT]({state}) {
+    return service.editProject(state.project)
+      .then((response) => router.push({name: Routes.Project, params: { id: response.data.id }}));
   },
 
   [DELETE_PROJECT]({commit}, id:string) {
