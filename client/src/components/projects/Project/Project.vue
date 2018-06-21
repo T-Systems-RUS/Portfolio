@@ -177,8 +177,7 @@
         this.modalVisible = false;
       },
       deleteProject() {
-        this.$store.dispatch(DELETE_PROJECT, this.project.uniqueId)
-          .then(() => this.$router.push({name: Routes.Projects}));
+        this.$store.dispatch(DELETE_PROJECT, this.project.uniqueId);
       }
     }
   });

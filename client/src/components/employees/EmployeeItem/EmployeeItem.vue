@@ -58,7 +58,9 @@
         <img src="../../projects/Project/assets/trash.svg">
       </a>
     </div>
-    <div class="employee-item-error">
+    <div
+      class="employee-item-error"
+      :class="{'is-pushed': $v.startdate.$dirty || $v.participation.$dirty}">
       <div v-if="$v.startdate.$dirty">
         <p
           class="help is-danger is-size-7"
@@ -105,7 +107,7 @@
     data() {
       return {
         startdate: new Date(this.schedule.startdate),
-        enddate: new Date(this.schedule.enddate),
+        enddate: this.schedule.enddate ? new Date(this.schedule.enddate) : null,
         participation: this.schedule.participation || 100.00
       }
     },
@@ -133,18 +135,14 @@
           return this.schedule.role.id || this.roles[0].id;
         },
         set(value: string) {
-          console.log(value);
           this.$store.commit(SET_SCHEDULE_ROLE, {targetId: this.schedule.employee.id,
-            role: this.roles.filter(role => role.id !== value)[0]});
+            role: this.roles.filter(role => role.id === value)[0]});
         }
       }
     },
     methods: {
       setDate(date:Date,mutation: string) {
         this.$store.commit(SET_SCHEDULE_DATE, { key:mutation, targetId:this.schedule.employee.id, date })
-      },
-      setRole(role:IRole) {
-        console.log(role);
       },
       setParticipation() {
         this.$store.commit(SET_SCHEDULE_PARTICIPATION, {targetId: this.schedule.employee.id, participation: this.participation });
@@ -199,7 +197,10 @@
 
     &-error {
       width: 100%;
-      margin-top: 10px;
+
+      &.is-pushed {
+        margin-top: 10px;
+      }
     }
   }
 

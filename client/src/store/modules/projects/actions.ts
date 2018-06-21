@@ -1,6 +1,8 @@
 import {ActionTree} from 'vuex';
 import {ProjectService} from './project.service';
 import {IProjectState} from './index';
+import {Routes} from './../../../router/index';
+import router from './../../../router/index';
 
 
 import {
@@ -67,7 +69,8 @@ export const actions: ActionTree<IProjectState, {}> = {
   },
 
   [DELETE_PROJECT]({commit}, id:string) {
-    return service.deleteProject(id);
+    return service.deleteProject(id)
+      .then(() => router.push({name: Routes.Projects}));
   },
 
   [GENERATE_PRESENTATION]({getters}) {

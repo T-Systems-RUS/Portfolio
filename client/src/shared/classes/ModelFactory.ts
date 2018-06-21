@@ -13,7 +13,6 @@ export class ModelFactory {
       roleId: role ? role.id : '',
       projectId: projectId || '',
       startdate: new Date(),
-      enddate: new Date(),
       createdAt: new Date(),
       updatedAt: new Date(),
       participation: 100.00
