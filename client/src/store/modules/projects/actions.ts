@@ -6,6 +6,7 @@ import router from './../../../router/index';
 
 
 import {
+  CREATE_PROJECT,
   DELETE_PROJECT, EDIT_PROJECT,
   FETCH_ADDONS,
   FETCH_PROJECT,
@@ -66,6 +67,11 @@ export const actions: ActionTree<IProjectState, {}> = {
         commit(SET_CUSTOMERS, response.data.customers);
         commit(FINISH_LOADING);
       });
+  },
+
+  [CREATE_PROJECT]({state}) {
+    return service.createProject(state.project)
+      .then(() => router.push({name: Routes.Projects}));
   },
 
   [EDIT_PROJECT]({state}) {

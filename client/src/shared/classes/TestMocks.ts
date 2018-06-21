@@ -7,6 +7,7 @@ import {ILine} from '../interfaces/ILine';
 import {ISchedule} from '../interfaces/ISchedule';
 import {ITechnology} from '../interfaces/ITechnology';
 import {IEmployee} from '../interfaces/IEmployee';
+import Guid from './Guid';
 
 export class TestMocks {
   static TestDomain(domainName: string = 'Health') {
@@ -142,6 +143,7 @@ export class TestMocks {
       enddate: new Date().toLocaleDateString(),
       createdAt: new Date(),
       updatedAt: new Date(),
+      uniqueId: Guid.newGuid(),
       pss: 0
     };
 

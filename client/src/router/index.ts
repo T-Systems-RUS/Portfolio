@@ -8,8 +8,7 @@ Vue.use(Router);
 
 export enum Routes {
   Projects = 'Projects',
-  Project = 'Project',
-  Change = 'Change'
+  Project = 'Project'
 }
 
 export default new Router({
@@ -20,16 +19,19 @@ export default new Router({
       name: Routes.Projects
     },
     {
+      path: '/projects/create',
+      component: ProjectChange
+    },
+    {
       path: '/projects/:id',
       component: Project,
       props: true,
       name: Routes.Project
     },
     {
-      path: '/projects/:id/:mode',
+      path: '/projects/:id/edit',
       component: ProjectChange,
-      props: true,
-      name: Routes.Change
+      props: true
     }
   ]
 });

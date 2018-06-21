@@ -274,7 +274,7 @@
                is-width-auto
                is-pulled-right"
           :disabled="$v.$invalid"
-          @click="editProject">
+          @click="saveProject">
           Save
         </button>
         <button
@@ -298,6 +298,7 @@
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {
+    CREATE_PROJECT,
     EDIT_PROJECT,
     FETCH_ADDONS,
     FETCH_PROJECT_WITH_IMAGE
@@ -313,6 +314,7 @@
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
   import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
   import {
+    SET_PROJECT,
     SET_PROJECT_CUSTOMERS,
     SET_PROJECT_DESCRIPTION,
     SET_PROJECT_DOMAIN,
@@ -324,7 +326,7 @@
     SET_PROJECT_START_DATE,
     SET_PROJECT_TECHNOLOGIES,
     SET_PROJECT_TYPE
-  } from '../../../store/modules/projects/mutation-types';
+  } from "../../../store/modules/projects/mutation-types";
   import {Util} from '../../../shared/classes/Util';
   import {Types} from '../../../store/modules/projects/constant-types';
   import {ICustomer} from '../../../shared/interfaces/ICustomer';
@@ -336,6 +338,7 @@
   import {EMPLOYEES, ROLES} from "../../../store/modules/employees/getter-types";
   import {IEmployee} from '../../../shared/interfaces/IEmployee';
   import {ModelFactory} from '../../../shared/classes/ModelFactory';
+  import {IProject} from "../../../shared/interfaces/IProject";
 
   interface IData {
     filteredTechnologies: {}[];
@@ -362,10 +365,6 @@
     props: {
       id: {
         type: String
-      },
-      mode: {
-        type: String,
-        default: 'edit'
       }
     },
     computed: {
@@ -434,16 +433,20 @@
       };
     },
     mounted() {
-      this.$store.dispatch(FETCH_PROJECT_WITH_IMAGE, this.id)
-        .then(() => {
-          // Hack necessary due to https://github.com/buefy/buefy/issues/700
-          // TODO change to actual computed+getter after fixed
-          this.startDate = new Date(this.$store.getters[PROJECT_START_DATE]);
-          const endDate = this.$store.getters[PROJECT_END_DATE];
-          if (endDate) {
-            this.endDate = new Date(endDate);
-          }
-        });
+      if(this.id) {
+        this.$store.dispatch(FETCH_PROJECT_WITH_IMAGE, this.id)
+          .then(() => {
+            // Hack necessary due to https://github.com/buefy/buefy/issues/700
+            // TODO change to actual computed+getter after fixed
+            this.startDate = new Date(this.$store.getters[PROJECT_START_DATE]);
+            const endDate = this.$store.getters[PROJECT_END_DATE];
+            if (endDate) {
+              this.endDate = new Date(endDate);
+            }
+          });
+      } else {
+        this.$store.commit(SET_PROJECT, ModelFactory.createProject());
+      }
       this.$store.dispatch(FETCH_TECHNOLOGIES);
       this.$store.dispatch(FETCH_ADDONS);
       this.$store.dispatch(FETCH_ROLES);
@@ -468,7 +471,7 @@
       selectEmployee(employee: IEmployee) {
         if (employee) {
           const updatedSchedules = [
-            ModelFactory.createSchedule(employee, this.id.toString(), this.$store.getters[ROLES][0]),
+            ModelFactory.createSchedule(employee, '', this.$store.getters[ROLES][0]),
             ...this.schedules
           ];
 
@@ -484,8 +487,12 @@
       setEndDate() {
         this.$store.commit(SET_PROJECT_END_DATE, this.endDate);
       },
-      editProject() {
-        this.$store.dispatch(EDIT_PROJECT);
+      saveProject() {
+        if(this.id) {
+          this.$store.dispatch(EDIT_PROJECT);
+        } else {
+          this.$store.dispatch(CREATE_PROJECT);
+        }
       }
     }
   });

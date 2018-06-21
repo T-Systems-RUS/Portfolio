@@ -68,7 +68,7 @@ const projectService = {
     domainId: project.domain.id,
     typeId: project.type.id,
     startdate: project.startdate,
-    enddate: project.enddate
+    enddate: project.enddate || null
   })
     .then(projectNew =>
       // return project only after technologies added

@@ -1,7 +1,7 @@
 <template>
   <footer class="footer container">
     <router-link
-      :to="{ name: 'Change', params: { mode: 'edit' }}"
+      to="edit"
       append
       class="footer-button">
       <img src="./assets/edit.svg">
