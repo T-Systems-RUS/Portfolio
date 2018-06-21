@@ -47,6 +47,14 @@ export class Extension {
       }, {});
     }
 
+  /**
+   * Set start/end date for schedule
+   * @param {ISchedule[]} schedules
+   * @param {string} property startdate or enddate
+   * @param {string} targetId id of employee of schedule
+   * @param {Date} value
+   * @returns {ISchedule[]}
+   */
     public static setScheduleDate(schedules: ISchedule[], property:string, targetId:string, value: Date) {
       schedules.forEach(schedule => {
         if(schedule.employee.id===targetId) schedule[property]=value;
@@ -55,6 +63,13 @@ export class Extension {
       return schedules;
     }
 
+  /**
+   * Set role of selected schedule
+   * @param {ISchedule[]} schedules
+   * @param {string} targetId id of employee of schedule
+   * @param {IRole} role to be set
+   * @returns {ISchedule[]}
+   */
     public static setScheduleRole(schedules: ISchedule[], targetId:string, role:IRole) {
       schedules.forEach(schedule => {
         if(schedule.employee.id===targetId) {
@@ -66,6 +81,13 @@ export class Extension {
       return schedules;
     }
 
+  /**
+   * Set participation of schedule
+   * @param {ISchedule[]} schedules
+   * @param {string} targetId id of employee of schedule
+   * @param {number} value
+   * @returns {ISchedule[]}
+   */
     public static setScheduleParticipation(schedules: ISchedule[],  targetId:string, value: number) {
       schedules.forEach(schedule => {
         if(schedule.employee.id===targetId) schedule.participation=value;

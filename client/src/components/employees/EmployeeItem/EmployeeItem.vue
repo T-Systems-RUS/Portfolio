@@ -26,31 +26,11 @@
         <div>
           <div>
             <span class="title is-5 is-size-12 is-marginless">Participation(%):</span>
-            <!--<span-->
-              <!--class="title-->
-                     <!--is-6-->
-                     <!--is-size-12-->
-                     <!--is-pulled-right-->
-                     <!--employee-item-percent">%</span>-->
             <input
               class="input is-pulled-right"
               type="text"
-              placeholder="Participation"
               v-model="participation"
               @input="$v.participation.$touch(); setParticipation">
-            <div
-              class="employee-item-error"
-              v-if="$v.participation.$dirty">
-              <p
-                class="help is-danger is-size-7"
-                v-if="!$v.participation.required">Participation is required</p>
-              <p
-                class="help is-danger is-size-7"
-                v-if="!$v.participation.decimal">Participation must be decimal</p>
-              <p
-                class="help is-danger is-size-7"
-                v-if="!$v.participation.between">Participation must be between 0 and 100</p>
-            </div>
           </div>
         </div>
         <div class="is-pushed-top">
@@ -67,14 +47,6 @@
                 class="employee-item-datepicker"
                 @input="$v.enddate.$touch(); setDate($event, 'enddate')"
                 :readonly="false"/>
-              <div v-if="$v.startdate.$dirty">
-                <p
-                  class="help is-danger is-size-7"
-                  v-if="!$v.startdate.required">Start date is required</p>
-                <p
-                  class="help is-danger is-size-7"
-                  v-if="$v.enddate && !$v.enddate.minValue">End date must be higher than a start date</p>
-              </div>
             </div>
         </div>
 
@@ -85,6 +57,28 @@
       <a @click="removeSchedule">
         <img src="../../projects/Project/assets/trash.svg">
       </a>
+    </div>
+    <div class="employee-item-error">
+      <div v-if="$v.startdate.$dirty">
+        <p
+          class="help is-danger is-size-7"
+          v-if="!$v.startdate.required">Start date is required</p>
+        <p
+          class="help is-danger is-size-7"
+          v-if="$v.enddate && !$v.enddate.minValue">End date must be higher than a start date</p>
+      </div>
+      <div
+        v-if="$v.participation.$dirty">
+        <p
+          class="help is-danger is-size-7"
+          v-if="!$v.participation.required">Participation is required</p>
+        <p
+          class="help is-danger is-size-7"
+          v-if="!$v.participation.decimal">Participation must be decimal</p>
+        <p
+          class="help is-danger is-size-7"
+          v-if="!$v.participation.between">Participation must be between 0 and 100</p>
+      </div>
     </div>
   </div>
 </template>
@@ -167,9 +161,12 @@
 
   $padding: 10px;
   $mb: 20px;
+  $delete-image-size: 15px;
+  $input-font-size: 12px;
 
   .employee-item{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     border: 1px solid $border-color;
     border-bottom: none;
@@ -193,13 +190,16 @@
     }
 
     &-delete {
-      padding-left: 5px;
+      padding-left: $delete-image-size;
+
+      img {
+        height: $delete-image-size;
+      }
     }
 
     &-error {
-      position: absolute;
-      background-color: $white;
-
+      width: 100%;
+      margin-top: 10px;
     }
   }
 
@@ -225,7 +225,8 @@
   .control, .input {
     width: 50px;
     height: 20px;
-    font-size: 12px;
+    font-size: $input-font-size;
+
   }
 
 
