@@ -8,7 +8,9 @@
       <span class="title is-5 is-size-14">
         {{ schedule.employee.firstname }} {{ schedule.employee.lastname }}
       </span>
-      <span class="title is-4 is-size-14 is-block"> {{ schedule.role.name }}</span>
+      <span
+        class="title is-4 is-size-14 is-block"
+        v-if="schedule.role"> {{ schedule.role.name }}</span>
     </div>
     <div class="list-item-right is-pulled-right">
       <p class="title is-4 is-size-14">{{ schedule.participation }}%</p>

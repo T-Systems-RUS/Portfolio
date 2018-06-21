@@ -30,7 +30,7 @@
               class="input is-pulled-right"
               type="text"
               v-model="participation"
-              @input="$v.participation.$touch(); setParticipation">
+              @input="$v.participation.$touch(); setParticipation()">
           </div>
         </div>
         <div class="is-pushed-top">
@@ -109,7 +109,7 @@
       return {
         startdate: new Date(this.schedule.startdate),
         enddate: this.schedule.enddate ? new Date(this.schedule.enddate) : null,
-        participation: this.schedule.participation || 100.00
+        participation: this.schedule.participation
       };
     },
     validations() {
@@ -133,7 +133,7 @@
       },
       roleId: {
         get(): string {
-          return this.schedule.role.id || this.roles[0].id;
+          return this.schedule.role.id;
         },
         set(value: string) {
           this.$store.commit(SET_SCHEDULE_ROLE, {targetId: this.schedule.employee.id,

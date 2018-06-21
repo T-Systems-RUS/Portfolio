@@ -172,6 +172,9 @@
                 <p
                   class="help is-danger is-size-7"
                   v-if="!$v.pss.decimal">PSS must be decimal</p>
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.pss.between">PSS must be between 0 and 5</p>
               </div>
             </div>
           </Stepper>
@@ -207,10 +210,33 @@
             </div>
           </Stepper>
         </div>
-
         <div class="field centered-margin">
           <Stepper
             step="5"
+            name="Project image">
+            <div class="field">
+              <div class="control">
+                <FileUploader
+                  :is-image-upload="true"
+                  :is-multiple="false">
+                  <span slot="button-text">Select project image</span>
+                  <span slot="upload-title">Upload project image</span>
+                  <span slot="upload-optional">Select an image to upload from your computer</span>
+                  <div
+                    slot="upload-info"
+                    class="has-text-centered">
+                    <p class="is-size-6">Maximum file size: 10 MB</p>
+                    <p class="is-size-6">Supported file formats: jpg, jpeg, png</p>
+                  </div>
+                  <template slot="upload-btn-text">Upload</template>
+                </FileUploader>
+              </div>
+            </div>
+          </Stepper>
+        </div>
+        <div class="field centered-margin">
+          <Stepper
+            step="6"
             name="Team">
             <div class="field">
               <div class="control">
@@ -240,30 +266,6 @@
           </Stepper>
         </div>
       </div>
-      <div class="field centered-margin">
-        <Stepper
-          step="6"
-          name="Project image">
-          <div class="field">
-            <div class="control">
-              <FileUploader
-                :is-image-upload="true"
-                :is-multiple="false">
-                <span slot="button-text">Select project image</span>
-                <span slot="upload-title">Upload project image</span>
-                <span slot="upload-optional">Select an image to upload from your computer</span>
-                <div
-                  slot="upload-info"
-                  class="has-text-centered">
-                  <p class="is-size-6">Maximum file size: 10 MB</p>
-                  <p class="is-size-6">Supported file formats: jpg, jpeg, png</p>
-                </div>
-                <template slot="upload-btn-text">Upload</template>
-              </FileUploader>
-            </div>
-          </div>
-        </Stepper>
-      </div>
       <div class="project-change-footer">
         <button
           class="button
@@ -292,7 +294,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {decimal, minValue, required} from 'vuelidate/lib/validators';
+  import {between, decimal, minValue, required} from "vuelidate/lib/validators";
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {
@@ -331,7 +333,7 @@
   import {IType} from '../../../shared/interfaces/IType';
   import {IDomain} from '../../../shared/interfaces/IDomain';
   import {IProgram} from '../../../shared/interfaces/IProgram';
-  import {EMPLOYEES} from '../../../store/modules/employees/getter-types';
+  import {EMPLOYEES, ROLES} from "../../../store/modules/employees/getter-types";
   import {IEmployee} from '../../../shared/interfaces/IEmployee';
   import {ModelFactory} from '../../../shared/classes/ModelFactory';
 
@@ -360,6 +362,10 @@
     props: {
       id: {
         type: String
+      },
+      mode: {
+        type: String,
+        default: 'edit'
       }
     },
     computed: {
@@ -422,7 +428,8 @@
           required
         },
         pss: {
-          decimal
+          decimal,
+          between: between(0,5)
         }
       };
     },
@@ -461,7 +468,7 @@
       selectEmployee(employee: IEmployee) {
         if (employee) {
           const updatedSchedules = [
-            ModelFactory.createSchedule(employee, this.id.toString()),
+            ModelFactory.createSchedule(employee, this.id.toString(), this.$store.getters[ROLES][0]),
             ...this.schedules
           ];
 

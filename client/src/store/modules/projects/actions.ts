@@ -70,7 +70,7 @@ export const actions: ActionTree<IProjectState, {}> = {
 
   [EDIT_PROJECT]({state}) {
     return service.editProject(state.project)
-      .then((response) => router.push({name: Routes.Project, params: { id: response.data.id }}));
+      .then((response) => router.push({name: Routes.Project, params: { id: String(response.data.id) }}));
   },
 
   [DELETE_PROJECT]({commit}, id:string) {
