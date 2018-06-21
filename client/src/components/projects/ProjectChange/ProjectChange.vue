@@ -224,7 +224,7 @@
                   icon="magnify"
                   @select="selectEmployee">
                   <template slot-scope="props">
-                    {{props.option.firstname}} {{props.option.lastname}}
+                    {{ props.option.firstname }} {{ props.option.lastname }}
                     <img
                       class="tag-image"
                       src="../../employees/assets/person.svg">
@@ -298,13 +298,13 @@
     FETCH_ADDONS,
     FETCH_PROJECT_WITH_IMAGE
   } from '../../../store/modules/projects/action-types';
-  import {FETCH_ROLES, FETCH_EMPLOYEES} from "../../../store/modules/employees/action-types";
+  import {FETCH_ROLES, FETCH_EMPLOYEES} from '../../../store/modules/employees/action-types';
   import {
     ADDONS,
     PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_EMPLOYEES, PROJECT_END_DATE,
     PROJECT_NAME,
     PROJECT_PROGRAM_ID, PROJECT_PSS, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE_ID
-  } from "../../../store/modules/projects/getter-types";
+  } from '../../../store/modules/projects/getter-types';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
   import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
@@ -330,7 +330,7 @@
   import {IDomain} from '../../../shared/interfaces/IDomain';
   import {IProgram} from '../../../shared/interfaces/IProgram';
   import {EMPLOYEES} from '../../../store/modules/employees/getter-types';
-  import {IEmployee} from "../../../shared/interfaces/IEmployee";
+  import {IEmployee} from '../../../shared/interfaces/IEmployee';
   import {ModelFactory} from '../../../shared/classes/ModelFactory';
 
   interface IData {
@@ -350,7 +350,7 @@
       return {
         filteredTechnologies: [],
         filteredCustomers: [],
-        employee:'',
+        employee: '',
         startDate: null,
         endDate: null
       };
@@ -369,10 +369,10 @@
       technologies: Util.mapTwoWay<ITechnology[]>(PROJECT_TECHNOLOGIES, SET_PROJECT_TECHNOLOGIES),
       employees(): IEmployee[] {
         return this.$store.getters[EMPLOYEES]
-                   .filter((employee: IEmployee) => ! (this.$store.getters[PROJECT_EMPLOYEES]
-                      .map((prEmplojee:IEmployee) => prEmplojee.id).indexOf(employee.id) >-1))
-                   .filter((employee: IEmployee) =>
-                     Util.containsIgnoreCase(`${employee.firstname} ${employee.lastname}`, this.employee))
+          .filter((employee: IEmployee) => !(this.$store.getters[PROJECT_EMPLOYEES]
+          .map((prEmplojee:IEmployee) => prEmplojee.id).indexOf(employee.id) >-1))
+          .filter((employee: IEmployee) =>
+          Util.containsIgnoreCase(`${employee.firstname} ${employee.lastname}`, this.employee));
       },
       programId: {
         get(): string {
@@ -457,9 +457,9 @@
           .filter((customer: ICustomer) => Util.containsIgnoreCase(customer.name, text)); // Search
       },
       selectEmployee(employee: IEmployee) {
-        if(employee) {
+        if (employee) {
           const updatedSchedules = [
-            ModelFactory.createSchedule(employee, this.id.toString()) ,
+            ModelFactory.createSchedule(employee, this.id.toString()),
             ...this.schedules
           ];
 

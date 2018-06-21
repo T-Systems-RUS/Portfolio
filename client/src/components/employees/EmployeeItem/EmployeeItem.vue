@@ -1,6 +1,6 @@
 <template>
   <div
-    class="employee-item">
+  class="employee-item">
     <img
       class="employee-item-image"
       src="../assets/person.svg">
@@ -34,20 +34,20 @@
           </div>
         </div>
         <div class="is-pushed-top">
-            <div>
-              <b-datepicker
-                v-model="startdate"
-                placeholder="Start date"
-                class="employee-item-datepicker"
-                @input="$v.startdate.$touch();setDate($event, 'startdate')"
-                :readonly="false"/>
-              <b-datepicker
-                v-model="enddate"
-                placeholder="End date"
-                class="employee-item-datepicker"
-                @input="$v.enddate.$touch(); setDate($event, 'enddate')"
-                :readonly="false"/>
-            </div>
+          <div>
+            <b-datepicker
+              v-model="startdate"
+              placeholder="Start date"
+              class="employee-item-datepicker"
+              @input="$v.startdate.$touch();setDate($event, 'startdate')"
+              :readonly="false"/>
+            <b-datepicker
+              v-model="enddate"
+              placeholder="End date"
+              class="employee-item-datepicker"
+              @input="$v.enddate.$touch(); setDate($event, 'enddate')"
+              :readonly="false"/>
+          </div>
         </div>
 
 
@@ -70,7 +70,7 @@
           v-if="$v.enddate && !$v.enddate.minValue">End date must be higher than a start date</p>
       </div>
       <div
-        v-if="$v.participation.$dirty">
+      v-if="$v.participation.$dirty">
         <p
           class="help is-danger is-size-7"
           v-if="!$v.participation.required">Participation is required</p>
@@ -87,6 +87,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import {decimal, minValue, required, between} from 'vuelidate/lib/validators';
   import {ISchedule} from '../../../shared/interfaces/ISchedule';
   import {IRole} from '../../../shared/interfaces/IRole';
   import {ROLES} from '../../../store/modules/employees/getter-types';
@@ -94,8 +95,8 @@
     REMOVE_PROJECT_SCHEDULE,
     SET_SCHEDULE_DATE,
     SET_SCHEDULE_PARTICIPATION, SET_SCHEDULE_ROLE
-  } from "../../../store/modules/projects/mutation-types";
-  import {decimal, minValue, required, between} from 'vuelidate/lib/validators';
+  } from '../../../store/modules/projects/mutation-types';
+
 
   export default Vue.extend({
     props: {
@@ -109,7 +110,7 @@
         startdate: new Date(this.schedule.startdate),
         enddate: this.schedule.enddate ? new Date(this.schedule.enddate) : null,
         participation: this.schedule.participation || 100.00
-      }
+      };
     },
     validations() {
       return {
@@ -136,16 +137,17 @@
         },
         set(value: string) {
           this.$store.commit(SET_SCHEDULE_ROLE, {targetId: this.schedule.employee.id,
-            role: this.roles.filter(role => role.id === value)[0]});
+                                                 role: this.roles.filter(role => role.id === value)[0]});
         }
       }
     },
     methods: {
-      setDate(date:Date,mutation: string) {
-        this.$store.commit(SET_SCHEDULE_DATE, { key:mutation, targetId:this.schedule.employee.id, date })
+      setDate(date:Date, mutation: string) {
+        this.$store.commit(SET_SCHEDULE_DATE, {key: mutation, targetId: this.schedule.employee.id, date});
       },
       setParticipation() {
-        this.$store.commit(SET_SCHEDULE_PARTICIPATION, {targetId: this.schedule.employee.id, participation: this.participation });
+        this.$store.commit(SET_SCHEDULE_PARTICIPATION,
+                           {targetId: this.schedule.employee.id, participation: this.participation});
       },
       removeSchedule() {
         this.$store.commit(REMOVE_PROJECT_SCHEDULE, this.schedule.employee.id);

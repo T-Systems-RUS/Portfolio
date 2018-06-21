@@ -134,7 +134,6 @@
   import TechnologyPanel from '../../technologies/TechnologyPanel/TechnologyPanel.vue';
   import {IProject} from '../../../shared/interfaces/IProject';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
-  import {Routes} from '../../../router';
   import {Util} from '../../../shared/classes/Util';
 
   export default Vue.extend({
