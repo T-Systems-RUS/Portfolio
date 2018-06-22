@@ -1,10 +1,10 @@
 <template>
   <CommonModal @exit="goBack">
-    <template slot="modal-title">Edit project</template>
+    <template slot="modal-title">{{id ? 'Edit' : 'Create'}} project</template>
     <p
       class="manage-user-subtitle common-modal-subtitle has-text-centered is-size-5 is-size-6-mobile"
       slot="modal-subtitle">
-      Please edit project information here
+      Please {{id ? 'edit' : 'create'}} project information here
     </p>
     <template slot="modal-content">
       <div class="form-container project-change">
@@ -30,6 +30,23 @@
               </div>
             </div>
             <div class="field">
+              <label class="label is-pulled-left">Program</label>
+              <div class="select">
+                <select v-model="programId">
+                  <option
+                    v-for="option in addons['Program']"
+                    :value="option.id">
+                    {{ option.name }}
+                  </option>
+                </select>
+              </div>
+              <div v-if="$v.programId.$invalid">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.programId.required">Program is required</p>
+              </div>
+            </div>
+            <div class="field">
               <label class="label is-pulled-left">Domain</label>
               <div class="select">
                 <select v-model="domainId">
@@ -40,17 +57,10 @@
                   </option>
                 </select>
               </div>
-            </div>
-            <div class="field">
-              <label class="label is-pulled-left">Program</label>
-              <div class="select">
-                <select v-model="programId">
-                  <option
-                    v-for="option in addons['Program']"
-                    :value="option.id">
-                    {{ option.name }}
-                  </option>
-                </select>
+              <div v-if="$v.domainId.$invalid">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.domainId.required">Domain is required</p>
               </div>
             </div>
             <div class="field">
@@ -63,6 +73,11 @@
                     {{ option.name }}
                   </option>
                 </select>
+              </div>
+              <div v-if="$v.typeId.$invalid">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.typeId.required">Type is required</p>
               </div>
             </div>
             <div class="field">
@@ -424,6 +439,15 @@
           minValue: minValue(this.startDate)
         },
         description: {
+          required
+        },
+        programId: {
+          required
+        },
+        domainId: {
+          required
+        },
+        typeId: {
           required
         },
         pss: {

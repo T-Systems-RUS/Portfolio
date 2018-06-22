@@ -43,6 +43,12 @@ const projectService = {
       console.log(error);
     }),
 
+  doesProjectWithNameExist: name => Project.scope([Scopes.ACTUAL_PROJECTS]).count({where: {name: name}})
+    .then(count => count !== 0)
+    .catch(error => {
+      console.log(error);
+    }),
+
 // GET Get latest project
   isProjectLatest: id => Project.findOne({
     where: {
