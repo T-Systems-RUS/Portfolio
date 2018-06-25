@@ -4,9 +4,17 @@ import {IProject} from '../../../shared/interfaces/IProject';
 
 export class ProjectService extends HttpClientService{
 
+  doesProjectExist(name: string = '') {
+    return this.get(`${routes.DOES_PROJECT_EXIST}${name}`);
+  }
+
+  doesProjectWithIdExist(name: string = '', id:string) {
+    return this.get(`${routes.DOES_PROJECT_EXIST_WITH_ID}${name}/${id}`);
+  }
+
   getProjects() {
     return this.get(routes.GET_PROJECTS);
-  };
+  }
 
   getProject(id:string) {
     return this.get(routes.GET_PROJECT + id);

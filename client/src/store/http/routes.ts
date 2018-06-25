@@ -1,4 +1,6 @@
 export enum routes {
+  DOES_PROJECT_EXIST = '/api/projects/exists/',
+  DOES_PROJECT_EXIST_WITH_ID = '/api/projects/update/exists/',
   GET_PROJECTS = '/api/projects',
   GET_PROJECT = '/api/projects/',
   GET_PROJECT_ADDONS = '/api/projects/addons',

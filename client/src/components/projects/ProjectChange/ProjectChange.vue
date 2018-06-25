@@ -26,6 +26,9 @@
               <div v-if="$v.name.$dirty">
                 <p
                   class="help is-danger is-size-7"
+                  v-if="!$v.name.doesExist">Project already exists</p>
+                <p
+                  class="help is-danger is-size-7"
                   v-if="!$v.name.required">Project name is required</p>
               </div>
             </div>
@@ -313,6 +316,7 @@
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {
+    CHECK_PROJECT_EXISTENCE, CHECK_PROJECT_EXISTENCE_UPDATE,
     CREATE_PROJECT,
     EDIT_PROJECT,
     FETCH_ADDONS,
@@ -324,7 +328,7 @@
     PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_EMPLOYEES, PROJECT_END_DATE,
     PROJECT_NAME,
     PROJECT_PROGRAM_ID, PROJECT_PSS, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE_ID
-  } from '../../../store/modules/projects/getter-types';
+  } from "../../../store/modules/projects/getter-types";
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
   import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
@@ -430,7 +434,14 @@
     validations() {
       return {
         name: {
-          required
+          required,
+          doesExist: async (name: string) => {
+            if(name === '') return true;
+
+            return this.id
+              ? !await this.$store.dispatch(CHECK_PROJECT_EXISTENCE_UPDATE, {name, id: this.id})
+              : !await this.$store.dispatch(CHECK_PROJECT_EXISTENCE, name)
+          }
         },
         startDate: {
           required
@@ -503,7 +514,11 @@
         }
       },
       goBack() {
-        this.$router.push({name: Routes.Project, params: {id: this.id}});
+        if(this.id) {
+          this.$router.push({name: Routes.Project, params: {id: this.id}});
+        } else {
+          this.$router.push({name: Routes.Projects});
+        }
       },
       setStartDate() {
         this.$store.commit(SET_PROJECT_START_DATE, this.startDate);

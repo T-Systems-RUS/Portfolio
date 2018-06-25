@@ -6,6 +6,7 @@ import router from './../../../router/index';
 
 
 import {
+  CHECK_PROJECT_EXISTENCE, CHECK_PROJECT_EXISTENCE_UPDATE,
   CREATE_PROJECT,
   DELETE_PROJECT, EDIT_PROJECT,
   FETCH_ADDONS,
@@ -67,6 +68,16 @@ export const actions: ActionTree<IProjectState, {}> = {
         commit(SET_CUSTOMERS, response.data.customers);
         commit(FINISH_LOADING);
       });
+  },
+
+  [CHECK_PROJECT_EXISTENCE]({commit}, name:string) {
+    return service.doesProjectExist(name)
+      .then(response => response.data);
+  },
+
+  [CHECK_PROJECT_EXISTENCE_UPDATE]({commit}, payload: {name:string, id:string}) {
+    return service.doesProjectWithIdExist(payload.name, payload.id)
+      .then(response => response.data);
   },
 
   [CREATE_PROJECT]({state}) {

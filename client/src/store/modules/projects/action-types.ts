@@ -3,6 +3,8 @@ export const FETCH_PROJECTS = 'projects/FETCH_PROJECTS';
 
 export const FETCH_PROJECT = 'projects/FETCH_PROJECT';
 export const FETCH_PROJECT_WITH_IMAGE = 'FETCH_PROJECT_WITH_IMAGE';
+export const CHECK_PROJECT_EXISTENCE = 'projects/CHECK_PROJECT_EXISTENCE';
+export const CHECK_PROJECT_EXISTENCE_UPDATE = 'projects/CHECK_PROJECT_EXISTENCE_UPDATE';
 
 export const CREATE_PROJECT = 'projects/CREATE_PROJECT';
 export const EDIT_PROJECT = 'projects/SAVE_PROJECT';

@@ -43,7 +43,15 @@ const projectService = {
       console.log(error);
     }),
 
-  doesProjectWithNameExist: name => Project.scope([Scopes.ACTUAL_PROJECTS]).count({where: {name: name}})
+  doesProjectWithNameExist: name => Project.count({where: {name: name, ishistory: false }})
+    .then(count => count !== 0)
+    .catch(error => {
+      console.log(error);
+    }),
+
+  doesProjectWithNameAndIdExist: (name, id) => Project.count({
+      where: {name: name, ishistory: false, id: {[sequelize.Op.ne]: id}
+    }})
     .then(count => count !== 0)
     .catch(error => {
       console.log(error);

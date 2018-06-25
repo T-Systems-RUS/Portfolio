@@ -3,6 +3,7 @@ import projectService from './project.service';
 import projectValidator from './project.validator';
 import {Util} from '../../shared/Util';
 import projectAddonsService from './shared/project-addons.service';
+import technologyService from '../technology/technology.service';
 
 const router = express.Router();
 
@@ -22,6 +23,14 @@ router.get('/projects/:id', (req, res) =>
 router.get('/projects/history/:uniqueId', (req, res) =>
   projectService.getProjectsByUniqueId(req.params.uniqueId)
     .then(Util.handleData(res)));
+
+router.get('/projects/exists/:name', (req, res) =>
+  projectService.doesProjectWithNameExist(req.params.name)
+    .then(doesExist => res.status(200).send(doesExist)));
+
+router.get('/projects/update/exists/:name/:id', (req, res) =>
+  projectService.doesProjectWithNameAndIdExist(req.params.name, req.params.id)
+    .then(doesExist => res.status(200).send(doesExist)));
 
 // POST Requests
 router.post('/projects/create', projectValidator.createValidators(), (req, res) =>
