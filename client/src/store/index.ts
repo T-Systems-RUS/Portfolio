@@ -9,7 +9,7 @@ import fileUpload from '../components/common/FileUploader/fileUploadStore';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   modules: {
     employees,
     projects,
@@ -18,3 +18,5 @@ export default new Vuex.Store({
     loading
   }
 });
+
+export default store;

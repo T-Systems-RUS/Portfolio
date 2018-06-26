@@ -74,11 +74,11 @@ export const actions: ActionTree<IProjectState, {}> = {
   [GENERATE_PRESENTATION_SINGLE]({getters}) {
     return PowerPointService.createSingleProjectPresentation(getters[PROJECT]);
   },
-  [SYNC_PARAMS]({commit}) {
+  [SYNC_PARAMS]({commit}, query) {
     // Set filter values from query params
-    Object.keys(router.currentRoute.query).forEach(key => {
+    Object.keys(query).forEach(key => {
       // Get all values for each filter key
-      router.currentRoute.query[key].split(',').forEach(value => {
+      query[key].split(',').forEach((value: string) => {
         commit(SET_FILTER_VALUE, {key, value: Number(value)});
       });
     });

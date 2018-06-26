@@ -1,24 +1,24 @@
 <template>
   <div class="technology-panel">
-    <p
-    class="title is-6 is-size-16 is-margin-7">
+    <p class="title is-6 is-size-16 is-margin-7">
       {{ domain | capitalize }}
     </p>
     <chip
       v-for="technology in technologies"
+      :id="technology.id"
       :key="technology.id"
       :name="technology.name"
-      :selected = "technology.active"
-      :with-image = "true"
-      :image="technology.image"/>
+      :selected="technology.active"
+      :with-image="true"
+      :image="technology.image"
+      :project-chip="true"
+      :filter-key="'technologies'"/>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import Chip from '../../common/Chip/Chip.vue';
-  import {ITechnology} from '../../../shared/interfaces/ITechnology';
-
 
   export default Vue.extend({
     components: {

@@ -30,7 +30,7 @@
   import ProjectCard from './ProjectCard/ProjectCard.vue';
   import ProjectFilter from './ProjectFilter/ProjectFilter.vue';
   import AppliedFilters from './AppliedFilters/AppliedFilters.vue';
-  import {FETCH_PROJECTS, SYNC_PARAMS} from '../../store/modules/projects/action-types';
+  import {FETCH_PROJECTS} from '../../store/modules/projects/action-types';
   import {PROJECTS} from '../../store/modules/projects/getter-types';
 
   export default Vue.extend({
@@ -45,14 +45,11 @@
       AppliedFilters
     },
     created() {
-      this.syncParams();
       this.fetchProjects();
     },
-
     methods: {
       ...mapActions({
-        fetchProjects: FETCH_PROJECTS,
-        syncParams: SYNC_PARAMS
+        fetchProjects: FETCH_PROJECTS
       })
     }
   });

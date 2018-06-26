@@ -1,7 +1,7 @@
 <template>
   <div
     class="chip"
-    :class ="{'is-selected': isSelected, 'is-disabled': !active}"
+    :class="{'is-selected': isSelected, 'is-disabled': !active}"
     @click="toggleActive">
     <!--TODO implement later-->
     <img
@@ -19,6 +19,7 @@
   import {SET_FILTER} from '../../../store/modules/projects/mutation-types';
   import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
   import {FilterTypes} from '../../../store/modules/projects/filter-types';
+  import {Routes} from '../../../router';
 
   export default Vue.extend({
     props: {
@@ -33,7 +34,6 @@
         default: ''
       },
       id: {
-        type: Number,
         required: false
       },
       active: {
@@ -47,6 +47,13 @@
       withImage: {
         type: Boolean,
         default: false
+      },
+      projectChip: {
+        type: Boolean,
+        default: false
+      },
+      filterKey: {
+        required: false
       }
     },
     computed: {
@@ -59,8 +66,13 @@
     },
     methods: {
       toggleActive() {
-        this.$store.commit(TOGGLE_TECHNOLOGY, {id: this.id});
-        this.$store.commit(SET_FILTER, {key: FilterTypes.TECHNOLOGIES, value: this.id});
+        // TODO refactor this and remove all logic from here!
+        if (this.projectChip) {
+          this.$router.push({name: Routes.Projects, query: {[this.filterKey as string]: this.id.toString()}});
+        } else {
+          this.$store.commit(TOGGLE_TECHNOLOGY, {id: this.id});
+          this.$store.commit(SET_FILTER, {key: FilterTypes.TECHNOLOGIES, value: this.id});
+        }
       }
     }
   });
@@ -108,7 +120,7 @@
     &.is-disabled {
       //border: 1px solid $text-secondary;
 
-      >span {
+      > span {
         color: $text-secondary;
       }
     }
