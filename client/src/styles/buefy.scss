@@ -49,3 +49,41 @@ $delete-button-icon-size: $building-unit/2;
     }
   }
 }
+
+// Datepicker arrows to switch month
+.datepicker {
+
+  .datepicker-header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    .pagination {
+
+      .pagination-list {
+        padding: 0 20px;
+      }
+
+      a:after {
+        border: 1px solid $light-black;
+        border-right: 0;
+        border-top: 0;
+        content: " ";
+        display: block;
+        height: 9px;
+        position: absolute;
+        transform-origin: center;
+        width: 9px;
+        top: 18px;
+      }
+
+      .pagination-previous:after {
+        transform: rotate(45deg);
+      }
+
+      .pagination-next:after {
+        right: 18px;
+        transform: rotate(225deg);
+      }
+    }
+  }
+}
