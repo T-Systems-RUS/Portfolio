@@ -1,10 +1,6 @@
 import {ActionTree} from 'vuex';
 import {ProjectService} from './project.service';
 import {IProjectState} from './index';
-import {Routes} from './../../../router/index';
-import router from './../../../router/index';
-
-
 import {
   DELETE_PROJECT,
   FETCH_ADDONS,
@@ -22,6 +18,9 @@ import {PowerPointService} from './PowerPointService';
 import {PROJECT, PROJECTS} from './getter-types';
 import {SET_IMAGE_URL} from '../../../components/common/FileUploader/fileUploadStore/mutation-types';
 import {FileUploadStatus} from '../../../components/common/FileUploader/IFileUploadList';
+import {FilterTypes} from './filter-types';
+import {TOGGLE_TECHNOLOGY} from '../technologies/mutation-types';
+import {default as router, Routes} from '../../../router';
 
 const service = new ProjectService();
 
@@ -79,6 +78,9 @@ export const actions: ActionTree<IProjectState, {}> = {
     Object.keys(query).forEach(key => {
       // Get all values for each filter key
       query[key].split(',').forEach((value: string) => {
+        if (key === FilterTypes.TECHNOLOGIES) {
+          commit(TOGGLE_TECHNOLOGY, {id: Number(value)});
+        }
         commit(SET_FILTER_VALUE, {key, value: Number(value)});
       });
     });
