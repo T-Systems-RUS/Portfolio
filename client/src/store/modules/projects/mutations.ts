@@ -38,13 +38,14 @@ import {
   SET_SCHEDULE_DATE,
   REMOVE_PROJECT_SCHEDULE,
   SET_SCHEDULE_PARTICIPATION,
-  SET_SCHEDULE_ROLE, SET_FILTER_VALUE, SET_SEARCH_VALUE
+  SET_SCHEDULE_ROLE, SET_FILTER_VALUE, SET_SEARCH_VALUE, SET_COMPLETION_VALUE
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
 import {ITechnology} from '../../../shared/interfaces/ITechnology';
 import router, {Routes} from '../../../router';
 import {ProjectQueryKey} from "../../../shared/enums/ProjectsQueryKey";
+import {CompleteTypes} from "../../../shared/enums/CompleteTypes";
 
 // Set query params to the filter values
 function setFilterQueryParams(key: string, value: string) {
@@ -77,7 +78,6 @@ function setFilterQueryParams(key: string, value: string) {
   router.push({name: Routes.Projects, query: newQuery});
 }
 
-// Set query params to the filter values
 function setSearchQueryParam(search: string) {
   // Get current query params
   const newQuery = {...router.currentRoute.query};
@@ -85,6 +85,18 @@ function setSearchQueryParam(search: string) {
     newQuery[ProjectQueryKey.SEARCH] = search;
   } else {
     delete newQuery[ProjectQueryKey.SEARCH];
+  }
+  // Set new query params
+  router.push({name: Routes.Projects, query: newQuery});
+}
+
+function setCompletionQueryParam(completion: CompleteTypes) {
+  // Get current query params
+  const newQuery = {...router.currentRoute.query};
+  if (completion === CompleteTypes.ALL) {
+    delete newQuery[ProjectQueryKey.COMPLETION];
+  } else {
+    newQuery[ProjectQueryKey.COMPLETION] = completion;
   }
   // Set new query params
   router.push({name: Routes.Projects, query: newQuery});
@@ -132,8 +144,12 @@ export const mutations: MutationTree<IProjectState> = {
   [SET_SORT](state, sort: string) {
     state.sort = sort;
   },
-  [SET_COMPLETION](state, completion: string) {
+  [SET_COMPLETION_VALUE](state, completion: CompleteTypes) {
     state.completion = completion;
+  },
+  [SET_COMPLETION](state, completion: CompleteTypes) {
+    state.completion = completion;
+    setCompletionQueryParam(completion);
   },
   [SET_LINES](state, payload: ILine[]) {
     state.lines = payload;

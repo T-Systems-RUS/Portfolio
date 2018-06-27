@@ -11,7 +11,7 @@ import {
 } from './action-types';
 
 import {
-  FINISH_LOADING,
+  FINISH_LOADING, SET_COMPLETION_VALUE,
   SET_CUSTOMERS,
   SET_DOMAINS,
   SET_FILTER_VALUE,
@@ -87,6 +87,9 @@ export const actions: ActionTree<IProjectState, {}> = {
       switch (queryParam) {
         case ProjectQueryKey.SEARCH:
           commit(SET_SEARCH_VALUE, query[queryParam]);
+          break;
+        case ProjectQueryKey.COMPLETION:
+          commit(SET_COMPLETION_VALUE, query[queryParam]);
           break;
         default:
           // Set filter values from query params

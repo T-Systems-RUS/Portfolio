@@ -12,6 +12,7 @@ export const SET_SEARCH_VALUE = 'projects/SET_SEARCH_VALUE';
 export const SET_SEARCH = 'projects/SET_SEARCH';
 export const SET_AUTOCOMPLETE_SEARCH = 'projects/SET_AUTOCOMPLETE_SEARCH';
 export const SET_COMPLETION= 'SET_COMPLETION';
+export const SET_COMPLETION_VALUE= 'SET_COMPLETION_VALUE';
 export const SET_SORT = 'SET_SORT';
 export const SET_SORT_REVERSE = 'SET_SORT_REVERSE';
 

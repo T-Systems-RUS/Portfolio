@@ -1,3 +1,4 @@
 export enum ProjectQueryKey {
-  SEARCH = 'search'
+  SEARCH = 'search',
+  COMPLETION = 'completion'
 }
