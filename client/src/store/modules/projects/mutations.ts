@@ -38,7 +38,13 @@ import {
   SET_SCHEDULE_DATE,
   REMOVE_PROJECT_SCHEDULE,
   SET_SCHEDULE_PARTICIPATION,
-  SET_SCHEDULE_ROLE, SET_FILTER_VALUE, SET_SEARCH_VALUE, SET_COMPLETION_VALUE, SET_SORT_VALUE, SET_SORT_REVERSE_VALUE
+  SET_SCHEDULE_ROLE,
+  SET_FILTER_VALUE,
+  SET_SEARCH_VALUE,
+  SET_COMPLETION_VALUE,
+  SET_SORT_VALUE,
+  SET_SORT_REVERSE_VALUE,
+  RESET_FILTERS
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
@@ -46,6 +52,11 @@ import {ITechnology} from '../../../shared/interfaces/ITechnology';
 import router, {Routes} from '../../../router';
 import {ProjectQueryKey} from '../../../shared/enums/ProjectsQueryKey';
 import {CompleteTypes} from '../../../shared/enums/CompleteTypes';
+import {Dictionary} from 'vue-router/types/router';
+
+function setQuery(query: Dictionary<string>) {
+  router.push({name: Routes.Projects, query});
+}
 
 // Set query params to the filter values
 function setFilterQueryParams(key: string, value: string) {
@@ -75,7 +86,7 @@ function setFilterQueryParams(key: string, value: string) {
     newQuery[key] = value;
   }
   // Set new query params
-  router.push({name: Routes.Projects, query: newQuery});
+  setQuery(newQuery);
 }
 
 function setSearchQueryParam(search: string) {
@@ -85,7 +96,7 @@ function setSearchQueryParam(search: string) {
   } else {
     delete newQuery[ProjectQueryKey.SEARCH];
   }
-  router.push({name: Routes.Projects, query: newQuery});
+  setQuery(newQuery);
 }
 
 function setCompletionQueryParam(completion: CompleteTypes) {
@@ -95,7 +106,7 @@ function setCompletionQueryParam(completion: CompleteTypes) {
   } else {
     newQuery[ProjectQueryKey.COMPLETION] = completion;
   }
-  router.push({name: Routes.Projects, query: newQuery});
+  setQuery(newQuery);
 }
 
 function setSortingQueryParam(sort: string) {
@@ -105,7 +116,7 @@ function setSortingQueryParam(sort: string) {
   } else {
     newQuery[ProjectQueryKey.SORT] = sort;
   }
-  router.push({name: Routes.Projects, query: newQuery});
+  setQuery(newQuery);
 }
 
 function setSortingReverseQueryParam(reverse: boolean) {
@@ -115,7 +126,15 @@ function setSortingReverseQueryParam(reverse: boolean) {
   } else {
     newQuery[ProjectQueryKey.SORT_REVERSE] = reverse.toString();
   }
-  router.push({name: Routes.Projects, query: newQuery});
+  setQuery(newQuery);
+}
+
+function setFilterValue(state: IProjectState, key: string, value: string) {
+  Vue.set(state.filter, key, Extension.toggleArray(state.filter[key], value));
+  // Delete empty keys
+  if (!state.filter[key].length) {
+    Vue.delete(state.filter, key);
+  }
 }
 
 export const mutations: MutationTree<IProjectState> = {
@@ -136,10 +155,10 @@ export const mutations: MutationTree<IProjectState> = {
     state.loading = false;
   },
   [SET_FILTER_VALUE](state, payload: { key: string, value: string }) {
-    Vue.set(state.filter, payload.key, Extension.toggleArray(state.filter[payload.key], payload.value));
+    setFilterValue(state, payload.key, payload.value);
   },
   [SET_FILTER](state, payload: { key: string, value: string }) {
-    Vue.set(state.filter, payload.key, Extension.toggleArray(state.filter[payload.key], payload.value));
+    setFilterValue(state, payload.key, payload.value);
 
     setFilterQueryParams(payload.key, payload.value.toString());
 
@@ -249,5 +268,9 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [REMOVE_PROJECT_SCHEDULE](state, targetId: string) {
     state.project.schedules = state.project.schedules.filter(schedule => schedule.employee.id !== targetId);
+  },
+  [RESET_FILTERS](state) {
+    state.filter = {};
+    setQuery({});
   }
 };
