@@ -1,4 +1,6 @@
 import {FileUploadStatus, IFileUpload, IImageUrl} from './IFileUploadList';
+import axios from 'axios';
+import Guid from '../../../shared/classes/Guid';
 
 const harmfulFileExtensionRegex = new RegExp('(.|/)(bat|exe|cmd|sh|php([0-9])?|pl|cgi|' +
   '386|dll|com|torrent|js|app|jar|pif|vb|vbscript|wsf|asp|cer|csr|jsp|drv|sys|ade|adp|bas|chm' +
@@ -38,6 +40,16 @@ export class FileUploaderService {
   // TODO: should be removed when API is working
   public static fakeUploadFiles(): Promise<boolean> {
     return new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
+  }
+
+  public static uploadFiles(file: IFileUpload) {
+    const fileExtension = file.file.type.replace(/^[^/]*[/]/, '');
+
+    return axios.post('/api/images/add/', {
+      'data': file.imageDataUrl,
+      'name': `${Guid.newGuid()}.${fileExtension}`,
+      'type': fileExtension
+    });
   }
 
   public static validateFileSize(file: File, maxSize: number): boolean {

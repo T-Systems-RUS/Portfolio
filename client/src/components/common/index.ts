@@ -7,6 +7,7 @@ import RadioButton from './RadioButton/RadioButton.vue';
 import Autocomplete from './Autocomplete/Autocomplete.vue';
 import Ribbon from './Ribbon/Ribbon.vue';
 import Accordion from './Accordion/Accordion.vue';
+import ErrorMessage from './ErrorMessage/ErrorMessage.vue';
 
 const components: { [key: string]: {} } = {
   Checkbox,
@@ -16,7 +17,8 @@ const components: { [key: string]: {} } = {
   RadioButton,
   Autocomplete,
   Ribbon,
-  Accordion
+  Accordion,
+  ErrorMessage
 };
 
 Object.keys(components)

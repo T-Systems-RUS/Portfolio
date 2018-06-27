@@ -33,7 +33,7 @@ import {
   SET_PROJECT_CUSTOMERS,
   SET_PROJECT_SCHEDULES,
   SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION, SET_SCHEDULE_DATE, REMOVE_PROJECT_SCHEDULE, SET_SCHEDULE_PARTICIPATION,
-  SET_SCHEDULE_ROLE
+  SET_SCHEDULE_ROLE, SET_PROJECT_IMAGE
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
@@ -110,6 +110,9 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_PROJECT_TYPE](state, type: IType) {
     state.project.type = type;
+  },
+  [SET_PROJECT_IMAGE](state, image: string) {
+    state.project.image = image;
   },
   [SET_PROJECT_START_DATE](state, startDate: string) {
     state.project.startdate = startDate;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {IProject} from '../../shared/interfaces/IProject';
+import {IModel} from '../../shared/interfaces/IModel';
 
 
 export class HttpClientService {
@@ -11,8 +11,12 @@ export class HttpClientService {
       .catch(this.catcher);
   }
 
-  post(url: string, data:IProject) {
+  post(url: string, data:IModel) {
     return axios.post(url, data);
+  }
+
+  put<T>(url: string, data:T) {
+    return axios.put(url, data);
   }
 
   delete(url: string) {

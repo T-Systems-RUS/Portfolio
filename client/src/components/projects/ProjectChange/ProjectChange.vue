@@ -320,12 +320,12 @@
     CREATE_PROJECT,
     EDIT_PROJECT,
     FETCH_ADDONS,
-    FETCH_PROJECT_WITH_IMAGE
+    FETCH_PROJECT_WITH_IMAGE, REMOVE_PROJECT_IMAGE
   } from "../../../store/modules/projects/action-types";
   import {FETCH_ROLES, FETCH_EMPLOYEES} from '../../../store/modules/employees/action-types';
   import {
     ADDONS,
-    PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_EMPLOYEES, PROJECT_END_DATE,
+    PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_EMPLOYEES, PROJECT_END_DATE, PROJECT_IMAGE,
     PROJECT_NAME,
     PROJECT_PROGRAM_ID, PROJECT_PSS, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE_ID
   } from "../../../store/modules/projects/getter-types";
@@ -517,6 +517,7 @@
         if(this.id) {
           this.$router.push({name: Routes.Project, params: {id: this.id}});
         } else {
+          this.$store.dispatch(REMOVE_PROJECT_IMAGE, this.$store.getters[PROJECT_IMAGE]);
           this.$router.push({name: Routes.Projects});
         }
       },

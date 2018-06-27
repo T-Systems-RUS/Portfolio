@@ -1,6 +1,8 @@
 import {HttpClientService} from '../../http/http-client.service';
 import {routes} from '../../http/routes';
 import {IProject} from '../../../shared/interfaces/IProject';
+import {IFileUpload} from '../../../components/common/FileUploader/IFileUploadList';
+import {IModel} from '../../../shared/interfaces/IModel';
 
 export class ProjectService extends HttpClientService{
 
@@ -34,5 +36,9 @@ export class ProjectService extends HttpClientService{
 
   deleteProject(id:string) {
     return this.delete(routes.DELETE_PROJECT + id);
+  }
+
+  removeImage<T>(data: T) {
+    return this.put(routes.REMOVE_PROJECT_IMAGA, data);
   }
 }

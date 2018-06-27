@@ -29,11 +29,13 @@ import {
 import {FileUploaderService} from '../FileUploaderService';
 import {FileUploadStatus, IFileUpload} from '../IFileUploadList';
 import {ALL_UPLOAD_FILES} from './getter-types';
+import {SET_PROJECT_IMAGE} from '../../../../store/modules/projects/mutation-types';
 
 export const actions: ActionTree<IFileUploadState, {}> = {
-  [ADD_TEMP_TO_FILES]({state, commit}) {
+  [ADD_TEMP_TO_FILES]({state, commit, dispatch}) {
     commit(ADD_FILES, state.tempFiles);
     commit(RESET_TEMP_FILES);
+    dispatch(UPLOAD_FILES);
   },
   [UPDATE_TEMP_FILES]({state, dispatch, commit}, payload) {
     dispatch(VALIDATE_FILES, payload)
@@ -65,16 +67,13 @@ export const actions: ActionTree<IFileUploadState, {}> = {
     commit(DELETE_TEMP_FILE, payload);
   },
   [UPLOAD_FILES]({commit, state}) {
-    // TODO: should be refactored
-    if (state.imageUrl.url) {
-      commit(SET_IMAGE_STATUS, FileUploadStatus.LOADING);
-      return FileUploaderService.fakeUploadFiles()
-        .then(() => commit(SET_IMAGE_STATUS, FileUploadStatus.COMPLETED));
-    }
     return Promise.all(state.files.map((file: IFileUpload) => {
       commit(SET_FILE_LOADING, file);
-      return FileUploaderService.fakeUploadFiles()
-        .then(() => commit(SET_FILE_COMPLETED, file));
+      return FileUploaderService.uploadFiles(file)
+        .then((res) => {
+          commit(SET_PROJECT_IMAGE, res.data.filename);
+          return commit(SET_FILE_COMPLETED, file)
+        });
     }));
   },
   [SET_PREVIEW_IMAGES]({state, commit, getters}) {

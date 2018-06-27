@@ -13,11 +13,11 @@ import {
   FETCH_PROJECT,
   FETCH_PROJECT_WITH_IMAGE,
   FETCH_PROJECTS,
-  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE
+  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, REMOVE_PROJECT_IMAGE
 } from './action-types';
 
 import {
-  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS,
+  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECT_IMAGE, SET_PROJECTS,
   SET_TYPES
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
@@ -101,5 +101,10 @@ export const actions: ActionTree<IProjectState, {}> = {
 
   [GENERATE_PRESENTATION_SINGLE]({getters}) {
     return PowerPointService.createSingleProjectPresentation(getters[PROJECT]);
+  },
+
+  [REMOVE_PROJECT_IMAGE]({commit}, image: string) {
+    return service.removeImage<object>({'image': image})
+      .then(() => commit(SET_PROJECT_IMAGE, ''));
   }
 };
