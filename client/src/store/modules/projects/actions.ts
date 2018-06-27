@@ -11,7 +11,15 @@ import {
 } from './action-types';
 
 import {
-  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_FILTER_VALUE, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS,
+  FINISH_LOADING,
+  SET_CUSTOMERS,
+  SET_DOMAINS,
+  SET_FILTER_VALUE,
+  SET_LINES,
+  SET_PROGRAMS,
+  SET_PROJECT,
+  SET_PROJECTS,
+  SET_SEARCH_VALUE,
   SET_TYPES
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
@@ -21,6 +29,7 @@ import {FileUploadStatus} from '../../../components/common/FileUploader/IFileUpl
 import {FilterTypes} from './filter-types';
 import {TOGGLE_TECHNOLOGY} from '../technologies/mutation-types';
 import {default as router, Routes} from '../../../router';
+import {ProjectQueryKey} from '../../../shared/enums/ProjectsQueryKey';
 
 const service = new ProjectService();
 
@@ -74,15 +83,22 @@ export const actions: ActionTree<IProjectState, {}> = {
     return PowerPointService.createSingleProjectPresentation(getters[PROJECT]);
   },
   [SYNC_PARAMS]({commit}, query) {
-    // Set filter values from query params
-    Object.keys(query).forEach(key => {
-      // Get all values for each filter key
-      query[key].split(',').forEach((value: string) => {
-        if (key === FilterTypes.TECHNOLOGIES) {
-          commit(TOGGLE_TECHNOLOGY, {id: Number(value)});
-        }
-        commit(SET_FILTER_VALUE, {key, value: Number(value)});
-      });
+    Object.keys(query).forEach(queryParam => {
+      switch (queryParam) {
+        case ProjectQueryKey.SEARCH:
+          commit(SET_SEARCH_VALUE, query[queryParam]);
+          break;
+        default:
+          // Set filter values from query params
+          // Get all values for each filter key
+          query[queryParam].split(',').forEach((value: string) => {
+            if (queryParam === FilterTypes.TECHNOLOGIES) {
+              commit(TOGGLE_TECHNOLOGY, {id: Number(value)});
+            }
+            commit(SET_FILTER_VALUE, {queryParam, value: Number(value)});
+          });
+          break;
+      }
     });
   }
 };

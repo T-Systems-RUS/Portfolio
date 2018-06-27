@@ -38,15 +38,16 @@ import {
   SET_SCHEDULE_DATE,
   REMOVE_PROJECT_SCHEDULE,
   SET_SCHEDULE_PARTICIPATION,
-  SET_SCHEDULE_ROLE, SET_FILTER_VALUE
+  SET_SCHEDULE_ROLE, SET_FILTER_VALUE, SET_SEARCH_VALUE
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
 import {ITechnology} from '../../../shared/interfaces/ITechnology';
 import router, {Routes} from '../../../router';
+import {ProjectQueryKey} from "../../../shared/enums/ProjectsQueryKey";
 
 // Set query params to the filter values
-function setQueryParams(key: string, value: string) {
+function setFilterQueryParams(key: string, value: string) {
   // Get current query params
   const newQuery = {...router.currentRoute.query};
   // Check if such key exists
@@ -76,6 +77,19 @@ function setQueryParams(key: string, value: string) {
   router.push({name: Routes.Projects, query: newQuery});
 }
 
+// Set query params to the filter values
+function setSearchQueryParam(search: string) {
+  // Get current query params
+  const newQuery = {...router.currentRoute.query};
+  if (search) {
+    newQuery[ProjectQueryKey.SEARCH] = search;
+  } else {
+    delete newQuery[ProjectQueryKey.SEARCH];
+  }
+  // Set new query params
+  router.push({name: Routes.Projects, query: newQuery});
+}
+
 export const mutations: MutationTree<IProjectState> = {
   [SET_ACCORDION](state, payload: { key: string, value: boolean }) {
     Vue.set(
@@ -99,13 +113,17 @@ export const mutations: MutationTree<IProjectState> = {
   [SET_FILTER](state, payload: { key: string, value: string }) {
     Vue.set(state.filter, payload.key, Extension.toggleArray(state.filter[payload.key], payload.value));
 
-    setQueryParams(payload.key, payload.value.toString());
+    setFilterQueryParams(payload.key, payload.value.toString());
 
     state.loading = false;
   },
   // Search
+  [SET_SEARCH_VALUE](state, search: string) {
+    state.search = search;
+  },
   [SET_SEARCH](state, search: string) {
     state.search = search;
+    setSearchQueryParam(search);
   },
   // Sorting
   [SET_AUTOCOMPLETE_SEARCH](state, search: string) {
