@@ -85,10 +85,10 @@
     SORT_FIELD_NAME,
     SORT_REVERSE
   } from '../../../store/modules/projects/getter-types';
-  import {RESET_FILTERS, SET_FILTER, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
+  import {SET_FILTER, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
   import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
   import {FilterTypes} from '../../../store/modules/projects/filter-types';
-  import {GENERATE_PRESENTATION} from '../../../store/modules/projects/action-types';
+  import {GENERATE_PRESENTATION, RESET_FILTERS_TECHNOLOGIES} from '../../../store/modules/projects/action-types';
 
   export default Vue.extend({
     computed: {
@@ -119,7 +119,7 @@
         this.$store.commit(SET_FILTER, {key: filterKey, value: id});
       },
       resetFilters() {
-        this.$store.commit(RESET_FILTERS);
+        this.$store.dispatch(RESET_FILTERS_TECHNOLOGIES);
       }
     }
   });

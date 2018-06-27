@@ -7,11 +7,11 @@ import {
   FETCH_PROJECT,
   FETCH_PROJECT_WITH_IMAGE,
   FETCH_PROJECTS,
-  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, SYNC_PARAMS
+  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, RESET_FILTERS_TECHNOLOGIES, SYNC_PARAMS
 } from './action-types';
 
 import {
-  FINISH_LOADING, SET_COMPLETION_VALUE,
+  FINISH_LOADING, RESET_FILTERS, SET_COMPLETION_VALUE,
   SET_CUSTOMERS,
   SET_DOMAINS,
   SET_FILTER_VALUE,
@@ -27,7 +27,7 @@ import {PROJECT, PROJECTS} from './getter-types';
 import {SET_IMAGE_URL} from '../../../components/common/FileUploader/fileUploadStore/mutation-types';
 import {FileUploadStatus} from '../../../components/common/FileUploader/IFileUploadList';
 import {FilterTypes} from './filter-types';
-import {TOGGLE_TECHNOLOGY} from '../technologies/mutation-types';
+import {RESET_TECHNOLOGIES, TOGGLE_TECHNOLOGY} from '../technologies/mutation-types';
 import {default as router, Routes} from '../../../router';
 import {ProjectQueryKey} from '../../../shared/enums/ProjectsQueryKey';
 
@@ -109,5 +109,9 @@ export const actions: ActionTree<IProjectState, {}> = {
           break;
       }
     });
+  },
+  [RESET_FILTERS_TECHNOLOGIES]({commit}) {
+    commit(RESET_FILTERS);
+    commit(RESET_TECHNOLOGIES);
   }
 };
