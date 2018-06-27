@@ -19,7 +19,7 @@ import {
   SET_PROGRAMS,
   SET_PROJECT,
   SET_PROJECTS,
-  SET_SEARCH_VALUE,
+  SET_SEARCH_VALUE, SET_SORT_REVERSE_VALUE, SET_SORT_VALUE,
   SET_TYPES
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
@@ -85,6 +85,12 @@ export const actions: ActionTree<IProjectState, {}> = {
   [SYNC_PARAMS]({commit}, query) {
     Object.keys(query).forEach(queryParam => {
       switch (queryParam) {
+        case ProjectQueryKey.SORT:
+          commit(SET_SORT_VALUE, query[queryParam]);
+          break;
+        case ProjectQueryKey.SORT_REVERSE:
+          commit(SET_SORT_REVERSE_VALUE, query[queryParam] === 'true');
+          break;
         case ProjectQueryKey.SEARCH:
           commit(SET_SEARCH_VALUE, query[queryParam]);
           break;

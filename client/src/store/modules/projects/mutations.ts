@@ -38,14 +38,14 @@ import {
   SET_SCHEDULE_DATE,
   REMOVE_PROJECT_SCHEDULE,
   SET_SCHEDULE_PARTICIPATION,
-  SET_SCHEDULE_ROLE, SET_FILTER_VALUE, SET_SEARCH_VALUE, SET_COMPLETION_VALUE
+  SET_SCHEDULE_ROLE, SET_FILTER_VALUE, SET_SEARCH_VALUE, SET_COMPLETION_VALUE, SET_SORT_VALUE, SET_SORT_REVERSE_VALUE
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
 import {ITechnology} from '../../../shared/interfaces/ITechnology';
 import router, {Routes} from '../../../router';
-import {ProjectQueryKey} from "../../../shared/enums/ProjectsQueryKey";
-import {CompleteTypes} from "../../../shared/enums/CompleteTypes";
+import {ProjectQueryKey} from '../../../shared/enums/ProjectsQueryKey';
+import {CompleteTypes} from '../../../shared/enums/CompleteTypes';
 
 // Set query params to the filter values
 function setFilterQueryParams(key: string, value: string) {
@@ -79,26 +79,42 @@ function setFilterQueryParams(key: string, value: string) {
 }
 
 function setSearchQueryParam(search: string) {
-  // Get current query params
   const newQuery = {...router.currentRoute.query};
   if (search) {
     newQuery[ProjectQueryKey.SEARCH] = search;
   } else {
     delete newQuery[ProjectQueryKey.SEARCH];
   }
-  // Set new query params
   router.push({name: Routes.Projects, query: newQuery});
 }
 
 function setCompletionQueryParam(completion: CompleteTypes) {
-  // Get current query params
   const newQuery = {...router.currentRoute.query};
   if (completion === CompleteTypes.ALL) {
     delete newQuery[ProjectQueryKey.COMPLETION];
   } else {
     newQuery[ProjectQueryKey.COMPLETION] = completion;
   }
-  // Set new query params
+  router.push({name: Routes.Projects, query: newQuery});
+}
+
+function setSortingQueryParam(sort: string) {
+  const newQuery = {...router.currentRoute.query};
+  if (sort === 'name') {
+    delete newQuery[ProjectQueryKey.SORT];
+  } else {
+    newQuery[ProjectQueryKey.SORT] = sort;
+  }
+  router.push({name: Routes.Projects, query: newQuery});
+}
+
+function setSortingReverseQueryParam(reverse: boolean) {
+  const newQuery = {...router.currentRoute.query};
+  if (reverse) {
+    delete newQuery[ProjectQueryKey.SORT_REVERSE];
+  } else {
+    newQuery[ProjectQueryKey.SORT_REVERSE] = reverse.toString();
+  }
   router.push({name: Routes.Projects, query: newQuery});
 }
 
@@ -137,12 +153,23 @@ export const mutations: MutationTree<IProjectState> = {
     state.search = search;
     setSearchQueryParam(search);
   },
-  // Sorting
   [SET_AUTOCOMPLETE_SEARCH](state, search: string) {
     state.autocompleteSearch = search;
   },
+  // Sorting
+  [SET_SORT_VALUE](state, sort: string) {
+    state.sort = sort;
+  },
   [SET_SORT](state, sort: string) {
     state.sort = sort;
+    setSortingQueryParam(sort);
+  },
+  [SET_SORT_REVERSE_VALUE](state, reverse: boolean) {
+    state.sortReverse = reverse;
+  },
+  [SET_SORT_REVERSE](state, reverse: boolean) {
+    state.sortReverse = reverse;
+    setSortingReverseQueryParam(reverse);
   },
   [SET_COMPLETION_VALUE](state, completion: CompleteTypes) {
     state.completion = completion;
@@ -168,9 +195,6 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [FINISH_LOADING](state) {
     state.loading = false;
-  },
-  [SET_SORT_REVERSE](state, reverse: boolean) {
-    state.sortReverse = reverse;
   },
   [SET_PROJECT_NAME](state, name: string) {
     state.project.name = name;

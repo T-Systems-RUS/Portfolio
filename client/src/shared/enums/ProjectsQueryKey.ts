@@ -1,4 +1,6 @@
 export enum ProjectQueryKey {
   SEARCH = 'search',
-  COMPLETION = 'completion'
+  COMPLETION = 'completion',
+  SORT = 'sort',
+  SORT_REVERSE = 'reverse'
 }
