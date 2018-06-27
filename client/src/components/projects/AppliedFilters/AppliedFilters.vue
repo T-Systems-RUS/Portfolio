@@ -36,7 +36,7 @@
           <span
             class="active-chip"
             @click="resetFilters">
-            Reset Filters
+            Reset All Filters
             <img src="../../../assets/images/close.svg">
           </span>
         </span>

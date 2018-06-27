@@ -271,6 +271,10 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [RESET_FILTERS](state) {
     state.filter = {};
+    state.search = '';
+    state.sort = 'name';
+    state.sortReverse = true;
+    state.completion = CompleteTypes.ALL;
     setQuery({});
   }
 };
