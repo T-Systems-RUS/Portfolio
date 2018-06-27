@@ -6,6 +6,7 @@ export const SET_TYPES = 'projects/SET_TYPES';
 export const SET_CUSTOMERS = 'projects/SET_CUSTOMERS';
 export const SET_PROJECTS = 'projects/SET_PROJECTS';
 export const SET_PROJECT = 'projects/SET_PROJECT';
+export const SET_FILTER_VALUE = 'projects/SET_FILTER_VALUE';
 export const SET_FILTER = 'projects/SET_FILTER';
 export const SET_SEARCH = 'projects/SET_SEARCH';
 export const SET_AUTOCOMPLETE_SEARCH = 'projects/SET_AUTOCOMPLETE_SEARCH';

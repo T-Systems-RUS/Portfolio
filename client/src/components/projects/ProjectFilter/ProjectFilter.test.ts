@@ -4,11 +4,13 @@ import store from '../../../store/index';
 import {TestMocks} from '../../../shared/classes/TestMocks';
 import {SET_FILTER, SET_PROJECTS} from '../../../store/modules/projects/mutation-types';
 import {PROJECTS} from '../../../store/modules/projects/getter-types';
+import router from '../../../router';
 
 describe('ProjectChange Filter', () => {
 
   const wrapper = mount(ProjectFilter, {
-    store: store
+    store: store,
+    router
   });
 
   const line = TestMocks.TestLine('Automotive');

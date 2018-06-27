@@ -47,7 +47,6 @@
     created() {
       this.fetchProjects();
     },
-
     methods: {
       ...mapActions({
         fetchProjects: FETCH_PROJECTS

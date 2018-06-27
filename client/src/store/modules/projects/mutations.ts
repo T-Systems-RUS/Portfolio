@@ -32,12 +32,49 @@ import {
   SET_PROJECT_DESCRIPTION,
   SET_PROJECT_CUSTOMERS,
   SET_PROJECT_SCHEDULES,
-  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION, SET_SCHEDULE_DATE, REMOVE_PROJECT_SCHEDULE, SET_SCHEDULE_PARTICIPATION,
-  SET_SCHEDULE_ROLE
+  SET_PROJECT_TECHNOLOGIES,
+  SET_PROJECT_PSS,
+  SET_COMPLETION,
+  SET_SCHEDULE_DATE,
+  REMOVE_PROJECT_SCHEDULE,
+  SET_SCHEDULE_PARTICIPATION,
+  SET_SCHEDULE_ROLE, SET_FILTER_VALUE
 } from './mutation-types';
 import {IRole} from '../../../shared/interfaces/IRole';
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
-import {ITechnology} from "../../../shared/interfaces/ITechnology";
+import {ITechnology} from '../../../shared/interfaces/ITechnology';
+import router, {Routes} from '../../../router';
+
+// Set query params to the filter values
+function setQueryParams(key: string, value: string) {
+  // Get current query params
+  const newQuery = {...router.currentRoute.query};
+  // Check if such key exists
+  if (router.currentRoute.query[key]) {
+    // Get all values for this key
+    const values = router.currentRoute.query[key].split(',');
+    const valueIndex = values.indexOf(value);
+    // Remove if it's already present
+    if (valueIndex > -1) {
+      values.splice(valueIndex, 1);
+      if (values.length) {
+        newQuery[key] = values.join(',');
+      } else {
+        // Remove the key if there's no more values
+        delete newQuery[key];
+      }
+    } else {
+      values.push(value);
+      // Add new value otherwise
+      newQuery[key] = values.join(',');
+    }
+  } else {
+    // Create a key if it isn't present
+    newQuery[key] = value;
+  }
+  // Set new query params
+  router.push({name: Routes.Projects, query: newQuery});
+}
 
 export const mutations: MutationTree<IProjectState> = {
   [SET_ACCORDION](state, payload: { key: string, value: boolean }) {
@@ -56,12 +93,14 @@ export const mutations: MutationTree<IProjectState> = {
     state.project = payload;
     state.loading = false;
   },
+  [SET_FILTER_VALUE](state, payload: { key: string, value: string }) {
+    Vue.set(state.filter, payload.key, Extension.toggleArray(state.filter[payload.key], payload.value));
+  },
   [SET_FILTER](state, payload: { key: string, value: string }) {
-    Vue.set(
-      state.filter,
-      payload.key,
-      Extension.toggleArray(state.filter[payload.key], payload.value)
-    );
+    Vue.set(state.filter, payload.key, Extension.toggleArray(state.filter[payload.key], payload.value));
+
+    setQueryParams(payload.key, payload.value.toString());
+
     state.loading = false;
   },
   // Search
@@ -132,25 +171,25 @@ export const mutations: MutationTree<IProjectState> = {
   [SET_PROJECT_TECHNOLOGIES](state, technologies: ITechnology[]) {
     state.project.technologies = technologies;
   },
-  [SET_SCHEDULE_PARTICIPATION](state, payload: {targetId:string, participation:number}){
+  [SET_SCHEDULE_PARTICIPATION](state, payload: { targetId: string, participation: number }) {
     state.project.schedules = Extension.setScheduleParticipation(
       state.project.schedules,
       payload.targetId,
       payload.participation
     );
   },
-  [SET_SCHEDULE_DATE](state, payload: { key:string, targetId:string, date: Date}){
+  [SET_SCHEDULE_DATE](state, payload: { key: string, targetId: string, date: Date }) {
     state.project.schedules = Extension.setScheduleDate(
-        state.project.schedules,
-        payload.key,
-        payload.targetId,
-        payload.date
-      );
+      state.project.schedules,
+      payload.key,
+      payload.targetId,
+      payload.date
+    );
   },
-  [SET_SCHEDULE_ROLE](state, payload: {targetId:string, role:IRole }) {
+  [SET_SCHEDULE_ROLE](state, payload: { targetId: string, role: IRole }) {
     state.project.schedules = Extension.setScheduleRole(state.project.schedules, payload.targetId, payload.role);
   },
-  [REMOVE_PROJECT_SCHEDULE](state, targetId:string) {
+  [REMOVE_PROJECT_SCHEDULE](state, targetId: string) {
     state.project.schedules = state.project.schedules.filter(schedule => schedule.employee.id !== targetId);
   }
 };
