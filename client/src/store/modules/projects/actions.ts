@@ -104,7 +104,7 @@ export const actions: ActionTree<IProjectState, {}> = {
             if (queryParam === FilterTypes.TECHNOLOGIES) {
               commit(TOGGLE_TECHNOLOGY, {id: Number(value)});
             }
-            commit(SET_FILTER_VALUE, {queryParam, value: Number(value)});
+            commit(SET_FILTER_VALUE, {key: queryParam, value: Number(value)});
           });
           break;
       }
