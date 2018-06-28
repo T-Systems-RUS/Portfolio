@@ -27,7 +27,7 @@ import {
   PROJECT_DESCRIPTION,
   PROJECT_CUSTOMERS,
   PROJECT_SCHEDULES,
-  PROJECT_TECHNOLOGIES_GROUPED, PROJECT_PSS, COMPLETION, PROJECT_EMPLOYEES
+  PROJECT_TECHNOLOGIES_GROUPED, PROJECT_PSS, COMPLETION, PROJECT_EMPLOYEES, FILTER_EMPTY
 } from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
@@ -51,7 +51,6 @@ export const getters: GetterTree<IProjectState, {}> = {
 
     return Object.keys(addons).map(key => {
       const mapKey = Util.mapNameToProperty(key);
-
       // create model for project filter
       const model: IProjectFilter = {
         name: key,
@@ -66,10 +65,11 @@ export const getters: GetterTree<IProjectState, {}> = {
           active: item.active
         })) as IProjectFilterCheck[]
       };
-
-
       return model;
     });
+  },
+  [FILTER_EMPTY]: state => {
+    return Object.keys(state.filter).length === 0;
   },
   [FILTERS]: state => state.filter,
   [FILTER_VALUE]: (state, projectGetters) => (key: string, id: number) => {
@@ -85,7 +85,7 @@ export const getters: GetterTree<IProjectState, {}> = {
     return item ? item.name : '';
   },
 
-  //Completion of project
+  // Completion of project
   [COMPLETION]: state => state.completion,
   // Sorting
   [SORT]: state => state.sort,
@@ -115,7 +115,6 @@ export const getters: GetterTree<IProjectState, {}> = {
   // Filtered, sorted and searched projects
   [PROJECTS](state) {
     let projects = state.projects;
-
     // iterates over keys in filter
     for (const key in state.filter) {
       projects = projects.filter(project => {
@@ -130,7 +129,6 @@ export const getters: GetterTree<IProjectState, {}> = {
               return project[key].map((item: IModel) => item.id).some((id: string) =>
                 state.filter[key].indexOf(id) > -1);
             }
-
             // AND condition
             // Exact technologies like in filter
             return project[key].map((item: IModel) => item.id).filter((id: string) =>
@@ -154,7 +152,6 @@ export const getters: GetterTree<IProjectState, {}> = {
     if (state.search) {
       projects = projects.filter(project => project.name.toLowerCase().indexOf(state.search.toLowerCase()) > -1);
     }
-
     projects = Util.filterCompletedProjects(projects, state.completion);
 
     projects.sort(Util.sortByField(state.sort, state.sortReverse, true));

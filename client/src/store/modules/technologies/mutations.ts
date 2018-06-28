@@ -1,7 +1,7 @@
 import {MutationTree} from 'vuex';
 import {ITechnologyState} from './index';
 import {ITechnology} from '../../../shared/interfaces/ITechnology';
-import {TOGGLE_TECHNOLOGY, SET_TECHNOLOGIES, SET_TECHNOLOGIES_FILTER} from './mutation-types';
+import {TOGGLE_TECHNOLOGY, SET_TECHNOLOGIES, SET_TECHNOLOGIES_FILTER, RESET_TECHNOLOGIES} from './mutation-types';
 import {Extension} from '../../../shared/classes/Extension';
 
 export const mutations: MutationTree<ITechnologyState> = {
@@ -15,5 +15,8 @@ export const mutations: MutationTree<ITechnologyState> = {
   },
   [SET_TECHNOLOGIES_FILTER](state, payload: string) {
     state.filter = payload;
+  },
+  [RESET_TECHNOLOGIES](state) {
+    state.selected = [];
   }
 };

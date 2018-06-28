@@ -7,11 +7,19 @@ import {
   FETCH_PROJECT,
   FETCH_PROJECT_WITH_IMAGE,
   FETCH_PROJECTS,
-  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, SYNC_PARAMS
+  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, RESET_FILTERS_TECHNOLOGIES, SYNC_PARAMS
 } from './action-types';
 
 import {
-  FINISH_LOADING, SET_CUSTOMERS, SET_DOMAINS, SET_FILTER_VALUE, SET_LINES, SET_PROGRAMS, SET_PROJECT, SET_PROJECTS,
+  FINISH_LOADING, RESET_FILTERS, SET_COMPLETION_VALUE,
+  SET_CUSTOMERS,
+  SET_DOMAINS,
+  SET_FILTER_VALUE,
+  SET_LINES,
+  SET_PROGRAMS,
+  SET_PROJECT,
+  SET_PROJECTS,
+  SET_SEARCH_VALUE, SET_SORT_REVERSE_VALUE, SET_SORT_VALUE,
   SET_TYPES
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
@@ -19,8 +27,9 @@ import {PROJECT, PROJECTS} from './getter-types';
 import {SET_IMAGE_URL} from '../../../components/common/FileUploader/fileUploadStore/mutation-types';
 import {FileUploadStatus} from '../../../components/common/FileUploader/IFileUploadList';
 import {FilterTypes} from './filter-types';
-import {TOGGLE_TECHNOLOGY} from '../technologies/mutation-types';
+import {RESET_TECHNOLOGIES, TOGGLE_TECHNOLOGY} from '../technologies/mutation-types';
 import {default as router, Routes} from '../../../router';
+import {ProjectQueryKey} from '../../../shared/enums/ProjectsQueryKey';
 
 const service = new ProjectService();
 
@@ -74,15 +83,35 @@ export const actions: ActionTree<IProjectState, {}> = {
     return PowerPointService.createSingleProjectPresentation(getters[PROJECT]);
   },
   [SYNC_PARAMS]({commit}, query) {
-    // Set filter values from query params
-    Object.keys(query).forEach(key => {
-      // Get all values for each filter key
-      query[key].split(',').forEach((value: string) => {
-        if (key === FilterTypes.TECHNOLOGIES) {
-          commit(TOGGLE_TECHNOLOGY, {id: Number(value)});
-        }
-        commit(SET_FILTER_VALUE, {key, value: Number(value)});
-      });
+    Object.keys(query).forEach(queryParam => {
+      switch (queryParam) {
+        case ProjectQueryKey.SORT:
+          commit(SET_SORT_VALUE, query[queryParam]);
+          break;
+        case ProjectQueryKey.SORT_REVERSE:
+          commit(SET_SORT_REVERSE_VALUE, query[queryParam] === 'true');
+          break;
+        case ProjectQueryKey.SEARCH:
+          commit(SET_SEARCH_VALUE, query[queryParam]);
+          break;
+        case ProjectQueryKey.COMPLETION:
+          commit(SET_COMPLETION_VALUE, query[queryParam]);
+          break;
+        default:
+          // Set filter values from query params
+          // Get all values for each filter key
+          query[queryParam].split(',').forEach((value: string) => {
+            if (queryParam === FilterTypes.TECHNOLOGIES) {
+              commit(TOGGLE_TECHNOLOGY, {id: Number(value)});
+            }
+            commit(SET_FILTER_VALUE, {key: queryParam, value: Number(value)});
+          });
+          break;
+      }
     });
+  },
+  [RESET_FILTERS_TECHNOLOGIES]({commit}) {
+    commit(RESET_FILTERS);
+    commit(RESET_TECHNOLOGIES);
   }
 };

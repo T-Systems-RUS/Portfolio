@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {IModel} from '../interfaces/IModel';
 import {IProject} from '../interfaces/IProject';
 import {Types} from '../../store/modules/projects/constant-types';
-import {CompleteTypes} from '../types/complete-types';
+import {CompleteTypes} from '../enums/CompleteTypes';
 
 export class Util {
   public static getApiUrl(url: string) {

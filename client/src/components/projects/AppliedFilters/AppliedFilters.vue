@@ -30,6 +30,18 @@
         </span>
       </div>
       <div
+        v-if="search || !filterEmpty || !sortReverse || sort!='name' || completion!='all'"
+        class="filter">
+        <span class="filter-text">
+          <span
+            class="active-chip"
+            @click="resetFilters">
+            Reset All Filters
+            <img src="../../../assets/images/close.svg">
+          </span>
+        </span>
+      </div>
+      <div
         class="filter"
         v-if="search">
         <span class="filter-text">
@@ -65,7 +77,7 @@
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
   import {
-    COMPLETION,
+    COMPLETION, FILTER_EMPTY,
     FILTER_VALUE,
     FILTERS,
     SEARCH,
@@ -76,7 +88,7 @@
   import {SET_FILTER, SET_SEARCH} from '../../../store/modules/projects/mutation-types';
   import {TOGGLE_TECHNOLOGY} from '../../../store/modules/technologies/mutation-types';
   import {FilterTypes} from '../../../store/modules/projects/filter-types';
-  import {GENERATE_PRESENTATION} from '../../../store/modules/projects/action-types';
+  import {GENERATE_PRESENTATION, RESET_FILTERS_TECHNOLOGIES} from '../../../store/modules/projects/action-types';
 
   export default Vue.extend({
     computed: {
@@ -85,7 +97,8 @@
         filterMaps: FILTERS,
         sort: SORT,
         completion: COMPLETION,
-        sortReverse: SORT_REVERSE
+        sortReverse: SORT_REVERSE,
+        filterEmpty: FILTER_EMPTY
       })
     },
     methods: {
@@ -104,6 +117,9 @@
       removeFilter(filterKey: string, id: number) {
         if (filterKey === FilterTypes.TECHNOLOGIES) this.$store.commit(TOGGLE_TECHNOLOGY, {id});
         this.$store.commit(SET_FILTER, {key: filterKey, value: id});
+      },
+      resetFilters() {
+        this.$store.dispatch(RESET_FILTERS_TECHNOLOGIES);
       }
     }
   });
