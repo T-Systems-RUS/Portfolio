@@ -134,6 +134,7 @@
         this.$store.commit(SET_IMAGE_URL, IMAGE_URL_INITIAL);
         this.urlToDelete = false;
         this.isConfirmModalOpen = false;
+        this.$emit('remove:image');
       }
     }
   });

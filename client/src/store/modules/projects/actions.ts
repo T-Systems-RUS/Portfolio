@@ -13,7 +13,7 @@ import {
   FETCH_PROJECT,
   FETCH_PROJECT_WITH_IMAGE,
   FETCH_PROJECTS,
-  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, REMOVE_PROJECT_IMAGE
+  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, REMOVE_PROJECT_IMAGE, UPDATE_PROJECT_IMAGE
 } from './action-types';
 
 import {
@@ -22,8 +22,9 @@ import {
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
 import {PROJECT, PROJECTS} from './getter-types';
-import {SET_IMAGE_URL} from '../../../components/common/FileUploader/fileUploadStore/mutation-types';
-import {FileUploadStatus} from '../../../components/common/FileUploader/IFileUploadList';
+import {SET_FILE_COMPLETED, SET_FILE_LOADING, SET_IMAGE_URL} from '../../../components/common/FileUploader/fileUploadStore/mutation-types';
+import {FileUploadStatus, IFileUpload} from '../../../components/common/FileUploader/IFileUploadList';
+import {FileUploaderService} from '../../../components/common/FileUploader/FileUploaderService';
 
 const service = new ProjectService();
 
@@ -106,5 +107,10 @@ export const actions: ActionTree<IProjectState, {}> = {
   [REMOVE_PROJECT_IMAGE]({commit}, image: string) {
     return service.removeImage<object>({'image': image})
       .then(() => commit(SET_PROJECT_IMAGE, ''));
+  },
+
+  [UPDATE_PROJECT_IMAGE]({commit}, payload: { id:string, image: string }) {
+    return service.updateImage<Object>(payload)
+      .then(() => commit(SET_PROJECT_IMAGE, payload.image));
   }
 };

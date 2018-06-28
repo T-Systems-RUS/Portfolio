@@ -11,7 +11,7 @@ export class HttpClientService {
       .catch(this.catcher);
   }
 
-  post(url: string, data:IModel) {
+  post<T>(url: string, data:T) {
     return axios.post(url, data);
   }
 

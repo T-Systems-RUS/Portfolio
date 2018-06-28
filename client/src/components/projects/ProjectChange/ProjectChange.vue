@@ -236,7 +236,8 @@
               <div class="control">
                 <FileUploader
                   :is-image-upload="true"
-                  :is-multiple="false">
+                  :is-multiple="false"
+                  v-on:remove:image="removeProjectImage">
                   <span slot="button-text">Select project image</span>
                   <span slot="upload-title">Upload project image</span>
                   <span slot="upload-optional">Select an image to upload from your computer</span>
@@ -320,7 +321,7 @@
     CREATE_PROJECT,
     EDIT_PROJECT,
     FETCH_ADDONS,
-    FETCH_PROJECT_WITH_IMAGE, REMOVE_PROJECT_IMAGE
+    FETCH_PROJECT_WITH_IMAGE, REMOVE_PROJECT_IMAGE, UPDATE_PROJECT_IMAGE
   } from "../../../store/modules/projects/action-types";
   import {FETCH_ROLES, FETCH_EMPLOYEES} from '../../../store/modules/employees/action-types';
   import {
@@ -358,6 +359,7 @@
   import {IEmployee} from '../../../shared/interfaces/IEmployee';
   import {ModelFactory} from '../../../shared/classes/ModelFactory';
   import {IProject} from "../../../shared/interfaces/IProject";
+  import {IImageUrl} from '../../common/FileUploader/IFileUploadList';
 
   interface IData {
     filteredTechnologies: {}[];
@@ -393,6 +395,9 @@
       customers: Util.mapTwoWay<ICustomer[]>(PROJECT_CUSTOMERS, SET_PROJECT_CUSTOMERS),
       schedules: Util.mapTwoWay<ISchedule[]>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
       technologies: Util.mapTwoWay<ITechnology[]>(PROJECT_TECHNOLOGIES, SET_PROJECT_TECHNOLOGIES),
+      image(): string {
+        return this.$store.getters[PROJECT_IMAGE];
+      },
       employees(): IEmployee[] {
         return this.$store.getters[EMPLOYEES]
           .filter((employee: IEmployee) => !(this.$store.getters[PROJECT_EMPLOYEES]
@@ -515,9 +520,10 @@
       },
       goBack() {
         if(this.id) {
+          this.$store.dispatch(UPDATE_PROJECT_IMAGE, {id:this.id, image: this.image});
           this.$router.push({name: Routes.Project, params: {id: this.id}});
         } else {
-          this.$store.dispatch(REMOVE_PROJECT_IMAGE, this.$store.getters[PROJECT_IMAGE]);
+          this.$store.dispatch(REMOVE_PROJECT_IMAGE, this.image);
           this.$router.push({name: Routes.Projects});
         }
       },
@@ -526,6 +532,9 @@
       },
       setEndDate() {
         this.$store.commit(SET_PROJECT_END_DATE, this.endDate);
+      },
+      removeProjectImage() {
+        this.$store.dispatch(REMOVE_PROJECT_IMAGE, this.$store.getters[PROJECT_IMAGE]);
       },
       saveProject() {
         if(this.id) {

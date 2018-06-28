@@ -3,6 +3,8 @@ import {routes} from '../../http/routes';
 import {IProject} from '../../../shared/interfaces/IProject';
 import {IFileUpload} from '../../../components/common/FileUploader/IFileUploadList';
 import {IModel} from '../../../shared/interfaces/IModel';
+import axios from 'axios';
+import Guid from '../../../shared/classes/Guid';
 
 export class ProjectService extends HttpClientService{
 
@@ -27,11 +29,11 @@ export class ProjectService extends HttpClientService{
   }
 
   createProject(data:IProject) {
-    return this.post(routes.CREATE_PROJECT, data);
+    return this.post<IProject>(routes.CREATE_PROJECT, data);
   }
 
   editProject(data:IProject) {
-    return this.post(routes.EDIT_PROJECT, data);
+    return this.post<IProject>(routes.EDIT_PROJECT, data);
   }
 
   deleteProject(id:string) {
@@ -39,6 +41,11 @@ export class ProjectService extends HttpClientService{
   }
 
   removeImage<T>(data: T) {
-    return this.put(routes.REMOVE_PROJECT_IMAGA, data);
+    return this.put(routes.REMOVE_PROJECT_IMAGE, data);
   }
+
+  updateImage<T>(data: T) {
+    return this.put(routes.UPDATE_PROJECT_IMAGE, data);
+  }
+
 }

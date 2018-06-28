@@ -62,7 +62,7 @@ export const actions: ActionTree<IFileUploadState, {}> = {
       return isValid;
     });
   },
-  [DELETE_FROM_ALL_LISTS]({commit}, payload) {
+  [DELETE_FROM_ALL_LISTS]({commit, dispatch}, payload) {
     commit(DELETE_FILE, payload);
     commit(DELETE_TEMP_FILE, payload);
   },

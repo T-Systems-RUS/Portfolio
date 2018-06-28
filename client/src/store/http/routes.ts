@@ -10,5 +10,6 @@ export enum routes {
   CREATE_PROJECT = '/api/projects/create',
   EDIT_PROJECT = '/api/projects/update',
   DELETE_PROJECT = '/api/projects/delete/',
-  REMOVE_PROJECT_IMAGA = '/api/images/remove'
+  REMOVE_PROJECT_IMAGE = '/api/images/remove',
+  UPDATE_PROJECT_IMAGE = '/api/projects/update/image'
 }

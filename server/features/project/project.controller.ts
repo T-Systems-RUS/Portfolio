@@ -61,6 +61,12 @@ router.put('/projects/archieve', projectValidator.archieveValidators(), (req, re
           .then(Util.handleData(res)))
   ));
 
+router.put('/projects/update/image', (req, res) =>
+  projectService.updateImage(req.body.id, req.body.image)
+    .then(Util.handleData(res))
+  )
+
+
 router.delete('/projects/delete/:uniqueId', projectValidator.deleteValidators(), (req, res) =>
   Util.handleValidation(req, res, () =>
     projectService.deleteProject(req.params.uniqueId)
