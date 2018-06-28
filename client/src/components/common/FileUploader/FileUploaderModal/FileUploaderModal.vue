@@ -93,7 +93,7 @@
         </div>
       </div>
       <div class="file-uploader-modal-list">
-        <FileList v-on:remove:image="removeImage"/>
+        <FileList @remove:image="removeImage"/>
       </div>
       <div class="file-uploader-modal-add has-text-centered">
         <slot name="upload-btn">

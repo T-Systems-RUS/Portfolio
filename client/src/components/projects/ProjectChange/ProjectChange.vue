@@ -1,10 +1,10 @@
 <template>
   <CommonModal @exit="goBack">
-    <template slot="modal-title">{{id ? 'Edit' : 'Create'}} project</template>
+    <template slot="modal-title">{{ id ? 'Edit' : 'Create' }} project</template>
     <p
       class="manage-user-subtitle common-modal-subtitle has-text-centered is-size-5 is-size-6-mobile"
       slot="modal-subtitle">
-      Please {{id ? 'edit' : 'create'}} project information here
+      Please {{ id ? 'edit' : 'create' }} project information here
     </p>
     <template slot="modal-content">
       <div class="form-container project-change">
@@ -237,7 +237,7 @@
                 <FileUploader
                   :is-image-upload="true"
                   :is-multiple="false"
-                  v-on:remove:image="removeProjectImage">
+                  @remove:image="removeProjectImage">
                   <span slot="button-text">Select project image</span>
                   <span slot="upload-title">Upload project image</span>
                   <span slot="upload-optional">Select an image to upload from your computer</span>
@@ -313,7 +313,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {between, decimal, minValue, required} from "vuelidate/lib/validators";
+  import {between, decimal, minValue, required} from 'vuelidate/lib/validators';
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {
@@ -322,14 +322,14 @@
     EDIT_PROJECT,
     FETCH_ADDONS,
     FETCH_PROJECT_WITH_IMAGE, REMOVE_PROJECT_IMAGE, UPDATE_PROJECT_IMAGE
-  } from "../../../store/modules/projects/action-types";
+  } from '../../../store/modules/projects/action-types';
   import {FETCH_ROLES, FETCH_EMPLOYEES} from '../../../store/modules/employees/action-types';
   import {
     ADDONS,
     PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_EMPLOYEES, PROJECT_END_DATE, PROJECT_IMAGE,
     PROJECT_NAME,
     PROJECT_PROGRAM_ID, PROJECT_PSS, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE_ID
-  } from "../../../store/modules/projects/getter-types";
+  } from '../../../store/modules/projects/getter-types';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
   import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
@@ -346,7 +346,7 @@
     SET_PROJECT_START_DATE,
     SET_PROJECT_TECHNOLOGIES,
     SET_PROJECT_TYPE
-  } from "../../../store/modules/projects/mutation-types";
+  } from '../../../store/modules/projects/mutation-types';
   import {Util} from '../../../shared/classes/Util';
   import {Types} from '../../../store/modules/projects/constant-types';
   import {ICustomer} from '../../../shared/interfaces/ICustomer';
@@ -355,10 +355,10 @@
   import {IType} from '../../../shared/interfaces/IType';
   import {IDomain} from '../../../shared/interfaces/IDomain';
   import {IProgram} from '../../../shared/interfaces/IProgram';
-  import {EMPLOYEES, ROLES} from "../../../store/modules/employees/getter-types";
+  import {EMPLOYEES, ROLES} from '../../../store/modules/employees/getter-types';
   import {IEmployee} from '../../../shared/interfaces/IEmployee';
   import {ModelFactory} from '../../../shared/classes/ModelFactory';
-  import {IProject} from "../../../shared/interfaces/IProject";
+  import {IProject} from '../../../shared/interfaces/IProject';
   import {IImageUrl} from '../../common/FileUploader/IFileUploadList';
 
   interface IData {
@@ -399,6 +399,9 @@
         return this.$store.getters[PROJECT_IMAGE];
       },
       employees(): IEmployee[] {
+        // Employees all employees from backend
+        // Project_Employees assigned to projects
+        // fill dropdown only with employees that are not in project
         return this.$store.getters[EMPLOYEES]
           .filter((employee: IEmployee) => !(this.$store.getters[PROJECT_EMPLOYEES]
           .map((prEmplojee:IEmployee) => prEmplojee.id).indexOf(employee.id) >-1))
@@ -441,11 +444,11 @@
         name: {
           required,
           doesExist: async (name: string) => {
-            if(name === '') return true;
+            if (name === '') return true;
 
             return this.id
               ? !await this.$store.dispatch(CHECK_PROJECT_EXISTENCE_UPDATE, {name, id: this.id})
-              : !await this.$store.dispatch(CHECK_PROJECT_EXISTENCE, name)
+              : !await this.$store.dispatch(CHECK_PROJECT_EXISTENCE, name);
           }
         },
         startDate: {
@@ -468,12 +471,12 @@
         },
         pss: {
           decimal,
-          between: between(0,5)
+          between: between(0, 5)
         }
       };
     },
     mounted() {
-      if(this.id) {
+      if (this.id) {
         this.$store.dispatch(FETCH_PROJECT_WITH_IMAGE, this.id)
           .then(() => {
             // Hack necessary due to https://github.com/buefy/buefy/issues/700
@@ -519,8 +522,8 @@
         }
       },
       goBack() {
-        if(this.id) {
-          this.$store.dispatch(UPDATE_PROJECT_IMAGE, {id:this.id, image: this.image});
+        if (this.id) {
+          this.$store.dispatch(UPDATE_PROJECT_IMAGE, {id: this.id, image: this.image});
           this.$router.push({name: Routes.Project, params: {id: this.id}});
         } else {
           this.$store.dispatch(REMOVE_PROJECT_IMAGE, this.image);
@@ -537,7 +540,7 @@
         this.$store.dispatch(REMOVE_PROJECT_IMAGE, this.$store.getters[PROJECT_IMAGE]);
       },
       saveProject() {
-        if(this.id) {
+        if (this.id) {
           this.$store.dispatch(EDIT_PROJECT);
         } else {
           this.$store.dispatch(CREATE_PROJECT);

@@ -12,10 +12,10 @@
     <FileList
       class="outer-file-list"
       v-if="hasOuterFileList"
-      v-on:remove:image="removeImage"/>
+      @remove:image="removeImage"/>
     <FileUploaderModal
       v-if="isUploadModalOpen"
-      v-on:remove:image="removeImage"
+      @remove:image="removeImage"
       @close="setIsUploadModalOpen(false)">
       <slot
         name="upload-title"
@@ -51,7 +51,7 @@
     SET_IS_IMAGE_URL, SET_IS_UPLOAD_MODAL_OPEN, SET_IS_UPLOAD_MULTIPLE
   } from './fileUploadStore/mutation-types';
   import {IMAGE_URL_INITIAL} from './fileUploadStore';
-  import {IS_UPLOAD_MODAL_OPEN, UPLOAD_IMAGE_URL} from "./fileUploadStore/getter-types";
+  import {IS_UPLOAD_MODAL_OPEN, UPLOAD_IMAGE_URL} from './fileUploadStore/getter-types';
 
   export default Vue.extend({
     components: {
