@@ -22,23 +22,20 @@ import {
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
 import {PROJECT, PROJECTS} from './getter-types';
-import {SET_FILE_COMPLETED, SET_FILE_LOADING, SET_IMAGE_URL} from '../../../components/common/FileUploader/fileUploadStore/mutation-types';
-import {FileUploadStatus, IFileUpload} from '../../../components/common/FileUploader/IFileUploadList';
-import {FileUploaderService} from '../../../components/common/FileUploader/FileUploaderService';
-
-const service = new ProjectService();
+import {SET_IMAGE_URL} from '../../../components/common/FileUploader/fileUploadStore/mutation-types';
+import {FileUploadStatus} from '../../../components/common/FileUploader/IFileUploadList';
 
 export const actions: ActionTree<IProjectState, {}> = {
 
   [FETCH_PROJECTS]({commit}) {
-    return service.getProjects()
+    return ProjectService.getProjects()
       .then(response => {
         commit(SET_PROJECTS, response.data);
       });
   },
 
   [FETCH_PROJECT]({commit}, id:string) {
-    return service.getProject(id)
+    return ProjectService.getProject(id)
       .then(response => {
         commit(SET_PROJECT, response.data);
         return response.data;
@@ -60,7 +57,7 @@ export const actions: ActionTree<IProjectState, {}> = {
   },
 
   [FETCH_ADDONS]({commit}) {
-    return service.getProjectAddons()
+    return ProjectService.getProjectAddons()
       .then(response => {
         commit(SET_LINES, response.data.lines);
         commit(SET_PROGRAMS, response.data.programs);
@@ -72,27 +69,27 @@ export const actions: ActionTree<IProjectState, {}> = {
   },
 
   [CHECK_PROJECT_EXISTENCE]({commit}, name:string) {
-    return service.doesProjectExist(name)
+    return ProjectService.doesProjectExist(name)
       .then(response => response.data);
   },
 
   [CHECK_PROJECT_EXISTENCE_UPDATE]({commit}, payload: {name:string, id:string}) {
-    return service.doesProjectWithIdExist(payload.name, payload.id)
+    return ProjectService.doesProjectWithIdExist(payload.name, payload.id)
       .then(response => response.data);
   },
 
   [CREATE_PROJECT]({state}) {
-    return service.createProject(state.project)
+    return ProjectService.createProject(state.project)
       .then(() => router.push({name: Routes.Projects}));
   },
 
   [EDIT_PROJECT]({state}) {
-    return service.editProject(state.project)
+    return ProjectService.editProject(state.project)
       .then((response) => router.push({name: Routes.Project, params: { id: String(response.data.id) }}));
   },
 
   [DELETE_PROJECT]({commit}, id:string) {
-    return service.deleteProject(id)
+    return ProjectService.deleteProject(id)
       .then(() => router.push({name: Routes.Projects}));
   },
 
@@ -105,12 +102,12 @@ export const actions: ActionTree<IProjectState, {}> = {
   },
 
   [REMOVE_PROJECT_IMAGE]({commit}, image: string) {
-    return service.removeImage<object>({'image': image})
+    return ProjectService.removeImage<object>({'image': image})
       .then(() => commit(SET_PROJECT_IMAGE, ''));
   },
 
   [UPDATE_PROJECT_IMAGE]({commit}, payload: { id:string, image: string }) {
-    return service.updateImage<Object>(payload)
+    return ProjectService.updateImage<Object>(payload)
       .then(() => commit(SET_PROJECT_IMAGE, payload.image));
   }
 };

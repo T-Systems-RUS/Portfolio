@@ -32,12 +32,15 @@ import {
   SET_PROJECT_DESCRIPTION,
   SET_PROJECT_CUSTOMERS,
   SET_PROJECT_SCHEDULES,
-  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION, SET_SCHEDULE_DATE, REMOVE_PROJECT_SCHEDULE, SET_SCHEDULE_PARTICIPATION,
-  SET_SCHEDULE_ROLE, SET_PROJECT_IMAGE
+  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION, REMOVE_PROJECT_SCHEDULE, SET_PROJECT_IMAGE, SET_SCHEDULE
 } from './mutation-types';
-import {IRole} from '../../../shared/interfaces/IRole';
+
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
 import {ITechnology} from "../../../shared/interfaces/ITechnology";
+
+function findScheduleIndexByEmployee(schedules:ISchedule[], schedule:ISchedule) {
+  return schedules.findIndex(stateSchedule => stateSchedule.employee.id === schedule.employee.id);
+}
 
 export const mutations: MutationTree<IProjectState> = {
   [SET_ACCORDION](state, payload: { key: string, value: boolean }) {
@@ -135,23 +138,9 @@ export const mutations: MutationTree<IProjectState> = {
   [SET_PROJECT_TECHNOLOGIES](state, technologies: ITechnology[]) {
     state.project.technologies = technologies;
   },
-  [SET_SCHEDULE_PARTICIPATION](state, payload: {targetId:string, participation:number}){
-    state.project.schedules = Extension.setScheduleParticipation(
-      state.project.schedules,
-      payload.targetId,
-      payload.participation
-    );
-  },
-  [SET_SCHEDULE_DATE](state, payload: { key:string, targetId:string, date: Date}){
-    state.project.schedules = Extension.setScheduleDate(
-        state.project.schedules,
-        payload.key,
-        payload.targetId,
-        payload.date
-      );
-  },
-  [SET_SCHEDULE_ROLE](state, payload: {targetId:string, role:IRole }) {
-    state.project.schedules = Extension.setScheduleRole(state.project.schedules, payload.targetId, payload.role);
+  [SET_SCHEDULE](state, schedule:ISchedule) {
+    const scheduleIndex = findScheduleIndexByEmployee(state.project.schedules, schedule);
+    state.project.schedules[scheduleIndex] = schedule;
   },
   [REMOVE_PROJECT_SCHEDULE](state, targetId:string) {
     state.project.schedules = state.project.schedules.filter(schedule => schedule.employee.id !== targetId);

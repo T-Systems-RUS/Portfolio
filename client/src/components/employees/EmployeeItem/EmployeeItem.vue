@@ -39,13 +39,13 @@
               v-model="startdate"
               placeholder="Start date"
               class="employee-item-datepicker"
-              @input="$v.startdate.$touch();setDate($event, 'startdate')"
+              @input="$v.startdate.$touch();setDate($event, true)"
               :readonly="false"/>
             <b-datepicker
               v-model="enddate"
               placeholder="End date"
               class="employee-item-datepicker"
-              @input="$v.enddate.$touch(); setDate($event, 'enddate')"
+              @input="$v.enddate.$touch(); setDate($event, false)"
               :readonly="false"/>
           </div>
         </div>
@@ -92,10 +92,8 @@
   import {IRole} from '../../../shared/interfaces/IRole';
   import {ROLES} from '../../../store/modules/employees/getter-types';
   import {
-    REMOVE_PROJECT_SCHEDULE,
-    SET_SCHEDULE_DATE,
-    SET_SCHEDULE_PARTICIPATION, SET_SCHEDULE_ROLE
-  } from '../../../store/modules/projects/mutation-types';
+    REMOVE_PROJECT_SCHEDULE, SET_SCHEDULE
+  } from "../../../store/modules/projects/mutation-types";
 
 
   export default Vue.extend({
@@ -108,7 +106,7 @@
     data() {
       return {
         startdate: new Date(this.schedule.startdate),
-        enddate: this.schedule.enddate ? new Date(this.schedule.enddate) : null,
+        enddate: this.schedule.enddate ? new Date(this.schedule.enddate) : undefined,
         participation: this.schedule.participation
       };
     },
@@ -136,18 +134,22 @@
           return this.schedule.role.id;
         },
         set(value: string) {
-          this.$store.commit(SET_SCHEDULE_ROLE, {targetId: this.schedule.employee.id,
-                                                 role: this.roles.filter(role => role.id === value)[0]});
+          this.schedule.role = this.roles.filter(role => role.id === value)[0];
+          this.schedule.roleId = this.roles.filter(role => role.id === value)[0].id;
+          this.$store.commit(SET_SCHEDULE, this.schedule);
         }
       }
     },
     methods: {
-      setDate(date:Date, mutation: string) {
-        this.$store.commit(SET_SCHEDULE_DATE, {key: mutation, targetId: this.schedule.employee.id, date});
+      setDate(date:Date, isStartDate: boolean) {
+        isStartDate ? this.schedule.startdate = this.startdate : this.schedule.enddate = this.enddate;
+        console.log(this.schedule.startdate);
+        console.log(this.schedule.enddate);
+        this.$store.commit(SET_SCHEDULE, this.schedule);
       },
       setParticipation() {
-        this.$store.commit(SET_SCHEDULE_PARTICIPATION,
-                           {targetId: this.schedule.employee.id, participation: this.participation});
+        this.schedule.participation = this.participation;
+        this.$store.commit(SET_SCHEDULE, this.schedule);
       },
       removeSchedule() {
         this.$store.commit(REMOVE_PROJECT_SCHEDULE, this.schedule.employee.id);

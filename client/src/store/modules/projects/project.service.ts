@@ -1,51 +1,48 @@
-import {HttpClientService} from '../../http/http-client.service';
 import {routes} from '../../http/routes';
 import {IProject} from '../../../shared/interfaces/IProject';
-import {IFileUpload} from '../../../components/common/FileUploader/IFileUploadList';
-import {IModel} from '../../../shared/interfaces/IModel';
 import axios from 'axios';
-import Guid from '../../../shared/classes/Guid';
 
-export class ProjectService extends HttpClientService{
 
-  doesProjectExist(name: string = '') {
-    return this.get(`${routes.DOES_PROJECT_EXIST}${name}`);
+export class ProjectService {
+
+  static doesProjectExist(name: string = '') {
+    return axios.get<Boolean>(`${routes.DOES_PROJECT_EXIST}${name}`);
   }
 
-  doesProjectWithIdExist(name: string = '', id:string) {
-    return this.get(`${routes.DOES_PROJECT_EXIST_WITH_ID}${name}/${id}`);
+  static doesProjectWithIdExist(name: string = '', id:string) {
+    return axios.get<Boolean>(`${routes.DOES_PROJECT_EXIST_WITH_ID}${name}/${id}`);
   }
 
-  getProjects() {
-    return this.get(routes.GET_PROJECTS);
+  static getProjects() {
+    return axios.get<IProject[]>(routes.GET_PROJECTS);
   }
 
-  getProject(id:string) {
-    return this.get(routes.GET_PROJECT + id);
+  static getProject(id:string) {
+    return axios.get<IProject>(routes.GET_PROJECT + id);
   }
 
-  getProjectAddons() {
-    return this.get(routes.GET_PROJECT_ADDONS);
+  static getProjectAddons() {
+    return axios.get(routes.GET_PROJECT_ADDONS);
   }
 
-  createProject(data:IProject) {
-    return this.post<IProject>(routes.CREATE_PROJECT, data);
+  static createProject(data:IProject) {
+    return axios.post<IProject>(routes.CREATE_PROJECT, data);
   }
 
-  editProject(data:IProject) {
-    return this.post<IProject>(routes.EDIT_PROJECT, data);
+  static editProject(data:IProject) {
+    return axios.post<IProject>(routes.EDIT_PROJECT, data);
   }
 
-  deleteProject(id:string) {
-    return this.delete(routes.DELETE_PROJECT + id);
+  static deleteProject(id:string) {
+    return axios.delete(routes.DELETE_PROJECT + id);
   }
 
-  removeImage<T>(data: T) {
-    return this.put(routes.REMOVE_PROJECT_IMAGE, data);
+  static removeImage<T>(data: T) {
+    return axios.put(routes.REMOVE_PROJECT_IMAGE, data);
   }
 
-  updateImage<T>(data: T) {
-    return this.put(routes.UPDATE_PROJECT_IMAGE, data);
+  static updateImage<T>(data: T) {
+    return axios.put(routes.UPDATE_PROJECT_IMAGE, data);
   }
 
 }

@@ -1,9 +1,10 @@
-import {HttpClientService} from '../../http/http-client.service';
+import axios from 'axios';
 import {routes} from '../../http/routes';
+import {ITechnology} from '../../../shared/interfaces/ITechnology';
 
-export class TechnologyService extends HttpClientService{
+export class TechnologyService {
 
-  getTechnologies() {
-    return this.get(routes.GET_TECHNOLOGIES);
+  static getTechnologies() {
+    return axios.get<ITechnology[]>(routes.GET_TECHNOLOGIES);
   };
 }

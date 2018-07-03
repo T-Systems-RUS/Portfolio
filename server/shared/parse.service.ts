@@ -8,7 +8,8 @@ const parseService = {
     employeeId: schedule.employee.id,
     roleId: schedule.role.id,
     participation: schedule.participation,
-    startdate: schedule.startdate
+    startdate: schedule.startdate,
+    enddate: schedule.enddate
   })),
 
   parseTechnology: technologies => technologies.map(technology => new Technology({
