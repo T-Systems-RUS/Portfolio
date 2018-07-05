@@ -1,10 +1,10 @@
 <template>
   <CommonModal @exit="goBack">
-    <template slot="modal-title">Edit project</template>
+    <template slot="modal-title">{{ id ? 'Edit' : 'Create' }} project</template>
     <p
       class="manage-user-subtitle common-modal-subtitle has-text-centered is-size-5 is-size-6-mobile"
       slot="modal-subtitle">
-      Please edit project information here
+      Please {{ id ? 'edit' : 'create' }} project information here
     </p>
     <template slot="modal-content">
       <div class="form-container project-change">
@@ -26,19 +26,10 @@
               <div v-if="$v.name.$dirty">
                 <p
                   class="help is-danger is-size-7"
+                  v-if="!$v.name.doesExist">Project already exists</p>
+                <p
+                  class="help is-danger is-size-7"
                   v-if="!$v.name.required">Project name is required</p>
-              </div>
-            </div>
-            <div class="field">
-              <label class="label is-pulled-left">Domain</label>
-              <div class="select">
-                <select v-model="domainId">
-                  <option
-                    v-for="option in addons['Domain']"
-                    :value="option.id">
-                    {{ option.name }}
-                  </option>
-                </select>
               </div>
             </div>
             <div class="field">
@@ -52,6 +43,28 @@
                   </option>
                 </select>
               </div>
+              <div v-if="$v.programId.$invalid">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.programId.required">Program is required</p>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label is-pulled-left">Domain</label>
+              <div class="select">
+                <select v-model="domainId">
+                  <option
+                    v-for="option in addons['Domain']"
+                    :value="option.id">
+                    {{ option.name }}
+                  </option>
+                </select>
+              </div>
+              <div v-if="$v.domainId.$invalid">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.domainId.required">Domain is required</p>
+              </div>
             </div>
             <div class="field">
               <label class="label is-pulled-left">Project type</label>
@@ -63,6 +76,11 @@
                     {{ option.name }}
                   </option>
                 </select>
+              </div>
+              <div v-if="$v.typeId.$invalid">
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.typeId.required">Type is required</p>
               </div>
             </div>
             <div class="field">
@@ -172,6 +190,9 @@
                 <p
                   class="help is-danger is-size-7"
                   v-if="!$v.pss.decimal">PSS must be decimal</p>
+                <p
+                  class="help is-danger is-size-7"
+                  v-if="!$v.pss.between">PSS must be between 0 and 5</p>
               </div>
             </div>
           </Stepper>
@@ -207,10 +228,34 @@
             </div>
           </Stepper>
         </div>
-
         <div class="field centered-margin">
           <Stepper
             step="5"
+            name="Project image">
+            <div class="field">
+              <div class="control">
+                <FileUploader
+                  :is-image-upload="true"
+                  :is-multiple="false"
+                  @remove:image="removeProjectImage">
+                  <span slot="button-text">Select project image</span>
+                  <span slot="upload-title">Upload project image</span>
+                  <span slot="upload-optional">Select an image to upload from your computer</span>
+                  <div
+                    slot="upload-info"
+                    class="has-text-centered">
+                    <p class="is-size-6">Maximum file size: 10 MB</p>
+                    <p class="is-size-6">Supported file formats: jpg, jpeg, png</p>
+                  </div>
+                  <template slot="upload-btn-text">Upload</template>
+                </FileUploader>
+              </div>
+            </div>
+          </Stepper>
+        </div>
+        <div class="field centered-margin">
+          <Stepper
+            step="6"
             name="Team">
             <div class="field">
               <div class="control">
@@ -240,30 +285,6 @@
           </Stepper>
         </div>
       </div>
-      <div class="field centered-margin">
-        <Stepper
-          step="6"
-          name="Project image">
-          <div class="field">
-            <div class="control">
-              <FileUploader
-                :is-image-upload="true"
-                :is-multiple="false">
-                <span slot="button-text">Select project image</span>
-                <span slot="upload-title">Upload project image</span>
-                <span slot="upload-optional">Select an image to upload from your computer</span>
-                <div
-                  slot="upload-info"
-                  class="has-text-centered">
-                  <p class="is-size-6">Maximum file size: 10 MB</p>
-                  <p class="is-size-6">Supported file formats: jpg, jpeg, png</p>
-                </div>
-                <template slot="upload-btn-text">Upload</template>
-              </FileUploader>
-            </div>
-          </div>
-        </Stepper>
-      </div>
       <div class="project-change-footer">
         <button
           class="button
@@ -271,7 +292,8 @@
                is-size-6
                is-width-auto
                is-pulled-right"
-          :disabled="$v.$invalid">
+          :disabled="$v.$invalid"
+          @click="saveProject">
           Save
         </button>
         <button
@@ -291,17 +313,20 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {decimal, minValue, required} from 'vuelidate/lib/validators';
+  import {between, decimal, minValue, required} from 'vuelidate/lib/validators';
   import Stepper from '../../common/Stepper/Stepper.vue';
   import EmployeeItem from '../../employees/EmployeeItem/EmployeeItem.vue';
   import {
+    CHECK_PROJECT_EXISTENCE, CHECK_PROJECT_EXISTENCE_UPDATE,
+    CREATE_PROJECT,
+    EDIT_PROJECT,
     FETCH_ADDONS,
-    FETCH_PROJECT_WITH_IMAGE
+    FETCH_PROJECT_WITH_IMAGE, REMOVE_PROJECT_IMAGE, UPDATE_PROJECT_IMAGE
   } from '../../../store/modules/projects/action-types';
   import {FETCH_ROLES, FETCH_EMPLOYEES} from '../../../store/modules/employees/action-types';
   import {
     ADDONS,
-    PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_EMPLOYEES, PROJECT_END_DATE,
+    PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_EMPLOYEES, PROJECT_END_DATE, PROJECT_IMAGE,
     PROJECT_NAME,
     PROJECT_PROGRAM_ID, PROJECT_PSS, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE_ID
   } from '../../../store/modules/projects/getter-types';
@@ -309,6 +334,8 @@
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
   import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
   import {
+    INCREMENT_VERSION,
+    SET_PROJECT,
     SET_PROJECT_CUSTOMERS,
     SET_PROJECT_DESCRIPTION,
     SET_PROJECT_DOMAIN,
@@ -320,7 +347,7 @@
     SET_PROJECT_START_DATE,
     SET_PROJECT_TECHNOLOGIES,
     SET_PROJECT_TYPE
-  } from '../../../store/modules/projects/mutation-types';
+  } from "../../../store/modules/projects/mutation-types";
   import {Util} from '../../../shared/classes/Util';
   import {Types} from '../../../store/modules/projects/constant-types';
   import {ICustomer} from '../../../shared/interfaces/ICustomer';
@@ -329,9 +356,11 @@
   import {IType} from '../../../shared/interfaces/IType';
   import {IDomain} from '../../../shared/interfaces/IDomain';
   import {IProgram} from '../../../shared/interfaces/IProgram';
-  import {EMPLOYEES} from '../../../store/modules/employees/getter-types';
+  import {EMPLOYEES, ROLES} from '../../../store/modules/employees/getter-types';
   import {IEmployee} from '../../../shared/interfaces/IEmployee';
   import {ModelFactory} from '../../../shared/classes/ModelFactory';
+  import {IProject} from '../../../shared/interfaces/IProject';
+  import {IImageUrl} from '../../common/FileUploader/IFileUploadList';
 
   interface IData {
     filteredTechnologies: {}[];
@@ -367,7 +396,13 @@
       customers: Util.mapTwoWay<ICustomer[]>(PROJECT_CUSTOMERS, SET_PROJECT_CUSTOMERS),
       schedules: Util.mapTwoWay<ISchedule[]>(PROJECT_SCHEDULES, SET_PROJECT_SCHEDULES),
       technologies: Util.mapTwoWay<ITechnology[]>(PROJECT_TECHNOLOGIES, SET_PROJECT_TECHNOLOGIES),
+      image(): string {
+        return this.$store.getters[PROJECT_IMAGE];
+      },
       employees(): IEmployee[] {
+        // Employees all employees from backend
+        // Project_Employees assigned to projects
+        // fill dropdown only with employees that are not in project
         return this.$store.getters[EMPLOYEES]
           .filter((employee: IEmployee) => !(this.$store.getters[PROJECT_EMPLOYEES]
           .map((prEmplojee:IEmployee) => prEmplojee.id).indexOf(employee.id) >-1))
@@ -408,7 +443,14 @@
     validations() {
       return {
         name: {
-          required
+          required,
+          doesExist: async (name: string) => {
+            if (name === '') return true;
+
+            return this.id
+              ? !await this.$store.dispatch(CHECK_PROJECT_EXISTENCE_UPDATE, {name, id: this.id})
+              : !await this.$store.dispatch(CHECK_PROJECT_EXISTENCE, name);
+          }
         },
         startDate: {
           required
@@ -419,22 +461,36 @@
         description: {
           required
         },
+        programId: {
+          required
+        },
+        domainId: {
+          required
+        },
+        typeId: {
+          required
+        },
         pss: {
-          decimal
+          decimal,
+          between: between(0, 5)
         }
       };
     },
     mounted() {
-      this.$store.dispatch(FETCH_PROJECT_WITH_IMAGE, this.id)
-        .then(() => {
-          // Hack necessary due to https://github.com/buefy/buefy/issues/700
-          // TODO change to actual computed+getter after fixed
-          this.startDate = new Date(this.$store.getters[PROJECT_START_DATE]);
-          const endDate = this.$store.getters[PROJECT_END_DATE];
-          if (endDate) {
-            this.endDate = new Date(endDate);
-          }
-        });
+      if (this.id) {
+        this.$store.dispatch(FETCH_PROJECT_WITH_IMAGE, this.id)
+          .then(() => {
+            // Hack necessary due to https://github.com/buefy/buefy/issues/700
+            // TODO change to actual computed+getter after fixed
+            this.startDate = new Date(this.$store.getters[PROJECT_START_DATE]);
+            const endDate = this.$store.getters[PROJECT_END_DATE];
+            if (endDate) {
+              this.endDate = new Date(endDate);
+            }
+          });
+      } else {
+        this.$store.commit(SET_PROJECT, ModelFactory.createProject());
+      }
       this.$store.dispatch(FETCH_TECHNOLOGIES);
       this.$store.dispatch(FETCH_ADDONS);
       this.$store.dispatch(FETCH_ROLES);
@@ -459,7 +515,7 @@
       selectEmployee(employee: IEmployee) {
         if (employee) {
           const updatedSchedules = [
-            ModelFactory.createSchedule(employee, this.id.toString()),
+            ModelFactory.createSchedule(employee, '', this.$store.getters[ROLES][0]),
             ...this.schedules
           ];
 
@@ -467,13 +523,30 @@
         }
       },
       goBack() {
-        this.$router.push({name: Routes.Project, params: {id: this.id}});
+        if (this.id) {
+          this.$store.dispatch(UPDATE_PROJECT_IMAGE, {id: this.id, image: this.image});
+          this.$router.push({name: Routes.Project, params: {id: this.id}});
+        } else {
+          this.$store.dispatch(REMOVE_PROJECT_IMAGE, this.image);
+          this.$router.push({name: Routes.Projects});
+        }
       },
       setStartDate() {
         this.$store.commit(SET_PROJECT_START_DATE, this.startDate);
       },
       setEndDate() {
         this.$store.commit(SET_PROJECT_END_DATE, this.endDate);
+      },
+      removeProjectImage() {
+        this.$store.dispatch(REMOVE_PROJECT_IMAGE, this.$store.getters[PROJECT_IMAGE]);
+      },
+      saveProject() {
+        if (this.id) {
+          this.$store.commit(INCREMENT_VERSION);
+          this.$store.dispatch(EDIT_PROJECT);
+        } else {
+          this.$store.dispatch(CREATE_PROJECT);
+        }
       }
     }
   });

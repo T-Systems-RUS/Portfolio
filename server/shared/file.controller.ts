@@ -1,51 +1,38 @@
 import * as express from 'express';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as multer from 'multer';
-
 import projectService from '../features/project/project.service';
+
 import {Util} from './Util';
 
-const DIST = 'server/images/';
-
+const DIST = 'images/';
 const router = express.Router();
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, DIST);
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.fieldname + '-' + req.body.name + path.extname(file.originalname));
-  }
-});
-
-const upload = multer({storage: storage}).single('image');
 
 // POST requests
 router.post('/images/add', (req, res) => {
-  upload(req, res, err => {
-    if (err) {
-      console.log(err)
-      return res.status(422).send(err);
-    }
+  if (req.body.data) {
+    const regexp = '^data:image\\/' + req.body.type + ';base64,';
 
-    projectService.updateImage(req.body.id, req.file.filename).then(Util.handleData(res));
-  });
+    const base64Data = req.body.data.replace(new RegExp(regexp) , ''),
+      binaryData = new Buffer(base64Data, 'base64').toString('binary');
+
+    // Util handleData doesn't work
+    fs.writeFile(DIST + req.body.name, binaryData, 'binary', () =>
+      res.status(200).send({ 'filename' : req.body.name}));
+  }
 });
 
 router.put('/images/remove', (req, res) => {
+  console.log(DIST + req.body.image);
   const image = DIST + req.body.image;
-  fs.exists(image, exists => {
-    if (exists) {
-      fs.unlink(image);
-      req.body.image = null;
-      projectService.removeImage(req.body)
-        .then(Util.handleData(res));
-    } else {
-      console.log(exists);
-      res.status(404).send('File not found.');
-    }
-  });
+
+  const exists = fs.existsSync(image);
+  console.log(exists);
+  if (exists) {
+    fs.unlink(image, () => res.status(200).send('removed'));
+  } else {
+    res.status(404).send('File not found.');
+  }
 });
 
 router.get('/presentation/images/:id?', (req, res) => {

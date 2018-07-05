@@ -2,12 +2,16 @@ import {ActionTree} from 'vuex';
 import {ProjectService} from './project.service';
 import {IProjectState} from './index';
 import {
-  DELETE_PROJECT,
+  CHECK_PROJECT_EXISTENCE, CHECK_PROJECT_EXISTENCE_UPDATE,
+  CREATE_PROJECT,
+  DELETE_PROJECT, EDIT_PROJECT,
   FETCH_ADDONS,
   FETCH_PROJECT,
   FETCH_PROJECT_WITH_IMAGE,
   FETCH_PROJECTS,
-  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, RESET_FILTERS_TECHNOLOGIES, SYNC_PARAMS
+
+  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, REMOVE_PROJECT_IMAGE, UPDATE_PROJECT_IMAGE, 
+  RESET_FILTERS_TECHNOLOGIES, SYNC_PARAMS  
 } from './action-types';
 
 import {
@@ -20,6 +24,7 @@ import {
   SET_PROJECT,
   SET_PROJECTS,
   SET_SEARCH_VALUE, SET_SORT_REVERSE_VALUE, SET_SORT_VALUE,
+
   SET_TYPES
 } from './mutation-types';
 import {PowerPointService} from './PowerPointService';
@@ -31,18 +36,18 @@ import {RESET_TECHNOLOGIES, TOGGLE_TECHNOLOGY} from '../technologies/mutation-ty
 import {default as router, Routes} from '../../../router';
 import {ProjectQueryKey} from '../../../shared/enums/ProjectsQueryKey';
 
-const service = new ProjectService();
-
 export const actions: ActionTree<IProjectState, {}> = {
 
   [FETCH_PROJECTS]({commit}) {
-    return service.getProjects()
+    return ProjectService.getProjects()
       .then(response => {
         commit(SET_PROJECTS, response.data);
       });
   },
-  [FETCH_PROJECT]({commit}, id: string) {
-    return service.getProject(id)
+
+
+  [FETCH_PROJECT]({commit}, id:string) {
+    return ProjectService.getProject(id)
       .then(response => {
         commit(SET_PROJECT, response.data);
         return response.data;
@@ -62,7 +67,7 @@ export const actions: ActionTree<IProjectState, {}> = {
       });
   },
   [FETCH_ADDONS]({commit}) {
-    return service.getProjectAddons()
+    return ProjectService.getProjectAddons()
       .then(response => {
         commit(SET_LINES, response.data.lines);
         commit(SET_PROGRAMS, response.data.programs);
@@ -72,8 +77,30 @@ export const actions: ActionTree<IProjectState, {}> = {
         commit(FINISH_LOADING);
       });
   },
-  [DELETE_PROJECT]({commit}, id: string) {
-    return service.deleteProject(id)
+
+
+  [CHECK_PROJECT_EXISTENCE]({commit}, name:string) {
+    return ProjectService.doesProjectExist(name)
+      .then(response => response.data);
+  },
+
+  [CHECK_PROJECT_EXISTENCE_UPDATE]({commit}, payload: {name:string, id:string}) {
+    return ProjectService.doesProjectWithIdExist(payload.name, payload.id)
+      .then(response => response.data);
+  },
+
+  [CREATE_PROJECT]({state}) {
+    return ProjectService.createProject(state.project)
+      .then(() => router.push({name: Routes.Projects}));
+  },
+
+  [EDIT_PROJECT]({state}) {
+    return ProjectService.editProject(state.project)
+      .then((response) => router.push({name: Routes.Project, params: { id: String(response.data.id) }}));
+  },
+
+  [DELETE_PROJECT]({commit}, id:string) {
+    return ProjectService.deleteProject(id)
       .then(() => router.push({name: Routes.Projects}));
   },
   [GENERATE_PRESENTATION]({getters}) {
@@ -82,6 +109,17 @@ export const actions: ActionTree<IProjectState, {}> = {
   [GENERATE_PRESENTATION_SINGLE]({getters}) {
     return PowerPointService.createSingleProjectPresentation(getters[PROJECT]);
   },
+
+
+  [REMOVE_PROJECT_IMAGE]({commit}, image: string) {
+    return ProjectService.removeImage<object>({'image': image})
+      .then(() => commit(SET_PROJECT_IMAGE, ''));
+  },
+
+  [UPDATE_PROJECT_IMAGE]({commit}, payload: { id:string, image: string }) {
+    return ProjectService.updateImage<Object>(payload)
+      .then(() => commit(SET_PROJECT_IMAGE, payload.image));
+
   [SYNC_PARAMS]({commit}, query) {
     Object.keys(query).forEach(queryParam => {
       switch (queryParam) {
@@ -113,5 +151,6 @@ export const actions: ActionTree<IProjectState, {}> = {
   [RESET_FILTERS_TECHNOLOGIES]({commit}) {
     commit(RESET_FILTERS);
     commit(RESET_TECHNOLOGIES);
+
   }
 };

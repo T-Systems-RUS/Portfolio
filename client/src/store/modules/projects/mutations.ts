@@ -44,9 +44,11 @@ import {
   SET_COMPLETION_VALUE,
   SET_SORT_VALUE,
   SET_SORT_REVERSE_VALUE,
-  RESET_FILTERS
+  RESET_FILTERS,
+  SET_PROJECT_IMAGE, SET_SCHEDULE, INCREMENT_VERSION
+
 } from './mutation-types';
-import {IRole} from '../../../shared/interfaces/IRole';
+
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
 import {ITechnology} from '../../../shared/interfaces/ITechnology';
 import router, {Routes} from '../../../router';
@@ -137,6 +139,10 @@ function setFilterValue(state: IProjectState, key: string, value: string) {
   }
 }
 
+function findScheduleIndexByEmployee(schedules:ISchedule[], schedule:ISchedule) {
+  return schedules.findIndex(stateSchedule => stateSchedule.employee.id === schedule.employee.id);
+}
+
 export const mutations: MutationTree<IProjectState> = {
   [SET_ACCORDION](state, payload: { key: string, value: boolean }) {
     Vue.set(
@@ -215,6 +221,12 @@ export const mutations: MutationTree<IProjectState> = {
   [FINISH_LOADING](state) {
     state.loading = false;
   },
+  [INCREMENT_VERSION](state) {
+    state.project.version = state.project.version + 1;
+  },
+  [SET_SORT_REVERSE](state, reverse: boolean) {
+    state.sortReverse = reverse;
+  },
   [SET_PROJECT_NAME](state, name: string) {
     state.project.name = name;
   },
@@ -226,6 +238,9 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [SET_PROJECT_TYPE](state, type: IType) {
     state.project.type = type;
+  },
+  [SET_PROJECT_IMAGE](state, image: string) {
+    state.project.image = image;
   },
   [SET_PROJECT_START_DATE](state, startDate: string) {
     state.project.startdate = startDate;
@@ -248,23 +263,10 @@ export const mutations: MutationTree<IProjectState> = {
   [SET_PROJECT_TECHNOLOGIES](state, technologies: ITechnology[]) {
     state.project.technologies = technologies;
   },
-  [SET_SCHEDULE_PARTICIPATION](state, payload: { targetId: string, participation: number }) {
-    state.project.schedules = Extension.setScheduleParticipation(
-      state.project.schedules,
-      payload.targetId,
-      payload.participation
-    );
-  },
-  [SET_SCHEDULE_DATE](state, payload: { key: string, targetId: string, date: Date }) {
-    state.project.schedules = Extension.setScheduleDate(
-      state.project.schedules,
-      payload.key,
-      payload.targetId,
-      payload.date
-    );
-  },
-  [SET_SCHEDULE_ROLE](state, payload: { targetId: string, role: IRole }) {
-    state.project.schedules = Extension.setScheduleRole(state.project.schedules, payload.targetId, payload.role);
+
+  [SET_SCHEDULE](state, schedule:ISchedule) {
+    const scheduleIndex = findScheduleIndexByEmployee(state.project.schedules, schedule);
+    state.project.schedules[scheduleIndex] = schedule;
   },
   [REMOVE_PROJECT_SCHEDULE](state, targetId: string) {
     state.project.schedules = state.project.schedules.filter(schedule => schedule.employee.id !== targetId);

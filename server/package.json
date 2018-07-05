@@ -17,7 +17,6 @@
     "express": "^4.16.0",
     "express-validator": "^4.3.0",
     "lodash": "^4.17.4",
-    "multer": "^1.3.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "pptxgenjs": "^1.10.0",

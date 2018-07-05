@@ -198,6 +198,7 @@
   .project {
     margin-bottom: 100px;
 
+
     &-secondary {
       color: $text-secondary3;
       margin-top: 30px;

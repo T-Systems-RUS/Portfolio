@@ -7,7 +7,9 @@ const parseService = {
     projectId: project.id,
     employeeId: schedule.employee.id,
     roleId: schedule.role.id,
-    participation: schedule.participation
+    participation: schedule.participation,
+    startdate: schedule.startdate,
+    enddate: schedule.enddate
   })),
 
   parseTechnology: technologies => technologies.map(technology => new Technology({

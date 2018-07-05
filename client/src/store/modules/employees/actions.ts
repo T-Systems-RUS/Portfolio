@@ -6,18 +6,17 @@ import {SET_EMPLOYEES} from './mutation-types';
 import {SET_ROLES} from './mutation-types';
 import {FETCH_ROLES} from './action-types';
 
-const service = new EmployeeService();
 
 export const actions: ActionTree<IEmployeeState, {}> = {
   [FETCH_EMPLOYEES]({commit}) {
-    return service.getEmployees()
+    return EmployeeService.getEmployees()
       .then((response) => {
         commit(SET_EMPLOYEES, response.data);
       });
   },
 
   [FETCH_ROLES]({commit}) {
-    return service.getRoles()
+    return EmployeeService.getRoles()
       .then(response => {
         commit(SET_ROLES, response.data);
       });

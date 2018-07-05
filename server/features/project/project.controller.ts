@@ -3,6 +3,7 @@ import projectService from './project.service';
 import projectValidator from './project.validator';
 import {Util} from '../../shared/Util';
 import projectAddonsService from './shared/project-addons.service';
+import technologyService from '../technology/technology.service';
 
 const router = express.Router();
 
@@ -23,10 +24,18 @@ router.get('/projects/history/:uniqueId', (req, res) =>
   projectService.getProjectsByUniqueId(req.params.uniqueId)
     .then(Util.handleData(res)));
 
+router.get('/projects/exists/:name', (req, res) =>
+  projectService.doesProjectWithNameExist(req.params.name)
+    .then(doesExist => res.status(200).send(doesExist)));
+
+router.get('/projects/update/exists/:name/:id', (req, res) =>
+  projectService.doesProjectWithNameAndIdExist(req.params.name, req.params.id)
+    .then(doesExist => res.status(200).send(doesExist)));
+
 // POST Requests
 router.post('/projects/create', projectValidator.createValidators(), (req, res) =>
   Util.handleValidation(req, res, () =>
-    projectService.doesProjectExist(req.body.uniqueId).then(doesExist =>
+    projectService.doesProjectWithNameExist(req.body.name).then(doesExist =>
       doesExist ?
         Util.handleConflict(res, 'Project already exists or was archieved') :
         projectService.createProject(req.body)
@@ -51,6 +60,12 @@ router.put('/projects/archieve', projectValidator.archieveValidators(), (req, re
         projectService.archieveProject(req.body.id)
           .then(Util.handleData(res)))
   ));
+
+router.put('/projects/update/image', (req, res) =>
+  projectService.updateImage(req.body.id, req.body.image)
+    .then(Util.handleData(res))
+  )
+
 
 router.delete('/projects/delete/:uniqueId', projectValidator.deleteValidators(), (req, res) =>
   Util.handleValidation(req, res, () =>

@@ -10,5 +10,5 @@ export interface ISchedule extends IModel{
   roleId: string,
   role: IRole,
   startdate: Date,
-  enddate: Date
+  enddate?: Date
 }

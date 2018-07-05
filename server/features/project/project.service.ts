@@ -43,6 +43,20 @@ const projectService = {
       console.log(error);
     }),
 
+  doesProjectWithNameExist: name => Project.count({where: {name: name, ishistory: false }})
+    .then(count => count !== 0)
+    .catch(error => {
+      console.log(error);
+    }),
+
+  doesProjectWithNameAndIdExist: (name, id) => Project.count({
+      where: {name: name, ishistory: false, id: {[sequelize.Op.ne]: id}
+    }})
+    .then(count => count !== 0)
+    .catch(error => {
+      console.log(error);
+    }),
+
 // GET Get latest project
   isProjectLatest: id => Project.findOne({
     where: {
@@ -68,7 +82,7 @@ const projectService = {
     domainId: project.domain.id,
     typeId: project.type.id,
     startdate: project.startdate,
-    enddate: project.enddate
+    enddate: project.enddate || null
   })
     .then(projectNew =>
       // return project only after technologies added

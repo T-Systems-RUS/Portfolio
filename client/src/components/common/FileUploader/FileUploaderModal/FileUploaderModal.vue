@@ -93,7 +93,7 @@
         </div>
       </div>
       <div class="file-uploader-modal-list">
-        <FileList/>
+        <FileList @remove:image="removeImage"/>
       </div>
       <div class="file-uploader-modal-add has-text-centered">
         <slot name="upload-btn">
@@ -238,6 +238,9 @@
         if (this.$refs.fileInput instanceof HTMLInputElement) {
           this.$refs.fileInput.value = '';
         }
+      },
+      removeImage() {
+        this.$emit('remove:image');
       }
     }
   });
