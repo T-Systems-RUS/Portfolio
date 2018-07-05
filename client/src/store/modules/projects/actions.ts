@@ -10,8 +10,8 @@ import {
   FETCH_PROJECT_WITH_IMAGE,
   FETCH_PROJECTS,
 
-  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, REMOVE_PROJECT_IMAGE, UPDATE_PROJECT_IMAGE, 
-  RESET_FILTERS_TECHNOLOGIES, SYNC_PARAMS  
+  GENERATE_PRESENTATION, GENERATE_PRESENTATION_SINGLE, REMOVE_PROJECT_IMAGE, UPDATE_PROJECT_IMAGE,
+  RESET_FILTERS_TECHNOLOGIES, SYNC_PARAMS
 } from './action-types';
 
 import {
@@ -21,7 +21,7 @@ import {
   SET_FILTER_VALUE,
   SET_LINES,
   SET_PROGRAMS,
-  SET_PROJECT,
+  SET_PROJECT, SET_PROJECT_IMAGE,
   SET_PROJECTS,
   SET_SEARCH_VALUE, SET_SORT_REVERSE_VALUE, SET_SORT_VALUE,
 
@@ -119,7 +119,7 @@ export const actions: ActionTree<IProjectState, {}> = {
   [UPDATE_PROJECT_IMAGE]({commit}, payload: { id:string, image: string }) {
     return ProjectService.updateImage<Object>(payload)
       .then(() => commit(SET_PROJECT_IMAGE, payload.image));
-
+  },
   [SYNC_PARAMS]({commit}, query) {
     Object.keys(query).forEach(queryParam => {
       switch (queryParam) {
@@ -148,6 +148,7 @@ export const actions: ActionTree<IProjectState, {}> = {
       }
     });
   },
+
   [RESET_FILTERS_TECHNOLOGIES]({commit}) {
     commit(RESET_FILTERS);
     commit(RESET_TECHNOLOGIES);

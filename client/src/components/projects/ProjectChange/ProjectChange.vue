@@ -347,7 +347,7 @@
     SET_PROJECT_START_DATE,
     SET_PROJECT_TECHNOLOGIES,
     SET_PROJECT_TYPE
-  } from "../../../store/modules/projects/mutation-types";
+  } from '../../../store/modules/projects/mutation-types';
   import {Util} from '../../../shared/classes/Util';
   import {Types} from '../../../store/modules/projects/constant-types';
   import {ICustomer} from '../../../shared/interfaces/ICustomer';
