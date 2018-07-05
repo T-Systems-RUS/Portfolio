@@ -33,8 +33,8 @@
     </div>
 
     <Checkbox
-      :checked.sync="reverse"
-      @update:checked="toggleReverse()">
+      :checked="sortReverse"
+      @update:checked="toggleReverse($event)">
       Reverse
     </Checkbox>
   </Accordion>
@@ -43,17 +43,19 @@
 <script lang="ts">
   import Vue from 'vue';
   import {SET_SORT, SET_SORT_REVERSE} from '../../../store/modules/projects/mutation-types';
-  import {SORT, SORT_FIELD_NAME} from '../../../store/modules/projects/getter-types';
+  import {SORT, SORT_FIELD_NAME, SORT_REVERSE} from '../../../store/modules/projects/getter-types';
 
 
   export default Vue.extend({
     data() {
       return {
-        sortingOpened: true,
-        reverse: true
+        sortingOpened: true
       };
     },
     computed: {
+      sortReverse(): boolean {
+        return this.$store.getters[SORT_REVERSE];
+      },
       checkedOption(): string {
         return this.$store.getters[SORT];
       }
@@ -65,8 +67,8 @@
       toggle(name: string) {
         this.$store.commit(SET_SORT, name);
       },
-      toggleReverse() {
-        this.$store.commit(SET_SORT_REVERSE, this.reverse);
+      toggleReverse(reverse: boolean) {
+        this.$store.commit(SET_SORT_REVERSE, reverse);
       }
     }
   });

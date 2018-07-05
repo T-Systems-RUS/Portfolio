@@ -35,11 +35,14 @@
       <div class="project-customers">
         <chip
           v-for="customer in project.customers"
+          :id="customer.id"
           :key="customer.id"
           :name="customer.name"
-          :selected = "customer.active"
+          :selected="customer.active"
           :with-image="true"
-          :image="customer.image"/>
+          :image="customer.image"
+          :filter-key="'customers'"
+          :project-chip="true"/>
       </div>
     </div>
     <div class="columns project-main">
@@ -76,27 +79,27 @@
         </p>
         <p>
           <span class="title is-5 is-size-16">Production line: </span>
-          <router-link
-            to="/"
+          <a
+            @click="openWithFilter('line', project.program.line.id)"
             class="title is-6 is-size-16 project-link is-magenta">
             {{ project.program.line.name }}
-          </router-link>
+          </a>
         </p>
         <p>
           <span class="title is-5 is-size-16">Program: </span>
-          <router-link
-            to="/"
+          <a
+            @click="openWithFilter('program', project.program.id)"
             class="title is-6 is-size-16 project-link is-magenta">
             {{ project.program.name }}
-          </router-link>
+          </a>
         </p>
         <p class="project-mb30">
           <span class="title is-5 is-size-16">Domain: </span>
-          <router-link
-            to="/"
+          <a
+            @click="openWithFilter('domain', project.domain.id)"
             class="title is-6 is-size-16 project-link is-magenta">
             {{ project.domain.name }}
-          </router-link>
+          </a>
         </p>
 
         <TechnologyPanel
@@ -135,6 +138,7 @@
   import {IProject} from '../../../shared/interfaces/IProject';
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {Util} from '../../../shared/classes/Util';
+  import {Routes} from '../../../router';
 
   export default Vue.extend({
     components: {
@@ -153,7 +157,7 @@
       project(): IProject {
         return this.$store.getters[PROJECT];
       },
-      technologies() :ITechnology[] {
+      technologies(): ITechnology[] {
         return this.$store.getters[PROJECT_TECHNOLOGIES_GROUPED];
       },
       isCompleted(): boolean {
@@ -177,6 +181,9 @@
       },
       deleteProject() {
         this.$store.dispatch(DELETE_PROJECT, this.project.uniqueId);
+      },
+      openWithFilter(key: string, value: string) {
+        this.$router.push({name: Routes.Projects, query: {[key]: value.toString()}});
       }
     }
   });
@@ -203,7 +210,7 @@
       margin-bottom: 10px;
     }
 
-    &-main{
+    &-main {
       margin-top: 5px;
       margin-bottom: 30px;
     }
@@ -221,7 +228,7 @@
       margin-bottom: 30px;
     }
 
-    &-nomb{
+    &-nomb {
       margin-bottom: 0;
     }
   }

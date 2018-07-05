@@ -32,11 +32,112 @@ import {
   SET_PROJECT_DESCRIPTION,
   SET_PROJECT_CUSTOMERS,
   SET_PROJECT_SCHEDULES,
-  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION, REMOVE_PROJECT_SCHEDULE, SET_PROJECT_IMAGE, SET_SCHEDULE, INCREMENT_VERSION
+  SET_PROJECT_TECHNOLOGIES,
+  SET_PROJECT_PSS,
+  SET_COMPLETION,
+  SET_SCHEDULE_DATE,
+  REMOVE_PROJECT_SCHEDULE,
+  SET_SCHEDULE_PARTICIPATION,
+  SET_SCHEDULE_ROLE,
+  SET_FILTER_VALUE,
+  SET_SEARCH_VALUE,
+  SET_COMPLETION_VALUE,
+  SET_SORT_VALUE,
+  SET_SORT_REVERSE_VALUE,
+  RESET_FILTERS,
+  SET_PROJECT_IMAGE, SET_SCHEDULE, INCREMENT_VERSION
+
 } from './mutation-types';
 
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
-import {ITechnology} from "../../../shared/interfaces/ITechnology";
+import {ITechnology} from '../../../shared/interfaces/ITechnology';
+import router, {Routes} from '../../../router';
+import {ProjectQueryKey} from '../../../shared/enums/ProjectsQueryKey';
+import {CompleteTypes} from '../../../shared/enums/CompleteTypes';
+import {Dictionary} from 'vue-router/types/router';
+
+function setQuery(query: Dictionary<string>) {
+  router.push({name: Routes.Projects, query});
+}
+
+// Set query params to the filter values
+function setFilterQueryParams(key: string, value: string) {
+  // Get current query params
+  const newQuery = {...router.currentRoute.query};
+  // Check if such key exists
+  if (router.currentRoute.query[key]) {
+    // Get all values for this key
+    const values = router.currentRoute.query[key].split(',');
+    const valueIndex = values.indexOf(value);
+    // Remove if it's already present
+    if (valueIndex > -1) {
+      values.splice(valueIndex, 1);
+      if (values.length) {
+        newQuery[key] = values.join(',');
+      } else {
+        // Remove the key if there's no more values
+        delete newQuery[key];
+      }
+    } else {
+      values.push(value);
+      // Add new value otherwise
+      newQuery[key] = values.join(',');
+    }
+  } else {
+    // Create a key if it isn't present
+    newQuery[key] = value;
+  }
+  // Set new query params
+  setQuery(newQuery);
+}
+
+function setSearchQueryParam(search: string) {
+  const newQuery = {...router.currentRoute.query};
+  if (search) {
+    newQuery[ProjectQueryKey.SEARCH] = search;
+  } else {
+    delete newQuery[ProjectQueryKey.SEARCH];
+  }
+  setQuery(newQuery);
+}
+
+function setCompletionQueryParam(completion: CompleteTypes) {
+  const newQuery = {...router.currentRoute.query};
+  if (completion === CompleteTypes.ALL) {
+    delete newQuery[ProjectQueryKey.COMPLETION];
+  } else {
+    newQuery[ProjectQueryKey.COMPLETION] = completion;
+  }
+  setQuery(newQuery);
+}
+
+function setSortingQueryParam(sort: string) {
+  const newQuery = {...router.currentRoute.query};
+  if (sort === 'name') {
+    delete newQuery[ProjectQueryKey.SORT];
+  } else {
+    newQuery[ProjectQueryKey.SORT] = sort;
+  }
+  setQuery(newQuery);
+}
+
+function setSortingReverseQueryParam(reverse: boolean) {
+  const newQuery = {...router.currentRoute.query};
+  if (reverse) {
+    delete newQuery[ProjectQueryKey.SORT_REVERSE];
+  } else {
+    newQuery[ProjectQueryKey.SORT_REVERSE] = reverse.toString();
+  }
+  setQuery(newQuery);
+}
+
+function setFilterValue(state: IProjectState, key: string, value: string) {
+  Vue.set(state.filter, key, Extension.toggleArray(state.filter[key], value));
+  // Delete empty keys
+  if (!state.filter[key].length) {
+    Vue.delete(state.filter, key);
+  }
+}
 
 function findScheduleIndexByEmployee(schedules:ISchedule[], schedule:ISchedule) {
   return schedules.findIndex(stateSchedule => stateSchedule.employee.id === schedule.employee.id);
@@ -59,27 +160,48 @@ export const mutations: MutationTree<IProjectState> = {
     state.project = payload;
     state.loading = false;
   },
+  [SET_FILTER_VALUE](state, payload: { key: string, value: string }) {
+    setFilterValue(state, payload.key, payload.value);
+  },
   [SET_FILTER](state, payload: { key: string, value: string }) {
-    Vue.set(
-      state.filter,
-      payload.key,
-      Extension.toggleArray(state.filter[payload.key], payload.value)
-    );
+    setFilterValue(state, payload.key, payload.value);
+
+    setFilterQueryParams(payload.key, payload.value.toString());
+
     state.loading = false;
   },
   // Search
-  [SET_SEARCH](state, search: string) {
+  [SET_SEARCH_VALUE](state, search: string) {
     state.search = search;
   },
-  // Sorting
+  [SET_SEARCH](state, search: string) {
+    state.search = search;
+    setSearchQueryParam(search);
+  },
   [SET_AUTOCOMPLETE_SEARCH](state, search: string) {
     state.autocompleteSearch = search;
   },
-  [SET_SORT](state, sort: string) {
+  // Sorting
+  [SET_SORT_VALUE](state, sort: string) {
     state.sort = sort;
   },
-  [SET_COMPLETION](state, completion: string) {
+  [SET_SORT](state, sort: string) {
+    state.sort = sort;
+    setSortingQueryParam(sort);
+  },
+  [SET_SORT_REVERSE_VALUE](state, reverse: boolean) {
+    state.sortReverse = reverse;
+  },
+  [SET_SORT_REVERSE](state, reverse: boolean) {
+    state.sortReverse = reverse;
+    setSortingReverseQueryParam(reverse);
+  },
+  [SET_COMPLETION_VALUE](state, completion: CompleteTypes) {
     state.completion = completion;
+  },
+  [SET_COMPLETION](state, completion: CompleteTypes) {
+    state.completion = completion;
+    setCompletionQueryParam(completion);
   },
   [SET_LINES](state, payload: ILine[]) {
     state.lines = payload;
@@ -141,11 +263,20 @@ export const mutations: MutationTree<IProjectState> = {
   [SET_PROJECT_TECHNOLOGIES](state, technologies: ITechnology[]) {
     state.project.technologies = technologies;
   },
+
   [SET_SCHEDULE](state, schedule:ISchedule) {
     const scheduleIndex = findScheduleIndexByEmployee(state.project.schedules, schedule);
     state.project.schedules[scheduleIndex] = schedule;
   },
-  [REMOVE_PROJECT_SCHEDULE](state, targetId:string) {
+  [REMOVE_PROJECT_SCHEDULE](state, targetId: string) {
     state.project.schedules = state.project.schedules.filter(schedule => schedule.employee.id !== targetId);
+  },
+  [RESET_FILTERS](state) {
+    state.filter = {};
+    state.search = '';
+    state.sort = 'name';
+    state.sortReverse = true;
+    state.completion = CompleteTypes.ALL;
+    setQuery({});
   }
 };

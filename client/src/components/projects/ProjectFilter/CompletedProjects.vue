@@ -31,7 +31,7 @@
   import Vue from 'vue';
   import {SET_COMPLETION} from '../../../store/modules/projects/mutation-types';
   import {COMPLETION, SORT_FIELD_NAME} from '../../../store/modules/projects/getter-types';
-  import {CompleteTypes} from '../../../shared/types/complete-types';
+  import {CompleteTypes} from '../../../shared/enums/CompleteTypes';
 
   export default Vue.extend({
     data() {

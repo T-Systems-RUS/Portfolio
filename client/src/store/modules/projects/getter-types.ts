@@ -8,6 +8,7 @@ export const PROJECT_NAMES = 'projects/PROJECT_NAMES';
 export const SEARCH = 'projects/SEARCH';
 export const AUTOCOMPLETE_SEARCH = 'projects/AUTOCOMPLETE_SEARCH';
 export const COMPLETION = 'projects/COMPLETION';
+export const FILTER_EMPTY = 'FILTER_EMPTY';
 export const FILTERS = 'FILTERS';
 export const FILTER_VALUE = 'FILTER_VALUE';
 export const SORT = 'SORT';
