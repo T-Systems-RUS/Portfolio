@@ -14,6 +14,7 @@ export const SET_SORT = 'SET_SORT';
 export const SET_SORT_REVERSE = 'SET_SORT_REVERSE';
 
 export const FINISH_LOADING = 'projects/FINISH_LOADING';
+export const INCREMENT_VERSION = 'projects/INCREMENT_VERSION';
 
 export const SET_PROJECT_NAME = 'SET_PROJECT_NAME';
 export const SET_PROJECT_PROGRAM = 'SET_PROJECT_PROGRAM';

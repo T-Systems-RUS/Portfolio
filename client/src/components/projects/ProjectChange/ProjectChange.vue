@@ -334,6 +334,7 @@
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
   import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
   import {
+    INCREMENT_VERSION,
     SET_PROJECT,
     SET_PROJECT_CUSTOMERS,
     SET_PROJECT_DESCRIPTION,
@@ -346,7 +347,7 @@
     SET_PROJECT_START_DATE,
     SET_PROJECT_TECHNOLOGIES,
     SET_PROJECT_TYPE
-  } from '../../../store/modules/projects/mutation-types';
+  } from "../../../store/modules/projects/mutation-types";
   import {Util} from '../../../shared/classes/Util';
   import {Types} from '../../../store/modules/projects/constant-types';
   import {ICustomer} from '../../../shared/interfaces/ICustomer';
@@ -541,6 +542,7 @@
       },
       saveProject() {
         if (this.id) {
+          this.$store.commit(INCREMENT_VERSION);
           this.$store.dispatch(EDIT_PROJECT);
         } else {
           this.$store.dispatch(CREATE_PROJECT);

@@ -24,4 +24,5 @@ export interface IProject extends IModel {
   updatedAt: Date;
   uniqueId: string;
   pss: number;
+  version: number;
 }

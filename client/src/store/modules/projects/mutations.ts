@@ -32,7 +32,7 @@ import {
   SET_PROJECT_DESCRIPTION,
   SET_PROJECT_CUSTOMERS,
   SET_PROJECT_SCHEDULES,
-  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION, REMOVE_PROJECT_SCHEDULE, SET_PROJECT_IMAGE, SET_SCHEDULE
+  SET_PROJECT_TECHNOLOGIES, SET_PROJECT_PSS, SET_COMPLETION, REMOVE_PROJECT_SCHEDULE, SET_PROJECT_IMAGE, SET_SCHEDULE, INCREMENT_VERSION
 } from './mutation-types';
 
 import {ISchedule} from '../../../shared/interfaces/ISchedule';
@@ -98,6 +98,9 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [FINISH_LOADING](state) {
     state.loading = false;
+  },
+  [INCREMENT_VERSION](state) {
+    state.project.version = state.project.version + 1;
   },
   [SET_SORT_REVERSE](state, reverse: boolean) {
     state.sortReverse = reverse;

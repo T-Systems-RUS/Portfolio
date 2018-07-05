@@ -143,6 +143,7 @@ export class TestMocks {
       enddate: new Date().toLocaleDateString(),
       createdAt: new Date(),
       updatedAt: new Date(),
+      version: 1,
       uniqueId: Guid.newGuid(),
       pss: 0
     };
