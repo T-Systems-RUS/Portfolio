@@ -93,7 +93,7 @@
   import {ROLES} from '../../../store/modules/employees/getter-types';
   import {
     REMOVE_PROJECT_SCHEDULE, SET_SCHEDULE
-  } from "../../../store/modules/projects/mutation-types";
+  } from '../../../store/modules/projects/mutation-types';
 
 
   export default Vue.extend({
@@ -142,9 +142,12 @@
     },
     methods: {
       setDate(date:Date, isStartDate: boolean) {
-        isStartDate ? this.schedule.startdate = this.startdate : this.schedule.enddate = this.enddate;
-        console.log(this.schedule.startdate);
-        console.log(this.schedule.enddate);
+        if (isStartDate) {
+          this.schedule.startdate = this.startdate;
+        } else {
+          this.schedule.enddate = this.enddate;
+        }
+
         this.$store.commit(SET_SCHEDULE, this.schedule);
       },
       setParticipation() {
