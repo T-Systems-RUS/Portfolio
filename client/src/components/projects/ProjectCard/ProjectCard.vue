@@ -95,6 +95,10 @@
       padding: 0 $padding;
       max-height: 119px;
       overflow: hidden;
+
+      .title:not(:last-child) {
+        margin-bottom: 3px;
+      }
     }
 
     &-title {
