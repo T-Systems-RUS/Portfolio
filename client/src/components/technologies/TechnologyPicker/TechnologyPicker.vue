@@ -4,7 +4,6 @@
       class="input"
       type="text"
       placeholder="Search technology"
-      v-if="technologiesFiltered.length"
       v-model="search"
       @input="filterTechnologies()">
     <chip
