@@ -7,8 +7,8 @@
 export enum ServerConstants {
     API_PREFIX = '/api',
     DEFAULT_PORT = '3000',
-    DEFAULT_INDEX_PATH = 'dist/index.html',
-    DEFAULT_STATIC_PATH = 'dist',
+    DEFAULT_INDEX_PATH = '../../client/dist/index.html',
+    DEFAULT_STATIC_PATH = '../../client/dist',
     IMAGES_ROUTE = '/server/images',
     IMAGES_PATH = '../server/images',
     PORT_ALIAS = 'port',

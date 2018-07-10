@@ -11,7 +11,7 @@ const ServerDefaults = {
     setGlobalRouteHandler: app => {
         // Catch all other routes and return the index file
         app.get('*', (req, res) => {
-            res.sendFile(path.join(__dirname, ServerConstants.DEFAULT_INDEX_PATH));
+            res.sendFile(path.resolve(__dirname, ServerConstants.DEFAULT_INDEX_PATH));
         });
     },
 
