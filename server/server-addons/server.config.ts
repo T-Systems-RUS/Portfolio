@@ -18,7 +18,7 @@ const app = express();
 app.use(bodyParser.json({limit: ServerConstants.MAX_REQUEST_SIZE}));
 app.use(bodyParser.urlencoded({limit: ServerConstants.MAX_REQUEST_SIZE, extended: true}));
 // point to build folder
-app.use(express.static(path.join(__dirname, ServerConstants.DEFAULT_STATIC_PATH)));
+app.use(express.static(path.resolve(__dirname, ServerConstants.DEFAULT_STATIC_PATH)));
 // 3rd library for validation of POST/PUT REST requests
 app.use(validator());
 
