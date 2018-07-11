@@ -10,26 +10,6 @@
           class="header-nav-item is-active">
           Projects
         </router-link>
-        <!--<a-->
-          <!--href="#"-->
-          <!--class="header-nav-item">-->
-          <!--Employees-->
-        <!--</a>-->
-        <!--<a-->
-          <!--href="#"-->
-          <!--class="header-nav-item">-->
-          <!--Technologies-->
-        <!--</a>-->
-        <!--<a-->
-          <!--href="#"-->
-          <!--class="header-nav-item">-->
-          <!--Statistik-->
-        <!--</a>-->
-        <!--<a-->
-          <!--href="#"-->
-          <!--class="header-nav-item">-->
-          <!--Help-->
-        <!--</a>-->
       </nav>
     </div>
     <div class="level-right">

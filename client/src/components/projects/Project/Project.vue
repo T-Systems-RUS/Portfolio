@@ -25,7 +25,7 @@
       </p>
     </div>
     <div class="level  is-marginless">
-      <p class="title is-7 is-size-40 project-header">{{ project.name }}</p>
+      <p class="title is-7 project-header">{{ project.name }}</p>
       <Ribbon
         value="Completed"
         :is-big="true"
@@ -194,6 +194,12 @@
 
   $image-width: 370px;
   $image-height: 250px;
+
+  .title {
+    &.is-7 {
+      font-size: 40px;
+    }
+  }
 
   .project {
     margin-bottom: 100px;
