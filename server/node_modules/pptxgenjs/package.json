@@ -1,0 +1,62 @@
+{
+	"name": "pptxgenjs",
+	"version": "1.10.0",
+	"author": {
+		"name": "Brent Ely",
+		"url": "https://github.com/gitbrent/"
+	},
+	"description": "JavaScript framework that creates PowerPoint (pptx) presentations",
+	"homepage": "https://gitbrent.github.io/PptxGenJS/",
+	"license": "MIT",
+	"main": "dist/pptxgen.js",
+	"dependencies": {
+		"express": "^4.15.3",
+		"image-size": ">=0.5.1",
+		"is-electron": "^2.1.0",
+		"jquery": "^3.2.1",
+		"jquery-node": "^0.3.0",
+		"jszip": ">=3.1.2"
+	},
+	"devDependencies": {
+		"gulp": "^3.9.1",
+		"gulp-concat": "^2.6.1",
+		"gulp-ignore": "^2.0.2",
+		"gulp-sourcemaps": "^2.6.0",
+		"gulp-uglify": "^3.0.0"
+	},
+	"directories": {
+		"example": "examples",
+		"libs": "dist"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gitbrent/PptxGenJS.git"
+	},
+	"keywords": [
+		"javascript",
+		"javascript-create-powerpoint",
+		"javascript-create-pptx",
+		"javascript-generate-pptx",
+		"javascript-pptx",
+		"javascript-powerpoint",
+		"javascript-powerpoint-charts",
+		"js-create-powerpoint",
+		"js-create-pptx",
+		"js-generate-powerpoint",
+		"js-pptx",
+		"js-produce-powerpoint",
+		"js-powerpoint",
+		"powerpoint",
+		"powerpoint-charts",
+		"powerpoint-presentation",
+		"ppt",
+		"pptx",
+		"presentations"
+	],
+	"bugs": {
+		"url": "https://github.com/gitbrent/PptxGenJS/issues"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	}
+}
