@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>plus_outline</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Shared" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-454.000000, -49.000000)">
+            <g id="plus_outline" transform="translate(450.000000, 45.000000)">
+                <rect id="Rectangle-path" x="0" y="0" width="64" height="64"></rect>
+                <path d="M58.5,30.5 L33.5,30.5 L33.5,5.5 C33.5,4.67157288 32.8284271,4 32,4 C31.1715729,4 30.5,4.67157288 30.5,5.5 L30.5,30.5 L5.5,30.5 C4.67157288,30.5 4,31.1715729 4,32 C4,32.8284271 4.67157288,33.5 5.5,33.5 L30.5,33.5 L30.5,58.5 C30.5,59.3284271 31.1715729,60 32,60 C32.8284271,60 33.5,59.3284271 33.5,58.5 L33.5,33.5 L58.5,33.5 C59.3284271,33.5 60,32.8284271 60,32 C60,31.1715729 59.3284271,30.5 58.5,30.5 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

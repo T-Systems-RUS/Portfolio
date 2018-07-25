@@ -1,5 +1,0 @@
-<div (click)="performClick(value)" class="chip {{style}}" [ngClass]="{'chip--clicked': active, 'chip--clickable': clickable || isLink}">
-    <img class="chip__image" *ngIf="image" src="{{fullpath}}" alt="">
-    <span [ngClass]="{'chip--ml27':image}">{{value}}</span>
-    <ng-content></ng-content>
-</div>
