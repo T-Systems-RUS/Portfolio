@@ -11,6 +11,17 @@
 /client/test/e2e/features/undefined-steps.js
 /client/selenium-debug.log
 
+/client/src/components/projects/.DS_Store
+/client/src/components/root/.DS_Store
+/client/src/shared/.DS_Store
+/client/src/store/.DS_Store
+/client/src/store/modules/.DS_Store
+/src/app/.DS_Store
+/src/.DS_Store
+/client/src/.DS_Store
+/client/src/components/root/.DS_Store
+/.DS_Store
+
 # Editor directories and files
 .idea
 .vscode

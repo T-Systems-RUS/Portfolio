@@ -1,8 +1,0 @@
-<div class="modal" [ngClass]="{'modal--visible': visible}">
-    <div class="modal__background" (click)="visible=false"></div>
-    <div class="modal__window {{windowStyle}}" [ngClass]="{'modal--fullscreen':fullscreen}">
-        <ng-content select="[header]"></ng-content>
-        <ng-content select="[content]"></ng-content>
-        <ng-content select="[footer]"></ng-content>
-    </div>
-</div>

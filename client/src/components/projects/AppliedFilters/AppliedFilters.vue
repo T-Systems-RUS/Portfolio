@@ -1,6 +1,15 @@
 <template>
   <div class="filters">
     <div>
+      <router-link
+        to="projects/create"
+        class="filter">
+        <span class="filter-text">
+          <span class="active-chip is-magenta">
+            <img src="./assets/plus_outline.svg">
+          </span>
+        </span>
+      </router-link>
       <div
         class="filter"
         @click="generatePresentation()">
@@ -135,7 +144,6 @@
 
   .filter {
     display: inline-block;
-    margin-right: 6px;
 
     &-text {
       color: $text-secondary;
@@ -164,6 +172,16 @@
         &:hover {
           background-color: $gray-194;
         }
+      }
+
+
+    }
+
+    .is-magenta {
+      background-color: $magenta;
+
+      &:hover {
+        background-color: $magenta-dark;
       }
     }
 
