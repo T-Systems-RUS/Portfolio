@@ -12,9 +12,6 @@ router.get('/projects', (req, res) =>
   projectService.getProjects()
     .then(Util.handleData(res)));
 
-router.get('/projects/grouped', (req, res) =>
-  projectService.getGroupedProjects()
-    .then(Util.handleData(res)));
 
 router.get('/projects/addons', (req, res) =>
   projectAddonsService.getProjectFilterModel()

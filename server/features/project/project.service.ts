@@ -7,19 +7,7 @@ import {ProjectCustomer} from '../../models/ProjectCustomer';
 import Guid from '../../shared/Guid';
 
 const projectService = {
-
-  // getGroupedProjects: async () =>  {
-  //   const groupedProjects = await Project.findAll({
-  //     raw: true,
-  //     attributes: ['Project.uniqueId', [sequelize.fn('max', sequelize.col('Project.updatedAt')),'updatedAt']],
-  //     group: ['Project.uniqueId']
-  //   });
-  //
-  //
-  //
-  //   return p;
-  // },
-
+  
   getProjects: () => sequelize.query('SELECT id from "Projects" as pr' +
     '  inner join (' +
     '      Select "uniqueId", max("updatedAt") as maxDate' +
