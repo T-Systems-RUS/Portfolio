@@ -12,6 +12,7 @@ router.get('/projects', (req, res) =>
   projectService.getProjects()
     .then(Util.handleData(res)));
 
+
 router.get('/projects/addons', (req, res) =>
   projectAddonsService.getProjectFilterModel()
     .then(Util.handleData(res)));
@@ -28,8 +29,8 @@ router.get('/projects/exists/:name', (req, res) =>
   projectService.doesProjectWithNameExist(req.params.name)
     .then(doesExist => res.status(200).send(doesExist)));
 
-router.get('/projects/update/exists/:name/:id', (req, res) =>
-  projectService.doesProjectWithNameAndIdExist(req.params.name, req.params.id)
+router.get('/projects/update/exists/:name/:uniqueId', (req, res) =>
+  projectService.doesProjectWithNameAndIdExist(req.params.name, req.params.uniqueId)
     .then(doesExist => res.status(200).send(doesExist)));
 
 // POST Requests
@@ -37,17 +38,17 @@ router.post('/projects/create', projectValidator.createValidators(), (req, res) 
   Util.handleValidation(req, res, () =>
     projectService.doesProjectWithNameExist(req.body.name).then(doesExist =>
       doesExist ?
-        Util.handleConflict(res, 'Project already exists or was archieved') :
+        Util.handleConflict(res, 'Project already exists') :
         projectService.createProject(req.body)
           .then(Util.handleData(res)))
   ));
 
 router.post('/projects/update', projectValidator.createValidators(), (req, res) =>
   Util.handleValidation(req, res, () =>
-    projectService.isProjectLatest(req.body.id).then(isLatest =>
+    projectService.isProjectLatest(req.body.id, req.body.uniqueId).then(isLatest =>
       !isLatest ?
         Util.handleConflict(res, 'Somebody has already updated the project in background') :
-        projectService.updateProject(req.body)
+        projectService.createProject(req.body)
           .then(Util.handleData(res)))
   ));
 
@@ -67,9 +68,9 @@ router.put('/projects/update/image', (req, res) =>
   )
 
 
-router.delete('/projects/delete/:uniqueId', projectValidator.deleteValidators(), (req, res) =>
+router.delete('/projects/delete/:id', projectValidator.deleteValidators(), (req, res) =>
   Util.handleValidation(req, res, () =>
-    projectService.deleteProject(req.params.uniqueId)
+    projectService.deleteProject(req.params.id)
       .then(() => res.status(200).json({message: 'ok'}))
   ));
 

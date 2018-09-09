@@ -16,7 +16,7 @@ const projectValidator = {
     ],
 
   deleteValidators: () => [
-    check('uniqueId', 'Project uniqueId is required').exists().isLength({min: 1, max: 100000})
+    check('id', 'Project id is required').exists().isLength({min: 1, max: 100000})
   ]
 };
 

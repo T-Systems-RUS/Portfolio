@@ -27,7 +27,7 @@ import {
   PROJECT_DESCRIPTION,
   PROJECT_CUSTOMERS,
   PROJECT_SCHEDULES,
-  PROJECT_TECHNOLOGIES_GROUPED, PROJECT_PSS, COMPLETION, PROJECT_EMPLOYEES, PROJECT_IMAGE, FILTER_EMPTY
+  PROJECT_TECHNOLOGIES_GROUPED, PROJECT_PSS, COMPLETION, PROJECT_EMPLOYEES, PROJECT_IMAGE, FILTER_EMPTY, ERROR_MESSAGE
 } from './getter-types';
 import {TECHNOLOGIES} from '../technologies/getter-types';
 import {IProjectFilter, IProjectFilterCheck} from '../../../shared/interfaces/shared/IProjectFilter';
@@ -174,5 +174,6 @@ export const getters: GetterTree<IProjectState, {}> = {
   [PROJECT_SCHEDULES]: state => state.project.schedules,
   [PROJECT_TECHNOLOGIES]: state => state.project.technologies,
   [PROJECT_EMPLOYEES]: state => state.project.schedules.map(schedule => schedule.employee),
-  [PROJECT_IMAGE]: state => state.project.image
+  [PROJECT_IMAGE]: state => state.project.image,
+  [ERROR_MESSAGE]: state => state.errorMessage
 };

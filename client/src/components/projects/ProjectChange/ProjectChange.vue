@@ -1,12 +1,20 @@
 <template>
   <CommonModal @exit="goBack">
-    <template slot="modal-title">{{ id ? 'Edit' : 'Create' }} project</template>
+    <template slot="modal-title">
+      {{ id ? 'Edit' : 'Create' }} project
+      <ErrorMessage v-if="errorMessage">
+        <p class="title is-size-18">
+          {{errorMessage}}
+        </p>
+      </ErrorMessage>
+    </template>
     <p
       class="manage-user-subtitle common-modal-subtitle has-text-centered is-size-5 is-size-6-mobile"
       slot="modal-subtitle">
       Please {{ id ? 'edit' : 'create' }} project information here
     </p>
     <template slot="modal-content">
+
       <div class="form-container project-change">
         <div class="field centered-margin">
           <Stepper
@@ -325,16 +333,16 @@
   } from '../../../store/modules/projects/action-types';
   import {FETCH_ROLES, FETCH_EMPLOYEES} from '../../../store/modules/employees/action-types';
   import {
-    ADDONS,
+    ADDONS, ERROR_MESSAGE,
     PROJECT_CUSTOMERS, PROJECT_DESCRIPTION, PROJECT_DOMAIN_ID, PROJECT_EMPLOYEES, PROJECT_END_DATE, PROJECT_IMAGE,
     PROJECT_NAME,
     PROJECT_PROGRAM_ID, PROJECT_PSS, PROJECT_SCHEDULES, PROJECT_START_DATE, PROJECT_TECHNOLOGIES, PROJECT_TYPE_ID
-  } from '../../../store/modules/projects/getter-types';
+  } from "../../../store/modules/projects/getter-types";
   import {ITechnology} from '../../../shared/interfaces/ITechnology';
   import {TECHNOLOGIES} from '../../../store/modules/technologies/getter-types';
   import {FETCH_TECHNOLOGIES} from '../../../store/modules/technologies/action-types';
   import {
-    INCREMENT_VERSION,
+    INCREMENT_VERSION, SET_ERROR_MESSAGE,
     SET_PROJECT,
     SET_PROJECT_CUSTOMERS,
     SET_PROJECT_DESCRIPTION,
@@ -347,7 +355,7 @@
     SET_PROJECT_START_DATE,
     SET_PROJECT_TECHNOLOGIES,
     SET_PROJECT_TYPE
-  } from '../../../store/modules/projects/mutation-types';
+  } from "../../../store/modules/projects/mutation-types";
   import {Util} from '../../../shared/classes/Util';
   import {Types} from '../../../store/modules/projects/constant-types';
   import {ICustomer} from '../../../shared/interfaces/ICustomer';
@@ -390,6 +398,9 @@
       }
     },
     computed: {
+      errorMessage(): string {
+        return this.$store.getters[ERROR_MESSAGE];
+      },
       name: Util.mapTwoWay<string>(PROJECT_NAME, SET_PROJECT_NAME),
       description: Util.mapTwoWay<string>(PROJECT_DESCRIPTION, SET_PROJECT_DESCRIPTION),
       pss: Util.mapTwoWay<number>(PROJECT_PSS, SET_PROJECT_PSS),
@@ -448,7 +459,7 @@
             if (name === '') return true;
 
             return this.id
-              ? !await this.$store.dispatch(CHECK_PROJECT_EXISTENCE_UPDATE, {name, id: this.id})
+              ? !await this.$store.dispatch(CHECK_PROJECT_EXISTENCE_UPDATE, name)
               : !await this.$store.dispatch(CHECK_PROJECT_EXISTENCE, name);
           }
         },
@@ -523,6 +534,7 @@
         }
       },
       goBack() {
+        this.$store.commit(SET_ERROR_MESSAGE, null);
         if (this.id) {
           this.$store.dispatch(UPDATE_PROJECT_IMAGE, {id: this.id, image: this.image});
           this.$router.push({name: Routes.Project, params: {id: this.id}});
@@ -541,6 +553,7 @@
         this.$store.dispatch(REMOVE_PROJECT_IMAGE, this.$store.getters[PROJECT_IMAGE]);
       },
       saveProject() {
+        this.$store.commit(SET_ERROR_MESSAGE, null);
         if (this.id) {
           this.$store.commit(INCREMENT_VERSION);
           this.$store.dispatch(EDIT_PROJECT);

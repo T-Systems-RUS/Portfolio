@@ -17,7 +17,7 @@ import {
 import {
   FINISH_LOADING, RESET_FILTERS, SET_COMPLETION_VALUE,
   SET_CUSTOMERS,
-  SET_DOMAINS,
+  SET_DOMAINS, SET_ERROR_MESSAGE,
   SET_FILTER_VALUE,
   SET_LINES,
   SET_PROGRAMS,
@@ -84,19 +84,23 @@ export const actions: ActionTree<IProjectState, {}> = {
       .then(response => response.data);
   },
 
-  [CHECK_PROJECT_EXISTENCE_UPDATE]({commit}, payload: {name:string, id:string}) {
-    return ProjectService.doesProjectWithIdExist(payload.name, payload.id)
+  [CHECK_PROJECT_EXISTENCE_UPDATE]({commit, state}, name: string) {
+    return ProjectService.doesProjectWithIdExist(name, state.project.uniqueId)
       .then(response => response.data);
   },
 
-  [CREATE_PROJECT]({state}) {
+  [CREATE_PROJECT]({state, commit}) {
     return ProjectService.createProject(state.project)
-      .then(() => router.push({name: Routes.Projects}));
+      .then(
+        () => router.push({name: Routes.Projects}),
+        error => {commit(SET_ERROR_MESSAGE, error.response.data.errors.latest.msg)});
   },
 
-  [EDIT_PROJECT]({state}) {
+  [EDIT_PROJECT]({state, commit}) {
     return ProjectService.editProject(state.project)
-      .then((response) => router.push({name: Routes.Project, params: { id: String(response.data.id) }}));
+      .then(
+        (response) => router.push({name: Routes.Project, params: { id: String(response.data.id) }}),
+        error => {commit(SET_ERROR_MESSAGE, error.response.data.errors.latest.msg)});
   },
 
   [DELETE_PROJECT]({commit}, id:string) {

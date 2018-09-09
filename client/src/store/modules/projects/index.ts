@@ -32,6 +32,7 @@ export interface IProjectState {
   sort: string;
   sortReverse: boolean;
   projectExists: boolean;
+  errorMessage: string;
 }
 
 
@@ -55,7 +56,8 @@ const projectState: Module<IProjectState, {}> = {
     autocompleteSearch: '',
     sort: 'name',
     sortReverse: true,
-    projectExists: false
+    projectExists: false,
+    errorMessage: ''
   },
   mutations,
   actions,
