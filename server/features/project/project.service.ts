@@ -8,17 +8,34 @@ import Guid from '../../shared/Guid';
 
 const projectService = {
 
-  getProjects: () => Project.scope([
-    Scopes.PROJECT_LIST,
-    Scopes.ACTUAL_PROJECTS
-  ])
-    .findAll({ order: [ ['updatedAt', 'DESC']]
-  }),
+  // getGroupedProjects: async () =>  {
+  //   const groupedProjects = await Project.findAll({
+  //     raw: true,
+  //     attributes: ['Project.uniqueId', [sequelize.fn('max', sequelize.col('Project.updatedAt')),'updatedAt']],
+  //     group: ['Project.uniqueId']
+  //   });
+  //
+  //
+  //
+  //   return p;
+  // },
+
+  getProjects: () => sequelize.query('SELECT id from "Projects" as pr' +
+    '  inner join (' +
+    '      Select "uniqueId", max("updatedAt") as maxDate' +
+    '      from "Projects"' +
+    '      group by "uniqueId"' +
+    '    ) as innerP' +
+    '    on pr."uniqueId" = innerP."uniqueId"' +
+    '    AND pr."updatedAt" = innerP.maxDate', { type: sequelize.QueryTypes.SELECT})
+    .then(maxDateProjects => Project.scope([Scopes.PROJECT_LIST ])
+      .findAll({
+        where: {id: maxDateProjects.map(project => project.id)}
+      })),
 
   // GET single project by id
   getProject: id => Project.scope([
-    Scopes.FULL,
-    Scopes.ACTUAL_PROJECTS
+    Scopes.FULL
   ])
     .findOne({
       where: {
@@ -43,14 +60,16 @@ const projectService = {
       console.log(error);
     }),
 
-  doesProjectWithNameExist: name => Project.count({where: {name: name, ishistory: false }})
+  doesProjectWithNameExist: name => Project.count({where: {name: name }})
     .then(count => count !== 0)
     .catch(error => {
       console.log(error);
     }),
 
-  doesProjectWithNameAndIdExist: (name, id) => Project.count({
-      where: {name: name, ishistory: false, id: {[sequelize.Op.ne]: id}
+  doesProjectWithNameAndIdExist: (name, uniqueId) => Project.count({
+      where: {
+        name: name,
+        uniqueId: {[sequelize.Op.ne]: uniqueId}
     }})
     .then(count => count !== 0)
     .catch(error => {
@@ -58,14 +77,19 @@ const projectService = {
     }),
 
 // GET Get latest project
-  isProjectLatest: id => Project.findOne({
-    where: {
-      id: id
-    }
-  }).then(project => !project.ishistory)
-    .catch(error => {
-      console.log(error);
-    }),
+  isProjectLatest: async (id, uniqueId) => {
+    const maxDate = await Project.max('updatedAt', {where: {uniqueId}});
+    const maxProject = await Project.findOne({
+      where: {
+        uniqueId,
+        updatedAt: maxDate
+      }
+    });
+
+
+    return maxProject.id === id;
+  },
+
 
   // POST create new project
   createProject: project => Project.create({
@@ -128,15 +152,15 @@ const projectService = {
     }
   },
 
-  deleteProject: async uniqueId => {
+  deleteProject: async id => {
     try {
-      const projects = await projectService.getProjectsByUniqueId(uniqueId);
-      projects.forEach(project => {
-        project.$remove('technologies', project.technologies);
-        Schedule.destroy({where: {projectId: project.id}});
-        ProjectCustomer.destroy({where: {projectId: project.id}});
-      });
-      return await Project.destroy({where: {uniqueId: uniqueId}, cascade: true});
+      const project = await projectService.getProject(id);
+
+      project.$remove('technologies', project.technologies);
+      Schedule.destroy({where: {projectId: project.id}});
+      ProjectCustomer.destroy({where: {projectId: project.id}});
+
+      return await Project.destroy({where: {id}, cascade: true});
     } catch (error) {
       throw new Error(error);
     }

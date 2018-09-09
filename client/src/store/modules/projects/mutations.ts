@@ -42,7 +42,7 @@ import {
   SET_SORT_VALUE,
   SET_SORT_REVERSE_VALUE,
   RESET_FILTERS,
-  SET_PROJECT_IMAGE, SET_SCHEDULE, INCREMENT_VERSION
+  SET_PROJECT_IMAGE, SET_SCHEDULE, INCREMENT_VERSION, SET_ERROR_MESSAGE
 
 } from './mutation-types';
 
@@ -267,6 +267,9 @@ export const mutations: MutationTree<IProjectState> = {
   },
   [REMOVE_PROJECT_SCHEDULE](state, targetId: string) {
     state.project.schedules = state.project.schedules.filter(schedule => schedule.employee.id !== targetId);
+  },
+  [SET_ERROR_MESSAGE](state, payload: string) {
+    state.errorMessage = payload;
   },
   [RESET_FILTERS](state) {
     state.filter = {};

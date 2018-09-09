@@ -9,8 +9,8 @@ export class ProjectService {
     return axios.get<Boolean>(`${routes.DOES_PROJECT_EXIST}${name}`);
   }
 
-  static doesProjectWithIdExist(name: string = '', id:string) {
-    return axios.get<Boolean>(`${routes.DOES_PROJECT_EXIST_WITH_ID}${name}/${id}`);
+  static doesProjectWithIdExist(name: string = '', uniqueId:string) {
+    return axios.get<Boolean>(`${routes.DOES_PROJECT_EXIST_WITH_ID}${name}/${uniqueId}`);
   }
 
   static getProjects() {

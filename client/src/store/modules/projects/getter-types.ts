@@ -15,6 +15,8 @@ export const SORT = 'SORT';
 export const SORT_REVERSE = 'SORT_REVERSE';
 export const SORT_FIELD_NAME = 'SORT_FIELD_NAME';
 
+export const ERROR_MESSAGE = 'ERROR_MESSAGE';
+
 export const PROJECT_NAME = 'PROJECT_NAME';
 export const PROJECT_PROGRAM_ID = 'PROJECT_PROGRAM_ID';
 export const PROJECT_LINE = 'PROJECT_LINE';

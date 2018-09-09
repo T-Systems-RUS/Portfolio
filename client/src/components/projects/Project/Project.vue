@@ -180,7 +180,7 @@
         this.modalVisible = false;
       },
       deleteProject() {
-        this.$store.dispatch(DELETE_PROJECT, this.project.uniqueId);
+        this.$store.dispatch(DELETE_PROJECT, this.project.id);
       },
       openWithFilter(key: string, value: string) {
         this.$router.push({name: Routes.Projects, query: {[key]: value.toString()}});
